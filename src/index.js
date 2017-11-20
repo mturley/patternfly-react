@@ -25,4 +25,5 @@ export * from './components/ToastNotification';
 export * from './components/Toolbar';
 export * from './components/Tooltip';
 export * from './components/Wizard';
+export * from './components/VerticalNavigation';
 export { patternfly } from './common/patternfly';
