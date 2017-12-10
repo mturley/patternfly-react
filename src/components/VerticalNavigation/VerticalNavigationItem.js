@@ -65,21 +65,21 @@ export default class VerticalNavigationItem extends React.Component {
     } = this.props;
 
     const handleHover = {
-      primary: this.handlePrimaryHover,
-      secondary: this.handleSecondaryHover,
-      tertiary: this.handleTertiaryHover,
+      primary: handlePrimaryHover,
+      secondary: handleSecondaryHover,
+      tertiary: handleTertiaryHover,
     };
 
     const handleBlur = {
-      primary: this.handlePrimaryBlur,
-      secondary: this.handleSecondaryBlur,
-      tertiary: this.handleTertiaryBlur,
+      primary: handlePrimaryBlur,
+      secondary: handleSecondaryBlur,
+      tertiary: handleTertiaryBlur,
     };
 
     const handleClick = {
-      primary: this.handlePrimaryClick,
-      secondary: this.handleSecondaryClick,
-      tertiary: this.handleTertiaryClick,
+      primary: handlePrimaryClick,
+      secondary: handleSecondaryClick,
+      tertiary: handleTertiaryClick,
     };
 
     // TODO maybe don't pass in all three handlers at the top, instead pass them below? would that still be DRY?
@@ -126,7 +126,13 @@ export default class VerticalNavigationItem extends React.Component {
           handleBlur[depth]('TODO args here');
         }}
       >
-        <a onClick={() => { handleClick[depth]('TODO args here') }}> {/* TODO handleClick takes all 3 items? figure that out... */}
+        <a
+          onClick={() => {
+            handleClick[depth]('TODO args here');
+          }}
+        >
+          {' '}
+          {/* TODO handleClick takes all 3 items? figure that out... */}
           {depth === 'primary' &&
             iconStyleClass && (
               <OverlayTrigger
@@ -144,7 +150,9 @@ export default class VerticalNavigationItem extends React.Component {
         </a>
         {children &&
           children.length > 0 && (
-            <div className="nav-pf-secondary-nav"> {/* TODO should this class sometimes say tertiary? */}
+            <div className="nav-pf-secondary-nav">
+              {' '}
+              {/* TODO should this class sometimes say tertiary? */}
               <div className="nav-item-pf-header">
                 <a
                   className={cx(`${nextDepth}-collapse-toggle-pf`, {
@@ -202,13 +210,13 @@ VerticalNavigationItem.defaultProps = {
   showMobileSecondary: false,
   showMobileTertiary: false,
   navCollapsed: false,
-  handlePrimaryHover: () => { },
-  handleSecondaryHover: () => { },
-  handleTertiaryHover: () => { },
-  handlePrimaryBlur: () => { },
-  handleSecondaryBlur: () => { },
-  handleTertiaryBlur: () => { },
-  handlePrimaryClick: () => { },
-  handleSecondaryClick: () => { },
-  handleTertiaryClick: () => { },
+  handlePrimaryHover: () => {},
+  handleSecondaryHover: () => {},
+  handleTertiaryHover: () => {},
+  handlePrimaryBlur: () => {},
+  handleSecondaryBlur: () => {},
+  handleTertiaryBlur: () => {},
+  handlePrimaryClick: () => {},
+  handleSecondaryClick: () => {},
+  handleTertiaryClick: () => {},
 };

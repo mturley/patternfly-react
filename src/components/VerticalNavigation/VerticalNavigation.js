@@ -56,7 +56,10 @@ export default class VerticalNavigation extends React.Component {
   }
 
   handlePrimaryClick(item) {
-    // TODO
+    // TODO compare with https://github.com/patternfly/patternfly-ng/blob/master/src/app/navigation/vertical-navigation.component.ts
+    // TODO implement local state behavior, also call handlers passable for the click and/or for the state changes.
+    // TODO put these handlers into render instead of the props handlers directly.
+    // this.props.handlePrimaryClick(primaryItem);
   }
 
   handlePrimaryHover(item) {
@@ -69,6 +72,7 @@ export default class VerticalNavigation extends React.Component {
 
   handleSecondaryClick(item) {
     // TODO
+    // this.props.handleSecondaryClick(primaryItem, secondaryItem);
   }
 
   handleSecondaryHover(item) {
@@ -80,7 +84,7 @@ export default class VerticalNavigation extends React.Component {
   }
 
   handleTertiaryClick(item) {
-    // TODO
+    // this.props.handleTertiaryClick(primaryItem, secondaryItem, tertiaryItem);
   }
 
   handleTertiaryHover(item) {
@@ -117,7 +121,7 @@ export default class VerticalNavigation extends React.Component {
       hoverSecondaryNav,
       hoverTertiaryNav,
       collapsedSecondaryNav,
-      collapsedTertiaryNav
+      collapsedTertiaryNav,
     } = this.state;
 
     // Nav items may be passed either as nested VerticalNavigationItem children, or as nested items in a prop.
@@ -163,8 +167,8 @@ export default class VerticalNavigation extends React.Component {
                 alt={brandAlt}
               />
             ) : (
-                <span className="navbar-brand-txt">{brandAlt}</span>
-              )}
+              <span className="navbar-brand-txt">{brandAlt}</span>
+            )}
             {/* TODO in the reference markup there is also a:
               <img class="navbar-brand-name" src="/assets/img/brand-alt.svg" alt="PatternFly Enterprise Application" /> */}
           </span>
@@ -228,6 +232,15 @@ VerticalNavigation.propTypes = {
   navCollapsed: PropTypes.bool,
   inMobileState: PropTypes.bool,
   activeSecondary: PropTypes.bool,
+  handlePrimaryHover: PropTypes.func,
+  handleSecondaryHover: PropTypes.func,
+  handleTertiaryHover: PropTypes.func,
+  handlePrimaryBlur: PropTypes.func,
+  handleSecondaryBlur: PropTypes.func,
+  handleTertiaryBlur: PropTypes.func,
+  handlePrimaryClick: PropTypes.func,
+  handleSecondaryClick: PropTypes.func,
+  handleTertiaryClick: PropTypes.func,
   children: PropTypes.node,
 };
 
@@ -249,4 +262,13 @@ VerticalNavigation.defaultProps = {
   navCollapsed: false,
   inMobileState: false,
   activeSecondary: false,
+  handlePrimaryHover: () => {},
+  handleSecondaryHover: () => {},
+  handleTertiaryHover: () => {},
+  handlePrimaryBlur: () => {},
+  handleSecondaryBlur: () => {},
+  handleTertiaryBlur: () => {},
+  handlePrimaryClick: () => {},
+  handleSecondaryClick: () => {},
+  handleTertiaryClick: () => {},
 };

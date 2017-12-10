@@ -17,7 +17,7 @@ stories.addDecorator(
 );
 
 stories.addWithInfo(
-  'Vertical Navigation, a simple example.',
+  'Vertical Navigation driven by JSX children',
   `VerticalNavigation usage example with items passed as children, but with only titles.`,
   () => {
     return (
@@ -43,7 +43,7 @@ stories.addWithInfo(
 );
 
 stories.addWithInfo(
-  'Vertical Navigation, a complex example',
+  'Vertical Navigation driven by an objects in a prop',
   `VerticalNavigation usage example with items passed as objects, driven by a mock file.`,
   () => {
     return <VerticalNavigation items={mockNavItems} />;
