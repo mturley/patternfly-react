@@ -42,6 +42,11 @@ export default class VerticalNavigationItem extends React.Component {
   }
 
   render() {
+    const { item, ...otherProps } = this.props;
+    if (item) {
+      return <VerticalNavigationItem {...otherProps} {...item} />; // The item object is just a container for a bunch of props.
+    }
+
     const {
       children,
       trackActiveState,
@@ -59,9 +64,10 @@ export default class VerticalNavigationItem extends React.Component {
       handlePrimaryBlur,
       handleSecondaryBlur,
       handleTertiaryBlur,
-      handlePrimaryClick,
-      handleSecondaryClick,
-      handleTertiaryClick,
+      primaryItem,
+      secondaryItem,
+      tertiaryItem,
+      inMobileState,
     } = this.props;
 
     const handleHover = {
@@ -74,12 +80,6 @@ export default class VerticalNavigationItem extends React.Component {
       primary: handlePrimaryBlur,
       secondary: handleSecondaryBlur,
       tertiary: handleTertiaryBlur,
-    };
-
-    const handleClick = {
-      primary: handlePrimaryClick,
-      secondary: handleSecondaryClick,
-      tertiary: handleTertiaryClick,
     };
 
     // TODO maybe don't pass in all three handlers at the top, instead pass them below? would that still be DRY?
@@ -128,11 +128,14 @@ export default class VerticalNavigationItem extends React.Component {
       >
         <a
           onClick={() => {
-            handleClick[depth]('TODO args here');
+            VerticalNavigation.handleItemClick(
+              primaryItem,
+              secondaryItem,
+              tertiaryItem,
+              inMobileState,
+            );
           }}
         >
-          {' '}
-          {/* TODO handleClick takes all 3 items? figure that out... */}
           {depth === 'primary' &&
             iconStyleClass && (
               <OverlayTrigger
@@ -174,8 +177,8 @@ export default class VerticalNavigationItem extends React.Component {
   }
 }
 
-VerticalNavigationItem.propTypes = {
-  title: PropTypes.string.isRequired,
+const itemShape = {
+  title: PropTypes.string,
   trackActiveState: PropTypes.bool,
   trackHoverState: PropTypes.bool,
   mobileItem: PropTypes.bool,
@@ -186,6 +189,12 @@ VerticalNavigationItem.propTypes = {
     count: PropTypes.number,
     iconStyleClass: PropTypes.string,
   }),
+  children: PropTypes.array,
+};
+
+VerticalNavigationItem.propTypes = {
+  item: PropTypes.shape(itemShape),
+  ...itemShape, // Each of the item object's properties can alternatively be passed directly as a prop.
   showMobileSecondary: PropTypes.bool,
   showMobileTertiary: PropTypes.bool,
   navCollapsed: PropTypes.bool,
@@ -200,10 +209,15 @@ VerticalNavigationItem.propTypes = {
   handlePrimaryClick: PropTypes.func,
   handleSecondaryClick: PropTypes.func,
   handleTertiaryClick: PropTypes.func,
+  primaryItem: PropTypes.shape(itemShape),
+  secondaryItem: PropTypes.shape(itemShape),
+  tertiaryItem: PropTypes.shape(itemShape),
+  inMobileState: PropTypes.bool,
   children: PropTypes.node,
 };
 
 VerticalNavigationItem.defaultProps = {
+  title: '',
   trackActiveState: true,
   trackHoverState: true,
   mobileItem: false,

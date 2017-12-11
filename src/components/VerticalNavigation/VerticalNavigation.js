@@ -7,6 +7,7 @@ import VerticalNavigationItem from './VerticalNavigationItem';
 // TODO compare with
 // http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
 // TODO fix errors and get it working on storybook
+// TODO react-router support?
 
 /**
  * VerticalNavigation - The Vertical Navigation pattern
@@ -19,22 +20,68 @@ export default class VerticalNavigation extends React.Component {
   // - Any props passed explicitly to VerticalNavigationItem children will take precendence over inherited props.
   static renderChildren(props) {
     const { children, ...parentProps } = props; // TODO maybe take specific props instead of passing all of them?
-    const depth = VerticalNavigation.getNextDepth(props.depth || 'primary');
+    const { primaryItem, secondaryItem, tertiaryItem } = props;
+    const childDepth = VerticalNavigation.getNextDepth(props.depth);
     return React.Children.map(children, child => {
       if (child.type === VerticalNavigationItem) {
-        return React.cloneElement(child, {
+        const item = VerticalNavigation.getItemObject(child.props);
+        const primary = childDepth === 'primary' ? item : primaryItem;
+        const secondary = childDepth === 'secondary' ? item : secondaryItem;
+        const tertiary = childDepth === 'tertiary' ? item : tertiaryItem;
+        const childProps = {
           ...parentProps,
-          depth,
+          depth: childDepth,
+          primaryItem: primary,
+          secondaryItem: secondary,
+          tertiaryItem: tertiary,
           ...child.props, // We include this to allow overriding these props inline on a VerticalNavigationItem.
-        });
+        };
+        return <VerticalNavigationItem {...childProps} />;
       } else {
         return child;
       }
     });
   }
 
+  static handleItemClick(primary, secondary, tertiary, inMobileState) {
+    const item =
+      (primary && secondary && tertiary) || (primary && secondary) || primary;
+    if (inMobileState) {
+      if (item.children && item.children.length > 0) {
+        this.updateMobileMenu(primary, secondary, tertiary); // TODO figure out what this did in ng
+      } else {
+        this.updateMobileMenu(); // TODO figure out what this did in ng (expanded states?)
+      }
+    }
+    if (!inMobileState || !item.children || item.children.length === 0) {
+      VerticalNavigation.navigateToItem(item);
+    }
+  }
+
   static getNextDepth(depth) {
+    if (!depth) return 'primary';
     return depth === 'primary' ? 'secondary' : 'tertiary';
+  }
+
+  static getItemObject(props) {
+    return {
+      title: props.title,
+      trackActiveState: props.trackActiveState,
+      trackHoverState: props.trackHoverState,
+      mobileItem: props.mobileItem,
+      iconStyleClass: props.iconStyleClass,
+      badges: props.badges,
+      children:
+        props.children &&
+        props.children.length > 0 &&
+        React.Children.map(props.children, child =>
+          VerticalNavigation.getItemObject(child.props),
+        ),
+    };
+  }
+
+  static navigateToItem(item) {
+    console.log('TODO NAVIGATE!', item); // TODO
   }
 
   constructor() {
@@ -46,6 +93,12 @@ export default class VerticalNavigation extends React.Component {
       collapsedTertiaryNav: false,
     };
     this.handleNavBarToggleClick = this.handleNavBarToggleClick.bind(this);
+    this.handlePrimaryHover = this.handlePrimaryHover.bind(this);
+    this.handlePrimaryBlur = this.handlePrimaryBlur.bind(this);
+    this.handleSecondaryHover = this.handleSecondaryHover.bind(this);
+    this.handleSecondaryBlur = this.handleSecondaryBlur.bind(this);
+    this.handleTertiaryHover = this.handleTertiaryHover.bind(this);
+    this.handleTertiaryBlur = this.handleTertiaryBlur.bind(this);
   }
 
   handleNavBarToggleClick() {
@@ -55,24 +108,12 @@ export default class VerticalNavigation extends React.Component {
     });
   }
 
-  handlePrimaryClick(item) {
-    // TODO compare with https://github.com/patternfly/patternfly-ng/blob/master/src/app/navigation/vertical-navigation.component.ts
-    // TODO implement local state behavior, also call handlers passable for the click and/or for the state changes.
-    // TODO put these handlers into render instead of the props handlers directly.
-    // this.props.handlePrimaryClick(primaryItem);
-  }
-
   handlePrimaryHover(item) {
-    // TODO
+    // TODO give hover and blur the same treatment as the static click handler
   }
 
   handlePrimaryBlur(item) {
     // TODO
-  }
-
-  handleSecondaryClick(item) {
-    // TODO
-    // this.props.handleSecondaryClick(primaryItem, secondaryItem);
   }
 
   handleSecondaryHover(item) {
@@ -81,10 +122,6 @@ export default class VerticalNavigation extends React.Component {
 
   handleSecondaryBlur(item) {
     // TODO
-  }
-
-  handleTertiaryClick(item) {
-    // this.props.handleTertiaryClick(primaryItem, secondaryItem, tertiaryItem);
   }
 
   handleTertiaryHover(item) {
@@ -96,37 +133,10 @@ export default class VerticalNavigation extends React.Component {
   }
 
   render() {
-    const {
-      items,
-      hidden,
-      persistentSecondary,
-      pinnableMenus,
-      hiddenIcons,
-      brandSrc,
-      brandAlt,
-      showBadges,
-      showMobileNav,
-      showMobileSecondary,
-      showMobileTertiary,
-      forceHidden,
-      hideTopBanner,
-      navCollapsed,
-      inMobileState,
-      activeSecondary,
-      children,
-      topBannerContents,
-      notificationDrawer /* TODO notification drawer components? */,
-    } = this.props;
-    const {
-      hoverSecondaryNav,
-      hoverTertiaryNav,
-      collapsedSecondaryNav,
-      collapsedTertiaryNav,
-    } = this.state;
-
+    const { items, children } = this.props;
     // Nav items may be passed either as nested VerticalNavigationItem children, or as nested items in a prop.
     // If we have the items prop, and we don't have any children, render as if it were passed as children.
-    if (items && !children)
+    if (items && !children) {
       return (
         <VerticalNavigation>
           {items.map((primaryItem, i) => (
@@ -144,6 +154,33 @@ export default class VerticalNavigation extends React.Component {
           ))}
         </VerticalNavigation>
       );
+    }
+
+    const {
+      hidden,
+      persistentSecondary,
+      pinnableMenus,
+      hiddenIcons,
+      brandSrc,
+      brandAlt,
+      showBadges,
+      showMobileNav,
+      showMobileSecondary,
+      showMobileTertiary,
+      forceHidden,
+      hideTopBanner,
+      navCollapsed,
+      inMobileState, // TODO maybe this should be local state?
+      activeSecondary,
+      topBannerContents,
+      notificationDrawer /* TODO notification drawer components? */,
+    } = this.props;
+    const {
+      hoverSecondaryNav,
+      hoverTertiaryNav,
+      collapsedSecondaryNav,
+      collapsedTertiaryNav,
+    } = this.state;
 
     const topBanner = (
       <div>
@@ -205,7 +242,9 @@ export default class VerticalNavigation extends React.Component {
             })}
           >
             <ListGroup componentClass="ul">
-              {children && VerticalNavigation.renderChildren(this.props)}
+              {children &&
+                children.length > 0 &&
+                VerticalNavigation.renderChildren(this.props)}
             </ListGroup>
           </div>
         </nav>
