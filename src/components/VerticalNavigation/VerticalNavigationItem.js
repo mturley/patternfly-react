@@ -10,12 +10,50 @@ import VerticalNavigation from './VerticalNavigation';
  * VerticalNavigationItem - a child element for the VerticalNavigation component
  */
 export default class VerticalNavigationItem extends React.Component {
+  static itemPropTypes = {
+    title: PropTypes.string,
+    trackActiveState: PropTypes.bool,
+    trackHoverState: PropTypes.bool,
+    mobileItem: PropTypes.bool,
+    iconStyleClass: PropTypes.string,
+    badges: PropTypes.shape({
+      badgeClass: PropTypes.string,
+      tooltip: PropTypes.string,
+      count: PropTypes.number,
+      iconStyleClass: PropTypes.string,
+    }),
+    children: PropTypes.array,
+  };
+
   constructor() {
     super();
     this.state = {};
+    this.onItemEvent = this.onItemEvent.bind(this);
+    this.onItemHover = this.onItemHover.bind(this);
+    this.onItemBlur = this.onItemBlur.bind(this);
+    this.onItemClick = this.onItemClick.bind(this);
+  }
+
+  onItemEvent(callback) {
+    const { primaryItem, secondaryItem, tertiaryItem } = this.context;
+    callback(primaryItem, secondaryItem, tertiaryItem);
+  }
+
+  onItemHover() {
+    // TODO allow handleItemHover props etc at the item level???
+    onItemEvent(this.context.onItemHover);
+  }
+
+  onItemBlur() {
+    onItemEvent(this.context.onItemBlur);
+  }
+
+  onItemClick() {
+    onItemEvent(this.context.onItemClick);
   }
 
   renderBadges(badges) {
+    // TODO we don't know about this-- it needs to optionally be a child that you can pass? this is the default?  TODO DOCUMENT IT!
     const { showBadges } = this.props;
     return (
       showBadges &&
@@ -44,7 +82,7 @@ export default class VerticalNavigationItem extends React.Component {
   render() {
     const { item, ...otherProps } = this.props;
     if (item) {
-      return <VerticalNavigationItem {...otherProps} {...item} />; // The item object is just a container for a bunch of props.
+      return <VerticalNavigationItem {...otherProps} {...item} />; // The item object is just a container for a bunch of props. // TODO yeah idk about this
     }
 
     const {
@@ -58,29 +96,13 @@ export default class VerticalNavigationItem extends React.Component {
       showMobileSecondary,
       showMobileTertiary,
       navCollapsed,
-      handlePrimaryHover,
-      handleSecondaryHover,
-      handleTertiaryHover,
-      handlePrimaryBlur,
-      handleSecondaryBlur,
-      handleTertiaryBlur,
       primaryItem,
       secondaryItem,
       tertiaryItem,
       inMobileState,
     } = this.props;
 
-    const handleHover = {
-      primary: handlePrimaryHover,
-      secondary: handleSecondaryHover,
-      tertiary: handleTertiaryHover,
-    };
-
-    const handleBlur = {
-      primary: handlePrimaryBlur,
-      secondary: handleSecondaryBlur,
-      tertiary: handleTertiaryBlur,
-    };
+    const { onItemHover, onItemBlur, onItemClick } = this.context;
 
     // TODO maybe don't pass in all three handlers at the top, instead pass them below? would that still be DRY?
 
@@ -120,20 +142,15 @@ export default class VerticalNavigationItem extends React.Component {
           // I don't know, that's just how this stuff was in patternfly-ng...
         })}
         onMouseEnter={() => {
-          handleHover[depth]('TODO args here');
+          onItemHover(primaryItem, secondaryItem, tertiaryItem);
         }}
         onMouseLeave={() => {
-          handleBlur[depth]('TODO args here');
+          onItemBlur(primaryItem, secondaryItem, tertiaryItem);
         }}
       >
         <a
           onClick={() => {
-            VerticalNavigation.handleItemClick(
-              primaryItem,
-              secondaryItem,
-              tertiaryItem,
-              inMobileState,
-            );
+            onItemClick(primaryItem, secondaryItem, tertiaryItem);
           }}
         >
           {depth === 'primary' &&
@@ -177,41 +194,26 @@ export default class VerticalNavigationItem extends React.Component {
   }
 }
 
-const itemShape = {
-  title: PropTypes.string,
-  trackActiveState: PropTypes.bool,
-  trackHoverState: PropTypes.bool,
-  mobileItem: PropTypes.bool,
-  iconStyleClass: PropTypes.string,
-  badges: PropTypes.shape({
-    badgeClass: PropTypes.string,
-    tooltip: PropTypes.string,
-    count: PropTypes.number,
-    iconStyleClass: PropTypes.string,
-  }),
-  children: PropTypes.array,
+VerticalNavigationItem.contextTypes = {
+  primaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
+  secondaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
+  tertiaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
+  onItemHover: PropTypes.func,
+  onItemBlur: PropTypes.func,
+  onItemClick: PropTypes.func,
 };
 
 VerticalNavigationItem.propTypes = {
-  item: PropTypes.shape(itemShape),
-  ...itemShape, // Each of the item object's properties can alternatively be passed directly as a prop.
+  item: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
+  ...itemShape, // Each of the item object's properties can alternatively be passed directly as a prop. FIXME ehhhh really?
   showMobileSecondary: PropTypes.bool,
   showMobileTertiary: PropTypes.bool,
   navCollapsed: PropTypes.bool,
   secondaryCollapsed: PropTypes.bool,
   tertiaryCollapsed: PropTypes.bool,
-  handlePrimaryHover: PropTypes.func,
-  handleSecondaryHover: PropTypes.func,
-  handleTertiaryHover: PropTypes.func,
-  handlePrimaryBlur: PropTypes.func,
-  handleSecondaryBlur: PropTypes.func,
-  handleTertiaryBlur: PropTypes.func,
-  handlePrimaryClick: PropTypes.func,
-  handleSecondaryClick: PropTypes.func,
-  handleTertiaryClick: PropTypes.func,
-  primaryItem: PropTypes.shape(itemShape),
-  secondaryItem: PropTypes.shape(itemShape),
-  tertiaryItem: PropTypes.shape(itemShape),
+  primaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
+  secondaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
+  tertiaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
   inMobileState: PropTypes.bool,
   children: PropTypes.node,
 };
@@ -224,13 +226,4 @@ VerticalNavigationItem.defaultProps = {
   showMobileSecondary: false,
   showMobileTertiary: false,
   navCollapsed: false,
-  handlePrimaryHover: () => {},
-  handleSecondaryHover: () => {},
-  handleTertiaryHover: () => {},
-  handlePrimaryBlur: () => {},
-  handleSecondaryBlur: () => {},
-  handleTertiaryBlur: () => {},
-  handlePrimaryClick: () => {},
-  handleSecondaryClick: () => {},
-  handleTertiaryClick: () => {},
 };
