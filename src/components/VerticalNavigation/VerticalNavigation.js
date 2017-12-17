@@ -3,72 +3,28 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ListGroup from '../ListGroup/ListGroup';
 import VerticalNavigationItem from './VerticalNavigationItem';
+import {
+  deepestOf,
+  itemObjectTypes,
+  itemContextTypes,
+  provideItemContext,
+} from './constants';
 
 // TODO compare with
 // http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
-// TODO fix errors and get it working on storybook
+
+// TODO -- get back to how items are stored? still need item ids...
+
 // TODO react-router support?
+
+const ItemContextProvider = provideItemContext(props => (
+  <div>{props.children}</div>
+));
 
 /**
  * VerticalNavigation - The Vertical Navigation pattern
  */
-export default class VerticalNavigation extends React.Component {
-  // NOTE: For convenience, ALL PROPS of VerticalNavigation will be passed to all VerticalNavigationItem children.
-  // EXCEPTIONS:
-  // - The children prop, for obvious reasons.
-  // - The depth prop will automatically be set to the currently nested depth (primary, secondary or tertiary).
-  // - Any props passed explicitly to VerticalNavigationItem children will take precendence over inherited props.
-  static renderChildren(props) {
-    const { children, ...parentProps } = props; // TODO maybe take specific props instead of passing all of them?
-    const { primaryItem, secondaryItem, tertiaryItem } = props;
-    const childDepth = VerticalNavigation.getNextDepth(props.depth);
-    return React.Children.map(children, child => {
-      if (child.type === VerticalNavigationItem) {
-        const item = VerticalNavigation.getItemObject(child.props);
-        const primary = childDepth === 'primary' ? item : primaryItem;
-        const secondary = childDepth === 'secondary' ? item : secondaryItem;
-        const tertiary = childDepth === 'tertiary' ? item : tertiaryItem;
-        const childProps = {
-          ...parentProps,
-          depth: childDepth,
-          primaryItem: primary,
-          secondaryItem: secondary,
-          tertiaryItem: tertiary,
-          ...child.props, // We include this to allow overriding these props inline on a VerticalNavigationItem.
-        };
-        return <VerticalNavigationItem {...childProps} />;
-      } else {
-        return child;
-      }
-    });
-  }
-
-  static getNextDepth(depth) {
-    if (!depth) return 'primary';
-    return depth === 'primary' ? 'secondary' : 'tertiary';
-  }
-
-  static getItemObject(props) {
-    return {
-      title: props.title,
-      trackActiveState: props.trackActiveState,
-      trackHoverState: props.trackHoverState,
-      mobileItem: props.mobileItem,
-      iconStyleClass: props.iconStyleClass,
-      badges: props.badges,
-      children:
-        props.children &&
-        props.children.length > 0 &&
-        React.Children.map(props.children, child =>
-          VerticalNavigation.getItemObject(child.props),
-        ),
-    };
-  }
-
-  static deepestOf(pri, sec, ter) {
-    return (pri && sec && ter) || (pri && sec) || pri;
-  }
-
+class VerticalNavigation extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -98,7 +54,7 @@ export default class VerticalNavigation extends React.Component {
 
   onItemClick(primary, secondary, tertiary) {
     const { inMobileState, handleItemClick } = this.props;
-    const item = VerticalNavigation.deepestOf(primary, secondary, tertiary);
+    const item = deepestOf(primary, secondary, tertiary);
     if (inMobileState) {
       if (item.children && item.children.length > 0) {
         this.updateMobileMenu(primary, secondary, tertiary); // TODO figure out what this did in ng
@@ -118,7 +74,7 @@ export default class VerticalNavigation extends React.Component {
     const { inMobileState, handleItemHover, hoverDelay } = this.props;
     const { itemHoverTimers, itemBlurTimers, itemHoverStates } = this.state;
     const that = this; // In case state changes before the setTimeout callback (we can't use this.state in that callback) we need a reference for future state
-    const item = VerticalNavigation.deepestOf(primary, secondary, tertiary);
+    const item = deepestOf(primary, secondary, tertiary);
     if (item.children && item.children.length > 0) {
       if (!inMobileState) {
         if (itemBlurTimers[item.id]) {
@@ -153,8 +109,8 @@ export default class VerticalNavigation extends React.Component {
     const { inMobileState, handleItemHover, hideDelay } = this.props;
     const { itemHoverTimers, itemBlurTimers, itemHoverStates } = this.state;
     const that = this; // In case state changes before the setTimeout callback (we can't use this.state in that callback) we need a reference for future state
-    const item = VerticalNavigation.deepestOf(primary, secondary, tertiary);
-    if (item.children && itme.children.length > 0) {
+    const item = deepestOf(primary, secondary, tertiary);
+    if (item.children && item.children.length > 0) {
       if (itemHoverTimers[item.id]) {
         clearTimeout(itemHoverTimers[item.id]);
         this.setState({
@@ -192,41 +148,44 @@ export default class VerticalNavigation extends React.Component {
     console.log('TODO NAVIGATE!', item); // TODO
   }
 
-  getChildContext() {
-    return {
-      primaryItem,
-      secondaryItem,
-      tertiaryItem,
-      onItemHover,
-      onItemBlur,
-      onItemClick,
-    };
-  }
-
   render() {
-    // TODO refactor to accept children for the masthead TODO FIXME THIS IS NEXT MIKE
     const { items, children } = this.props;
+
+    // TODO include more stories examples!
+
     // Nav items may be passed either as nested VerticalNavigationItem children, or as nested items in a prop.
-    // If we have the items prop, and we don't have any children, render as if it were passed as children.
-    if (items && !children) {
-      return (
-        <VerticalNavigation>
-          {items.map((primaryItem, i) => (
-            <VerticalNavigationItem {...primaryItem}>
-              {primaryItem.children &&
-                primaryItem.children.map((secondaryItem, j) => (
-                  <VerticalNavigationItem {...secondaryItem}>
-                    {secondaryItem.children &&
-                      secondaryItem.children.map((tertiaryItem, j) => (
-                        <VerticalNavigationItem {...tertiaryItem} />
-                      ))}
-                  </VerticalNavigationItem>
-                ))}
-            </VerticalNavigationItem>
-          ))}
-        </VerticalNavigation>
-      );
-    }
+    // The items prop will take priority, if present, and must be an array of item objects (not React components).
+    // If the items prop is not present, items must be expressed as VerticalNavigationItem children instead.
+    // Any non-VerticalNavigationItem children will be rendered in the masthead.
+    const childrenArray =
+      children &&
+      React.Children.count(children) > 0 &&
+      React.Children.toArray(children);
+    const itemsFromChildren =
+      childrenArray &&
+      childrenArray.filter(child => child.type === VerticalNavigationItem);
+    const nonItemChildren =
+      childrenArray &&
+      childrenArray.filter(child => child.type !== VerticalNavigationItem);
+    const itemsFromProps =
+      items &&
+      items.length > 0 &&
+      items.map((primaryItem, i) => (
+        <VerticalNavigationItem {...primaryItem}>
+          {/* TODO do we need keys in this mapped array of nodes? */}
+          {primaryItem.children &&
+            primaryItem.children.map((secondaryItem, j) => (
+              <VerticalNavigationItem {...secondaryItem}>
+                {secondaryItem.children &&
+                  secondaryItem.children.map((tertiaryItem, j) => (
+                    <VerticalNavigationItem {...tertiaryItem} />
+                  ))}
+              </VerticalNavigationItem>
+            ))}
+        </VerticalNavigationItem>
+      ));
+
+    const itemComponents = itemsFromProps || itemsFromChildren || [];
 
     const {
       hidden,
@@ -265,19 +224,19 @@ export default class VerticalNavigation extends React.Component {
             <span className="sr-only">Toggle navigation</span>
             <span className="icon-bar" />
             <span className="icon-bar" />
-            <span className="icon-bar" />{' '}
-            {/* TODO make props for these icons! */}
+            <span className="icon-bar" />
           </button>
           <span className="navbar-brand">
-            {brandSrc ? (
-              <img
-                className="navbar-brand-icon"
-                src={brandSrc}
-                alt={brandAlt}
-              />
-            ) : (
-              <span className="navbar-brand-txt">{brandAlt}</span>
-            )}
+            {nonItemChildren || // TODO revisit this? how to best default when they don't have children?
+              (brandSrc ? (
+                <img
+                  className="navbar-brand-icon"
+                  src={brandSrc}
+                  alt={brandAlt}
+                />
+              ) : (
+                <span className="navbar-brand-txt">{brandAlt}</span>
+              ))}
             {/* TODO in the reference markup there is also a:
               <img class="navbar-brand-name" src="/assets/img/brand-alt.svg" alt="PatternFly Enterprise Application" /> */}
           </span>
@@ -288,7 +247,11 @@ export default class VerticalNavigation extends React.Component {
     );
 
     return (
-      <div>
+      <ItemContextProvider
+        onItemHover={this.onItemHover}
+        onItemBlur={this.onItemBlur}
+        onItemClick={this.onItemClick}
+      >
         <nav // TODO do we need classes like the commented out ones here?
           className={cx(
             'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */,
@@ -313,20 +276,16 @@ export default class VerticalNavigation extends React.Component {
               'show-mobile-nav': showMobileNav,
             })}
           >
-            <ListGroup componentClass="ul">
-              {children &&
-                children.length > 0 &&
-                VerticalNavigation.renderChildren(this.props)}
-            </ListGroup>
+            <ListGroup componentClass="ul">{itemComponents}</ListGroup>
           </div>
         </nav>
-      </div>
+      </ItemContextProvider>
     );
   }
 }
 
 VerticalNavigation.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object), // TODO shape of item objects?
+  items: PropTypes.arrayOf(PropTypes.shape(itemObjectTypes)),
   hidden: PropTypes.bool,
   persistentSecondary: PropTypes.bool,
   pinnableMenus: PropTypes.bool,
@@ -376,4 +335,4 @@ VerticalNavigation.defaultProps = {
   handleItemBlur: () => {},
 };
 
-VerticalNavigation.childContextTypes = VerticalNavigationItem.contextTypes;
+export default VerticalNavigation;

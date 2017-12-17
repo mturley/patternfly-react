@@ -1,55 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 import cx from 'classnames';
 import { ListGroup, ListGroupItem } from '../ListGroup';
 import OverlayTrigger from '../OverlayTrigger';
 import Tooltip from '../Tooltip';
 import VerticalNavigation from './VerticalNavigation';
+import {
+  getNextDepth,
+  getItemProps,
+  itemObjectTypes,
+  itemContextTypes,
+  consumeAndProvideItemContext,
+} from './constants';
 
 /**
  * VerticalNavigationItem - a child element for the VerticalNavigation component
  */
-export default class VerticalNavigationItem extends React.Component {
-  static itemPropTypes = {
-    title: PropTypes.string,
-    trackActiveState: PropTypes.bool,
-    trackHoverState: PropTypes.bool,
-    mobileItem: PropTypes.bool,
-    iconStyleClass: PropTypes.string,
-    badges: PropTypes.shape({
-      badgeClass: PropTypes.string,
-      tooltip: PropTypes.string,
-      count: PropTypes.number,
-      iconStyleClass: PropTypes.string,
-    }),
-    children: PropTypes.array,
-  };
-
+class VerticalNavigationItem extends React.Component {
   constructor() {
     super();
     this.state = {};
+    this.getContextNavItems = this.getContextNavItems.bind(this);
     this.onItemEvent = this.onItemEvent.bind(this);
     this.onItemHover = this.onItemHover.bind(this);
     this.onItemBlur = this.onItemBlur.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
   }
 
+  getContextNavItems() {
+    // We have primary, secondary, and tertiary items as props if they are part of the parent context,
+    // but we also want to include the current item when calling handlers.
+    const {
+      item,
+      depth,
+      primaryItem,
+      secondaryItem,
+      tertiaryItem,
+    } = this.props;
+    const navItem = item || getItemProps(this.props);
+    return {
+      primary: depth === 'primary' ? navItem : primaryItem,
+      secondary: depth === 'secondary' ? navItem : secondaryItem,
+      tertiary: depth === 'tertiary' ? navItem : tertiaryItem,
+    };
+  }
+
   onItemEvent(callback) {
-    const { primaryItem, secondaryItem, tertiaryItem } = this.context;
-    callback(primaryItem, secondaryItem, tertiaryItem);
+    const { primary, secondary, tertiary } = this.getContextNavItems();
+    callback(primary, secondary, tertiary);
   }
 
   onItemHover() {
     // TODO allow handleItemHover props etc at the item level???
-    onItemEvent(this.context.onItemHover);
+    this.onItemEvent(this.props.onItemHover);
   }
 
   onItemBlur() {
-    onItemEvent(this.context.onItemBlur);
+    // TODO allow handleItemHover props etc at the item level???
+    this.onItemEvent(this.props.onItemBlur);
   }
 
   onItemClick() {
-    onItemEvent(this.context.onItemClick);
+    // TODO allow handleItemHover props etc at the item level???
+    this.onItemEvent(this.props.onItemClick);
   }
 
   renderBadges(badges) {
@@ -80,35 +94,44 @@ export default class VerticalNavigationItem extends React.Component {
   }
 
   render() {
-    const { item, ...otherProps } = this.props;
-    if (item) {
-      return <VerticalNavigationItem {...otherProps} {...item} />; // The item object is just a container for a bunch of props. // TODO yeah idk about this
-    }
+    const {
+      item,
+      showMobileSecondary,
+      showMobileTertiary,
+      navCollapsed,
+      inMobileState,
+      onItemHover,
+      onItemBlur,
+      onItemClick,
+      children,
+    } = this.props;
+
+    // The nav item can either be passed directly as one item object prop, or as individual props.
+    const navItem = item || getItemProps(this.props);
 
     const {
-      children,
+      title,
       trackActiveState,
       trackHoverState,
       mobileItem,
       iconStyleClass,
-      title,
       badges,
-      showMobileSecondary,
-      showMobileTertiary,
-      navCollapsed,
-      primaryItem,
-      secondaryItem,
-      tertiaryItem,
-      inMobileState,
-    } = this.props;
+    } = navItem;
 
-    const { onItemHover, onItemBlur, onItemClick } = this.context;
+    const childItemComponents =
+      (children &&
+        React.Children.count(children) > 0 &&
+        React.Children.toArray(children).filter(
+          child => child.type === VerticalNavigationItem,
+        )) ||
+      (navItem.children &&
+        navItem.children.length > 0 &&
+        navItem.children.map(childItem => (
+          <VerticalNavigationItem item={childItem} />
+        )));
 
-    // TODO maybe don't pass in all three handlers at the top, instead pass them below? would that still be DRY?
-
-    // Assume that if someone nests deeper than tertiary, it's just another tertiary-styled item.
     const depth = this.props.depth || 'primary';
-    const nextDepth = VerticalNavigation.getNextDepth(depth);
+    const nextDepth = getNextDepth(depth);
 
     // Default to collapsed unless we explicitly pass collapsed = false.
     const secondaryCollapsed = this.props.secondaryCollapsed !== false;
@@ -141,18 +164,10 @@ export default class VerticalNavigationItem extends React.Component {
             mobileItem && depth === 'primary' && showMobileTertiary,
           // I don't know, that's just how this stuff was in patternfly-ng...
         })}
-        onMouseEnter={() => {
-          onItemHover(primaryItem, secondaryItem, tertiaryItem);
-        }}
-        onMouseLeave={() => {
-          onItemBlur(primaryItem, secondaryItem, tertiaryItem);
-        }}
+        onMouseEnter={this.onItemHover}
+        onMouseLeave={this.onItemBlur}
       >
-        <a
-          onClick={() => {
-            onItemClick(primaryItem, secondaryItem, tertiaryItem);
-          }}
-        >
+        <a onClick={this.onItemClick}>
           {depth === 'primary' &&
             iconStyleClass && (
               <OverlayTrigger
@@ -169,7 +184,7 @@ export default class VerticalNavigationItem extends React.Component {
           {this.renderBadges(badges)}
         </a>
         {children &&
-          children.length > 0 && (
+          React.Children.count(children) > 0 && (
             <div className="nav-pf-secondary-nav">
               {' '}
               {/* TODO should this class sometimes say tertiary? */}
@@ -184,9 +199,7 @@ export default class VerticalNavigationItem extends React.Component {
                 />
                 <span>{title}</span>
               </div>
-              <ListGroup componentClass="ul">
-                {VerticalNavigation.renderChildren(this.props)}
-              </ListGroup>
+              <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
             </div>
           )}
       </ListGroupItem>
@@ -194,26 +207,15 @@ export default class VerticalNavigationItem extends React.Component {
   }
 }
 
-VerticalNavigationItem.contextTypes = {
-  primaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
-  secondaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
-  tertiaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
-  onItemHover: PropTypes.func,
-  onItemBlur: PropTypes.func,
-  onItemClick: PropTypes.func,
-};
-
 VerticalNavigationItem.propTypes = {
-  item: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
-  ...itemShape, // Each of the item object's properties can alternatively be passed directly as a prop. FIXME ehhhh really?
+  item: PropTypes.shape(itemObjectTypes),
+  ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
+  ...itemContextTypes,
   showMobileSecondary: PropTypes.bool,
   showMobileTertiary: PropTypes.bool,
   navCollapsed: PropTypes.bool,
   secondaryCollapsed: PropTypes.bool,
   tertiaryCollapsed: PropTypes.bool,
-  primaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
-  secondaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
-  tertiaryItem: PropTypes.shape(VerticalNavigationItem.itemPropTypes),
   inMobileState: PropTypes.bool,
   children: PropTypes.node,
 };
@@ -227,3 +229,5 @@ VerticalNavigationItem.defaultProps = {
   showMobileTertiary: false,
   navCollapsed: false,
 };
+
+export default consumeAndProvideItemContext(VerticalNavigationItem);
