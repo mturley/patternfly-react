@@ -17,6 +17,7 @@ import {
 // TODO -- namespace things as VerticalNavigation.Item
 // TODO -- make the masthead components designated by a VerticalNavigation.Masthead
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem? inheritance??
+// TODO -- figure out controlled vs uncontrolled, and what props/state this involves
 
 // TODO react-router support?
 // TODO all the other TODOs....
