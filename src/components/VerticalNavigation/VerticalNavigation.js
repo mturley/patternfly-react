@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ListGroup from '../ListGroup/ListGroup';
 import VerticalNavigationItem from './VerticalNavigationItem';
+import VerticalNavigationMasthead from './VerticalNavigationMasthead';
 import {
   deepestOf,
   itemObjectTypes,
@@ -122,28 +123,38 @@ class VerticalNavigation extends React.Component {
     const itemsFromChildren =
       childrenArray &&
       childrenArray.filter(child => child.type === VerticalNavigationItem);
-    const nonItemChildren =
-      childrenArray &&
-      childrenArray.filter(child => child.type !== VerticalNavigationItem);
+    // TODO maybe rely on the item render method to recurse, and just do one map here?
     const itemsFromProps =
       items &&
       items.length > 0 &&
       items.map((primaryItem, i) => (
-        <VerticalNavigationItem {...primaryItem}>
-          {/* TODO do we need keys in this mapped array of nodes? */}
+        <VerticalNavigationItem
+          item={primaryItem}
+          key={`primary_${primaryItem.title}`}
+        >
           {primaryItem.children &&
             primaryItem.children.map((secondaryItem, j) => (
-              <VerticalNavigationItem {...secondaryItem}>
+              <VerticalNavigationItem
+                item={secondaryItem}
+                key={`secondary_${secondaryItem.title}`}
+              >
                 {secondaryItem.children &&
                   secondaryItem.children.map((tertiaryItem, j) => (
-                    <VerticalNavigationItem {...tertiaryItem} />
+                    <VerticalNavigationItem
+                      item={tertiaryItem}
+                      key={`tertiary_${tertiaryItem.title}`}
+                    />
                   ))}
               </VerticalNavigationItem>
             ))}
         </VerticalNavigationItem>
       ));
-
     const itemComponents = itemsFromProps || itemsFromChildren || [];
+
+    const masthead =
+      childrenArray &&
+      childrenArray.find(child => child.type === VerticalNavigationMasthead);
+    const mastheadChildren = masthead && masthead.props.children;
 
     const {
       hidden,
@@ -187,7 +198,7 @@ class VerticalNavigation extends React.Component {
             <span className="icon-bar" />
           </button>
           <span className="navbar-brand">
-            {nonItemChildren || // TODO revisit this? how to best default when they don't have children?
+            {mastheadChildren || // TODO revisit this? how to best default when they don't have children?
               (brandSrc ? (
                 <img
                   className="navbar-brand-icon"

@@ -21,23 +21,30 @@ stories.addWithInfo(
   `VerticalNavigation usage example with items passed as children, but with only titles.`,
   () => {
     return (
-      <VerticalNavigation secondaryCollapsed={false} tertiaryCollapsed>
-        <VerticalNavigation.Item title="Item 1" />
-        <VerticalNavigation.Item title="Item 2">
-          <VerticalNavigation.Item title="Item 2-A" />
-          <VerticalNavigation.Item title="Item 2-B" />
-          <VerticalNavigation.Item title="Item 2-C" />
-        </VerticalNavigation.Item>
-        <VerticalNavigation.Item title="Item 3">
-          <VerticalNavigation.Item title="Item 3-A" />
-          <VerticalNavigation.Item title="Item 3-B">
-            <VerticalNavigation.Item title="Item 3-B-i" />
-            <VerticalNavigation.Item title="Item 3-B-ii" />
-            <VerticalNavigation.Item title="Item 3-B-iii" />
+      // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
+      // See https://stackoverflow.com/a/38796408
+      <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
+        <VerticalNavigation secondaryCollapsed={false} tertiaryCollapsed>
+          <VerticalNavigation.Masthead>
+            <span>Super Awesome App</span>
+          </VerticalNavigation.Masthead>
+          <VerticalNavigation.Item title="Item 1" />
+          <VerticalNavigation.Item title="Item 2">
+            <VerticalNavigation.Item title="Item 2-A" />
+            <VerticalNavigation.Item title="Item 2-B" />
+            <VerticalNavigation.Item title="Item 2-C" />
           </VerticalNavigation.Item>
-          <VerticalNavigation.Item title="Item 3-C" />
-        </VerticalNavigation.Item>
-      </VerticalNavigation>
+          <VerticalNavigation.Item title="Item 3">
+            <VerticalNavigation.Item title="Item 3-A" />
+            <VerticalNavigation.Item title="Item 3-B">
+              <VerticalNavigation.Item title="Item 3-B-i" />
+              <VerticalNavigation.Item title="Item 3-B-ii" />
+              <VerticalNavigation.Item title="Item 3-B-iii" />
+            </VerticalNavigation.Item>
+            <VerticalNavigation.Item title="Item 3-C" />
+          </VerticalNavigation.Item>
+        </VerticalNavigation>
+      </div>
     );
   },
 );
@@ -46,8 +53,18 @@ stories.addWithInfo(
   'Vertical Navigation driven by an objects in a prop',
   `VerticalNavigation usage example with items passed as objects, driven by a mock file.`,
   () => {
-    return <VerticalNavigation items={mockNavItems} />;
+    return (
+      // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
+      // See https://stackoverflow.com/a/38796408
+      <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
+        <VerticalNavigation items={mockNavItems}>
+          <VerticalNavigation.Masthead>
+            <span>Super Awesome App</span>
+          </VerticalNavigation.Masthead>
+        </VerticalNavigation>
+      </div>
+    );
   },
 );
 
-// TODO add more stories!
+// TODO add more stories! with and without custom masthead (how to handle default?) and others

@@ -32,6 +32,17 @@ class VerticalNavigationItem extends React.Component {
     this.onItemClick = this.onItemClick.bind(this);
   }
 
+  componentWillUnmount() {
+    // Clear both timers so they don't trigger while the component is unmounted.
+    const { hoverTimer, blurTimer } = this.state;
+    if (hoverTimer) clearTimeout(hoverTimer);
+    if (blurTimer) clearTimeout(blurTimer);
+    this.setState({
+      hoverTimer: null,
+      blurTimer: null,
+    });
+  }
+
   getContextNavItems() {
     // We have primary, secondary, and tertiary items as props if they are part of the parent context,
     // but we also want to include the current item when calling handlers.
@@ -188,7 +199,7 @@ class VerticalNavigationItem extends React.Component {
       (navItem.children &&
         navItem.children.length > 0 &&
         navItem.children.map(childItem => (
-          <VerticalNavigationItem item={childItem} />
+          <VerticalNavigationItem item={childItem} key={childItem.title} />
         )));
 
     const depth = this.props.depth || 'primary';
