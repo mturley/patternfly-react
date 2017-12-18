@@ -5,7 +5,6 @@ import { withContext, getContext, compose } from 'recompose';
 const itemObjectTypes = {
   title: PropTypes.string,
   trackActiveState: PropTypes.bool,
-  trackHoverState: PropTypes.bool,
   mobileItem: PropTypes.bool,
   iconStyleClass: PropTypes.string,
   badges: PropTypes.shape({
@@ -21,10 +20,12 @@ const itemContextTypes = {
   depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   primaryItem: PropTypes.shape(itemObjectTypes),
   secondaryItem: PropTypes.shape(itemObjectTypes),
-  onItemHover: PropTypes.func,
-  onItemBlur: PropTypes.func,
-  onItemClick: PropTypes.func,
-  // TODO more context?  inMobileState?
+  updateNavOnItemHover: PropTypes.func,
+  updateNavOnItemBlur: PropTypes.func,
+  updateNavOnItemClick: PropTypes.func,
+  inMobileState: PropTypes.bool,
+  hoverDelay: PropTypes.number,
+  hideDelay: PropTypes.number,
 };
 
 const getNextDepth = depth => {
@@ -39,7 +40,6 @@ const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
 const getItemProps = props => ({
   title: props.title,
   trackActiveState: props.trackActiveState,
-  trackHoverState: props.trackHoverState,
   mobileItem: props.mobileItem,
   iconStyleClass: props.iconStyleClass,
   badges: props.badges,
@@ -56,19 +56,25 @@ const getChildItemContext = parentProps => {
     item, // *
     primaryItem, // *
     secondaryItem, // *
-    onItemHover,
-    onItemBlur,
-    onItemClick,
+    updateNavOnItemHover,
+    updateNavOnItemBlur,
+    updateNavOnItemClick,
+    inMobileState,
+    hoverDelay,
+    hideDelay,
   } = parentProps;
   const nextDepth = getNextDepth(depth); // returns primary if depth was undefined
   return {
     depth: nextDepth,
     primaryItem: nextDepth === 'secondary' ? item : primaryItem,
     secondaryItem: nextDepth === 'tertiary' ? item : secondaryItem,
-    // tertiaryItem doesn't need to be in context.
-    onItemHover,
-    onItemBlur,
-    onItemClick,
+    // tertiaryItem doesn't need to be in context (see VerticalNavigationItem.getContextNavItems)
+    updateNavOnItemHover,
+    updateNavOnItemBlur,
+    updateNavOnItemClick,
+    inMobileState,
+    hoverDelay,
+    hideDelay,
   };
 };
 

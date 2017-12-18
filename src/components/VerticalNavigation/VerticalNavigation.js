@@ -13,9 +13,12 @@ import {
 // TODO compare with
 // http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
 
-// TODO -- get back to how items are stored? still need item ids...
+// TODO -- namespace things as VerticalNavigation.Item
+// TODO -- make the masthead components designated by a VerticalNavigation.Masthead
+// TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem? inheritance??
 
 // TODO react-router support?
+// TODO all the other TODOs....
 
 const ItemContextProvider = provideItemContext(props => (
   <div>{props.children}</div>
@@ -32,19 +35,17 @@ class VerticalNavigation extends React.Component {
       hoverTertiaryNav: false,
       collapsedSecondaryNav: false,
       collapsedTertiaryNav: false,
-      itemBlurTimers: {},
-      itemHoverTimers: {},
-      itemHoverStates: {},
     };
-    this.handleNavBarToggleClick = this.handleNavBarToggleClick.bind(this);
-    this.onItemClick = this.onItemClick.bind(this);
-    this.onItemHover = this.onItemHover.bind(this);
-    this.onItemBlur = this.onItemBlur.bind(this);
+    this.onNavBarToggleClick = this.onNavBarToggleClick.bind(this);
+    this.updateHoverState = this.updateHoverState.bind(this);
+    this.updateNavOnItemHover = this.updateNavOnItemHover.bind(this);
+    this.updateNavOnItemBlur = this.updateNavOnItemBlur.bind(this);
+    this.updateNavOnItemClick = this.updateNavOnItemClick.bind(this);
     this.updateMobileMenu = this.updateMobileMenu.bind(this);
     this.navigateToItem = this.navigateToItem.bind(this);
   }
 
-  handleNavBarToggleClick() {
+  onNavBarToggleClick() {
     // TODO differentiate between onNavBarToggleClick and handle, like we have for handleItemClick
     const { hideTopBanner } = this.state;
     this.setState({
@@ -52,8 +53,35 @@ class VerticalNavigation extends React.Component {
     });
   }
 
-  onItemClick(primary, secondary, tertiary) {
-    const { inMobileState, handleItemClick } = this.props;
+  updateHoverState(hovering, primary, secondary, tertiary) {
+    if (primary && secondary) {
+      if (tertiary) {
+        this.setState({ hoverTertiaryNav: hovering });
+      } else {
+        this.setState({ hoverSecondaryNav: hovering });
+      }
+    }
+  }
+
+  updateNavOnItemHover(primary, secondary, tertiary) {
+    const { onItemHover } = this.props;
+    this.updateHoverState(true, primary, secondary, tertiary);
+    if (onItemHover) {
+      onItemHover(primary, secondary, tertiary);
+    }
+  }
+
+  updateNavOnItemBlur(primary, secondary, tertiary) {
+    const { onItemBlur } = this.props;
+    // if (!this.primaryHover()) hoverSecondaryNav: false ? from ng, is it necessary?
+    this.updateHoverState(false, primary, secondary, tertiary);
+    if (onItemBlur) {
+      onItemBlur(primary, secondary, tertiary);
+    }
+  }
+
+  updateNavOnItemClick(primary, secondary, tertiary) {
+    const { inMobileState, onItemClick } = this.props;
     const item = deepestOf(primary, secondary, tertiary);
     if (inMobileState) {
       if (item.children && item.children.length > 0) {
@@ -65,78 +93,8 @@ class VerticalNavigation extends React.Component {
     if (!inMobileState || !item.children || item.children.length === 0) {
       this.navigateToItem(item);
     }
-    if (handleItemClick) {
-      handleItemClick(primary, secondary, tertiary);
-    }
-  }
-
-  onItemHover(primary, secondary, tertiary) {
-    const { inMobileState, handleItemHover, hoverDelay } = this.props;
-    const { itemHoverTimers, itemBlurTimers, itemHoverStates } = this.state;
-    const that = this; // In case state changes before the setTimeout callback (we can't use this.state in that callback) we need a reference for future state
-    const item = deepestOf(primary, secondary, tertiary);
-    if (item.children && item.children.length > 0) {
-      if (!inMobileState) {
-        if (itemBlurTimers[item.id]) {
-          clearTimeout(itemBlurTimers[item.id]);
-          this.setState({
-            itemBlurTimers: { ...itemBlurTimers, [item.id]: null },
-          });
-        } else if (!itemHoverTimers[item.id] && !itemHoverStates[item.id]) {
-          this.setState({
-            itemHoverTimers: {
-              ...itemHoverTimers,
-              [item.id]: setTimeout(() => {
-                const hoverTimers = that.state.itemHoverTimers;
-                const hoverStates = that.state.itemHoverStates;
-                that.setState({
-                  hoverSecondaryNav: true,
-                  itemHoverTimers: { ...hoverTimers, [item.id]: null },
-                  itemHoverStates: { ...hoverStates, [item.id]: true }, // TODO we need an item.id ??? // TODO maybe this instead should be in the item's own state??
-                });
-                if (handleItemHover) {
-                  handleItemHover(primary, secondary, tertiary);
-                }
-              }, hoverDelay),
-            },
-          });
-        }
-      }
-    }
-  }
-
-  onItemBlur(primary, secondary, tertiary) {
-    const { inMobileState, handleItemHover, hideDelay } = this.props;
-    const { itemHoverTimers, itemBlurTimers, itemHoverStates } = this.state;
-    const that = this; // In case state changes before the setTimeout callback (we can't use this.state in that callback) we need a reference for future state
-    const item = deepestOf(primary, secondary, tertiary);
-    if (item.children && item.children.length > 0) {
-      if (itemHoverTimers[item.id]) {
-        clearTimeout(itemHoverTimers[item.id]);
-        this.setState({
-          itemHoverTimers: { ...itemHoverTimers, [item.id]: null },
-        });
-      } else if (!itemBlurTimers[item.id] && itemHoverStates[item.id]) {
-        this.setState({
-          itemBlurTimers: {
-            ...itemBlurTimers,
-            [item.id]: setTimeout(() => {
-              const blurTimers = that.state.itemBlurTimers;
-              const hoverStates = that.state.itemHoverStates;
-              that.setState({
-                /*
-                if (!this.primaryHover()) {
-                  this.hoverSecondaryNav = false;
-                }
-                */
-                hoverSecondaryNav: false, // TODO FIXME based on above? TODO fixme all these need to have their hoverXNav stuff set right
-                itemBlurTimers: { ...blurTimers, [item.id]: null },
-                itemHoverStates: { ...hoverStates, [item.id]: false },
-              });
-            }, hideDelay),
-          },
-        });
-      }
+    if (onItemClick) {
+      onItemClick(primary, secondary, tertiary);
     }
   }
 
@@ -201,8 +159,10 @@ class VerticalNavigation extends React.Component {
       forceHidden,
       hideTopBanner,
       navCollapsed,
-      inMobileState, // TODO maybe this should be local state?
-      activeSecondary,
+      inMobileState,
+      hoverDelay,
+      hideDelay,
+      activeSecondary, // ???
       topBannerContents,
       notificationDrawer /* TODO notification drawer components? */,
     } = this.props;
@@ -219,7 +179,7 @@ class VerticalNavigation extends React.Component {
           <button
             type="button"
             className="navbar-toggle"
-            onClick={this.handleNavBarToggleClick}
+            onClick={this.onNavBarToggleClick}
           >
             <span className="sr-only">Toggle navigation</span>
             <span className="icon-bar" />
@@ -248,9 +208,12 @@ class VerticalNavigation extends React.Component {
 
     return (
       <ItemContextProvider
-        onItemHover={this.onItemHover}
-        onItemBlur={this.onItemBlur}
-        onItemClick={this.onItemClick}
+        updateNavOnItemHover={this.updateNavOnItemHover}
+        updateNavOnItemBlur={this.updateNavOnItemBlur}
+        updateNavOnItemClick={this.updateNavOnItemClick}
+        inMobileState={inMobileState}
+        hoverDelay={hoverDelay}
+        hideDelay={hideDelay}
       >
         <nav // TODO do we need classes like the commented out ones here?
           className={cx(
@@ -304,9 +267,9 @@ VerticalNavigation.propTypes = {
   activeSecondary: PropTypes.bool,
   hoverDelay: PropTypes.number, // ms
   hideDelay: PropTypes.number, // ms
-  handleItemClick: PropTypes.func, // Optional, will be called in addition to the component's own this.onItemClick
-  handleItemHover: PropTypes.func, // Optional, will be called in addition to the component's own this.onItemHover
-  handleItemBlur: PropTypes.func, // Optional, will be called in addition to the component's own this.onItemBlur
+  onItemClick: PropTypes.func, // Optional, will be called in addition to the component handlers
+  onItemHover: PropTypes.func, // Optional, will be called in addition to the component handlers
+  onItemBlur: PropTypes.func, // Optional, will be called in addition to the component handlers
   children: PropTypes.node,
 };
 
@@ -330,9 +293,9 @@ VerticalNavigation.defaultProps = {
   activeSecondary: false,
   hoverDelay: 500,
   hideDelay: 700,
-  handleItemClick: () => {},
-  handleItemHover: () => {},
-  handleItemBlur: () => {},
+  onItemClick: () => {},
+  onItemHover: () => {},
+  onItemBlur: () => {},
 };
 
 export default VerticalNavigation;

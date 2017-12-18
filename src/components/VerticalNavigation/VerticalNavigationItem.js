@@ -8,6 +8,7 @@ import Tooltip from '../Tooltip';
 import VerticalNavigation from './VerticalNavigation';
 import {
   getNextDepth,
+  deepestOf,
   getItemProps,
   itemObjectTypes,
   itemContextTypes,
@@ -20,7 +21,11 @@ import {
 class VerticalNavigationItem extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      hovering: false,
+      hoverTimer: null,
+      blurTimer: null,
+    };
     this.getContextNavItems = this.getContextNavItems.bind(this);
     this.onItemEvent = this.onItemEvent.bind(this);
     this.onItemHover = this.onItemHover.bind(this);
@@ -46,24 +51,80 @@ class VerticalNavigationItem extends React.Component {
     };
   }
 
-  onItemEvent(callback) {
-    const { primary, secondary, tertiary } = this.getContextNavItems();
-    callback(primary, secondary, tertiary);
-  }
-
   onItemHover() {
-    // TODO allow handleItemHover props etc at the item level???
-    this.onItemEvent(this.props.onItemHover);
+    const { primary, secondary, tertiary } = this.getContextNavItems();
+    const {
+      inMobileState,
+      hoverDelay,
+      updateNavOnItemHover,
+      onHover,
+    } = this.props;
+    const { hoverTimer, blurTimer, hovering } = this.state;
+    const that = this;
+    const item = deepestOf(primary, secondary, tertiary);
+    if (item.children && item.children.length > 0) {
+      if (!inMobileState) {
+        if (blurTimer) {
+          clearTimeout(blurTimer);
+          this.setState({ blurTimer: null });
+        } else if (!hoverTimer && !hovering) {
+          this.setState({
+            hoverTimer: setTimeout(() => {
+              that.setState({
+                hoverTimer: null,
+                hovering: true,
+              });
+              updateNavOnItemHover(primary, secondary, tertiary);
+              if (onHover) {
+                onHover(primary, secondary, tertiary);
+              }
+            }, hoverDelay),
+          });
+        }
+      }
+    }
   }
 
   onItemBlur() {
-    // TODO allow handleItemHover props etc at the item level???
-    this.onItemEvent(this.props.onItemBlur);
+    const { primary, secondary, tertiary } = this.getContextNavItems();
+    const {
+      inMobileState,
+      hideDelay,
+      updateNavOnItemBlur,
+      onBlur,
+    } = this.props;
+    const { hoverTimer, blurTimer, hovering } = this.state;
+    const that = this;
+    const item = deepestOf(primary, secondary, tertiary);
+    if (item.children && item.children.length > 0) {
+      if (hoverTimer) {
+        clearTimeout(hoverTimer);
+        this.setState({ hoverTimer: null });
+      } else if (!blurTimer && hovering) {
+        this.setState({
+          blurTimer: setTimeout(() => {
+            that.setState({
+              blurTimer: null,
+              hovering: false,
+            });
+            updateNavOnItemBlur(primary, secondary, tertiary);
+            if (onBlur) {
+              onBlur(primary, secondary, tertiary);
+            }
+          }, hideDelay),
+        });
+      }
+    }
   }
 
   onItemClick() {
-    // TODO allow handleItemHover props etc at the item level???
-    this.onItemEvent(this.props.onItemClick);
+    const { primary, secondary, tertiary } = this.getContextNavItems();
+    const { updateNavOnItemClick, onClick } = this.props;
+    updateNavOnItemClick(primary, secondary, tertiary);
+    if (onClick) {
+      onClick(primary, secondary, tertiary);
+    }
+    // TODO other item-level nav props? href? route?
   }
 
   renderBadges(badges) {
@@ -106,13 +167,14 @@ class VerticalNavigationItem extends React.Component {
       children,
     } = this.props;
 
+    const { hovering } = this.state;
+
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = item || getItemProps(this.props);
 
     const {
       title,
       trackActiveState,
-      trackHoverState,
       mobileItem,
       iconStyleClass,
       badges,
@@ -152,7 +214,7 @@ class VerticalNavigationItem extends React.Component {
           [`${nextDepth}-nav-item-pf`]:
             depth !== 'tertiary' && children && children.length > 0,
           active: trackActiveState, // This is the only class we have at the tertiary depth.
-          'is-hover': depth !== 'tertiary' && trackHoverState,
+          'is-hover': depth !== 'tertiary' && hovering,
           // This class is present at primary and secondary depths if mobileItem is true,
           // except for the primary depth, where it is only present if showMobileSecondary is also true.
           'mobile-nav-item-pf':
@@ -211,19 +273,21 @@ VerticalNavigationItem.propTypes = {
   item: PropTypes.shape(itemObjectTypes),
   ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
   ...itemContextTypes,
-  showMobileSecondary: PropTypes.bool,
-  showMobileTertiary: PropTypes.bool,
-  navCollapsed: PropTypes.bool,
-  secondaryCollapsed: PropTypes.bool,
-  tertiaryCollapsed: PropTypes.bool,
+  showMobileSecondary: PropTypes.bool, // TODO ???
+  showMobileTertiary: PropTypes.bool, // TODO ???
+  navCollapsed: PropTypes.bool, // TODO does this need to be in context?
+  secondaryCollapsed: PropTypes.bool, // TODO ???
+  tertiaryCollapsed: PropTypes.bool, // TODO ???
   inMobileState: PropTypes.bool,
+  onHover: PropTypes.func,
+  onBlur: PropTypes.func,
+  onClick: PropTypes.func,
   children: PropTypes.node,
 };
 
 VerticalNavigationItem.defaultProps = {
   title: '',
-  trackActiveState: true,
-  trackHoverState: true,
+  trackActiveState: true, // TODO make this less dumb
   mobileItem: false,
   showMobileSecondary: false,
   showMobileTertiary: false,
