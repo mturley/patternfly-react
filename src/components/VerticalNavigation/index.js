@@ -1,2 +1,6 @@
-export { default as VerticalNavigation } from './VerticalNavigation';
-export { default as VerticalNavigationItem } from './VerticalNavigationItem';
+import VerticalNavigation from './VerticalNavigation';
+import VerticalNavigationItem from './VerticalNavigationItem';
+
+VerticalNavigation.Item = VerticalNavigationItem;
+
+export { VerticalNavigation, VerticalNavigationItem };

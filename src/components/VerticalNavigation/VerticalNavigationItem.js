@@ -27,7 +27,6 @@ class VerticalNavigationItem extends React.Component {
       blurTimer: null,
     };
     this.getContextNavItems = this.getContextNavItems.bind(this);
-    this.onItemEvent = this.onItemEvent.bind(this);
     this.onItemHover = this.onItemHover.bind(this);
     this.onItemBlur = this.onItemBlur.bind(this);
     this.onItemClick = this.onItemClick.bind(this);

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { defaultTemplate } from '../../../storybook/decorators/storyTemplates';
 
-import { VerticalNavigation, VerticalNavigationItem } from '../../index';
+import { VerticalNavigation } from '../../index';
 import { mockNavItems } from './__mocks__/mockNavItems';
 
 const stories = storiesOf('VerticalNavigation', module);
@@ -22,21 +22,21 @@ stories.addWithInfo(
   () => {
     return (
       <VerticalNavigation secondaryCollapsed={false} tertiaryCollapsed>
-        <VerticalNavigationItem title="Item 1" />
-        <VerticalNavigationItem title="Item 2">
-          <VerticalNavigationItem title="Item 2-A" />
-          <VerticalNavigationItem title="Item 2-B" />
-          <VerticalNavigationItem title="Item 2-C" />
-        </VerticalNavigationItem>
-        <VerticalNavigationItem title="Item 3">
-          <VerticalNavigationItem title="Item 3-A" />
-          <VerticalNavigationItem title="Item 3-B">
-            <VerticalNavigationItem title="Item 3-B-i" />
-            <VerticalNavigationItem title="Item 3-B-ii" />
-            <VerticalNavigationItem title="Item 3-B-iii" />
-          </VerticalNavigationItem>
-          <VerticalNavigationItem title="Item 3-C" />
-        </VerticalNavigationItem>
+        <VerticalNavigation.Item title="Item 1" />
+        <VerticalNavigation.Item title="Item 2">
+          <VerticalNavigation.Item title="Item 2-A" />
+          <VerticalNavigation.Item title="Item 2-B" />
+          <VerticalNavigation.Item title="Item 2-C" />
+        </VerticalNavigation.Item>
+        <VerticalNavigation.Item title="Item 3">
+          <VerticalNavigation.Item title="Item 3-A" />
+          <VerticalNavigation.Item title="Item 3-B">
+            <VerticalNavigation.Item title="Item 3-B-i" />
+            <VerticalNavigation.Item title="Item 3-B-ii" />
+            <VerticalNavigation.Item title="Item 3-B-iii" />
+          </VerticalNavigation.Item>
+          <VerticalNavigation.Item title="Item 3-C" />
+        </VerticalNavigation.Item>
       </VerticalNavigation>
     );
   },
