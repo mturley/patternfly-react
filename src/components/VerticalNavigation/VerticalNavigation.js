@@ -8,9 +8,8 @@ import {
   deepestOf,
   itemObjectTypes,
   itemContextTypes,
-  provideItemContext,
+  provideItemContext
 } from './constants';
-import { text } from '../../../../../Library/Caches/typescript/2.6/node_modules/@types/d3';
 
 // TODO compare with
 // http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
@@ -39,7 +38,7 @@ class VerticalNavigation extends React.Component {
       hoverSecondaryNav: false,
       hoverTertiaryNav: false,
       collapsedSecondaryNav: false,
-      collapsedTertiaryNav: false,
+      collapsedTertiaryNav: false
     };
     this.onNavBarToggleClick = this.onNavBarToggleClick.bind(this);
     this.expandMenu = this.expandMenu.bind(this);
@@ -72,7 +71,7 @@ class VerticalNavigation extends React.Component {
   expandMenu() {
     this.setState({
       navCollapsed: false,
-      explicitCollapse: false,
+      explicitCollapse: false
     });
     // TODO collapsed-nav body class? only in uncontrolled mode.
 
@@ -85,7 +84,7 @@ class VerticalNavigation extends React.Component {
   collapseMenu() {
     this.setState({
       navCollapsed: true,
-      explicitCollapse: true,
+      explicitCollapse: true
     });
     // TODO collapsed-nav body class?
   }
@@ -210,14 +209,14 @@ class VerticalNavigation extends React.Component {
       hideDelay,
       activeSecondary, // ???
       topBannerContents,
-      notificationDrawer /* TODO notification drawer components? */,
+      notificationDrawer /* TODO notification drawer components? */
     } = this.props;
     const {
       navCollapsed, // TODO should this also be overrideable with a prop? TODO burger button needs a prop handler too then.
       hoverSecondaryNav,
       hoverTertiaryNav,
       collapsedSecondaryNav,
-      collapsedTertiaryNav,
+      collapsedTertiaryNav
     } = this.state;
 
     const topBanner = (
@@ -264,7 +263,7 @@ class VerticalNavigation extends React.Component {
       >
         <nav // TODO do we need classes like the commented out ones here?
           className={cx(
-            'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */,
+            'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */
           )}
         >
           {!hideTopBanner && topBanner}
@@ -283,7 +282,7 @@ class VerticalNavigation extends React.Component {
               hidden: inMobileState,
               collapsed: navCollapsed,
               'force-hide-secondary-nav-pf': forceHidden,
-              'show-mobile-nav': showMobileNav,
+              'show-mobile-nav': showMobileNav
             })}
           >
             <ListGroup componentClass="ul">{itemComponents}</ListGroup>
@@ -317,7 +316,7 @@ VerticalNavigation.propTypes = {
   onItemClick: PropTypes.func, // Optional, will be called in addition to the component handlers
   onItemHover: PropTypes.func, // Optional, will be called in addition to the component handlers
   onItemBlur: PropTypes.func, // Optional, will be called in addition to the component handlers
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 VerticalNavigation.defaultProps = {
@@ -342,7 +341,7 @@ VerticalNavigation.defaultProps = {
   hideDelay: 700,
   onItemClick: () => {},
   onItemHover: () => {},
-  onItemBlur: () => {},
+  onItemBlur: () => {}
 };
 
 export default VerticalNavigation;
