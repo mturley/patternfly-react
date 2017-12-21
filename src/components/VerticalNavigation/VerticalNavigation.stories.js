@@ -24,7 +24,7 @@ stories.addWithInfo(
       // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
       // See https://stackoverflow.com/a/38796408
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
-        <VerticalNavigation secondaryCollapsed={false} tertiaryCollapsed>
+        <VerticalNavigation>
           <VerticalNavigation.Masthead>
             <span>Super Awesome App</span>
           </VerticalNavigation.Masthead>

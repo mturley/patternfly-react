@@ -10,12 +10,12 @@ import {
   itemContextTypes,
   provideItemContext,
 } from './constants';
+import { text } from '../../../../../Library/Caches/typescript/2.6/node_modules/@types/d3';
 
 // TODO compare with
 // http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
 
-// TODO -- namespace things as VerticalNavigation.Item
-// TODO -- make the masthead components designated by a VerticalNavigation.Masthead
+// TODO -- the rest of the handler problems
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem? inheritance??
 // TODO -- figure out controlled vs uncontrolled, and what props/state this involves
 
@@ -33,12 +33,17 @@ class VerticalNavigation extends React.Component {
   constructor() {
     super();
     this.state = {
+      showMobileNav: false, // TODO allow controlled override with prop?
+      navCollapsed: false, // TODO allow controlled override with prop?
+      explicitCollapse: false, // TODO do we need this?
       hoverSecondaryNav: false,
       hoverTertiaryNav: false,
       collapsedSecondaryNav: false,
       collapsedTertiaryNav: false,
     };
     this.onNavBarToggleClick = this.onNavBarToggleClick.bind(this);
+    this.expandMenu = this.expandMenu.bind(this);
+    this.collapseMenu = this.collapseMenu.bind(this);
     this.updateHoverState = this.updateHoverState.bind(this);
     this.updateNavOnItemHover = this.updateNavOnItemHover.bind(this);
     this.updateNavOnItemBlur = this.updateNavOnItemBlur.bind(this);
@@ -48,11 +53,41 @@ class VerticalNavigation extends React.Component {
   }
 
   onNavBarToggleClick() {
-    // TODO differentiate between onNavBarToggleClick and handle, like we have for handleItemClick
-    const { hideTopBanner } = this.state;
+    const { inMobileState } = this.props;
+    const { showMobileNav, navCollapsed } = this.state;
+    if (inMobileState) {
+      if (showMobileNav) {
+        this.setState({ showMobileNav: false });
+      } else {
+        this.updateMobileMenu();
+        this.setState({ showMobileNav: true });
+      }
+    } else if (navCollapsed) {
+      this.expandMenu();
+    } else {
+      this.collapseMenu();
+    }
+  }
+
+  expandMenu() {
     this.setState({
-      hideTopBanner: !hideTopBanner,
+      navCollapsed: false,
+      explicitCollapse: false,
     });
+    // TODO collapsed-nav body class? only in uncontrolled mode.
+
+    // Dispatch a resize event when showing the expanding then menu to
+    // allow content to adjust to the menu sizing
+    // TODO FIXME -- do we need this, and wouldn't we want it after the re-render?
+    // this.windowRef.nativeWindow.dispatchEvent(new Event('resize'));
+  }
+
+  collapseMenu() {
+    this.setState({
+      navCollapsed: true,
+      explicitCollapse: true,
+    });
+    // TODO collapsed-nav body class?
   }
 
   updateHoverState(hovering, primary, secondary, tertiary) {
@@ -170,7 +205,6 @@ class VerticalNavigation extends React.Component {
       showMobileTertiary,
       forceHidden,
       hideTopBanner,
-      navCollapsed,
       inMobileState,
       hoverDelay,
       hideDelay,
@@ -179,6 +213,7 @@ class VerticalNavigation extends React.Component {
       notificationDrawer /* TODO notification drawer components? */,
     } = this.props;
     const {
+      navCollapsed, // TODO should this also be overrideable with a prop? TODO burger button needs a prop handler too then.
       hoverSecondaryNav,
       hoverTertiaryNav,
       collapsedSecondaryNav,
