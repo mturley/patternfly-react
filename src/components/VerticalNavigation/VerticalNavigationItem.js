@@ -6,6 +6,7 @@ import { ListGroup, ListGroupItem } from '../ListGroup';
 import OverlayTrigger from '../OverlayTrigger';
 import Tooltip from '../Tooltip';
 import VerticalNavigation from './VerticalNavigation';
+import { bindMethods } from '../../common/helpers';
 import {
   getNextDepth,
   deepestOf,
@@ -26,10 +27,12 @@ class VerticalNavigationItem extends React.Component {
       hoverTimer: null,
       blurTimer: null
     };
-    this.getContextNavItems = this.getContextNavItems.bind(this);
-    this.onItemHover = this.onItemHover.bind(this);
-    this.onItemBlur = this.onItemBlur.bind(this);
-    this.onItemClick = this.onItemClick.bind(this);
+    bindMethods(this, [
+      'getContextNavItems',
+      'onItemHover',
+      'onItemBlur',
+      'onItemClick'
+    ]);
   }
 
   componentWillUnmount() {

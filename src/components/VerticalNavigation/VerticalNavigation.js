@@ -4,6 +4,7 @@ import cx from 'classnames';
 import ListGroup from '../ListGroup/ListGroup';
 import VerticalNavigationItem from './VerticalNavigationItem';
 import VerticalNavigationMastHead from './VerticalNavigationMastHead';
+import { bindMethods } from '../../common/helpers';
 import {
   deepestOf,
   itemObjectTypes,
@@ -38,16 +39,18 @@ class VerticalNavigation extends React.Component {
       collapsedSecondaryNav: false,
       collapsedTertiaryNav: false
     };
-    this.getControlledState = this.getControlledState.bind(this);
-    this.onMenuToggleClick = this.onMenuToggleClick.bind(this);
-    this.collapseMenu = this.collapseMenu.bind(this);
-    this.expandMenu = this.expandMenu.bind(this);
-    this.updateHoverState = this.updateHoverState.bind(this);
-    this.updateNavOnItemHover = this.updateNavOnItemHover.bind(this);
-    this.updateNavOnItemBlur = this.updateNavOnItemBlur.bind(this);
-    this.updateNavOnItemClick = this.updateNavOnItemClick.bind(this);
-    this.updateMobileMenu = this.updateMobileMenu.bind(this);
-    this.navigateToItem = this.navigateToItem.bind(this);
+    bindMethods(this, [
+      'getControlledState',
+      'onMenuToggleClick',
+      'collapseMenu',
+      'expandMenu',
+      'updateHoverState',
+      'updateNavOnItemHover',
+      'updateNavOnItemBlur',
+      'updateNavOnItemClick',
+      'updateMobileMenu',
+      'navigateToItem'
+    ]);
   }
 
   // This is a prop-by-prop implementation of the controlled component pattern.
