@@ -11,9 +11,9 @@ const itemObjectTypes = {
     badgeClass: PropTypes.string,
     tooltip: PropTypes.string,
     count: PropTypes.number,
-    iconStyleClass: PropTypes.string,
+    iconStyleClass: PropTypes.string
   }),
-  children: PropTypes.array,
+  children: PropTypes.array
 };
 
 const itemContextTypes = {
@@ -25,14 +25,15 @@ const itemContextTypes = {
   updateNavOnItemClick: PropTypes.func,
   inMobileState: PropTypes.bool,
   hoverDelay: PropTypes.number,
-  hideDelay: PropTypes.number,
+  hideDelay: PropTypes.number
 };
 
 const getNextDepth = depth => {
-  // If we have no depth already, we're at the top level.
-  if (!depth) return 'primary';
-  // Assume that if someone nests deeper than tertiary, it's just another tertiary-styled item.
-  return depth === 'primary' ? 'secondary' : 'tertiary';
+  return (
+    (depth === 'primary' && 'secondary') ||
+    (depth === 'secondary' && 'tertiary') ||
+    'primary'
+  );
 };
 
 const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
@@ -46,7 +47,7 @@ const getItemProps = props => ({
   children:
     props.children &&
     React.Children.count(props.children) > 0 &&
-    React.Children.map(props.children, child => getItemProps(child.props)),
+    React.Children.map(props.children, child => getItemProps(child.props))
 });
 
 const getChildItemContext = parentProps => {
@@ -61,7 +62,7 @@ const getChildItemContext = parentProps => {
     updateNavOnItemClick,
     inMobileState,
     hoverDelay,
-    hideDelay,
+    hideDelay
   } = parentProps;
   const nextDepth = getNextDepth(depth); // returns primary if depth was undefined
   return {
@@ -74,7 +75,7 @@ const getChildItemContext = parentProps => {
     updateNavOnItemClick,
     inMobileState,
     hoverDelay,
-    hideDelay,
+    hideDelay
   };
 };
 
@@ -82,8 +83,15 @@ const provideItemContext = withContext(itemContextTypes, getChildItemContext);
 const consumeItemContext = getContext(itemContextTypes);
 const consumeAndProvideItemContext = compose(
   consumeItemContext,
-  provideItemContext,
+  provideItemContext
 );
+
+// WARNING: HACK! HAAAACK HACK HACK HACK WARNING THIS IS A HACK.
+// We only use this to apply magic body classes when the component is used in uncontrolled mode. TODO it's a prop now
+// And only for consistency-- the better solution is to manage these classes yourself in the application.
+const getBodyContentElement = () => {
+  return document.querySelector('.container-pf-nav-pf-vertical');
+};
 
 export {
   getNextDepth,
@@ -94,4 +102,5 @@ export {
   provideItemContext,
   consumeItemContext,
   consumeAndProvideItemContext,
+  getBodyContentElement
 };

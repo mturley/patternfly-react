@@ -12,19 +12,19 @@ import {
   getItemProps,
   itemObjectTypes,
   itemContextTypes,
-  consumeAndProvideItemContext,
+  consumeAndProvideItemContext
 } from './constants';
 
 /**
- * VerticalNavigationItem - a child element for the VerticalNavigation component
+ * VerticalNavigation.Item - a child element for the VerticalNavigation component
  */
 class VerticalNavigationItem extends React.Component {
   constructor() {
     super();
     this.state = {
-      hovering: false,
+      hovering: false, // TODO should we allow hovering to be controlled by a prop too?
       hoverTimer: null,
-      blurTimer: null,
+      blurTimer: null
     };
     this.getContextNavItems = this.getContextNavItems.bind(this);
     this.onItemHover = this.onItemHover.bind(this);
@@ -39,7 +39,7 @@ class VerticalNavigationItem extends React.Component {
     if (blurTimer) clearTimeout(blurTimer);
     this.setState({
       hoverTimer: null,
-      blurTimer: null,
+      blurTimer: null
     });
   }
 
@@ -51,13 +51,13 @@ class VerticalNavigationItem extends React.Component {
       depth,
       primaryItem,
       secondaryItem,
-      tertiaryItem,
+      tertiaryItem
     } = this.props;
     const navItem = item || getItemProps(this.props);
     return {
       primary: depth === 'primary' ? navItem : primaryItem,
       secondary: depth === 'secondary' ? navItem : secondaryItem,
-      tertiary: depth === 'tertiary' ? navItem : tertiaryItem,
+      tertiary: depth === 'tertiary' ? navItem : tertiaryItem
     };
   }
 
@@ -67,7 +67,7 @@ class VerticalNavigationItem extends React.Component {
       inMobileState,
       hoverDelay,
       updateNavOnItemHover,
-      onHover,
+      onHover
     } = this.props;
     const { hoverTimer, blurTimer, hovering } = this.state;
     const that = this;
@@ -82,13 +82,11 @@ class VerticalNavigationItem extends React.Component {
             hoverTimer: setTimeout(() => {
               that.setState({
                 hoverTimer: null,
-                hovering: true,
+                hovering: true
               });
               updateNavOnItemHover(primary, secondary, tertiary);
-              if (onHover) {
-                onHover(primary, secondary, tertiary);
-              }
-            }, hoverDelay),
+              onHover && onHover(primary, secondary, tertiary);
+            }, hoverDelay)
           });
         }
       }
@@ -101,7 +99,7 @@ class VerticalNavigationItem extends React.Component {
       inMobileState,
       hideDelay,
       updateNavOnItemBlur,
-      onBlur,
+      onBlur
     } = this.props;
     const { hoverTimer, blurTimer, hovering } = this.state;
     const that = this;
@@ -115,13 +113,11 @@ class VerticalNavigationItem extends React.Component {
           blurTimer: setTimeout(() => {
             that.setState({
               blurTimer: null,
-              hovering: false,
+              hovering: false
             });
             updateNavOnItemBlur(primary, secondary, tertiary);
-            if (onBlur) {
-              onBlur(primary, secondary, tertiary);
-            }
-          }, hideDelay),
+            onBlur && onBlur(primary, secondary, tertiary);
+          }, hideDelay)
         });
       }
     }
@@ -131,14 +127,13 @@ class VerticalNavigationItem extends React.Component {
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const { updateNavOnItemClick, onClick } = this.props;
     updateNavOnItemClick(primary, secondary, tertiary);
-    if (onClick) {
-      onClick(primary, secondary, tertiary);
-    }
+    onClick && onClick(primary, secondary, tertiary);
     // TODO other item-level nav props? href? route?
   }
 
   renderBadges(badges) {
     // TODO we don't know about this-- it needs to optionally be a child that you can pass? this is the default?  TODO DOCUMENT IT!
+    // TODO yeah this needs to be VerticalNavigation.Badge or something
     const { showBadges } = this.props;
     return (
       showBadges &&
@@ -174,7 +169,7 @@ class VerticalNavigationItem extends React.Component {
       onItemHover,
       onItemBlur,
       onItemClick,
-      children,
+      children
     } = this.props;
 
     const { hovering } = this.state;
@@ -187,14 +182,14 @@ class VerticalNavigationItem extends React.Component {
       trackActiveState,
       mobileItem,
       iconStyleClass,
-      badges,
+      badges
     } = navItem;
 
     const childItemComponents =
       (children &&
         React.Children.count(children) > 0 &&
         React.Children.toArray(children).filter(
-          child => child.type === VerticalNavigationItem,
+          child => child.type === VerticalNavigationItem
         )) ||
       (navItem.children &&
         navItem.children.length > 0 &&
@@ -233,7 +228,7 @@ class VerticalNavigationItem extends React.Component {
               depth === 'secondary'),
           // This class is confusingly named, but the logic is more readable.
           'mobile-secondary-item-pf':
-            mobileItem && depth === 'primary' && showMobileTertiary,
+            mobileItem && depth === 'primary' && showMobileTertiary
           // I don't know, that's just how this stuff was in patternfly-ng...
         })}
         onMouseEnter={this.onItemHover}
@@ -263,7 +258,7 @@ class VerticalNavigationItem extends React.Component {
               <div className="nav-item-pf-header">
                 <a
                   className={cx(`${nextDepth}-collapse-toggle-pf`, {
-                    collapsed: nextDepthCollapsed,
+                    collapsed: nextDepthCollapsed
                   })}
                   onClick={() => {
                     collapseNextNav('TODO args here');
@@ -292,7 +287,7 @@ VerticalNavigationItem.propTypes = {
   onHover: PropTypes.func,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 VerticalNavigationItem.defaultProps = {
@@ -301,7 +296,7 @@ VerticalNavigationItem.defaultProps = {
   mobileItem: false,
   showMobileSecondary: false,
   showMobileTertiary: false,
-  navCollapsed: false,
+  navCollapsed: false
 };
 
 export default consumeAndProvideItemContext(VerticalNavigationItem);

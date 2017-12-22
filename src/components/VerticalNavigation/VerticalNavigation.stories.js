@@ -6,14 +6,20 @@ import { defaultTemplate } from '../../../storybook/decorators/storyTemplates';
 import { VerticalNavigation } from '../../index';
 import { mockNavItems } from './__mocks__/mockNavItems';
 
+const mockBodyContainer = (
+  <div className="container-fluid container-cards-pf container-pf-nav-pf-vertical nav-pf-persistent-secondary">
+    <h1>Body Content Here!</h1>
+  </div>
+);
+
 const stories = storiesOf('VerticalNavigation', module);
 stories.addDecorator(withKnobs);
 stories.addDecorator(
   defaultTemplate({
     title: 'VerticalNavigation',
     documentationLink:
-      'http://www.patternfly.org/pattern-library/navigation/vertical-navigation/',
-  }),
+      'http://www.patternfly.org/pattern-library/navigation/vertical-navigation/'
+  })
 );
 
 stories.addWithInfo(
@@ -24,29 +30,32 @@ stories.addWithInfo(
       // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
       // See https://stackoverflow.com/a/38796408
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
-        <VerticalNavigation>
-          <VerticalNavigation.Masthead>
-            <span>Super Awesome App</span>
-          </VerticalNavigation.Masthead>
-          <VerticalNavigation.Item title="Item 1" />
-          <VerticalNavigation.Item title="Item 2">
-            <VerticalNavigation.Item title="Item 2-A" />
-            <VerticalNavigation.Item title="Item 2-B" />
-            <VerticalNavigation.Item title="Item 2-C" />
-          </VerticalNavigation.Item>
-          <VerticalNavigation.Item title="Item 3">
-            <VerticalNavigation.Item title="Item 3-A" />
-            <VerticalNavigation.Item title="Item 3-B">
-              <VerticalNavigation.Item title="Item 3-B-i" />
-              <VerticalNavigation.Item title="Item 3-B-ii" />
-              <VerticalNavigation.Item title="Item 3-B-iii" />
+        <div className="layout-pf layout-pf-fixed faux-layout">
+          <VerticalNavigation>
+            <VerticalNavigation.MastHead>
+              <span>Super Awesome App</span>
+            </VerticalNavigation.MastHead>
+            <VerticalNavigation.Item title="Item 1" />
+            <VerticalNavigation.Item title="Item 2">
+              <VerticalNavigation.Item title="Item 2-A" />
+              <VerticalNavigation.Item title="Item 2-B" />
+              <VerticalNavigation.Item title="Item 2-C" />
             </VerticalNavigation.Item>
-            <VerticalNavigation.Item title="Item 3-C" />
-          </VerticalNavigation.Item>
-        </VerticalNavigation>
+            <VerticalNavigation.Item title="Item 3">
+              <VerticalNavigation.Item title="Item 3-A" />
+              <VerticalNavigation.Item title="Item 3-B">
+                <VerticalNavigation.Item title="Item 3-B-i" />
+                <VerticalNavigation.Item title="Item 3-B-ii" />
+                <VerticalNavigation.Item title="Item 3-B-iii" />
+              </VerticalNavigation.Item>
+              <VerticalNavigation.Item title="Item 3-C" />
+            </VerticalNavigation.Item>
+          </VerticalNavigation>
+        </div>
+        {mockBodyContainer}
       </div>
     );
-  },
+  }
 );
 
 stories.addWithInfo(
@@ -57,14 +66,17 @@ stories.addWithInfo(
       // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
       // See https://stackoverflow.com/a/38796408
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
-        <VerticalNavigation items={mockNavItems}>
-          <VerticalNavigation.Masthead>
-            <span>Super Awesome App</span>
-          </VerticalNavigation.Masthead>
-        </VerticalNavigation>
+        <div className="layout-pf layout-pf-fixed faux-layout">
+          <VerticalNavigation items={mockNavItems}>
+            <VerticalNavigation.MastHead>
+              <span>Super Awesome App</span>
+            </VerticalNavigation.MastHead>
+          </VerticalNavigation>
+          {mockBodyContainer}
+        </div>
       </div>
     );
-  },
+  }
 );
 
 // TODO add more stories! with and without custom masthead (how to handle default?) and others

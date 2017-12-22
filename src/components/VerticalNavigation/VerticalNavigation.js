@@ -3,46 +3,45 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ListGroup from '../ListGroup/ListGroup';
 import VerticalNavigationItem from './VerticalNavigationItem';
-import VerticalNavigationMasthead from './VerticalNavigationMasthead';
+import VerticalNavigationMastHead from './VerticalNavigationMastHead';
 import {
   deepestOf,
   itemObjectTypes,
   itemContextTypes,
-  provideItemContext
+  provideItemContext,
+  getBodyContentElement
 } from './constants';
 
-// TODO compare with
-// http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
-
-// TODO -- the rest of the handler problems
-// TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem? inheritance??
+// TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
 // TODO -- figure out controlled vs uncontrolled, and what props/state this involves
 
 // TODO react-router support?
 // TODO all the other TODOs....
 
-const ItemContextProvider = provideItemContext(props => (
-  <div>{props.children}</div>
+const ContextProvider = provideItemContext(props => (
+  <div className={props.className}>{props.children}</div>
 ));
 
 /**
  * VerticalNavigation - The Vertical Navigation pattern
+ * http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
  */
 class VerticalNavigation extends React.Component {
   constructor() {
     super();
     this.state = {
-      showMobileNav: false, // TODO allow controlled override with prop?
-      navCollapsed: false, // TODO allow controlled override with prop?
+      showMobileNav: false,
+      navCollapsed: false,
       explicitCollapse: false, // TODO do we need this?
       hoverSecondaryNav: false,
       hoverTertiaryNav: false,
       collapsedSecondaryNav: false,
       collapsedTertiaryNav: false
     };
-    this.onNavBarToggleClick = this.onNavBarToggleClick.bind(this);
-    this.expandMenu = this.expandMenu.bind(this);
+    this.getControlledState = this.getControlledState.bind(this);
+    this.onMenuToggleClick = this.onMenuToggleClick.bind(this);
     this.collapseMenu = this.collapseMenu.bind(this);
+    this.expandMenu = this.expandMenu.bind(this);
     this.updateHoverState = this.updateHoverState.bind(this);
     this.updateNavOnItemHover = this.updateNavOnItemHover.bind(this);
     this.updateNavOnItemBlur = this.updateNavOnItemBlur.bind(this);
@@ -51,10 +50,31 @@ class VerticalNavigation extends React.Component {
     this.navigateToItem = this.navigateToItem.bind(this);
   }
 
-  onNavBarToggleClick() {
-    const { inMobileState } = this.props;
-    const { showMobileNav, navCollapsed } = this.state;
+  // This is a prop-by-prop implementation of the controlled component pattern.
+  // If you pass any of these props, the component will render with your value instead of
+  // the automatic internal state value of the same name. If you use one of these props,
+  // be sure to also use the corresponding handlers to keep them updated.
+  getControlledState() {
+    return [
+      'showMobileNav',
+      'navCollapsed',
+      'hoverSecondaryNav',
+      'hoverTertiaryNav'
+    ].reduce((values, key) => {
+      return {
+        ...values,
+        [key]: this.props.hasOwnProperty(key)
+          ? this.props[key]
+          : this.state[key]
+      };
+    }, {});
+  }
+
+  onMenuToggleClick() {
+    const { inMobileState, onMenuToggleClick } = this.props;
+    const { showMobileNav, navCollapsed } = this.getControlledState();
     if (inMobileState) {
+      // TODO can/should we detect internally that it is mobile mode?
       if (showMobileNav) {
         this.setState({ showMobileNav: false });
       } else {
@@ -66,27 +86,34 @@ class VerticalNavigation extends React.Component {
     } else {
       this.collapseMenu();
     }
+    onMenuToggleClick && onMenuToggleClick();
+  }
+
+  collapseMenu() {
+    const { onCollapse } = this.props;
+    this.setState({
+      navCollapsed: true,
+      explicitCollapse: true
+    });
+    onCollapse && onCollapse();
+    // TODO only in uncontrolled mode
+    getBodyContentElement().classList.add('collapsed-nav');
   }
 
   expandMenu() {
+    const { onExpand } = this.props;
     this.setState({
       navCollapsed: false,
       explicitCollapse: false
     });
-    // TODO collapsed-nav body class? only in uncontrolled mode.
+    onExpand && onExpand();
+    // TODO only in uncontrolled mode
+    getBodyContentElement().classList.remove('collapsed-nav');
 
     // Dispatch a resize event when showing the expanding then menu to
     // allow content to adjust to the menu sizing
     // TODO FIXME -- do we need this, and wouldn't we want it after the re-render?
     // this.windowRef.nativeWindow.dispatchEvent(new Event('resize'));
-  }
-
-  collapseMenu() {
-    this.setState({
-      navCollapsed: true,
-      explicitCollapse: true
-    });
-    // TODO collapsed-nav body class?
   }
 
   updateHoverState(hovering, primary, secondary, tertiary) {
@@ -129,9 +156,7 @@ class VerticalNavigation extends React.Component {
     if (!inMobileState || !item.children || item.children.length === 0) {
       this.navigateToItem(item);
     }
-    if (onItemClick) {
-      onItemClick(primary, secondary, tertiary);
-    }
+    onItemClick && onItemClick(primary, secondary, tertiary);
   }
 
   updateMobileMenu() {
@@ -186,10 +211,10 @@ class VerticalNavigation extends React.Component {
       ));
     const itemComponents = itemsFromProps || itemsFromChildren || [];
 
-    const masthead =
+    const mastHead =
       childrenArray &&
-      childrenArray.find(child => child.type === VerticalNavigationMasthead);
-    const mastheadChildren = masthead && masthead.props.children;
+      childrenArray.find(child => child.type === VerticalNavigationMastHead);
+    const mastHeadChildren = mastHead && mastHead.props.children;
 
     const {
       hidden,
@@ -199,7 +224,6 @@ class VerticalNavigation extends React.Component {
       brandSrc,
       brandAlt,
       showBadges,
-      showMobileNav,
       showMobileSecondary,
       showMobileTertiary,
       forceHidden,
@@ -211,13 +235,13 @@ class VerticalNavigation extends React.Component {
       topBannerContents,
       notificationDrawer /* TODO notification drawer components? */
     } = this.props;
+    const { collapsedSecondaryNav, collapsedTertiaryNav } = this.state; // ???? TODO
     const {
-      navCollapsed, // TODO should this also be overrideable with a prop? TODO burger button needs a prop handler too then.
+      showMobileNav,
+      navCollapsed,
       hoverSecondaryNav,
-      hoverTertiaryNav,
-      collapsedSecondaryNav,
-      collapsedTertiaryNav
-    } = this.state;
+      hoverTertiaryNav
+    } = this.getControlledState();
 
     const topBanner = (
       <div>
@@ -225,7 +249,7 @@ class VerticalNavigation extends React.Component {
           <button
             type="button"
             className="navbar-toggle"
-            onClick={this.onNavBarToggleClick}
+            onClick={this.onMenuToggleClick}
           >
             <span className="sr-only">Toggle navigation</span>
             <span className="icon-bar" />
@@ -233,7 +257,7 @@ class VerticalNavigation extends React.Component {
             <span className="icon-bar" />
           </button>
           <span className="navbar-brand">
-            {mastheadChildren || // TODO revisit this? how to best default when they don't have children?
+            {mastHeadChildren || // TODO revisit this? how to best default when they don't have children?
               (brandSrc ? (
                 <img
                   className="navbar-brand-icon"
@@ -253,42 +277,41 @@ class VerticalNavigation extends React.Component {
     );
 
     return (
-      <ItemContextProvider
-        updateNavOnItemHover={this.updateNavOnItemHover}
-        updateNavOnItemBlur={this.updateNavOnItemBlur}
-        updateNavOnItemClick={this.updateNavOnItemClick}
-        inMobileState={inMobileState}
-        hoverDelay={hoverDelay}
-        hideDelay={hideDelay}
+      <nav // TODO do we need classes like the commented out ones here?
+        className={cx(
+          'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */
+        )}
       >
-        <nav // TODO do we need classes like the commented out ones here?
-          className={cx(
-            'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */
-          )}
+        {!hideTopBanner && topBanner}
+        <ContextProvider
+          updateNavOnItemHover={this.updateNavOnItemHover}
+          updateNavOnItemBlur={this.updateNavOnItemBlur}
+          updateNavOnItemClick={this.updateNavOnItemClick}
+          inMobileState={inMobileState}
+          hoverDelay={hoverDelay}
+          hideDelay={hideDelay}
+          className={cx('nav-pf-vertical nav-pf-vertical-with-sub-menus', {
+            'nav-pf-vertical-collapsible-menus': pinnableMenus,
+            'hidden-icons-pf': hiddenIcons,
+            'nav-pf-vertical-with-badges': showBadges,
+            'secondary-visible-pf': activeSecondary,
+            'show-mobile-secondary': showMobileSecondary,
+            'show-mobile-tertiary': showMobileTertiary,
+            'hover-secondary-nav-pf': hoverSecondaryNav,
+            'hover-tertiary-nav-pf': hoverTertiaryNav,
+            'collapsed-secondary-nav-pf': collapsedSecondaryNav,
+            'collapsed-tertiary-nav-pf': collapsedTertiaryNav,
+            hidden: inMobileState,
+            collapsed: navCollapsed,
+            'force-hide-secondary-nav-pf': forceHidden,
+            'show-mobile-nav': showMobileNav
+            // TODO nav-pf-persistent-secondary? check pf core for other classes?
+            // TODO open an issue on pf-ng for the missing classes?
+          })}
         >
-          {!hideTopBanner && topBanner}
-          <div
-            className={cx('nav-pf-vertical nav-pf-vertical-with-sub-menus', {
-              'nav-pf-vertical-collapsible-menus': pinnableMenus,
-              'hidden-icons-pf': hiddenIcons,
-              'nav-pf-vertical-with-badges': showBadges,
-              'secondary-visible-pf': activeSecondary,
-              'show-mobile-secondary': showMobileSecondary,
-              'show-mobile-tertiary': showMobileTertiary,
-              'hover-secondary-nav-pf': hoverSecondaryNav,
-              'hover-tertiary-nav-pf': hoverTertiaryNav,
-              'collapsed-secondary-nav-pf': collapsedSecondaryNav,
-              'collapsed-tertiary-nav-pf': collapsedTertiaryNav,
-              hidden: inMobileState,
-              collapsed: navCollapsed,
-              'force-hide-secondary-nav-pf': forceHidden,
-              'show-mobile-nav': showMobileNav
-            })}
-          >
-            <ListGroup componentClass="ul">{itemComponents}</ListGroup>
-          </div>
-        </nav>
-      </ItemContextProvider>
+          <ListGroup componentClass="ul">{itemComponents}</ListGroup>
+        </ContextProvider>
+      </nav>
     );
   }
 }
@@ -302,20 +325,27 @@ VerticalNavigation.propTypes = {
   brandSrc: PropTypes.string,
   brandAlt: PropTypes.string,
   showBadges: PropTypes.bool,
-  showMobileNav: PropTypes.bool,
   showMobileSecondary: PropTypes.bool,
   showMobileTertiary: PropTypes.bool,
   forceHidden: PropTypes.bool,
   hideTopBanner: PropTypes.bool,
   topBannerContents: PropTypes.node,
-  navCollapsed: PropTypes.bool,
   inMobileState: PropTypes.bool,
   activeSecondary: PropTypes.bool,
   hoverDelay: PropTypes.number, // ms
   hideDelay: PropTypes.number, // ms
-  onItemClick: PropTypes.func, // Optional, will be called in addition to the component handlers
-  onItemHover: PropTypes.func, // Optional, will be called in addition to the component handlers
-  onItemBlur: PropTypes.func, // Optional, will be called in addition to the component handlers
+  // * = Optional, will be called in addition to the component handlers
+  onMenuToggleClick: PropTypes.func, // *
+  onCollapse: PropTypes.func, // *
+  onExpand: PropTypes.func, // *
+  onItemClick: PropTypes.func, // *
+  onItemHover: PropTypes.func, // *
+  onItemBlur: PropTypes.func, // *
+  // ** = overrides a this.state value of the same name (see getControlledState())
+  showMobileNav: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
+  navCollapsed: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
+  hoverSecondaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
+  hoverTertiaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
   children: PropTypes.node
 };
 
@@ -339,9 +369,12 @@ VerticalNavigation.defaultProps = {
   activeSecondary: false,
   hoverDelay: 500,
   hideDelay: 700,
-  onItemClick: () => {},
-  onItemHover: () => {},
-  onItemBlur: () => {}
+  onMenuToggleClick: null,
+  onCollapse: null,
+  onExpand: null,
+  onItemClick: null,
+  onItemHover: null,
+  onItemBlur: null
 };
 
 export default VerticalNavigation;
