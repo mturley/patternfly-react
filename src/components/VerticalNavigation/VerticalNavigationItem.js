@@ -180,13 +180,7 @@ class VerticalNavigationItem extends React.Component {
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = item || getItemProps(this.props);
 
-    const {
-      title,
-      trackActiveState,
-      mobileItem,
-      iconStyleClass,
-      badges
-    } = navItem;
+    const { title, mobileItem, iconStyleClass, badges } = navItem;
 
     const childItemComponents =
       (children &&
@@ -221,7 +215,7 @@ class VerticalNavigationItem extends React.Component {
         className={cx({
           [`${nextDepth}-nav-item-pf`]:
             depth !== 'tertiary' && children && children.length > 0,
-          active: trackActiveState, // This is the only class we have at the tertiary depth.
+          active: this.props.active || navItem.active, // This is the only class we have at the tertiary depth.
           'is-hover': depth !== 'tertiary' && hovering,
           // This class is present at primary and secondary depths if mobileItem is true,
           // except for the primary depth, where it is only present if showMobileSecondary is also true.
@@ -295,7 +289,7 @@ VerticalNavigationItem.propTypes = {
 
 VerticalNavigationItem.defaultProps = {
   title: '',
-  trackActiveState: true, // TODO make this less dumb
+  active: false,
   mobileItem: false,
   showMobileSecondary: false,
   showMobileTertiary: false,

@@ -33,7 +33,8 @@ stories.addWithInfo(
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation>
             <VerticalNavigation.MastHead>
-              <span>Super Awesome App</span>
+              <span>Super Awesome App</span>{' '}
+              {/* TODO make this positioned right? */}
             </VerticalNavigation.MastHead>
             <VerticalNavigation.Item title="Item 1" />
             <VerticalNavigation.Item title="Item 2">

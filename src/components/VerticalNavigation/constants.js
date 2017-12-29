@@ -4,7 +4,7 @@ import { withContext, getContext, compose } from 'recompose';
 
 const itemObjectTypes = {
   title: PropTypes.string,
-  trackActiveState: PropTypes.bool,
+  active: PropTypes.bool,
   mobileItem: PropTypes.bool,
   iconStyleClass: PropTypes.string,
   badges: PropTypes.shape({
@@ -40,7 +40,7 @@ const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
 
 const getItemProps = props => ({
   title: props.title,
-  trackActiveState: props.trackActiveState,
+  active: props.active,
   mobileItem: props.mobileItem,
   iconStyleClass: props.iconStyleClass,
   badges: props.badges,
