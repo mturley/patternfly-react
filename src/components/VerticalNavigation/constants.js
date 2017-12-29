@@ -17,6 +17,7 @@ const itemObjectTypes = {
 };
 
 const itemContextTypes = {
+  hiddenIcons: PropTypes.bool,
   depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   primaryItem: PropTypes.shape(itemObjectTypes),
   secondaryItem: PropTypes.shape(itemObjectTypes),
@@ -57,6 +58,7 @@ const getChildItemContext = parentProps => {
     item, // *
     primaryItem, // *
     secondaryItem, // *
+    hiddenIcons,
     updateNavOnItemHover,
     updateNavOnItemBlur,
     updateNavOnItemClick,
@@ -70,6 +72,7 @@ const getChildItemContext = parentProps => {
     primaryItem: nextDepth === 'secondary' ? item : primaryItem,
     secondaryItem: nextDepth === 'tertiary' ? item : secondaryItem,
     // tertiaryItem doesn't need to be in context (see VerticalNavigationItem.getContextNavItems)
+    hiddenIcons,
     updateNavOnItemHover,
     updateNavOnItemBlur,
     updateNavOnItemClick,

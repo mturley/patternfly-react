@@ -13,8 +13,8 @@ import {
   getBodyContentElement
 } from './constants';
 
-// TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
 // TODO -- figure out controlled vs uncontrolled, and what props/state this involves
+// TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
 
 // TODO react-router support?
 // TODO all the other TODOs....

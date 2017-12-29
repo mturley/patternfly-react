@@ -56,7 +56,7 @@ class VerticalNavigationItem extends React.Component {
       secondaryItem,
       tertiaryItem
     } = this.props;
-    const navItem = item || getItemProps(this.props);
+    const navItem = item || getItemProps(this.props); // TODO should this just be a spread of both? also in render?
     return {
       primary: depth === 'primary' ? navItem : primaryItem,
       secondary: depth === 'secondary' ? navItem : secondaryItem,
@@ -165,6 +165,7 @@ class VerticalNavigationItem extends React.Component {
   render() {
     const {
       item,
+      hiddenIcons,
       showMobileSecondary,
       showMobileTertiary,
       navCollapsed,
