@@ -4,7 +4,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { defaultTemplate } from '../../../storybook/decorators/storyTemplates';
 
 import { VerticalNavigation } from '../../index';
-import { mockNavItems } from './__mocks__/mockNavItems';
+import mockNavItems from './__mocks__/mockNavItems';
 
 const mockBodyContainer = (
   <div className="container-fluid container-cards-pf container-pf-nav-pf-vertical nav-pf-persistent-secondary">

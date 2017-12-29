@@ -221,9 +221,9 @@ class VerticalNavigation extends React.Component {
 
     const {
       hidden,
+      hiddenIcons,
       persistentSecondary,
       pinnableMenus,
-      hiddenIcons,
       brandSrc,
       brandAlt,
       showBadges,
@@ -290,6 +290,7 @@ class VerticalNavigation extends React.Component {
           updateNavOnItemHover={this.updateNavOnItemHover}
           updateNavOnItemBlur={this.updateNavOnItemBlur}
           updateNavOnItemClick={this.updateNavOnItemClick}
+          hiddenIcons={hiddenIcons}
           inMobileState={inMobileState}
           hoverDelay={hoverDelay}
           hideDelay={hideDelay}
