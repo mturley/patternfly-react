@@ -66,9 +66,10 @@ class VerticalNavigation extends React.Component {
     ].reduce((values, key) => {
       return {
         ...values,
-        [key]: this.props.hasOwnProperty(key)
-          ? this.props[key]
-          : this.state[key]
+        [key]:
+          this.props.hasOwnProperty(key) && this.props[key] !== null
+            ? this.props[key]
+            : this.state[key]
       };
     }, {});
   }
@@ -99,7 +100,7 @@ class VerticalNavigation extends React.Component {
       explicitCollapse: true
     });
     onCollapse && onCollapse();
-    // TODO only in uncontrolled mode
+    // TODO only in uncontrolled mode / with a specific prop
     getBodyContentElement().classList.add('collapsed-nav');
   }
 
@@ -292,6 +293,7 @@ class VerticalNavigation extends React.Component {
           updateNavOnItemClick={this.updateNavOnItemClick}
           hiddenIcons={hiddenIcons}
           inMobileState={inMobileState}
+          navCollapsed={navCollapsed}
           hoverDelay={hoverDelay}
           hideDelay={hideDelay}
           className={cx('nav-pf-vertical nav-pf-vertical-with-sub-menus', {
@@ -368,7 +370,7 @@ VerticalNavigation.defaultProps = {
   forceHidden: false,
   hideTopBanner: false,
   topBannerContents: null,
-  navCollapsed: false,
+  navCollapsed: null,
   inMobileState: false,
   activeSecondary: false,
   hoverDelay: 500,

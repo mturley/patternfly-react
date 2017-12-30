@@ -251,9 +251,7 @@ class VerticalNavigationItem extends React.Component {
             (navCollapsed ? (
               <OverlayTrigger
                 placement="bottom"
-                overlay={
-                  navCollapsed ? <Tooltip>{title}</Tooltip> : <Tooltip />
-                }
+                overlay={<Tooltip>{title}</Tooltip>}
               >
                 {icon}
               </OverlayTrigger>
@@ -292,7 +290,6 @@ VerticalNavigationItem.propTypes = {
   ...itemContextTypes,
   showMobileSecondary: PropTypes.bool, // TODO ???
   showMobileTertiary: PropTypes.bool, // TODO ???
-  navCollapsed: PropTypes.bool, // TODO does this need to be in context?
   secondaryCollapsed: PropTypes.bool, // TODO ???
   tertiaryCollapsed: PropTypes.bool, // TODO ???
   inMobileState: PropTypes.bool,
@@ -307,8 +304,7 @@ VerticalNavigationItem.defaultProps = {
   active: false,
   mobileItem: false,
   showMobileSecondary: false,
-  showMobileTertiary: false,
-  navCollapsed: false
+  showMobileTertiary: false
 };
 
 export default consumeAndProvideItemContext(VerticalNavigationItem);

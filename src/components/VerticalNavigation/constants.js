@@ -25,6 +25,7 @@ const itemContextTypes = {
   updateNavOnItemBlur: PropTypes.func,
   updateNavOnItemClick: PropTypes.func,
   inMobileState: PropTypes.bool,
+  navCollapsed: PropTypes.bool,
   hoverDelay: PropTypes.number,
   hideDelay: PropTypes.number
 };
@@ -63,6 +64,7 @@ const getChildItemContext = parentProps => {
     updateNavOnItemBlur,
     updateNavOnItemClick,
     inMobileState,
+    navCollapsed,
     hoverDelay,
     hideDelay
   } = parentProps;
@@ -77,6 +79,7 @@ const getChildItemContext = parentProps => {
     updateNavOnItemBlur,
     updateNavOnItemClick,
     inMobileState,
+    navCollapsed,
     hoverDelay,
     hideDelay
   };
