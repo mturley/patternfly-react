@@ -218,15 +218,12 @@ class VerticalNavigation extends React.Component {
     const mastHead =
       childrenArray &&
       childrenArray.find(child => child.type === VerticalNavigationMastHead);
-    const mastHeadChildren = mastHead && mastHead.props.children;
 
     const {
       hidden,
       hiddenIcons,
       persistentSecondary,
       pinnableMenus,
-      brandSrc,
-      brandAlt,
       showBadges,
       showMobileSecondary,
       showMobileTertiary,
@@ -247,36 +244,19 @@ class VerticalNavigation extends React.Component {
       hoverTertiaryNav
     } = this.getControlledState();
 
-    const topBanner = (
-      <div>
-        <div className="navbar-header">
-          <button
-            type="button"
-            className="navbar-toggle"
-            onClick={this.onMenuToggleClick}
-          >
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar" />
-            <span className="icon-bar" />
-            <span className="icon-bar" />
-          </button>
-          <span className="navbar-brand">
-            {mastHeadChildren || // TODO revisit this? how to best default when they don't have children?
-              (brandSrc ? (
-                <img
-                  className="navbar-brand-icon"
-                  src={brandSrc}
-                  alt={brandAlt}
-                />
-              ) : (
-                <span className="navbar-brand-txt">{brandAlt}</span>
-              ))}
-            {/* TODO in the reference markup there is also a:
-              <img class="navbar-brand-name" src="/assets/img/brand-alt.svg" alt="PatternFly Enterprise Application" /> */}
-          </span>
-        </div>
-        <nav className="collapse navbar-collapse">{topBannerContents}</nav>
-        {notificationDrawer}
+    const header = (
+      <div className="navbar-header">
+        <button
+          type="button"
+          className="navbar-toggle"
+          onClick={this.onMenuToggleClick}
+        >
+          <span className="sr-only">Toggle navigation</span>
+          <span className="icon-bar" />
+          <span className="icon-bar" />
+          <span className="icon-bar" />
+        </button>
+        {mastHead}
       </div>
     );
 
@@ -286,7 +266,12 @@ class VerticalNavigation extends React.Component {
           'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */
         )}
       >
-        {!hideTopBanner && topBanner}
+        {/* TODO these three should be one fragment when we upgrade to react 16.2 */}
+        {!hideTopBanner && header}
+        {!hideTopBanner && (
+          <nav className="collapse navbar-collapse">{topBannerContents}</nav>
+        )}
+        {!hideTopBanner && notificationDrawer}
         <ContextProvider
           updateNavOnItemHover={this.updateNavOnItemHover}
           updateNavOnItemBlur={this.updateNavOnItemBlur}
@@ -328,8 +313,6 @@ VerticalNavigation.propTypes = {
   persistentSecondary: PropTypes.bool,
   pinnableMenus: PropTypes.bool,
   hiddenIcons: PropTypes.bool,
-  brandSrc: PropTypes.string,
-  brandAlt: PropTypes.string,
   showBadges: PropTypes.bool,
   showMobileSecondary: PropTypes.bool,
   showMobileTertiary: PropTypes.bool,
@@ -361,8 +344,6 @@ VerticalNavigation.defaultProps = {
   persistentSecondary: false,
   pinnableMenus: false,
   hiddenIcons: false,
-  brandSrc: null,
-  brandAlt: '',
   showBadges: true,
   showMobileNav: true,
   showMobileSecondary: false,

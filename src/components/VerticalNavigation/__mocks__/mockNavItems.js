@@ -1,20 +1,20 @@
 export const mockNavItems = [
   {
     title: 'Item 1',
-    iconStyleClass: 'fa-home',
+    iconStyleClass: 'fa fa-home',
     // TODO badges?
     subItems: [
       {
         title: 'Item 1-A',
-        iconStyleClass: 'fa-envelope',
+        iconStyleClass: 'fa fa-envelope',
         subItems: [
           {
             title: 'Item 1-A-i',
-            iconStyleClass: 'fa-envelope-open'
+            iconStyleClass: 'fa fa-envelope-open'
           },
           {
             title: 'Item 1-A-ii',
-            iconStyleClass: 'fa-envelope-closed'
+            iconStyleClass: 'fa fa-envelope-closed'
           },
           {
             title: 'Item 1-A-iii'
@@ -23,7 +23,7 @@ export const mockNavItems = [
       },
       {
         title: 'Item 1-B',
-        iconStyleClass: 'fa-bell',
+        iconStyleClass: 'fa fa-bell',
         subItems: [
           {
             title: 'Item 1-B-i'
@@ -43,7 +43,7 @@ export const mockNavItems = [
   },
   {
     title: 'Item 2',
-    iconStyleClass: 'fa-calendar'
+    iconStyleClass: 'fa fa-calendar'
   },
   {
     title: 'Item 3',
