@@ -302,7 +302,7 @@ VerticalNavigationItem.propTypes = {
 VerticalNavigationItem.defaultProps = {
   title: '',
   active: false,
-  mobileItem: false,
+  mobileItem: true,
   showMobileSecondary: false,
   showMobileTertiary: false
 };

@@ -121,8 +121,9 @@ class VerticalNavigation extends React.Component {
   }
 
   updateHoverState(hovering, primary, secondary, tertiary) {
-    if (primary && secondary) {
-      if (tertiary) {
+    console.log('HOVER STATE:', arguments);
+    if (primary) {
+      if (secondary) {
         this.setState({ hoverTertiaryNav: hovering });
       } else {
         this.setState({ hoverSecondaryNav: hovering });

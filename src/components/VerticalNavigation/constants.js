@@ -45,11 +45,11 @@ const getItemProps = props => ({
   active: props.active,
   mobileItem: props.mobileItem,
   iconStyleClass: props.iconStyleClass,
-  badges: props.badges
-  /* 8subItems:
+  badges: props.badges,
+  subItems:
     props.children &&
     React.Children.count(props.children) > 0 &&
-    React.Children.map(props.children, child => getItemProps(child.props)) */
+    React.Children.map(props.children, child => getItemProps(child.props))
 });
 
 const getChildItemContext = parentProps => {
