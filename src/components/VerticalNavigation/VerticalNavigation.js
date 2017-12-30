@@ -34,6 +34,8 @@ class VerticalNavigation extends React.Component {
       showMobileNav: false,
       navCollapsed: false,
       explicitCollapse: false, // TODO do we need this?
+      numHoveredPrimary: 0,
+      numHoveredSecondary: 0,
       hoverSecondaryNav: false,
       hoverTertiaryNav: false,
       collapsedSecondaryNav: false,
@@ -121,12 +123,21 @@ class VerticalNavigation extends React.Component {
   }
 
   updateHoverState(hovering, primary, secondary, tertiary) {
-    console.log('HOVER STATE:', arguments);
+    // Since the hideTimer can be longer than the hoverTimer, it is possible for two items to be "hovering" at a time.
+    // We must guard against this race condition, or a long-running hideTimer can undo a hover triggered later.
+    // We keep a count and only remove the hover styles if there are really no more hovered items in that tier.
+    const doUpdate = (numHoveredKey, hoverStateKey) => {
+      const newNumHovered = this.state[numHoveredKey] + (hovering ? 1 : -1);
+      this.setState({ [numHoveredKey]: newNumHovered });
+      if (hovering || newNumHovered < 1) {
+        this.setState({ [hoverStateKey]: hovering });
+      }
+    };
     if (primary) {
       if (secondary) {
-        this.setState({ hoverTertiaryNav: hovering });
+        doUpdate('numHoveredSecondary', 'hoverTertiaryNav');
       } else {
-        this.setState({ hoverSecondaryNav: hovering });
+        doUpdate('numHoveredPrimary', 'hoverSecondaryNav');
       }
     }
   }
