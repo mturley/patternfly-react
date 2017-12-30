@@ -4,7 +4,8 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { defaultTemplate } from '../../../storybook/decorators/storyTemplates';
 
 import { VerticalNavigation } from '../../index';
-import mockNavItems from './__mocks__/mockNavItems';
+
+import { mockNavItems } from './__mocks__/mockNavItems';
 
 const mockBodyContainer = (
   <div className="container-fluid container-cards-pf container-pf-nav-pf-vertical nav-pf-persistent-secondary">
@@ -33,7 +34,7 @@ stories.addWithInfo(
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation>
             <VerticalNavigation.MastHead>
-              <span>Super Awesome App</span>{' '}
+              <span>Super Awesome App</span>
               {/* TODO make this positioned right? */}
             </VerticalNavigation.MastHead>
             <VerticalNavigation.Item title="Item 1" />
@@ -63,6 +64,7 @@ stories.addWithInfo(
   'Vertical Navigation driven by an objects in a prop',
   `VerticalNavigation usage example with items passed as objects, driven by a mock file.`,
   () => {
+    console.log('ITEMS:', mockNavItems);
     return (
       // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
       // See https://stackoverflow.com/a/38796408

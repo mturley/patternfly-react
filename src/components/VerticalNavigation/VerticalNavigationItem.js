@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import cx from 'classnames';
 import { ListGroup, ListGroupItem } from '../ListGroup';
-import OverlayTrigger from '../OverlayTrigger';
-import Tooltip from '../Tooltip';
+import { OverlayTrigger } from '../OverlayTrigger';
+import { Tooltip } from '../Tooltip';
 import VerticalNavigation from './VerticalNavigation';
 import { bindMethods } from '../../common/helpers';
 import {
@@ -46,6 +46,12 @@ class VerticalNavigationItem extends React.Component {
     });
   }
 
+  getNavItem() {
+    const { item } = this.props;
+    // Properties of the item object take priority over individual item props
+    return { ...getItemProps(this.props), ...item };
+  }
+
   getContextNavItems() {
     // We have primary, secondary, and tertiary items as props if they are part of the parent context,
     // but we also want to include the current item when calling handlers.
@@ -56,7 +62,7 @@ class VerticalNavigationItem extends React.Component {
       secondaryItem,
       tertiaryItem
     } = this.props;
-    const navItem = item || getItemProps(this.props); // TODO should this just be a spread of both? also in render?
+    const navItem = this.getNavItem();
     return {
       primary: depth === 'primary' ? navItem : primaryItem,
       secondary: depth === 'secondary' ? navItem : secondaryItem,
@@ -75,7 +81,7 @@ class VerticalNavigationItem extends React.Component {
     const { hoverTimer, blurTimer, hovering } = this.state;
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
-    if (item.children && item.children.length > 0) {
+    if (item.subItems && item.subItems.length > 0) {
       if (!inMobileState) {
         if (blurTimer) {
           clearTimeout(blurTimer);
@@ -107,7 +113,7 @@ class VerticalNavigationItem extends React.Component {
     const { hoverTimer, blurTimer, hovering } = this.state;
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
-    if (item.children && item.children.length > 0) {
+    if (item.subItems && item.subItems.length > 0) {
       if (hoverTimer) {
         clearTimeout(hoverTimer);
         this.setState({ hoverTimer: null });
@@ -139,26 +145,27 @@ class VerticalNavigationItem extends React.Component {
     // TODO yeah this needs to be VerticalNavigation.Badge or something
     const { showBadges } = this.props;
     return (
-      showBadges &&
-      badges && (
-        <div className="badge-container-pf">
-          {badges.map(badge => (
-            <OverlayTrigger
-              key={badge.badgeClass}
-              placement="right"
-              overlay={<Tooltip>{badge.tooltip}</Tooltip>}
-            >
-              <div className={cx('badge', badge.badgeClass)}>
-                {badge.count &&
-                  badge.iconStyleClass && (
-                    <span className={badge.iconStyleClass} />
-                  )}
-                {badge.count && <span>{badge.count}</span>}
-              </div>
-            </OverlayTrigger>
-          ))}
-        </div>
-      )
+      (showBadges &&
+        badges && (
+          <div className="badge-container-pf">
+            {badges.map(badge => (
+              <OverlayTrigger
+                key={badge.badgeClass}
+                placement="right"
+                overlay={<Tooltip>{badge.tooltip}</Tooltip>}
+              >
+                <div className={cx('badge', badge.badgeClass)}>
+                  {badge.count &&
+                    badge.iconStyleClass && (
+                      <span className={badge.iconStyleClass} />
+                    )}
+                  {badge.count && <span>{badge.count}</span>}
+                </div>
+              </OverlayTrigger>
+            ))}
+          </div>
+        )) ||
+      null
     );
   }
 
@@ -179,9 +186,8 @@ class VerticalNavigationItem extends React.Component {
     const { hovering } = this.state;
 
     // The nav item can either be passed directly as one item object prop, or as individual props.
-    const navItem = item || getItemProps(this.props);
-
-    const { title, mobileItem, iconStyleClass, badges } = navItem;
+    const navItem = this.getNavItem();
+    const { title, mobileItem, iconStyleClass, badges, subItems } = navItem;
 
     const childItemComponents =
       (children &&
@@ -189,9 +195,9 @@ class VerticalNavigationItem extends React.Component {
         React.Children.toArray(children).filter(
           child => child.type === VerticalNavigationItem
         )) ||
-      (navItem.children &&
-        navItem.children.length > 0 &&
-        navItem.children.map(childItem => (
+      (subItems &&
+        subItems.length > 0 &&
+        subItems.map(childItem => (
           <VerticalNavigationItem item={childItem} key={childItem.title} />
         )));
 
@@ -209,6 +215,13 @@ class VerticalNavigationItem extends React.Component {
       nextDepth === 'secondary'
         ? this.collapseSecondaryNav
         : this.collapseTertiaryNav;
+
+    const icon = iconStyleClass && (
+      <span
+        className={cx(iconStyleClass, { hidden: hiddenIcons })}
+        title={title}
+      />
+    );
 
     return (
       <ListGroupItem
@@ -234,24 +247,25 @@ class VerticalNavigationItem extends React.Component {
       >
         <a onClick={this.onItemClick}>
           {depth === 'primary' &&
-            iconStyleClass && (
+            icon &&
+            (navCollapsed ? (
               <OverlayTrigger
                 placement="bottom"
-                overlay={navCollapsed ? <Tooltip>{title}</Tooltip> : null}
+                overlay={
+                  navCollapsed ? <Tooltip>{title}</Tooltip> : <Tooltip />
+                }
               >
-                <span
-                  className={cx(iconStyleClass, { hidden: hiddenIcons })}
-                  title={title}
-                />
+                {icon}
               </OverlayTrigger>
-            )}
+            ) : (
+              icon
+            ))}
           <span className="list-group-item-value">{title}</span>
           {this.renderBadges(badges)}
         </a>
         {children &&
           React.Children.count(children) > 0 && (
             <div className="nav-pf-secondary-nav">
-              {' '}
               {/* TODO should this class sometimes say tertiary? */}
               <div className="nav-item-pf-header">
                 <a

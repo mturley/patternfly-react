@@ -150,13 +150,13 @@ class VerticalNavigation extends React.Component {
     const { inMobileState, onItemClick } = this.props;
     const item = deepestOf(primary, secondary, tertiary);
     if (inMobileState) {
-      if (item.children && item.children.length > 0) {
+      if (item.subItems && item.subItems.length > 0) {
         this.updateMobileMenu(primary, secondary, tertiary); // TODO figure out what this did in ng
       } else {
         this.updateMobileMenu(); // TODO figure out what this did in ng (expanded states?)
       }
     }
-    if (!inMobileState || !item.children || item.children.length === 0) {
+    if (!inMobileState || !item.subItems || item.subItems.length === 0) {
       this.navigateToItem(item);
     }
     onItemClick && onItemClick(primary, secondary, tertiary);
@@ -175,10 +175,10 @@ class VerticalNavigation extends React.Component {
 
     // TODO include more stories examples!
 
-    // Nav items may be passed either as nested VerticalNavigationItem children, or as nested items in a prop.
+    // Nav items may be passed either as nested VerticalNavigationitem.subItems, or as nested items in a prop.
     // The items prop will take priority, if present, and must be an array of item objects (not React components).
-    // If the items prop is not present, items must be expressed as VerticalNavigationItem children instead.
-    // Any non-VerticalNavigationItem children will be rendered in the masthead.
+    // If the items prop is not present, items must be expressed as VerticalNavigationitem.subItems instead.
+    // Any non-VerticalNavigationitem.subItems will be rendered in the masthead.
     const childrenArray =
       children &&
       React.Children.count(children) > 0 &&
@@ -195,14 +195,14 @@ class VerticalNavigation extends React.Component {
           item={primaryItem}
           key={`primary_${primaryItem.title}`}
         >
-          {primaryItem.children &&
-            primaryItem.children.map((secondaryItem, j) => (
+          {primaryItem.subItems &&
+            primaryItem.subItems.map((secondaryItem, j) => (
               <VerticalNavigationItem
                 item={secondaryItem}
                 key={`secondary_${secondaryItem.title}`}
               >
-                {secondaryItem.children &&
-                  secondaryItem.children.map((tertiaryItem, j) => (
+                {secondaryItem.subItems &&
+                  secondaryItem.subItems.map((tertiaryItem, j) => (
                     <VerticalNavigationItem
                       item={tertiaryItem}
                       key={`tertiary_${tertiaryItem.title}`}

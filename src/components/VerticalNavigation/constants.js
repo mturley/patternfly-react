@@ -13,7 +13,7 @@ const itemObjectTypes = {
     count: PropTypes.number,
     iconStyleClass: PropTypes.string
   }),
-  children: PropTypes.array
+  subItems: PropTypes.array
 };
 
 const itemContextTypes = {
@@ -44,11 +44,11 @@ const getItemProps = props => ({
   active: props.active,
   mobileItem: props.mobileItem,
   iconStyleClass: props.iconStyleClass,
-  badges: props.badges,
-  children:
+  badges: props.badges
+  /* 8subItems:
     props.children &&
     React.Children.count(props.children) > 0 &&
-    React.Children.map(props.children, child => getItemProps(child.props))
+    React.Children.map(props.children, child => getItemProps(child.props)) */
 });
 
 const getChildItemContext = parentProps => {
