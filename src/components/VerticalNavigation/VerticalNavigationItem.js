@@ -24,8 +24,7 @@ class VerticalNavigationItem extends React.Component {
     super();
     this.state = {
       hovering: false, // TODO should we allow hovering to be controlled by a prop too?
-      hoverTimer: null,
-      blurTimer: null
+      hoverTimer: null
     };
     bindMethods(this, [
       'getContextNavItems',
@@ -37,12 +36,10 @@ class VerticalNavigationItem extends React.Component {
 
   componentWillUnmount() {
     // Clear both timers so they don't trigger while the component is unmounted.
-    const { hoverTimer, blurTimer } = this.state;
+    const { hoverTimer } = this.state;
     if (hoverTimer) clearTimeout(hoverTimer);
-    if (blurTimer) clearTimeout(blurTimer);
     this.setState({
-      hoverTimer: null,
-      blurTimer: null
+      hoverTimer: null
     });
   }
 
@@ -78,15 +75,15 @@ class VerticalNavigationItem extends React.Component {
       updateNavOnItemHover,
       onHover
     } = this.props;
-    const { hoverTimer, blurTimer, hovering } = this.state;
+    const { hoverTimer, hovering } = this.state;
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
     if (item.subItems && item.subItems.length > 0) {
       if (!inMobileState) {
-        if (blurTimer) {
-          clearTimeout(blurTimer);
-          this.setState({ blurTimer: null });
-        } else if (!hoverTimer && !hovering) {
+        if (hoverTimer) {
+          clearTimeout(hoverTimer);
+          this.setState({ hoverTimer: null });
+        } else if (!hovering) {
           this.setState({
             hoverTimer: setTimeout(() => {
               that.setState({
@@ -110,18 +107,18 @@ class VerticalNavigationItem extends React.Component {
       updateNavOnItemBlur,
       onBlur
     } = this.props;
-    const { hoverTimer, blurTimer, hovering } = this.state;
+    const { hoverTimer, hovering } = this.state;
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
     if (item.subItems && item.subItems.length > 0) {
       if (hoverTimer) {
         clearTimeout(hoverTimer);
         this.setState({ hoverTimer: null });
-      } else if (!blurTimer && hovering) {
+      } else if (hovering) {
         this.setState({
-          blurTimer: setTimeout(() => {
+          hoverTimer: setTimeout(() => {
             that.setState({
-              blurTimer: null,
+              hoverTimer: null,
               hovering: false
             });
             updateNavOnItemBlur(primary, secondary, tertiary);
