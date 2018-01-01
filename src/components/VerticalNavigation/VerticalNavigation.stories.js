@@ -33,7 +33,7 @@ stories.addWithInfo(
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation>
-            <VerticalNavigation.MastHead title="Super Awesome App" />
+            <VerticalNavigation.MastHead title="Patternfly React" />
             <VerticalNavigation.Item title="Item 1" />
             <VerticalNavigation.Item title="Item 2">
               <VerticalNavigation.Item title="Item 2-A" />
@@ -68,7 +68,7 @@ stories.addWithInfo(
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation items={mockNavItems}>
-            <VerticalNavigation.MastHead title="Super Awesome App" />
+            <VerticalNavigation.MastHead title="Patternfly React" />
           </VerticalNavigation>
           {mockBodyContainer}
         </div>

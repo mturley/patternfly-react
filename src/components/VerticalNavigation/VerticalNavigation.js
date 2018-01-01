@@ -61,24 +61,32 @@ class VerticalNavigation extends React.Component {
   // be sure to also use the corresponding handlers to keep them updated.
   getControlledState() {
     return [
+      'inMobileState',
       'showMobileNav',
       'navCollapsed',
       'hoverSecondaryNav',
-      'hoverTertiaryNav'
-    ].reduce((values, key) => {
-      return {
+      'hoverTertiaryNav',
+      'collapsedSecondaryNav',
+      'collapsedTertiaryNav'
+    ].reduce(
+      (values, key) => ({
         ...values,
         [key]:
           this.props.hasOwnProperty(key) && this.props[key] !== null
             ? this.props[key]
             : this.state[key]
-      };
-    }, {});
+      }),
+      {}
+    );
   }
 
   onMenuToggleClick() {
-    const { inMobileState, onMenuToggleClick } = this.props;
-    const { showMobileNav, navCollapsed } = this.getControlledState();
+    const { onMenuToggleClick } = this.props;
+    const {
+      inMobileState,
+      showMobileNav,
+      navCollapsed
+    } = this.getControlledState();
     if (inMobileState) {
       // TODO can/should we detect internally that it is mobile mode?
       if (showMobileNav) {
@@ -160,7 +168,8 @@ class VerticalNavigation extends React.Component {
   }
 
   updateNavOnItemClick(primary, secondary, tertiary) {
-    const { inMobileState, onItemClick } = this.props;
+    const { onItemClick } = this.props;
+    const { inMobileState } = this.getControlledState();
     const item = deepestOf(primary, secondary, tertiary);
     if (inMobileState) {
       if (item.subItems && item.subItems.length > 0) {
@@ -241,19 +250,20 @@ class VerticalNavigation extends React.Component {
       showMobileTertiary,
       forceHidden,
       hideTopBanner,
-      inMobileState,
       hoverDelay,
       hideDelay,
       activeSecondary, // ???
       topBannerContents,
       notificationDrawer /* TODO notification drawer components? */
     } = this.props;
-    const { collapsedSecondaryNav, collapsedTertiaryNav } = this.state; // ???? TODO
     const {
+      inMobileState,
       showMobileNav,
       navCollapsed,
       hoverSecondaryNav,
-      hoverTertiaryNav
+      hoverTertiaryNav,
+      collapsedSecondaryNav,
+      collapsedTertiaryNav
     } = this.getControlledState();
 
     const header = (
@@ -347,6 +357,8 @@ VerticalNavigation.propTypes = {
   navCollapsed: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
   hoverSecondaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
   hoverTertiaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
+  collapsedSecondaryNav: PropTypes.bool, // ** (must also use TODO onWhateverCollapseBullshit to maintain app state)
+  collapsedTertiaryNav: PropTypes.bool, // ** (must also use TODO onWhateverCollapseBullshit to maintain app state)
   children: PropTypes.node
 };
 

@@ -1,7 +1,7 @@
 export const mockNavItems = [
   {
-    title: 'Item 1',
-    iconStyleClass: 'fa fa-home',
+    title: 'Dashboard',
+    iconStyleClass: 'fa fa-dashboard',
     // TODO badges?
     subItems: [
       {
@@ -42,11 +42,12 @@ export const mockNavItems = [
     ]
   },
   {
-    title: 'Item 2',
-    iconStyleClass: 'fa fa-calendar'
+    title: 'Dolor',
+    iconStyleClass: 'fa fa-shield'
   },
   {
-    title: 'Item 3',
+    title: 'Ipsum',
+    iconStyleClass: 'fa fa-space-shuttle',
     subItems: [
       {
         title: 'Item 3-A'
@@ -71,6 +72,15 @@ export const mockNavItems = [
     ]
   },
   {
-    title: 'Another item'
+    title: 'Amet',
+    iconStyleClass: 'fa fa-paper-plane'
+  },
+  {
+    title: 'Adipscing',
+    iconStyleClass: 'fa fa-graduation-cap'
+  },
+  {
+    title: 'Lorem',
+    iconStyleClass: 'fa fa-gamepad'
   }
 ];
