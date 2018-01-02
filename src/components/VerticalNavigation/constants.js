@@ -18,6 +18,7 @@ const itemObjectTypes = {
 
 const itemContextTypes = {
   hiddenIcons: PropTypes.bool,
+  pinnableMenus: PropTypes.bool,
   depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   primaryItem: PropTypes.shape(itemObjectTypes),
   secondaryItem: PropTypes.shape(itemObjectTypes),
@@ -26,6 +27,11 @@ const itemContextTypes = {
   updateNavOnItemClick: PropTypes.func,
   inMobileState: PropTypes.bool,
   navCollapsed: PropTypes.bool,
+  collapsedSecondaryNav: PropTypes.bool,
+  collapsedTertiaryNav: PropTypes.bool,
+  updateNavOnSecondaryCollapse: PropTypes.func,
+  updateNavOnTertiaryCollapse: PropTypes.func,
+  forceHideSecondaryMenu: PropTypes.func,
   hoverDelay: PropTypes.number,
   hideDelay: PropTypes.number
 };
@@ -60,11 +66,17 @@ const getChildItemContext = parentProps => {
     primaryItem, // *
     secondaryItem, // *
     hiddenIcons,
+    pinnableMenus,
     updateNavOnItemHover,
     updateNavOnItemBlur,
     updateNavOnItemClick,
     inMobileState,
     navCollapsed,
+    collapsedSecondaryNav,
+    collapsedTertiaryNav,
+    updateNavOnSecondaryCollapse,
+    updateNavOnTertiaryCollapse,
+    forceHideSecondaryMenu,
     hoverDelay,
     hideDelay
   } = parentProps;
@@ -75,11 +87,17 @@ const getChildItemContext = parentProps => {
     secondaryItem: nextDepth === 'tertiary' ? item : secondaryItem,
     // tertiaryItem doesn't need to be in context (see VerticalNavigationItem.getContextNavItems)
     hiddenIcons,
+    pinnableMenus,
     updateNavOnItemHover,
     updateNavOnItemBlur,
     updateNavOnItemClick,
     inMobileState,
     navCollapsed,
+    collapsedSecondaryNav,
+    collapsedTertiaryNav,
+    updateNavOnSecondaryCollapse,
+    updateNavOnTertiaryCollapse,
+    forceHideSecondaryMenu,
     hoverDelay,
     hideDelay
   };

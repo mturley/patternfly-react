@@ -13,7 +13,7 @@ import {
   getBodyContentElement
 } from './constants';
 
-// TODO -- figure out controlled vs uncontrolled, and what props/state this involves
+// TODO -- Primary-only: what do we need? first finish the items in the masthead and other primary-only stuff.
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
 
 // TODO react-router support?
@@ -51,6 +51,9 @@ class VerticalNavigation extends React.Component {
       'updateNavOnItemBlur',
       'updateNavOnItemClick',
       'updateMobileMenu',
+      'updateNavOnSecondaryCollapse',
+      'updateNavOnTertiaryCollapse',
+      'forceHideSecondaryMenu',
       'navigateToItem'
     ]);
   }
@@ -58,7 +61,7 @@ class VerticalNavigation extends React.Component {
   // This is a prop-by-prop implementation of the controlled component pattern.
   // If you pass any of these props, the component will render with your value instead of
   // the automatic internal state value of the same name. If you use one of these props,
-  // be sure to also use the corresponding handlers to keep them updated.
+  // be sure to also use the corresponding callbacks/handlers to keep them updated.
   getControlledState() {
     return [
       'inMobileState',
@@ -134,18 +137,28 @@ class VerticalNavigation extends React.Component {
     // Since the hideTimer can be longer than the hoverTimer, it is possible for two items to be "hovering" at a time.
     // We must guard against this race condition, or a long-running hideTimer can undo a hover triggered later.
     // We keep a count and only remove the hover styles if there are really no more hovered items in that tier.
+    const { numHoveredPrimary, numHoveredSecondary } = this.state;
     const doUpdate = (numHoveredKey, hoverStateKey) => {
       const newNumHovered = this.state[numHoveredKey] + (hovering ? 1 : -1);
       this.setState({ [numHoveredKey]: newNumHovered });
       if (hovering || newNumHovered < 1) {
         this.setState({ [hoverStateKey]: hovering });
       }
+      return newNumHovered;
     };
     if (primary) {
       if (secondary) {
-        doUpdate('numHoveredSecondary', 'hoverTertiaryNav');
+        const newNum = doUpdate('numHoveredSecondary', 'hoverTertiaryNav');
+        return {
+          numHoveredPrimary,
+          numHoveredSecondary: newNum
+        };
       } else {
-        doUpdate('numHoveredPrimary', 'hoverSecondaryNav');
+        const newNum = doUpdate('numHoveredPrimary', 'hoverSecondaryNav');
+        return {
+          numHoveredPrimary: newNum,
+          numHoveredSecondary
+        };
       }
     }
   }
@@ -160,8 +173,18 @@ class VerticalNavigation extends React.Component {
 
   updateNavOnItemBlur(primary, secondary, tertiary) {
     const { onItemBlur } = this.props;
-    // if (!this.primaryHover()) hoverSecondaryNav: false ? from ng, is it necessary?
-    this.updateHoverState(false, primary, secondary, tertiary);
+    const { numHoveredPrimary, numHoveredSecondary } = this.updateHoverState(
+      false,
+      primary,
+      secondary,
+      tertiary
+    );
+    if (primary && !secondary && !tertiary && numHoveredPrimary === 0) {
+      this.setState({ hoverSecondaryNav: false });
+    }
+    if (primary && secondary && !tertiary && numHoveredSecondary === 0) {
+      this.setState({ hoverTertiaryNav: false });
+    }
     if (onItemBlur) {
       onItemBlur(primary, secondary, tertiary);
     }
@@ -186,6 +209,52 @@ class VerticalNavigation extends React.Component {
 
   updateMobileMenu() {
     console.log('TODO update menu', arguments); // TODO
+  }
+
+  updateNavOnSecondaryCollapse(collapsed) {
+    const { onSecondaryCollapse } = this.props;
+    const { inMobileState } = this.getControlledState();
+    if (inMobileState) {
+      this.updateMobileMenu();
+    } else {
+      this.setState({ collapsedSecondaryNav: collapsed });
+      onSecondaryCollapse && onSecondaryCollapse(collapsed);
+    }
+    this.setState({ hoverSecondaryNav: false });
+  }
+
+  updateNavOnTertiaryCollapse(collapsed) {
+    const { onTertiaryCollapse } = this.props;
+    const { inMobileState } = this.getControlledState();
+    if (inMobileState) {
+      // TODO WEIRD USAGE OF UPDATEMOBILEMENU???
+      /* from ng:
+      this.items.forEach((primaryItem) => {
+        if (primaryItem.children) {
+          primaryItem.children.forEach((secondaryItem) => {
+            if (secondaryItem === item) {
+              this.updateMobileMenu(primaryItem);
+            }
+          });
+        }
+      });
+      */
+    } else {
+      this.setState({ collapsedTertiaryNav: collapsed });
+      onTertiaryCollapse && onTertiaryCollapse();
+    }
+    this.setState({ hoverSecondaryNav: false, hoverTertiaryNav: false });
+    if (collapsed) {
+      this.updateNavOnSecondaryCollapse(false);
+    }
+  }
+
+  forceHideSecondaryMenu() {
+    // TODO do we really need this?
+    this.setState({ forceHidden: true });
+    setTimeout(() => {
+      this.setState({ forceHidden: false });
+    }, 500);
   }
 
   navigateToItem(item) {
@@ -260,10 +329,10 @@ class VerticalNavigation extends React.Component {
       inMobileState,
       showMobileNav,
       navCollapsed,
-      hoverSecondaryNav,
-      hoverTertiaryNav,
       collapsedSecondaryNav,
-      collapsedTertiaryNav
+      collapsedTertiaryNav,
+      hoverSecondaryNav,
+      hoverTertiaryNav
     } = this.getControlledState();
 
     const header = (
@@ -299,19 +368,27 @@ class VerticalNavigation extends React.Component {
           updateNavOnItemBlur={this.updateNavOnItemBlur}
           updateNavOnItemClick={this.updateNavOnItemClick}
           hiddenIcons={hiddenIcons}
+          pinnableMenus={pinnableMenus}
           inMobileState={inMobileState}
           navCollapsed={navCollapsed}
+          collapsedSecondaryNav={collapsedSecondaryNav}
+          collapsedTertiaryNav={collapsedTertiaryNav}
+          updateNavOnSecondaryCollapse={this.updateNavOnSecondaryCollapse}
+          updateNavOnTertiaryCollapse={this.updateNavOnTertiaryCollapse}
+          forceHideSecondaryMenu={this.forceHideSecondaryMenu}
           hoverDelay={hoverDelay}
           hideDelay={hideDelay}
           className={cx('nav-pf-vertical nav-pf-vertical-with-sub-menus', {
             'nav-pf-vertical-collapsible-menus': pinnableMenus,
             'hidden-icons-pf': hiddenIcons,
             'nav-pf-vertical-with-badges': showBadges,
+            'nav-pf-persistent-secondary': persistentSecondary,
             'secondary-visible-pf': activeSecondary,
             'show-mobile-secondary': showMobileSecondary,
             'show-mobile-tertiary': showMobileTertiary,
-            'hover-secondary-nav-pf': hoverSecondaryNav,
-            'hover-tertiary-nav-pf': hoverTertiaryNav,
+            'hover-secondary-nav-pf':
+              hoverSecondaryNav || collapsedSecondaryNav,
+            'hover-tertiary-nav-pf': hoverTertiaryNav || collapsedTertiaryNav,
             'collapsed-secondary-nav-pf': collapsedSecondaryNav,
             'collapsed-tertiary-nav-pf': collapsedTertiaryNav,
             hidden: inMobileState,
@@ -352,13 +429,15 @@ VerticalNavigation.propTypes = {
   onItemClick: PropTypes.func, // *
   onItemHover: PropTypes.func, // *
   onItemBlur: PropTypes.func, // *
+  onSecondaryCollapse: PropTypes.func, // *
+  onTertiaryCollapse: PropTypes.func, // *
   // ** = overrides a this.state value of the same name (see getControlledState())
   showMobileNav: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
   navCollapsed: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
   hoverSecondaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
   hoverTertiaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
-  collapsedSecondaryNav: PropTypes.bool, // ** (must also use TODO onWhateverCollapseBullshit to maintain app state)
-  collapsedTertiaryNav: PropTypes.bool, // ** (must also use TODO onWhateverCollapseBullshit to maintain app state)
+  collapsedSecondaryNav: PropTypes.bool, // ** (must also use onSecondaryCollapse to maintain app state)
+  collapsedTertiaryNav: PropTypes.bool, // ** (must also use onTertiaryCollapse to maintain app state)
   children: PropTypes.node
 };
 
@@ -366,7 +445,7 @@ VerticalNavigation.defaultProps = {
   items: null,
   hidden: false,
   persistentSecondary: false,
-  pinnableMenus: false,
+  pinnableMenus: true,
   hiddenIcons: false,
   showBadges: true,
   showMobileNav: true,
@@ -383,6 +462,8 @@ VerticalNavigation.defaultProps = {
   onMenuToggleClick: null,
   onCollapse: null,
   onExpand: null,
+  onSecondaryCollapse: null,
+  onTertiaryCollapse: null,
   onItemClick: null,
   onItemHover: null,
   onItemBlur: null
