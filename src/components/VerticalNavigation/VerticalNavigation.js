@@ -241,7 +241,7 @@ class VerticalNavigation extends React.Component {
       */
     } else {
       this.setState({ pinnedTertiaryNav: pinned });
-      onPinTertiary && onPinTertiary();
+      onPinTertiary && onPinTertiary(pinned);
     }
     this.setState({ hoverSecondaryNav: false, hoverTertiaryNav: false });
     if (pinned) {
@@ -467,5 +467,7 @@ VerticalNavigation.defaultProps = {
   onItemHover: null,
   onItemBlur: null
 };
+
+VerticalNavigation.displayName = 'VerticalNavigation';
 
 export default VerticalNavigation;

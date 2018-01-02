@@ -222,8 +222,8 @@ class VerticalNavigationItem extends React.Component {
     const childItemComponents =
       (children &&
         React.Children.count(children) > 0 &&
-        React.Children.toArray(children).filter(
-          child => child.type === VerticalNavigationItem
+        React.Children.toArray(children).filter(child =>
+          child.type.displayName.includes('VerticalNavigationItem')
         )) ||
       (subItems &&
         subItems.length > 0 &&
@@ -255,7 +255,9 @@ class VerticalNavigationItem extends React.Component {
         listItem // Renders as <li>. Other props can change this, see logic in react-bootstrap's ListGroupItem.
         className={cx({
           [`${nextDepth}-nav-item-pf`]:
-            depth !== 'tertiary' && children && children.length > 0,
+            depth !== 'tertiary' &&
+            childItemComponents &&
+            childItemComponents.length > 0,
           active: this.props.active || navItem.active, // This is the only class we have at the tertiary depth.
           'is-hover': nextDepthPinned || (depth !== 'tertiary' && hovering),
           // This class is present at primary and secondary depths if mobileItem is true,
@@ -288,10 +290,9 @@ class VerticalNavigationItem extends React.Component {
           <span className="list-group-item-value">{title}</span>
           {this.renderBadges(badges)}
         </a>
-        {children &&
-          React.Children.count(children) > 0 && (
-            <div className="nav-pf-secondary-nav">
-              {/* TODO should this class sometimes say tertiary? */}
+        {childItemComponents &&
+          childItemComponents.length > 0 && (
+            <div className={`nav-pf-${nextDepth}-nav`}>
               <div className="nav-item-pf-header">
                 {pinnableMenus && (
                   <a
@@ -329,9 +330,11 @@ VerticalNavigationItem.propTypes = {
 VerticalNavigationItem.defaultProps = {
   title: '',
   active: false,
-  mobileItem: true,
+  mobileItem: false, // TODO WHAT? why does this break things when true.....
   showMobileSecondary: false,
   showMobileTertiary: false
 };
+
+VerticalNavigationItem.displayName = 'VerticalNavigationItem';
 
 export default consumeAndProvideItemContext(VerticalNavigationItem);

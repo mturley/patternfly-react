@@ -44,4 +44,6 @@ VerticalNavigationMastHead.defaultProps = {
   children: null
 };
 
+VerticalNavigationMastHead.displayName = 'VerticalNavigationMastHead';
+
 export default VerticalNavigationMastHead;
