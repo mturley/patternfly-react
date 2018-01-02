@@ -38,8 +38,8 @@ class VerticalNavigation extends React.Component {
       numHoveredSecondary: 0,
       hoverSecondaryNav: false,
       hoverTertiaryNav: false,
-      collapsedSecondaryNav: false,
-      collapsedTertiaryNav: false
+      pinnedSecondaryNav: false,
+      pinnedTertiaryNav: false
     };
     bindMethods(this, [
       'getControlledState',
@@ -51,8 +51,8 @@ class VerticalNavigation extends React.Component {
       'updateNavOnItemBlur',
       'updateNavOnItemClick',
       'updateMobileMenu',
-      'updateNavOnSecondaryCollapse',
-      'updateNavOnTertiaryCollapse',
+      'updateNavOnPinSecondary',
+      'updateNavOnPinTertiary',
       'forceHideSecondaryMenu',
       'navigateToItem'
     ]);
@@ -69,8 +69,8 @@ class VerticalNavigation extends React.Component {
       'navCollapsed',
       'hoverSecondaryNav',
       'hoverTertiaryNav',
-      'collapsedSecondaryNav',
-      'collapsedTertiaryNav'
+      'pinnedSecondaryNav',
+      'pinnedTertiaryNav'
     ].reduce(
       (values, key) => ({
         ...values,
@@ -211,20 +211,20 @@ class VerticalNavigation extends React.Component {
     console.log('TODO update menu', arguments); // TODO
   }
 
-  updateNavOnSecondaryCollapse(collapsed) {
-    const { onSecondaryCollapse } = this.props;
+  updateNavOnPinSecondary(pinned) {
+    const { onPinSecondary } = this.props;
     const { inMobileState } = this.getControlledState();
     if (inMobileState) {
       this.updateMobileMenu();
     } else {
-      this.setState({ collapsedSecondaryNav: collapsed });
-      onSecondaryCollapse && onSecondaryCollapse(collapsed);
+      this.setState({ pinnedSecondaryNav: pinned });
+      onPinSecondary && onPinSecondary(pinned);
     }
     this.setState({ hoverSecondaryNav: false });
   }
 
-  updateNavOnTertiaryCollapse(collapsed) {
-    const { onTertiaryCollapse } = this.props;
+  updateNavOnPinTertiary(pinned) {
+    const { onPinTertiary } = this.props;
     const { inMobileState } = this.getControlledState();
     if (inMobileState) {
       // TODO WEIRD USAGE OF UPDATEMOBILEMENU???
@@ -240,12 +240,12 @@ class VerticalNavigation extends React.Component {
       });
       */
     } else {
-      this.setState({ collapsedTertiaryNav: collapsed });
-      onTertiaryCollapse && onTertiaryCollapse();
+      this.setState({ pinnedTertiaryNav: pinned });
+      onPinTertiary && onPinTertiary();
     }
     this.setState({ hoverSecondaryNav: false, hoverTertiaryNav: false });
-    if (collapsed) {
-      this.updateNavOnSecondaryCollapse(false);
+    if (pinned) {
+      this.updateNavOnPinSecondary(false);
     }
   }
 
@@ -329,8 +329,8 @@ class VerticalNavigation extends React.Component {
       inMobileState,
       showMobileNav,
       navCollapsed,
-      collapsedSecondaryNav,
-      collapsedTertiaryNav,
+      pinnedSecondaryNav,
+      pinnedTertiaryNav,
       hoverSecondaryNav,
       hoverTertiaryNav
     } = this.getControlledState();
@@ -371,10 +371,10 @@ class VerticalNavigation extends React.Component {
           pinnableMenus={pinnableMenus}
           inMobileState={inMobileState}
           navCollapsed={navCollapsed}
-          collapsedSecondaryNav={collapsedSecondaryNav}
-          collapsedTertiaryNav={collapsedTertiaryNav}
-          updateNavOnSecondaryCollapse={this.updateNavOnSecondaryCollapse}
-          updateNavOnTertiaryCollapse={this.updateNavOnTertiaryCollapse}
+          pinnedSecondaryNav={pinnedSecondaryNav}
+          pinnedTertiaryNav={pinnedTertiaryNav}
+          updateNavOnPinSecondary={this.updateNavOnPinSecondary}
+          updateNavOnPinTertiary={this.updateNavOnPinTertiary}
           forceHideSecondaryMenu={this.forceHideSecondaryMenu}
           hoverDelay={hoverDelay}
           hideDelay={hideDelay}
@@ -386,11 +386,10 @@ class VerticalNavigation extends React.Component {
             'secondary-visible-pf': activeSecondary,
             'show-mobile-secondary': showMobileSecondary,
             'show-mobile-tertiary': showMobileTertiary,
-            'hover-secondary-nav-pf':
-              hoverSecondaryNav || collapsedSecondaryNav,
-            'hover-tertiary-nav-pf': hoverTertiaryNav || collapsedTertiaryNav,
-            'collapsed-secondary-nav-pf': collapsedSecondaryNav,
-            'collapsed-tertiary-nav-pf': collapsedTertiaryNav,
+            'hover-secondary-nav-pf': hoverSecondaryNav || pinnedSecondaryNav,
+            'hover-tertiary-nav-pf': hoverTertiaryNav || pinnedTertiaryNav,
+            'collapsed-secondary-nav-pf': pinnedSecondaryNav,
+            'collapsed-tertiary-nav-pf': pinnedTertiaryNav,
             hidden: inMobileState,
             collapsed: navCollapsed,
             'force-hide-secondary-nav-pf': forceHidden,
@@ -429,15 +428,15 @@ VerticalNavigation.propTypes = {
   onItemClick: PropTypes.func, // *
   onItemHover: PropTypes.func, // *
   onItemBlur: PropTypes.func, // *
-  onSecondaryCollapse: PropTypes.func, // *
-  onTertiaryCollapse: PropTypes.func, // *
+  onPinSecondary: PropTypes.func, // *
+  onPinTertiary: PropTypes.func, // *
   // ** = overrides a this.state value of the same name (see getControlledState())
   showMobileNav: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
   navCollapsed: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
   hoverSecondaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
   hoverTertiaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
-  collapsedSecondaryNav: PropTypes.bool, // ** (must also use onSecondaryCollapse to maintain app state)
-  collapsedTertiaryNav: PropTypes.bool, // ** (must also use onTertiaryCollapse to maintain app state)
+  pinnedSecondaryNav: PropTypes.bool, // ** (must also use onPinSecondary to maintain app state)
+  pinnedTertiaryNav: PropTypes.bool, // ** (must also use onPinTertiary to maintain app state)
   children: PropTypes.node
 };
 
@@ -462,8 +461,8 @@ VerticalNavigation.defaultProps = {
   onMenuToggleClick: null,
   onCollapse: null,
   onExpand: null,
-  onSecondaryCollapse: null,
-  onTertiaryCollapse: null,
+  onPinSecondary: null,
+  onPinTertiary: null,
   onItemClick: null,
   onItemHover: null,
   onItemBlur: null

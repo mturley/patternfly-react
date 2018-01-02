@@ -25,13 +25,13 @@ class VerticalNavigationItem extends React.Component {
     this.state = {
       hovering: false, // TODO should we allow hovering to be controlled by a prop too?
       hoverTimer: null,
-      secondaryCollapsed: false,
-      tertiaryCollapsed: false
+      secondaryPinned: false,
+      tertiaryPinned: false
     };
     bindMethods(this, [
       'getContextNavItems',
-      'collapseSecondaryNav',
-      'collapseTertiaryNav',
+      'pinSecondaryNav',
+      'pinTertiaryNav',
       'onItemHover',
       'onItemBlur',
       'onItemClick'
@@ -48,12 +48,12 @@ class VerticalNavigationItem extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    // If any other secondary/tertiary nav is un-collapsed, un-collapse them all.
-    if (this.props.collapsedSecondaryNav && !newProps.collapsedSecondaryNav) {
-      this.setState({ secondaryCollapsed: false });
+    // If any other secondary/tertiary nav is un-pinned, un-pin them all.
+    if (this.props.pinnedSecondaryNav && !newProps.pinnedSecondaryNav) {
+      this.setState({ secondaryPinned: false });
     }
-    if (this.props.collapsedTertiaryNav && !newProps.collapsedTertiaryNav) {
-      this.setState({ tertiaryCollapsed: false });
+    if (this.props.pinnedTertiaryNav && !newProps.pinnedTertiaryNav) {
+      this.setState({ tertiaryPinned: false });
     }
   }
 
@@ -81,28 +81,22 @@ class VerticalNavigationItem extends React.Component {
     };
   }
 
-  collapseNestedNav(stateKey, updateNav) {
+  pinNav(stateKey, updateNav) {
     const { inMobileState, forceHideSecondaryMenu } = this.props;
-    const collapsed = this.state[stateKey];
+    const pinned = this.state[stateKey];
     if (!inMobileState) {
-      this.setState({ [stateKey]: !collapsed });
-      if (collapsed) forceHideSecondaryMenu();
+      this.setState({ [stateKey]: !pinned });
+      if (pinned) forceHideSecondaryMenu();
     }
-    updateNav(!collapsed);
+    updateNav(!pinned);
   }
 
-  collapseSecondaryNav() {
-    this.collapseNestedNav(
-      'secondaryCollapsed',
-      this.props.updateNavOnSecondaryCollapse
-    );
+  pinSecondaryNav() {
+    this.pinNav('secondaryPinned', this.props.updateNavOnPinSecondary);
   }
 
-  collapseTertiaryNav() {
-    this.collapseNestedNav(
-      'tertiaryCollapsed',
-      this.props.updateNavOnTertiaryCollapse
-    );
+  pinTertiaryNav() {
+    this.pinNav('tertiaryPinned', this.props.updateNavOnPinTertiary);
   }
 
   onItemHover() {
@@ -219,7 +213,7 @@ class VerticalNavigationItem extends React.Component {
       children
     } = this.props;
 
-    const { hovering, secondaryCollapsed, tertiaryCollapsed } = this.state;
+    const { hovering, secondaryPinned, tertiaryPinned } = this.state;
 
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = this.getNavItem();
@@ -240,17 +234,14 @@ class VerticalNavigationItem extends React.Component {
     const depth = this.props.depth || 'primary';
     const nextDepth = getNextDepth(depth);
 
-    // Default to collapsed unless we explicitly pass collapsed = false.
-    const collapsedSecondaryNav = this.props.collapsedSecondaryNav !== false;
-    const collapsedTertiaryNav = this.props.collapsedTertiaryNav !== false;
+    const pinnedSecondaryNav = this.props.pinnedSecondaryNav;
+    const pinnedTertiaryNav = this.props.pinnedTertiaryNav;
 
     // We only have primary, secondary, and tertiary depths, so nextDepth will only ever be secondary or tertiary.
-    const nextDepthCollapsed =
-      nextDepth === 'secondary' ? secondaryCollapsed : tertiaryCollapsed;
-    const collapseNextNav =
-      nextDepth === 'secondary'
-        ? this.collapseSecondaryNav
-        : this.collapseTertiaryNav;
+    const nextDepthPinned =
+      nextDepth === 'secondary' ? secondaryPinned : tertiaryPinned;
+    const pinNextDepth =
+      nextDepth === 'secondary' ? this.pinSecondaryNav : this.pinTertiaryNav;
 
     const icon = iconStyleClass && (
       <span
@@ -266,7 +257,7 @@ class VerticalNavigationItem extends React.Component {
           [`${nextDepth}-nav-item-pf`]:
             depth !== 'tertiary' && children && children.length > 0,
           active: this.props.active || navItem.active, // This is the only class we have at the tertiary depth.
-          'is-hover': nextDepthCollapsed || (depth !== 'tertiary' && hovering),
+          'is-hover': nextDepthPinned || (depth !== 'tertiary' && hovering),
           // This class is present at primary and secondary depths if mobileItem is true,
           // except for the primary depth, where it is only present if showMobileSecondary is also true.
           'mobile-nav-item-pf':
@@ -305,10 +296,10 @@ class VerticalNavigationItem extends React.Component {
                 {pinnableMenus && (
                   <a
                     className={cx(`${nextDepth}-collapse-toggle-pf`, {
-                      collapsed: nextDepthCollapsed
+                      collapsed: nextDepthPinned
                     })}
                     onClick={() => {
-                      collapseNextNav();
+                      pinNextDepth();
                     }}
                   />
                 )}
