@@ -61,7 +61,6 @@ stories.addWithInfo(
   'Vertical Navigation driven by an objects in a prop',
   `VerticalNavigation usage example with items passed as objects, driven by a mock file.`,
   () => {
-    console.log('ITEMS:', mockNavItems);
     return (
       // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
       // See https://stackoverflow.com/a/38796408

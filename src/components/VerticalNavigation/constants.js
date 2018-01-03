@@ -4,7 +4,6 @@ import { withContext, getContext, compose } from 'recompose';
 
 const itemObjectTypes = {
   title: PropTypes.string,
-  active: PropTypes.bool,
   mobileItem: PropTypes.bool,
   iconStyleClass: PropTypes.string,
   badges: PropTypes.shape({
@@ -32,6 +31,7 @@ const itemContextTypes = {
   updateNavOnPinSecondary: PropTypes.func,
   updateNavOnPinTertiary: PropTypes.func,
   forceHideSecondaryMenu: PropTypes.func,
+  setAncestorsActive: PropTypes.func,
   hoverDelay: PropTypes.number,
   hideDelay: PropTypes.number
 };
@@ -48,7 +48,6 @@ const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
 
 const getItemProps = props => ({
   title: props.title,
-  active: props.active,
   mobileItem: props.mobileItem,
   iconStyleClass: props.iconStyleClass,
   badges: props.badges,
@@ -77,6 +76,7 @@ const getChildItemContext = parentProps => {
     updateNavOnPinSecondary,
     updateNavOnPinTertiary,
     forceHideSecondaryMenu,
+    setAncestorsActive,
     hoverDelay,
     hideDelay
   } = parentProps;
@@ -98,6 +98,7 @@ const getChildItemContext = parentProps => {
     updateNavOnPinSecondary,
     updateNavOnPinTertiary,
     forceHideSecondaryMenu,
+    setAncestorsActive,
     hoverDelay,
     hideDelay
   };
@@ -109,6 +110,10 @@ const consumeAndProvideItemContext = compose(
   consumeItemContext,
   provideItemContext
 );
+
+const ItemContextProvider = provideItemContext(props => (
+  <React.Fragment>{props.children}</React.Fragment>
+));
 
 // WARNING: HACK! HAAAACK HACK HACK HACK WARNING THIS IS A HACK.
 // We only use this to apply magic body classes when the component is used in uncontrolled mode. TODO it's a prop now
@@ -126,5 +131,6 @@ export {
   provideItemContext,
   consumeItemContext,
   consumeAndProvideItemContext,
+  ItemContextProvider,
   getBodyContentElement
 };

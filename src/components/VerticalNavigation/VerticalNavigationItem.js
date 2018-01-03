@@ -6,14 +6,15 @@ import { ListGroup, ListGroupItem } from '../ListGroup';
 import { OverlayTrigger } from '../OverlayTrigger';
 import { Tooltip } from '../Tooltip';
 import VerticalNavigation from './VerticalNavigation';
-import { bindMethods } from '../../common/helpers';
+import { bindMethods, getControlledState } from '../../common/helpers';
 import {
+  ItemContextProvider,
   getNextDepth,
   deepestOf,
   getItemProps,
   itemObjectTypes,
   itemContextTypes,
-  consumeAndProvideItemContext
+  consumeItemContext
 } from './constants';
 
 /**
@@ -23,18 +24,21 @@ class VerticalNavigationItem extends React.Component {
   constructor() {
     super();
     this.state = {
+      active: false,
       hovering: false, // TODO should we allow hovering to be controlled by a prop too?
       hoverTimer: null,
       secondaryPinned: false,
       tertiaryPinned: false
     };
     bindMethods(this, [
+      'controlledState',
       'getContextNavItems',
       'pinSecondaryNav',
       'pinTertiaryNav',
       'onItemHover',
       'onItemBlur',
-      'onItemClick'
+      'onItemClick',
+      'setAncestorsActive'
     ]);
   }
 
@@ -55,6 +59,10 @@ class VerticalNavigationItem extends React.Component {
     if (this.props.pinnedTertiaryNav && !newProps.pinnedTertiaryNav) {
       this.setState({ tertiaryPinned: false });
     }
+  }
+
+  controlledState() {
+    return getControlledState(this.props, this.state, ['active', 'hovering']);
   }
 
   getNavItem() {
@@ -83,15 +91,21 @@ class VerticalNavigationItem extends React.Component {
 
   pinNav(stateKey, updateNav) {
     const { inMobileState, forceHideSecondaryMenu } = this.props;
+    const { primary, secondary, tertiary } = this.getContextNavItems();
     const pinned = this.state[stateKey];
     if (!inMobileState) {
       this.setState({ [stateKey]: !pinned });
-      if (pinned) forceHideSecondaryMenu();
+      this.setAncestorsActive(!pinned);
+      if (pinned) {
+        forceHideSecondaryMenu();
+        this.onItemBlur(true);
+      }
     }
     updateNav(!pinned);
   }
 
   pinSecondaryNav() {
+    // TODO these don't really need to be separate by depth, do they...?
     this.pinNav('secondaryPinned', this.props.updateNavOnPinSecondary);
   }
 
@@ -131,7 +145,7 @@ class VerticalNavigationItem extends React.Component {
     }
   }
 
-  onItemBlur() {
+  onItemBlur(immediate) {
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const {
       inMobileState,
@@ -155,7 +169,7 @@ class VerticalNavigationItem extends React.Component {
             });
             updateNavOnItemBlur(primary, secondary, tertiary);
             onBlur && onBlur(primary, secondary, tertiary);
-          }, hideDelay)
+          }, immediate ? 1 : hideDelay)
         });
       }
     }
@@ -198,6 +212,13 @@ class VerticalNavigationItem extends React.Component {
     );
   }
 
+  setAncestorsActive(active) {
+    const { setAncestorsActive } = this.props;
+    const { title } = this.getNavItem();
+    this.setState({ active: active });
+    setAncestorsActive && setAncestorsActive(active);
+  }
+
   render() {
     const {
       item,
@@ -212,8 +233,8 @@ class VerticalNavigationItem extends React.Component {
       onItemClick,
       children
     } = this.props;
-
     const { hovering, secondaryPinned, tertiaryPinned } = this.state;
+    const { active } = this.controlledState();
 
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = this.getNavItem();
@@ -258,7 +279,7 @@ class VerticalNavigationItem extends React.Component {
             depth !== 'tertiary' &&
             childItemComponents &&
             childItemComponents.length > 0,
-          active: this.props.active || navItem.active, // This is the only class we have at the tertiary depth.
+          active: active, // This is the only class we have at the tertiary depth.
           'is-hover': nextDepthPinned || (depth !== 'tertiary' && hovering),
           // This class is present at primary and secondary depths if mobileItem is true,
           // except for the primary depth, where it is only present if showMobileSecondary is also true.
@@ -306,7 +327,12 @@ class VerticalNavigationItem extends React.Component {
                 )}
                 <span>{title}</span>
               </div>
-              <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
+              <ItemContextProvider
+                {...this.props}
+                setAncestorsActive={this.setAncestorsActive}
+              >
+                <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
+              </ItemContextProvider>
             </div>
           )}
       </ListGroupItem>
@@ -318,6 +344,8 @@ VerticalNavigationItem.propTypes = {
   item: PropTypes.shape(itemObjectTypes),
   ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
   ...itemContextTypes,
+  active: PropTypes.bool, // TODO comment about controlled state
+  hovering: PropTypes.bool, // TODO comment about controlled state
   showMobileSecondary: PropTypes.bool, // TODO ???
   showMobileTertiary: PropTypes.bool, // TODO ???
   inMobileState: PropTypes.bool,
@@ -329,7 +357,7 @@ VerticalNavigationItem.propTypes = {
 
 VerticalNavigationItem.defaultProps = {
   title: '',
-  active: false,
+  active: null,
   mobileItem: false, // TODO WHAT? why does this break things when true.....
   showMobileSecondary: false,
   showMobileTertiary: false
@@ -337,4 +365,4 @@ VerticalNavigationItem.defaultProps = {
 
 VerticalNavigationItem.displayName = 'VerticalNavigationItem';
 
-export default consumeAndProvideItemContext(VerticalNavigationItem);
+export default consumeItemContext(VerticalNavigationItem);
