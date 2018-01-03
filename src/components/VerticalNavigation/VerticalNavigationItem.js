@@ -243,8 +243,10 @@ class VerticalNavigationItem extends React.Component {
     const childItemComponents =
       (children &&
         React.Children.count(children) > 0 &&
-        React.Children.toArray(children).filter(child =>
-          child.type.displayName.includes('VerticalNavigationItem')
+        React.Children.toArray(children).filter(
+          child =>
+            child.type.displayName &&
+            child.type.displayName.includes('VerticalNavigationItem')
         )) ||
       (subItems &&
         subItems.length > 0 &&
