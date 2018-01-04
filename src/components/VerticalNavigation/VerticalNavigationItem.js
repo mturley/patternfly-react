@@ -195,7 +195,9 @@ class VerticalNavigationItem extends React.Component {
               <OverlayTrigger
                 key={badge.badgeClass}
                 placement="right"
-                overlay={<Tooltip>{badge.tooltip}</Tooltip>}
+                overlay={
+                  <Tooltip id={badge.badgeClass}>{badge.tooltip}</Tooltip>
+                }
               >
                 <div className={cx('badge', badge.badgeClass)}>
                   {badge.count &&
@@ -303,7 +305,7 @@ class VerticalNavigationItem extends React.Component {
             (navCollapsed ? (
               <OverlayTrigger
                 placement="bottom"
-                overlay={<Tooltip>{title}</Tooltip>}
+                overlay={<Tooltip id={title}>{title}</Tooltip>}
               >
                 {icon}
               </OverlayTrigger>
