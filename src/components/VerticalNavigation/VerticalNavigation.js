@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ListGroup from '../ListGroup/ListGroup';
 import VerticalNavigationItem from './VerticalNavigationItem';
-import VerticalNavigationMastHead from './VerticalNavigationMastHead';
+import VerticalNavigationMasthead from './VerticalNavigationMasthead';
 import { bindMethods, getControlledState } from '../../common/helpers';
 import {
   ItemContextProvider,
@@ -291,9 +291,9 @@ class VerticalNavigation extends React.Component {
       ));
     const itemComponents = itemsFromProps || itemsFromChildren || [];
 
-    const mastHead =
+    const masthead =
       childrenArray &&
-      childrenArray.find(child => child.type === VerticalNavigationMastHead);
+      childrenArray.find(child => child.type === VerticalNavigationMasthead);
 
     const {
       hidden,
@@ -333,7 +333,7 @@ class VerticalNavigation extends React.Component {
           <span className="icon-bar" />
           <span className="icon-bar" />
         </button>
-        {mastHead}
+        {masthead}
       </div>
     );
 

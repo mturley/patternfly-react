@@ -1,12 +1,12 @@
 import VerticalNavigation from './VerticalNavigation';
-import VerticalNavigationMastHead from './VerticalNavigationMastHead';
+import VerticalNavigationMasthead from './VerticalNavigationMasthead';
 import VerticalNavigationItem from './VerticalNavigationItem';
 
-VerticalNavigation.MastHead = VerticalNavigationMastHead;
+VerticalNavigation.Masthead = VerticalNavigationMasthead;
 VerticalNavigation.Item = VerticalNavigationItem;
 
 export {
   VerticalNavigation,
-  VerticalNavigationMastHead,
+  VerticalNavigationMasthead,
   VerticalNavigationItem
 };

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * VerticalNavigationMastHead - the first child of a VerticalNavigation component
+ * VerticalNavigationMasthead - the first child of a VerticalNavigation component
  */
-const VerticalNavigationMastHead = props => {
+const VerticalNavigationMasthead = props => {
   const { children, href, iconImg, titleImg, title } = props;
   if (children) return <span className="navbar-brand">{children}</span>;
   const brand = (
@@ -28,7 +28,7 @@ const VerticalNavigationMastHead = props => {
   return <span className="navbar-brand">{brand}</span>;
 };
 
-VerticalNavigationMastHead.propTypes = {
+VerticalNavigationMasthead.propTypes = {
   iconImg: PropTypes.string,
   titleImg: PropTypes.string,
   title: PropTypes.string,
@@ -36,7 +36,7 @@ VerticalNavigationMastHead.propTypes = {
   children: PropTypes.node
 };
 
-VerticalNavigationMastHead.defaultProps = {
+VerticalNavigationMasthead.defaultProps = {
   iconImg: null,
   titleImg: null,
   title: '',
@@ -44,6 +44,6 @@ VerticalNavigationMastHead.defaultProps = {
   children: null
 };
 
-VerticalNavigationMastHead.displayName = 'VerticalNavigationMastHead';
+VerticalNavigationMasthead.displayName = 'VerticalNavigationMasthead';
 
-export default VerticalNavigationMastHead;
+export default VerticalNavigationMasthead;

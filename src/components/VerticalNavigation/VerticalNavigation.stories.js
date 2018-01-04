@@ -33,7 +33,7 @@ stories.addWithInfo(
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation>
-            <VerticalNavigation.MastHead title="Patternfly React" />
+            <VerticalNavigation.Masthead title="Patternfly React" />
             <VerticalNavigation.Item title="Item 1" />
             <VerticalNavigation.Item title="Item 2">
               <VerticalNavigation.Item title="Item 2-A" />
@@ -58,7 +58,7 @@ stories.addWithInfo(
 );
 
 stories.addWithInfo(
-  'Vertical Navigation driven by an objects in a prop',
+  'Vertical Navigation driven by objects in a prop',
   `VerticalNavigation usage example with items passed as objects, driven by a mock file.`,
   () => {
     return (
@@ -67,7 +67,7 @@ stories.addWithInfo(
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation items={mockNavItems}>
-            <VerticalNavigation.MastHead title="Patternfly React" />
+            <VerticalNavigation.Masthead title="Patternfly React" />
           </VerticalNavigation>
           {mockBodyContainer}
         </div>
