@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withContext, getContext, compose } from 'recompose';
+import { layoutGenerator } from 'react-break';
+
+const layout = layoutGenerator({
+  mobile: 0,
+  tablet: 768,
+  desktop: 1200
+});
 
 const itemObjectTypes = {
   title: PropTypes.string,
