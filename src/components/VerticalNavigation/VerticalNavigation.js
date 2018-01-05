@@ -5,6 +5,7 @@ import ListGroup from '../ListGroup/ListGroup';
 import VerticalNavigationItem from './VerticalNavigationItem';
 import VerticalNavigationMasthead from './VerticalNavigationMasthead';
 import { bindMethods, getControlledState } from '../../common/helpers';
+import { layout } from '../../common/patternfly';
 import {
   ItemContextProvider,
   deepestOf,
@@ -14,7 +15,7 @@ import {
   getBodyContentElement
 } from './constants';
 
-// TODO -- Primary-only: what do we need? first finish the items in the masthead and other primary-only stuff.
+// TODO -- mobile friendly!
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
 
 // TODO react-router support?
@@ -25,10 +26,10 @@ import {
  * http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
  */
 class VerticalNavigation extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      inMobileState: false,
+      mobileLayout: layout.is('mobile'),
       showMobileNav: false,
       navCollapsed: false,
       explicitCollapse: false, // TODO do we need this?
@@ -41,6 +42,7 @@ class VerticalNavigation extends React.Component {
     };
     bindMethods(this, [
       'controlledState',
+      'onLayoutChange',
       'onMenuToggleClick',
       'collapseMenu',
       'expandMenu',
@@ -56,10 +58,26 @@ class VerticalNavigation extends React.Component {
     ]);
   }
 
+  componentDidMount() {
+    // If the mobileLayout prop is being used, we don't bother listening for layout changes here.
+    const { mobileLayout } = this.props;
+    if (mobileLayout !== true && mobileLayout !== false) {
+      layout.addChangeListener(this.onLayoutChange);
+    }
+  }
+
+  componentWillUnmount() {
+    layout.removeChangeListener(this.onLayoutChange);
+  }
+
+  onLayoutChange(layout) {
+    this.setState({ mobileLayout: layout === 'mobile' });
+  }
+
   // NOTE: If you use any of these props, be sure to also use the corresponding callbacks/handlers.
   controlledState() {
     return getControlledState(this.props, this.state, [
-      'inMobileState',
+      'mobileLayout',
       'showMobileNav',
       'navCollapsed',
       'hoverSecondaryNav',
@@ -72,11 +90,11 @@ class VerticalNavigation extends React.Component {
   onMenuToggleClick() {
     const { onMenuToggleClick } = this.props;
     const {
-      inMobileState,
+      mobileLayout,
       showMobileNav,
       navCollapsed
     } = this.controlledState();
-    if (inMobileState) {
+    if (mobileLayout) {
       // TODO can/should we detect internally that it is mobile mode?
       if (showMobileNav) {
         this.setState({ showMobileNav: false });
@@ -178,16 +196,16 @@ class VerticalNavigation extends React.Component {
 
   updateNavOnItemClick(primary, secondary, tertiary) {
     const { onItemClick } = this.props;
-    const { inMobileState } = this.controlledState();
+    const { mobileLayout } = this.controlledState();
     const item = deepestOf(primary, secondary, tertiary);
-    if (inMobileState) {
+    if (mobileLayout) {
       if (item.subItems && item.subItems.length > 0) {
         this.updateMobileMenu(primary, secondary, tertiary); // TODO figure out what this did in ng
       } else {
         this.updateMobileMenu(); // TODO figure out what this did in ng (expanded states?)
       }
     }
-    if (!inMobileState || !item.subItems || item.subItems.length === 0) {
+    if (!mobileLayout || !item.subItems || item.subItems.length === 0) {
       this.navigateToItem(item);
     }
     onItemClick && onItemClick(primary, secondary, tertiary);
@@ -199,8 +217,8 @@ class VerticalNavigation extends React.Component {
 
   updateNavOnPinSecondary(pinned) {
     const { onPinSecondary } = this.props;
-    const { inMobileState } = this.controlledState();
-    if (inMobileState) {
+    const { mobileLayout } = this.controlledState();
+    if (mobileLayout) {
       this.updateMobileMenu();
     } else {
       this.setState({ pinnedSecondaryNav: pinned });
@@ -211,8 +229,8 @@ class VerticalNavigation extends React.Component {
 
   updateNavOnPinTertiary(pinned) {
     const { onPinTertiary } = this.props;
-    const { inMobileState } = this.controlledState();
-    if (inMobileState) {
+    const { mobileLayout } = this.controlledState();
+    if (mobileLayout) {
       // TODO WEIRD USAGE OF UPDATEMOBILEMENU???
       /* from ng:
       this.items.forEach((primaryItem) => {
@@ -312,7 +330,7 @@ class VerticalNavigation extends React.Component {
       notificationDrawer /* TODO notification drawer components? */
     } = this.props;
     const {
-      inMobileState,
+      mobileLayout,
       showMobileNav,
       navCollapsed,
       pinnedSecondaryNav,
@@ -355,7 +373,7 @@ class VerticalNavigation extends React.Component {
           updateNavOnItemClick={this.updateNavOnItemClick}
           hiddenIcons={hiddenIcons}
           pinnableMenus={pinnableMenus}
-          inMobileState={inMobileState}
+          mobileLayout={mobileLayout}
           navCollapsed={navCollapsed}
           pinnedSecondaryNav={pinnedSecondaryNav}
           pinnedTertiaryNav={pinnedTertiaryNav}
@@ -378,7 +396,7 @@ class VerticalNavigation extends React.Component {
               'hover-tertiary-nav-pf': hoverTertiaryNav,
               'collapsed-secondary-nav-pf': pinnedSecondaryNav,
               'collapsed-tertiary-nav-pf': pinnedTertiaryNav,
-              hidden: inMobileState,
+              hidden: mobileLayout,
               collapsed: navCollapsed,
               'force-hide-secondary-nav-pf': forceHidden,
               'show-mobile-nav': showMobileNav
@@ -406,7 +424,7 @@ VerticalNavigation.propTypes = {
   forceHidden: PropTypes.bool,
   hideTopBanner: PropTypes.bool,
   topBannerContents: PropTypes.node,
-  inMobileState: PropTypes.bool,
+  mobileLayout: PropTypes.bool,
   activeSecondary: PropTypes.bool,
   hoverDelay: PropTypes.number, // ms
   hideDelay: PropTypes.number, // ms
@@ -443,7 +461,7 @@ VerticalNavigation.defaultProps = {
   hideTopBanner: false,
   topBannerContents: null,
   navCollapsed: null,
-  inMobileState: false,
+  mobileLayout: null,
   activeSecondary: false,
   hoverDelay: 500,
   hideDelay: 700,
