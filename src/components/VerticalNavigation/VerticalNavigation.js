@@ -15,11 +15,13 @@ import {
   getBodyContentElement
 } from './constants';
 
-// TODO -- mobile friendly!
+// TODO -- mobile friendly! ---- reimplement updateMobileMenu stuff
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
-
+// TODO -- what else is implemented in the ng version that I'm missing?
 // TODO react-router support?
 // TODO all the other TODOs....
+
+// TODO build it into the demo app!
 
 /**
  * VerticalNavigation - The Vertical Navigation pattern
