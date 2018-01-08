@@ -76,7 +76,8 @@ class BaseVerticalNavigation extends React.Component {
       onMenuToggleClick,
       mobileLayout,
       showMobileNav,
-      navCollapsed
+      navCollapsed,
+      setControlledState
     } = this.props;
     if (mobileLayout) {
       if (showMobileNav) {
@@ -94,7 +95,7 @@ class BaseVerticalNavigation extends React.Component {
   }
 
   collapseMenu() {
-    const { onCollapse } = this.props;
+    const { onCollapse, setControlledState } = this.props;
     setControlledState({ navCollapsed: true });
     this.setState({ explicitCollapse: true });
     onCollapse && onCollapse();
@@ -103,7 +104,7 @@ class BaseVerticalNavigation extends React.Component {
   }
 
   expandMenu() {
-    const { onExpand } = this.props;
+    const { onExpand, setControlledState } = this.props;
     setControlledState({ navCollapsed: false });
     this.setState({ explicitCollapse: false });
     onExpand && onExpand();
@@ -195,7 +196,7 @@ class BaseVerticalNavigation extends React.Component {
   }
 
   updateNavOnPinSecondary(pinned) {
-    const { onPinSecondary, mobileLayout } = this.props;
+    const { onPinSecondary, mobileLayout, setControlledState } = this.props;
     if (mobileLayout) {
       this.updateMobileMenu();
     } else {
