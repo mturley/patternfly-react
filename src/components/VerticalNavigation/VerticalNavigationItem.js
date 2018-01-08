@@ -6,7 +6,7 @@ import { ListGroup, ListGroupItem } from '../ListGroup';
 import { OverlayTrigger } from '../OverlayTrigger';
 import { Tooltip } from '../Tooltip';
 import VerticalNavigation from './VerticalNavigation';
-import { bindMethods, getControlledState } from '../../common/helpers';
+import { bindMethods, controlled } from '../../common/helpers';
 import {
   ItemContextProvider,
   getNextDepth,
@@ -24,14 +24,11 @@ class BaseVerticalNavigationItem extends React.Component {
   constructor() {
     super();
     this.state = {
-      active: false,
-      hovering: false, // TODO should we allow hovering to be controlled by a prop too?
       hoverTimer: null,
       secondaryPinned: false,
       tertiaryPinned: false
     };
     bindMethods(this, [
-      'controlledState',
       'getContextNavItems',
       'pinSecondaryNav',
       'pinTertiaryNav',
@@ -59,10 +56,6 @@ class BaseVerticalNavigationItem extends React.Component {
     if (this.props.pinnedTertiaryNav && !newProps.pinnedTertiaryNav) {
       this.setState({ tertiaryPinned: false });
     }
-  }
-
-  controlledState() {
-    return getControlledState(this.props, this.state, ['active', 'hovering']);
   }
 
   getNavItem() {
@@ -210,9 +203,9 @@ class BaseVerticalNavigationItem extends React.Component {
   }
 
   setAncestorsActive(active) {
-    const { setAncestorsActive } = this.props;
+    const { setAncestorsActive, setControlledState } = this.props;
     const { title } = this.getNavItem();
-    this.setState({ active: active });
+    setControlledState({ active: active });
     setAncestorsActive && setAncestorsActive(active);
   }
 
@@ -228,10 +221,11 @@ class BaseVerticalNavigationItem extends React.Component {
       onItemHover,
       onItemBlur,
       onItemClick,
-      children
+      children,
+      active,
+      hovering
     } = this.props;
-    const { hovering, secondaryPinned, tertiaryPinned } = this.state;
-    const { active } = this.controlledState();
+    const { secondaryPinned, tertiaryPinned } = this.state;
 
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = this.getNavItem();
@@ -340,7 +334,13 @@ class BaseVerticalNavigationItem extends React.Component {
   }
 }
 
+const controlledStateTypes = {
+  active: PropTypes.bool,
+  hovering: PropTypes.bool
+};
+
 BaseVerticalNavigationItem.propTypes = {
+  ...controlledStateTypes,
   item: PropTypes.shape(itemObjectTypes),
   ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
   ...itemContextTypes,
@@ -352,21 +352,29 @@ BaseVerticalNavigationItem.propTypes = {
   onHover: PropTypes.func,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
-  children: PropTypes.node
+  children: PropTypes.node,
+  setControlledState: PropTypes.func
+};
+
+const defaultControlledState = {
+  active: false,
+  hovering: false
 };
 
 BaseVerticalNavigationItem.defaultProps = {
   title: '',
-  active: null,
   mobileItem: false, // TODO WHAT? why does this break things when true.....
   showMobileSecondary: false,
   showMobileTertiary: false
 };
 
-BaseVerticalNavigationItem.displayName = 'VerticalNavigationItem';
+const VerticalNavigationItem = controlled(
+  controlledStateTypes,
+  defaultControlledState
+)(consumeItemContext(BaseVerticalNavigationItem));
 
-const VerticalNavigationItem = consumeItemContext(BaseVerticalNavigationItem);
-
+VerticalNavigationItem.displayName = 'VerticalNavigationItem';
 VerticalNavigationItem.propTypes = BaseVerticalNavigationItem.propTypes;
+VerticalNavigationItem.defaultProps = BaseVerticalNavigationItem.defaultProps;
 
 export default VerticalNavigationItem;

@@ -4,7 +4,7 @@ import cx from 'classnames';
 import ListGroup from '../ListGroup/ListGroup';
 import VerticalNavigationItem from './VerticalNavigationItem';
 import VerticalNavigationMasthead from './VerticalNavigationMasthead';
-import { bindMethods, getControlledState } from '../../common/helpers';
+import { bindMethods, controlled } from '../../common/helpers';
 import { layout } from '../../common/patternfly';
 import {
   ItemContextProvider,
@@ -24,26 +24,19 @@ import {
 // TODO build it into the demo app!
 
 /**
- * VerticalNavigation - The Vertical Navigation pattern
+ * BaseVerticalNavigation - The Vertical Navigation pattern
  * http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
  */
-class VerticalNavigation extends React.Component {
+class BaseVerticalNavigation extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      mobileLayout: layout.is('mobile'),
-      showMobileNav: false,
-      navCollapsed: false,
       explicitCollapse: false, // TODO do we need this?
       numHoveredPrimary: 0,
       numHoveredSecondary: 0,
-      hoverSecondaryNav: false,
-      hoverTertiaryNav: false,
-      pinnedSecondaryNav: false,
-      pinnedTertiaryNav: false
+      forceHidden: false
     };
     bindMethods(this, [
-      'controlledState',
       'onLayoutChange',
       'onMenuToggleClick',
       'collapseMenu',
@@ -73,36 +66,24 @@ class VerticalNavigation extends React.Component {
   }
 
   onLayoutChange(layout) {
-    this.setState({ mobileLayout: layout === 'mobile' });
-  }
-
-  // NOTE: If you use any of these props, be sure to also use the corresponding callbacks/handlers.
-  controlledState() {
-    return getControlledState(this.props, this.state, [
-      'mobileLayout',
-      'showMobileNav',
-      'navCollapsed',
-      'hoverSecondaryNav',
-      'hoverTertiaryNav',
-      'pinnedSecondaryNav',
-      'pinnedTertiaryNav'
-    ]);
+    const { onLayoutChange, setControlledState } = this.props;
+    setControlledState({ mobileLayout: layout === 'mobile' });
+    onLayoutChange && onLayoutChange(layout);
   }
 
   onMenuToggleClick() {
-    const { onMenuToggleClick } = this.props;
     const {
+      onMenuToggleClick,
       mobileLayout,
       showMobileNav,
       navCollapsed
-    } = this.controlledState();
+    } = this.props;
     if (mobileLayout) {
-      // TODO can/should we detect internally that it is mobile mode?
       if (showMobileNav) {
-        this.setState({ showMobileNav: false });
+        setControlledState({ showMobileNav: false });
       } else {
         this.updateMobileMenu();
-        this.setState({ showMobileNav: true });
+        setControlledState({ showMobileNav: true });
       }
     } else if (navCollapsed) {
       this.expandMenu();
@@ -114,10 +95,8 @@ class VerticalNavigation extends React.Component {
 
   collapseMenu() {
     const { onCollapse } = this.props;
-    this.setState({
-      navCollapsed: true,
-      explicitCollapse: true
-    });
+    setControlledState({ navCollapsed: true });
+    this.setState({ explicitCollapse: true });
     onCollapse && onCollapse();
     // TODO only in uncontrolled mode / with a specific prop
     getBodyContentElement().classList.add('collapsed-nav');
@@ -125,10 +104,8 @@ class VerticalNavigation extends React.Component {
 
   expandMenu() {
     const { onExpand } = this.props;
-    this.setState({
-      navCollapsed: false,
-      explicitCollapse: false
-    });
+    setControlledState({ navCollapsed: false });
+    this.setState({ explicitCollapse: false });
     onExpand && onExpand();
     // TODO only in uncontrolled mode
     getBodyContentElement().classList.remove('collapsed-nav');
@@ -143,12 +120,13 @@ class VerticalNavigation extends React.Component {
     // Since the hideTimer can be longer than the hoverTimer, it is possible for two items to be "hovering" at a time.
     // We must guard against this race condition, or a long-running hideTimer can undo a hover triggered later.
     // We keep a count and only remove the hover styles if there are really no more hovered items in that tier.
+    const { setControlledState } = this.props;
     const { numHoveredPrimary, numHoveredSecondary } = this.state;
     const doUpdate = (numHoveredKey, hoverStateKey) => {
       const newNumHovered = this.state[numHoveredKey] + (hovering ? 1 : -1);
       this.setState({ [numHoveredKey]: newNumHovered });
       if (hovering || newNumHovered < 1) {
-        this.setState({ [hoverStateKey]: hovering });
+        setControlledState({ [hoverStateKey]: hovering });
       }
       return newNumHovered;
     };
@@ -178,7 +156,7 @@ class VerticalNavigation extends React.Component {
   }
 
   updateNavOnItemBlur(primary, secondary, tertiary) {
-    const { onItemBlur } = this.props;
+    const { onItemBlur, setControlledState } = this.props;
     const { numHoveredPrimary, numHoveredSecondary } = this.updateHoverState(
       false,
       primary,
@@ -186,10 +164,10 @@ class VerticalNavigation extends React.Component {
       tertiary
     );
     if (primary && !secondary && !tertiary && numHoveredPrimary === 0) {
-      this.setState({ hoverSecondaryNav: false });
+      setControlledState({ hoverSecondaryNav: false });
     }
     if (primary && secondary && !tertiary && numHoveredSecondary === 0) {
-      this.setState({ hoverTertiaryNav: false });
+      setControlledState({ hoverTertiaryNav: false });
     }
     if (onItemBlur) {
       onItemBlur(primary, secondary, tertiary);
@@ -197,8 +175,7 @@ class VerticalNavigation extends React.Component {
   }
 
   updateNavOnItemClick(primary, secondary, tertiary) {
-    const { onItemClick } = this.props;
-    const { mobileLayout } = this.controlledState();
+    const { onItemClick, mobileLayout } = this.props;
     const item = deepestOf(primary, secondary, tertiary);
     if (mobileLayout) {
       if (item.subItems && item.subItems.length > 0) {
@@ -218,20 +195,18 @@ class VerticalNavigation extends React.Component {
   }
 
   updateNavOnPinSecondary(pinned) {
-    const { onPinSecondary } = this.props;
-    const { mobileLayout } = this.controlledState();
+    const { onPinSecondary, mobileLayout } = this.props;
     if (mobileLayout) {
       this.updateMobileMenu();
     } else {
-      this.setState({ pinnedSecondaryNav: pinned });
+      setControlledState({ pinnedSecondaryNav: pinned });
       onPinSecondary && onPinSecondary(pinned);
     }
-    this.setState({ hoverSecondaryNav: false });
+    setControlledState({ hoverSecondaryNav: false });
   }
 
   updateNavOnPinTertiary(pinned) {
-    const { onPinTertiary } = this.props;
-    const { mobileLayout } = this.controlledState();
+    const { onPinTertiary, mobileLayout, setControlledState } = this.props;
     if (mobileLayout) {
       // TODO WEIRD USAGE OF UPDATEMOBILEMENU???
       /* from ng:
@@ -246,10 +221,10 @@ class VerticalNavigation extends React.Component {
       });
       */
     } else {
-      this.setState({ pinnedTertiaryNav: pinned });
+      setControlledState({ pinnedTertiaryNav: pinned });
       onPinTertiary && onPinTertiary(pinned);
     }
-    this.setState({ hoverSecondaryNav: false, hoverTertiaryNav: false });
+    setControlledState({ hoverSecondaryNav: false, hoverTertiaryNav: false });
     if (pinned) {
       this.updateNavOnPinSecondary(false);
     }
@@ -283,6 +258,7 @@ class VerticalNavigation extends React.Component {
     const itemsFromChildren =
       childrenArray &&
       childrenArray.filter(child => child.type === VerticalNavigationItem);
+    // TODO maybe use displayName here instead of type
     // TODO maybe rely on the item render method to recurse, and just do one map here?
     const itemsFromProps =
       items &&
@@ -314,6 +290,7 @@ class VerticalNavigation extends React.Component {
     const masthead =
       childrenArray &&
       childrenArray.find(child => child.type === VerticalNavigationMasthead);
+    // TODO maybe use displayName here instead of type
 
     const {
       hidden,
@@ -329,9 +306,7 @@ class VerticalNavigation extends React.Component {
       hideDelay,
       activeSecondary, // ???
       topBannerContents,
-      notificationDrawer /* TODO notification drawer components? */
-    } = this.props;
-    const {
+      notificationDrawer /* TODO notification drawer components? */,
       mobileLayout,
       showMobileNav,
       navCollapsed,
@@ -339,7 +314,7 @@ class VerticalNavigation extends React.Component {
       pinnedTertiaryNav,
       hoverSecondaryNav,
       hoverTertiaryNav
-    } = this.controlledState();
+    } = this.props;
 
     const header = (
       <div className="navbar-header">
@@ -414,7 +389,20 @@ class VerticalNavigation extends React.Component {
   }
 }
 
-VerticalNavigation.propTypes = {
+// NOTE: If you use any of these props, be sure to also use the corresponding callbacks/handlers.
+// These props override values of the same name set by setControlledState().
+const controlledStateTypes = {
+  mobileLayout: PropTypes.bool, // (can optionally use onLayoutChange to maintain app state)
+  showMobileNav: PropTypes.bool, // (must also use onCollapse and onExpand to maintain app state)
+  navCollapsed: PropTypes.bool, // (must also use onCollapse and onExpand to maintain app state)
+  hoverSecondaryNav: PropTypes.bool, // (must also use onItemHover and onItemBlur to maintain app state)
+  hoverTertiaryNav: PropTypes.bool, // (must also use onItemHover and onItemBlur to maintain app state)
+  pinnedSecondaryNav: PropTypes.bool, // (must also use onPinSecondary to maintain app state)
+  pinnedTertiaryNav: PropTypes.bool // (must also use onPinTertiary to maintain app state)
+};
+
+BaseVerticalNavigation.propTypes = {
+  ...controlledStateTypes,
   items: PropTypes.arrayOf(PropTypes.shape(itemObjectTypes)),
   hidden: PropTypes.bool,
   persistentSecondary: PropTypes.bool,
@@ -426,11 +414,11 @@ VerticalNavigation.propTypes = {
   forceHidden: PropTypes.bool,
   hideTopBanner: PropTypes.bool,
   topBannerContents: PropTypes.node,
-  mobileLayout: PropTypes.bool,
   activeSecondary: PropTypes.bool,
   hoverDelay: PropTypes.number, // ms
   hideDelay: PropTypes.number, // ms
   // * = Optional, will be called in addition to the component handlers
+  onLayoutChange: PropTypes.func, // *
   onMenuToggleClick: PropTypes.func, // *
   onCollapse: PropTypes.func, // *
   onExpand: PropTypes.func, // *
@@ -439,17 +427,21 @@ VerticalNavigation.propTypes = {
   onItemBlur: PropTypes.func, // *
   onPinSecondary: PropTypes.func, // *
   onPinTertiary: PropTypes.func, // *
-  // ** = overrides a this.state value of the same name (see controlledState())
-  showMobileNav: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
-  navCollapsed: PropTypes.bool, // ** (must also use onCollapse and onExpand to maintain app state)
-  hoverSecondaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
-  hoverTertiaryNav: PropTypes.bool, // ** (must also use onItemHover and onItemBlur to maintain app state)
-  pinnedSecondaryNav: PropTypes.bool, // ** (must also use onPinSecondary to maintain app state)
-  pinnedTertiaryNav: PropTypes.bool, // ** (must also use onPinTertiary to maintain app state)
-  children: PropTypes.node
+  children: PropTypes.node,
+  setControlledState: PropTypes.func
 };
 
-VerticalNavigation.defaultProps = {
+const defaultControlledState = {
+  mobileLayout: layout.is('mobile'),
+  showMobileNav: false,
+  navCollapsed: false,
+  hoverSecondaryNav: false,
+  hoverTertiaryNav: false,
+  pinnedSecondaryNav: false,
+  pinnedTertiaryNav: false
+};
+
+BaseVerticalNavigation.defaultProps = {
   items: null,
   hidden: false,
   persistentSecondary: false,
@@ -476,6 +468,11 @@ VerticalNavigation.defaultProps = {
   onItemHover: null,
   onItemBlur: null
 };
+
+const VerticalNavigation = controlled(
+  controlledStateTypes,
+  defaultControlledState
+)(BaseVerticalNavigation);
 
 VerticalNavigation.displayName = 'VerticalNavigation';
 
