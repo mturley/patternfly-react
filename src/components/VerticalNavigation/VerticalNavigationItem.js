@@ -90,10 +90,10 @@ class VerticalNavigationItem extends React.Component {
   }
 
   pinNav(stateKey, updateNav) {
-    const { inMobileState, forceHideSecondaryMenu } = this.props;
+    const { mobileLayout, forceHideSecondaryMenu } = this.props;
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const pinned = this.state[stateKey];
-    if (!inMobileState) {
+    if (!mobileLayout) {
       this.setState({ [stateKey]: !pinned });
       this.setAncestorsActive(!pinned);
       if (pinned) {
@@ -116,7 +116,7 @@ class VerticalNavigationItem extends React.Component {
   onItemHover() {
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const {
-      inMobileState,
+      mobileLayout,
       hoverDelay,
       updateNavOnItemHover,
       onHover
@@ -125,7 +125,7 @@ class VerticalNavigationItem extends React.Component {
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
     if (item.subItems && item.subItems.length > 0) {
-      if (!inMobileState) {
+      if (!mobileLayout) {
         if (hoverTimer) {
           clearTimeout(hoverTimer);
           this.setState({ hoverTimer: null });
@@ -147,12 +147,7 @@ class VerticalNavigationItem extends React.Component {
 
   onItemBlur(immediate) {
     const { primary, secondary, tertiary } = this.getContextNavItems();
-    const {
-      inMobileState,
-      hideDelay,
-      updateNavOnItemBlur,
-      onBlur
-    } = this.props;
+    const { mobileLayout, hideDelay, updateNavOnItemBlur, onBlur } = this.props;
     const { hoverTimer, hovering } = this.state;
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
@@ -229,7 +224,7 @@ class VerticalNavigationItem extends React.Component {
       showMobileSecondary,
       showMobileTertiary,
       navCollapsed,
-      inMobileState,
+      mobileLayout,
       onItemHover,
       onItemBlur,
       onItemClick,
@@ -352,7 +347,7 @@ VerticalNavigationItem.propTypes = {
   hovering: PropTypes.bool, // TODO comment about controlled state
   showMobileSecondary: PropTypes.bool, // TODO ???
   showMobileTertiary: PropTypes.bool, // TODO ???
-  inMobileState: PropTypes.bool,
+  mobileLayout: PropTypes.bool,
   onHover: PropTypes.func,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
