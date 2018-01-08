@@ -292,7 +292,8 @@ class VerticalNavigationItem extends React.Component {
           // I don't know, that's just how this stuff was in patternfly-ng...
         })}
         onMouseEnter={this.onItemHover}
-        onMouseLeave={this.onItemBlur}
+        // NOTE onItemBlur takes a boolean, we want to prevent it being passed a truthy event.
+        onMouseLeave={e => this.onItemBlur(false)}
       >
         <a onClick={this.onItemClick}>
           {depth === 'primary' &&
