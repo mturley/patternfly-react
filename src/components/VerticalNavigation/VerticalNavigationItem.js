@@ -112,9 +112,11 @@ class BaseVerticalNavigationItem extends React.Component {
       mobileLayout,
       hoverDelay,
       updateNavOnItemHover,
-      onHover
+      onHover,
+      setControlledState,
+      hovering
     } = this.props;
-    const { hoverTimer, hovering } = this.state;
+    const { hoverTimer } = this.state;
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
     if (item.subItems && item.subItems.length > 0) {
@@ -125,10 +127,8 @@ class BaseVerticalNavigationItem extends React.Component {
         } else if (!hovering) {
           this.setState({
             hoverTimer: setTimeout(() => {
-              that.setState({
-                hoverTimer: null,
-                hovering: true
-              });
+              that.setState({ hoverTimer: null });
+              setControlledState({ hovering: true });
               updateNavOnItemHover(primary, secondary, tertiary);
               onHover && onHover(primary, secondary, tertiary);
             }, hoverDelay)

@@ -64,7 +64,10 @@ export const controlled = (stateTypes, defaults = {}) => WrappedComponent => {
     }
   }
   ControlledComponent.displayName = WrappedComponent.displayName;
-  ControlledComponent.propTypes = WrappedComponent.propTypes;
+  ControlledComponent.propTypes = {
+    ...WrappedComponent.propTypes,
+    ...stateTypes
+  };
   ControlledComponent.defaultProps = WrappedComponent.defaultProps;
   return ControlledComponent;
 };
