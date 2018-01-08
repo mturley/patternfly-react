@@ -20,7 +20,7 @@ import {
 /**
  * VerticalNavigation.Item - a child element for the VerticalNavigation component
  */
-class VerticalNavigationItem extends React.Component {
+class BaseVerticalNavigationItem extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -340,7 +340,7 @@ class VerticalNavigationItem extends React.Component {
   }
 }
 
-VerticalNavigationItem.propTypes = {
+BaseVerticalNavigationItem.propTypes = {
   item: PropTypes.shape(itemObjectTypes),
   ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
   ...itemContextTypes,
@@ -355,7 +355,7 @@ VerticalNavigationItem.propTypes = {
   children: PropTypes.node
 };
 
-VerticalNavigationItem.defaultProps = {
+BaseVerticalNavigationItem.defaultProps = {
   title: '',
   active: null,
   mobileItem: false, // TODO WHAT? why does this break things when true.....
@@ -363,6 +363,10 @@ VerticalNavigationItem.defaultProps = {
   showMobileTertiary: false
 };
 
-VerticalNavigationItem.displayName = 'VerticalNavigationItem';
+BaseVerticalNavigationItem.displayName = 'VerticalNavigationItem';
 
-export default consumeItemContext(VerticalNavigationItem);
+const VerticalNavigationItem = consumeItemContext(BaseVerticalNavigationItem);
+
+VerticalNavigationItem.propTypes = BaseVerticalNavigationItem.propTypes;
+
+export default VerticalNavigationItem;
