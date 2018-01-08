@@ -140,8 +140,15 @@ class BaseVerticalNavigationItem extends React.Component {
 
   onItemBlur(immediate) {
     const { primary, secondary, tertiary } = this.getContextNavItems();
-    const { mobileLayout, hideDelay, updateNavOnItemBlur, onBlur } = this.props;
-    const { hoverTimer, hovering } = this.state;
+    const {
+      mobileLayout,
+      hideDelay,
+      updateNavOnItemBlur,
+      onBlur,
+      setControlledState,
+      hovering
+    } = this.props;
+    const { hoverTimer } = this.state;
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
     if (item.subItems && item.subItems.length > 0) {
@@ -151,10 +158,8 @@ class BaseVerticalNavigationItem extends React.Component {
       } else if (hovering) {
         this.setState({
           hoverTimer: setTimeout(() => {
-            that.setState({
-              hoverTimer: null,
-              hovering: false
-            });
+            that.setState({ hoverTimer: null });
+            setControlledState({ hovering: false });
             updateNavOnItemBlur(primary, secondary, tertiary);
             onBlur && onBlur(primary, secondary, tertiary);
           }, immediate ? 1 : hideDelay)
