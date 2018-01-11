@@ -92,10 +92,27 @@ class BaseVerticalNavigationItem extends React.Component {
   }
 
   pinNav(stateKey, updateNav) {
-    const { isMobile, forceHideSecondaryMenu } = this.props;
-    const { primary, secondary, tertiary } = this.getContextNavItems();
+    const {
+      isMobile,
+      depth,
+      clearMobileSelection,
+      setControlledState,
+      updateAncestorsOnMobileSelection,
+      forceHideSecondaryMenu
+    } = this.props;
+    const { primary } = this.getContextNavItems();
     const pinned = this.state[stateKey];
-    if (!isMobile) {
+    if (isMobile) {
+      // On mobile, the pin buttons act as back buttons instead.
+      if (depth === 'primary') {
+        // Going back to primary nav clears all selection.
+        clearMobileSelection();
+      } else if (depth === 'secondary') {
+        // Going back to secondary nav de-selects this item and re-selects the primary parent.
+        setControlledState({ selectedOnMobile: false });
+        updateAncestorsOnMobileSelection(primary);
+      }
+    } else {
       this.setState({ [stateKey]: !pinned });
       this.setAncestorsActive(!pinned);
       if (pinned) {
@@ -185,19 +202,18 @@ class BaseVerticalNavigationItem extends React.Component {
       onClick,
       setControlledState
     } = this.props;
+    updateNavOnItemClick(primary, secondary, tertiary); // Clears all mobile selections
     if (isMobile) {
-      this.onMobileSelection(primary, secondary, tertiary);
+      this.onMobileSelection(primary, secondary, tertiary); // Applies new mobile selection here
     }
-    updateNavOnItemClick(primary, secondary, tertiary);
     onClick && onClick(primary, secondary, tertiary);
     // TODO other item-level nav props? href? route?
   }
 
-  onMobileSelection() {
-    const { primary, secondary, tertiary } = this.getContextNavItems();
-    const { setControlledState, updateNavOnMobileSelection } = this.props;
+  onMobileSelection(primary, secondary, tertiary) {
+    const { setControlledState, updateAncestorsOnMobileSelection } = this.props;
     setControlledState({ selectedOnMobile: true });
-    updateNavOnMobileSelection(primary, secondary, tertiary);
+    updateAncestorsOnMobileSelection(primary, secondary, tertiary);
   }
 
   renderBadges(badges) {
@@ -355,7 +371,7 @@ class BaseVerticalNavigationItem extends React.Component {
                 {...this.props}
                 item={navItem}
                 setAncestorsActive={this.setAncestorsActive}
-                updateNavOnMobileSelection={this.onMobileSelection} // Override (helper calls parent's updateNavOnMobileSelection)
+                updateAncestorsOnMobileSelection={this.onMobileSelection} // Override (helper calls parent's updateAncestorsOnMobileSelection)
               >
                 <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
               </ItemContextProvider>
