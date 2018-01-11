@@ -24,7 +24,7 @@ stories.addDecorator(
 );
 
 stories.addWithInfo(
-  'Basic Vertical Navigation (Inline JSX)',
+  'Basic (Inline JSX)',
   `VerticalNavigation usage example with items passed as children, but with only titles.`,
   () => {
     return (
@@ -35,7 +35,7 @@ stories.addWithInfo(
           <VerticalNavigation>
             <VerticalNavigation.Masthead title="Patternfly React" />
             <VerticalNavigation.Item title="Item 1" />
-            <VerticalNavigation.Item title="Item 2">
+            <VerticalNavigation.Item title="Item 2" active>
               <VerticalNavigation.Item title="Item 2-A" />
               <VerticalNavigation.Item title="Item 2-B" />
               <VerticalNavigation.Item title="Item 2-C" />
@@ -58,7 +58,7 @@ stories.addWithInfo(
 );
 
 stories.addWithInfo(
-  'Complex Vertical Navigation (item objects via props)',
+  'Basic (Items Array)',
   `VerticalNavigation usage example with items passed as objects, driven by a mock file.`,
   () => {
     return (
@@ -75,5 +75,7 @@ stories.addWithInfo(
     );
   }
 );
+
+// TODO add a story with a mock store to keep track of active state.  (auto track active in uncontrolled mode???)
 
 // TODO add more stories! with and without custom masthead (how to handle default?) and others

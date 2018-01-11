@@ -233,7 +233,6 @@ class BaseVerticalNavigationItem extends React.Component {
 
   setAncestorsActive(active) {
     const { setAncestorsActive, setControlledState } = this.props;
-    console.log('SET ANCESTORS ACTIVE', active);
     setControlledState({ active: active });
     setAncestorsActive && setAncestorsActive(active);
   }
@@ -250,7 +249,6 @@ class BaseVerticalNavigationItem extends React.Component {
       onItemBlur,
       onItemClick,
       children,
-      active,
       hovering
     } = this.props;
     const { secondaryPinned, tertiaryPinned } = this.state;
@@ -264,7 +262,7 @@ class BaseVerticalNavigationItem extends React.Component {
 
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = this.getNavItem();
-    const { title, iconStyleClass, badges, subItems } = navItem;
+    const { active, title, iconStyleClass, badges, subItems } = navItem;
 
     const childItemComponents =
       (children &&
@@ -304,7 +302,7 @@ class BaseVerticalNavigationItem extends React.Component {
             depth !== 'tertiary' &&
             childItemComponents &&
             childItemComponents.length > 0,
-          active: active, // This is the only class we have at the tertiary depth.
+          active, // This is the only class we have at the tertiary depth.
           'is-hover': nextDepthPinned || (depth !== 'tertiary' && hovering),
           // This class is present at primary and secondary depths if selectedOnMobile is true,
           // except for the primary depth, where it is only present if showMobileSecondary is also true.
@@ -379,8 +377,6 @@ BaseVerticalNavigationItem.propTypes = {
   item: PropTypes.shape(itemObjectTypes),
   ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
   ...itemContextTypes,
-  active: PropTypes.bool, // TODO comment about controlled state
-  hovering: PropTypes.bool, // TODO comment about controlled state
   isMobile: PropTypes.bool,
   selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary']),
   onHover: PropTypes.func,
@@ -391,9 +387,9 @@ BaseVerticalNavigationItem.propTypes = {
 };
 
 const defaultControlledState = {
-  active: false,
-  hovering: false,
-  selectedOnMobile: false
+  active: null,
+  hovering: null,
+  selectedOnMobile: null
 };
 
 BaseVerticalNavigationItem.defaultProps = {

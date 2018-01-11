@@ -465,12 +465,12 @@ BaseVerticalNavigation.propTypes = {
 
 const defaultControlledState = {
   isMobile: layout.is('mobile'),
-  showMobileNav: false,
-  navCollapsed: false,
-  hoverSecondaryNav: false,
-  hoverTertiaryNav: false,
-  pinnedSecondaryNav: false,
-  pinnedTertiaryNav: false,
+  showMobileNav: null,
+  navCollapsed: null,
+  hoverSecondaryNav: null,
+  hoverTertiaryNav: null,
+  pinnedSecondaryNav: null,
+  pinnedTertiaryNav: null,
   selectedMobileDepth: null
 };
 

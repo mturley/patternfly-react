@@ -12,7 +12,8 @@ const itemObjectTypes = {
     count: PropTypes.number,
     iconStyleClass: PropTypes.string
   }),
-  subItems: PropTypes.array
+  subItems: PropTypes.array,
+  active: PropTypes.bool
 };
 
 // * undefined if coming from top-level VerticalNavigation container parent
@@ -47,9 +48,7 @@ const getNextDepth = depth =>
 const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
 
 const getItemProps = props => ({
-  title: props.title,
-  iconStyleClass: props.iconStyleClass,
-  badges: props.badges,
+  ...selectKeys(props, Object.keys(itemObjectTypes)),
   subItems:
     props.children &&
     React.Children.count(props.children) > 0 &&

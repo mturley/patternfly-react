@@ -1,6 +1,7 @@
 export const mockNavItems = [
   {
     title: 'Dashboard',
+    active: true,
     iconStyleClass: 'fa fa-dashboard',
     // TODO badges?
     subItems: [

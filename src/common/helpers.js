@@ -28,7 +28,7 @@ export const nullValues = obj => selectKeys(obj, Object.keys(obj), () => null);
    * stateTypes - an object of PropTypes for the state that will be contained here
    * defaults - an optional object with default values for stateTypes
   
-  The WrappedComponent will be rendered with special props:y
+  The WrappedComponent will be rendered with special props:
    * setControlledState - a reference to this state wrapper's this.setState.
    * Props for all the stateTypes, from this.props if present or from this.state otherwise.
    * All other props passed to the controlled component HoC.
