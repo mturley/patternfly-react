@@ -35,6 +35,7 @@ class BaseVerticalNavigationItem extends React.Component {
       'onItemHover',
       'onItemBlur',
       'onItemClick',
+      'onMobileSelection',
       'setAncestorsActive'
     ]);
   }
@@ -49,12 +50,20 @@ class BaseVerticalNavigationItem extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
+    const { setControlledState } = this.props;
     // If any other secondary/tertiary nav is un-pinned, un-pin them all.
     if (this.props.pinnedSecondaryNav && !newProps.pinnedSecondaryNav) {
       this.setState({ secondaryPinned: false });
     }
     if (this.props.pinnedTertiaryNav && !newProps.pinnedTertiaryNav) {
       this.setState({ tertiaryPinned: false });
+    }
+    // If there is no more selectedMobileDepth, reset all mobile selection state.
+    if (
+      this.props.selectedMobileDepth !== null &&
+      newProps.selectedMobileDepth === null
+    ) {
+      setControlledState({ selectedOnMobile: false });
     }
   }
 
@@ -83,10 +92,10 @@ class BaseVerticalNavigationItem extends React.Component {
   }
 
   pinNav(stateKey, updateNav) {
-    const { mobileLayout, forceHideSecondaryMenu } = this.props;
+    const { isMobile, forceHideSecondaryMenu } = this.props;
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const pinned = this.state[stateKey];
-    if (!mobileLayout) {
+    if (!isMobile) {
       this.setState({ [stateKey]: !pinned });
       this.setAncestorsActive(!pinned);
       if (pinned) {
@@ -109,7 +118,7 @@ class BaseVerticalNavigationItem extends React.Component {
   onItemHover() {
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const {
-      mobileLayout,
+      isMobile,
       hoverDelay,
       updateNavOnItemHover,
       onHover,
@@ -120,7 +129,7 @@ class BaseVerticalNavigationItem extends React.Component {
     const that = this;
     const item = deepestOf(primary, secondary, tertiary);
     if (item.subItems && item.subItems.length > 0) {
-      if (!mobileLayout) {
+      if (!isMobile) {
         if (hoverTimer) {
           clearTimeout(hoverTimer);
           this.setState({ hoverTimer: null });
@@ -141,7 +150,7 @@ class BaseVerticalNavigationItem extends React.Component {
   onItemBlur(immediate) {
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const {
-      mobileLayout,
+      isMobile,
       hideDelay,
       updateNavOnItemBlur,
       onBlur,
@@ -170,10 +179,25 @@ class BaseVerticalNavigationItem extends React.Component {
 
   onItemClick() {
     const { primary, secondary, tertiary } = this.getContextNavItems();
-    const { updateNavOnItemClick, onClick } = this.props;
+    const {
+      isMobile,
+      updateNavOnItemClick,
+      onClick,
+      setControlledState
+    } = this.props;
+    if (isMobile) {
+      this.onMobileSelection(primary, secondary, tertiary);
+    }
     updateNavOnItemClick(primary, secondary, tertiary);
     onClick && onClick(primary, secondary, tertiary);
     // TODO other item-level nav props? href? route?
+  }
+
+  onMobileSelection() {
+    const { primary, secondary, tertiary } = this.getContextNavItems();
+    const { setControlledState, updateNavOnMobileSelection } = this.props;
+    setControlledState({ selectedOnMobile: true });
+    updateNavOnMobileSelection(primary, secondary, tertiary);
   }
 
   renderBadges(badges) {
@@ -209,20 +233,19 @@ class BaseVerticalNavigationItem extends React.Component {
 
   setAncestorsActive(active) {
     const { setAncestorsActive, setControlledState } = this.props;
-    const { title } = this.getNavItem();
+    console.log('SET ANCESTORS ACTIVE', active);
     setControlledState({ active: active });
     setAncestorsActive && setAncestorsActive(active);
   }
 
   render() {
     const {
-      item,
       pinnableMenus,
       hiddenIcons,
-      showMobileSecondary,
-      showMobileTertiary,
       navCollapsed,
-      mobileLayout,
+      isMobile,
+      selectedMobileDepth,
+      selectedOnMobile,
       onItemHover,
       onItemBlur,
       onItemClick,
@@ -232,9 +255,16 @@ class BaseVerticalNavigationItem extends React.Component {
     } = this.props;
     const { secondaryPinned, tertiaryPinned } = this.state;
 
+    // TODO FIXME this code is duplicated in both VertNav and VertNavItem
+    const showMobileSecondary =
+      isMobile &&
+      (selectedMobileDepth === 'primary' ||
+        selectedMobileDepth === 'secondary');
+    const showMobileTertiary = isMobile && selectedMobileDepth === 'secondary';
+
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = this.getNavItem();
-    const { title, mobileItem, iconStyleClass, badges, subItems } = navItem;
+    const { title, iconStyleClass, badges, subItems } = navItem;
 
     const childItemComponents =
       (children &&
@@ -252,9 +282,6 @@ class BaseVerticalNavigationItem extends React.Component {
 
     const depth = this.props.depth || 'primary';
     const nextDepth = getNextDepth(depth);
-
-    const pinnedSecondaryNav = this.props.pinnedSecondaryNav;
-    const pinnedTertiaryNav = this.props.pinnedTertiaryNav;
 
     // We only have primary, secondary, and tertiary depths, so nextDepth will only ever be secondary or tertiary.
     const nextDepthPinned =
@@ -279,15 +306,15 @@ class BaseVerticalNavigationItem extends React.Component {
             childItemComponents.length > 0,
           active: active, // This is the only class we have at the tertiary depth.
           'is-hover': nextDepthPinned || (depth !== 'tertiary' && hovering),
-          // This class is present at primary and secondary depths if mobileItem is true,
+          // This class is present at primary and secondary depths if selectedOnMobile is true,
           // except for the primary depth, where it is only present if showMobileSecondary is also true.
           'mobile-nav-item-pf':
-            mobileItem &&
+            selectedOnMobile &&
             ((depth === 'primary' && showMobileSecondary) ||
               depth === 'secondary'),
           // This class is confusingly named, but the logic is more readable.
           'mobile-secondary-item-pf':
-            mobileItem && depth === 'primary' && showMobileTertiary
+            selectedOnMobile && depth === 'primary' && showMobileTertiary
           // I don't know, that's just how this stuff was in patternfly-ng...
         })}
         onMouseEnter={this.onItemHover}
@@ -328,7 +355,9 @@ class BaseVerticalNavigationItem extends React.Component {
               </div>
               <ItemContextProvider
                 {...this.props}
+                item={navItem}
                 setAncestorsActive={this.setAncestorsActive}
+                updateNavOnMobileSelection={this.onMobileSelection} // Override (helper calls parent's updateNavOnMobileSelection)
               >
                 <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
               </ItemContextProvider>
@@ -341,7 +370,8 @@ class BaseVerticalNavigationItem extends React.Component {
 
 const controlledStateTypes = {
   active: PropTypes.bool,
-  hovering: PropTypes.bool
+  hovering: PropTypes.bool,
+  selectedOnMobile: PropTypes.bool
 };
 
 BaseVerticalNavigationItem.propTypes = {
@@ -351,9 +381,8 @@ BaseVerticalNavigationItem.propTypes = {
   ...itemContextTypes,
   active: PropTypes.bool, // TODO comment about controlled state
   hovering: PropTypes.bool, // TODO comment about controlled state
-  showMobileSecondary: PropTypes.bool, // TODO ???
-  showMobileTertiary: PropTypes.bool, // TODO ???
-  mobileLayout: PropTypes.bool,
+  isMobile: PropTypes.bool,
+  selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary']),
   onHover: PropTypes.func,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
@@ -363,14 +392,13 @@ BaseVerticalNavigationItem.propTypes = {
 
 const defaultControlledState = {
   active: false,
-  hovering: false
+  hovering: false,
+  selectedOnMobile: false
 };
 
 BaseVerticalNavigationItem.defaultProps = {
   title: '',
-  mobileItem: false, // TODO WHAT? why does this break things when true.....
-  showMobileSecondary: false,
-  showMobileTertiary: false
+  selectedMobileDepth: null
 };
 
 const VerticalNavigationItem = controlled(

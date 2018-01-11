@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withContext, getContext, compose } from 'recompose';
+import { selectKeys } from '../../common/helpers';
 
 const itemObjectTypes = {
   title: PropTypes.string,
-  mobileItem: PropTypes.bool,
   iconStyleClass: PropTypes.string,
   badges: PropTypes.shape({
     badgeClass: PropTypes.string,
@@ -15,40 +15,39 @@ const itemObjectTypes = {
   subItems: PropTypes.array
 };
 
+// * undefined if coming from top-level VerticalNavigation container parent
 const itemContextTypes = {
+  depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']), // *
+  primaryItem: PropTypes.shape(itemObjectTypes), // *
+  secondaryItem: PropTypes.shape(itemObjectTypes), // *
   hiddenIcons: PropTypes.bool,
   pinnableMenus: PropTypes.bool,
-  depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  primaryItem: PropTypes.shape(itemObjectTypes),
-  secondaryItem: PropTypes.shape(itemObjectTypes),
-  updateNavOnItemHover: PropTypes.func,
-  updateNavOnItemBlur: PropTypes.func,
-  updateNavOnItemClick: PropTypes.func,
-  mobileLayout: PropTypes.bool,
+  isMobile: PropTypes.bool,
+  selectedMobileDepth: PropTypes.bool,
   navCollapsed: PropTypes.bool,
   pinnedSecondaryNav: PropTypes.bool,
   pinnedTertiaryNav: PropTypes.bool,
+  updateNavOnItemHover: PropTypes.func,
+  updateNavOnItemBlur: PropTypes.func,
+  updateNavOnItemClick: PropTypes.func,
   updateNavOnPinSecondary: PropTypes.func,
   updateNavOnPinTertiary: PropTypes.func,
+  updateNavOnMobileSelection: PropTypes.func,
   forceHideSecondaryMenu: PropTypes.func,
   setAncestorsActive: PropTypes.func,
   hoverDelay: PropTypes.number,
   hideDelay: PropTypes.number
 };
 
-const getNextDepth = depth => {
-  return (
-    (depth === 'primary' && 'secondary') ||
-    (depth === 'secondary' && 'tertiary') ||
-    'primary'
-  );
-};
+const getNextDepth = depth =>
+  (depth === 'primary' && 'secondary') ||
+  (depth === 'secondary' && 'tertiary') ||
+  'primary';
 
 const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
 
 const getItemProps = props => ({
   title: props.title,
-  mobileItem: props.mobileItem,
   iconStyleClass: props.iconStyleClass,
   badges: props.badges,
   subItems:
@@ -57,50 +56,19 @@ const getItemProps = props => ({
     React.Children.map(props.children, child => getItemProps(child.props))
 });
 
-const getChildItemContext = parentProps => {
-  const {
-    // * undefined if coming from top-level VerticalNavigation container parent
-    depth, // *
-    item, // *
-    primaryItem, // *
-    secondaryItem, // *
-    hiddenIcons,
-    pinnableMenus,
-    updateNavOnItemHover,
-    updateNavOnItemBlur,
-    updateNavOnItemClick,
-    mobileLayout,
-    navCollapsed,
-    pinnedSecondaryNav,
-    pinnedTertiaryNav,
-    updateNavOnPinSecondary,
-    updateNavOnPinTertiary,
-    forceHideSecondaryMenu,
-    setAncestorsActive,
-    hoverDelay,
-    hideDelay
-  } = parentProps;
-  const nextDepth = getNextDepth(depth); // returns primary if depth was undefined
+const getChildItemContext = providerProps => {
+  // The item prop doesn't get included in context, but must be passed to the provider
+  // In order to properly include primaryItem and secondaryItem in context.
+  const { item, primaryItem, secondaryItem } = providerProps;
+  const nextDepth = getNextDepth(providerProps.depth);
   return {
+    // Only the keys that should be in context are included,
+    // so it is safe to spread extra props into the provider component.
+    ...selectKeys(providerProps, Object.keys(itemContextTypes)),
     depth: nextDepth,
     primaryItem: nextDepth === 'secondary' ? item : primaryItem,
-    secondaryItem: nextDepth === 'tertiary' ? item : secondaryItem,
-    // tertiaryItem doesn't need to be in context (see VerticalNavigationItem.getContextNavItems)
-    hiddenIcons,
-    pinnableMenus,
-    updateNavOnItemHover,
-    updateNavOnItemBlur,
-    updateNavOnItemClick,
-    mobileLayout,
-    navCollapsed,
-    pinnedSecondaryNav,
-    pinnedTertiaryNav,
-    updateNavOnPinSecondary,
-    updateNavOnPinTertiary,
-    forceHideSecondaryMenu,
-    setAncestorsActive,
-    hoverDelay,
-    hideDelay
+    secondaryItem: nextDepth === 'tertiary' ? item : secondaryItem
+    // We don't need a tertiaryItem in context (see VerticalNavigationItem.getContextNavItems)
   };
 };
 

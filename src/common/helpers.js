@@ -6,12 +6,16 @@ export const bindMethods = (context, methods) => {
   });
 };
 
-const filterKeys = (obj, callback) =>
-  Object.keys(obj)
-    .filter(callback)
-    .reduce((values, key) => ({ ...values, [key]: obj[key] }), {});
-const nullValues = obj =>
-  Object.keys(obj).reduce((values, key) => ({ ...values, [key]: null }), {});
+// Returns a subset of the given object including only the given keys, with values optionally replaced by a fn.
+export const selectKeys = (obj, keys, fn = val => val) =>
+  keys.reduce((values, key) => ({ ...values, [key]: fn(obj[key]) }), {});
+
+// Returns a subset of the given object with a validator function applied to its keys.
+export const filterKeys = (obj, validator) =>
+  selectKeys(obj, Object.keys(obj).filter(validator));
+
+// Returns an object with the same keys as the given one, but all null values.
+export const nullValues = obj => selectKeys(obj, Object.keys(obj), () => null);
 
 /*
   controlled(stateTypes, defaults)(WrappedComponent)
@@ -24,7 +28,7 @@ const nullValues = obj =>
    * stateTypes - an object of PropTypes for the state that will be contained here
    * defaults - an optional object with default values for stateTypes
   
-  The WrappedComponent will be rendered with special props:
+  The WrappedComponent will be rendered with special props:y
    * setControlledState - a reference to this state wrapper's this.setState.
    * Props for all the stateTypes, from this.props if present or from this.state otherwise.
    * All other props passed to the controlled component HoC.
@@ -69,7 +73,7 @@ export const controlled = (stateTypes, defaults = {}) => WrappedComponent => {
     ...stateTypes
   };
   ControlledComponent.defaultProps = WrappedComponent.defaultProps;
-  return ControlledComponent;
+  return ControlledComponent; // TODO use recompose withState or withStateHandlers here instead of component state above
 };
 
 export const noop = Function.prototype;

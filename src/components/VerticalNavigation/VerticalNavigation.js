@@ -48,42 +48,39 @@ class BaseVerticalNavigation extends React.Component {
       'updateMobileMenu',
       'updateNavOnPinSecondary',
       'updateNavOnPinTertiary',
+      'updateNavOnMobileSelection',
       'forceHideSecondaryMenu',
       'navigateToItem'
     ]);
   }
 
   componentDidMount() {
-    // If the mobileLayout prop is being used, we don't bother listening for layout changes here.
-    const { mobileLayout } = this.props;
-    if (mobileLayout !== true && mobileLayout !== false) {
-      layout.addChangeListener(this.onLayoutChange);
-    }
+    layout.addChangeListener(this.onLayoutChange);
   }
 
   componentWillUnmount() {
     layout.removeChangeListener(this.onLayoutChange);
   }
 
-  onLayoutChange(layout) {
+  onLayoutChange(newLayout) {
     const { onLayoutChange, setControlledState } = this.props;
-    setControlledState({ mobileLayout: layout === 'mobile' });
-    onLayoutChange && onLayoutChange(layout);
+    setControlledState({ isMobile: newLayout === 'mobile' });
+    onLayoutChange && onLayoutChange(newLayout);
   }
 
   onMenuToggleClick() {
     const {
       onMenuToggleClick,
-      mobileLayout,
+      isMobile,
       showMobileNav,
       navCollapsed,
       setControlledState
     } = this.props;
-    if (mobileLayout) {
+    if (isMobile) {
       if (showMobileNav) {
         setControlledState({ showMobileNav: false });
       } else {
-        this.updateMobileMenu();
+        this.updateMobileMenu(); // TODO FIXME reset mobile selections
         setControlledState({ showMobileNav: true });
       }
     } else if (navCollapsed) {
@@ -176,29 +173,56 @@ class BaseVerticalNavigation extends React.Component {
   }
 
   updateNavOnItemClick(primary, secondary, tertiary) {
-    const { onItemClick, mobileLayout } = this.props;
+    const { onItemClick, isMobile } = this.props;
     const item = deepestOf(primary, secondary, tertiary);
-    if (mobileLayout) {
+    if (isMobile) {
       if (item.subItems && item.subItems.length > 0) {
-        this.updateMobileMenu(primary, secondary, tertiary); // TODO figure out what this did in ng
+        this.updateMobileMenu(primary, secondary, tertiary); // TODO FIXME set a mobile active flag on the deepest item-- share stuff with pinning?
       } else {
-        this.updateMobileMenu(); // TODO figure out what this did in ng (expanded states?)
+        this.updateMobileMenu(); // TODO FIXME reset mobile selections
       }
     }
-    if (!mobileLayout || !item.subItems || item.subItems.length === 0) {
+    if (!isMobile || !item.subItems || item.subItems.length === 0) {
       this.navigateToItem(item);
     }
     onItemClick && onItemClick(primary, secondary, tertiary);
   }
 
+  updateNavOnMobileSelection(primary, secondary, tertiary) {
+    const { onMobileSelection, setControlledState } = this.props;
+    const item = deepestOf(primary, secondary, tertiary);
+    const itemDepth =
+      (!item && null) ||
+      (item === primary && 'primary') ||
+      (item === secondary && 'secondary') ||
+      (item === tertiary && 'tertiary');
+    setControlledState({ selectedMobileDepth: itemDepth });
+    onMobileSelection && onMobileSelection(primary, secondary, tertiary);
+  }
+
   updateMobileMenu() {
     console.log('TODO update menu', arguments); // TODO
+
+    // NG: loop over items, and set selectedOnMobile to false on primary and secondary items.
+    // NG: then if there is a selected item, mark it as selectedOnMobile true and its parent too if it's secondary.
+    // NG: showMobileSecondary to true and false, etc....
+
+    // Okay, looks like we should instead get rid of showMobileSecondary and showMobileTertiary, and instead
+    // use the current depth and the mobile state to render right on mobile state update.
+    // selectedOnMobile should possibly also get removed.
+    // TODO
+
+    // TODO
+
+    // TODO
+
+    /// THIS MIGHT NOT NEED TO EXIST
   }
 
   updateNavOnPinSecondary(pinned) {
-    const { onPinSecondary, mobileLayout, setControlledState } = this.props;
-    if (mobileLayout) {
-      this.updateMobileMenu();
+    const { onPinSecondary, isMobile, setControlledState } = this.props;
+    if (isMobile) {
+      this.updateMobileMenu(); // TODO FIXME reset mobile selections
     } else {
       setControlledState({ pinnedSecondaryNav: pinned });
       onPinSecondary && onPinSecondary(pinned);
@@ -207,8 +231,8 @@ class BaseVerticalNavigation extends React.Component {
   }
 
   updateNavOnPinTertiary(pinned) {
-    const { onPinTertiary, mobileLayout, setControlledState } = this.props;
-    if (mobileLayout) {
+    const { onPinTertiary, isMobile, setControlledState } = this.props;
+    if (isMobile) {
       // TODO WEIRD USAGE OF UPDATEMOBILEMENU???
       /* from ng:
       this.items.forEach((primaryItem) => {
@@ -299,8 +323,7 @@ class BaseVerticalNavigation extends React.Component {
       persistentSecondary,
       pinnableMenus,
       showBadges,
-      showMobileSecondary,
-      showMobileTertiary,
+      selectedMobileDepth,
       forceHidden,
       hideTopBanner,
       hoverDelay,
@@ -308,7 +331,7 @@ class BaseVerticalNavigation extends React.Component {
       activeSecondary, // ???
       topBannerContents,
       notificationDrawer /* TODO notification drawer components? */,
-      mobileLayout,
+      isMobile,
       showMobileNav,
       navCollapsed,
       pinnedSecondaryNav,
@@ -316,6 +339,13 @@ class BaseVerticalNavigation extends React.Component {
       hoverSecondaryNav,
       hoverTertiaryNav
     } = this.props;
+
+    // TODO FIXME this code is duplicated in both VertNav and VertNavItem
+    const showMobileSecondary =
+      isMobile &&
+      (selectedMobileDepth === 'primary' ||
+        selectedMobileDepth === 'secondary');
+    const showMobileTertiary = isMobile && selectedMobileDepth === 'secondary';
 
     const header = (
       <div className="navbar-header">
@@ -349,9 +379,11 @@ class BaseVerticalNavigation extends React.Component {
           updateNavOnItemHover={this.updateNavOnItemHover}
           updateNavOnItemBlur={this.updateNavOnItemBlur}
           updateNavOnItemClick={this.updateNavOnItemClick}
+          updateNavOnMobileSelection={this.updateNavOnMobileSelection}
           hiddenIcons={hiddenIcons}
           pinnableMenus={pinnableMenus}
-          mobileLayout={mobileLayout}
+          isMobile={isMobile}
+          selectedMobileDepth={selectedMobileDepth}
           navCollapsed={navCollapsed}
           pinnedSecondaryNav={pinnedSecondaryNav}
           pinnedTertiaryNav={pinnedTertiaryNav}
@@ -374,7 +406,7 @@ class BaseVerticalNavigation extends React.Component {
               'hover-tertiary-nav-pf': hoverTertiaryNav,
               'collapsed-secondary-nav-pf': pinnedSecondaryNav,
               'collapsed-tertiary-nav-pf': pinnedTertiaryNav,
-              hidden: mobileLayout,
+              hidden: isMobile,
               collapsed: navCollapsed,
               'force-hide-secondary-nav-pf': forceHidden,
               'show-mobile-nav': showMobileNav
@@ -393,13 +425,14 @@ class BaseVerticalNavigation extends React.Component {
 // NOTE: If you use any of these props, be sure to also use the corresponding callbacks/handlers.
 // These props override values of the same name set by setControlledState().
 const controlledStateTypes = {
-  mobileLayout: PropTypes.bool, // (can optionally use onLayoutChange to maintain app state)
+  isMobile: PropTypes.bool, // (can optionally use onLayoutChange to maintain app state)
   showMobileNav: PropTypes.bool, // (must also use onCollapse and onExpand to maintain app state)
   navCollapsed: PropTypes.bool, // (must also use onCollapse and onExpand to maintain app state)
   hoverSecondaryNav: PropTypes.bool, // (must also use onItemHover and onItemBlur to maintain app state)
   hoverTertiaryNav: PropTypes.bool, // (must also use onItemHover and onItemBlur to maintain app state)
   pinnedSecondaryNav: PropTypes.bool, // (must also use onPinSecondary to maintain app state)
-  pinnedTertiaryNav: PropTypes.bool // (must also use onPinTertiary to maintain app state)
+  pinnedTertiaryNav: PropTypes.bool, // (must also use onPinTertiary to maintain app state)
+  selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary'])
 };
 
 BaseVerticalNavigation.propTypes = {
@@ -410,8 +443,6 @@ BaseVerticalNavigation.propTypes = {
   pinnableMenus: PropTypes.bool,
   hiddenIcons: PropTypes.bool,
   showBadges: PropTypes.bool,
-  showMobileSecondary: PropTypes.bool,
-  showMobileTertiary: PropTypes.bool,
   forceHidden: PropTypes.bool,
   hideTopBanner: PropTypes.bool,
   topBannerContents: PropTypes.node,
@@ -433,13 +464,14 @@ BaseVerticalNavigation.propTypes = {
 };
 
 const defaultControlledState = {
-  mobileLayout: layout.is('mobile'),
+  isMobile: layout.is('mobile'),
   showMobileNav: false,
   navCollapsed: false,
   hoverSecondaryNav: false,
   hoverTertiaryNav: false,
   pinnedSecondaryNav: false,
-  pinnedTertiaryNav: false
+  pinnedTertiaryNav: false,
+  selectedMobileDepth: null
 };
 
 BaseVerticalNavigation.defaultProps = {
@@ -449,14 +481,10 @@ BaseVerticalNavigation.defaultProps = {
   pinnableMenus: true,
   hiddenIcons: false,
   showBadges: true,
-  showMobileNav: true,
-  showMobileSecondary: false,
-  showMobileTertiary: false,
   forceHidden: false,
   hideTopBanner: false,
   topBannerContents: null,
-  navCollapsed: null,
-  mobileLayout: null,
+  isMobile: null,
   activeSecondary: false,
   hoverDelay: 500,
   hideDelay: 700,
