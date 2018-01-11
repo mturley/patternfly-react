@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import cx from 'classnames';
 import { ListGroup, ListGroupItem } from '../ListGroup';
 import { OverlayTrigger } from '../OverlayTrigger';
 import { Tooltip } from '../Tooltip';
-import VerticalNavigation from './VerticalNavigation';
 import { bindMethods, controlled } from '../../common/helpers';
 import {
   ItemContextProvider,
@@ -21,8 +19,8 @@ import {
  * VerticalNavigation.Item - a child element for the VerticalNavigation component
  */
 class BaseVerticalNavigationItem extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       hoverTimer: null,
       secondaryPinned: false,
@@ -76,13 +74,7 @@ class BaseVerticalNavigationItem extends React.Component {
   getContextNavItems() {
     // We have primary, secondary, and tertiary items as props if they are part of the parent context,
     // but we also want to include the current item when calling handlers.
-    const {
-      item,
-      depth,
-      primaryItem,
-      secondaryItem,
-      tertiaryItem
-    } = this.props;
+    const { depth, primaryItem, secondaryItem, tertiaryItem } = this.props;
     const navItem = this.getNavItem();
     return {
       primary: depth === 'primary' ? navItem : primaryItem,
@@ -167,7 +159,6 @@ class BaseVerticalNavigationItem extends React.Component {
   onItemBlur(immediate) {
     const { primary, secondary, tertiary } = this.getContextNavItems();
     const {
-      isMobile,
       hideDelay,
       updateNavOnItemBlur,
       onBlur,
@@ -196,12 +187,7 @@ class BaseVerticalNavigationItem extends React.Component {
 
   onItemClick() {
     const { primary, secondary, tertiary } = this.getContextNavItems();
-    const {
-      isMobile,
-      updateNavOnItemClick,
-      onClick,
-      setControlledState
-    } = this.props;
+    const { isMobile, updateNavOnItemClick, onClick } = this.props;
     updateNavOnItemClick(primary, secondary, tertiary); // Clears all mobile selections
     if (isMobile) {
       this.onMobileSelection(primary, secondary, tertiary); // Applies new mobile selection here
@@ -261,9 +247,6 @@ class BaseVerticalNavigationItem extends React.Component {
       isMobile,
       selectedMobileDepth,
       selectedOnMobile,
-      onItemHover,
-      onItemBlur,
-      onItemClick,
       children,
       hovering
     } = this.props;
@@ -390,9 +373,9 @@ const controlledStateTypes = {
 
 BaseVerticalNavigationItem.propTypes = {
   ...controlledStateTypes,
-  item: PropTypes.shape(itemObjectTypes),
   ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
   ...itemContextTypes,
+  item: PropTypes.shape(itemObjectTypes),
   isMobile: PropTypes.bool,
   selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary']),
   onHover: PropTypes.func,
@@ -419,7 +402,5 @@ const VerticalNavigationItem = controlled(
 )(consumeItemContext(BaseVerticalNavigationItem));
 
 VerticalNavigationItem.displayName = 'VerticalNavigationItem';
-VerticalNavigationItem.propTypes = BaseVerticalNavigationItem.propTypes;
-VerticalNavigationItem.defaultProps = BaseVerticalNavigationItem.defaultProps;
 
 export default VerticalNavigationItem;

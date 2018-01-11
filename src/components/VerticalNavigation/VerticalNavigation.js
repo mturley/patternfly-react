@@ -10,11 +10,13 @@ import {
   ItemContextProvider,
   deepestOf,
   itemObjectTypes,
-  itemContextTypes,
-  provideItemContext,
   getBodyContentElement
 } from './constants';
 
+// TODO -- items need unique identifiers: id={userSuppliedID || title || index}
+// TODO -- support built in active state tracking with an activePath
+// TODO -- apply the same thing as a selectedMobilePath
+// TODO -- lift any other weird state up to the container
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
 // TODO -- what else is implemented in the ng version that I'm missing?
 // TODO react-router support?
@@ -28,7 +30,7 @@ import {
  */
 class BaseVerticalNavigation extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       explicitCollapse: false, // TODO do we need this?
       numHoveredPrimary: 0,
@@ -284,7 +286,6 @@ class BaseVerticalNavigation extends React.Component {
     // TODO maybe use displayName here instead of type
 
     const {
-      hidden,
       hiddenIcons,
       persistentSecondary,
       pinnableMenus,
@@ -405,7 +406,6 @@ const controlledStateTypes = {
 BaseVerticalNavigation.propTypes = {
   ...controlledStateTypes,
   items: PropTypes.arrayOf(PropTypes.shape(itemObjectTypes)),
-  hidden: PropTypes.bool,
   persistentSecondary: PropTypes.bool,
   pinnableMenus: PropTypes.bool,
   hiddenIcons: PropTypes.bool,
@@ -426,6 +426,7 @@ BaseVerticalNavigation.propTypes = {
   onItemBlur: PropTypes.func, // *
   onPinSecondary: PropTypes.func, // *
   onPinTertiary: PropTypes.func, // *
+  onMobileSelection: PropTypes.func, // *
   children: PropTypes.node,
   setControlledState: PropTypes.func
 };
@@ -462,7 +463,8 @@ BaseVerticalNavigation.defaultProps = {
   onPinTertiary: null,
   onItemClick: null,
   onItemHover: null,
-  onItemBlur: null
+  onItemBlur: null,
+  onMobileSelection: null
 };
 
 const VerticalNavigation = controlled(
