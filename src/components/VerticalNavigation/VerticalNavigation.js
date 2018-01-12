@@ -50,6 +50,7 @@ class BaseVerticalNavigation extends React.Component {
       'updateNavOnPinSecondary',
       'updateNavOnPinTertiary',
       'updateNavOnMobileSelection',
+      'setActivePath',
       'clearMobileSelection',
       'forceHideSecondaryMenu',
       'navigateToItem'
@@ -219,6 +220,10 @@ class BaseVerticalNavigation extends React.Component {
     onMobileSelection && onMobileSelection(primary, secondary, tertiary);
   }
 
+  setActivePath(activePath) {
+    this.props.setControlledState({ activePath });
+  }
+
   clearMobileSelection() {
     // For readability
     this.updateNavOnMobileSelection(null);
@@ -296,7 +301,7 @@ class BaseVerticalNavigation extends React.Component {
       hideTopBanner,
       hoverDelay,
       hideDelay,
-      activeSecondary, // ???
+      activeSecondary, // TODO ???
       topBannerContents,
       notificationDrawer /* TODO notification drawer components? */,
       isMobile,
@@ -305,7 +310,8 @@ class BaseVerticalNavigation extends React.Component {
       pinnedSecondaryNav,
       pinnedTertiaryNav,
       hoverSecondaryNav,
-      hoverTertiaryNav
+      hoverTertiaryNav,
+      activePath
     } = this.props;
 
     // TODO FIXME this code is duplicated in both VertNav and VertNavItem
@@ -344,12 +350,14 @@ class BaseVerticalNavigation extends React.Component {
         )}
         {!hideTopBanner && notificationDrawer}
         <ItemContextProvider
-          idPath={''}
+          idPath={'/'}
           updateNavOnItemHover={this.updateNavOnItemHover}
           updateNavOnItemBlur={this.updateNavOnItemBlur}
           updateNavOnItemClick={this.updateNavOnItemClick}
           updateAncestorsOnMobileSelection={this.updateNavOnMobileSelection}
           clearMobileSelection={this.clearMobileSelection}
+          setActivePath={this.setActivePath}
+          activePath={activePath}
           hiddenIcons={hiddenIcons}
           pinnableMenus={pinnableMenus}
           isMobile={isMobile}
@@ -403,7 +411,7 @@ const controlledStateTypes = {
   pinnedSecondaryNav: PropTypes.bool, // (must also use onPinSecondary to maintain app state)
   pinnedTertiaryNav: PropTypes.bool, // (must also use onPinTertiary to maintain app state)
   selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary']),
-  activePath: PropTypes.arrayOf(PropTypes.string)
+  activePath: PropTypes.string
 };
 
 BaseVerticalNavigation.propTypes = {
@@ -442,7 +450,8 @@ const defaultControlledState = {
   hoverTertiaryNav: null,
   pinnedSecondaryNav: null,
   pinnedTertiaryNav: null,
-  selectedMobileDepth: null
+  selectedMobileDepth: null,
+  activePath: null
 };
 
 BaseVerticalNavigation.defaultProps = {

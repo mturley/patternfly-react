@@ -35,7 +35,7 @@ stories.addWithInfo(
           <VerticalNavigation>
             <VerticalNavigation.Masthead title="Patternfly React" />
             <VerticalNavigation.Item title="Item 1" />
-            <VerticalNavigation.Item title="Item 2" active>
+            <VerticalNavigation.Item title="Item 2" initialActive>
               <VerticalNavigation.Item title="Item 2-A" />
               <VerticalNavigation.Item title="Item 2-B" />
               <VerticalNavigation.Item title="Item 2-C" />

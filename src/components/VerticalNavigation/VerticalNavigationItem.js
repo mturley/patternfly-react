@@ -30,6 +30,7 @@ class BaseVerticalNavigationItem extends React.Component {
       'navItem',
       'id',
       'idPath',
+      'setActive',
       'getContextNavItems',
       'pinNav',
       'pinSecondaryNav',
@@ -37,9 +38,14 @@ class BaseVerticalNavigationItem extends React.Component {
       'onItemHover',
       'onItemBlur',
       'onItemClick',
-      'onMobileSelection',
-      'setAncestorsActive'
+      'onMobileSelection'
     ]);
+  }
+
+  componentDidMount() {
+    if (this.navItem().initialActive) {
+      this.setActive();
+    }
   }
 
   componentWillUnmount() {
@@ -53,6 +59,12 @@ class BaseVerticalNavigationItem extends React.Component {
 
   componentWillReceiveProps(newProps) {
     const { setControlledState } = this.props;
+    const oldItem = this.navItem();
+    const newItem = this.navItem(newProps);
+    if (!oldItem.active && newItem.active) {
+      // If the active prop is being added, make sure the activePath is in sync.
+      if (newProps.activePath !== this.idPath()) this.setActive();
+    }
     // If any other secondary/tertiary nav is un-pinned, un-pin them all.
     if (this.props.pinnedSecondaryNav && !newProps.pinnedSecondaryNav) {
       this.setState({ secondaryPinned: false });
@@ -69,19 +81,33 @@ class BaseVerticalNavigationItem extends React.Component {
     }
   }
 
-  navItem() {
-    const { item } = this.props;
+  navItem(oldProps, ignorePath) {
+    const props = oldProps || this.props;
     // Properties of the item object take priority over individual item props
-    return { ...getItemProps(this.props), ...item };
+    const item = { ...getItemProps(props), ...props.item };
+    return {
+      ...item,
+      // Automatically set the active property if this item is along the activePath...
+      // But don't call idPath() (and therefore id()) when we're calling navItem() inside id()...
+      active:
+        item.active ||
+        (ignorePath
+          ? null
+          : props.activePath && props.activePath.startsWith(this.idPath()))
+    };
   }
 
   id() {
-    const { id, title } = this.navItem();
+    const { id, title } = this.navItem(null, true); // Need to ignorePath here so we don't get an infinite call stack...
     return id || title || this.props.index;
   }
 
   idPath() {
-    return `${this.props.idPath}/${this.id()}`;
+    return `${this.props.idPath}${this.id()}/`;
+  }
+
+  setActive() {
+    this.props.setActivePath(this.idPath());
   }
 
   getContextNavItems() {
@@ -103,7 +129,8 @@ class BaseVerticalNavigationItem extends React.Component {
       clearMobileSelection,
       setControlledState,
       updateAncestorsOnMobileSelection,
-      forceHideSecondaryMenu
+      forceHideSecondaryMenu,
+      setActivePath
     } = this.props;
     const { primary } = this.getContextNavItems();
     const pinned = this.state[stateKey];
@@ -119,7 +146,7 @@ class BaseVerticalNavigationItem extends React.Component {
       }
     } else {
       this.setState({ [stateKey]: !pinned });
-      this.setAncestorsActive(!pinned);
+      setActivePath(pinned ? this.idPath() : null);
       if (pinned) {
         forceHideSecondaryMenu();
         this.onItemBlur(true);
@@ -205,6 +232,7 @@ class BaseVerticalNavigationItem extends React.Component {
     if (isMobile) {
       this.onMobileSelection(primary, secondary, tertiary); // Applies new mobile selection here
     }
+    this.setActive();
     onClick && onClick(primary, secondary, tertiary);
     // TODO other item-level nav props? href? route?
   }
@@ -244,12 +272,6 @@ class BaseVerticalNavigationItem extends React.Component {
         )) ||
       null
     );
-  }
-
-  setAncestorsActive(active) {
-    const { setAncestorsActive, setControlledState } = this.props;
-    setControlledState({ active: active });
-    setAncestorsActive && setAncestorsActive(active);
   }
 
   render() {
@@ -367,7 +389,6 @@ class BaseVerticalNavigationItem extends React.Component {
                 {...this.props}
                 idPath={this.idPath()}
                 item={navItem}
-                setAncestorsActive={this.setAncestorsActive}
                 updateAncestorsOnMobileSelection={this.onMobileSelection} // Override (helper calls parent's updateAncestorsOnMobileSelection)
               >
                 <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
@@ -380,7 +401,6 @@ class BaseVerticalNavigationItem extends React.Component {
 }
 
 const controlledStateTypes = {
-  active: PropTypes.bool,
   hovering: PropTypes.bool,
   selectedOnMobile: PropTypes.bool
 };
@@ -400,7 +420,6 @@ BaseVerticalNavigationItem.propTypes = {
 };
 
 const defaultControlledState = {
-  active: null,
   hovering: null,
   selectedOnMobile: null
 };

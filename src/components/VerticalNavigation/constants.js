@@ -13,10 +13,13 @@ const itemObjectTypes = {
     iconStyleClass: PropTypes.string
   }),
   subItems: PropTypes.array,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  // You can use initialActive if you don't want to use controlled active props,
+  // but you want to set the initial state of the activePath.
+  initialActive: PropTypes.bool
 };
 
-// * undefined or ** empty string if coming from top-level VerticalNavigation parent
+// * undefined (** or '/') if coming from top-level VerticalNavigation parent
 const itemContextTypes = {
   idPath: PropTypes.string, // **
   depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']), // *
@@ -37,8 +40,8 @@ const itemContextTypes = {
   updateNavOnPinTertiary: PropTypes.func,
   updateAncestorsOnMobileSelection: PropTypes.func,
   clearMobileSelection: PropTypes.func,
+  setActivePath: PropTypes.func,
   forceHideSecondaryMenu: PropTypes.func,
-  setAncestorsActive: PropTypes.func,
   hoverDelay: PropTypes.number,
   hideDelay: PropTypes.number
 };
