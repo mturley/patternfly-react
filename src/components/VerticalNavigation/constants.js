@@ -16,8 +16,9 @@ const itemObjectTypes = {
   active: PropTypes.bool
 };
 
-// * undefined if coming from top-level VerticalNavigation container parent
+// * undefined or ** empty string if coming from top-level VerticalNavigation parent
 const itemContextTypes = {
+  idPath: PropTypes.string, // **
   depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']), // *
   primaryItem: PropTypes.shape(itemObjectTypes), // *
   secondaryItem: PropTypes.shape(itemObjectTypes), // *
@@ -25,6 +26,7 @@ const itemContextTypes = {
   pinnableMenus: PropTypes.bool,
   isMobile: PropTypes.bool,
   selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary']),
+  activePath: PropTypes.string,
   navCollapsed: PropTypes.bool,
   pinnedSecondaryNav: PropTypes.bool,
   pinnedTertiaryNav: PropTypes.bool,

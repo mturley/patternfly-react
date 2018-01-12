@@ -27,7 +27,11 @@ class BaseVerticalNavigationItem extends React.Component {
       tertiaryPinned: false
     };
     bindMethods(this, [
+      'navItem',
+      'id',
+      'idPath',
       'getContextNavItems',
+      'pinNav',
       'pinSecondaryNav',
       'pinTertiaryNav',
       'onItemHover',
@@ -65,17 +69,26 @@ class BaseVerticalNavigationItem extends React.Component {
     }
   }
 
-  getNavItem() {
+  navItem() {
     const { item } = this.props;
     // Properties of the item object take priority over individual item props
     return { ...getItemProps(this.props), ...item };
+  }
+
+  id() {
+    const { id, title } = this.navItem();
+    return id || title || this.props.index;
+  }
+
+  idPath() {
+    return `${this.props.idPath}/${this.id()}`;
   }
 
   getContextNavItems() {
     // We have primary, secondary, and tertiary items as props if they are part of the parent context,
     // but we also want to include the current item when calling handlers.
     const { depth, primaryItem, secondaryItem, tertiaryItem } = this.props;
-    const navItem = this.getNavItem();
+    const navItem = this.navItem();
     return {
       primary: depth === 'primary' ? navItem : primaryItem,
       secondary: depth === 'secondary' ? navItem : secondaryItem,
@@ -260,7 +273,7 @@ class BaseVerticalNavigationItem extends React.Component {
     const showMobileTertiary = isMobile && selectedMobileDepth === 'secondary';
 
     // The nav item can either be passed directly as one item object prop, or as individual props.
-    const navItem = this.getNavItem();
+    const navItem = this.navItem();
     const { active, title, iconStyleClass, badges, subItems } = navItem;
 
     const childItemComponents =
@@ -352,6 +365,7 @@ class BaseVerticalNavigationItem extends React.Component {
               </div>
               <ItemContextProvider
                 {...this.props}
+                idPath={this.idPath()}
                 item={navItem}
                 setAncestorsActive={this.setAncestorsActive}
                 updateAncestorsOnMobileSelection={this.onMobileSelection} // Override (helper calls parent's updateAncestorsOnMobileSelection)

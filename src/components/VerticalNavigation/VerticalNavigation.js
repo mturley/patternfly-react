@@ -13,11 +13,12 @@ import {
   getBodyContentElement
 } from './constants';
 
-// TODO -- items need unique identifiers: id={userSuppliedID || title || index}
 // TODO -- support built in active state tracking with an activePath
-// TODO -- apply the same thing as a selectedMobilePath
+// TODO -- detect if active prop or selectedOnMobile prop is being used, and then don't use activePath?
+// TODO -- apply the same thing with a selectedMobilePath
 // TODO -- lift any other weird state up to the container
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
+// TODO -- split out the other masthead children components
 // TODO -- what else is implemented in the ng version that I'm missing?
 // TODO react-router support?
 // TODO all the other TODOs....
@@ -343,6 +344,7 @@ class BaseVerticalNavigation extends React.Component {
         )}
         {!hideTopBanner && notificationDrawer}
         <ItemContextProvider
+          idPath={''}
           updateNavOnItemHover={this.updateNavOnItemHover}
           updateNavOnItemBlur={this.updateNavOnItemBlur}
           updateNavOnItemClick={this.updateNavOnItemClick}
@@ -400,7 +402,8 @@ const controlledStateTypes = {
   hoverTertiaryNav: PropTypes.bool, // (must also use onItemHover and onItemBlur to maintain app state)
   pinnedSecondaryNav: PropTypes.bool, // (must also use onPinSecondary to maintain app state)
   pinnedTertiaryNav: PropTypes.bool, // (must also use onPinTertiary to maintain app state)
-  selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary'])
+  selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary']),
+  activePath: PropTypes.arrayOf(PropTypes.string)
 };
 
 BaseVerticalNavigation.propTypes = {
