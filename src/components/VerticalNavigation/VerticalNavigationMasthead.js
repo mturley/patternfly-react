@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import VerticalNavigationBrand from './VerticalNavigationBrand';
 import { consumeItemContext } from './constants';
 
-// TODO -- all the items you can place in the right side of the masthead should be children components here
-
 /**
  * VerticalNavigationMasthead - the first child of a VerticalNavigation component
  */
@@ -22,22 +20,6 @@ const BaseVerticalNavigationMasthead = props => {
     childrenArray &&
     childrenArray.filter(child => child.type !== VerticalNavigationBrand);
 
-  const brand =
-    brandChildren && brandChildren.length > 0 ? (
-      brandChildren
-    ) : (
-      <span>
-        {iconImg && (
-          <img className="navbar-brand-icon" src={iconImg} alt={title} />
-        )}
-        {titleImg && (
-          <img className="navbar-brand-name" src={titleImg} alt={title} />
-        )}
-        {!titleImg &&
-          title && <span className="navbar-brand-txt">{title}</span>}
-      </span>
-    );
-
   return (
     <React.Fragment>
       <div className="navbar-header">
@@ -51,12 +33,15 @@ const BaseVerticalNavigationMasthead = props => {
           <span className="icon-bar" />
           <span className="icon-bar" />
         </button>
-        {href ? (
-          <a href={href} className="navbar-brand">
-            {brand}
-          </a>
+        {brandChildren && brandChildren.length > 0 ? (
+          brandChildren
         ) : (
-          <span className="navbar-brand">{brand}</span>
+          <VerticalNavigationBrand
+            title={title}
+            href={href}
+            iconImg={iconImg}
+            titleImg={titleImg}
+          />
         )}
       </div>
       {otherChildren}

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Collapse } from './index';
+import VerticalNavigationCollapse from './VerticalNavigationCollapse';
 
 const VerticalNavigationIconBar = props => {
   const iconBar = (
@@ -8,7 +8,11 @@ const VerticalNavigationIconBar = props => {
       {props.children}
     </ul>
   );
-  return props.collapse ? <Collapse>{iconBar}</Collapse> : iconBar;
+  return props.collapse ? (
+    <VerticalNavigationCollapse>{iconBar}</VerticalNavigationCollapse>
+  ) : (
+    iconBar
+  );
 };
 
 VerticalNavigationIconBar.propTypes = {
