@@ -75,6 +75,7 @@ stories.addWithInfo(
   }
 );
 
+/*
 stories.addWithInfo(
   'Flat (Items Array)',
   'VerticalNavigation usage example with items passed as objects inline.',
@@ -90,6 +91,7 @@ stories.addWithInfo(
     return <div />; // TODO
   }
 );
+*/
 
 stories.addWithInfo(
   'Nested (Items Array)',

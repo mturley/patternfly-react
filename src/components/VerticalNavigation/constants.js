@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withContext, getContext, compose } from 'recompose';
+import { withContext, getContext } from 'recompose';
 import { selectKeys } from '../../common/helpers';
 
 const itemObjectTypes = {
@@ -16,7 +16,7 @@ const itemObjectTypes = {
   active: PropTypes.bool,
   // You can use initialActive if you don't want to use controlled active props,
   // but you want to set the initial state of the activePath.
-  initialActive: PropTypes.bool
+  initialActive: PropTypes.bool // ??? TODO
 };
 
 // * undefined (** or '/') if coming from top-level VerticalNavigation parent
