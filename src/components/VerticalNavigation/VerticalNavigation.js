@@ -13,14 +13,10 @@ import {
   getBodyContentElement
 } from './constants';
 
-// TODO -- support built in active state tracking with an activePath
-// TODO -- detect if active prop or selectedOnMobile prop is being used, and then don't use activePath?
-// TODO -- apply the same thing with a selectedMobilePath
-// TODO -- lift any other weird state up to the container
+// TODO react-router support?
 // TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
 // TODO -- split out the other masthead children components
 // TODO -- what else is implemented in the ng version that I'm missing?
-// TODO react-router support?
 // TODO all the other TODOs....
 
 // TODO build it into the demo app!
@@ -96,21 +92,23 @@ class BaseVerticalNavigation extends React.Component {
   }
 
   collapseMenu() {
-    const { onCollapse, setControlledState } = this.props;
+    const { onCollapse, setControlledState, dynamicBodyClasses } = this.props;
     setControlledState({ navCollapsed: true });
     this.setState({ explicitCollapse: true });
     onCollapse && onCollapse();
-    // TODO only in uncontrolled mode / with a specific prop
-    getBodyContentElement().classList.add('collapsed-nav');
+    if (dynamicBodyClasses) {
+      getBodyContentElement().classList.add('collapsed-nav');
+    }
   }
 
   expandMenu() {
-    const { onExpand, setControlledState } = this.props;
+    const { onExpand, setControlledState, dynamicBodyClasses } = this.props;
     setControlledState({ navCollapsed: false });
     this.setState({ explicitCollapse: false });
     onExpand && onExpand();
-    // TODO only in uncontrolled mode
-    getBodyContentElement().classList.remove('collapsed-nav');
+    if (dynamicBodyClasses) {
+      getBodyContentElement().classList.remove('collapsed-nav');
+    }
 
     // Dispatch a resize event when showing the expanding then menu to
     // allow content to adjust to the menu sizing
@@ -428,6 +426,7 @@ BaseVerticalNavigation.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(itemObjectTypes)),
   persistentSecondary: PropTypes.bool,
   pinnableMenus: PropTypes.bool,
+  dynamicBodyClasses: PropTypes.bool,
   hiddenIcons: PropTypes.bool,
   showBadges: PropTypes.bool,
   forceHidden: PropTypes.bool,
@@ -469,6 +468,7 @@ BaseVerticalNavigation.defaultProps = {
   hidden: false,
   persistentSecondary: false,
   pinnableMenus: true,
+  dynamicBodyClasses: true,
   hiddenIcons: false,
   showBadges: true,
   forceHidden: false,

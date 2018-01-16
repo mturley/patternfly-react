@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// TODO -- all the items you can place in the right side of the masthead should be children components here
+
 /**
  * VerticalNavigationMasthead - the first child of a VerticalNavigation component
  */

@@ -63,7 +63,7 @@ class BaseVerticalNavigationItem extends React.Component {
     const newItem = this.navItem(newProps);
     if (!oldItem.active && newItem.active) {
       // If the active prop is being added, make sure the activePath is in sync.
-      if (newProps.activePath !== this.idPath()) this.setActive(); // TODO do we need this for mobilePath too?
+      if (newProps.activePath !== this.idPath()) this.setActive(true); // TODO do we need this for mobilePath too?
     }
     // If any other secondary/tertiary nav is un-pinned, un-pin them all.
     if (this.props.pinnedSecondaryNav && !newProps.pinnedSecondaryNav) {
