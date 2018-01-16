@@ -267,9 +267,7 @@ class BaseVerticalNavigationItem extends React.Component {
               >
                 <div className={cx('badge', badge.badgeClass)}>
                   {badge.count &&
-                    badge.iconStyleClass && (
-                      <span className={badge.iconStyleClass} />
-                    )}
+                    badge.iconClass && <span className={badge.iconClass} />}
                   {badge.count && <span>{badge.count}</span>}
                 </div>
               </OverlayTrigger>
@@ -305,7 +303,7 @@ class BaseVerticalNavigationItem extends React.Component {
       active,
       selectedOnMobile,
       title,
-      iconStyleClass,
+      iconClass,
       badges,
       subItems
     } = navItem;
@@ -333,11 +331,8 @@ class BaseVerticalNavigationItem extends React.Component {
     const pinNextDepth =
       nextDepth === 'secondary' ? this.pinSecondaryNav : this.pinTertiaryNav;
 
-    const icon = iconStyleClass && (
-      <span
-        className={cx(iconStyleClass, { hidden: hiddenIcons })}
-        title={title}
-      />
+    const icon = iconClass && (
+      <span className={cx(iconClass, { hidden: hiddenIcons })} title={title} />
     );
 
     return (

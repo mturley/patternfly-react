@@ -2,20 +2,20 @@ export const mockNavItems = [
   {
     title: 'Dashboard',
     initialActive: true,
-    iconStyleClass: 'fa fa-dashboard',
+    iconClass: 'fa fa-dashboard',
     // TODO badges?
     subItems: [
       {
         title: 'Item 1-A',
-        iconStyleClass: 'fa fa-envelope',
+        iconClass: 'fa fa-envelope',
         subItems: [
           {
             title: 'Item 1-A-i',
-            iconStyleClass: 'fa fa-envelope-open'
+            iconClass: 'fa fa-envelope-open'
           },
           {
             title: 'Item 1-A-ii',
-            iconStyleClass: 'fa fa-envelope-closed'
+            iconClass: 'fa fa-envelope-closed'
           },
           {
             title: 'Item 1-A-iii'
@@ -24,7 +24,7 @@ export const mockNavItems = [
       },
       {
         title: 'Item 1-B',
-        iconStyleClass: 'fa fa-bell',
+        iconClass: 'fa fa-bell',
         subItems: [
           {
             title: 'Item 1-B-i'
@@ -44,11 +44,11 @@ export const mockNavItems = [
   },
   {
     title: 'Dolor',
-    iconStyleClass: 'fa fa-shield'
+    iconClass: 'fa fa-shield'
   },
   {
     title: 'Ipsum',
-    iconStyleClass: 'fa fa-space-shuttle',
+    iconClass: 'fa fa-space-shuttle',
     subItems: [
       {
         title: 'Item 3-A'
@@ -74,14 +74,14 @@ export const mockNavItems = [
   },
   {
     title: 'Amet',
-    iconStyleClass: 'fa fa-paper-plane'
+    iconClass: 'fa fa-paper-plane'
   },
   {
     title: 'Adipscing',
-    iconStyleClass: 'fa fa-graduation-cap'
+    iconClass: 'fa fa-graduation-cap'
   },
   {
     title: 'Lorem',
-    iconStyleClass: 'fa fa-gamepad'
+    iconClass: 'fa fa-gamepad'
   }
 ];

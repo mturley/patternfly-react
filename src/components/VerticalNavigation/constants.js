@@ -5,18 +5,18 @@ import { selectKeys } from '../../common/helpers';
 
 const itemObjectTypes = {
   title: PropTypes.string,
-  iconStyleClass: PropTypes.string,
+  iconClass: PropTypes.string,
   badges: PropTypes.shape({
     badgeClass: PropTypes.string,
     tooltip: PropTypes.string,
     count: PropTypes.number,
-    iconStyleClass: PropTypes.string
+    iconClass: PropTypes.string
   }),
   subItems: PropTypes.array,
   active: PropTypes.bool,
   // You can use initialActive if you don't want to use controlled active props,
   // but you want to set the initial state of the activePath.
-  initialActive: PropTypes.bool // ??? TODO
+  initialActive: PropTypes.bool
 };
 
 // * undefined (** or '/') if coming from top-level VerticalNavigation parent

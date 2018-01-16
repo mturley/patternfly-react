@@ -52,13 +52,20 @@ stories.addWithInfo(
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation>
             <VerticalNavigation.Masthead title="Patternfly React" />
-            <VerticalNavigation.Item title="Item 1" />
-            <VerticalNavigation.Item title="Item 2" initialActive>
+            <VerticalNavigation.Item
+              title="Item 1"
+              iconClass="fa fa-home"
+              initialActive
+            />
+            <VerticalNavigation.Item title="Item 2" iconClass="fa fa-star">
               <VerticalNavigation.Item title="Item 2-A" />
               <VerticalNavigation.Item title="Item 2-B" />
               <VerticalNavigation.Item title="Item 2-C" />
             </VerticalNavigation.Item>
-            <VerticalNavigation.Item title="Item 3">
+            <VerticalNavigation.Item
+              title="Item 3"
+              iconClass="fa fa-info-circle"
+            >
               <VerticalNavigation.Item title="Item 3-A" />
               <VerticalNavigation.Item title="Item 3-B">
                 <VerticalNavigation.Item title="Item 3-B-i" />
