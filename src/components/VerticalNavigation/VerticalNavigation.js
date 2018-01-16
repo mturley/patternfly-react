@@ -36,10 +36,10 @@ class BaseVerticalNavigation extends React.Component {
     };
     bindMethods(this, [
       'onLayoutChange',
-      'onMenuToggleClick',
       'collapseMenu',
       'expandMenu',
       'updateHoverState',
+      'updateNavOnMenuToggleClick',
       'updateNavOnItemHover',
       'updateNavOnItemBlur',
       'updateNavOnItemClick',
@@ -66,29 +66,6 @@ class BaseVerticalNavigation extends React.Component {
     const { onLayoutChange, setControlledState } = this.props;
     setControlledState({ isMobile: newLayout === 'mobile' });
     onLayoutChange && onLayoutChange(newLayout);
-  }
-
-  onMenuToggleClick() {
-    const {
-      onMenuToggleClick,
-      isMobile,
-      showMobileNav,
-      navCollapsed,
-      setControlledState
-    } = this.props;
-    if (isMobile) {
-      if (showMobileNav) {
-        setControlledState({ showMobileNav: false });
-      } else {
-        this.clearMobileSelection();
-        setControlledState({ showMobileNav: true });
-      }
-    } else if (navCollapsed) {
-      this.expandMenu();
-    } else {
-      this.collapseMenu();
-    }
-    onMenuToggleClick && onMenuToggleClick();
   }
 
   collapseMenu() {
@@ -145,6 +122,29 @@ class BaseVerticalNavigation extends React.Component {
         };
       }
     }
+  }
+
+  updateNavOnMenuToggleClick() {
+    const {
+      onMenuToggleClick,
+      isMobile,
+      showMobileNav,
+      navCollapsed,
+      setControlledState
+    } = this.props;
+    if (isMobile) {
+      if (showMobileNav) {
+        setControlledState({ showMobileNav: false });
+      } else {
+        this.clearMobileSelection();
+        setControlledState({ showMobileNav: true });
+      }
+    } else if (navCollapsed) {
+      this.expandMenu();
+    } else {
+      this.collapseMenu();
+    }
+    onMenuToggleClick && onMenuToggleClick();
   }
 
   updateNavOnItemHover(primary, secondary, tertiary) {
@@ -325,22 +325,6 @@ class BaseVerticalNavigation extends React.Component {
         selectedMobileDepth === 'secondary');
     const showMobileTertiary = isMobile && selectedMobileDepth === 'secondary';
 
-    const header = (
-      <div className="navbar-header">
-        <button
-          type="button"
-          className="navbar-toggle"
-          onClick={this.onMenuToggleClick}
-        >
-          <span className="sr-only">Toggle navigation</span>
-          <span className="icon-bar" />
-          <span className="icon-bar" />
-          <span className="icon-bar" />
-        </button>
-        {masthead}
-      </div>
-    );
-
     return (
       <nav // TODO do we need classes like the commented out ones here?
         className={cx(
@@ -348,13 +332,14 @@ class BaseVerticalNavigation extends React.Component {
         )}
       >
         {/* TODO these three should be one fragment when we upgrade to react 16.2 */}
-        {!hideTopBanner && header}
+        {!hideTopBanner && masthead}
         {!hideTopBanner && (
           <nav className="collapse navbar-collapse">{topBannerContents}</nav>
         )}
         {!hideTopBanner && notificationDrawer}
         <ItemContextProvider
           idPath={'/'}
+          updateNavOnMenuToggleClick={this.updateNavOnMenuToggleClick}
           updateNavOnItemHover={this.updateNavOnItemHover}
           updateNavOnItemBlur={this.updateNavOnItemBlur}
           updateNavOnItemClick={this.updateNavOnItemClick}

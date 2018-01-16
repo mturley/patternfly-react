@@ -34,6 +34,7 @@ const itemContextTypes = {
   navCollapsed: PropTypes.bool,
   pinnedSecondaryNav: PropTypes.bool,
   pinnedTertiaryNav: PropTypes.bool,
+  onMenuToggleClick: PropTypes.func,
   updateNavOnItemHover: PropTypes.func,
   updateNavOnItemBlur: PropTypes.func,
   updateNavOnItemClick: PropTypes.func,

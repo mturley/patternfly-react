@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { defaultTemplate } from '../../../storybook/decorators/storyTemplates';
 
-import { VerticalNavigation } from '../../index';
+import { VerticalNavigation, Masthead, Item, Brand, IconBar } from './index';
 
 import { mockNavItems } from './__mocks__/mockNavItems';
 
@@ -27,7 +27,7 @@ stories.addDecorator(
 );
 
 stories.addWithInfo(
-  'Basic (Inline JSX)',
+  'Flat (Inline JSX)',
   `VerticalNavigation usage example with items passed as children, but with only titles.`,
   () => {
     return (
@@ -36,22 +36,22 @@ stories.addWithInfo(
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation>
-            <VerticalNavigation.Masthead title="Patternfly React" />
-            <VerticalNavigation.Item title="Item 1" />
-            <VerticalNavigation.Item title="Item 2" initialActive>
-              <VerticalNavigation.Item title="Item 2-A" />
-              <VerticalNavigation.Item title="Item 2-B" />
-              <VerticalNavigation.Item title="Item 2-C" />
-            </VerticalNavigation.Item>
-            <VerticalNavigation.Item title="Item 3">
-              <VerticalNavigation.Item title="Item 3-A" />
-              <VerticalNavigation.Item title="Item 3-B">
-                <VerticalNavigation.Item title="Item 3-B-i" />
-                <VerticalNavigation.Item title="Item 3-B-ii" />
-                <VerticalNavigation.Item title="Item 3-B-iii" />
-              </VerticalNavigation.Item>
-              <VerticalNavigation.Item title="Item 3-C" />
-            </VerticalNavigation.Item>
+            <Masthead title="Patternfly React" />
+            <Item title="Item 1" />
+            <Item title="Item 2" initialActive>
+              <Item title="Item 2-A" />
+              <Item title="Item 2-B" />
+              <Item title="Item 2-C" />
+            </Item>
+            <Item title="Item 3">
+              <Item title="Item 3-A" />
+              <Item title="Item 3-B">
+                <Item title="Item 3-B-i" />
+                <Item title="Item 3-B-ii" />
+                <Item title="Item 3-B-iii" />
+              </Item>
+              <Item title="Item 3-C" />
+            </Item>
           </VerticalNavigation>
         </div>
         {mockBodyContainer}
@@ -60,8 +60,11 @@ stories.addWithInfo(
   }
 );
 
+// TODO story 'Flat (Items Array)'
+// TODO story 'Nested (Inline JSX)'
+
 stories.addWithInfo(
-  'Basic (Items Array)',
+  'Nested (Items Array)',
   `VerticalNavigation usage example with items passed as objects, driven by a mock file.`,
   () => {
     return (
@@ -70,7 +73,29 @@ stories.addWithInfo(
       <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
         <div className="layout-pf layout-pf-fixed faux-layout">
           <VerticalNavigation items={mockNavItems}>
-            <VerticalNavigation.Masthead title="Patternfly React" />
+            <Masthead title="Patternfly React" />
+          </VerticalNavigation>
+          {mockBodyContainer}
+        </div>
+      </div>
+    );
+  }
+);
+
+stories.addWithInfo(
+  'With Custom Masthead',
+  `VerticalNavigation usage example with a customized masthead.`,
+  () => {
+    return (
+      // This container div prevents position: fixed elements from being aligned incorrectly in storybook.
+      // See https://stackoverflow.com/a/38796408
+      <div style={{ transform: 'translateZ(0)', height: '100vh' }}>
+        <div className="layout-pf layout-pf-fixed faux-layout">
+          <VerticalNavigation items={mockNavItems}>
+            <Masthead>
+              <Brand img="/img/brand-alt.svg" /> // TODO make this better
+              <IconBar />
+            </Masthead>
           </VerticalNavigation>
           {mockBodyContainer}
         </div>
