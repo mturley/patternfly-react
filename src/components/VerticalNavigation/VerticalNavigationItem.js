@@ -58,12 +58,12 @@ class BaseVerticalNavigationItem extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { setControlledState } = this.props;
+    const { setMobilePath } = this.props;
     const oldItem = this.navItem();
     const newItem = this.navItem(newProps);
     if (!oldItem.active && newItem.active) {
       // If the active prop is being added, make sure the activePath is in sync.
-      if (newProps.activePath !== this.idPath()) this.setActive();
+      if (newProps.activePath !== this.idPath()) this.setActive(); // TODO do we need this for mobilePath too?
     }
     // If any other secondary/tertiary nav is un-pinned, un-pin them all.
     if (this.props.pinnedSecondaryNav && !newProps.pinnedSecondaryNav) {
@@ -77,7 +77,7 @@ class BaseVerticalNavigationItem extends React.Component {
       this.props.selectedMobileDepth !== null &&
       newProps.selectedMobileDepth === null
     ) {
-      setControlledState({ selectedOnMobile: false });
+      setMobilePath(null);
     }
   }
 
@@ -87,13 +87,18 @@ class BaseVerticalNavigationItem extends React.Component {
     const item = { ...getItemProps(props), ...props.item };
     return {
       ...item,
-      // Automatically set the active property if this item is along the activePath...
-      // But don't call idPath() (and therefore id()) when we're calling navItem() inside id()...
+      // Automatically set the active and selectedOnMobile properties based on current path...
+      // ...But don't call idPath() (and therefore id()) when we're calling navItem() inside id().
       active:
         item.active ||
         (ignorePath
           ? null
-          : props.activePath && props.activePath.startsWith(this.idPath()))
+          : props.activePath && props.activePath.startsWith(this.idPath())),
+      selectedOnMobile:
+        item.selectedOnMobile ||
+        (ignorePath
+          ? null
+          : props.mobilePath && props.mobilePath.startsWith(this.idPath()))
     };
   }
 
@@ -127,12 +132,11 @@ class BaseVerticalNavigationItem extends React.Component {
       isMobile,
       depth,
       clearMobileSelection,
-      setControlledState,
-      updateAncestorsOnMobileSelection,
+      setMobilePath,
       forceHideSecondaryMenu,
-      setActivePath
+      setActivePath,
+      idPath
     } = this.props;
-    const { primary } = this.getContextNavItems();
     const pinned = this.state[stateKey];
     if (isMobile) {
       // On mobile, the pin buttons act as back buttons instead.
@@ -140,9 +144,8 @@ class BaseVerticalNavigationItem extends React.Component {
         // Going back to primary nav clears all selection.
         clearMobileSelection();
       } else if (depth === 'secondary') {
-        // Going back to secondary nav de-selects this item and re-selects the primary parent.
-        setControlledState({ selectedOnMobile: false });
-        updateAncestorsOnMobileSelection(primary);
+        // Going back to secondary nav de-selects this item and re-selects the parent.
+        setMobilePath(idPath); // idPath prop, which is parent's path, not this.idPath().
       }
     } else {
       this.setState({ [stateKey]: !pinned });
@@ -238,9 +241,9 @@ class BaseVerticalNavigationItem extends React.Component {
   }
 
   onMobileSelection(primary, secondary, tertiary) {
-    const { setControlledState, updateAncestorsOnMobileSelection } = this.props;
-    setControlledState({ selectedOnMobile: true });
-    updateAncestorsOnMobileSelection(primary, secondary, tertiary);
+    const { setMobilePath, updateNavOnMobileSelection } = this.props;
+    setMobilePath(this.idPath());
+    updateNavOnMobileSelection(primary, secondary, tertiary);
   }
 
   renderBadges(badges) {
@@ -281,7 +284,6 @@ class BaseVerticalNavigationItem extends React.Component {
       navCollapsed,
       isMobile,
       selectedMobileDepth,
-      selectedOnMobile,
       children,
       hovering
     } = this.props;
@@ -296,7 +298,14 @@ class BaseVerticalNavigationItem extends React.Component {
 
     // The nav item can either be passed directly as one item object prop, or as individual props.
     const navItem = this.navItem();
-    const { active, title, iconStyleClass, badges, subItems } = navItem;
+    const {
+      active,
+      selectedOnMobile,
+      title,
+      iconStyleClass,
+      badges,
+      subItems
+    } = navItem;
 
     const childItemComponents =
       (children &&
@@ -389,7 +398,6 @@ class BaseVerticalNavigationItem extends React.Component {
                 {...this.props}
                 idPath={this.idPath()}
                 item={navItem}
-                updateAncestorsOnMobileSelection={this.onMobileSelection} // Override (helper calls parent's updateAncestorsOnMobileSelection)
               >
                 <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
               </ItemContextProvider>
@@ -401,8 +409,7 @@ class BaseVerticalNavigationItem extends React.Component {
 }
 
 const controlledStateTypes = {
-  hovering: PropTypes.bool,
-  selectedOnMobile: PropTypes.bool
+  hovering: PropTypes.bool
 };
 
 BaseVerticalNavigationItem.propTypes = {
@@ -420,8 +427,7 @@ BaseVerticalNavigationItem.propTypes = {
 };
 
 const defaultControlledState = {
-  hovering: null,
-  selectedOnMobile: null
+  hovering: null
 };
 
 BaseVerticalNavigationItem.defaultProps = {
