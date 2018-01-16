@@ -152,7 +152,7 @@ class BaseVerticalNavigationItem extends React.Component {
       }
     } else {
       this.setState({ [stateKey]: !pinned });
-      setActivePath(pinned ? this.idPath() : null);
+      setActivePath(!pinned ? this.idPath() : null);
       if (pinned) {
         forceHideSecondaryMenu();
         this.onItemBlur(true);
