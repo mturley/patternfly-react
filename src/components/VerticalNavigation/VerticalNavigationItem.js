@@ -15,6 +15,9 @@ import {
   consumeItemContext
 } from './constants';
 
+// TODO -- break down into a common Child component VerticalNavigationItemHelper which keeps state and methods and shared JSX
+// TODO -- build shells around the Primary, Secondary, Tertiary
+
 /**
  * VerticalNavigation.Item - a child element for the VerticalNavigation component
  */

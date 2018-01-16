@@ -7,6 +7,9 @@ import { VerticalNavigation } from '../../index';
 
 import { mockNavItems } from './__mocks__/mockNavItems';
 
+// TODO -- add more stories
+// TODO -- add richer descriptions of props for storybook
+
 const mockBodyContainer = (
   <div className="container-fluid container-cards-pf container-pf-nav-pf-vertical nav-pf-persistent-secondary">
     <h1>Body Content Here!</h1>

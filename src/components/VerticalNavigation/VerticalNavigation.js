@@ -242,17 +242,18 @@ class BaseVerticalNavigation extends React.Component {
 
   navigateToItem(item) {
     console.log('TODO NAVIGATE!', item); // TODO
+    // TODO onNavigate prop or something?
+    // TODO router?
+    // FIXME or should this just be in the item and not here?
   }
 
   render() {
     const { items, children } = this.props;
-
-    // TODO include more stories examples!
-
     // Nav items may be passed either as nested VerticalNavigationitem.subItems, or as nested items in a prop.
     // The items prop will take priority, if present, and must be an array of item objects (not React components).
     // If the items prop is not present, items must be expressed as VerticalNavigationitem.subItems instead.
     // Any non-VerticalNavigationitem.subItems will be rendered in the masthead.
+    // TODO move this explanation to the docs? maybe summarize here and reference them there?
     const childrenArray =
       children &&
       React.Children.count(children) > 0 &&
@@ -260,8 +261,7 @@ class BaseVerticalNavigation extends React.Component {
     const itemsFromChildren =
       childrenArray &&
       childrenArray.filter(child => child.type === VerticalNavigationItem);
-    // TODO maybe use displayName here instead of type
-    // TODO maybe rely on the item render method to recurse, and just do one map here?
+    // TODO maybe use displayName here instead of type -- TODO see recompose get display name
     const itemsFromProps =
       items &&
       items.length > 0 &&
@@ -382,8 +382,8 @@ class BaseVerticalNavigation extends React.Component {
               'nav-pf-vertical-collapsible-menus': pinnableMenus,
               'hidden-icons-pf': hiddenIcons,
               'nav-pf-vertical-with-badges': showBadges,
-              'nav-pf-persistent-secondary': persistentSecondary,
-              'secondary-visible-pf': activeSecondary,
+              'nav-pf-persistent-secondary': persistentSecondary, // TODO these are not used internally, what is the deal, how to test
+              'secondary-visible-pf': activeSecondary, // TODO these are not used internally, what is the deal, how to test
               'show-mobile-secondary': showMobileSecondary,
               'show-mobile-tertiary': showMobileTertiary,
               'hover-secondary-nav-pf': hoverSecondaryNav,
@@ -394,8 +394,6 @@ class BaseVerticalNavigation extends React.Component {
               collapsed: navCollapsed,
               'force-hide-secondary-nav-pf': forceHidden,
               'show-mobile-nav': showMobileNav
-              // TODO nav-pf-persistent-secondary? check pf core for other classes?
-              // TODO open an issue on pf-ng for the missing classes?
             })}
           >
             <ListGroup componentClass="ul">{itemComponents}</ListGroup>
