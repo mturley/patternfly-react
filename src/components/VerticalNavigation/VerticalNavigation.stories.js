@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { defaultTemplate } from '../../../storybook/decorators/storyTemplates';
 
-import { VerticalNavigation, Masthead, Item, Brand, IconBar } from './index';
+import { VerticalNavigation, Masthead, Brand, IconBar } from './index';
 
 import { mockNavItems } from './__mocks__/mockNavItems';
 import { mockIconBarChildren } from './__mocks__/mockIconBarChildren';
@@ -75,8 +75,21 @@ stories.addWithInfo(
   }
 );
 
-// TODO story 'Flat (Items Array)'
-// TODO story 'Nested (Inline JSX)'
+stories.addWithInfo(
+  'Flat (Items Array)',
+  'VerticalNavigation usage example with items passed as objects inline.',
+  () => {
+    return <div />; // TODO
+  }
+);
+
+stories.addWithInfo(
+  'Nested (Inline JSX)',
+  'VerticalNavigation usage example with items passed as children, three levels deep.',
+  () => {
+    return <div />; // TODO
+  }
+);
 
 stories.addWithInfo(
   'Nested (Items Array)',

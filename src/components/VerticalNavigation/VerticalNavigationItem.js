@@ -6,13 +6,13 @@ import { OverlayTrigger } from '../OverlayTrigger';
 import { Tooltip } from '../Tooltip';
 import { bindMethods, controlled } from '../../common/helpers';
 import {
-  ItemContextProvider,
+  NavContextProvider,
   getNextDepth,
   deepestOf,
   getItemProps,
   itemObjectTypes,
-  itemContextTypes,
-  consumeItemContext
+  navContextTypes,
+  consumeNavContext
 } from './constants';
 
 // TODO -- break down into a common Child component VerticalNavigationItemHelper which keeps state and methods and shared JSX
@@ -397,13 +397,13 @@ class BaseVerticalNavigationItem extends React.Component {
                 )}
                 <span>{title}</span>
               </div>
-              <ItemContextProvider
+              <NavContextProvider
                 {...this.props}
                 idPath={this.idPath()}
                 item={navItem}
               >
                 <ListGroup componentClass="ul">{childItemComponents}</ListGroup>
-              </ItemContextProvider>
+              </NavContextProvider>
             </div>
           )}
       </ListGroupItem>
@@ -418,7 +418,7 @@ const controlledStateTypes = {
 BaseVerticalNavigationItem.propTypes = {
   ...controlledStateTypes,
   ...itemObjectTypes, // Each of the item object's properties can alternatively be passed directly as a prop.
-  ...itemContextTypes,
+  ...navContextTypes,
   item: PropTypes.shape(itemObjectTypes),
   isMobile: PropTypes.bool,
   selectedMobileDepth: PropTypes.oneOf([null, 'primary', 'secondary']),
@@ -441,7 +441,7 @@ BaseVerticalNavigationItem.defaultProps = {
 const VerticalNavigationItem = controlled(
   controlledStateTypes,
   defaultControlledState
-)(consumeItemContext(BaseVerticalNavigationItem));
+)(consumeNavContext(BaseVerticalNavigationItem));
 
 VerticalNavigationItem.displayName = 'VerticalNavigationItem';
 

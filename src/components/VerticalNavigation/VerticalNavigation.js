@@ -7,7 +7,7 @@ import VerticalNavigationMasthead from './VerticalNavigationMasthead';
 import { bindMethods, controlled } from '../../common/helpers';
 import { layout } from '../../common/patternfly';
 import {
-  ItemContextProvider,
+  NavContextProvider,
   deepestOf,
   itemObjectTypes,
   getBodyContentElement
@@ -326,42 +326,42 @@ class BaseVerticalNavigation extends React.Component {
     const showMobileTertiary = isMobile && selectedMobileDepth === 'secondary';
 
     return (
-      <nav // TODO do we need classes like the commented out ones here?
-        className={cx(
-          'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */
-        )}
+      <NavContextProvider
+        idPath={'/'}
+        updateNavOnMenuToggleClick={this.updateNavOnMenuToggleClick}
+        updateNavOnItemHover={this.updateNavOnItemHover}
+        updateNavOnItemBlur={this.updateNavOnItemBlur}
+        updateNavOnItemClick={this.updateNavOnItemClick}
+        updateNavOnMobileSelection={this.updateNavOnMobileSelection}
+        clearMobileSelection={this.clearMobileSelection}
+        setActivePath={this.setActivePath}
+        setMobilePath={this.setMobilePath}
+        activePath={activePath}
+        mobilePath={mobilePath}
+        hiddenIcons={hiddenIcons}
+        pinnableMenus={pinnableMenus}
+        isMobile={isMobile}
+        selectedMobileDepth={selectedMobileDepth}
+        navCollapsed={navCollapsed}
+        pinnedSecondaryNav={pinnedSecondaryNav}
+        pinnedTertiaryNav={pinnedTertiaryNav}
+        updateNavOnPinSecondary={this.updateNavOnPinSecondary}
+        updateNavOnPinTertiary={this.updateNavOnPinTertiary}
+        forceHideSecondaryMenu={this.forceHideSecondaryMenu}
+        hoverDelay={hoverDelay}
+        hideDelay={hideDelay}
       >
-        {/* TODO these three should be one fragment when we upgrade to react 16.2 */}
-        {!hideTopBanner && masthead}
-        {!hideTopBanner && (
-          <nav className="collapse navbar-collapse">{topBannerContents}</nav>
-        )}
-        {!hideTopBanner && notificationDrawer}
-        <ItemContextProvider
-          idPath={'/'}
-          updateNavOnMenuToggleClick={this.updateNavOnMenuToggleClick}
-          updateNavOnItemHover={this.updateNavOnItemHover}
-          updateNavOnItemBlur={this.updateNavOnItemBlur}
-          updateNavOnItemClick={this.updateNavOnItemClick}
-          updateNavOnMobileSelection={this.updateNavOnMobileSelection}
-          clearMobileSelection={this.clearMobileSelection}
-          setActivePath={this.setActivePath}
-          setMobilePath={this.setMobilePath}
-          activePath={activePath}
-          mobilePath={mobilePath}
-          hiddenIcons={hiddenIcons}
-          pinnableMenus={pinnableMenus}
-          isMobile={isMobile}
-          selectedMobileDepth={selectedMobileDepth}
-          navCollapsed={navCollapsed}
-          pinnedSecondaryNav={pinnedSecondaryNav}
-          pinnedTertiaryNav={pinnedTertiaryNav}
-          updateNavOnPinSecondary={this.updateNavOnPinSecondary}
-          updateNavOnPinTertiary={this.updateNavOnPinTertiary}
-          forceHideSecondaryMenu={this.forceHideSecondaryMenu}
-          hoverDelay={hoverDelay}
-          hideDelay={hideDelay}
+        <nav // TODO do we need classes like the commented out ones here?
+          className={cx(
+            'navbar navbar-pf-vertical' /* 'pf-vertical-container', hideTopBanner && 'pfng-vertical-hide-nav' */
+          )}
         >
+          {/* TODO these three should be one fragment when we upgrade to react 16.2 */}
+          {!hideTopBanner && masthead}
+          {!hideTopBanner && (
+            <nav className="collapse navbar-collapse">{topBannerContents}</nav>
+          )}
+          {!hideTopBanner && notificationDrawer}
           <div
             className={cx('nav-pf-vertical nav-pf-vertical-with-sub-menus', {
               'nav-pf-vertical-collapsible-menus': pinnableMenus,
@@ -383,8 +383,8 @@ class BaseVerticalNavigation extends React.Component {
           >
             <ListGroup componentClass="ul">{itemComponents}</ListGroup>
           </div>
-        </ItemContextProvider>
-      </nav>
+        </nav>
+      </NavContextProvider>
     );
   }
 }

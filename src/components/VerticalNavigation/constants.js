@@ -20,7 +20,7 @@ const itemObjectTypes = {
 };
 
 // * undefined (** or '/') if coming from top-level VerticalNavigation parent
-const itemContextTypes = {
+const navContextTypes = {
   idPath: PropTypes.string, // **
   depth: PropTypes.oneOf(['primary', 'secondary', 'tertiary']), // *
   primaryItem: PropTypes.shape(itemObjectTypes), // *
@@ -34,6 +34,7 @@ const itemContextTypes = {
   navCollapsed: PropTypes.bool,
   pinnedSecondaryNav: PropTypes.bool,
   pinnedTertiaryNav: PropTypes.bool,
+  updateNavOnMenuToggleClick: PropTypes.func,
   updateNavOnItemHover: PropTypes.func,
   updateNavOnItemBlur: PropTypes.func,
   updateNavOnItemClick: PropTypes.func,
@@ -63,7 +64,7 @@ const getItemProps = props => ({
     React.Children.map(props.children, child => getItemProps(child.props))
 });
 
-const getChildItemContext = providerProps => {
+const provideNavContext = withContext(navContextTypes, providerProps => {
   // The item prop doesn't get included in context, but must be passed to the provider
   // In order to properly include primaryItem and secondaryItem in context.
   const { item, primaryItem, secondaryItem } = providerProps;
@@ -71,22 +72,16 @@ const getChildItemContext = providerProps => {
   return {
     // Only the keys that should be in context are included,
     // so it is safe to spread extra props into the provider component.
-    ...selectKeys(providerProps, Object.keys(itemContextTypes)),
+    ...selectKeys(providerProps, Object.keys(navContextTypes)),
     depth: nextDepth,
     primaryItem: nextDepth === 'secondary' ? item : primaryItem,
     secondaryItem: nextDepth === 'tertiary' ? item : secondaryItem
     // We don't need a tertiaryItem in context (see VerticalNavigationItem.getContextNavItems)
   };
-};
+});
+const consumeNavContext = getContext(navContextTypes);
 
-const provideItemContext = withContext(itemContextTypes, getChildItemContext);
-const consumeItemContext = getContext(itemContextTypes);
-const consumeAndProvideItemContext = compose(
-  consumeItemContext,
-  provideItemContext
-);
-
-const ItemContextProvider = provideItemContext(props => (
+const NavContextProvider = provideNavContext(props => (
   <React.Fragment>{props.children}</React.Fragment>
 ));
 
@@ -102,10 +97,9 @@ export {
   deepestOf,
   getItemProps,
   itemObjectTypes,
-  itemContextTypes,
-  provideItemContext,
-  consumeItemContext,
-  consumeAndProvideItemContext,
-  ItemContextProvider,
+  navContextTypes,
+  provideNavContext,
+  consumeNavContext,
+  NavContextProvider,
   getBodyContentElement
 };

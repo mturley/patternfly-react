@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import VerticalNavigationBrand from './VerticalNavigationBrand';
-import { consumeItemContext } from './constants';
+import { consumeNavContext, navContextTypes } from './constants';
 
 /**
  * VerticalNavigationMasthead - the first child of a VerticalNavigation component
@@ -50,6 +50,7 @@ const BaseVerticalNavigationMasthead = props => {
 };
 
 BaseVerticalNavigationMasthead.propTypes = {
+  ...navContextTypes,
   iconImg: PropTypes.string,
   titleImg: PropTypes.string,
   title: PropTypes.string,
@@ -58,16 +59,7 @@ BaseVerticalNavigationMasthead.propTypes = {
   updateNavOnMenuToggleClick: PropTypes.func
 };
 
-BaseVerticalNavigationMasthead.defaultProps = {
-  iconImg: null,
-  titleImg: null,
-  title: '',
-  href: null,
-  children: null,
-  updateNavOnMenuToggleClick: () => {}
-};
-
-const VerticalNavigationMasthead = consumeItemContext(
+const VerticalNavigationMasthead = consumeNavContext(
   BaseVerticalNavigationMasthead
 );
 
