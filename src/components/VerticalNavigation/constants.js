@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withContext, getContext } from 'recompose';
 import { selectKeys } from '../../common/helpers';
+import VerticalNavigationItem from './VerticalNavigationItem';
+import VerticalNavigationSecondaryItem from './VerticalNavigationSecondaryItem';
+import VerticalNavigationTertiaryItem from './VerticalNavigationTertiaryItem';
 
 const itemObjectTypes = {
   title: PropTypes.string,
@@ -55,7 +58,32 @@ const getNextDepth = depth =>
   'primary';
 
 const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
+/*
+const componentForDepth = depth => {
+  if (depth === 'primary') return VerticalNavigationItem;
+  if (depth === 'secondary') return VerticalNavigationSecondaryItem;
+  if (depth === 'tertiary') return VerticalNavigationTertiaryItem;
+  return null;
+};
 
+const wrongDepth = (props, expectedDepth) => {
+  if (props.depth !== expectedDepth) {
+    const componentUsed = componentForDepth(expectedDepth).displayName;
+    console.warn(
+      `Warning: ${componentUsed} was used at ${
+        props.depth
+      } depth, but it is for ${expectedDepth} items.`
+    );
+  }
+};
+
+const correctDepth = props => {
+  const Component = componentForDepth(props.depth);
+  console.warn(`Rendering with ${Component.displayName} instead.`);
+  return <Component {...props} />;
+};
+correctDepth.propTypes = { depth: PropTypes.string };
+*/
 const getItemProps = props => ({
   ...selectKeys(props, Object.keys(itemObjectTypes)),
   subItems:
@@ -81,6 +109,8 @@ const provideNavContext = withContext(navContextTypes, providerProps => {
 });
 const consumeNavContext = getContext(navContextTypes);
 
+console.log('consume?', consumeNavContext);
+
 const NavContextProvider = provideNavContext(props => (
   <React.Fragment>{props.children}</React.Fragment>
 ));
@@ -95,6 +125,8 @@ const getBodyContentElement = () => {
 export {
   getNextDepth,
   deepestOf,
+  wrongDepth,
+  correctDepth,
   getItemProps,
   itemObjectTypes,
   navContextTypes,

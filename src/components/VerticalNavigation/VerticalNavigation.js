@@ -14,15 +14,12 @@ import {
 } from './constants';
 
 // TODO react-router support?
-// TODO -- break things out into PrimaryItem, SecondaryItem, TertiaryItem
-// TODO -- split out the other masthead children components
 // TODO -- what else is implemented in the ng version that I'm missing?
 // TODO all the other TODOs....
-
 // TODO build it into the demo app!
 
 /**
- * BaseVerticalNavigation - The Vertical Navigation pattern
+ * VerticalNavigation - The Vertical Navigation pattern
  * http://www.patternfly.org/pattern-library/navigation/vertical-navigation/
  */
 class BaseVerticalNavigation extends React.Component {

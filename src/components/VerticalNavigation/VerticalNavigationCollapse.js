@@ -9,4 +9,6 @@ VerticalNavigationCollapse.propTypes = {
   children: PropTypes.node
 };
 
+VerticalNavigationCollapse.displayName = 'VerticalNavigation.Collapse';
+
 export default VerticalNavigationCollapse;

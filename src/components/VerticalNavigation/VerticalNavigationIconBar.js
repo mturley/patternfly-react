@@ -24,4 +24,6 @@ VerticalNavigationIconBar.defaultProps = {
   collapse: true
 };
 
+VerticalNavigationIconBar.displayName = 'VerticalNavigation.IconBar';
+
 export default VerticalNavigationIconBar;

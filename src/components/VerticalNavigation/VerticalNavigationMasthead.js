@@ -63,6 +63,6 @@ const VerticalNavigationMasthead = consumeNavContext(
   BaseVerticalNavigationMasthead
 );
 
-VerticalNavigationMasthead.displayName = 'VerticalNavigationMasthead';
+VerticalNavigationMasthead.displayName = 'VerticalNavigation.Masthead';
 
 export default VerticalNavigationMasthead;

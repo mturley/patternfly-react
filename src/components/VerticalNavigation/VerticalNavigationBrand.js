@@ -36,4 +36,6 @@ VerticalNavigationBrand.propTypes = {
   children: PropTypes.node
 };
 
+VerticalNavigationBrand.displayName = 'VerticalNavigation.Brand';
+
 export default VerticalNavigationBrand;
