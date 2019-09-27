@@ -10,7 +10,11 @@ import { Form } from '../index';
 export const InputGroupsFormFields = [
   {
     controlId: 'control-1',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.InputGroup.Addon>@</Form.InputGroup.Addon>
         <Form.FormControl type="text" disabled={disabled} />
@@ -19,7 +23,11 @@ export const InputGroupsFormFields = [
   },
   {
     controlId: 'control-2',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.FormControl type="text" disabled={disabled} />
         <Form.InputGroup.Addon>.00</Form.InputGroup.Addon>
@@ -28,7 +36,11 @@ export const InputGroupsFormFields = [
   },
   {
     controlId: 'control-3',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.InputGroup.Addon>$</Form.InputGroup.Addon>
         <Form.FormControl type="text" disabled={disabled} />
@@ -38,7 +50,11 @@ export const InputGroupsFormFields = [
   },
   {
     controlId: 'control-4',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.FormControl type="text" disabled={disabled} />
         <Form.InputGroup.Addon>
@@ -49,7 +65,11 @@ export const InputGroupsFormFields = [
   },
   {
     controlId: 'control-5',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.InputGroup.Button>
           <Button disabled={disabled}>Before</Button>
@@ -60,7 +80,11 @@ export const InputGroupsFormFields = [
   },
   {
     controlId: 'control-6',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.FormControl type="text" disabled={disabled} />
         <DropdownButton
@@ -76,7 +100,11 @@ export const InputGroupsFormFields = [
   },
   {
     controlId: 'control-7',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.InputGroup.Addon>
           <input type="radio" disabled={disabled} />
@@ -87,7 +115,11 @@ export const InputGroupsFormFields = [
   },
   {
     controlId: 'control-8',
-    formControl: ({ validationState = 'default', disabled = false, ...props }) => (
+    formControl: ({
+      validationState = 'default',
+      disabled = false,
+      ...props
+    }) => (
       <Form.InputGroup {...props}>
         <Form.InputGroup.Addon>
           <input type="checkbox" disabled={disabled} />
@@ -99,7 +131,12 @@ export const InputGroupsFormFields = [
 ];
 
 export const getInputGroupsFormKnobs = () => ({
-  validationState: select('Validation State', [null, 'success', 'warning', 'error']),
+  validationState: select('Validation State', [
+    null,
+    'success',
+    'warning',
+    'error'
+  ]),
   bsSize: select('Size', [null, 'small', 'large']),
   disabled: boolean('Disabled', false)
 });

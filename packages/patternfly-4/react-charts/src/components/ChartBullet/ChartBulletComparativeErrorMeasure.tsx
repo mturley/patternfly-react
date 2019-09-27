@@ -5,10 +5,10 @@ import {
   DomainPropType,
   NumberOrCallback,
   PaddingProps,
-  VictoryBar,
+  VictoryBar
 } from 'victory';
 import { ChartContainer } from '../ChartContainer';
-import { ChartThemeDefinition}  from '../ChartTheme';
+import { ChartThemeDefinition } from '../ChartTheme';
 import { getBulletComparativeErrorMeasureTheme } from '../ChartUtils';
 import { ChartBulletComparativeMeasure } from './ChartBulletComparativeMeasure';
 
@@ -155,7 +155,9 @@ export interface ChartBulletComparativeErrorMeasureProps {
   y?: DataGetterPropType;
 }
 
-export const ChartBulletComparativeErrorMeasure: React.FunctionComponent<ChartBulletComparativeErrorMeasureProps> = ({
+export const ChartBulletComparativeErrorMeasure: React.FunctionComponent<
+  ChartBulletComparativeErrorMeasureProps
+> = ({
   ariaDesc,
   ariaTitle,
   barWidth,
@@ -180,32 +182,35 @@ export const ChartBulletComparativeErrorMeasure: React.FunctionComponent<ChartBu
 }: ChartBulletComparativeErrorMeasureProps) => {
   // Comparative measure component
   const measure = React.cloneElement(measureComponent, {
-      ariaDesc,
-      ariaTitle,
-      barWidth,
-      constrainToVisibleArea,
-      data,
-      domain,
-      height,
-      horizontal,
-      labelComponent,
-      labels,
-      padding,
-      standalone: false,
-      theme,
-      width,
-      y,
-      ...measureComponent.props
-    });
+    ariaDesc,
+    ariaTitle,
+    barWidth,
+    constrainToVisibleArea,
+    data,
+    domain,
+    height,
+    horizontal,
+    labelComponent,
+    labels,
+    padding,
+    standalone: false,
+    theme,
+    width,
+    y,
+    ...measureComponent.props
+  });
 
   return standalone ? (
-    <ChartContainer desc={ariaDesc} height={height} title={ariaTitle} width={width}>
+    <ChartContainer
+      desc={ariaDesc}
+      height={height}
+      title={ariaTitle}
+      width={width}
+    >
       {measure}
     </ChartContainer>
   ) : (
-    <React.Fragment>
-      {measure}
-    </React.Fragment>
+    <React.Fragment>{measure}</React.Fragment>
   );
 };
 

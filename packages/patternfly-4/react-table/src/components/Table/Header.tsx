@@ -12,8 +12,12 @@ const ContextHeader: React.FunctionComponent<ContextHeaderProps> = ({
   className = '',
   headerRows = undefined as IHeaderRow[],
   ...props
-}: ContextHeaderProps ) => (
-  <Header {...props} headerRows={headerRows as ColumnsType} className={className} />
+}: ContextHeaderProps) => (
+  <Header
+    {...props}
+    headerRows={headerRows as ColumnsType}
+    className={className}
+  />
 );
 
 export interface HeaderProps extends React.HTMLProps<HTMLTableRowElement> {
@@ -22,8 +26,8 @@ export interface HeaderProps extends React.HTMLProps<HTMLTableRowElement> {
 
 export const TableHeader: React.FunctionComponent<HeaderProps> = ({
   ...props
-}: HeaderProps ) => (
+}: HeaderProps) => (
   <TableContext.Consumer>
-  {({ headerRows }) => <ContextHeader {...props} headerRows={headerRows} />}
+    {({ headerRows }) => <ContextHeader {...props} headerRows={headerRows} />}
   </TableContext.Consumer>
 );

@@ -2,7 +2,10 @@ describe('Stack Chart Gold Demo Test', () => {
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#stack-gold-bottom-legend-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/stack-gold-bottom-legend-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/stack-gold-bottom-legend-demo-nav-link'
+    );
   });
 
   it('Verify stack chart', () => {
@@ -18,4 +21,3 @@ describe('Stack Chart Gold Demo Test', () => {
     cy.get('.VictoryContainer > svg').should('have.attr', 'height', '275');
   });
 });
-

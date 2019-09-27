@@ -5,7 +5,8 @@ import { AngleRightIcon } from '@patternfly/react-icons';
 import { Omit } from '../../helpers/typeUtils';
 import { AccordionContext } from './AccordionContext';
 
-export interface AccordionToggleProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'type'> {
+export interface AccordionToggleProps
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'type'> {
   /** Content rendered inside the Accordion toggle  */
   children?: React.ReactNode;
   /** Additional classes added to the Accordion Toggle  */
@@ -33,7 +34,11 @@ export const AccordionToggle: React.FunctionComponent<AccordionToggleProps> = ({
         <Container>
           <button
             id={id}
-            className={css(styles.accordionToggle, isExpanded && styles.modifiers.expanded, className)}
+            className={css(
+              styles.accordionToggle,
+              isExpanded && styles.modifiers.expanded,
+              className
+            )}
             {...props}
             aria-expanded={isExpanded}
           >

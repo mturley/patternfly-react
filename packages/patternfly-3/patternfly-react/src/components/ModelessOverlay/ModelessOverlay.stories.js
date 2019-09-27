@@ -2,16 +2,25 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { select, withKnobs } from '@storybook/addon-knobs';
 
-import { MockModelessManager, basicExampleSource } from './__mocks__/mockModelessManager';
+import {
+  MockModelessManager,
+  basicExampleSource
+} from './__mocks__/mockModelessManager';
 import { name } from '../../../package.json';
 
 import ModelessOverlay from './ModelessOverlay';
 
 const stories = storiesOf(
-  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.FORMS_AND_CONTROLS}/Modeless Overlay`,
+  `${storybookPackageName(name)}/${
+    STORYBOOK_CATEGORY.FORMS_AND_CONTROLS
+  }/Modeless Overlay`,
   module
 );
 
@@ -30,7 +39,11 @@ stories.add(
       </div>
     )
   })(() => {
-    const size = select('Size', { default: 'Default', sm: 'Small', lg: 'Large' }, 'default');
+    const size = select(
+      'Size',
+      { default: 'Default', sm: 'Small', lg: 'Large' },
+      'default'
+    );
     const story = <MockModelessManager size={size} />;
     return inlineTemplate({
       title: 'Modeless Overlay',

@@ -5,7 +5,8 @@ import styles from '@patternfly/react-styles/css/components/Dropdown/dropdown';
 import { DropdownContext } from './dropdownConstants';
 import { css } from '@patternfly/react-styles';
 
-export interface DropdownToggleProps extends React.HTMLProps<HTMLButtonElement> {
+export interface DropdownToggleProps
+  extends React.HTMLProps<HTMLButtonElement> {
   /** HTML ID of dropdown toggle */
   id?: string;
   /** Anything which can be rendered as dropdown toggle button */
@@ -37,7 +38,14 @@ export interface DropdownToggleProps extends React.HTMLProps<HTMLButtonElement> 
   /** Accessible label for the dropdown toggle button */
   'aria-label'?: string;
   /** Accessibility property to indicate correct has popup */
-  ariaHasPopup?: boolean | 'listbox' | 'menu' | 'dialog' | 'grid' | 'listbox' | 'tree';
+  ariaHasPopup?:
+    | boolean
+    | 'listbox'
+    | 'menu'
+    | 'dialog'
+    | 'grid'
+    | 'listbox'
+    | 'tree';
   /** Type to put on the button */
   type?: 'button' | 'submit' | 'reset';
   /** Callback called when the Enter key is pressed */
@@ -80,9 +88,19 @@ export const DropdownToggle: React.FunctionComponent<DropdownToggleProps> = ({
           isPrimary={isPrimary}
           onToggle={onToggle}
           ariaHasPopup={ariaHasPopup}
-          {...splitButtonItems && { "isSplitButton": true, 'aria-label': props['aria-label'] || 'Select' }}>
-          {children && <span className={IconComponent && css(toggleTextClass)}>{children}</span>}
-          {IconComponent && <IconComponent className={css(children && toggleIconClass)} />}
+          {...(splitButtonItems && {
+            isSplitButton: true,
+            'aria-label': props['aria-label'] || 'Select'
+          })}
+        >
+          {children && (
+            <span className={IconComponent && css(toggleTextClass)}>
+              {children}
+            </span>
+          )}
+          {IconComponent && (
+            <IconComponent className={css(children && toggleIconClass)} />
+          )}
         </Toggle>
       )}
     </DropdownContext.Consumer>

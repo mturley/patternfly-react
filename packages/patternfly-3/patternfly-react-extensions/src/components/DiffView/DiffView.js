@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { parseDiff, Diff, markCharacterEdits, markWordEdits } from 'react-diff-view';
+import {
+  parseDiff,
+  Diff,
+  markCharacterEdits,
+  markWordEdits
+} from 'react-diff-view';
 import { formatLines, diffLines } from 'unidiff';
 
 const getDiff = (oldText, newText) => {
@@ -25,7 +30,9 @@ const DiffView = ({
   ...props
 }) => {
   const markEditProps = { markThreshold, markLongDistanceDiff };
-  const markEdits = markEditsByWord ? markWordEdits(markEditProps) : markCharacterEdits(markEditProps);
+  const markEdits = markEditsByWord
+    ? markWordEdits(markEditProps)
+    : markCharacterEdits(markEditProps);
   const classes = classNames('diff-pf', className);
 
   // Old, New Text
@@ -34,8 +41,20 @@ const DiffView = ({
     const files = parseDiff(gitDiff);
     const hunk = files[0].hunks;
 
-    if (hunk.length === 0) { return emptyState; }
-    return hunk && <Diff className={classes} hunks={hunk} markEdits={markEdits} viewType={viewType} {...props} />;
+    if (hunk.length === 0) {
+      return emptyState;
+    }
+    return (
+      hunk && (
+        <Diff
+          className={classes}
+          hunks={hunk}
+          markEdits={markEdits}
+          viewType={viewType}
+          {...props}
+        />
+      )
+    );
   }
 
   // Patch
@@ -53,7 +72,9 @@ const DiffView = ({
     />
   );
 
-  if (patch === '') { return emptyState; }
+  if (patch === '') {
+    return emptyState;
+  }
   return <div>{files.map(renderFile)}</div>;
 };
 

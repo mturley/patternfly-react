@@ -8,11 +8,25 @@ import ToolbarRightContent from './ToolbarRightContent';
 import ToolbarFind from './ToolbarFind';
 import ToolbarViewSelector from './ToolbarViewSelector';
 
-import { toolbarContextTypes, getToolbarContext, ToolbarContextProvider } from './ToolbarConstants';
+import {
+  toolbarContextTypes,
+  getToolbarContext,
+  ToolbarContextProvider
+} from './ToolbarConstants';
 
-const ContextualToolbar = ({ children, className, preventSubmit, ...props }) => {
-  const toolbarChildren = filterChildren(children, child => !hasDisplayName(child, ToolbarResults.displayName));
-  const resultsChildren = filterChildren(children, child => hasDisplayName(child, ToolbarResults.displayName));
+const ContextualToolbar = ({
+  children,
+  className,
+  preventSubmit,
+  ...props
+}) => {
+  const toolbarChildren = filterChildren(
+    children,
+    child => !hasDisplayName(child, ToolbarResults.displayName)
+  );
+  const resultsChildren = filterChildren(children, child =>
+    hasDisplayName(child, ToolbarResults.displayName)
+  );
 
   return (
     <ToolbarContextProvider isDescendantOfToolbar>
@@ -52,7 +66,9 @@ ContextualToolbar.defaultProps = {
   preventSubmit: false
 };
 
-const Toolbar = withContext(toolbarContextTypes, getToolbarContext)(ContextualToolbar);
+const Toolbar = withContext(toolbarContextTypes, getToolbarContext)(
+  ContextualToolbar
+);
 
 Toolbar.Results = ToolbarResults;
 Toolbar.RightContent = ToolbarRightContent;

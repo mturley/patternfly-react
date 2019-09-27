@@ -2,7 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, number } from '@storybook/addon-knobs';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, STORYBOOK_CATEGORY, DOCUMENTATION_URL } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  STORYBOOK_CATEGORY,
+  DOCUMENTATION_URL
+} from 'storybook/constants/siteConstants';
 import LoginPage from './LoginPage';
 
 import { name } from '../../../package.json';
@@ -16,7 +20,9 @@ import {
 } from './LoginPageFixtures';
 
 const stories = storiesOf(
-  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.APPLICATION_FRAMEWORK}/Login Page`,
+  `${storybookPackageName(name)}/${
+    STORYBOOK_CATEGORY.APPLICATION_FRAMEWORK
+  }/Login Page`,
   module
 );
 
@@ -36,7 +42,9 @@ stories.add('Managed Login Page with errors display under form inputs', () => (
   <LoginPage {...getManagedPageProps()} />
 ));
 
-stories.add('Build Your own Basic Login Page', () => LoginPage.Pattern(getBuildYourOwnPageProps()));
+stories.add('Build Your own Basic Login Page', () =>
+  LoginPage.Pattern(getBuildYourOwnPageProps())
+);
 
 stories.add('Managed Social Login Page', () => {
   const logoListCopy = createLogoList();

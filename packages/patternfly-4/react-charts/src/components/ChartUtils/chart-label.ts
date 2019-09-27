@@ -18,7 +18,7 @@ interface ChartPieLabelInterface {
   dx?: number; // Horizontal shift from the x coordinate
   dy?: number; // Horizontal shift from the y coordinate
   height: number; // Chart height
-  labelPosition?: 'bottom' | 'center' | 'right' ; // Position of label
+  labelPosition?: 'bottom' | 'center' | 'right'; // Position of label
   legendPosition?: 'bottom' | 'right'; // Position of legend
   padding: any; // Chart padding
   width: number; // Chart width
@@ -35,7 +35,9 @@ export const getBulletLabelX = ({
   dx = 0,
   labelPosition
 }: ChartBulletLabelInterface) => {
-  return (labelPosition === 'top' && chartWidth) ? Math.round(chartWidth / 2) : dx;
+  return labelPosition === 'top' && chartWidth
+    ? Math.round(chartWidth / 2)
+    : dx;
 };
 
 // Returns y coordinate for bullet labels
@@ -113,9 +115,9 @@ export const overpassFontCharacterConstant = 2.5875;
 export const getLabelTextSize = ({
   text,
   theme
-}: ChartLabelTextSizeInterface): {height: number, width: number} => {
+}: ChartLabelTextSizeInterface): { height: number; width: number } => {
   const style = theme.legend.style.labels;
-  return TextSize.approximateTextSize(text,  {
+  return TextSize.approximateTextSize(text, {
     ...style,
     characterConstant: overpassFontCharacterConstant
   });

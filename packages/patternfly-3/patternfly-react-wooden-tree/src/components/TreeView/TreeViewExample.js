@@ -46,7 +46,9 @@ const actionMapper = {
 
 class TreeViewExample extends React.Component {
   state = {
-    tree: WoodenTreeView.convertHierarchicalTree(WoodenTreeView.initHierarchicalTree(data))
+    tree: WoodenTreeView.convertHierarchicalTree(
+      WoodenTreeView.initHierarchicalTree(data)
+    )
   };
 
   /**
@@ -69,7 +71,7 @@ class TreeViewExample extends React.Component {
       }
     }
     this.setState({ tree });
-  }
+  };
 
   render() {
     return (

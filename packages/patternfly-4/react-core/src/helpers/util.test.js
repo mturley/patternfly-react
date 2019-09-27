@@ -1,6 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { ApplicationLauncher, DropdownItem, Dropdown, DropdownToggle } from '@patternfly/react-core';
+import {
+  ApplicationLauncher,
+  DropdownItem,
+  Dropdown,
+  DropdownToggle
+} from '@patternfly/react-core';
 import {
   capitalize,
   getUniqueId,
@@ -103,9 +108,12 @@ describe('keyHandler works on ApplicationLauncher', () => {
       Disabled Link
     </DropdownItem>
   ];
-  const view = mount(<ApplicationLauncher dropdownItems={dropdownItems} isOpen />, {
-    attachTo: document.getElementsByName('div')[0]
-  });
+  const view = mount(
+    <ApplicationLauncher dropdownItems={dropdownItems} isOpen />,
+    {
+      attachTo: document.getElementsByName('div')[0]
+    }
+  );
 
   const firstDropdownItem = view.find('#first button').first();
   const secondDropdownItem = view.find('#second button').first();
@@ -165,7 +173,11 @@ describe('keyHandler works on Dropdown', () => {
     </DropdownItem>
   ];
   const view = mount(
-    <Dropdown dropdownItems={dropdownItems} isOpen toggle={<DropdownToggle>Expanded Dropdown</DropdownToggle>} />,
+    <Dropdown
+      dropdownItems={dropdownItems}
+      isOpen
+      toggle={<DropdownToggle>Expanded Dropdown</DropdownToggle>}
+    />,
     {
       attachTo: document.getElementsByName('div')[0]
     }
@@ -233,7 +245,19 @@ test('text pluralize', () => {
 });
 
 test('formatBreakpointMods', () => {
-  expect(formatBreakpointMods([{modifier: "spacer-none"}], styles)).toEqual('pf-m-spacer-none');
-  expect(formatBreakpointMods([{modifier: "spacer-none", breakpoint: 'md'}], styles)).toEqual('pf-m-spacer-none-on-md');
-  expect(formatBreakpointMods([{modifier: "column"}, {modifier: "row", breakpoint: "lg"}], styles)).toEqual('pf-m-column pf-m-row-on-lg');
+  expect(formatBreakpointMods([{ modifier: 'spacer-none' }], styles)).toEqual(
+    'pf-m-spacer-none'
+  );
+  expect(
+    formatBreakpointMods(
+      [{ modifier: 'spacer-none', breakpoint: 'md' }],
+      styles
+    )
+  ).toEqual('pf-m-spacer-none-on-md');
+  expect(
+    formatBreakpointMods(
+      [{ modifier: 'column' }, { modifier: 'row', breakpoint: 'lg' }],
+      styles
+    )
+  ).toEqual('pf-m-column pf-m-row-on-lg');
 });

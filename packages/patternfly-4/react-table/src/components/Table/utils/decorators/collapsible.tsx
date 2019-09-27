@@ -5,9 +5,16 @@ import { CollapseColumn } from '../../CollapseColumn';
 import { ExpandableRowContent } from '../../ExpandableRowContent';
 import { IExtra, IFormatterValueType } from '../../Table';
 
-export const collapsible = (value: IFormatterValueType, { rowIndex, columnIndex, rowData, column, property }: IExtra) => {
+export const collapsible = (
+  value: IFormatterValueType,
+  { rowIndex, columnIndex, rowData, column, property }: IExtra
+) => {
   const {
-    extraParams: { onCollapse, rowLabeledBy = 'simple-node', expandId = 'expand-toggle' }
+    extraParams: {
+      onCollapse,
+      rowLabeledBy = 'simple-node',
+      expandId = 'expand-toggle'
+    }
   } = column;
   const extraData = {
     rowIndex,
@@ -18,7 +25,14 @@ export const collapsible = (value: IFormatterValueType, { rowIndex, columnIndex,
 
   function onToggle(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     // tslint:disable-next-line:no-unused-expression
-    onCollapse && onCollapse(event, rowIndex, rowData && !rowData.isOpen, rowData, extraData);
+    onCollapse &&
+      onCollapse(
+        event,
+        rowIndex,
+        rowData && !rowData.isOpen,
+        rowData,
+        extraData
+      );
   }
 
   return {
@@ -38,7 +52,11 @@ export const collapsible = (value: IFormatterValueType, { rowIndex, columnIndex,
 };
 
 export const expandable = (value: IFormatterValueType, { rowData }: IExtra) =>
-  rowData.hasOwnProperty('parent') ? <ExpandableRowContent>{value}</ExpandableRowContent> : value;
+  rowData.hasOwnProperty('parent') ? (
+    <ExpandableRowContent>{value}</ExpandableRowContent>
+  ) : (
+    value
+  );
 
 export const expandedRow = (colSpan: number) => {
   const expandedRowFormatter = (

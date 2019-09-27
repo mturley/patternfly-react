@@ -8,7 +8,13 @@ import * as React from 'react';
 import { evaluateFormatters } from './evaluate-formatters';
 import { evaluateTransforms } from './evaluate-transforms';
 import { mergeProps } from './merge-props';
-import { createElementType, ColumnType, HeaderType, RowsType, RendererType } from './types';
+import {
+  createElementType,
+  ColumnType,
+  HeaderType,
+  RowsType,
+  RendererType
+} from './types';
 
 export interface HeaderRowProps {
   rowData: RowsType;
@@ -35,7 +41,11 @@ export const HeaderRow: React.FunctionComponent<HeaderRowProps> = ({
         property: evaluatedProperty,
         column
       };
-      const transformedProps = evaluateTransforms(transforms, label, extraParameters);
+      const transformedProps = evaluateTransforms(
+        transforms,
+        label,
+        extraParameters
+      );
 
       if (!transformedProps) {
         // tslint:disable-next-line:no-console
@@ -48,7 +58,8 @@ export const HeaderRow: React.FunctionComponent<HeaderRowProps> = ({
           key: `${columnIndex}-header`,
           ...mergeProps(props, header && header.props, transformedProps)
         },
-        transformedProps.children || evaluateFormatters(formatters)(label, extraParameters)
+        transformedProps.children ||
+          evaluateFormatters(formatters)(label, extraParameters)
       );
     })
   );

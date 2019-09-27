@@ -52,7 +52,12 @@ test('Select functionality', () => {
 
 test('Select Helper', () => {
   const host = optionsArray[0];
-  const itemProps = createItemProps(host, optionsArray[1], 'className', () => {});
+  const itemProps = createItemProps(
+    host,
+    optionsArray[1],
+    'className',
+    () => {}
+  );
 
   expect(itemProps).toMatchSnapshot();
 });

@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import chunk from 'lodash/chunk';
 import times from 'lodash/times';
 import Day from './Day';
-import { addDays, addMonths, getMonthStart, isEqualDate, isWeekend } from './helpers';
+import {
+  addDays,
+  addMonths,
+  getMonthStart,
+  isEqualDate,
+  isWeekend
+} from './helpers';
 import Header from './Header';
 
 class DateInput extends React.Component {

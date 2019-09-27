@@ -32,7 +32,9 @@ const SidebarLayout = ({ children }) => {
     }
   `);
 
-  const prInfo = data.allEnvVars.edges.filter(({ node }) => node.name === 'PR_INFO')[0].node;
+  const prInfo = data.allEnvVars.edges.filter(
+    ({ node }) => node.name === 'PR_INFO'
+  )[0].node;
 
   const Header = (
     <PageHeader
@@ -58,7 +60,12 @@ const SidebarLayout = ({ children }) => {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Helmet>
       {/* Nothing quite like dogfooding your own components */}
-      <Page style={{ height: '100vh' }} header={Header} sidebar={SideBar} isManagedSidebar>
+      <Page
+        style={{ height: '100vh' }}
+        header={Header}
+        sidebar={SideBar}
+        isManagedSidebar
+      >
         {children}
       </Page>
     </React.Fragment>

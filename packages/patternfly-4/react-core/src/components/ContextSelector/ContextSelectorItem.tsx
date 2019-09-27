@@ -21,7 +21,9 @@ export interface ContextSelectorItemProps {
   sendRef: (index: number, current: any) => void;
 }
 
-export class ContextSelectorItem extends React.Component<ContextSelectorItemProps> {
+export class ContextSelectorItem extends React.Component<
+  ContextSelectorItemProps
+> {
   static defaultProps = {
     children: null as React.ReactNode,
     className: '',
@@ -40,7 +42,16 @@ export class ContextSelectorItem extends React.Component<ContextSelectorItemProp
   }
 
   render() {
-    const { className, children, isHovered, onClick, isDisabled, index, sendRef, ...props } = this.props;
+    const {
+      className,
+      children,
+      isHovered,
+      onClick,
+      isDisabled,
+      index,
+      sendRef,
+      ...props
+    } = this.props;
     return (
       <ContextSelectorContext.Consumer>
         {({ onSelect }) => (
@@ -53,7 +64,7 @@ export class ContextSelectorItem extends React.Component<ContextSelectorItemProp
                 className
               )}
               ref={this.ref}
-              onClick={(event) => {
+              onClick={event => {
                 if (!isDisabled) {
                   onClick(event);
                   onSelect(event, children);

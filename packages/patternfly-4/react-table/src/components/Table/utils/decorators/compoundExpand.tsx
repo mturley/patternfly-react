@@ -4,7 +4,10 @@ import { Button } from '@patternfly/react-core';
 import styles from '@patternfly/react-styles/css/components/Table/table';
 import { IExtra, IFormatterValueType } from '../../Table';
 
-export const compoundExpand = (value: IFormatterValueType, { rowIndex, columnIndex, rowData, column, property }: IExtra) => {
+export const compoundExpand = (
+  value: IFormatterValueType,
+  { rowIndex, columnIndex, rowData, column, property }: IExtra
+) => {
   if (!value) {
     return null;
   }
@@ -21,12 +24,21 @@ export const compoundExpand = (value: IFormatterValueType, { rowIndex, columnInd
 
   function onToggle(event: React.MouseEvent) {
     // tslint:disable-next-line:no-unused-expression
-    onExpand && onExpand(event, rowIndex, columnIndex, props.isOpen, rowData, extraData);
+    onExpand &&
+      onExpand(event, rowIndex, columnIndex, props.isOpen, rowData, extraData);
   }
   return {
-    className: css(styles.tableCompoundExpansionToggle, props.isOpen && styles.modifiers.expanded),
+    className: css(
+      styles.tableCompoundExpansionToggle,
+      props.isOpen && styles.modifiers.expanded
+    ),
     children: props.isOpen !== undefined && (
-      <Button variant="link" onClick={onToggle} aria-expanded={props.isOpen} aria-controls={props.ariaControls}>
+      <Button
+        variant="link"
+        onClick={onToggle}
+        aria-expanded={props.isOpen}
+        aria-controls={props.ariaControls}
+      >
         {title}
       </Button>
     )

@@ -3,7 +3,8 @@ import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/AboutModalBox/about-modal-box';
 import { Title } from '../Title';
 
-export interface AboutModalBoxHeaderProps extends React.HTMLProps<HTMLDivElement> {
+export interface AboutModalBoxHeaderProps
+  extends React.HTMLProps<HTMLDivElement> {
   /** additional classes added to the button  */
   className?: string;
   /** Name of the Product  */

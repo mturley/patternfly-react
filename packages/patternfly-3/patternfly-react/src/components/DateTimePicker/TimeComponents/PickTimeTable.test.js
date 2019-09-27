@@ -6,7 +6,9 @@ import { HOUR, MINUTE } from './TimeConstants';
 test('PickTimeTable is working properly for Minute', () => {
   const time = new Date('2019-01-04 14:22:31');
   const setSelected = jest.fn();
-  const component = mount(<PickTimeTable time={time} type={MINUTE} setSelected={setSelected} />);
+  const component = mount(
+    <PickTimeTable time={time} type={MINUTE} setSelected={setSelected} />
+  );
   expect(component.render()).toMatchSnapshot();
   component
     .find('.minute')
@@ -18,7 +20,9 @@ test('PickTimeTable is working properly for Minute', () => {
 test('PickTimeTable is working properly for Hour', () => {
   const time = new Date('2019-01-04 14:22:31');
   const setSelected = jest.fn();
-  const component = mount(<PickTimeTable time={time} type={HOUR} setSelected={setSelected} />);
+  const component = mount(
+    <PickTimeTable time={time} type={HOUR} setSelected={setSelected} />
+  );
   expect(component.render()).toMatchSnapshot();
   component
     .find('.hour')

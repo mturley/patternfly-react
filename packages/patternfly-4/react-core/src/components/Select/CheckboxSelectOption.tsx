@@ -4,7 +4,8 @@ import { default as checkStyles } from '@patternfly/react-styles/css/components/
 import { css } from '@patternfly/react-styles';
 import { SelectConsumer, KeyTypes } from './selectConstants';
 
-export interface CheckboxSelectOptionProps extends React.HTMLProps<HTMLLabelElement> {
+export interface CheckboxSelectOptionProps
+  extends React.HTMLProps<HTMLLabelElement> {
   /** Optional alternate display for the option */
   children?: React.ReactNode;
   /** Additional classes added to the Select Option */
@@ -25,7 +26,9 @@ export interface CheckboxSelectOptionProps extends React.HTMLProps<HTMLLabelElem
   onClick?: (event: React.MouseEvent | React.ChangeEvent) => void;
 }
 
-export class CheckboxSelectOption extends React.Component<CheckboxSelectOptionProps> {
+export class CheckboxSelectOption extends React.Component<
+  CheckboxSelectOptionProps
+> {
   private ref = React.createRef<any>();
   static defaultProps = {
     className: '',
@@ -59,10 +62,21 @@ export class CheckboxSelectOption extends React.Component<CheckboxSelectOptionPr
       this.ref.current.click();
       this.ref.current.focus();
     }
-  }
+  };
 
   render() {
-    const { children, className, value, onClick, isDisabled, isChecked, sendRef, keyHandler, index, ...props } = this.props;
+    const {
+      children,
+      className,
+      value,
+      onClick,
+      isDisabled,
+      isChecked,
+      sendRef,
+      keyHandler,
+      index,
+      ...props
+    } = this.props;
     return (
       <SelectConsumer>
         {({ onSelect }) => (
@@ -80,7 +94,7 @@ export class CheckboxSelectOption extends React.Component<CheckboxSelectOptionPr
               id={value}
               className={css(checkStyles.checkInput)}
               type="checkbox"
-              onChange={(event) => {
+              onChange={event => {
                 if (!isDisabled) {
                   onClick(event);
                   onSelect(event, value);
@@ -90,7 +104,14 @@ export class CheckboxSelectOption extends React.Component<CheckboxSelectOptionPr
               defaultChecked={isChecked || false}
               disabled={isDisabled}
             />
-            <span className={css(checkStyles.checkLabel, isDisabled && styles.modifiers.disabled)}>{children || value}</span>
+            <span
+              className={css(
+                checkStyles.checkLabel,
+                isDisabled && styles.modifiers.disabled
+              )}
+            >
+              {children || value}
+            </span>
           </label>
         )}
       </SelectConsumer>

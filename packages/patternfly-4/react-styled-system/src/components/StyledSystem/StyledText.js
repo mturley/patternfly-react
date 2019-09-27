@@ -2,7 +2,13 @@ import React from 'react';
 import { css } from '@patternfly/react-styles';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import { fontFamily, fontWeight, textAlign, lineHeight, letterSpacing } from 'styled-system';
+import {
+  fontFamily,
+  fontWeight,
+  textAlign,
+  lineHeight,
+  letterSpacing
+} from 'styled-system';
 import StyledBox, { StyledBoxBase } from './StyledBox';
 
 const StyledTextBase = styled(StyledBoxBase)(
@@ -36,15 +42,35 @@ StyledText.propTypes = {
   ...StyledBox.propTypes,
 
   /** font-family - Maps with Maps with StyledConstants.fonts */
-  fontFamily: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  fontFamily: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** font-weight - Maps with Maps with StyledConstants.fontWeights */
-  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  fontWeight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** line-height - Maps with Maps with StyledConstants.lineHeights */
-  lineHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  lineHeight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** letter-spacing */
-  letterSpacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  letterSpacing: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** text-align */
-  textAlign: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array])
+  textAlign: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ])
 };
 
 StyledText.defaultProps = {

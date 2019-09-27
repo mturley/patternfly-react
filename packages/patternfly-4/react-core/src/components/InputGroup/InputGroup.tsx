@@ -17,16 +17,20 @@ export const InputGroup: React.FunctionComponent<InputGroupProps> = ({
   children,
   ...props
 }: InputGroupProps) => {
-  const formCtrls = [FormSelect, TextArea, TextInput].map((comp) => comp.toString());
+  const formCtrls = [FormSelect, TextArea, TextInput].map(comp =>
+    comp.toString()
+  );
   const idItem = React.Children.toArray(children).find(
     (child: any) => !formCtrls.includes(child.type.toString()) && child.props.id
-  ) as React.ReactElement<{id: string}>;
+  ) as React.ReactElement<{ id: string }>;
   return (
     <div className={css(styles.inputGroup, className)} {...props}>
       {idItem
         ? React.Children.map(children, (child: any) =>
             formCtrls.includes(child.type.toString())
-              ? React.cloneElement(child, { 'aria-describedby': idItem.props.id })
+              ? React.cloneElement(child, {
+                  'aria-describedby': idItem.props.id
+                })
               : child
           )
         : children}

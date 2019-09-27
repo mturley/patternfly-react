@@ -19,6 +19,8 @@ it('handles onRemoveClick having a falsy value', () => {
 });
 
 it('spreads additional props and className to icon', () => {
-  const view = shallow(<RemoveButton id="id" another="another" className="additional classes" />);
+  const view = shallow(
+    <RemoveButton id="id" another="another" className="additional classes" />
+  );
   expect(view).toMatchSnapshot('Icon has correct props.');
 });

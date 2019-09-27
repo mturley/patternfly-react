@@ -9,7 +9,10 @@ export const twoLevel = (
       <HorizontalNavMenuItem id="another-link" title="Another Link" active />
       <HorizontalNavMenuItem id="something-else" title="Something Else Here" />
       <HorizontalNavMenuItem id="remember" title="Remembering to keep" />
-      <HorizontalNavMenuItem id="between-5-7" title="It between five and seven" />
+      <HorizontalNavMenuItem
+        id="between-5-7"
+        title="It between five and seven"
+      />
       <HorizontalNavMenuItem id="more" title="More options" />
     </HorizontalNavMenuItem>
     <HorizontalNavMenuItem id="and-another" title="And Another" />

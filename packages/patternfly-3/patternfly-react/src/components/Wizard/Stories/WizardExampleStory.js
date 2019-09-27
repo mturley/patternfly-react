@@ -34,7 +34,8 @@ const wizardExampleWithInfo = stories => {
       );
       return inlineTemplate({
         title: 'Wizard',
-        description: 'The wizard example contains all base wizard components within a modal wizard.',
+        description:
+          'The wizard example contains all base wizard components within a modal wizard.',
         documentationLink: `${DOCUMENTATION_URL.PATTERNFLY_ORG_COMMUNICATION}wizard/#overview`,
         story
       });

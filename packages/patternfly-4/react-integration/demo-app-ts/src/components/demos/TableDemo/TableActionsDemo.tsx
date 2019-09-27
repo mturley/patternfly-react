@@ -18,7 +18,10 @@ import {
   ISeparator
 } from '@patternfly/react-table';
 
-export class TableActionsDemo extends React.Component<TableProps, { columns: any, rows: IRow[] }> {
+export class TableActionsDemo extends React.Component<
+  TableProps,
+  { columns: any; rows: IRow[] }
+> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
@@ -64,7 +67,9 @@ export class TableActionsDemo extends React.Component<TableProps, { columns: any
               // tslint:disable-next-line:no-shadowed-variable
               onClick: (event, rowId, rowData, extra) =>
                 // tslint:disable-next-line:no-console
-                console.log(`clicked on Third action, on row ${rowId} of type ${rowData.type}`)
+                console.log(
+                  `clicked on Third action, on row ${rowId} of type ${rowData.type}`
+                )
             } as IAction
           ]
         : [];
@@ -75,14 +80,18 @@ export class TableActionsDemo extends React.Component<TableProps, { columns: any
         // tslint:disable-next-line:no-shadowed-variable
         onClick: (event, rowId, rowData, extra) =>
           // tslint:disable-next-line:no-console
-          console.log(`clicked on Some action, on row ${rowId} of type ${rowData.type}`)
+          console.log(
+            `clicked on Some action, on row ${rowId} of type ${rowData.type}`
+          )
       } as IAction,
       {
         title: 'Another action',
         // tslint:disable-next-line:no-shadowed-variable
         onClick: (event, rowId, rowData, extra) =>
           // tslint:disable-next-line:no-console
-          console.log(`clicked on Another action, on row ${rowId} of type ${rowData.type}`)
+          console.log(
+            `clicked on Another action, on row ${rowId} of type ${rowData.type}`
+          )
       } as IAction,
       ...thirdAction
     ];
@@ -93,7 +102,7 @@ export class TableActionsDemo extends React.Component<TableProps, { columns: any
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {

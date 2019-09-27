@@ -4,7 +4,10 @@ import { HelpIcon } from '@patternfly/react-icons';
 import { ApplicationLauncher } from './ApplicationLauncher';
 import { DropdownItem } from '../Dropdown/DropdownItem';
 
-import { DropdownPosition, DropdownDirection } from '../Dropdown/dropdownConstants';
+import {
+  DropdownPosition,
+  DropdownDirection
+} from '../Dropdown/dropdownConstants';
 import { DropdownSeparator } from '../Dropdown/Separator';
 
 const dropdownItems = [
@@ -32,12 +35,22 @@ describe('ApplicationLauncher', () => {
   });
 
   test('right aligned', () => {
-    const view = mount(<ApplicationLauncher dropdownItems={dropdownItems} position={DropdownPosition.right} />);
+    const view = mount(
+      <ApplicationLauncher
+        dropdownItems={dropdownItems}
+        position={DropdownPosition.right}
+      />
+    );
     expect(view).toMatchSnapshot();
   });
 
   test('dropup', () => {
-    const view = mount(<ApplicationLauncher dropdownItems={dropdownItems} direction={DropdownDirection.up} />);
+    const view = mount(
+      <ApplicationLauncher
+        dropdownItems={dropdownItems}
+        direction={DropdownDirection.up}
+      />
+    );
     expect(view).toMatchSnapshot();
   });
 
@@ -53,13 +66,19 @@ describe('ApplicationLauncher', () => {
   });
 
   test('expanded', () => {
-    const view = mount(<ApplicationLauncher dropdownItems={dropdownItems} isOpen />);
+    const view = mount(
+      <ApplicationLauncher dropdownItems={dropdownItems} isOpen />
+    );
     expect(view).toMatchSnapshot();
   });
 
   test('custom icon', () => {
     const view = mount(
-      <ApplicationLauncher dropdownItems={dropdownItems} isOpen toggleIcon={<HelpIcon id="test-icon" />} />
+      <ApplicationLauncher
+        dropdownItems={dropdownItems}
+        isOpen
+        toggleIcon={<HelpIcon id="test-icon" />}
+      />
     );
     expect(view).toMatchSnapshot();
   });

@@ -94,7 +94,8 @@ export class MockInlineEditRowTable extends React.Component {
     this.inlineEditController = inlineEditController;
 
     const inlineEditFormatter = inlineEditFormatterFactory({
-      isEditing: additionalData => inlineEditController.isEditing(additionalData),
+      isEditing: additionalData =>
+        inlineEditController.isEditing(additionalData),
       renderValue: (value, additionalData) => (
         <td className="editable">
           <span className="static">{value}</span>
@@ -107,7 +108,9 @@ export class MockInlineEditRowTable extends React.Component {
             <FormControl
               type="text"
               defaultValue={rowData.editing[property]}
-              onBlur={e => inlineEditController.onChange(e.target.value, additionalData)}
+              onBlur={e =>
+                inlineEditController.onChange(e.target.value, additionalData)
+              }
             />
           </td>
         );
@@ -118,7 +121,10 @@ export class MockInlineEditRowTable extends React.Component {
       isEditing: additionalData => this.state.editing,
       renderValue: (value, additionalData) => (
         <td style={{ padding: '2px' }}>
-          <Button bsStyle="default" onClick={() => inlineEditController.onActivate(additionalData)}>
+          <Button
+            bsStyle="default"
+            onClick={() => inlineEditController.onActivate(additionalData)}
+          >
             <Icon type="pf" name="edit" />
           </Button>
         </td>
@@ -305,8 +311,10 @@ export class MockInlineEditRowTable extends React.Component {
             onRow={(rowData, { rowIndex }) => ({
               role: 'row',
               isEditing: () => this.inlineEditController.isEditing({ rowData }),
-              onCancel: () => this.inlineEditController.onCancel({ rowData, rowIndex }),
-              onConfirm: () => this.inlineEditController.onConfirm({ rowData, rowIndex }),
+              onCancel: () =>
+                this.inlineEditController.onCancel({ rowData, rowIndex }),
+              onConfirm: () =>
+                this.inlineEditController.onConfirm({ rowData, rowIndex }),
               last: rowIndex === sortedRows.length - 1
             })}
           />

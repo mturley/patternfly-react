@@ -2,15 +2,32 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info/dist/index';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
-import { MockVirtualTableGridExample, MockVirtualTableGridExampleSource } from './_mocks_/mockVirtualTableGridExample';
+import {
+  storybookPackageName,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
+import {
+  MockVirtualTableGridExample,
+  MockVirtualTableGridExampleSource
+} from './_mocks_/mockVirtualTableGridExample';
 
-import { VirtualTableGrid, TableGridHead, TableGridColumnHeader, TableGridRow, TableGridCol } from './index';
+import {
+  VirtualTableGrid,
+  TableGridHead,
+  TableGridColumnHeader,
+  TableGridRow,
+  TableGridCol
+} from './index';
 
 import { name } from '../../../package.json';
 import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.CONTENT_VIEWS}/VirtualTableGrid`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${
+    STORYBOOK_CATEGORY.CONTENT_VIEWS
+  }/VirtualTableGrid`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({
@@ -18,15 +35,19 @@ stories.addDecorator(
     description: (
       <div>
         The VirtualTableGrid is based on the Bootstrap Grid Layout and uses{' '}
-        <a href="https://github.com/bvaughn/react-virtualized">react-virtualized</a> to efficiently render large lists
-        of data.
+        <a href="https://github.com/bvaughn/react-virtualized">
+          react-virtualized
+        </a>{' '}
+        to efficiently render large lists of data.
         <br />
         <br />
-        The <b>VirtualTableGrid.ColumnHeaders</b> should have the same bootstrap column classes as the children of the{' '}
-        <b>VirtualTableGrid.Row</b> component in order to maintain equal widths.
+        The <b>VirtualTableGrid.ColumnHeaders</b> should have the same bootstrap
+        column classes as the children of the <b>VirtualTableGrid.Row</b>{' '}
+        component in order to maintain equal widths.
         <br />
         <br />
-        When using <i>cell</i> selection, the <b>VirtualTableGrid.Col</b> component should be used in place of the
+        When using <i>cell</i> selection, the <b>VirtualTableGrid.Col</b>{' '}
+        component should be used in place of the
         <b> Grid.Col</b> component for correct selection styling.
       </div>
     )
@@ -38,7 +59,13 @@ stories.add(
   'VirtualTableGrid',
   withInfo({
     source: false,
-    propTables: [VirtualTableGrid, TableGridHead, TableGridColumnHeader, TableGridRow, TableGridCol],
+    propTables: [
+      VirtualTableGrid,
+      TableGridHead,
+      TableGridColumnHeader,
+      TableGridRow,
+      TableGridCol
+    ],
     propTablesExclude: [MockVirtualTableGridExample],
     text: (
       <div>
@@ -54,6 +81,11 @@ stories.add(
       'none'
     );
 
-    return <MockVirtualTableGridExample bordered={bordered} selectType={selectType} />;
+    return (
+      <MockVirtualTableGridExample
+        bordered={bordered}
+        selectType={selectType}
+      />
+    );
   })
 );

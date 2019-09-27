@@ -28,14 +28,27 @@ export const WizardFooterInternal: React.SFC<WizardFooterInternalProps> = ({
   cancelButtonText
 }) => (
   <footer className={css(styles.wizardFooter)}>
-    <Button variant={ButtonVariant.primary} type="submit" onClick={onNext} isDisabled={!isValid}>
+    <Button
+      variant={ButtonVariant.primary}
+      type="submit"
+      onClick={onNext}
+      isDisabled={!isValid}
+    >
       {nextButtonText}
     </Button>
-    {!activeStep.hideBackButton && <Button variant={ButtonVariant.secondary} onClick={onBack} className={css(firstStep && 'pf-m-disabled')}>
-      {backButtonText}
-    </Button>}
-    {!activeStep.hideCancelButton && <Button variant={ButtonVariant.link} onClick={onClose}>
-      {cancelButtonText}
-    </Button>}
+    {!activeStep.hideBackButton && (
+      <Button
+        variant={ButtonVariant.secondary}
+        onClick={onBack}
+        className={css(firstStep && 'pf-m-disabled')}
+      >
+        {backButtonText}
+      </Button>
+    )}
+    {!activeStep.hideCancelButton && (
+      <Button variant={ButtonVariant.link} onClick={onClose}>
+        {cancelButtonText}
+      </Button>
+    )}
   </footer>
 );

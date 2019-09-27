@@ -13,7 +13,7 @@ import {
   VictoryChart,
   VictoryChartProps,
   VictoryStyleInterface,
-  VictoryZoomContainer,
+  VictoryZoomContainer
 } from 'victory';
 import { ChartContainer } from '../ChartContainer';
 import {
@@ -23,8 +23,12 @@ import {
   ChartLegendWrapper
 } from '../ChartLegend';
 import { ChartCommonStyles, ChartThemeDefinition } from '../ChartTheme';
-import { getClassName, getLabelTextSize, getPaddingForSide, getTheme } from '../ChartUtils';
-
+import {
+  getClassName,
+  getLabelTextSize,
+  getPaddingForSide,
+  getTheme
+} from '../ChartUtils';
 
 /**
  * See https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/victory/index.d.ts
@@ -229,7 +233,7 @@ export interface ChartProps extends VictoryChartProps {
    * maxDomain={0}
    * maxDomain={{ y: 0 }}
    */
-  maxDomain?: number | { x?: number, y?: number };
+  maxDomain?: number | { x?: number; y?: number };
   /**
    * The minDomain prop defines a minimum domain value for a chart. This prop is useful in situations where the minimum
    * domain of a chart is static, while the maximum value depends on data or other variable information. If the domain
@@ -244,7 +248,7 @@ export interface ChartProps extends VictoryChartProps {
    * minDomain={0}
    * minDomain={{ y: 0 }}
    */
-  minDomain?: number | { x?: number, y?: number };
+  minDomain?: number | { x?: number; y?: number };
   /**
    * The padding props specifies the amount of padding in number of pixels between
    * the edge of the chart and any rendered child components. This prop can be given
@@ -270,17 +274,20 @@ export interface ChartProps extends VictoryChartProps {
    * Cartesian: range={{ x: [50, 250], y: [50, 250] }}
    * Polar: range={{ x: [0, 360], y: [0, 250] }}
    */
-  range?: [number, number] | { x?: [number, number], y?: [number, number] };
+  range?: [number, number] | { x?: [number, number]; y?: [number, number] };
   /**
    * The scale prop determines which scales your chart should use. This prop can be
    * given as a string specifying a supported scale ("linear", "time", "log", "sqrt"),
    * as a d3 scale function, or as an object with scales specified for x and y
    * @example d3Scale.time(), {x: "linear", y: "log"}
    */
-  scale?: ScalePropType | D3Scale | {
-    x?: ScalePropType | D3Scale;
-    y?: ScalePropType | D3Scale;
-  };
+  scale?:
+    | ScalePropType
+    | D3Scale
+    | {
+        x?: ScalePropType | D3Scale;
+        y?: ScalePropType | D3Scale;
+      };
   /**
    * The sharedEvents prop is used internally to coordinate events between components. It should not be set manually.
    */
@@ -302,7 +309,7 @@ export interface ChartProps extends VictoryChartProps {
    * singleQuadrantDomainPadding={false}
    * singleQuadrantDomainPadding={{ x: false }}
    */
-  singleQuadrantDomainPadding?: boolean | { x: boolean, y: boolean };
+  singleQuadrantDomainPadding?: boolean | { x: boolean; y: boolean };
   /**
    * The standalone prop determines whether the component will render a standalone svg
    * or a <g> tag that will be included in an external svg. Set standalone to false to
@@ -360,7 +367,7 @@ export const Chart: React.FunctionComponent<ChartProps> = ({
   ariaDesc,
   ariaTitle,
   children,
-  legendComponent = <ChartLegend/>,
+  legendComponent = <ChartLegend />,
   legendData,
   legendPosition = ChartCommonStyles.legend.position as ChartLegendPosition,
   padding,
@@ -370,17 +377,21 @@ export const Chart: React.FunctionComponent<ChartProps> = ({
 
   // destructure last
   theme = getTheme(themeColor, themeVariant),
-  containerComponent = allowZoom ? <VictoryZoomContainer /> : <ChartContainer />,
+  containerComponent = allowZoom ? (
+    <VictoryZoomContainer />
+  ) : (
+    <ChartContainer />
+  ),
   legendOrientation = theme.legend.orientation as ChartLegendOrientation,
   height = theme.chart.height,
   width = theme.chart.width,
   ...rest
 }: ChartProps) => {
   const defaultPadding = {
-    bottom: getPaddingForSide('bottom',  padding, theme.chart.padding),
+    bottom: getPaddingForSide('bottom', padding, theme.chart.padding),
     left: getPaddingForSide('left', padding, theme.chart.padding),
     right: getPaddingForSide('right', padding, theme.chart.padding),
-    top: getPaddingForSide('top', padding, theme.chart.padding),
+    top: getPaddingForSide('top', padding, theme.chart.padding)
   };
 
   // Clone so users can override container props
@@ -389,7 +400,7 @@ export const Chart: React.FunctionComponent<ChartProps> = ({
     title: ariaTitle,
     theme,
     ...containerComponent.props,
-    className: getClassName({className: containerComponent.props.className}) // Override VictoryContainer class name
+    className: getClassName({ className: containerComponent.props.className }) // Override VictoryContainer class name
   });
 
   const legend = React.cloneElement(legendComponent, {
@@ -411,8 +422,13 @@ export const Chart: React.FunctionComponent<ChartProps> = ({
 
     // Adjust for axis label
     React.Children.toArray(children).map((child: any) => {
-      if (child.type.role === 'axis' && child.props.label && !child.props.dependentAxis) {
-        xAxisLabelHeight = getLabelTextSize({text: child.props.label, theme}).height + 10;
+      if (
+        child.type.role === 'axis' &&
+        child.props.label &&
+        !child.props.dependentAxis
+      ) {
+        xAxisLabelHeight =
+          getLabelTextSize({ text: child.props.label, theme }).height + 10;
         legendTitleHeight = 0;
       }
     });

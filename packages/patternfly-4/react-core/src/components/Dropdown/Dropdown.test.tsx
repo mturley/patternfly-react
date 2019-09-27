@@ -19,7 +19,9 @@ const dropdownItems = [
     Disabled Action
   </InternalDropdownItem>,
   <DropdownSeparator key="separator" />,
-  <InternalDropdownItem key="separated link">Separated Link</InternalDropdownItem>,
+  <InternalDropdownItem key="separated link">
+    Separated Link
+  </InternalDropdownItem>,
   <InternalDropdownItem key="separated action" component="button">
     Separated Action
   </InternalDropdownItem>
@@ -28,7 +30,10 @@ const dropdownItems = [
 describe('dropdown', () => {
   test('regular', () => {
     const view = mount(
-      <Dropdown dropdownItems={dropdownItems} toggle={<DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>} />
+      <Dropdown
+        dropdownItems={dropdownItems}
+        toggle={<DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>}
+      />
     );
     expect(view).toMatchSnapshot();
   });
@@ -82,7 +87,11 @@ describe('dropdown', () => {
     const view = mount(
       <Dropdown
         dropdownItems={dropdownItems}
-        toggle={<DropdownToggle id="Dropdown Toggle" isPrimary>Dropdown</DropdownToggle>}
+        toggle={
+          <DropdownToggle id="Dropdown Toggle" isPrimary>
+            Dropdown
+          </DropdownToggle>
+        }
       />
     );
     expect(view).toMatchSnapshot();
@@ -90,7 +99,10 @@ describe('dropdown', () => {
 
   test('basic', () => {
     const view = mount(
-      <Dropdown isOpen toggle={<DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>}>
+      <Dropdown
+        isOpen
+        toggle={<DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>}
+      >
         <div>BASIC</div>
       </Dropdown>
     );
@@ -100,7 +112,12 @@ describe('dropdown', () => {
 
 describe('KebabToggle', () => {
   test('regular', () => {
-    const view = mount(<Dropdown dropdownItems={dropdownItems} toggle={<KebabToggle id="Dropdown Toggle" />} />);
+    const view = mount(
+      <Dropdown
+        dropdownItems={dropdownItems}
+        toggle={<KebabToggle id="Dropdown Toggle" />}
+      />
+    );
     expect(view).toMatchSnapshot();
   });
 
@@ -139,13 +156,23 @@ describe('KebabToggle', () => {
   });
 
   test('expanded', () => {
-    const view = mount(<Dropdown dropdownItems={dropdownItems} isOpen toggle={<KebabToggle id="Dropdown Toggle" />} />);
+    const view = mount(
+      <Dropdown
+        dropdownItems={dropdownItems}
+        isOpen
+        toggle={<KebabToggle id="Dropdown Toggle" />}
+      />
+    );
     expect(view).toMatchSnapshot();
   });
 
   test('plain', () => {
     const view = mount(
-      <Dropdown dropdownItems={dropdownItems} isPlain toggle={<KebabToggle id="Dropdown Toggle" />} />
+      <Dropdown
+        dropdownItems={dropdownItems}
+        isPlain
+        toggle={<KebabToggle id="Dropdown Toggle" />}
+      />
     );
     expect(view).toMatchSnapshot();
   });
@@ -181,15 +208,19 @@ describe('API', () => {
   });
 
   test('dropdownItems and children console error ', () => {
-    expect(() => mount(
-      <Dropdown
-        dropdownItems={dropdownItems}
-        isOpen
-        toggle={<DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>}
-      >
-        <div>Children items</div>
-      </Dropdown>
-    )).toThrowError();
+    expect(() =>
+      mount(
+        <Dropdown
+          dropdownItems={dropdownItems}
+          isOpen
+          toggle={
+            <DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>
+          }
+        >
+          <div>Children items</div>
+        </Dropdown>
+      )
+    ).toThrowError();
   });
 
   test('dropdownItems only, no console error ', () => {
@@ -209,7 +240,10 @@ describe('API', () => {
     const myMock = jest.fn();
     global.console = { error: myMock } as any;
     mount(
-      <Dropdown isOpen toggle={<DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>}>
+      <Dropdown
+        isOpen
+        toggle={<DropdownToggle id="Dropdown Toggle">Dropdown</DropdownToggle>}
+      >
         <div>Children items</div>
       </Dropdown>
     );

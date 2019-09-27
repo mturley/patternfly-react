@@ -1,14 +1,18 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { DualListControlled } from './index';
-import { getCounterMessage as counterMessage, getFilterredItemsLength } from './helpers';
+import {
+  getCounterMessage as counterMessage,
+  getFilterredItemsLength
+} from './helpers';
 
 jest.mock('../../common/helpers', () => {
   const selectKeys = (obj, keys, fn = val => val) =>
     keys.reduce((values, key) => ({ ...values, [key]: fn(obj[key]) }), {});
 
   /** Returns a subset of the given object with a validator function applied to its keys. */
-  const filterKeys = (obj, validator) => selectKeys(obj, Object.keys(obj).filter(validator));
+  const filterKeys = (obj, validator) =>
+    selectKeys(obj, Object.keys(obj).filter(validator));
 
   return {
     debounce: fn => fn,
@@ -23,7 +27,10 @@ const getProps = () => ({
       {
         value: 'Brittany Turner',
         label: 'Brittany Turner',
-        children: [{ value: 'zzz', label: 'zzz' }, { value: 'ppp', label: 'ppp' }]
+        children: [
+          { value: 'zzz', label: 'zzz' },
+          { value: 'ppp', label: 'ppp' }
+        ]
       },
       { value: 'Heather Davis', label: 'Heather Davis' }
     ]
@@ -51,7 +58,9 @@ test('dual-list items match the list length ', () => {
 
 test('Footer updates when items are selected ', () => {
   const props = getProps();
-  const getCounterMessage = jest.fn((selected, total) => counterMessage(selected, total));
+  const getCounterMessage = jest.fn((selected, total) =>
+    counterMessage(selected, total)
+  );
   props.left = { ...props.left, getCounterMessage };
   const component = mount(<DualListControlled {...props} />);
   expect(getCounterMessage.mock.calls).toHaveLength(1);
@@ -61,7 +70,9 @@ test('Footer updates when items are selected ', () => {
   const listItems = body.find('.dual-list-pf-item');
   const input = listItems.first().find('input');
   const { 'data-side': side, 'data-position': position } = input.props();
-  const mockedEvent = { target: { checked: true, dataset: { position, side } } };
+  const mockedEvent = {
+    target: { checked: true, dataset: { position, side } }
+  };
   input.simulate('change', mockedEvent);
   expect(footer.text()).toBe(getCounterMessage(2, 3));
   expect(getCounterMessage.mock.calls).toHaveLength(3);
@@ -70,14 +81,23 @@ test('Footer updates when items are selected ', () => {
 test('selecting child items works properly', () => {
   const props = getProps();
   const component = mount(<DualListControlled {...props} />);
-  const childItemsCheckbox = component.find('label.dual-list-pf-item.child > input[type="checkbox"]');
+  const childItemsCheckbox = component.find(
+    'label.dual-list-pf-item.child > input[type="checkbox"]'
+  );
   const {
     'data-side': side,
     'data-position': position,
     'data-parent-position': parentPosition
   } = childItemsCheckbox.first().props();
-  const firstMockedEvent = { target: { checked: true, dataset: { position, side, parentPosition } } };
-  const secondMockedEvent = { target: { checked: true, dataset: { position: position + 1, side, parentPosition } } };
+  const firstMockedEvent = {
+    target: { checked: true, dataset: { position, side, parentPosition } }
+  };
+  const secondMockedEvent = {
+    target: {
+      checked: true,
+      dataset: { position: position + 1, side, parentPosition }
+    }
+  };
   childItemsCheckbox.first().simulate('change', firstMockedEvent);
   childItemsCheckbox.at(1).simulate('change', secondMockedEvent);
   expect(component.state().left.items[0].checked).toBeTruthy();
@@ -86,13 +106,17 @@ test('selecting child items works properly', () => {
 test('move child items works properly', () => {
   const props = getProps();
   const component = mount(<DualListControlled {...props} />);
-  const childItemsCheckbox = component.find('label.dual-list-pf-item.child > input[type="checkbox"]');
+  const childItemsCheckbox = component.find(
+    'label.dual-list-pf-item.child > input[type="checkbox"]'
+  );
   const {
     'data-side': side,
     'data-position': position,
     'data-parent-position': parentPosition
   } = childItemsCheckbox.first().props();
-  const firstMockedEvent = { target: { checked: true, dataset: { position, side, parentPosition } } };
+  const firstMockedEvent = {
+    target: { checked: true, dataset: { position, side, parentPosition } }
+  };
   childItemsCheckbox.first().simulate('change', firstMockedEvent);
   const rightArrow = component
     .find('DualListArrows')
@@ -125,10 +149,16 @@ test('main checkbox functions properly', () => {
   const props = getProps();
   const component = mount(<DualListControlled {...props} />);
   const selector = component.find('DualListSelector').at(1);
-  const itemCheckbox = selector.find('label.dual-list-pf-item > input[type="checkbox"]').first();
-  const mainCheckbox = selector.find('input[type="checkbox"].dual-list-pf-main-checkbox');
+  const itemCheckbox = selector
+    .find('label.dual-list-pf-item > input[type="checkbox"]')
+    .first();
+  const mainCheckbox = selector.find(
+    'input[type="checkbox"].dual-list-pf-main-checkbox'
+  );
   const { 'data-side': side, 'data-position': position } = itemCheckbox.props();
-  const mockedEvent = { target: { checked: true, dataset: { position, side } } };
+  const mockedEvent = {
+    target: { checked: true, dataset: { position, side } }
+  };
   itemCheckbox.simulate('change', mockedEvent);
   expect(component.state()[side].isMainChecked).toBeTruthy();
   mockedEvent.target.checked = false;
@@ -147,8 +177,13 @@ test('transitions between selectors works!', () => {
     .first();
   const arrows = component.find('DualListArrows').find('Icon');
   const rightArrow = arrows.at(0);
-  const { 'data-side': side, 'data-position': position } = firstItemCheckbox.props();
-  const mockedEvent = { target: { checked: true, dataset: { position, side } } };
+  const {
+    'data-side': side,
+    'data-position': position
+  } = firstItemCheckbox.props();
+  const mockedEvent = {
+    target: { checked: true, dataset: { position, side } }
+  };
   const getState = () => component.state();
   expect(getState().left.items).toHaveLength(2);
   expect(getState().right.items).toHaveLength(1);
@@ -167,7 +202,9 @@ test('sorting works ! ', () => {
   const mockedEvent = { target: { dataset: { side } } };
   const originalList = [...component.state()[side].items];
   sortingIcon.simulate('click', mockedEvent);
-  expect(component.state().left.items[0]).toBe(originalList[originalList.length - 1]);
+  expect(component.state().left.items[0]).toBe(
+    originalList[originalList.length - 1]
+  );
 });
 
 test('item is disabled and tooltip exists', () => {

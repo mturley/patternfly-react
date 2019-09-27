@@ -10,7 +10,8 @@ import {
   headerCol,
   sortable,
   expandable,
-  compoundExpand, IRow
+  compoundExpand,
+  IRow
 } from './index';
 import { rows, columns, actions } from '../../test-helpers/data-sets';
 import { ColumnsType } from './base';
@@ -50,7 +51,13 @@ test('Sortable table', () => {
   const onSortCall = () => undefined as any;
   columns[0] = { ...columns[0], transforms: [sortable] };
   const view = mount(
-    <Table aria-label="Aria labeled" onSort={onSortCall} sortBy={{}} cells={columns} rows={rows}>
+    <Table
+      aria-label="Aria labeled"
+      onSort={onSortCall}
+      sortBy={{}}
+      cells={columns}
+      rows={rows}
+    >
       <TableHeader />
       <TableBody />
     </Table>
@@ -59,10 +66,15 @@ test('Sortable table', () => {
 });
 
 describe('Table variants', () => {
-  Object.values(TableGridBreakpoint).forEach((oneBreakpoint) => {
+  Object.values(TableGridBreakpoint).forEach(oneBreakpoint => {
     test(`Breakpoint - ${oneBreakpoint}`, () => {
       const view = mount(
-        <Table aria-label="Aria labeled" gridBreakPoint={oneBreakpoint} cells={columns} rows={rows}>
+        <Table
+          aria-label="Aria labeled"
+          gridBreakPoint={oneBreakpoint}
+          cells={columns}
+          rows={rows}
+        >
           <TableHeader />
           <TableBody />
         </Table>
@@ -70,10 +82,15 @@ describe('Table variants', () => {
       expect(view).toMatchSnapshot();
     });
   });
-  Object.values(TableVariant).forEach((onevariant) => {
+  Object.values(TableVariant).forEach(onevariant => {
     test(`Size - ${onevariant}`, () => {
       const view = mount(
-        <Table aria-label="Aria labeled" variant={onevariant} cells={columns} rows={rows}>
+        <Table
+          aria-label="Aria labeled"
+          variant={onevariant}
+          cells={columns}
+          rows={rows}
+        >
           <TableHeader />
           <TableBody />
         </Table>
@@ -93,7 +110,12 @@ test('Simple Actions table', () => {
   ];
 
   const view = mount(
-    <Table aria-label="Aria labeled" actions={actions} cells={columns} rows={rowsWithDisabledAction}>
+    <Table
+      aria-label="Aria labeled"
+      actions={actions}
+      cells={columns}
+      rows={rowsWithDisabledAction}
+    >
       <TableHeader />
       <TableBody />
     </Table>
@@ -136,7 +158,12 @@ test('Collapsible table', () => {
   columns[0] = { ...columns[0], cellFormatters: [expandable] };
   const onCollapse = () => undefined as any;
   const view = mount(
-    <Table aria-label="Aria labeled" onCollapse={onCollapse} cells={columns} rows={rows}>
+    <Table
+      aria-label="Aria labeled"
+      onCollapse={onCollapse}
+      cells={columns}
+      rows={rows}
+    >
       <TableHeader />
       <TableBody />
     </Table>
@@ -150,14 +177,39 @@ test('Compound Expandable table', () => {
     { title: 'col2', cell: { transforms: [compoundExpand] } }
   ];
   const compoundRows: IRow[] = [
-    { isOpen: true, cells: [{ title: '1', props: { isOpen: true } }, { title: '2', props: { isOpen: false } }] },
-    { parent: 0, compoundParent: 0, cells: [{ title: 'expanded', props: { colSpan: 2 } }] },
-    { isOpen: false, cells: [{ title: '3', props: { isOpen: false } }, { title: '4', props: { isOpen: false } }] },
-    { parent: 2, compoundParent: 0, cells: [{ title: 'expanded', props: { colSpan: 2 } }] }
+    {
+      isOpen: true,
+      cells: [
+        { title: '1', props: { isOpen: true } },
+        { title: '2', props: { isOpen: false } }
+      ]
+    },
+    {
+      parent: 0,
+      compoundParent: 0,
+      cells: [{ title: 'expanded', props: { colSpan: 2 } }]
+    },
+    {
+      isOpen: false,
+      cells: [
+        { title: '3', props: { isOpen: false } },
+        { title: '4', props: { isOpen: false } }
+      ]
+    },
+    {
+      parent: 2,
+      compoundParent: 0,
+      cells: [{ title: 'expanded', props: { colSpan: 2 } }]
+    }
   ];
   const onExpand = () => undefined as any;
   const view = mount(
-    <Table aria-label="Aria labeled" onExpand={onExpand} cells={compoundColumns} rows={compoundRows}>
+    <Table
+      aria-label="Aria labeled"
+      onExpand={onExpand}
+      cells={compoundColumns}
+      rows={compoundRows}
+    >
       <TableHeader />
       <TableBody />
     </Table>
@@ -171,7 +223,12 @@ test('Collapsible nested table', () => {
   rows[2] = { ...rows[2], parent: 1 };
   const onCollapse = () => undefined as any;
   const view = mount(
-    <Table aria-label="Aria labeled" onCollapse={onCollapse} cells={columns} rows={rows}>
+    <Table
+      aria-label="Aria labeled"
+      onCollapse={onCollapse}
+      cells={columns}
+      rows={rows}
+    >
       <TableHeader />
       <TableBody />
     </Table>
@@ -182,7 +239,12 @@ test('Collapsible nested table', () => {
 test('Selectable table', () => {
   const onSelect = () => undefined as any;
   const view = mount(
-    <Table aria-label="Aria labeled" onSelect={onSelect} cells={columns} rows={rows}>
+    <Table
+      aria-label="Aria labeled"
+      onSelect={onSelect}
+      cells={columns}
+      rows={rows}
+    >
       <TableHeader />
       <TableBody />
     </Table>

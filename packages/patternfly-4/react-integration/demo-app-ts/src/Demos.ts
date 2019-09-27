@@ -77,7 +77,8 @@ export const Demos: DemoInterface[] = [
   },
   {
     id: 'color-bar-zoom-demo',
-    name: 'Bar Chart Multi-color, horizontal with Zoom and Bottom-aligned Legend Demo',
+    name:
+      'Bar Chart Multi-color, horizontal with Zoom and Bottom-aligned Legend Demo',
     componentType: Examples.ColorBarZoomDemo
   },
   {

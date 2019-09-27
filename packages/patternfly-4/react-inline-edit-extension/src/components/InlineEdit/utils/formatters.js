@@ -1,1 +1,3 @@
-export { default as inlineEditFormatterFactory } from './formatters/inlineEditFormatterFactory';
+export {
+  default as inlineEditFormatterFactory
+} from './formatters/inlineEditFormatterFactory';

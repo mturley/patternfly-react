@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { AutoSizer, List as VirtualList, WindowScroller, CellMeasurerCache, CellMeasurer } from 'react-virtualized';
+import {
+  AutoSizer,
+  List as VirtualList,
+  WindowScroller,
+  CellMeasurerCache,
+  CellMeasurer
+} from 'react-virtualized';
 
 import TableGridHead from './TableGridHead';
 import TableGridColumnHeader from './TableGridColumnHeader';
@@ -41,7 +47,13 @@ const VirtualTableGrid = ({
     const obj = data[index];
 
     return (
-      <CellMeasurer cache={cellMeasurementCache} columnIndex={0} key={key} rowIndex={index} parent={parent}>
+      <CellMeasurer
+        cache={cellMeasurementCache}
+        columnIndex={0}
+        key={key}
+        rowIndex={index}
+        parent={parent}
+      >
         <div style={style}>{row({ obj, tableData, index })}</div>
       </CellMeasurer>
     );
@@ -60,7 +72,13 @@ const VirtualTableGrid = ({
   );
 
   const renderAutoSizer = sizerProps => {
-    const { height, isScrolling, registerChild, onChildScroll, scrollTop } = sizerProps;
+    const {
+      height,
+      isScrolling,
+      registerChild,
+      onChildScroll,
+      scrollTop
+    } = sizerProps;
 
     return (
       <AutoSizer disableHeight>
@@ -86,12 +104,15 @@ const VirtualTableGrid = ({
     );
   };
 
-  const scrollElement = scrollable || document.getElementById(scrollableElementId) || window;
+  const scrollElement =
+    scrollable || document.getElementById(scrollableElementId) || window;
 
   const bodyComponent = empty ? (
     emptyComponent
   ) : (
-    <WindowScroller scrollElement={scrollElement}>{renderAutoSizer}</WindowScroller>
+    <WindowScroller scrollElement={scrollElement}>
+      {renderAutoSizer}
+    </WindowScroller>
   );
 
   return (

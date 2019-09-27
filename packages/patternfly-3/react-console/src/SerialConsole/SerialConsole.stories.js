@@ -13,7 +13,10 @@ const { CONNECTED, DISCONNECTED, LOADING } = constants;
 
 import { name } from '../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/Serial Console`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/Serial Console`,
+  module
+);
 stories.addDecorator(
   defaultTemplate({
     title: 'SerialConsole',
@@ -37,72 +40,104 @@ export class SerialConsoleConnector extends React.Component {
   onBackendDisconnected = () => {
     log('Backend has disconnected, pass the info to the UI component');
     if (this.childSerialconsole) {
-      this.childSerialconsole.onConnectionClosed('Reason for disconnect provided by backend.');
+      this.childSerialconsole.onConnectionClosed(
+        'Reason for disconnect provided by backend.'
+      );
     }
 
     this.setState({
       passKeys: false,
       status: DISCONNECTED // will close the terminal window
     });
-  }
+  };
 
   onConnect = () => {
     log('SerialConsoleConnector.onConnect(), ', this.state);
     this.setConnected();
     this.tellFairyTale();
-  }
+  };
 
   onData = data => {
-    log('UI terminal component produced data, i.e. a key was pressed, pass it to backend. [', data, ']');
+    log(
+      'UI terminal component produced data, i.e. a key was pressed, pass it to backend. [',
+      data,
+      ']'
+    );
 
     // Normally, the "data" shall be passed to the backend which might send them back via onData() call
     // Since there is no backend, let;s pass them to UI component immediately.
     if (this.state.passKeys) {
       this.onDataFromBackend(data);
     }
-  }
+  };
 
   onDataFromBackend = data => {
     log('Backend sent data, pass them to the UI component. [', data, ']');
     if (this.childSerialconsole) {
       this.childSerialconsole.onDataReceived(data);
     }
-  }
+  };
 
   onDisconnect = () => {
     this.setState({
       status: DISCONNECTED
     });
     timeoutIds.forEach(id => clearTimeout(id));
-  }
+  };
 
   onResize = (rows, cols) => {
-    log('UI has been resized, pass this info to backend. [', rows, ', ', cols, ']');
-  }
+    log(
+      'UI has been resized, pass this info to backend. [',
+      rows,
+      ', ',
+      cols,
+      ']'
+    );
+  };
 
   setConnected = () => {
     this.setState({
       status: CONNECTED,
       passKeys: true
     });
-  }
+  };
 
   tellFairyTale = () => {
     let time = 1000;
-    timeoutIds.push(setTimeout(() => this.onDataFromBackend(' This is a mock terminal. '), time));
+    timeoutIds.push(
+      setTimeout(
+        () => this.onDataFromBackend(' This is a mock terminal. '),
+        time
+      )
+    );
 
     time += 1000;
-    timeoutIds.push(setTimeout(() => this.onDataFromBackend(' Something is happening! '), time));
+    timeoutIds.push(
+      setTimeout(
+        () => this.onDataFromBackend(' Something is happening! '),
+        time
+      )
+    );
 
     time += 1000;
-    timeoutIds.push(setTimeout(() => this.onDataFromBackend(' Something is happening! '), time));
+    timeoutIds.push(
+      setTimeout(
+        () => this.onDataFromBackend(' Something is happening! '),
+        time
+      )
+    );
 
     time += 1000;
-    timeoutIds.push(setTimeout(() => this.onDataFromBackend(' Backend will be disconnected shortly. '), time));
+    timeoutIds.push(
+      setTimeout(
+        () => this.onDataFromBackend(' Backend will be disconnected shortly. '),
+        time
+      )
+    );
 
     time += 5000;
     timeoutIds.push(setTimeout(this.onBackendDisconnected, time));
-  }
+  };
 
   render() {
     return (

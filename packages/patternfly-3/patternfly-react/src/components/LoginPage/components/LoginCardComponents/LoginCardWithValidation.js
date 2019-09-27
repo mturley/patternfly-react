@@ -41,7 +41,9 @@ class LoginCardWithValidation extends React.Component {
   static getDerivedStateFromProps(props, state) {
     // disableSubmit prop will only be used in a not validated login card
     const { validate, disableSubmit } = props;
-    if (validate) { return null; }
+    if (validate) {
+      return null;
+    }
     if (disableSubmit !== state.form.disableSubmit) {
       return {
         form: { disableSubmit }
@@ -54,10 +56,11 @@ class LoginCardWithValidation extends React.Component {
     if (updatedInputValue.length < 1) {
       return true;
     }
-    const otherInputType = inputType === 'usernameField' ? 'passwordField' : 'usernameField';
+    const otherInputType =
+      inputType === 'usernameField' ? 'passwordField' : 'usernameField';
     const otherInputValue = this.state[otherInputType].value;
     return otherInputValue.length < 1;
-  }
+  };
 
   onInputChange = (e, inputType) => {
     const {
@@ -75,7 +78,7 @@ class LoginCardWithValidation extends React.Component {
         disableSubmit: this.shouldDisableSubmit(inputType, value)
       }
     }));
-  }
+  };
 
   onInputFocus = (e, inputType) => {
     this.props[inputType].onFocus && this.props[inputType].onFocus(e);
@@ -86,7 +89,7 @@ class LoginCardWithValidation extends React.Component {
         showError: false
       }
     });
-  }
+  };
 
   onInputBlur = (e, inputType) => {
     this.props[inputType].onBlur && this.props[inputType].onBlur(e);
@@ -98,12 +101,12 @@ class LoginCardWithValidation extends React.Component {
       },
       isCapsLock: false
     });
-  }
+  };
 
   onKeyPress = (e, inputType) => {
     this.props[inputType].onMouseEnter && this.props[inputType].onMouseEnter(e);
     this.handleCapsLock(e);
-  }
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -113,7 +116,7 @@ class LoginCardWithValidation extends React.Component {
     } else {
       this.handleOnInputErrors();
     }
-  }
+  };
 
   onSubmitStart = () => {
     this.setState(({ form }) => ({
@@ -125,7 +128,7 @@ class LoginCardWithValidation extends React.Component {
         showError: false
       }
     }));
-  }
+  };
 
   onSubmitError = submitError => {
     this.setState(({ form }) => ({
@@ -138,7 +141,7 @@ class LoginCardWithValidation extends React.Component {
         isSubmitting: false
       }
     }));
-  }
+  };
 
   getFormError = () => {
     const {
@@ -151,14 +154,16 @@ class LoginCardWithValidation extends React.Component {
           </div>
         ))
       : submitError;
-  }
+  };
 
   getModifiedProps = () => {
     const { usernameField, passwordField, isCapsLock, form } = this.state;
     const {
       passwordField: { warnings }
     } = this.props;
-    const passwordFieldWarningType = this.state.isCapsLock ? 'capsLock' : this.state.passwordField.warningType;
+    const passwordFieldWarningType = this.state.isCapsLock
+      ? 'capsLock'
+      : this.state.passwordField.warningType;
     return {
       usernameField: {
         ...this.props.usernameField,
@@ -186,7 +191,7 @@ class LoginCardWithValidation extends React.Component {
       isSubmitting: form.isSubmitting,
       submitError: this.getFormError()
     };
-  }
+  };
 
   handleOnInputErrors = () => {
     const { usernameField, passwordField } = this.state;
@@ -207,13 +212,13 @@ class LoginCardWithValidation extends React.Component {
     }
 
     !topErrorOnly && this.hideSubmitError();
-  }
+  };
 
   isFormValid = () =>
     !!this.state.usernameField.value &&
     !!this.state.passwordField.value &&
     !this.isPasswordShort() &&
-    this.isUserNameValid()
+    this.isUserNameValid();
 
   isPasswordShort = () => {
     const {
@@ -225,7 +230,7 @@ class LoginCardWithValidation extends React.Component {
       }
     } = this.state;
     return passwordMinLength > 0 && currentPasswordLength < passwordMinLength;
-  }
+  };
 
   hideSubmitError = () => {
     this.setState({
@@ -234,7 +239,7 @@ class LoginCardWithValidation extends React.Component {
         showError: false
       }
     });
-  }
+  };
 
   clearFormErrors = () => {
     this.setState(({ form }) => ({
@@ -243,7 +248,7 @@ class LoginCardWithValidation extends React.Component {
         errors: []
       }
     }));
-  }
+  };
 
   handleOnPasswordTooShort = () => {
     const {
@@ -268,7 +273,7 @@ class LoginCardWithValidation extends React.Component {
             }
           }
     );
-  }
+  };
 
   handleOnInvalidUsername = () => {
     const {
@@ -293,7 +298,7 @@ class LoginCardWithValidation extends React.Component {
             }
           }
     );
-  }
+  };
 
   handleOnEmptyInput = inputType => {
     const {
@@ -318,7 +323,7 @@ class LoginCardWithValidation extends React.Component {
             }
           }
     );
-  }
+  };
 
   toggleCapsLock = e => {
     if (!this.state.passwordField.value) {
@@ -328,18 +333,20 @@ class LoginCardWithValidation extends React.Component {
       this.setState({
         isCapsLock: !this.state.isCapsLock
       });
-  }
+  };
 
   handleCapsLock = e => {
     const keyCode = e.keyCode ? e.keyCode : e.which;
     const shiftKey = e.shiftKey ? e.shiftKey : keyCode === KEY_CODES.SHIFT;
     const isCapsLock =
       (keyCode >= KEY_CODES.A && keyCode <= KEY_CODES.Z && !shiftKey) ||
-      (keyCode >= KEY_CODES.NUMPAD['0'] && keyCode <= KEY_CODES.F11 && shiftKey);
+      (keyCode >= KEY_CODES.NUMPAD['0'] &&
+        keyCode <= KEY_CODES.F11 &&
+        shiftKey);
     this.setState({
       isCapsLock
     });
-  }
+  };
 
   isUserNameValid = () => {
     const {
@@ -352,7 +359,7 @@ class LoginCardWithValidation extends React.Component {
       return atPos > 1 && dotPos - atPos > 2 && atPos < dotPos;
     }
     return true;
-  }
+  };
 
   render() {
     const { validate, children } = this.props;

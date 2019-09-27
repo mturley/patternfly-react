@@ -2,7 +2,10 @@ describe('Bar Chart Simple Demo Test', () => {
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#bar-chart-simple-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/bar-chart-simple-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/bar-chart-simple-demo-nav-link'
+    );
   });
 
   it('Verify bar chart', () => {

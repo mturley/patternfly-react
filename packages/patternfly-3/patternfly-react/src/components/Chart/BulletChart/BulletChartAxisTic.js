@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const BulletChartAxisTic = ({ className, text, vertical, value, ...props }) => {
-  const bulletChartAxisTicClass = classNames('bullet-chart-pf-axis-tic', className);
+  const bulletChartAxisTicClass = classNames(
+    'bullet-chart-pf-axis-tic',
+    className
+  );
 
   let ticStyle;
   if (vertical) {

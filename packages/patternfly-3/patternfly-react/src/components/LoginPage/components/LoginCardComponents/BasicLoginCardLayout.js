@@ -4,7 +4,15 @@ import { Row, Col } from '../../../../index';
 
 const BasicLoginCardLayout = ({ children, ...props }) => (
   <Row>
-    <Col sm={10} smOffset={1} md={8} mdOffset={2} lg={8} lgOffset={2} {...props}>
+    <Col
+      sm={10}
+      smOffset={1}
+      md={8}
+      mdOffset={2}
+      lg={8}
+      lgOffset={2}
+      {...props}
+    >
       {children}
     </Col>
   </Row>

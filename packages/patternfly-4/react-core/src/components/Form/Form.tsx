@@ -18,7 +18,17 @@ export const Form: React.FunctionComponent<FormProps> = ({
   isHorizontal = false,
   ...props
 }: FormProps) => (
-  <form noValidate {...props} className={css(styles.form, isHorizontal && styles.modifiers.horizontal, className)}>
-    <FormContext.Provider value={{ isHorizontal }}>{children}</FormContext.Provider>
+  <form
+    noValidate
+    {...props}
+    className={css(
+      styles.form,
+      isHorizontal && styles.modifiers.horizontal,
+      className
+    )}
+  >
+    <FormContext.Provider value={{ isHorizontal }}>
+      {children}
+    </FormContext.Provider>
   </form>
 );

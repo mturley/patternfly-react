@@ -43,7 +43,9 @@ function getComputedStyles(classNames, cssStr) {
     const key = cs[i];
     const value = cs
       .getPropertyValue(key)
-      .replace(/rgb\(([\d|,|\s]+)\)/g, (full, match) => rgbToHex(...match.split(',').map(n => parseInt(n, 10))));
+      .replace(/rgb\(([\d|,|\s]+)\)/g, (full, match) =>
+        rgbToHex(...match.split(',').map(n => parseInt(n, 10)))
+      );
     values[key] = value;
   }
   return values;
@@ -52,7 +54,8 @@ function getComputedStyles(classNames, cssStr) {
 function getStylesAST(bufferedStyles, globalCSS = '') {
   const ast = css.parse(`${globalCSS}\n${bufferedStyles}`);
   const vars = {};
-  const getVarValue = value => value.replace(/var\(([\w|-]*)\)/g, (full, match) => vars[match]);
+  const getVarValue = value =>
+    value.replace(/var\(([\w|-]*)\)/g, (full, match) => vars[match]);
   ast.stylesheet.rules = ast.stylesheet.rules.map(rule => {
     if (rule.type === 'rule') {
       rule.declarations = rule.declarations.map(decl => {
@@ -97,7 +100,10 @@ function getStyles(nodeSelectors, insertedStyles, globalCSS) {
         return acc;
       }
 
-      const computedStyles = getComputedStyles(sel.map(s => s.replace('.', '')).join(' '), css.stringify(ast));
+      const computedStyles = getComputedStyles(
+        sel.map(s => s.replace('.', '')).join(' '),
+        css.stringify(ast)
+      );
 
       return [...acc, formatComputedStyles(sel, computedStyles)];
     }, [])

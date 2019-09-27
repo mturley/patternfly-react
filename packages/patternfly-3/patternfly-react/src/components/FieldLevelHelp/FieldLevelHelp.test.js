@@ -4,7 +4,9 @@ import { mount } from 'enzyme';
 import FieldLevelHelp from './FieldLevelHelp';
 
 test('FieldLevelHelp renders properly', () => {
-  const component = mount(<FieldLevelHelp id="fieldlevelname1">Port Number</FieldLevelHelp>);
+  const component = mount(
+    <FieldLevelHelp id="fieldlevelname1">Port Number</FieldLevelHelp>
+  );
 
   expect(component).toMatchSnapshot();
 });

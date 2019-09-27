@@ -7,6 +7,8 @@ describe('Progress Demo Test', () => {
 
   it('Verify simple progress', () => {
     cy.get('#simple-progress-description').contains('Simple progress');
-    cy.get('#simple-progress .pf-c-progress__status .pf-c-progress__measure').contains('33%');
+    cy.get(
+      '#simple-progress .pf-c-progress__status .pf-c-progress__measure'
+    ).contains('33%');
   });
 });

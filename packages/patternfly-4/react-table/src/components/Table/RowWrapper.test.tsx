@@ -13,7 +13,9 @@ const getRowWrapper = (props: RowWrapperProps) => (
 describe('RowWrapper', () => {
   test('renders correctly', () => {
     const trRef = jest.fn();
-    const view = mount(getRowWrapper({ onScroll: jest.fn(), onResize: jest.fn(), trRef }));
+    const view = mount(
+      getRowWrapper({ onScroll: jest.fn(), onResize: jest.fn(), trRef })
+    );
     expect(view).toMatchSnapshot();
     expect(trRef.mock.calls).toHaveLength(1);
   });

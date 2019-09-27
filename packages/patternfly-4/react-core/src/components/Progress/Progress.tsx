@@ -1,17 +1,22 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/Progress/progress';
 import { css, getModifier } from '@patternfly/react-styles';
-import { ProgressContainer, ProgressMeasureLocation, ProgressVariant } from './ProgressContainer';
+import {
+  ProgressContainer,
+  ProgressMeasureLocation,
+  ProgressVariant
+} from './ProgressContainer';
 import { getUniqueId } from '../../helpers/util';
 import { Omit } from '../../helpers/typeUtils';
 
 export enum ProgressSize {
   sm = 'sm',
   md = 'md',
-  lg = 'lg',
+  lg = 'lg'
 }
 
-export interface ProgressProps extends Omit<React.HTMLProps<HTMLDivElement>, 'size' | 'label'> {
+export interface ProgressProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'size' | 'label'> {
   /** Classname for progress component. */
   className?: string;
   /** Size variant of progress. */
@@ -70,10 +75,12 @@ export class Progress extends React.Component<ProgressProps> {
     } = this.props;
     const additionalProps = {
       ...props,
-      ...(valueText ? { 'aria-valuetext': valueText } : { 'aria-describedby': `${this.id}-description` })
+      ...(valueText
+        ? { 'aria-valuetext': valueText }
+        : { 'aria-describedby': `${this.id}-description` })
     };
 
-    const ariaProps: {[k: string]: any} = {
+    const ariaProps: { [k: string]: any } = {
       'aria-describedby': `${this.id}-description`,
       'aria-valuemin': min,
       'aria-valuenow': value,
@@ -84,7 +91,10 @@ export class Progress extends React.Component<ProgressProps> {
       ariaProps['aria-valuetext'] = valueText;
     }
 
-    const scaledValue = Math.min(100, Math.max(0, Math.floor(((value - min) / (max - min)) * 100)));
+    const scaledValue = Math.min(
+      100,
+      Math.max(0, Math.floor(((value - min) / (max - min)) * 100))
+    );
     return (
       <div
         {...additionalProps}
@@ -92,7 +102,13 @@ export class Progress extends React.Component<ProgressProps> {
           styles.progress,
           getModifier(styles, variant, ''),
           getModifier(styles, measureLocation, ''),
-          getModifier(styles, measureLocation === ProgressMeasureLocation.inside ? ProgressSize.lg : size, ''),
+          getModifier(
+            styles,
+            measureLocation === ProgressMeasureLocation.inside
+              ? ProgressSize.lg
+              : size,
+            ''
+          ),
           !title && getModifier(styles, 'singleline', ''),
           className
         )}

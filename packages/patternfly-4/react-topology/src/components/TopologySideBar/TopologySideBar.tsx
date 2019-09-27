@@ -21,8 +21,10 @@ interface TopologySideBarState {
   isIn: boolean;
 }
 
-export class TopologySideBar extends React.Component<TopologySideBarProps, TopologySideBarState> {
-
+export class TopologySideBar extends React.Component<
+  TopologySideBarProps,
+  TopologySideBarState
+> {
   timer: any = null;
 
   constructor(props: TopologySideBarProps) {
@@ -36,19 +38,19 @@ export class TopologySideBar extends React.Component<TopologySideBarProps, Topol
 
   updateForTransitions = () => {
     this.setState({ isIn: this.props.show });
-  }
+  };
 
   startTimer = () => {
     this.clearTimer();
     this.timer = setTimeout(this.updateForTransitions, 150);
-  }
+  };
 
   clearTimer = () => {
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;
     }
-  }
+  };
 
   render() {
     const {
@@ -70,23 +72,26 @@ export class TopologySideBar extends React.Component<TopologySideBarProps, Topol
       <div
         {...otherProps}
         role="dialog"
-        className={`pf-topology-side-bar fade ${className}${show ? ' shown' : ''}${isIn ? ' in' : ''}`}
+        className={`pf-topology-side-bar fade ${className}${
+          show ? ' shown' : ''
+        }${isIn ? ' in' : ''}`}
       >
         {show && (
           <React.Fragment>
             {onClose && (
-              <Button className="pf-topology-side-bar__dismiss" variant="plain" onClick={onClose as any} aria-label="Close">
+              <Button
+                className="pf-topology-side-bar__dismiss"
+                variant="plain"
+                onClick={onClose as any}
+                aria-label="Close"
+              >
                 <TimesIcon />
               </Button>
             )}
             {header && (
-              <div className="pf-topology-side-bar__header">
-                {header}
-              </div>
+              <div className="pf-topology-side-bar__header">{header}</div>
             )}
-            <div className="pf-topology-side-bar__body">
-              {children}
-            </div>
+            <div className="pf-topology-side-bar__body">{children}</div>
           </React.Fragment>
         )}
       </div>

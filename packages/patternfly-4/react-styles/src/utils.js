@@ -2,7 +2,11 @@ import camelcase from 'camel-case';
 import { injectGlobal, caches as emotionCache } from 'emotion';
 
 export function isValidStyleDeclaration(styleObj) {
-  return Boolean(styleObj) && typeof styleObj.__className === 'string' && typeof styleObj.__inject === 'function';
+  return (
+    Boolean(styleObj) &&
+    typeof styleObj.__className === 'string' &&
+    typeof styleObj.__inject === 'function'
+  );
 }
 
 export function createStyleDeclaration(className, rawCss) {
@@ -15,7 +19,9 @@ export function createStyleDeclaration(className, rawCss) {
 }
 
 export function isModifier(className) {
-  return Boolean(className && className.startsWith) && className.startsWith('.pf-m-');
+  return (
+    Boolean(className && className.startsWith) && className.startsWith('.pf-m-')
+  );
 }
 
 export function getModifier(styleObj, modifier, defaultModifier) {
@@ -24,7 +30,9 @@ export function getModifier(styleObj, modifier, defaultModifier) {
   }
 
   const modifiers = styleObj.modifiers || styleObj;
-  return modifiers[modifier] || modifiers[camelcase(modifier)] || defaultModifier;
+  return (
+    modifiers[modifier] || modifiers[camelcase(modifier)] || defaultModifier
+  );
 }
 
 export function formatClassName(className) {
@@ -48,5 +56,8 @@ export function getInsertedStyles() {
 }
 
 export function pickProperties(object, properties) {
-  return properties.reduce((picked, property) => ({ ...picked, [property]: object[property] }), {});
+  return properties.reduce(
+    (picked, property) => ({ ...picked, [property]: object[property] }),
+    {}
+  );
 }

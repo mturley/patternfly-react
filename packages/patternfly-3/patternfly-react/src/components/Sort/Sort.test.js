@@ -28,7 +28,10 @@ const mockSortFields = [
 test('Sort renders numeric ascending properly', () => {
   const component = mount(
     <Sort>
-      <Sort.TypeSelector sortTypes={mockSortFields} currentSortType={mockSortFields[0]} />
+      <Sort.TypeSelector
+        sortTypes={mockSortFields}
+        currentSortType={mockSortFields[0]}
+      />
       <Sort.DirectionSelector />
     </Sort>
   );
@@ -39,7 +42,10 @@ test('Sort renders numeric ascending properly', () => {
 test('Sort renders numeric descending properly', () => {
   const component = mount(
     <Sort>
-      <Sort.TypeSelector sortTypes={mockSortFields} currentSortType={mockSortFields[0]} />
+      <Sort.TypeSelector
+        sortTypes={mockSortFields}
+        currentSortType={mockSortFields[0]}
+      />
       <Sort.DirectionSelector isAscending={false} />
     </Sort>
   );
@@ -50,7 +56,10 @@ test('Sort renders numeric descending properly', () => {
 test('Sort renders alpha ascending properly', () => {
   const component = mount(
     <Sort>
-      <Sort.TypeSelector sortTypes={mockSortFields} currentSortType={mockSortFields[0]} />
+      <Sort.TypeSelector
+        sortTypes={mockSortFields}
+        currentSortType={mockSortFields[0]}
+      />
       <Sort.DirectionSelector isNumeric={false} />
     </Sort>
   );
@@ -61,7 +70,10 @@ test('Sort renders alpha ascending properly', () => {
 test('Sort renders alpha descending properly', () => {
   const component = mount(
     <Sort>
-      <Sort.TypeSelector sortTypes={mockSortFields} currentSortType={mockSortFields[0]} />
+      <Sort.TypeSelector
+        sortTypes={mockSortFields}
+        currentSortType={mockSortFields[0]}
+      />
       <Sort.DirectionSelector isNumeric={false} isAscending={false} />
     </Sort>
   );

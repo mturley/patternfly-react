@@ -36,13 +36,19 @@ export const WizardToggle: React.FunctionComponent<WizardToggleProps> = ({
   let activeStepName;
   let activeStepSubName;
   for (let i = 0; i < steps.length; i++) {
-    if ((activeStep.id && steps[i].id === activeStep.id) || steps[i].name === activeStep.name) {
+    if (
+      (activeStep.id && steps[i].id === activeStep.id) ||
+      steps[i].name === activeStep.name
+    ) {
       activeStepIndex = i + 1;
       activeStepName = steps[i].name;
       break;
     } else if (steps[i].steps) {
       for (const step of steps[i].steps!) {
-        if ((activeStep.id && step.id === activeStep.id) || step.name === activeStep.name) {
+        if (
+          (activeStep.id && step.id === activeStep.id) ||
+          step.name === activeStep.name
+        ) {
           activeStepIndex = i + 1;
           activeStepName = steps[i].name;
           activeStepSubName = step.name;
@@ -60,17 +66,34 @@ export const WizardToggle: React.FunctionComponent<WizardToggleProps> = ({
       >
         <ol className={css(styles.wizardToggleList)}>
           <li className={css(styles.wizardToggleListItem)}>
-            <span className={css(styles.wizardToggleNum)}>{activeStepIndex}</span> {activeStepName}
-            {activeStepSubName && <AngleRightIcon className={css(styles.wizardToggleSeparator)} aria-hidden="true" />}
+            <span className={css(styles.wizardToggleNum)}>
+              {activeStepIndex}
+            </span>{' '}
+            {activeStepName}
+            {activeStepSubName && (
+              <AngleRightIcon
+                className={css(styles.wizardToggleSeparator)}
+                aria-hidden="true"
+              />
+            )}
           </li>
-          {activeStepSubName && <li className={css(styles.wizardToggleListItem)}>{activeStepSubName}</li>}
+          {activeStepSubName && (
+            <li className={css(styles.wizardToggleListItem)}>
+              {activeStepSubName}
+            </li>
+          )}
         </ol>
-        <CaretDownIcon className={css(styles.wizardToggleIcon)} aria-hidden="true" />
+        <CaretDownIcon
+          className={css(styles.wizardToggleIcon)}
+          aria-hidden="true"
+        />
       </button>
       <div className={css(styles.wizardOuterWrap)}>
         <div className={css(styles.wizardInnerWrap)}>
           {nav(isNavOpen)}
-          <WizardBody hasBodyPadding={hasBodyPadding}>{activeStep.component}</WizardBody>
+          <WizardBody hasBodyPadding={hasBodyPadding}>
+            {activeStep.component}
+          </WizardBody>
         </div>
         {children}
       </div>

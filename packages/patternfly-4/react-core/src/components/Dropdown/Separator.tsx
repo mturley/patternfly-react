@@ -7,7 +7,12 @@ export interface SeparatorProps extends React.HTMLProps<HTMLAnchorElement> {
   /** Classes applied to root element of dropdown item */
   className?: string;
   /** Click event to pass to InternalDropdownItem */
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement> | React.KeyboardEvent | MouseEvent) => void;
+  onClick?: (
+    event:
+      | React.MouseEvent<HTMLAnchorElement>
+      | React.KeyboardEvent
+      | MouseEvent
+  ) => void;
 }
 
 export const DropdownSeparator: React.FunctionComponent<SeparatorProps> = ({
@@ -18,7 +23,7 @@ export const DropdownSeparator: React.FunctionComponent<SeparatorProps> = ({
   <DropdownContext.Consumer>
     {({ separatorClass }) => (
       <DropdownArrowContext.Consumer>
-        {(context) => (
+        {context => (
           <InternalDropdownItem
             {...props}
             context={context}

@@ -4,34 +4,53 @@ import { ICell, IRow } from '../Table';
 describe('headerUtils', () => {
   describe('calculateColumns', () => {
     test('collapsibleTransfroms', () => {
-      const collapsibleTransfroms = calculateColumns(['Some'], { onCollapse: () => undefined as any });
+      const collapsibleTransfroms = calculateColumns(['Some'], {
+        onCollapse: () => undefined as any
+      });
       expect(collapsibleTransfroms[0].cell.formatters).toHaveLength(1);
-      expect(collapsibleTransfroms[0].cell.formatters[0].name).toBe('defaultTitle');
+      expect(collapsibleTransfroms[0].cell.formatters[0].name).toBe(
+        'defaultTitle'
+      );
       expect(collapsibleTransfroms[0].cell.transforms).toHaveLength(2);
       expect(collapsibleTransfroms[0].extraParams.onCollapse).toBeDefined();
       expect(collapsibleTransfroms[0].header.transforms).toHaveLength(3);
       expect(collapsibleTransfroms[1].cell.transforms).toHaveLength(3);
-      expect(collapsibleTransfroms[1].cell.transforms.find((transform) => transform.name === 'parentId')).toBeDefined();
       expect(
-        collapsibleTransfroms[1].cell.transforms.find((transform) => transform.name === 'expandedRowFormatter')
+        collapsibleTransfroms[1].cell.transforms.find(
+          transform => transform.name === 'parentId'
+        )
+      ).toBeDefined();
+      expect(
+        collapsibleTransfroms[1].cell.transforms.find(
+          transform => transform.name === 'expandedRowFormatter'
+        )
       ).toBeDefined();
     });
 
     test('selectableTransforms', () => {
-      const selectableTransforms = calculateColumns([], { onSelect: () => undefined as any, canSelectAll: true });
+      const selectableTransforms = calculateColumns([], {
+        onSelect: () => undefined as any,
+        canSelectAll: true
+      });
       expect(selectableTransforms[0].cell.formatters).toHaveLength(1);
-      expect(selectableTransforms[0].cell.formatters[0].name).toBe('defaultTitle');
+      expect(selectableTransforms[0].cell.formatters[0].name).toBe(
+        'defaultTitle'
+      );
       expect(selectableTransforms[0].cell.transforms).toHaveLength(2);
       expect(selectableTransforms[0].extraParams.onSelect).toBeDefined();
       expect(selectableTransforms[0].header.transforms).toHaveLength(3);
     });
 
     test('basicActionsTransforms', () => {
-      const actionsTransforms = calculateColumns([], { actions: [{ title: 'some' }] });
+      const actionsTransforms = calculateColumns([], {
+        actions: [{ title: 'some' }]
+      });
       expect(actionsTransforms[0].cell.formatters).toHaveLength(1);
       expect(actionsTransforms[0].cell.formatters[0].name).toBe('defaultTitle');
       expect(actionsTransforms[0].cell.transforms).toHaveLength(2);
-      expect(actionsTransforms[0].extraParams).toEqual({ actions: [{ title: 'some' }] });
+      expect(actionsTransforms[0].extraParams).toEqual({
+        actions: [{ title: 'some' }]
+      });
       expect(actionsTransforms[0].header.transforms).toHaveLength(3);
     });
 
@@ -54,7 +73,12 @@ describe('headerUtils', () => {
     });
 
     describe('mixed strings and objects', () => {
-      const cells = ['first', { title: 'second' }, 'third', { title: 'some' }] as ICell[];
+      const cells = [
+        'first',
+        { title: 'second' },
+        'third',
+        { title: 'some' }
+      ] as ICell[];
       const mixed = calculateColumns(cells, {});
       cells.forEach((oneCell: ICell, key) => {
         test(`${oneCell}`, () => {
@@ -69,7 +93,9 @@ describe('headerUtils', () => {
 
     test('correct property', () => {
       expect(calculateColumns(['some'], {})[0].property).toBe('some');
-      expect(calculateColumns(['some with space'], {})[0].property).toBe('some-with-space');
+      expect(calculateColumns(['some with space'], {})[0].property).toBe(
+        'some-with-space'
+      );
       expect(calculateColumns([''], {})[0].property).toBe('column-0');
     });
 
@@ -100,8 +126,16 @@ describe('headerUtils', () => {
           ],
           {}
         );
-        expect(result[0].header.formatters.find((formatter) => formatter.name === 'testFunc')).toBeDefined();
-        expect(result[0].header.transforms.find((transform) => transform.name === 'testFunc')).toBeDefined();
+        expect(
+          result[0].header.formatters.find(
+            formatter => formatter.name === 'testFunc'
+          )
+        ).toBeDefined();
+        expect(
+          result[0].header.transforms.find(
+            transform => transform.name === 'testFunc'
+          )
+        ).toBeDefined();
       });
 
       test('custom functions in header', () => {
@@ -118,8 +152,16 @@ describe('headerUtils', () => {
           ],
           {}
         );
-        expect(result[0].header.formatters.find((formatter) => formatter.name === 'testFunc')).toBeDefined();
-        expect(result[0].header.transforms.find((transform) => transform.name === 'testFunc')).toBeDefined();
+        expect(
+          result[0].header.formatters.find(
+            formatter => formatter.name === 'testFunc'
+          )
+        ).toBeDefined();
+        expect(
+          result[0].header.transforms.find(
+            transform => transform.name === 'testFunc'
+          )
+        ).toBeDefined();
       });
     });
 
@@ -150,8 +192,16 @@ describe('headerUtils', () => {
           ],
           {}
         );
-        expect(result[0].cell.formatters.find((formatter) => formatter.name === 'testFunc')).toBeDefined();
-        expect(result[0].cell.transforms.find((transform) => transform.name === 'testFunc')).toBeDefined();
+        expect(
+          result[0].cell.formatters.find(
+            formatter => formatter.name === 'testFunc'
+          )
+        ).toBeDefined();
+        expect(
+          result[0].cell.transforms.find(
+            transform => transform.name === 'testFunc'
+          )
+        ).toBeDefined();
       });
 
       test('custom functions in header', () => {
@@ -168,8 +218,16 @@ describe('headerUtils', () => {
           ],
           {}
         );
-        expect(result[0].cell.formatters.find((formatter) => formatter.name === 'testFunc')).toBeDefined();
-        expect(result[0].cell.transforms.find((transform) => transform.name === 'testFunc')).toBeDefined();
+        expect(
+          result[0].cell.formatters.find(
+            formatter => formatter.name === 'testFunc'
+          )
+        ).toBeDefined();
+        expect(
+          result[0].cell.transforms.find(
+            transform => transform.name === 'testFunc'
+          )
+        ).toBeDefined();
       });
     });
   });
@@ -194,7 +252,12 @@ describe('headerUtils', () => {
     });
 
     test('no parent', () => {
-      const rows = [{ parent: 'something' }, { parent: 0 }, {}, { parent: 2 }] as IRow[];
+      const rows = [
+        { parent: 'something' },
+        { parent: 0 },
+        {},
+        { parent: 2 }
+      ] as IRow[];
       const children = ['one', 'two', 'three', 'four'];
       const mappedRows = mapOpenedRows(rows, children);
       expect(mappedRows).toHaveLength(1);
@@ -203,7 +266,12 @@ describe('headerUtils', () => {
     });
 
     test('should add rest props', () => {
-      const rows = [{ isOpen: true, somethig: 'other' }, { parent: 0 }, { isOpen: false }, { parent: 2 }] as IRow[];
+      const rows = [
+        { isOpen: true, somethig: 'other' },
+        { parent: 0 },
+        { isOpen: false },
+        { parent: 2 }
+      ] as IRow[];
       const children = ['one', 'two', 'three', 'four'];
       const mappedRows = mapOpenedRows(rows, children);
       expect(mappedRows).toHaveLength(2);

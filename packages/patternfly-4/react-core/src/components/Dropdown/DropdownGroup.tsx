@@ -3,7 +3,8 @@ import { css } from '@patternfly/react-styles';
 import { DropdownContext } from './dropdownConstants';
 import { Omit } from '../../helpers/typeUtils';
 
-export interface DropdownGroupProps extends Omit<React.HTMLProps<HTMLDivElement>, 'label'> {
+export interface DropdownGroupProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'label'> {
   /** Checkboxes within group */
   children?: React.ReactNode;
   /** Additional classes added to the DropdownGroup control */
@@ -21,7 +22,7 @@ export const DropdownGroup: React.FunctionComponent<DropdownGroupProps> = ({
     {({ sectionClass, sectionTitleClass, sectionComponent }) => {
       const SectionComponent = sectionComponent as any;
       return (
-        <SectionComponent  className={css(sectionClass, className)}>
+        <SectionComponent className={css(sectionClass, className)}>
           {label && (
             <h1 className={css(sectionTitleClass)} aria-hidden>
               {label}

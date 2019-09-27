@@ -16,19 +16,23 @@ export function mergeProps(...props: any) {
   }
 
   // Avoid mutating the first prop collection
-  return mergeWith(mergeWith({}, firstProps), ...restProps, (a: any, b: any, key: any) => {
-    if (key === 'children') {
-      // Children have to be merged in reverse order for Reactabular
-      // logic to work.
-      return { ...b, ...a };
-    }
+  return mergeWith(
+    mergeWith({}, firstProps),
+    ...restProps,
+    (a: any, b: any, key: any) => {
+      if (key === 'children') {
+        // Children have to be merged in reverse order for Reactabular
+        // logic to work.
+        return { ...b, ...a };
+      }
 
-    if (key === 'className') {
-      // Process class names through classNames to merge properly
-      // as a string.
-      return classNames(a, b);
-    }
+      if (key === 'className') {
+        // Process class names through classNames to merge properly
+        // as a string.
+        return classNames(a, b);
+      }
 
-    return undefined;
-  });
+      return undefined;
+    }
+  );
 }

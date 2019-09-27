@@ -18,7 +18,10 @@ export interface LoginFormProps extends React.HTMLProps<HTMLFormElement> {
   /** Value for the Username */
   usernameValue?: string;
   /** Function that handles the onChange event for the Username */
-  onChangeUsername?: (value: string, event: React.FormEvent<HTMLInputElement>) => void;
+  onChangeUsername?: (
+    value: string,
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
   /** Flag indicating if the Username is valid */
   isValidUsername?: boolean;
   /** Label for the Password Input Field */
@@ -26,7 +29,10 @@ export interface LoginFormProps extends React.HTMLProps<HTMLFormElement> {
   /** Value for the Password */
   passwordValue?: string;
   /** Function that handles the onChange event for the Password */
-  onChangePassword?: (value: string, event: React.FormEvent<HTMLInputElement>) => void;
+  onChangePassword?: (
+    value: string,
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
   /** Flag indicating if the Password is valid */
   isValidPassword?: boolean;
   /** Label for the Log in Button Input */
@@ -34,13 +40,18 @@ export interface LoginFormProps extends React.HTMLProps<HTMLFormElement> {
   /** Flag indicating if the Login Button is disabled */
   isLoginButtonDisabled?: boolean;
   /** Function that is called when the Login button is clicked */
-  onLoginButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onLoginButtonClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
   /** Label for the Remember Me Checkbox that indicates the user should be kept logged in.  If the label is not provided, the checkbox will not show. */
   rememberMeLabel?: string;
   /** Flag indicating if the remember me Checkbox is checked. */
   isRememberMeChecked?: boolean;
   /** Function that handles the onChange event for the Remember Me Checkbox */
-  onChangeRememberMe?: (checked: boolean, event: React.FormEvent<HTMLInputElement>) => void;
+  onChangeRememberMe?: (
+    checked: boolean,
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
   /* THIS PROP IS DEPRECATED AND NO LONGER USED; remove in a future breaking change release
    * Aria Label for the Remember me checkbox, use this to override using the rememberMeLabel
    * */
@@ -54,27 +65,36 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
   helperText = null,
   usernameLabel = 'Username',
   usernameValue = '',
-  onChangeUsername =  () => undefined as any,
+  onChangeUsername = () => undefined as any,
   isValidUsername = true,
   passwordLabel = 'Password',
   passwordValue = '',
-  onChangePassword =  () => undefined as any,
+  onChangePassword = () => undefined as any,
   isValidPassword = true,
   loginButtonLabel = 'Log In',
   isLoginButtonDisabled = false,
-  onLoginButtonClick =  () => undefined as any,
+  onLoginButtonClick = () => undefined as any,
   rememberMeLabel = '',
   isRememberMeChecked = false,
-  onChangeRememberMe =  () => undefined as any,
+  onChangeRememberMe = () => undefined as any,
   rememberMeAriaLabel = '',
   ...props
 }: LoginFormProps) => (
   <Form className={className} {...props}>
-    <FormHelperText isError={!isValidUsername || !isValidPassword} isHidden={!showHelperText}>
+    <FormHelperText
+      isError={!isValidUsername || !isValidPassword}
+      isHidden={!showHelperText}
+    >
       {helperText}
     </FormHelperText>
-    <FormGroup label={usernameLabel} isRequired isValid={isValidUsername} fieldId="pf-login-username-id">
-      <TextInput autoFocus={!noAutoFocus}
+    <FormGroup
+      label={usernameLabel}
+      isRequired
+      isValid={isValidUsername}
+      fieldId="pf-login-username-id"
+    >
+      <TextInput
+        autoFocus={!noAutoFocus}
         id="pf-login-username-id"
         isRequired
         isValid={isValidUsername}
@@ -84,7 +104,12 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
         onChange={onChangeUsername}
       />
     </FormGroup>
-    <FormGroup label={passwordLabel} isRequired isValid={isValidPassword} fieldId="pf-login-password-id">
+    <FormGroup
+      label={passwordLabel}
+      isRequired
+      isValid={isValidPassword}
+      fieldId="pf-login-password-id"
+    >
       <TextInput
         isRequired
         type="password"
@@ -106,7 +131,13 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
       </FormGroup>
     )}
     <ActionGroup>
-      <Button variant="primary" type="submit" onClick={onLoginButtonClick} isBlock isDisabled={isLoginButtonDisabled}>
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={onLoginButtonClick}
+        isBlock
+        isDisabled={isLoginButtonDisabled}
+      >
         {loginButtonLabel}
       </Button>
     </ActionGroup>

@@ -5,12 +5,12 @@ import {
   DomainPropType,
   NumberOrCallback,
   PaddingProps,
-  VictoryBar,
+  VictoryBar
 } from 'victory';
-import { getComparativeMeasureData }  from './utils';
+import { getComparativeMeasureData } from './utils';
 import { ChartBar } from '../ChartBar';
 import { ChartContainer } from '../ChartContainer';
-import { ChartBulletStyles, ChartThemeDefinition}  from '../ChartTheme';
+import { ChartBulletStyles, ChartThemeDefinition } from '../ChartTheme';
 import { ChartTooltip } from '../ChartTooltip';
 import { getBulletComparativeMeasureTheme } from '../ChartUtils';
 
@@ -157,7 +157,9 @@ export interface ChartBulletComparativeMeasureProps {
   y?: DataGetterPropType;
 }
 
-export const ChartBulletComparativeMeasure: React.FunctionComponent<ChartBulletComparativeMeasureProps> = ({
+export const ChartBulletComparativeMeasure: React.FunctionComponent<
+  ChartBulletComparativeMeasureProps
+> = ({
   ariaDesc,
   ariaTitle,
   barWidth = ChartBulletStyles.comparativeMeasureWidth,
@@ -195,14 +197,16 @@ export const ChartBulletComparativeMeasure: React.FunctionComponent<ChartBulletC
       if (horizontal) {
         return 0;
       }
-      const result = (typeof barWidth === 'function') ? barWidth(data, false) : barWidth;
+      const result =
+        typeof barWidth === 'function' ? barWidth(data, false) : barWidth;
       return result / 2;
     },
     dy: () => {
       if (!horizontal) {
         return 0;
       }
-      const result = (typeof barWidth === 'function') ? barWidth(data, false) : barWidth;
+      const result =
+        typeof barWidth === 'function' ? barWidth(data, false) : barWidth;
       return -(result / 2);
     },
     orientation: 'top',
@@ -212,7 +216,7 @@ export const ChartBulletComparativeMeasure: React.FunctionComponent<ChartBulletC
   const measure = computedData.map((dataPoint: any, index: number) => {
     return React.cloneElement(measureComponent, {
       barWidth,
-      data: [{...dataPoint}],
+      data: [{ ...dataPoint }],
       domain,
       height,
       horizontal,
@@ -228,13 +232,16 @@ export const ChartBulletComparativeMeasure: React.FunctionComponent<ChartBulletC
   });
 
   return standalone ? (
-    <ChartContainer desc={ariaDesc} height={height} title={ariaTitle} width={width}>
+    <ChartContainer
+      desc={ariaDesc}
+      height={height}
+      title={ariaTitle}
+      width={width}
+    >
       {measure}
     </ChartContainer>
   ) : (
-    <React.Fragment>
-      {measure}
-    </React.Fragment>
+    <React.Fragment>{measure}</React.Fragment>
   );
 };
 

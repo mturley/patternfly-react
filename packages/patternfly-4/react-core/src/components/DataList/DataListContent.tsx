@@ -36,6 +36,13 @@ export const DataListContent: React.FunctionComponent<DataListContentProps> = ({
     aria-label={ariaLabel}
     {...props}
   >
-    <div className={css(styles.dataListExpandableContentBody, noPadding && styles.modifiers.noPadding)}>{children}</div>
+    <div
+      className={css(
+        styles.dataListExpandableContentBody,
+        noPadding && styles.modifiers.noPadding
+      )}
+    >
+      {children}
+    </div>
   </section>
 );

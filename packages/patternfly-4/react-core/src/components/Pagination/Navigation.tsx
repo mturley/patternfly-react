@@ -1,7 +1,12 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/Pagination/pagination';
 import { css } from '@patternfly/react-styles';
-import { AngleLeftIcon, AngleDoubleLeftIcon, AngleRightIcon, AngleDoubleRightIcon } from '@patternfly/react-icons';
+import {
+  AngleLeftIcon,
+  AngleDoubleLeftIcon,
+  AngleRightIcon,
+  AngleDoubleRightIcon
+} from '@patternfly/react-icons';
 import { Button, ButtonVariant } from '../Button';
 import { pluralize } from '../../helpers';
 import { KEY_CODES } from '../../helpers/constants';
@@ -34,24 +39,45 @@ export interface NavigationProps extends React.HTMLProps<HTMLElement> {
   /** The number of the current page */
   page: React.ReactText;
   /** Function called when page is changed */
-  onSetPage: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onSetPage: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks to navigate to next page */
-  onNextClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onNextClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks to navigate to previous page */
-  onPreviousClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onPreviousClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks to navigate to first page */
-  onFirstClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onFirstClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks to navigate to last page */
-  onLastClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onLastClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user inputs page number */
-  onPageInput?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onPageInput?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
 }
 
 export interface NavigationState {
   userInputPage?: React.ReactText;
 }
 
-export class Navigation extends React.Component<NavigationProps, NavigationState> {
+export class Navigation extends React.Component<
+  NavigationProps,
+  NavigationState
+> {
   constructor(props: NavigationProps) {
     super(props);
     this.state = { userInputPage: this.props.page };
@@ -74,10 +100,13 @@ export class Navigation extends React.Component<NavigationProps, NavigationState
     onPreviousClick: () => undefined as any,
     onFirstClick: () => undefined as any,
     onLastClick: () => undefined as any,
-    onPageInput: () => undefined as any,
+    onPageInput: () => undefined as any
   };
 
-  private static parseInteger(input: React.ReactText, lastPage: number): number {
+  private static parseInteger(
+    input: React.ReactText,
+    lastPage: number
+  ): number {
     let inputPage = Number.parseInt(input as string, 10);
     if (!Number.isNaN(inputPage)) {
       inputPage = inputPage > lastPage ? lastPage : inputPage;
@@ -86,24 +115,53 @@ export class Navigation extends React.Component<NavigationProps, NavigationState
     return inputPage;
   }
 
-  private onChange(event: React.ChangeEvent<HTMLInputElement>, lastPage: number): void {
+  private onChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    lastPage: number
+  ): void {
     const inputPage = Navigation.parseInteger(event.target.value, lastPage);
-    this.setState({ userInputPage: Number.isNaN(inputPage as number) ? event.target.value : inputPage });
+    this.setState({
+      userInputPage: Number.isNaN(inputPage as number)
+        ? event.target.value
+        : inputPage
+    });
   }
 
-  private onKeyDown(event: React.KeyboardEvent<HTMLInputElement>, page: number | string, lastPage: number, onPageInput: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void, onSetPage: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void): void {
+  private onKeyDown(
+    event: React.KeyboardEvent<HTMLInputElement>,
+    page: number | string,
+    lastPage: number,
+    onPageInput: (
+      event: React.SyntheticEvent<HTMLButtonElement>,
+      page: number
+    ) => void,
+    onSetPage: (
+      event: React.SyntheticEvent<HTMLButtonElement>,
+      page: number
+    ) => void
+  ): void {
     if (event.keyCode === KEY_CODES.ENTER) {
-      const inputPage = Navigation.parseInteger(this.state.userInputPage, lastPage) as number;
-      onPageInput(event, Number.isNaN(inputPage) ? page as number : inputPage);
-      onSetPage(event, Number.isNaN(inputPage) ? page as number : inputPage);
+      const inputPage = Navigation.parseInteger(
+        this.state.userInputPage,
+        lastPage
+      ) as number;
+      onPageInput(
+        event,
+        Number.isNaN(inputPage) ? (page as number) : inputPage
+      );
+      onSetPage(event, Number.isNaN(inputPage) ? (page as number) : inputPage);
     }
   }
 
   componentDidUpdate(lastState: NavigationProps) {
-    if (this.props.page !== lastState.page && this.props.page <= this.props.lastPage && this.state.userInputPage !== this.props.page) {
+    if (
+      this.props.page !== lastState.page &&
+      this.props.page <= this.props.lastPage &&
+      this.state.userInputPage !== this.props.page
+    ) {
       this.setState({ userInputPage: this.props.page });
     }
-   }
+  }
 
   render() {
     const {
@@ -130,28 +188,33 @@ export class Navigation extends React.Component<NavigationProps, NavigationState
     } = this.props;
     const { userInputPage } = this.state;
     return (
-      <nav className={css(styles.paginationNav, className)} aria-label={paginationTitle} {...props}>
+      <nav
+        className={css(styles.paginationNav, className)}
+        aria-label={paginationTitle}
+        {...props}
+      >
         {!isCompact && (
           <Button
             variant={ButtonVariant.plain}
             isDisabled={isDisabled || page === firstPage}
             aria-label={toFirstPage}
             data-action="first"
-            onClick={(event) => {
+            onClick={event => {
               onFirstClick(event, 1);
               onSetPage(event, 1);
               this.setState({ userInputPage: 1 });
             }}
           >
             <AngleDoubleLeftIcon />
-          </Button>  
+          </Button>
         )}
         <Button
           variant={ButtonVariant.plain}
           isDisabled={isDisabled || page === firstPage}
           data-action="previous"
-          onClick={(event) => {
-            const newPage = page as number - 1 >= 1 ? page as number - 1 : 1;
+          onClick={event => {
+            const newPage =
+              (page as number) - 1 >= 1 ? (page as number) - 1 : 1;
             onPreviousClick(event, newPage);
             onSetPage(event, newPage);
             this.setState({ userInputPage: newPage });
@@ -166,12 +229,14 @@ export class Navigation extends React.Component<NavigationProps, NavigationState
               className={css(styles.formControl)}
               aria-label={currPage}
               type="number"
-              disabled={isDisabled || page === firstPage && page === lastPage}
+              disabled={isDisabled || (page === firstPage && page === lastPage)}
               min={lastPage <= 0 && firstPage <= 0 ? 0 : 1}
               max={lastPage}
               value={userInputPage}
-              onKeyDown={(event) => this.onKeyDown(event, page, lastPage, onPageInput, onSetPage)}
-              onChange={(event) => this.onChange(event, lastPage)}
+              onKeyDown={event =>
+                this.onKeyDown(event, page, lastPage, onPageInput, onSetPage)
+              }
+              onChange={event => this.onChange(event, lastPage)}
             />
             <span aria-hidden="true">
               of {pagesTitle ? pluralize(lastPage, pagesTitle) : lastPage}
@@ -183,8 +248,11 @@ export class Navigation extends React.Component<NavigationProps, NavigationState
           isDisabled={isDisabled || page === lastPage}
           aria-label={toNextPage}
           data-action="next"
-          onClick={(event) => {
-            const newPage = page as number + 1 <= lastPage ? page as number + 1 : lastPage;
+          onClick={event => {
+            const newPage =
+              (page as number) + 1 <= lastPage
+                ? (page as number) + 1
+                : lastPage;
             onNextClick(event, newPage);
             onSetPage(event, newPage);
             this.setState({ userInputPage: newPage });
@@ -198,7 +266,7 @@ export class Navigation extends React.Component<NavigationProps, NavigationState
             isDisabled={isDisabled || page === lastPage}
             aria-label={toLastPage}
             data-action="last"
-            onClick={(event) => {
+            onClick={event => {
               onLastClick(event, lastPage);
               onSetPage(event, lastPage);
               this.setState({ userInputPage: lastPage });

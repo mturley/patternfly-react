@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, DropdownKebab, Filter, FormControl, Icon, MenuItem, Sort, Toolbar } from '../../../index';
+import {
+  Button,
+  DropdownKebab,
+  Filter,
+  FormControl,
+  Icon,
+  MenuItem,
+  Sort,
+  Toolbar
+} from '../../../index';
 import { noop } from '../../../common/helpers';
 
 import { mockFilterExampleFields } from '../../Filter/__mocks__/mockFilterExample';
@@ -26,7 +35,7 @@ export class MockToolbarExample extends React.Component {
       keyEvent.stopPropagation();
       keyEvent.preventDefault();
     }
-  }
+  };
 
   setViewType(viewType) {
     const { onViewChanged } = this.props;
@@ -47,13 +56,13 @@ export class MockToolbarExample extends React.Component {
         this.filterAdded(currentFilterType, filterValue);
       }
     }
-  }
+  };
 
   clearFilters = () => {
     const { onFiltersChanged } = this.props;
     this.setState({ activeFilters: [] });
     onFiltersChanged && onFiltersChanged('Filters cleared.');
-  }
+  };
 
   filterAdded = (field, value) => {
     const { onFiltersChanged } = this.props;
@@ -66,8 +75,8 @@ export class MockToolbarExample extends React.Component {
     filterText += ': ';
 
     if (value.filterCategory) {
-      filterText += `${value.filterCategory.title || value.filterCategory}-${value.filterValue.title ||
-        value.filterValue}`;
+      filterText += `${value.filterCategory.title ||
+        value.filterCategory}-${value.filterValue.title || value.filterValue}`;
     } else if (value.title) {
       filterText += value.title;
     } else {
@@ -77,14 +86,14 @@ export class MockToolbarExample extends React.Component {
     const activeFilters = [...this.state.activeFilters, { label: filterText }];
     this.setState({ activeFilters });
     onFiltersChanged && onFiltersChanged(`Filter Added: ${filterText}`);
-  }
+  };
 
   filterCategorySelected = category => {
     const { filterCategory } = this.state;
     if (filterCategory !== category) {
       this.setState({ filterCategory: category });
     }
-  }
+  };
 
   filterValueSelected = filterValue => {
     const { currentFilterType, currentValue } = this.state;
@@ -95,7 +104,7 @@ export class MockToolbarExample extends React.Component {
         this.filterAdded(currentFilterType, filterValue);
       }
     }
-  }
+  };
 
   removeFilter = filter => {
     const { onFiltersChanged } = this.props;
@@ -103,11 +112,14 @@ export class MockToolbarExample extends React.Component {
 
     const index = activeFilters.indexOf(filter);
     if (index > -1) {
-      const updated = [...activeFilters.slice(0, index), ...activeFilters.slice(index + 1)];
+      const updated = [
+        ...activeFilters.slice(0, index),
+        ...activeFilters.slice(index + 1)
+      ];
       this.setState({ activeFilters: updated });
     }
     onFiltersChanged && onFiltersChanged(`Filter Removed: ${filter.label}`);
-  }
+  };
 
   selectFilterType = filterType => {
     const { currentFilterType } = this.state;
@@ -118,7 +130,7 @@ export class MockToolbarExample extends React.Component {
         this.setState({ filterCategory: undefined });
       }
     }
-  }
+  };
 
   toggleCurrentSortDirection = () => {
     const { isSortAscending } = this.state;
@@ -126,7 +138,7 @@ export class MockToolbarExample extends React.Component {
 
     this.setState({ isSortAscending: !isSortAscending });
     onSortChanged && onSortChanged(`sort ascending: ${!isSortAscending}`);
-  }
+  };
 
   updateCurrentSortType = sortType => {
     const { currentSortType } = this.state;
@@ -140,11 +152,11 @@ export class MockToolbarExample extends React.Component {
       });
     }
     onSortChanged && onSortChanged(`sort type: ${sortType.title}`);
-  }
+  };
 
   updateCurrentValue = event => {
     this.setState({ currentValue: event.target.value });
-  }
+  };
 
   renderInput() {
     const { currentFilterType, currentValue, filterCategory } = this.state;
@@ -247,14 +259,16 @@ export class MockToolbarExample extends React.Component {
             </MenuItem>
             <MenuItem
               onClick={() => {
-                onActionPerformed && onActionPerformed('Action: Another Action');
+                onActionPerformed &&
+                  onActionPerformed('Action: Another Action');
               }}
             >
               Another Action
             </MenuItem>
             <MenuItem
               onClick={() => {
-                onActionPerformed && onActionPerformed('Action: Something Else Here');
+                onActionPerformed &&
+                  onActionPerformed('Action: Something Else Here');
               }}
             >
               Something Else Here
@@ -262,7 +276,8 @@ export class MockToolbarExample extends React.Component {
             <MenuItem role="separator" className="divider" />
             <MenuItem
               onClick={() => {
-                onActionPerformed && onActionPerformed('Action: Separated Link');
+                onActionPerformed &&
+                  onActionPerformed('Action: Separated Link');
               }}
             >
               Separated Link
@@ -275,9 +290,15 @@ export class MockToolbarExample extends React.Component {
             currentIndex={1}
             totalCount={3}
             onChange={value => onFindAction && onFindAction(`Find: ${value}`)}
-            onEnter={value => onFindAction && onFindAction(`Find again: ${value}`)}
-            onFindNext={value => onFindAction && onFindAction(`Find Next: ${value}`)}
-            onFindPrevious={value => onFindAction && onFindAction(`Find Previous: ${value}`)}
+            onEnter={value =>
+              onFindAction && onFindAction(`Find again: ${value}`)
+            }
+            onFindNext={value =>
+              onFindAction && onFindAction(`Find Next: ${value}`)
+            }
+            onFindPrevious={value =>
+              onFindAction && onFindAction(`Find Previous: ${value}`)
+            }
           />
           <Toolbar.ViewSelector>
             <Button
@@ -324,7 +345,11 @@ export class MockToolbarExample extends React.Component {
             <Filter.ActiveLabel>Active Filters:</Filter.ActiveLabel>
             <Filter.List>
               {activeFilters.map((item, index) => (
-                <Filter.Item key={index} onRemove={this.removeFilter} filterData={item}>
+                <Filter.Item
+                  key={index}
+                  onRemove={this.removeFilter}
+                  filterData={item}
+                >
                   label=
                   {item.label}
                 </Filter.Item>

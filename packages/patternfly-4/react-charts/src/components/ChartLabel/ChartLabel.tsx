@@ -109,7 +109,7 @@ export interface ChartLabelProps extends VictoryLabelProps {
    * Victory components will pass an origin prop is to define the center point in svg coordinates for polar charts.
    * **This prop should not be set manually.**
    */
-  origin?: { x: number, y: number };
+  origin?: { x: number; y: number };
   /**
    * Victory components can pass a boolean polar prop to specify whether a label is part of a polar chart.
    * **This prop should not be set manually.**
@@ -124,7 +124,7 @@ export interface ChartLabelProps extends VictoryLabelProps {
    * Victory components can pass a scale prop to their label component. This can be used to calculate the position of
    * label elements from datum. This prop should not be set manually.
    */
-  scale?: { x?: any, y?: any };
+  scale?: { x?: any; y?: any };
   /**
    * The style prop applies CSS properties to the rendered `<text>` element.
    */
@@ -166,12 +166,15 @@ export const ChartLabel: React.FunctionComponent<ChartLabelProps> = ({
   style,
   ...rest
 }: ChartLabelProps) => {
-  const applyDefaultStyle = (customStyle: React.CSSProperties) => defaults(customStyle, {
-    fontFamily: ChartCommonStyles.label.fontFamily,
-    fontSize: ChartCommonStyles.label.fontSize,
-    letterSpacing: ChartCommonStyles.label.letterSpacing
-  });
-  const newStyle = Array.isArray(style) ? style.map(applyDefaultStyle) : applyDefaultStyle(style);
+  const applyDefaultStyle = (customStyle: React.CSSProperties) =>
+    defaults(customStyle, {
+      fontFamily: ChartCommonStyles.label.fontFamily,
+      fontSize: ChartCommonStyles.label.fontSize,
+      letterSpacing: ChartCommonStyles.label.letterSpacing
+    });
+  const newStyle = Array.isArray(style)
+    ? style.map(applyDefaultStyle)
+    : applyDefaultStyle(style);
   return <VictoryLabel style={newStyle as any} {...rest} />;
 };
 

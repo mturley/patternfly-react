@@ -3,7 +3,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { name } from '../../../package.json';
 import { items, dropdownItems } from './DualListMocks';
 import { Button } from '../../index';
@@ -25,7 +29,9 @@ import {
 } from './index';
 
 const stories = storiesOf(
-  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.FORMS_AND_CONTROLS}/Dual List Selector`,
+  `${storybookPackageName(name)}/${
+    STORYBOOK_CATEGORY.FORMS_AND_CONTROLS
+  }/Dual List Selector`,
   module
 );
 
@@ -77,7 +83,10 @@ stories.add(
   'Dual List Selector as a form input',
   withInfo(storyInfo)(() => (
     <div>
-      <h3>Please see this short video to understand how to send the form values by network:</h3>
+      <h3>
+        Please see this short video to understand how to send the form values by
+        network:
+      </h3>
       <iframe
         width="400"
         height="200"

@@ -11,7 +11,11 @@ const LinkPreview = ({ name, path, text }) => {
     <>
       {text && <p>{text}</p>}
       <h4 data-pf-content className="pf-u-my-md">
-        <a href={split[split.length - 1].toLowerCase()} target="_blank" rel="noopener noreferrer">
+        <a
+          href={split[split.length - 1].toLowerCase()}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {name}
         </a>
       </h4>

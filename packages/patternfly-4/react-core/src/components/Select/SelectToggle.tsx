@@ -45,7 +45,9 @@ export interface SelectToggleProps extends React.HTMLProps<HTMLElement> {
 }
 
 export class SelectToggle extends React.Component<SelectToggleProps> {
-  private toggle: React.RefObject<HTMLDivElement> | React.RefObject<HTMLButtonElement>;
+  private toggle:
+    | React.RefObject<HTMLDivElement>
+    | React.RefObject<HTMLButtonElement>;
 
   static defaultProps = {
     className: '',
@@ -67,8 +69,12 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
   constructor(props: SelectToggleProps) {
     super(props);
     const { variant } = props;
-    const isTypeahead = variant === SelectVariant.typeahead || variant === SelectVariant.typeaheadMulti;
-    this.toggle = isTypeahead ? React.createRef<HTMLDivElement>() : React.createRef<HTMLButtonElement>();
+    const isTypeahead =
+      variant === SelectVariant.typeahead ||
+      variant === SelectVariant.typeaheadMulti;
+    this.toggle = isTypeahead
+      ? React.createRef<HTMLDivElement>()
+      : React.createRef<HTMLButtonElement>();
   }
 
   componentDidMount() {
@@ -85,12 +91,16 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
 
   onDocClick = (event: Event) => {
     const { parentRef, isExpanded, onToggle, onClose } = this.props;
-    if (isExpanded && parentRef && !parentRef.current.contains(event.target as Node)) {
+    if (
+      isExpanded &&
+      parentRef &&
+      !parentRef.current.contains(event.target as Node)
+    ) {
       onToggle(false);
       onClose();
       this.toggle.current.focus();
     }
-  }
+  };
 
   onEscPress = (event: KeyboardEvent) => {
     const { parentRef, isExpanded, variant, onToggle, onClose } = this.props;
@@ -107,19 +117,31 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
       onClose();
       this.toggle.current.focus();
     }
-  }
+  };
 
   onKeyDown = (event: React.KeyboardEvent) => {
-    const { isExpanded, onToggle, variant, onClose, onEnter, handleTypeaheadKeys } = this.props;
+    const {
+      isExpanded,
+      onToggle,
+      variant,
+      onClose,
+      onEnter,
+      handleTypeaheadKeys
+    } = this.props;
     if (
       (event.key === KeyTypes.ArrowDown || event.key === KeyTypes.ArrowUp) &&
-      (variant === SelectVariant.typeahead || variant === SelectVariant.typeaheadMulti)
+      (variant === SelectVariant.typeahead ||
+        variant === SelectVariant.typeaheadMulti)
     ) {
-      handleTypeaheadKeys((event.key === KeyTypes.ArrowDown && 'down') || (event.key === KeyTypes.ArrowUp && 'up'));
+      handleTypeaheadKeys(
+        (event.key === KeyTypes.ArrowDown && 'down') ||
+          (event.key === KeyTypes.ArrowUp && 'up')
+      );
     }
     if (
       event.key === KeyTypes.Enter &&
-      (variant === SelectVariant.typeahead || variant === SelectVariant.typeaheadMulti)
+      (variant === SelectVariant.typeahead ||
+        variant === SelectVariant.typeaheadMulti)
     ) {
       if (isExpanded) {
         handleTypeaheadKeys('enter');
@@ -133,20 +155,29 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
       (event.key === KeyTypes.Tab && !isExpanded) ||
       (event.key !== KeyTypes.Enter && event.key !== KeyTypes.Space) ||
       ((event.key === KeyTypes.Space || event.key === KeyTypes.Enter) &&
-        (variant === SelectVariant.typeahead || variant === SelectVariant.typeaheadMulti))
+        (variant === SelectVariant.typeahead ||
+          variant === SelectVariant.typeaheadMulti))
     ) {
       return;
     }
     event.preventDefault();
-    if ((event.key === KeyTypes.Tab || event.key === KeyTypes.Enter || event.key === KeyTypes.Space) && isExpanded) {
+    if (
+      (event.key === KeyTypes.Tab ||
+        event.key === KeyTypes.Enter ||
+        event.key === KeyTypes.Space) &&
+      isExpanded
+    ) {
       onToggle(!isExpanded);
       onClose();
       this.toggle.current.focus();
-    } else if ((event.key === KeyTypes.Enter || event.key === KeyTypes.Space) && !isExpanded) {
+    } else if (
+      (event.key === KeyTypes.Enter || event.key === KeyTypes.Space) &&
+      !isExpanded
+    ) {
       onToggle(!isExpanded);
       onEnter();
     }
-  }
+  };
 
   render() {
     const {
@@ -170,7 +201,9 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
       ariaLabelToggle,
       ...props
     } = this.props;
-    const isTypeahead = variant === SelectVariant.typeahead || variant === SelectVariant.typeaheadMulti;
+    const isTypeahead =
+      variant === SelectVariant.typeahead ||
+      variant === SelectVariant.typeaheadMulti;
     const toggleProps: {
       id: string;
       'aria-labelledby': string;
@@ -199,7 +232,7 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
               isPlain && styles.modifiers.plain,
               className
             )}
-            onClick={(_event) => {
+            onClick={_event => {
               onToggle(!isExpanded);
               if (isExpanded) {
                 onClose();
@@ -226,7 +259,7 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
               isTypeahead && styles.modifiers.typeahead,
               className
             )}
-            onClick={(_event) => {
+            onClick={_event => {
               if (!isDisabled) {
                 onToggle(true);
               }
@@ -238,7 +271,7 @@ export class SelectToggle extends React.Component<SelectToggleProps> {
               {...toggleProps}
               className={css(buttonStyles.button, styles.selectToggleButton)}
               aria-label={ariaLabelToggle}
-              onClick={(_event) => {
+              onClick={_event => {
                 _event.stopPropagation();
                 onToggle(!isExpanded);
                 if (isExpanded) {

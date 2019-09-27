@@ -14,16 +14,23 @@ class StatefulWrapperSelect extends Component {
     matched: []
   };
 
-  onToggle = () => this.setState({ open: !this.state.open, isSearching: false, searchValue: '' });
+  onToggle = () =>
+    this.setState({
+      open: !this.state.open,
+      isSearching: false,
+      searchValue: ''
+    });
 
   matcher = search => {
     const { options } = this.state;
     const results = [];
     options.forEach(opt => {
-      if (opt.name.includes(search)) { results.push(opt); }
+      if (opt.name.includes(search)) {
+        results.push(opt);
+      }
     });
     return results;
-  }
+  };
 
   onSearch = e => {
     e.persist();
@@ -43,20 +50,37 @@ class StatefulWrapperSelect extends Component {
           }, 700);
         }
       );
-    } else { this.setState({ isSearching: false, searchValue: '' }); }
-  }
+    } else {
+      this.setState({ isSearching: false, searchValue: '' });
+    }
+  };
 
   onClear = () => this.setState({ searchValue: '', isSearching: false });
 
   onItemClick = host =>
-    this.setState({ selected: { id: host.id, name: host.name }, open: false, isSearching: false, searchValue: '' })
+    this.setState({
+      selected: { id: host.id, name: host.name },
+      open: false,
+      isSearching: false,
+      searchValue: ''
+    });
 
   handleClickOutside = () => {
-    if (this.state.open === true) { this.onToggle(); }
-  }
+    if (this.state.open === true) {
+      this.onToggle();
+    }
+  };
 
   render() {
-    const { open, isSearching, searchValue, selected, isLoading, options, matched } = this.state;
+    const {
+      open,
+      isSearching,
+      searchValue,
+      selected,
+      isLoading,
+      options,
+      matched
+    } = this.state;
     return (
       <Select
         options={isSearching ? matched : options}

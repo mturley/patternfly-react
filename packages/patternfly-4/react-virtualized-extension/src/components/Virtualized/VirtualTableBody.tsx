@@ -126,7 +126,13 @@ export default class VirtualTableBody extends React.PureComponent<Props> {
   }
 
   /** See VirtualGrid#getOffsetForCell */
-  getOffsetForRow({ alignment, index }: { alignment: Alignment, index: number }) {
+  getOffsetForRow({
+    alignment,
+    index
+  }: {
+    alignment: Alignment;
+    index: number;
+  }) {
     if (this.VirtualGrid) {
       const { scrollTop } = this.VirtualGrid.getOffsetForCell({
         alignment,
@@ -157,7 +163,10 @@ export default class VirtualTableBody extends React.PureComponent<Props> {
   }
 
   /** CellMeasurer compatibility */
-  recomputeVirtualGridSize({ columnIndex = 0, rowIndex = 0 }: CellPosition = {}) {
+  recomputeVirtualGridSize({
+    columnIndex = 0,
+    rowIndex = 0
+  }: CellPosition = {}) {
     if (this.VirtualGrid) {
       this.VirtualGrid.recomputeVirtualGridSize({
         rowIndex,
@@ -194,7 +203,17 @@ export default class VirtualTableBody extends React.PureComponent<Props> {
   }
 
   render() {
-    const { className, noRowsRenderer, scrollToIndex, width, columns, columnCount, rows, tabIndex, style } = this.props;
+    const {
+      className,
+      noRowsRenderer,
+      scrollToIndex,
+      width,
+      columns,
+      columnCount,
+      rows,
+      tabIndex,
+      style
+    } = this.props;
 
     const classNames = clsx('ReactVirtualized__List', className);
 
@@ -235,7 +254,14 @@ export default class VirtualTableBody extends React.PureComponent<Props> {
     );
   }
 
-  _cellRenderer = ({ parent, rowIndex, style, isScrolling, isVisible, key }: CellRendererParams) => {
+  _cellRenderer = ({
+    parent,
+    rowIndex,
+    style,
+    isScrolling,
+    isVisible,
+    key
+  }: CellRendererParams) => {
     const { rowRenderer } = this.props;
 
     // TRICKY The style object is sometimes cached by VirtualGrid.
@@ -258,17 +284,21 @@ export default class VirtualTableBody extends React.PureComponent<Props> {
       key,
       parent
     });
-  }
+  };
 
   _setRef = (ref: any) => {
     this.VirtualGrid = ref;
-  }
+  };
 
-  _onScroll = ({ clientHeight, scrollHeight, scrollTop }: VirtualGridScroll) => {
+  _onScroll = ({
+    clientHeight,
+    scrollHeight,
+    scrollTop
+  }: VirtualGridScroll) => {
     const { onScroll } = this.props;
 
     onScroll({ clientHeight, scrollHeight, scrollTop });
-  }
+  };
 
   _onSectionRendered = ({
     rowOverscanStartIndex,
@@ -284,5 +314,5 @@ export default class VirtualTableBody extends React.PureComponent<Props> {
       startIndex: rowStartIndex,
       stopIndex: rowStopIndex
     });
-  }
+  };
 }

@@ -3,7 +3,8 @@ import { css, getModifier } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/OptionsMenu/options-menu';
 import { OptionsMenuToggle } from './OptionsMenuToggle';
 
-export interface OptionsMenuToggleWithTextProps extends React.HTMLProps<HTMLDivElement> {
+export interface OptionsMenuToggleWithTextProps
+  extends React.HTMLProps<HTMLDivElement> {
   /** Id of the parent Options menu component */
   parentId?: string;
   /** Content to be rendered inside the Options menu toggle as text or another non-interactive element */
@@ -33,12 +34,22 @@ export interface OptionsMenuToggleWithTextProps extends React.HTMLProps<HTMLDivE
   /** Internal parent reference */
   parentRef?: HTMLElement;
   /** Indicates that the element has a popup context menu or sub-level menu */
-  ariaHasPopup?: boolean | 'dialog' | 'menu' | 'false' | 'true' | 'listbox' | 'tree' | 'grid';
+  ariaHasPopup?:
+    | boolean
+    | 'dialog'
+    | 'menu'
+    | 'false'
+    | 'true'
+    | 'listbox'
+    | 'tree'
+    | 'grid';
   /** Provides an accessible name for the button when an icon is used instead of text */
   'aria-label'?: string;
 }
 
-export const OptionsMenuToggleWithText: React.FunctionComponent<OptionsMenuToggleWithTextProps> = ({
+export const OptionsMenuToggleWithText: React.FunctionComponent<
+  OptionsMenuToggleWithTextProps
+> = ({
   parentId = '',
   toggleText,
   toggleTextClassName = '',
@@ -58,17 +69,23 @@ export const OptionsMenuToggleWithText: React.FunctionComponent<OptionsMenuToggl
   ...props
 }: OptionsMenuToggleWithTextProps) => {
   return (
-
-  <div className={css(styles.optionsMenuToggle,
-    getModifier(styles, 'text'),
-    isPlain && getModifier(styles, 'plain'),
-    isHovered && getModifier(styles, 'hover'),
-    isActive && getModifier(styles, 'active'),
-    isFocused && getModifier(styles, 'focus'),
-    isDisabled && getModifier(styles, 'disabled'))}
-    {...props}>
-    <span className={css(styles.optionsMenuToggleText, toggleTextClassName)}>{toggleText}</span>
-    <OptionsMenuToggle className={toggleButtonContentsClassName}
+    <div
+      className={css(
+        styles.optionsMenuToggle,
+        getModifier(styles, 'text'),
+        isPlain && getModifier(styles, 'plain'),
+        isHovered && getModifier(styles, 'hover'),
+        isActive && getModifier(styles, 'active'),
+        isFocused && getModifier(styles, 'focus'),
+        isDisabled && getModifier(styles, 'disabled')
+      )}
+      {...props}
+    >
+      <span className={css(styles.optionsMenuToggleText, toggleTextClassName)}>
+        {toggleText}
+      </span>
+      <OptionsMenuToggle
+        className={toggleButtonContentsClassName}
         isDisabled={isDisabled}
         aria-label={ariaLabel}
         isOpen={isOpen}
@@ -79,5 +96,6 @@ export const OptionsMenuToggleWithText: React.FunctionComponent<OptionsMenuToggl
         onEnter={onEnter}
         toggleTemplate={toggleButtonContents}
       />
-  </div>
-);};
+    </div>
+  );
+};

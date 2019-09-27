@@ -3,18 +3,28 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { withInfo } from '@storybook/addon-info';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { Grid } from './index';
 import { name } from '../../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.LAYOUTS}/Grid`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.LAYOUTS}/Grid`,
+  module
+);
 stories.addDecorator(withKnobs);
 
 const description = (
   <p>
-    This component is based on React Bootstrap Grid component. Grids are used to structure and present data. See{' '}
-    <a href={`${DOCUMENTATION_URL.REACT_BOOTSTRAP_LAYOUT}grid/`}>React Bootstrap Docs</a> for complete Grid component
-    documentation.
+    This component is based on React Bootstrap Grid component. Grids are used to
+    structure and present data. See{' '}
+    <a href={`${DOCUMENTATION_URL.REACT_BOOTSTRAP_LAYOUT}grid/`}>
+      React Bootstrap Docs
+    </a>{' '}
+    for complete Grid component documentation.
   </p>
 );
 

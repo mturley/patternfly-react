@@ -14,6 +14,8 @@ test('simple table text input', () => {
 });
 
 test('focused table text input', () => {
-  const view = shallow(<TableTextInput {...props} aria-label="focused text input" />);
+  const view = shallow(
+    <TableTextInput {...props} aria-label="focused text input" />
+  );
   expect(view).toMatchSnapshot();
 });

@@ -3,7 +3,11 @@ import * as ReactDOM from 'react-dom';
 import styles from '@patternfly/react-styles/css/components/Dropdown/dropdown';
 import { css } from '@patternfly/react-styles';
 import { keyHandler } from '../../helpers/util';
-import { DropdownPosition, DropdownArrowContext, DropdownContext } from './dropdownConstants';
+import {
+  DropdownPosition,
+  DropdownArrowContext,
+  DropdownContext
+} from './dropdownConstants';
 import { KEY_CODES, KEYHANDLER_DIRECTION } from '../../helpers/constants';
 
 export interface DropdownMenuProps {
@@ -50,20 +54,20 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
   componentDidMount() {
     const { autoFocus } = this.props;
     if (this.props.component === 'ul' && autoFocus) {
-      const focusTarget = this.refsCollection.find(
-        (ref) => {
-          return ref && !ref.hasAttribute('disabled')
-        }
-      );
+      const focusTarget = this.refsCollection.find(ref => {
+        return ref && !ref.hasAttribute('disabled');
+      });
       if (focusTarget) {
         if (focusTarget.focus) {
           focusTarget.focus();
         } else {
-          const searchedFocusTarget = ReactDOM.findDOMNode(focusTarget) as HTMLElement;
+          const searchedFocusTarget = ReactDOM.findDOMNode(
+            focusTarget
+          ) as HTMLElement;
           searchedFocusTarget.focus();
         }
       } else if (focusTarget) {
-         // eslint-disable-line react/no-find-dom-node
+        // eslint-disable-line react/no-find-dom-node
       }
     }
   }
@@ -73,45 +77,62 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
       index,
       position,
       this.refsCollection,
-      this.props.isGrouped ? this.refsCollection : React.Children.toArray(this.props.children),
+      this.props.isGrouped
+        ? this.refsCollection
+        : React.Children.toArray(this.props.children),
       custom
     );
-  }
+  };
 
-  sendRef = (index: number, node: any, isDisabled: boolean, isSeparator: boolean) => {
+  sendRef = (
+    index: number,
+    node: any,
+    isDisabled: boolean,
+    isSeparator: boolean
+  ) => {
     // since the ref is on the outer <li>, target the inner child for focusing and keyboard navigation
-    const innerNode = node.childNodes && node.childNodes.length ? node.childNodes[0] : node;
+    const innerNode =
+      node.childNodes && node.childNodes.length ? node.childNodes[0] : node;
     if (!innerNode.getAttribute) {
       // eslint-disable-line react/no-find-dom-node
-      this.refsCollection[index] = ReactDOM.findDOMNode(innerNode) as HTMLElement;
+      this.refsCollection[index] = ReactDOM.findDOMNode(
+        innerNode
+      ) as HTMLElement;
     } else if (isDisabled || isSeparator) {
       this.refsCollection[index] = null;
     } else {
       this.refsCollection[index] = innerNode;
     }
-  }
+  };
 
   extendChildren() {
     const { children, isGrouped } = this.props;
     if (isGrouped) {
       let index = 0;
-      return React.Children.map(children, (groupedChildren) => {
-          const group = groupedChildren as React.ReactElement<{children: React.ReactNode}>;
-          return React.cloneElement(group, {
-            ...(group.props && group.props.children && {
+      return React.Children.map(children, groupedChildren => {
+        const group = groupedChildren as React.ReactElement<{
+          children: React.ReactNode;
+        }>;
+        return React.cloneElement(group, {
+          ...(group.props &&
+            group.props.children && {
               children:
                 (group.props.children.constructor === Array &&
-                  React.Children.map(group.props.children as React.ReactElement<any>,
+                  React.Children.map(
+                    group.props.children as React.ReactElement<any>,
                     (option: React.ReactElement<any>) =>
                       React.cloneElement(option, {
                         index: index++
                       })
                   )) ||
-                React.cloneElement(group.props.children as React.ReactElement<any>, {
-                  index: index++
-                })
+                React.cloneElement(
+                  group.props.children as React.ReactElement<any>,
+                  {
+                    index: index++
+                  }
+                )
             })
-          });
+        });
       });
     }
     return React.Children.map(children, (child, index) =>
@@ -145,11 +166,12 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
               <div
                 className={css(
                   menuClass,
-                  position === DropdownPosition.right && styles.modifiers.alignRight,
+                  position === DropdownPosition.right &&
+                    styles.modifiers.alignRight,
                   className
                 )}
                 hidden={!isOpen}
-                onClick={(event) => onSelect && onSelect(event)}
+                onClick={event => onSelect && onSelect(event)}
               >
                 {children}
               </div>
@@ -165,7 +187,8 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
                     {...props}
                     className={css(
                       menuClass,
-                      position === DropdownPosition.right && styles.modifiers.alignRight,
+                      position === DropdownPosition.right &&
+                        styles.modifiers.alignRight,
                       className
                     )}
                     hidden={!isOpen}
@@ -185,7 +208,8 @@ export class DropdownMenu extends React.Component<DropdownMenuProps> {
                     {...props}
                     className={css(
                       menuClass,
-                      position === DropdownPosition.right && styles.modifiers.alignRight,
+                      position === DropdownPosition.right &&
+                        styles.modifiers.alignRight,
                       className
                     )}
                     hidden={!isOpen}

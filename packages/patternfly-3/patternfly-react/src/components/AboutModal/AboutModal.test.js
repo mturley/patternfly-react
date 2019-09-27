@@ -1,6 +1,10 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { AboutModal, AboutModalVersions, AboutModalVersionItem } from '../../index';
+import {
+  AboutModal,
+  AboutModalVersions,
+  AboutModalVersionItem
+} from '../../index';
 
 const testAboutModal = props => (
   <AboutModal

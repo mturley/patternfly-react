@@ -21,12 +21,24 @@ const countColSizes = {
 };
 
 const ItemHeader = tableData => {
-  const { selectType, selectedItems, sortField, isAscending, numItems } = tableData;
+  const {
+    selectType,
+    selectedItems,
+    sortField,
+    isAscending,
+    numItems
+  } = tableData;
   return (
     <VirtualTableGrid.Head
       showCheckbox={selectType === 'checkbox'}
-      allSelected={selectType === 'checkbox' && selectedItems.length === numItems}
-      partialSelected={selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < numItems}
+      allSelected={
+        selectType === 'checkbox' && selectedItems.length === numItems
+      }
+      partialSelected={
+        selectType === 'checkbox' &&
+        selectedItems.length > 0 &&
+        selectedItems.length < numItems
+      }
     >
       <VirtualTableGrid.ColumnHeader
         id="title"
@@ -71,30 +83,44 @@ const ItemHeader = tableData => {
 const ItemRow = rowProps => {
   const { obj, tableData, index } = rowProps;
   const { selectType, selectedItem, selectedField, selectedItems } = tableData;
-  const selected = selectType === 'checkbox' ? selectedItems.indexOf(obj) >= 0 : selectedItem === obj;
+  const selected =
+    selectType === 'checkbox'
+      ? selectedItems.indexOf(obj) >= 0
+      : selectedItem === obj;
   return (
-    <VirtualTableGrid.Row key={index} selected={(selectType === 'row' || selectType === 'checkbox') && selected}>
+    <VirtualTableGrid.Row
+      key={index}
+      selected={(selectType === 'row' || selectType === 'checkbox') && selected}
+    >
       <VirtualTableGrid.Col
         {...titleColSizes}
-        selected={selectType === 'cell' && selected && selectedField === 'title'}
+        selected={
+          selectType === 'cell' && selected && selectedField === 'title'
+        }
       >
         {obj.title}
       </VirtualTableGrid.Col>
       <VirtualTableGrid.Col
         {...descrColSizes}
-        selected={selectType === 'cell' && selected && selectedField === 'description'}
+        selected={
+          selectType === 'cell' && selected && selectedField === 'description'
+        }
       >
         {obj.description}
       </VirtualTableGrid.Col>
       <VirtualTableGrid.Col
         {...countColSizes}
-        selected={selectType === 'cell' && selected && selectedField === 'hosts'}
+        selected={
+          selectType === 'cell' && selected && selectedField === 'hosts'
+        }
       >
         {obj.hosts}
       </VirtualTableGrid.Col>
       <VirtualTableGrid.Col
         {...countColSizes}
-        selected={selectType === 'cell' && selected && selectedField === 'clusters'}
+        selected={
+          selectType === 'cell' && selected && selectedField === 'clusters'
+        }
       >
         {obj.clusters}
       </VirtualTableGrid.Col>

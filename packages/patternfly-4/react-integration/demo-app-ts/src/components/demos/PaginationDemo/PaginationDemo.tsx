@@ -13,30 +13,33 @@ interface OptionsMenuDemoState {
   perPage: number;
 }
 
-export class PaginationDemo extends React.Component<React.HTMLProps<HTMLDivElement>, OptionsMenuDemoState> {
+export class PaginationDemo extends React.Component<
+  React.HTMLProps<HTMLDivElement>,
+  OptionsMenuDemoState
+> {
   state = {
     topPage: 1,
     bottomPage: 1,
-    perPage: 20,
+    perPage: 20
   };
 
   onSetTopPage = (_event, pageNumber) => {
     this.setState({
       topPage: pageNumber
     });
-  }
+  };
 
   onSetBottomPage = (_event, pageNumber) => {
     this.setState({
       bottomPage: pageNumber
     });
-  }
+  };
 
   onPerPageSelect = (_event, perPage) => {
     this.setState({
       perPage
     });
-  }
+  };
 
   renderPagination() {
     return (
@@ -60,7 +63,7 @@ export class PaginationDemo extends React.Component<React.HTMLProps<HTMLDivEleme
             onSetPage={this.onSetBottomPage}
             onPerPageSelect={this.onPerPageSelect}
           />
-           <Pagination
+          <Pagination
             itemCount={523}
             widgetId="pagination-options-menu-bottom"
             perPage={this.state.perPage}
@@ -95,10 +98,12 @@ export class PaginationDemo extends React.Component<React.HTMLProps<HTMLDivEleme
   }
 
   render() {
-    return <Stack gutter="md">
-      {this.renderPagination()}
-      {this.renderDisabled()}
-    </Stack>;
+    return (
+      <Stack gutter="md">
+        {this.renderPagination()}
+        {this.renderDisabled()}
+      </Stack>
+    );
   }
 }
 

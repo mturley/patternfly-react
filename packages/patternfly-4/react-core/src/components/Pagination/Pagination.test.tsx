@@ -9,15 +9,17 @@ describe('component render', () => {
   });
 
   test('should render correctly bottom', () => {
-    const wrapper = mount(<Pagination itemCount={20} variant={PaginationVariant.bottom} />);
+    const wrapper = mount(
+      <Pagination itemCount={20} variant={PaginationVariant.bottom} />
+    );
     expect(wrapper).toMatchSnapshot();
   });
-  
+
   test('should render correctly compact', () => {
     const wrapper = mount(<Pagination itemCount={20} isCompact />);
     expect(wrapper).toMatchSnapshot();
   });
-  
+
   test('should render correctly disabled', () => {
     const wrapper = mount(<Pagination itemCount={20} isDisabled />);
     expect(wrapper).toMatchSnapshot();
@@ -39,7 +41,12 @@ describe('component render', () => {
   });
 
   test('custom perPageOptions', () => {
-    const wrapper = mount(<Pagination itemCount={40} perPageOptions={[{ title: 'some', value: 1 }]} />);
+    const wrapper = mount(
+      <Pagination
+        itemCount={40}
+        perPageOptions={[{ title: 'some', value: 1 }]}
+      />
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -54,19 +61,28 @@ describe('component render', () => {
   });
 
   test('custom start end', () => {
-    const wrapper = mount(<Pagination itemCount={40} itemsStart={5} itemsEnd={15} />);
+    const wrapper = mount(
+      <Pagination itemCount={40} itemsStart={5} itemsEnd={15} />
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   test('titles', () => {
-    const wrapper = mount(<Pagination itemCount={40} titles={{ items: 'values', page: 'books' }} />);
+    const wrapper = mount(
+      <Pagination itemCount={40} titles={{ items: 'values', page: 'books' }} />
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   test('custom pagination toggle', () => {
     const wrapper = mount(
       // eslint-disable-next-line no-template-curly-in-string
-      <Pagination itemCount={40} toggleTemplate={'${firstIndex} - ${lastIndex} - ${itemCount} - ${itemsTitle}'} />
+      <Pagination
+        itemCount={40}
+        toggleTemplate={
+          '${firstIndex} - ${lastIndex} - ${itemCount} - ${itemsTitle}'
+        }
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -82,7 +98,9 @@ describe('API', () => {
     const onSetPage = jest.fn();
 
     test('should call first', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} page={2} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} page={2} />
+      );
       wrapper
         .find('[data-action="first"]')
         .first()
@@ -92,7 +110,9 @@ describe('API', () => {
     });
 
     test('should call previous', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} page={3} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} page={3} />
+      );
       wrapper
         .find('[data-action="previous"]')
         .first()
@@ -102,7 +122,9 @@ describe('API', () => {
     });
 
     test('should call next', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} />
+      );
       wrapper
         .find('[data-action="next"]')
         .first()
@@ -112,7 +134,9 @@ describe('API', () => {
     });
 
     test('should call last', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} />
+      );
       wrapper
         .find('[data-action="last"]')
         .first()
@@ -122,7 +146,9 @@ describe('API', () => {
     });
 
     test('should call input', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} />
+      );
       wrapper
         .find('input')
         .first()
@@ -133,7 +159,9 @@ describe('API', () => {
     });
 
     test('should call input wrong value', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} />
+      );
       wrapper
         .find('input')
         .first()
@@ -144,7 +172,9 @@ describe('API', () => {
     });
 
     test('should call input huge page number', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} />
+      );
       wrapper
         .find('input')
         .first()
@@ -155,7 +185,9 @@ describe('API', () => {
     });
 
     test('should call input small page number', () => {
-      const wrapper = mount(<Pagination onSetPage={onSetPage} itemCount={40} />);
+      const wrapper = mount(
+        <Pagination onSetPage={onSetPage} itemCount={40} />
+      );
       wrapper
         .find('input')
         .first()
@@ -178,7 +210,9 @@ describe('API', () => {
   describe('onFirst', () => {
     const onFirst = jest.fn();
     test('should call', () => {
-      const wrapper = mount(<Pagination onFirstClick={onFirst} itemCount={40} page={2} />);
+      const wrapper = mount(
+        <Pagination onFirstClick={onFirst} itemCount={40} page={2} />
+      );
       wrapper
         .find('[data-action="first"]')
         .first()
@@ -222,7 +256,9 @@ describe('API', () => {
   describe('onPrevious', () => {
     const onPrevious = jest.fn();
     test('should call', () => {
-      const wrapper = mount(<Pagination onPreviousClick={onPrevious} itemCount={40} page={3} />);
+      const wrapper = mount(
+        <Pagination onPreviousClick={onPrevious} itemCount={40} page={3} />
+      );
       wrapper
         .find('[data-action="previous"]')
         .first()
@@ -266,7 +302,9 @@ describe('API', () => {
   describe('onPerPage', () => {
     const onPerPage = jest.fn();
     test('should call', () => {
-      const wrapper = mount(<Pagination onPerPageSelect={onPerPage} itemCount={40} />);
+      const wrapper = mount(
+        <Pagination onPerPageSelect={onPerPage} itemCount={40} />
+      );
       wrapper
         .find('.pf-c-options-menu button')
         .first()

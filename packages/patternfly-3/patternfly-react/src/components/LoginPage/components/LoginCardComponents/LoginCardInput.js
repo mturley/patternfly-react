@@ -37,7 +37,11 @@ const LoginCardInput = ({
     validationState = 'error';
   }
   return (
-    <FormGroup className={classNames('login_card_input', className)} controlId={id} validationState={validationState}>
+    <FormGroup
+      className={classNames('login_card_input', className)}
+      controlId={id}
+      validationState={validationState}
+    >
       <FormControl
         {...attributes}
         type={type}

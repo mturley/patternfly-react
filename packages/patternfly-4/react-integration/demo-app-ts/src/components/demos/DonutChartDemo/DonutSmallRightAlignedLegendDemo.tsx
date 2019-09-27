@@ -2,7 +2,6 @@ import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
 
 export class DonutSmallRightAlignedLegendDemo extends React.Component {
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -10,15 +9,30 @@ export class DonutSmallRightAlignedLegendDemo extends React.Component {
   render() {
     return (
       <div>
-        <div style={{height: '150px', width: '275px', paddingTop: '50px', paddingLeft: '50px'}}>
+        <div
+          style={{
+            height: '150px',
+            width: '275px',
+            paddingTop: '50px',
+            paddingLeft: '50px'
+          }}
+        >
           <ChartDonut
             ariaDesc="Average number of pets"
             ariaTitle="Donut chart example"
-            constrainToVisibleArea={true}
-            data={[{ x: 'Cats', y: 35 }, { x: 'Dogs', y: 55 }, { x: 'Birds', y: 10 }]}
+            constrainToVisibleArea
+            data={[
+              { x: 'Cats', y: 35 },
+              { x: 'Dogs', y: 55 },
+              { x: 'Birds', y: 10 }
+            ]}
             height={150}
             labels={({ datum }) => `${datum.x}: ${datum.y}%`}
-            legendData={[{ name: 'Cats: 35' }, { name: 'Dogs: 55' }, { name: 'Birds: 10' }]}
+            legendData={[
+              { name: 'Cats: 35' },
+              { name: 'Dogs: 55' },
+              { name: 'Birds: 10' }
+            ]}
             legendOrientation="vertical"
             legendPosition="right"
             padding={{
@@ -33,7 +47,6 @@ export class DonutSmallRightAlignedLegendDemo extends React.Component {
           />
         </div>
       </div>
-
     );
   }
 }

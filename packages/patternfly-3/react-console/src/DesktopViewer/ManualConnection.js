@@ -42,7 +42,8 @@ const ManualConnection = ({
   textRdpAddress
 }) => {
   const msg = spice || vnc ? textConnectWith : textNoProtocol;
-  const address = spice && vnc && spice.address === vnc.address && spice.address; // merge value if equal
+  const address =
+    spice && vnc && spice.address === vnc.address && spice.address; // merge value if equal
   const rdpAddress = rdp && rdp.address !== address ? rdp.address : null;
 
   return (
@@ -51,13 +52,23 @@ const ManualConnection = ({
       <p>{msg}</p>
       <Form horizontal>
         {address && <Detail title={textAddress} value={address} />}
-        {!address && spice && <Detail title={textSpiceAddress} value={spice.address} />}
+        {!address && spice && (
+          <Detail title={textSpiceAddress} value={spice.address} />
+        )}
         {rdpAddress && <Detail title={textRdpAddress} value={rdpAddress} />}
-        {spice && spice.port && <Detail title={textSpicePort} value={spice.port} />}
-        {spice && spice.tlsPort && <Detail title={textSpiceTlsPort} value={spice.tlsPort} />}
-        {!address && vnc && <Detail title={textVNCAddress} value={vnc.address} />}
+        {spice && spice.port && (
+          <Detail title={textSpicePort} value={spice.port} />
+        )}
+        {spice && spice.tlsPort && (
+          <Detail title={textSpiceTlsPort} value={spice.tlsPort} />
+        )}
+        {!address && vnc && (
+          <Detail title={textVNCAddress} value={vnc.address} />
+        )}
         {spice && vnc.port && <Detail title={textVNCPort} value={vnc.port} />}
-        {spice && vnc.tlsPort && <Detail title={textVNCTlsPort} value={vnc.tlsPort} />}
+        {spice && vnc.tlsPort && (
+          <Detail title={textVNCTlsPort} value={vnc.tlsPort} />
+        )}
         {rdp && rdp.port && <Detail title={textRDPPort} value={rdp.port} />}
       </Form>
     </div>

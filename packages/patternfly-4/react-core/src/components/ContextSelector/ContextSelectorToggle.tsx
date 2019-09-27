@@ -27,7 +27,9 @@ export interface ContextSelectorToggleProps {
   isActive?: boolean;
 }
 
-export class ContextSelectorToggle extends React.Component<ContextSelectorToggleProps> {
+export class ContextSelectorToggle extends React.Component<
+  ContextSelectorToggleProps
+> {
   static defaultProps = {
     className: '',
     toggleText: '',
@@ -46,13 +48,13 @@ export class ContextSelectorToggle extends React.Component<ContextSelectorToggle
     document.addEventListener('mousedown', this.onDocClick);
     document.addEventListener('touchstart', this.onDocClick);
     document.addEventListener('keydown', this.onEscPress);
-  }
+  };
 
   componentWillUnmount = () => {
     document.removeEventListener('mousedown', this.onDocClick);
     document.removeEventListener('touchstart', this.onDocClick);
     document.removeEventListener('keydown', this.onEscPress);
-  }
+  };
 
   onDocClick = (event: any) => {
     const { isOpen, parentRef, onToggle } = this.props;
@@ -60,31 +62,46 @@ export class ContextSelectorToggle extends React.Component<ContextSelectorToggle
       onToggle(null, false);
       this.toggle.current.focus();
     }
-  }
+  };
 
   onEscPress = (event: any) => {
     const { isOpen, parentRef, onToggle } = this.props;
     const keyCode = event.keyCode || event.which;
-    if (isOpen && keyCode === KEY_CODES.ESCAPE_KEY && parentRef && parentRef.contains(event.target)) {
+    if (
+      isOpen &&
+      keyCode === KEY_CODES.ESCAPE_KEY &&
+      parentRef &&
+      parentRef.contains(event.target)
+    ) {
       onToggle(null, false);
       this.toggle.current.focus();
     }
-  }
+  };
 
   onKeyDown = (event: any) => {
     const { isOpen, onToggle, onEnter } = this.props;
-    if ((event.keyCode === KEY_CODES.TAB && !isOpen) || event.key !== KEY_CODES.ENTER) { return; }
+    if (
+      (event.keyCode === KEY_CODES.TAB && !isOpen) ||
+      event.key !== KEY_CODES.ENTER
+    ) {
+      return;
+    }
     event.preventDefault();
     if (
-      (event.keyCode === KEY_CODES.TAB || event.keyCode === KEY_CODES.ENTER || event.key !== KEY_CODES.SPACE) &&
+      (event.keyCode === KEY_CODES.TAB ||
+        event.keyCode === KEY_CODES.ENTER ||
+        event.key !== KEY_CODES.SPACE) &&
       isOpen
     ) {
       onToggle(null, !isOpen);
-    } else if ((event.keyCode === KEY_CODES.ENTER || event.key === ' ') && !isOpen) {
+    } else if (
+      (event.keyCode === KEY_CODES.ENTER || event.key === ' ') &&
+      !isOpen
+    ) {
       onToggle(null, !isOpen);
       onEnter();
     }
-  }
+  };
 
   render() {
     const {
@@ -113,12 +130,17 @@ export class ContextSelectorToggle extends React.Component<ContextSelectorToggle
           className
         )}
         type="button"
-        onClick={(event) => onToggle(event, !isOpen)}
+        onClick={event => onToggle(event, !isOpen)}
         aria-expanded={isOpen}
         onKeyDown={this.onKeyDown}
       >
-        <span className={css(styles.contextSelectorToggleText)}>{toggleText}</span>
-        <CaretDownIcon className={css(styles.contextSelectorToggleIcon)} aria-hidden />
+        <span className={css(styles.contextSelectorToggleText)}>
+          {toggleText}
+        </span>
+        <CaretDownIcon
+          className={css(styles.contextSelectorToggleIcon)}
+          aria-hidden
+        />
       </button>
     );
   }

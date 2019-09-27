@@ -5,7 +5,12 @@ import { OverlayTrigger, Tooltip } from '../../../index';
 const DualListItemTooltip = ({ id, text, children }) => {
   const tooltip = <Tooltip id={id}>{text}</Tooltip>;
   return (
-    <OverlayTrigger overlay={tooltip} placement="top" trigger={['hover', 'focus']} delayShow={150}>
+    <OverlayTrigger
+      overlay={tooltip}
+      placement="top"
+      trigger={['hover', 'focus']}
+      delayShow={150}
+    >
       {children}
     </OverlayTrigger>
   );

@@ -56,11 +56,11 @@ class MockTableGridExample extends React.Component {
     });
 
     this.setState({ items, sortField: id, isAscending: updateAscending });
-  }
+  };
 
   onSelect = (item, field) => {
     this.setState({ selectedItem: item, selectedField: field });
-  }
+  };
 
   toggleSelection = item => {
     const { selectedItems } = this.state;
@@ -68,60 +68,82 @@ class MockTableGridExample extends React.Component {
     const index = selectedItems.indexOf(item);
 
     if (index >= 0) {
-      newSelections = [...selectedItems.slice(0, index), ...selectedItems.slice(index + 1)];
+      newSelections = [
+        ...selectedItems.slice(0, index),
+        ...selectedItems.slice(index + 1)
+      ];
     } else {
       newSelections = [...selectedItems, item];
     }
     this.setState({ selectedItems: newSelections });
-  }
+  };
 
   toggleAllSelections = () => {
     const { items, selectedItems } = this.state;
-    this.setState({ selectedItems: selectedItems.length > 0 ? [] : [...items] });
-  }
+    this.setState({
+      selectedItems: selectedItems.length > 0 ? [] : [...items]
+    });
+  };
 
   renderItemRow = (item, index) => {
     const { selectType } = this.props;
     const { selectedItem, selectedField, selectedItems } = this.state;
-    const selected = selectType === 'checkbox' ? selectedItems.indexOf(item) >= 0 : selectedItem === item;
+    const selected =
+      selectType === 'checkbox'
+        ? selectedItems.indexOf(item) >= 0
+        : selectedItem === item;
     return (
       <TableGrid.Row
         key={index}
         onClick={() => selectType === 'row' && this.onSelect(item)}
-        selected={(selectType === 'row' || selectType === 'checkbox') && selected}
+        selected={
+          (selectType === 'row' || selectType === 'checkbox') && selected
+        }
         onToggleSelection={() => this.toggleSelection(item)}
       >
         <TableGrid.Col
           {...titleColSizes}
           onClick={() => selectType === 'cell' && this.onSelect(item, 'title')}
-          selected={selectType === 'cell' && selected && selectedField === 'title'}
+          selected={
+            selectType === 'cell' && selected && selectedField === 'title'
+          }
         >
           {item.title}
         </TableGrid.Col>
         <TableGrid.Col
           {...descrColSizes}
-          onClick={() => selectType === 'cell' && this.onSelect(item, 'description')}
-          selected={selectType === 'cell' && selected && selectedField === 'description'}
+          onClick={() =>
+            selectType === 'cell' && this.onSelect(item, 'description')
+          }
+          selected={
+            selectType === 'cell' && selected && selectedField === 'description'
+          }
         >
           {item.description}
         </TableGrid.Col>
         <TableGrid.Col
           {...countColSizes}
           onClick={() => selectType === 'cell' && this.onSelect(item, 'hosts')}
-          selected={selectType === 'cell' && selected && selectedField === 'hosts'}
+          selected={
+            selectType === 'cell' && selected && selectedField === 'hosts'
+          }
         >
           {item.hosts}
         </TableGrid.Col>
         <TableGrid.Col
           {...countColSizes}
-          onClick={() => selectType === 'cell' && this.onSelect(item, 'clusters')}
-          selected={selectType === 'cell' && selected && selectedField === 'clusters'}
+          onClick={() =>
+            selectType === 'cell' && this.onSelect(item, 'clusters')
+          }
+          selected={
+            selectType === 'cell' && selected && selectedField === 'clusters'
+          }
         >
           {item.clusters}
         </TableGrid.Col>
       </TableGrid.Row>
     );
-  }
+  };
 
   render() {
     const { items, selectedItems, sortField, isAscending } = this.state;
@@ -130,8 +152,14 @@ class MockTableGridExample extends React.Component {
       <TableGrid id="table-grid" bordered={bordered} selectType={selectType}>
         <TableGrid.Head
           showCheckbox={selectType === 'checkbox'}
-          allSelected={selectType === 'checkbox' && selectedItems.length === items.length}
-          partialSelected={selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < items.length}
+          allSelected={
+            selectType === 'checkbox' && selectedItems.length === items.length
+          }
+          partialSelected={
+            selectType === 'checkbox' &&
+            selectedItems.length > 0 &&
+            selectedItems.length < items.length
+          }
           onToggleSelection={this.toggleAllSelections}
         >
           <TableGrid.ColumnHeader
@@ -161,7 +189,10 @@ class MockTableGridExample extends React.Component {
             onSortToggle={() => this.onSortToggle('hosts')}
             {...countColSizes}
           >
-            <OverlayTrigger overlay={<Tooltip id="hosts-tip">Hosts</Tooltip>} placement="top">
+            <OverlayTrigger
+              overlay={<Tooltip id="hosts-tip">Hosts</Tooltip>}
+              placement="top"
+            >
               <span>Hosts</span>
             </OverlayTrigger>
           </TableGrid.ColumnHeader>
@@ -173,12 +204,17 @@ class MockTableGridExample extends React.Component {
             onSortToggle={() => this.onSortToggle('clusters')}
             {...countColSizes}
           >
-            <OverlayTrigger overlay={<Tooltip id="clusters-tip">Clusters</Tooltip>} placement="top">
+            <OverlayTrigger
+              overlay={<Tooltip id="clusters-tip">Clusters</Tooltip>}
+              placement="top"
+            >
               <span>Clusters</span>
             </OverlayTrigger>
           </TableGrid.ColumnHeader>
         </TableGrid.Head>
-        <TableGrid.Body>{items.map((item, index) => this.renderItemRow(item, index))}</TableGrid.Body>
+        <TableGrid.Body>
+          {items.map((item, index) => this.renderItemRow(item, index))}
+        </TableGrid.Body>
       </TableGrid>
     );
   }

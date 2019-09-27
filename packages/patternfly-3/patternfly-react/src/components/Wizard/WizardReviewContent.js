@@ -6,7 +6,11 @@ import classNames from 'classnames';
  * WizardReviewContent component for Patternfly React
  */
 const WizardReviewContent = ({ children, className, collapsed, ...props }) => {
-  const classes = classNames('wizard-pf-review-content', { collapse: collapsed }, className);
+  const classes = classNames(
+    'wizard-pf-review-content',
+    { collapse: collapsed },
+    className
+  );
   return (
     <div className={classes} {...props}>
       {children}

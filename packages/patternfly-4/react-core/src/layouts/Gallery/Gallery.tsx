@@ -17,7 +17,11 @@ export const Gallery: React.FunctionComponent<GalleryProps> = ({
   ...props
 }: GalleryProps) => (
   <div
-    className={css(styles.gallery, gutter && styles.modifiers.gutter, className)}
+    className={css(
+      styles.gallery,
+      gutter && styles.modifiers.gutter,
+      className
+    )}
     {...props}
   >
     {children}

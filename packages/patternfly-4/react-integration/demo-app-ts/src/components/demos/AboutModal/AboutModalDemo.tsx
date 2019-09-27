@@ -1,5 +1,11 @@
 import React from 'react';
-import { AboutModal, Button, TextContent, TextList, TextListItem } from '@patternfly/react-core';
+import {
+  AboutModal,
+  Button,
+  TextContent,
+  TextList,
+  TextListItem
+} from '@patternfly/react-core';
 import brandImg from './brandImg.svg';
 
 interface AboutModalState {
@@ -18,14 +24,18 @@ export class AboutModalDemo extends React.Component<null, AboutModalState> {
     this.setState(({ isModalOpen }) => ({
       isModalOpen: !isModalOpen
     }));
-  }
+  };
 
   render() {
     const { isModalOpen } = this.state;
 
     return (
       <React.Fragment>
-        <Button id="modal-button" variant="primary" onClick={this.handleModalToggle}>
+        <Button
+          id="modal-button"
+          variant="primary"
+          onClick={this.handleModalToggle}
+        >
           Show About Modal
         </Button>
         <AboutModal
@@ -47,7 +57,9 @@ export class AboutModalDemo extends React.Component<null, AboutModalState> {
               <TextListItem component="dt">User Name</TextListItem>
               <TextListItem component="dd">Administrator</TextListItem>
               <TextListItem component="dt">User Role</TextListItem>
-              <TextListItem component="dd">EvmRole-super_administrator</TextListItem>
+              <TextListItem component="dd">
+                EvmRole-super_administrator
+              </TextListItem>
               <TextListItem component="dt">Browser Version</TextListItem>
               <TextListItem component="dd">601.2</TextListItem>
               <TextListItem component="dt">Browser OS</TextListItem>

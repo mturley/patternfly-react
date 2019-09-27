@@ -4,4 +4,10 @@ import ToolbarRightContent from './ToolbarRightContent';
 import ToolbarFind from './ToolbarFind';
 import ToolbarViewSelector from './ToolbarViewSelector';
 
-export { Toolbar, ToolbarResults, ToolbarRightContent, ToolbarFind, ToolbarViewSelector };
+export {
+  Toolbar,
+  ToolbarResults,
+  ToolbarRightContent,
+  ToolbarFind,
+  ToolbarViewSelector
+};

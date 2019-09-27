@@ -11,7 +11,8 @@ test('popover renders close-button, header and body', () => {
       headerContent={<div>Popover Header</div>}
       bodyContent={
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id
+          feugiat augue, nec fringilla turpis.
         </div>
       }
     >
@@ -30,7 +31,8 @@ test('popover can specify position as object value', () => {
       headerContent={<div>Popover Header</div>}
       bodyContent={
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id
+          feugiat augue, nec fringilla turpis.
         </div>
       }
     >
@@ -49,7 +51,8 @@ test('popover passes along values to tippy.js', () => {
       headerContent={<div>Popover Header</div>}
       bodyContent={
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id
+          feugiat augue, nec fringilla turpis.
         </div>
       }
       tippyProps={{

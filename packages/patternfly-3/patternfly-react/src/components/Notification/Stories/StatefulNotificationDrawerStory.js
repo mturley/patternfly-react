@@ -14,7 +14,8 @@ const p1Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -30,7 +31,8 @@ const p1Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -46,7 +48,8 @@ const p1Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -62,7 +65,8 @@ const p1Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -80,7 +84,8 @@ const p2Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -96,7 +101,8 @@ const p2Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -112,7 +118,8 @@ const p2Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -128,7 +135,8 @@ const p2Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -144,7 +152,8 @@ const p2Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -160,7 +169,8 @@ const p2Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -176,7 +186,8 @@ const p2Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -194,7 +205,8 @@ const p3Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -211,7 +223,8 @@ const p3Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -227,7 +240,8 @@ const p3Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         }
@@ -243,12 +257,14 @@ const p3Notifications = [
     actions: {
       links: [
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open',
           external: true
         },
         {
-          href: 'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
+          href:
+            'http://theforeman.org/2018/01/foreman-community-newsletter-january-2018.html',
           title: 'Open again',
           external: true
         }

@@ -5,12 +5,16 @@ import { DropdownSeparator } from './Separator';
 
 describe('dropdown items', () => {
   test('a', () => {
-    const view = shallow(<InternalDropdownItem>Something</InternalDropdownItem>);
+    const view = shallow(
+      <InternalDropdownItem>Something</InternalDropdownItem>
+    );
     expect(view).toMatchSnapshot();
   });
 
   test('button', () => {
-    const view = shallow(<InternalDropdownItem component="button">Something</InternalDropdownItem>);
+    const view = shallow(
+      <InternalDropdownItem component="button">Something</InternalDropdownItem>
+    );
     expect(view).toMatchSnapshot();
   });
 
@@ -21,7 +25,9 @@ describe('dropdown items', () => {
 
   describe('hover', () => {
     test('a', () => {
-      const view = shallow(<InternalDropdownItem isHovered>Something</InternalDropdownItem>);
+      const view = shallow(
+        <InternalDropdownItem isHovered>Something</InternalDropdownItem>
+      );
       expect(view).toMatchSnapshot();
     });
     test('button', () => {
@@ -36,7 +42,9 @@ describe('dropdown items', () => {
 
   describe('disabled', () => {
     test('a', () => {
-      const view = shallow(<InternalDropdownItem isDisabled>Something</InternalDropdownItem>);
+      const view = shallow(
+        <InternalDropdownItem isDisabled>Something</InternalDropdownItem>
+      );
       expect(view).toMatchSnapshot();
     });
     test('button', () => {

@@ -60,7 +60,11 @@ const BulletChart = ({
   customLegend,
   className
 }) => {
-  const classes = classNames('bullet-chart-pf', { 'bullet-chart-pf-vertical': vertical }, className);
+  const classes = classNames(
+    'bullet-chart-pf',
+    { 'bullet-chart-pf-vertical': vertical },
+    className
+  );
 
   // Order the ranges into an array of 3 ranges lowest to highest, insert 0's if necessary
   // this is to keep darkest as highest and use darkest colors first (ie. 1 range still uses darkest)
@@ -78,7 +82,9 @@ const BulletChart = ({
 
   const displayValues = [...values];
 
-  const defaultColors = useExtendedColors ? defaultExtendedColors : defaultPrimaryColors;
+  const defaultColors = useExtendedColors
+    ? defaultExtendedColors
+    : defaultPrimaryColors;
   displayValues.forEach((value, index) => {
     if (!value.color && defaultColors[index]) {
       value.color = defaultColors[index];
@@ -125,8 +131,12 @@ const BulletChart = ({
         return customLegend;
       }
 
-      const warningThreshold = thresholdWarningLegendTextFunction(thresholdWarning) || thresholdWarningLegendText;
-      const errorThreshold = thresholdErrorLegendTextFunction(thresholdError) || thresholdErrorLegendText;
+      const warningThreshold =
+        thresholdWarningLegendTextFunction(thresholdWarning) ||
+        thresholdWarningLegendText;
+      const errorThreshold =
+        thresholdErrorLegendTextFunction(thresholdError) ||
+        thresholdErrorLegendText;
       const thresholdTipFunction = (title, value) => {
         if (thresholdWarningTooltipFunction) {
           return thresholdWarningTooltipFunction(title, value);
@@ -143,15 +153,21 @@ const BulletChart = ({
                 return value.tooltipFunction(value.value, value.title);
               }
 
-              const tipText = `${value.title}: ${value.value}${percents ? '%' : ''}`;
-              return <Tooltip id={value.tooltipId || randomId()}>{tipText}</Tooltip>;
+              const tipText = `${value.title}: ${value.value}${
+                percents ? '%' : ''
+              }`;
+              return (
+                <Tooltip id={value.tooltipId || randomId()}>{tipText}</Tooltip>
+              );
             };
 
             const legendTextFunction = value.legendTextFunction || noop;
             return (
               <BulletChartLegendItem
                 key={`value-${index}`}
-                title={legendTextFunction(value) || value.legendText || value.title}
+                title={
+                  legendTextFunction(value) || value.legendText || value.title
+                }
                 value={value.value}
                 color={value.color}
                 tooltipFunction={tooltipFunction}
@@ -159,14 +175,23 @@ const BulletChart = ({
             );
           })}
           {rangeValues.map((range, index) => {
-            if (range.value > 0 && (percents ? range.value <= 100 : range.value <= maxValue)) {
+            if (
+              range.value > 0 &&
+              (percents ? range.value <= 100 : range.value <= maxValue)
+            ) {
               const tooltipFunction = () => {
                 if (range.tooltipFunction) {
                   return range.tooltipFunction(range.value, range.title);
                 }
 
-                const tipText = `${range.title}: ${range.value}${percents ? '%' : ''}`;
-                return <Tooltip id={range.tooltipId || randomId()}>{tipText}</Tooltip>;
+                const tipText = `${range.title}: ${range.value}${
+                  percents ? '%' : ''
+                }`;
+                return (
+                  <Tooltip id={range.tooltipId || randomId()}>
+                    {tipText}
+                  </Tooltip>
+                );
               };
 
               const legendTextFunction = range.legendTextFunction || noop;
@@ -174,7 +199,9 @@ const BulletChart = ({
               return (
                 <BulletChartLegendItem
                   key={`range-${index}`}
-                  title={legendTextFunction(range) || range.legendText || range.title}
+                  title={
+                    legendTextFunction(range) || range.legendText || range.title
+                  }
                   value={range.value}
                   boxClassName={`range-${index}`}
                   color={range.color}
@@ -262,7 +289,11 @@ const BulletChart = ({
           text={percents ? undefined : `${Math.floor(maxValue * 0.75)}`}
           vertical={vertical}
         />
-        <BulletChartAxisTic value={100} text={percents ? undefined : `${Math.floor(maxValue)}`} vertical={vertical} />
+        <BulletChartAxisTic
+          value={100}
+          text={percents ? undefined : `${Math.floor(maxValue)}`}
+          vertical={vertical}
+        />
       </BulletChartAxis>
     );
   };
@@ -279,7 +310,11 @@ const BulletChart = ({
     );
 
     if (vertical) {
-      return <div className="bullet-chart-pf-vertical-data-container">{chartContainer}</div>;
+      return (
+        <div className="bullet-chart-pf-vertical-data-container">
+          {chartContainer}
+        </div>
+      );
     }
 
     return chartContainer;

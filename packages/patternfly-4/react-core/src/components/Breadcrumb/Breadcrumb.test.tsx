@@ -22,7 +22,8 @@ describe('Breadcrumb component', () => {
   test('should render breadcrumb with children', () => {
     const view = mount(
       <Breadcrumb>
-        <BreadcrumbItem to="#">Item 1</BreadcrumbItem> <BreadcrumbItem to="#">Item 1</BreadcrumbItem>
+        <BreadcrumbItem to="#">Item 1</BreadcrumbItem>{' '}
+        <BreadcrumbItem to="#">Item 1</BreadcrumbItem>
       </Breadcrumb>
     );
     expect(view).toMatchSnapshot();

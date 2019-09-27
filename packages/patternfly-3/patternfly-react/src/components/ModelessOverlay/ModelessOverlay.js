@@ -17,7 +17,7 @@ class ModelessOverlay extends React.Component {
 
   updateForTransitions = () => {
     this.setState({ isIn: this.props.show });
-  }
+  };
 
   render() {
     const { children, className, bsSize, show, ...otherProps } = this.props;
@@ -39,7 +39,12 @@ class ModelessOverlay extends React.Component {
       'modal-lg': bsSize === 'lg' || bsSize === 'large'
     });
     return (
-      <div role="dialog" tabIndex={-1} className={classes} {...excludeKeys(otherProps, ['show'])}>
+      <div
+        role="dialog"
+        tabIndex={-1}
+        className={classes}
+        {...excludeKeys(otherProps, ['show'])}
+      >
         <div className={dialogClasses}>
           <div className="modal-content">{children}</div>
         </div>

@@ -7,7 +7,10 @@ describe('API', () => {
   test('click on closed', () => {
     const mockToggle = jest.fn();
     const view = mount(
-      <DropdownToggle onToggle={mockToggle} parentRef={document.createElement('div')}>
+      <DropdownToggle
+        onToggle={mockToggle}
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
@@ -22,7 +25,12 @@ describe('API', () => {
   test('click on opened', () => {
     const mockToggle = jest.fn();
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" onToggle={mockToggle} isOpen parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        onToggle={mockToggle}
+        isOpen
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
@@ -46,14 +54,22 @@ describe('API', () => {
     });
     const mockToggle = jest.fn();
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" onToggle={mockToggle} isOpen parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        onToggle={mockToggle}
+        isOpen
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
     view.unmount();
     mousedown({ target: document } as any);
     expect(mockToggle.mock.calls).toHaveLength(0);
-    expect(document.removeEventListener).toHaveBeenCalledWith('mousedown', expect.any(Function));
+    expect(document.removeEventListener).toHaveBeenCalledWith(
+      'mousedown',
+      expect.any(Function)
+    );
   });
 
   test('on touch outside has been removed', () => {
@@ -68,21 +84,33 @@ describe('API', () => {
     });
     const mockToggle = jest.fn();
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" onToggle={mockToggle} isOpen parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        onToggle={mockToggle}
+        isOpen
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
     view.unmount();
     touchstart({ target: document } as any);
     expect(mockToggle.mock.calls).toHaveLength(0);
-    expect(document.removeEventListener).toHaveBeenCalledWith('touchstart', expect.any(Function));
+    expect(document.removeEventListener).toHaveBeenCalledWith(
+      'touchstart',
+      expect.any(Function)
+    );
   });
 });
 
 describe('state', () => {
   test('hover', () => {
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" isHovered parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        isHovered
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
@@ -91,7 +119,11 @@ describe('state', () => {
 
   test('active', () => {
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" isActive parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        isActive
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
@@ -100,7 +132,11 @@ describe('state', () => {
 
   test('focus', () => {
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" isFocused parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        isFocused
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
@@ -115,7 +151,11 @@ describe('state', () => {
           toggleIconClass: 'another-test-class'
         }}
       >
-        <DropdownToggle id="Dropdown Toggle" isFocused parentRef={document.createElement('div')}>
+        <DropdownToggle
+          id="Dropdown Toggle"
+          isFocused
+          parentRef={document.createElement('div')}
+        >
           Dropdown
         </DropdownToggle>
       </DropdownContext.Provider>
@@ -131,7 +171,11 @@ describe('state', () => {
           toggleIconClass: 'another-test-class'
         }}
       >
-        <DropdownToggle id="Dropdown Toggle" isFocused parentRef={document.createElement('div')}>
+        <DropdownToggle
+          id="Dropdown Toggle"
+          isFocused
+          parentRef={document.createElement('div')}
+        >
           Dropdown
         </DropdownToggle>
       </DropdownContext.Provider>

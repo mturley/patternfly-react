@@ -8,7 +8,11 @@ import { TimesCircleIcon } from '@patternfly/react-icons';
 import { SelectMenu } from './SelectMenu';
 import { SelectOption, SelectOptionObject } from './SelectOption';
 import { SelectToggle } from './SelectToggle';
-import { SelectContext, SelectVariant, SelectDirection } from './selectConstants';
+import {
+  SelectContext,
+  SelectVariant,
+  SelectDirection
+} from './selectConstants';
 import { Chip, ChipGroup } from '../ChipGroup';
 import { keyHandler, getNextIndex } from '../../helpers/util';
 import { Omit } from '../../helpers/typeUtils';
@@ -17,7 +21,10 @@ import { Omit } from '../../helpers/typeUtils';
 let currentId = 0;
 
 export interface SelectProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'onSelect' | 'ref' | 'checked' | 'selected'> {
+  extends Omit<
+    React.HTMLProps<HTMLDivElement>,
+    'onSelect' | 'ref' | 'checked' | 'selected'
+  > {
   /** Content rendered inside the Select */
   children: React.ReactElement[];
   /** Classes applied to the root of the Select */
@@ -94,32 +101,32 @@ export class Select extends React.Component<SelectProps, SelectState> {
   private refCollection: HTMLElement[] = [];
 
   static defaultProps = {
-    "children": [] as React.ReactElement[],
-    "className": '',
-    "direction": SelectDirection.down,
-    "toggleId": null as string,
-    "isExpanded": false,
-    "isGrouped": false,
-    "isPlain": false,
-    "isDisabled": false,
-    "isCreatable": false,
-    "aria-label": '',
-    "ariaLabelledBy": '',
-    "ariaLabelTypeAhead": '',
-    "ariaLabelClear": 'Clear all',
-    "ariaLabelToggle": 'Options menu',
-    "ariaLabelRemove": 'Remove',
-    "selections": '',
-    "createText": "Create",
-    "placeholderText": '',
-    "noResultsFoundText": "No results found",
-    "variant": SelectVariant.single,
-    "width": '',
-    "maxHeight": '',
-    "onClear": Function.prototype,
-    "onCreateOption": Function.prototype,
-    "toggleIcon": null as React.ReactElement,
-    "onFilter": undefined as () => {}
+    children: [] as React.ReactElement[],
+    className: '',
+    direction: SelectDirection.down,
+    toggleId: null as string,
+    isExpanded: false,
+    isGrouped: false,
+    isPlain: false,
+    isDisabled: false,
+    isCreatable: false,
+    'aria-label': '',
+    ariaLabelledBy: '',
+    ariaLabelTypeAhead: '',
+    ariaLabelClear: 'Clear all',
+    ariaLabelToggle: 'Options menu',
+    ariaLabelRemove: 'Remove',
+    selections: '',
+    createText: 'Create',
+    placeholderText: '',
+    noResultsFoundText: 'No results found',
+    variant: SelectVariant.single,
+    width: '',
+    maxHeight: '',
+    onClear: Function.prototype,
+    onCreateOption: Function.prototype,
+    toggleIcon: null as React.ReactElement,
+    onFilter: undefined as () => {}
   };
 
   state = {
@@ -142,16 +149,19 @@ export class Select extends React.Component<SelectProps, SelectState> {
       });
     }
 
-    if (prevProps.selections !== this.props.selections && this.state.typeaheadActiveChild) {
+    if (
+      prevProps.selections !== this.props.selections &&
+      this.state.typeaheadActiveChild
+    ) {
       this.setState({
         typeaheadInputValue: this.state.typeaheadActiveChild.innerText
       });
     }
-  }
+  };
 
   onEnter = () => {
     this.setState({ openedOnEnter: true });
-  }
+  };
 
   onClose = () => {
     this.setState({
@@ -161,10 +171,16 @@ export class Select extends React.Component<SelectProps, SelectState> {
       typeaheadFilteredChildren: React.Children.toArray(this.props.children),
       typeaheadCurrIndex: -1
     });
-  }
+  };
 
   onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { onFilter, isCreatable, onCreateOption, createText, noResultsFoundText } = this.props;
+    const {
+      onFilter,
+      isCreatable,
+      onCreateOption,
+      createText,
+      noResultsFoundText
+    } = this.props;
     let typeaheadFilteredChildren;
     if (onFilter) {
       typeaheadFilteredChildren = onFilter(e);
@@ -173,23 +189,36 @@ export class Select extends React.Component<SelectProps, SelectState> {
       try {
         input = new RegExp(e.target.value.toString(), 'i');
       } catch (err) {
-        input = new RegExp(e.target.value.toString().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+        input = new RegExp(
+          e.target.value.toString().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+          'i'
+        );
       }
       typeaheadFilteredChildren =
         e.target.value.toString() !== ''
           ? React.Children.toArray(this.props.children).filter(
               (child: React.ReactNode) =>
-                this.getDisplay((child as React.ReactElement).props.value.toString(), 'text').search(input) === 0
+                this.getDisplay(
+                  (child as React.ReactElement).props.value.toString(),
+                  'text'
+                ).search(input) === 0
             )
           : React.Children.toArray(this.props.children);
     }
     if (typeaheadFilteredChildren.length === 0) {
-      !isCreatable && typeaheadFilteredChildren.push(<SelectOption isDisabled key={0} value={noResultsFoundText} />);
+      !isCreatable &&
+        typeaheadFilteredChildren.push(
+          <SelectOption isDisabled key={0} value={noResultsFoundText} />
+        );
     }
     if (isCreatable && e.target.value != '') {
       const newValue = e.target.value;
       typeaheadFilteredChildren.push(
-        <SelectOption key={0} value={newValue} onClick={() => onCreateOption && onCreateOption(newValue)}>
+        <SelectOption
+          key={0}
+          value={newValue}
+          onClick={() => onCreateOption && onCreateOption(newValue)}
+        >
           {createText} "{newValue}"
         </SelectOption>
       );
@@ -203,11 +232,11 @@ export class Select extends React.Component<SelectProps, SelectState> {
       creatableValue: e.target.value
     });
     this.refCollection = [];
-  }
+  };
 
   onClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-  }
+  };
 
   clearSelection = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -217,7 +246,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
       typeaheadFilteredChildren: React.Children.toArray(this.props.children),
       typeaheadCurrIndex: -1
     });
-  }
+  };
 
   extendTypeaheadChildren(typeaheadActiveChild: HTMLElement) {
     return this.state.typeaheadFilteredChildren.map((child: React.ReactNode) =>
@@ -225,34 +254,43 @@ export class Select extends React.Component<SelectProps, SelectState> {
         isFocused:
           typeaheadActiveChild &&
           (typeaheadActiveChild.innerText ===
-            this.getDisplay((child as React.ReactElement).props.value.toString(), 'text') ||
-            (this.props.isCreatable && typeaheadActiveChild.innerText === `{createText} "${(child as React.ReactElement).props.value}"`))
+            this.getDisplay(
+              (child as React.ReactElement).props.value.toString(),
+              'text'
+            ) ||
+            (this.props.isCreatable &&
+              typeaheadActiveChild.innerText ===
+                `{createText} "${(child as React.ReactElement).props.value}"`))
       })
     );
   }
 
   sendRef = (ref: React.ReactNode, index: number) => {
     this.refCollection[index] = ref as HTMLElement;
-  }
+  };
 
   handleArrowKeys = (index: number, position: string) => {
     keyHandler(index, position, this.refCollection, this.refCollection);
-  }
+  };
 
   handleFocus = () => {
     if (!this.props.isExpanded) {
       this.props.onToggle(true);
     }
-  }
+  };
 
   handleTypeaheadKeys = (position: string) => {
     const { isExpanded, isCreatable, createText } = this.props;
     const { typeaheadActiveChild, typeaheadCurrIndex } = this.state;
     if (isExpanded) {
-      if (position === 'enter' && (typeaheadActiveChild || this.refCollection[0])) {
+      if (
+        position === 'enter' &&
+        (typeaheadActiveChild || this.refCollection[0])
+      ) {
         this.setState({
           typeaheadInputValue:
-            (typeaheadActiveChild && typeaheadActiveChild.innerText) || this.refCollection[0].innerText
+            (typeaheadActiveChild && typeaheadActiveChild.innerText) ||
+            this.refCollection[0].innerText
         });
         if (typeaheadActiveChild) {
           typeaheadActiveChild.click();
@@ -266,27 +304,37 @@ export class Select extends React.Component<SelectProps, SelectState> {
         } else if (typeaheadCurrIndex === -1 && position === 'up') {
           nextIndex = this.refCollection.length - 1;
         } else {
-          nextIndex = getNextIndex(typeaheadCurrIndex, position, this.refCollection);
+          nextIndex = getNextIndex(
+            typeaheadCurrIndex,
+            position,
+            this.refCollection
+          );
         }
         this.setState({
           typeaheadCurrIndex: nextIndex,
           typeaheadActiveChild: this.refCollection[nextIndex],
           typeaheadInputValue:
-            isCreatable && this.refCollection[nextIndex].innerText.includes(createText)
-              ? this.state.creatableValue 
+            isCreatable &&
+            this.refCollection[nextIndex].innerText.includes(createText)
+              ? this.state.creatableValue
               : this.refCollection[nextIndex].innerText
         });
       }
     }
-  }
+  };
 
-  getDisplay = (value: string | SelectOptionObject, type: 'node' | 'text' = 'node') => {
+  getDisplay = (
+    value: string | SelectOptionObject,
+    type: 'node' | 'text' = 'node'
+  ) => {
     if (!value) {
       return;
     }
 
     const { children } = this.props;
-    const item = children.filter(child => child.props.value.toString() === value.toString())[0];
+    const item = children.filter(
+      child => child.props.value.toString() === value.toString()
+    )[0];
     if (item) {
       if (item && item.props.children) {
         if (type === 'node') {
@@ -299,7 +347,9 @@ export class Select extends React.Component<SelectProps, SelectState> {
     return value;
   };
 
-  findText: (item: React.ReactElement) => string = (item: React.ReactElement) => {
+  findText: (item: React.ReactElement) => string = (
+    item: React.ReactElement
+  ) => {
     if (!item.props || !item.props.children) {
       if (typeof item !== 'string') {
         return '';
@@ -310,11 +360,11 @@ export class Select extends React.Component<SelectProps, SelectState> {
       return item.props.children;
     }
     const multi: string[] = [];
-    React.Children.toArray(item.props.children).forEach((child: React.ReactElement) =>
-      multi.push(this.findText(child))
+    React.Children.toArray(item.props.children).forEach(
+      (child: React.ReactElement) => multi.push(this.findText(child))
     );
     return multi.join('');
-  }
+  };
 
   render() {
     const {
@@ -346,13 +396,20 @@ export class Select extends React.Component<SelectProps, SelectState> {
       toggleIcon,
       ...props
     } = this.props;
-    const { openedOnEnter, typeaheadInputValue, typeaheadActiveChild } = this.state;
+    const {
+      openedOnEnter,
+      typeaheadInputValue,
+      typeaheadActiveChild
+    } = this.state;
     const selectToggleId = toggleId || `pf-toggle-id-${currentId++}`;
     let childPlaceholderText = null;
     if (!selections && !placeholderText) {
-      const childPlaceholder = React.Children.toArray(children.filter((child) => child.props.isPlaceholder === true));
+      const childPlaceholder = React.Children.toArray(
+        children.filter(child => child.props.isPlaceholder === true)
+      );
       childPlaceholderText =
-        (childPlaceholder[0] && this.getDisplay(childPlaceholder[0].props.value, 'node')) ||
+        (childPlaceholder[0] &&
+          this.getDisplay(childPlaceholder[0].props.value, 'node')) ||
         (children[0] && this.getDisplay(children[0].props.value, 'node'));
     }
     let selectedChips = null;
@@ -360,8 +417,12 @@ export class Select extends React.Component<SelectProps, SelectState> {
       selectedChips = (
         <ChipGroup>
           {selections &&
-            (selections as string[]).map((item) => (
-              <Chip key={item} onClick={(e) => onSelect(e, item)} closeBtnAriaLabel={ariaLabelRemove}>
+            (selections as string[]).map(item => (
+              <Chip
+                key={item}
+                onClick={e => onSelect(e, item)}
+                closeBtnAriaLabel={ariaLabelRemove}
+              >
                 {this.getDisplay(item, 'node')}
               </Chip>
             ))}
@@ -379,7 +440,9 @@ export class Select extends React.Component<SelectProps, SelectState> {
         ref={this.parentRef}
         style={{ width }}
       >
-        <SelectContext.Provider value={{ onSelect, onClose: this.onClose, variant }}>
+        <SelectContext.Provider
+          value={{ onSelect, onClose: this.onClose, variant }}
+        >
           <SelectToggle
             id={selectToggleId}
             parentRef={this.parentRef}
@@ -396,33 +459,62 @@ export class Select extends React.Component<SelectProps, SelectState> {
           >
             {variant === SelectVariant.single && (
               <div className={css(styles.selectToggleWrapper)}>
-                {toggleIcon && <span className={css(styles.selectToggleIcon)}>{toggleIcon}</span>}
+                {toggleIcon && (
+                  <span className={css(styles.selectToggleIcon)}>
+                    {toggleIcon}
+                  </span>
+                )}
                 <span className={css(styles.selectToggleText)}>
-                  {this.getDisplay(selections as string, 'node') || placeholderText || childPlaceholderText}
+                  {this.getDisplay(selections as string, 'node') ||
+                    placeholderText ||
+                    childPlaceholderText}
                 </span>
               </div>
             )}
             {variant === SelectVariant.checkbox && (
               <React.Fragment>
                 <div className={css(styles.selectToggleWrapper)}>
-                  {toggleIcon && <span className={css(styles.selectToggleIcon)}>{toggleIcon}</span>}
-                  <span className={css(styles.selectToggleText)}>{placeholderText}</span>
-                  {selections && (Array.isArray(selections) && selections.length > 0) && (
-                    <div className={css(styles.selectToggleBadge)}>
-                      <span className={css(badgeStyles.badge, badgeStyles.modifiers.read)}>{selections.length}</span>
-                    </div>
+                  {toggleIcon && (
+                    <span className={css(styles.selectToggleIcon)}>
+                      {toggleIcon}
+                    </span>
                   )}
+                  <span className={css(styles.selectToggleText)}>
+                    {placeholderText}
+                  </span>
+                  {selections &&
+                    (Array.isArray(selections) && selections.length > 0) && (
+                      <div className={css(styles.selectToggleBadge)}>
+                        <span
+                          className={css(
+                            badgeStyles.badge,
+                            badgeStyles.modifiers.read
+                          )}
+                        >
+                          {selections.length}
+                        </span>
+                      </div>
+                    )}
                 </div>
               </React.Fragment>
             )}
             {variant === SelectVariant.typeahead && (
               <React.Fragment>
                 <div className={css(styles.selectToggleWrapper)}>
-                  {toggleIcon && <span className={css(styles.selectToggleIcon)}>{toggleIcon}</span>}
-                  <form onSubmit={(e) => e.preventDefault()}>
+                  {toggleIcon && (
+                    <span className={css(styles.selectToggleIcon)}>
+                      {toggleIcon}
+                    </span>
+                  )}
+                  <form onSubmit={e => e.preventDefault()}>
                     <input
-                      className={css(formStyles.formControl, styles.selectToggleTypeahead)}
-                      aria-activedescendant={typeaheadActiveChild && typeaheadActiveChild.id}
+                      className={css(
+                        formStyles.formControl,
+                        styles.selectToggleTypeahead
+                      )}
+                      aria-activedescendant={
+                        typeaheadActiveChild && typeaheadActiveChild.id
+                      }
                       id="select-typeahead"
                       aria-label={ariaLabelTypeAhead}
                       placeholder={placeholderText as string}
@@ -441,8 +533,12 @@ export class Select extends React.Component<SelectProps, SelectState> {
                 </div>
                 {selections && (
                   <button
-                    className={css(buttonStyles.button, buttonStyles.modifiers.plain, styles.selectToggleClear)}
-                    onClick={(e) => {
+                    className={css(
+                      buttonStyles.button,
+                      buttonStyles.modifiers.plain,
+                      styles.selectToggleClear
+                    )}
+                    onClick={e => {
                       this.clearSelection(e);
                       onClear(e);
                     }}
@@ -458,16 +554,29 @@ export class Select extends React.Component<SelectProps, SelectState> {
             {variant === SelectVariant.typeaheadMulti && (
               <React.Fragment>
                 <div className={css(styles.selectToggleWrapper)}>
-                  {toggleIcon && <span className={css(styles.selectToggleIcon)}>{toggleIcon}</span>}
-                  {selections && (Array.isArray(selections) && selections.length > 0) && selectedChips}
-                  <form onSubmit={(e) => e.preventDefault()}>
+                  {toggleIcon && (
+                    <span className={css(styles.selectToggleIcon)}>
+                      {toggleIcon}
+                    </span>
+                  )}
+                  {selections &&
+                    (Array.isArray(selections) && selections.length > 0) &&
+                    selectedChips}
+                  <form onSubmit={e => e.preventDefault()}>
                     <input
-                      className={css(formStyles.formControl, styles.selectToggleTypeahead)}
-                      aria-activedescendant={typeaheadActiveChild && typeaheadActiveChild.id}
+                      className={css(
+                        formStyles.formControl,
+                        styles.selectToggleTypeahead
+                      )}
+                      aria-activedescendant={
+                        typeaheadActiveChild && typeaheadActiveChild.id
+                      }
                       id="select-multi-typeahead-typeahead"
                       aria-label={ariaLabelTypeAhead}
                       placeholder={placeholderText as string}
-                      value={typeaheadInputValue !== null ? typeaheadInputValue : ''}
+                      value={
+                        typeaheadInputValue !== null ? typeaheadInputValue : ''
+                      }
                       type="text"
                       onChange={this.onChange}
                       onFocus={this.handleFocus}
@@ -476,20 +585,25 @@ export class Select extends React.Component<SelectProps, SelectState> {
                     />
                   </form>
                 </div>
-                {selections && (Array.isArray(selections) && selections.length > 0) && (
-                  <button
-                    className={css(buttonStyles.button, buttonStyles.modifiers.plain, styles.selectToggleClear)}
-                    onClick={(e) => {
-                      this.clearSelection(e);
-                      onClear(e);
-                    }}
-                    aria-label={ariaLabelClear}
-                    type="button"
-                    disabled={isDisabled}
-                  >
-                    <TimesCircleIcon aria-hidden />
-                  </button>
-                )}
+                {selections &&
+                  (Array.isArray(selections) && selections.length > 0) && (
+                    <button
+                      className={css(
+                        buttonStyles.button,
+                        buttonStyles.modifiers.plain,
+                        styles.selectToggleClear
+                      )}
+                      onClick={e => {
+                        this.clearSelection(e);
+                        onClear(e);
+                      }}
+                      aria-label={ariaLabelClear}
+                      type="button"
+                      disabled={isDisabled}
+                    >
+                      <TimesCircleIcon aria-hidden />
+                    </button>
+                  )}
               </React.Fragment>
             )}
           </SelectToggle>
@@ -521,20 +635,22 @@ export class Select extends React.Component<SelectProps, SelectState> {
               {children}
             </SelectMenu>
           )}
-          {(variant === SelectVariant.typeahead || variant === SelectVariant.typeaheadMulti) && isExpanded && (
-            <SelectMenu
-              {...props}
-              selected={selections}
-              openedOnEnter={openedOnEnter}
-              aria-label={ariaLabel}
-              aria-labelledby={ariaLabelledBy}
-              sendRef={this.sendRef}
-              keyHandler={this.handleArrowKeys}
-              maxHeight={maxHeight}
-            >
-              {this.extendTypeaheadChildren(typeaheadActiveChild)}
-            </SelectMenu>
-          )}
+          {(variant === SelectVariant.typeahead ||
+            variant === SelectVariant.typeaheadMulti) &&
+            isExpanded && (
+              <SelectMenu
+                {...props}
+                selected={selections}
+                openedOnEnter={openedOnEnter}
+                aria-label={ariaLabel}
+                aria-labelledby={ariaLabelledBy}
+                sendRef={this.sendRef}
+                keyHandler={this.handleArrowKeys}
+                maxHeight={maxHeight}
+              >
+                {this.extendTypeaheadChildren(typeaheadActiveChild)}
+              </SelectMenu>
+            )}
         </SelectContext.Provider>
       </div>
     );

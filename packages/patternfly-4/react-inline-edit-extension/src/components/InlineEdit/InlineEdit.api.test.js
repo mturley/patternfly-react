@@ -1,6 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Table, TableHeader, TableBody, RowWrapper } from '@patternfly/react-table';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  RowWrapper
+} from '@patternfly/react-table';
 import { TextInput } from '@patternfly/react-core';
 
 import { default as editableRowWrapper } from './editableRowWrapper';
@@ -53,13 +58,17 @@ describe('Editable table', () => {
       {
         '[data-key]': {
           getAttribute: () => firstColEditedRowInputId.columnIndex,
-          contains: elem => elem.getAttribute('id') === makeTableId(firstColEditedRowInputId)
+          contains: elem =>
+            elem.getAttribute('id') === makeTableId(firstColEditedRowInputId)
         },
         '[id]': {
           getAttribute: () => makeTableId(firstColEditedRowInputId)
         }
       },
-      selector => (selector === 'table' ? container.getDOMNode().getElementsByTagName('table')[0] : undefined),
+      selector =>
+        selector === 'table'
+          ? container.getDOMNode().getElementsByTagName('table')[0]
+          : undefined,
       true
     );
   });
@@ -75,7 +84,11 @@ describe('Editable table', () => {
     const onBlur = jest.fn();
 
     const inlineEditingFormatter = inlineEditFormatterFactory({
-      renderEdit: (value, { columnIndex, rowIndex, column }, { activeEditId }) => {
+      renderEdit: (
+        value,
+        { columnIndex, rowIndex, column },
+        { activeEditId }
+      ) => {
         const firstInputId = makeTableId({
           rowIndex,
           columnIndex,
@@ -133,7 +146,12 @@ describe('Editable table', () => {
       onEditCanceled: jest.fn()
     };
     const view = mount(
-      <Table caption="Editable table" cells={editableCols} rows={editableRows} rowWrapper={ComposedRowWrapper}>
+      <Table
+        caption="Editable table"
+        cells={editableCols}
+        rows={editableRows}
+        rowWrapper={ComposedRowWrapper}
+      >
         <TableHeader />
         <ComposedBody editConfig={editConfig} />
       </Table>,
@@ -158,13 +176,20 @@ describe('Editable table', () => {
       .simulate('mousedown');
 
     // should immediately call onEditCellClicked
-    setTimeout(() => expect(editConfig.onEditCellClicked).toHaveBeenCalled(), 0);
+    setTimeout(
+      () => expect(editConfig.onEditCellClicked).toHaveBeenCalled(),
+      0
+    );
 
     // responds to confirmation button clicks
-    view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary').simulate('mouseup');
+    view
+      .find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary')
+      .simulate('mouseup');
     expect(editConfig.onEditConfirmed).toHaveBeenCalled();
 
-    view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-plain').simulate('mouseup');
+    view
+      .find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-plain')
+      .simulate('mouseup');
     expect(editConfig.onEditCanceled).toHaveBeenCalled();
   });
 });

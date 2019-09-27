@@ -24,7 +24,12 @@ export const ModalBoxHeader: React.FunctionComponent<ModalBoxHeaderProps> = ({
 }: ModalBoxHeaderProps) => {
   return hideTitle ? null : (
     <React.Fragment>
-      <Title size="2xl" headingLevel={headingLevel} className={className} {...props}>
+      <Title
+        size="2xl"
+        headingLevel={headingLevel}
+        className={className}
+        {...props}
+      >
         {children}
       </Title>
     </React.Fragment>

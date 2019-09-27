@@ -2,12 +2,27 @@ import React from 'react';
 import { boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Button } from '../../Button';
-import { Card, CardGrid, CardHeading, CardDropdownButton, CardTitle, CardBody, CardFooter, CardLink } from '../index';
+import {
+  Card,
+  CardGrid,
+  CardHeading,
+  CardDropdownButton,
+  CardTitle,
+  CardBody,
+  CardFooter,
+  CardLink
+} from '../index';
 import { Icon } from '../../Icon';
 import { MenuItem } from '../../MenuItem';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
 import { DOCUMENTATION_URL } from 'storybook/constants/siteConstants';
-import { EmptyState, EmptyStateTitle, EmptyStateIcon, EmptyStateInfo, EmptyStateAction } from '../../../index';
+import {
+  EmptyState,
+  EmptyStateTitle,
+  EmptyStateIcon,
+  EmptyStateInfo,
+  EmptyStateAction
+} from '../../../index';
 
 const handleClick = e => {
   e.preventDefault();
@@ -31,7 +46,11 @@ const baseCardHeightMatchingStory = stories => {
             <CardGrid.Col xs={6} sm={4} md={4}>
               <Card matchHeight={matchHeightBool} accented>
                 <CardHeading>
-                  <CardDropdownButton id="cardDropdownButton1" title="Last 30 Days" onClick={action('onClick')}>
+                  <CardDropdownButton
+                    id="cardDropdownButton1"
+                    title="Last 30 Days"
+                    onClick={action('onClick')}
+                  >
                     <MenuItem eventKey="1" active>
                       Last 30 Days
                     </MenuItem>
@@ -42,9 +61,15 @@ const baseCardHeightMatchingStory = stories => {
                     <Icon name="shield" /> Card Title
                   </CardTitle>
                 </CardHeading>
-                <CardBody>{content ? <span>{fakeContent}</span> : '[card contents]'}</CardBody>
+                <CardBody>
+                  {content ? <span>{fakeContent}</span> : '[card contents]'}
+                </CardBody>
                 <CardFooter>
-                  <CardLink onClick={handleClick} href="#" icon={<Icon type="pf" name="add-circle-o" />}>
+                  <CardLink
+                    onClick={handleClick}
+                    href="#"
+                    icon={<Icon type="pf" name="add-circle-o" />}
+                  >
                     Add New Cluster
                   </CardLink>
                 </CardFooter>
@@ -55,14 +80,22 @@ const baseCardHeightMatchingStory = stories => {
                 <CardTitle>Card Title</CardTitle>
                 <CardBody>[card contents]</CardBody>
                 <CardFooter>
-                  <CardDropdownButton id="cardDropdownButton1" title="Last 30 Days" onClick={action('onClick')}>
+                  <CardDropdownButton
+                    id="cardDropdownButton1"
+                    title="Last 30 Days"
+                    onClick={action('onClick')}
+                  >
                     <MenuItem eventKey="1" active>
                       Last 30 Days
                     </MenuItem>
                     <MenuItem eventKey="2">Last 60 Days</MenuItem>
                     <MenuItem eventKey="3">Last 90 Days</MenuItem>
                   </CardDropdownButton>
-                  <CardLink disabled onClick={action('some on click')} icon={<Icon type="pf" name="flag" />}>
+                  <CardLink
+                    disabled
+                    onClick={action('some on click')}
+                    icon={<Icon type="pf" name="flag" />}
+                  >
                     View CPU Events
                   </CardLink>
                 </CardFooter>
@@ -79,7 +112,11 @@ const baseCardHeightMatchingStory = stories => {
                     <EmptyStateTitle>Empty Card</EmptyStateTitle>
                     <EmptyStateInfo>No Data</EmptyStateInfo>
                     <EmptyStateAction>
-                      <Button bsStyle="primary" bsSize="large" onClick={action('Click')()}>
+                      <Button
+                        bsStyle="primary"
+                        bsSize="large"
+                        onClick={action('Click')()}
+                      >
                         Upload Data
                       </Button>
                     </EmptyStateAction>

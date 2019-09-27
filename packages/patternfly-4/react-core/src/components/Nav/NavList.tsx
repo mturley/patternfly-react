@@ -6,7 +6,11 @@ import { AngleLeftIcon, AngleRightIcon } from '@patternfly/react-icons';
 import { isElementInView } from '../../helpers/util';
 import { NavContext } from './Nav';
 
-export interface NavListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
+export interface NavListProps
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLUListElement>,
+    HTMLUListElement
+  > {
   /** Children nodes */
   children?: React.ReactNode;
   /** Additional classes added to the list */
@@ -37,17 +41,25 @@ export class NavList extends React.Component<NavListProps> {
       const { updateScrollButtonState } = this.context;
       const container = this.navList.current;
       // get first element and check if it is in view
-      const showLeftScrollButton = !isElementInView(container, container.firstChild as HTMLElement, false);
+      const showLeftScrollButton = !isElementInView(
+        container,
+        container.firstChild as HTMLElement,
+        false
+      );
 
       // get last element and check if it is in view
-      const showRightScrollButton = !isElementInView(container, container.lastChild as HTMLElement, false);
+      const showRightScrollButton = !isElementInView(
+        container,
+        container.lastChild as HTMLElement,
+        false
+      );
 
       updateScrollButtonState({
         showLeftScrollButton,
         showRightScrollButton
       });
     }
-  }
+  };
 
   scrollLeft = () => {
     // find first Element that is fully in view on the left, then scroll to the element before it
@@ -67,7 +79,7 @@ export class NavList extends React.Component<NavListProps> {
       }
       this.handleScrollButtons();
     }
-  }
+  };
 
   scrollRight = () => {
     // find last Element that is fully in view on the right, then scroll to the element after it
@@ -87,11 +99,12 @@ export class NavList extends React.Component<NavListProps> {
       }
       this.handleScrollButtons();
     }
-  }
+  };
 
   componentDidMount() {
     const { variant } = this.props;
-    const isHorizontal = variant === NavVariants.horizontal || variant === NavVariants.tertiary;
+    const isHorizontal =
+      variant === NavVariants.horizontal || variant === NavVariants.tertiary;
     if (isHorizontal) {
       window.addEventListener('resize', this.handleScrollButtons, false);
       // call the handle resize function to check if scroll buttons should be shown
@@ -101,34 +114,55 @@ export class NavList extends React.Component<NavListProps> {
 
   componentWillUnmount() {
     const { variant } = this.props;
-    const isHorizontal = variant === NavVariants.horizontal || variant === NavVariants.tertiary;
+    const isHorizontal =
+      variant === NavVariants.horizontal || variant === NavVariants.tertiary;
     if (isHorizontal) {
       document.removeEventListener('resize', this.handleScrollButtons, false);
     }
   }
 
   render() {
-    const { variant, children, className, ariaLeftScroll, ariaRightScroll, ...props } = this.props;
+    const {
+      variant,
+      children,
+      className,
+      ariaLeftScroll,
+      ariaRightScroll,
+      ...props
+    } = this.props;
     const variantStyle = {
       [NavVariants.default]: styles.navList,
       [NavVariants.simple]: styles.navSimpleList,
       [NavVariants.horizontal]: styles.navHorizontalList,
       [NavVariants.tertiary]: styles.navTertiaryList
     };
-    const isHorizontal = variant === NavVariants.horizontal || variant === NavVariants.tertiary;
+    const isHorizontal =
+      variant === NavVariants.horizontal || variant === NavVariants.tertiary;
 
     return (
       <>
         {isHorizontal && (
-          <button className={css(styles.navScrollButton)} aria-label={ariaLeftScroll} onClick={this.scrollLeft}>
+          <button
+            className={css(styles.navScrollButton)}
+            aria-label={ariaLeftScroll}
+            onClick={this.scrollLeft}
+          >
             <AngleLeftIcon />
           </button>
         )}
-        <ul ref={this.navList} className={css(variantStyle[variant], className)} {...props}>
+        <ul
+          ref={this.navList}
+          className={css(variantStyle[variant], className)}
+          {...props}
+        >
           {children}
         </ul>
         {isHorizontal && (
-          <button className={css(styles.navScrollButton)} aria-label={ariaRightScroll} onClick={this.scrollRight}>
+          <button
+            className={css(styles.navScrollButton)}
+            aria-label={ariaRightScroll}
+            onClick={this.scrollRight}
+          >
             <AngleRightIcon />
           </button>
         )}

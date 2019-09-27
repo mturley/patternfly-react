@@ -17,7 +17,9 @@ describe('Accordion Demo Test', () => {
     cy.get('#item-1').should('have.attr', 'aria-expanded', 'true');
     cy.get('#item-2').should('have.attr', 'aria-expanded', 'false');
     cy.get('#item-3').should('have.attr', 'aria-expanded', 'false');
-    const expandedContent = cy.get('#accordion-example .pf-c-accordion__expanded-content.pf-m-expanded');
+    const expandedContent = cy.get(
+      '#accordion-example .pf-c-accordion__expanded-content.pf-m-expanded'
+    );
     expandedContent.should('have.length', 1);
     expandedContent.should('have.attr', 'id', 'item-1-content');
   });
@@ -27,7 +29,9 @@ describe('Accordion Demo Test', () => {
     cy.get('#item-1').should('have.attr', 'aria-expanded', 'false');
     cy.get('#item-2').should('have.attr', 'aria-expanded', 'true');
     cy.get('#item-3').should('have.attr', 'aria-expanded', 'false');
-    const expandedContent = cy.get('#accordion-example .pf-c-accordion__expanded-content.pf-m-expanded');
+    const expandedContent = cy.get(
+      '#accordion-example .pf-c-accordion__expanded-content.pf-m-expanded'
+    );
     expandedContent.should('have.length', 1);
     expandedContent.should('have.attr', 'id', 'item-2-content');
   });
@@ -37,7 +41,9 @@ describe('Accordion Demo Test', () => {
     cy.get('#item-1').should('have.attr', 'aria-expanded', 'false');
     cy.get('#item-2').should('have.attr', 'aria-expanded', 'false');
     cy.get('#item-3').should('have.attr', 'aria-expanded', 'false');
-    const expandedContent = cy.get('#accordion-example .pf-c-accordion__expanded-content.pf-m-expanded');
+    const expandedContent = cy.get(
+      '#accordion-example .pf-c-accordion__expanded-content.pf-m-expanded'
+    );
     expandedContent.should('not.exist');
   });
 });

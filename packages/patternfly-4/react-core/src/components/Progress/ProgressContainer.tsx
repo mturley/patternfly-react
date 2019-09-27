@@ -18,7 +18,8 @@ export enum ProgressVariant {
   info = 'info'
 }
 
-export interface ProgressContainerProps extends Omit<React.HTMLProps<HTMLDivElement>, 'label'> {
+export interface ProgressContainerProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'label'> {
   /** Properties needed for aria support */
   ariaProps: AriaProps;
   /** Progress component DOM ID. */
@@ -35,12 +36,14 @@ export interface ProgressContainerProps extends Omit<React.HTMLProps<HTMLDivElem
   value: number;
 }
 
-const variantToIcon: {[k: string]: React.FunctionComponent} = {
+const variantToIcon: { [k: string]: React.FunctionComponent } = {
   danger: TimesCircleIcon,
   success: CheckCircleIcon
 };
 
-export const ProgressContainer: React.FunctionComponent<ProgressContainerProps> = ({
+export const ProgressContainer: React.FunctionComponent<
+  ProgressContainerProps
+> = ({
   ariaProps,
   value,
   title = '',
@@ -49,15 +52,22 @@ export const ProgressContainer: React.FunctionComponent<ProgressContainerProps> 
   variant = ProgressVariant.info,
   measureLocation = ProgressMeasureLocation.top
 }: ProgressContainerProps) => {
-  const StatusIcon = variantToIcon.hasOwnProperty(variant) && variantToIcon[variant];
+  const StatusIcon =
+    variantToIcon.hasOwnProperty(variant) && variantToIcon[variant];
   return (
     <React.Fragment>
-      <div className={css(progressStyle.progressDescription)} id={`${parentId}-description`}>
+      <div
+        className={css(progressStyle.progressDescription)}
+        id={`${parentId}-description`}
+      >
         {title}
       </div>
       <div className={css(progressStyle.progressStatus)}>
-        {(measureLocation === ProgressMeasureLocation.top || measureLocation === ProgressMeasureLocation.outside) && (
-          <span className={css(progressStyle.progressMeasure)}>{label || `${value}%`}</span>
+        {(measureLocation === ProgressMeasureLocation.top ||
+          measureLocation === ProgressMeasureLocation.outside) && (
+          <span className={css(progressStyle.progressMeasure)}>
+            {label || `${value}%`}
+          </span>
         )}
         {variantToIcon.hasOwnProperty(variant) && (
           <span className={css(progressStyle.progressStatusIcon)}>

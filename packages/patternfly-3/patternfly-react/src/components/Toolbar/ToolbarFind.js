@@ -19,7 +19,7 @@ class ToolbarFind extends React.Component {
     if (keyEvent.key === 'Enter' && onEnter) {
       onEnter(currentValue);
     }
-  }
+  };
 
   handleFindNext = () => {
     const { currentValue } = this.state;
@@ -28,7 +28,7 @@ class ToolbarFind extends React.Component {
     if (onFindNext) {
       onFindNext(currentValue);
     }
-  }
+  };
 
   handleFindPrevious = () => {
     const { currentValue } = this.state;
@@ -37,7 +37,7 @@ class ToolbarFind extends React.Component {
     if (onFindPrevious) {
       onFindPrevious(currentValue);
     }
-  }
+  };
 
   handleValueChange = event => {
     const { onChange } = this.props;
@@ -47,15 +47,15 @@ class ToolbarFind extends React.Component {
     if (onChange) {
       onChange(event.target.value);
     }
-  }
+  };
 
   hideDropdown = () => {
     this.setState({ dropdownShown: false });
-  }
+  };
 
   toggleDropdownShown = () => {
     this.setState(prevState => ({ dropdownShown: !prevState.dropdownShown }));
-  }
+  };
 
   renderCounts() {
     const { currentValue } = this.state;
@@ -66,7 +66,11 @@ class ToolbarFind extends React.Component {
         <span className="find-pf-nums" key="findCountText">
           {currentIndex || 0} of {totalCount}
         </span>,
-        <Button bsStyle="link" key="findPrevious" onClick={this.handleFindPrevious}>
+        <Button
+          bsStyle="link"
+          key="findPrevious"
+          onClick={this.handleFindPrevious}
+        >
           <Icon type="fa" name="angle-up" />
         </Button>,
         <Button bsStyle="link" key="findNext" onClick={this.handleFindNext}>
@@ -89,7 +93,11 @@ class ToolbarFind extends React.Component {
 
     return (
       <div className={classes}>
-        <Button bsStyle="link" className="btn-find" onClick={this.toggleDropdownShown}>
+        <Button
+          bsStyle="link"
+          className="btn-find"
+          onClick={this.toggleDropdownShown}
+        >
           <Icon type="fa" name="search" />
         </Button>
         <div className={dropdownClasses}>
@@ -103,7 +111,11 @@ class ToolbarFind extends React.Component {
           />
           <div className="find-pf-buttons">
             {this.renderCounts()}
-            <Button bsStyle="link" className="btn-find-close" onClick={this.hideDropdown}>
+            <Button
+              bsStyle="link"
+              className="btn-find-close"
+              onClick={this.hideDropdown}
+            >
               <Icon type="pf" name="close" />
             </Button>
           </div>

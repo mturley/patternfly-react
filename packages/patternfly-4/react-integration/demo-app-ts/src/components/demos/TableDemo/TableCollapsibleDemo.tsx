@@ -10,10 +10,13 @@ import {
   TableVariant,
   expandable,
   cellWidth,
-  IRow,
+  IRow
 } from '@patternfly/react-table';
 
-export class TableCollapsibleDemo extends React.Component<TableProps, { columns: any, rows: IRow[] }> {
+export class TableCollapsibleDemo extends React.Component<
+  TableProps,
+  { columns: any; rows: IRow[] }
+> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
@@ -78,14 +81,19 @@ export class TableCollapsibleDemo extends React.Component<TableProps, { columns:
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {
     const { columns, rows } = this.state;
 
     return (
-      <Table caption="Collapsible table" onCollapse={this.onCollapse} rows={rows} cells={columns}>
+      <Table
+        caption="Collapsible table"
+        onCollapse={this.onCollapse}
+        rows={rows}
+        cells={columns}
+      >
         <TableHeader />
         <TableBody />
       </Table>

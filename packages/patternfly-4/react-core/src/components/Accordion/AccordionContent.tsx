@@ -20,7 +20,9 @@ export interface AccordionContentProps extends React.HTMLProps<HTMLDivElement> {
   component?: React.ElementType;
 }
 
-export const AccordionContent: React.FunctionComponent<AccordionContentProps> = ({
+export const AccordionContent: React.FunctionComponent<
+  AccordionContentProps
+> = ({
   className = '',
   children = null,
   id = '',
@@ -46,7 +48,9 @@ export const AccordionContent: React.FunctionComponent<AccordionContentProps> = 
           aria-label={ariaLabel}
           {...props}
         >
-          <div className={css(styles.accordionExpandedContentBody)}>{children}</div>
+          <div className={css(styles.accordionExpandedContentBody)}>
+            {children}
+          </div>
         </Container>
       );
     }}

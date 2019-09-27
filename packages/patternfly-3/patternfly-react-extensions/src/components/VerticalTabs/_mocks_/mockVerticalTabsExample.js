@@ -9,13 +9,22 @@ class MockVerticalTabsExample extends React.Component {
 
   onActivateTab = id => {
     this.setState({ activeTabId: id });
-  }
+  };
 
   render() {
     const { restrictTabs, wrapStyle } = this.props;
     const { activeTabId } = this.state;
 
-    const topLevelIds = ['all', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+    const topLevelIds = [
+      'all',
+      'one',
+      'two',
+      'three',
+      'four',
+      'five',
+      'six',
+      'seven'
+    ];
 
     const renderTab = (id, title, children, props) => {
       const childIds = React.Children.map(children, child => child.props.id);
@@ -32,7 +41,10 @@ class MockVerticalTabsExample extends React.Component {
           {...props}
         >
           {children && (
-            <VerticalTabs restrictTabs={restrictTabs} activeTab={childIds.includes(activeTabId)}>
+            <VerticalTabs
+              restrictTabs={restrictTabs}
+              activeTab={childIds.includes(activeTabId)}
+            >
               {children}
             </VerticalTabs>
           )}
@@ -41,7 +53,11 @@ class MockVerticalTabsExample extends React.Component {
     };
 
     return (
-      <VerticalTabs id="vertical-tabs" restrictTabs={restrictTabs} activeTab={topLevelIds.includes(activeTabId)}>
+      <VerticalTabs
+        id="vertical-tabs"
+        restrictTabs={restrictTabs}
+        activeTab={topLevelIds.includes(activeTabId)}
+      >
         {renderTab('all', 'All', null, { shown: true })}
         {renderTab('one', 'Tab One', [
           renderTab('one-one', 'Tab One-One', [
@@ -61,7 +77,10 @@ class MockVerticalTabsExample extends React.Component {
           renderTab('two-two', 'Tab Two-Two'),
           renderTab('two-three', 'Tab Two-Three')
         ])}
-        {renderTab('three', 'Tab Three - Donec id elit non mi porta gravida at eget metus')}
+        {renderTab(
+          'three',
+          'Tab Three - Donec id elit non mi porta gravida at eget metus'
+        )}
         {renderTab('four', 'Tab Four')}
         {renderTab('five', 'Tab Five')}
         {renderTab('six', 'Tab Six')}

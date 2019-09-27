@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
 
-const SortDirectionSelector = ({ className, isNumeric, isAscending, ...props }) => {
+const SortDirectionSelector = ({
+  className,
+  isNumeric,
+  isAscending,
+  ...props
+}) => {
   let directionName;
   if (isNumeric) {
     directionName = isAscending ? 'sort-numeric-asc' : 'sort-numeric-desc';

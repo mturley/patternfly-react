@@ -2,7 +2,10 @@ describe('Green donut utilization with static thresholds and right-aligned (cust
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#donut-utilization-green-static-right-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/donut-utilization-green-static-right-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/donut-utilization-green-static-right-demo-nav-link'
+    );
   });
 
   it('Verify donut chart', () => {

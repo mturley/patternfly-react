@@ -8,10 +8,23 @@ import { ButtonGroup } from '../Button';
 /**
  * DropdownKebab Component for Patternfly React
  */
-const DropdownKebab = ({ className, children, id, pullRight, componentClass, title, toggleStyle }) => {
+const DropdownKebab = ({
+  className,
+  children,
+  id,
+  pullRight,
+  componentClass,
+  title,
+  toggleStyle
+}) => {
   const kebabClass = classNames('dropdown-kebab-pf', className);
   return (
-    <Dropdown className={kebabClass} id={id} pullRight={pullRight} componentClass={componentClass}>
+    <Dropdown
+      className={kebabClass}
+      id={id}
+      pullRight={pullRight}
+      componentClass={componentClass}
+    >
       <Dropdown.Toggle bsStyle={toggleStyle} title={title} noCaret>
         <Icon name="ellipsis-v" />
       </Dropdown.Toggle>

@@ -9,7 +9,8 @@ import { Omit } from '../../helpers/typeUtils';
 // tslint:disable-next-line
 const FocusTrap: any = require('focus-trap-react');
 
-export interface SelectMenuProps extends Omit<React.HTMLProps<HTMLElement>, 'checked' | 'selected' | 'ref'> {
+export interface SelectMenuProps
+  extends Omit<React.HTMLProps<HTMLElement>, 'checked' | 'selected' | 'ref'> {
   /** Content rendered inside the SelectMenu */
   children: React.ReactElement[];
   /** Additional classes added to the SelectMenu control */
@@ -21,7 +22,7 @@ export interface SelectMenuProps extends Omit<React.HTMLProps<HTMLElement>, 'che
   /** Currently selected option (for single, typeahead variants) */
   selected?: string | SelectOptionObject | (string | SelectOptionObject)[];
   /** Currently checked options (for checkbox variant) */
-  checked?: (string | SelectOptionObject) [];
+  checked?: (string | SelectOptionObject)[];
   /** Internal flag for specifiying how the menu was opened */
   openedOnEnter?: boolean;
   /** Flag to specify the  maximum height of the menu, as a string percentage or number of pixels */
@@ -51,12 +52,16 @@ export class SelectMenu extends React.Component<SelectMenuProps> {
       return React.Children.map(children, (group: React.ReactElement) =>
         React.cloneElement(group, {
           titleId: group.props.label.replace(/\W/g, '-'),
-          children: group.props.children.map((option: React.ReactElement) => this.cloneOption(option, index++))
+          children: group.props.children.map((option: React.ReactElement) =>
+            this.cloneOption(option, index++)
+          )
         })
       );
     }
-    return React.Children.map(this.props.children, (child: React.ReactElement, index: number) =>
-      this.cloneOption(child, index)
+    return React.Children.map(
+      this.props.children,
+      (child: React.ReactElement, index: number) =>
+        this.cloneOption(child, index)
     );
   }
 
@@ -64,7 +69,8 @@ export class SelectMenu extends React.Component<SelectMenuProps> {
     const { selected, sendRef, keyHandler } = this.props;
     const isSelected =
       selected && selected.constructor === Array
-        ? selected && (Array.isArray(selected) && selected.includes(child.props.value))
+        ? selected &&
+          (Array.isArray(selected) && selected.includes(child.props.value))
         : selected === child.props.value;
     return React.cloneElement(child, {
       id: `${child.props.value ? child.props.value.toString() : ''}-${index}`,
@@ -77,14 +83,20 @@ export class SelectMenu extends React.Component<SelectMenuProps> {
 
   extendCheckboxChildren(props: any) {
     const { children, isGrouped, checked, sendRef, keyHandler } = this.props;
-    const { 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy } = props;
+    const {
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy
+    } = props;
     if (isGrouped) {
       let index = 0;
       return React.Children.map(children, (group: React.ReactElement) =>
         React.cloneElement(group, {
           titleId: group.props.label.replace(/\W/g, '-'),
           children: (
-            <fieldset aria-labelledby={group.props.label.replace(/\W/g, '-')} className={css(formStyles.formFieldset)}>
+            <fieldset
+              aria-labelledby={group.props.label.replace(/\W/g, '-')}
+              className={css(formStyles.formFieldset)}
+            >
               {group.props.children.map((option: React.ReactElement) =>
                 React.cloneElement(option, {
                   isChecked: checked && checked.includes(option.props.value),
@@ -105,13 +117,15 @@ export class SelectMenu extends React.Component<SelectMenuProps> {
         aria-labelledby={(!ariaLabel && ariaLabelledBy) || null}
         className={css(formStyles.formFieldset)}
       >
-        {React.Children.map(children, (child: React.ReactElement, index: number) =>
-          React.cloneElement(child, {
-            isChecked: checked && checked.includes(child.props.value),
-            sendRef,
-            keyHandler,
-            index
-          })
+        {React.Children.map(
+          children,
+          (child: React.ReactElement, index: number) =>
+            React.cloneElement(child, {
+              isChecked: checked && checked.includes(child.props.value),
+              sendRef,
+              keyHandler,
+              index
+            })
         )}
       </fieldset>
     );
@@ -137,26 +151,43 @@ export class SelectMenu extends React.Component<SelectMenuProps> {
         {({ variant }) => (
           <React.Fragment>
             {variant !== SelectVariant.checkbox && (
-              <ul className={css(styles.selectMenu, className)} role="listbox" {...maxHeight && {style:({ maxHeight, overflow: 'auto' })}}  {...props}>
+              <ul
+                className={css(styles.selectMenu, className)}
+                role="listbox"
+                {...(maxHeight && { style: { maxHeight, overflow: 'auto' } })}
+                {...props}
+              >
                 {this.extendChildren()}
               </ul>
             )}
-            {variant === SelectVariant.checkbox && React.Children.count(children) > 0 && (
-              <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
-                <div className={css(styles.selectMenu, className)} {...maxHeight && {style:({ maxHeight, overflow: 'auto' })}}>
+            {variant === SelectVariant.checkbox &&
+              React.Children.count(children) > 0 && (
+                <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }}>
+                  <div
+                    className={css(styles.selectMenu, className)}
+                    {...(maxHeight && {
+                      style: { maxHeight, overflow: 'auto' }
+                    })}
+                  >
+                    <form noValidate className={css(formStyles.form)}>
+                      <div className={css(formStyles.formGroup)}>
+                        {this.extendCheckboxChildren(props)}
+                      </div>
+                    </form>
+                  </div>
+                </FocusTrap>
+              )}
+            {variant === SelectVariant.checkbox &&
+              React.Children.count(children) === 0 && (
+                <div
+                  className={css(styles.selectMenu, className)}
+                  {...(maxHeight && { style: { maxHeight, overflow: 'auto' } })}
+                >
                   <form noValidate className={css(formStyles.form)}>
-                    <div className={css(formStyles.formGroup)}>{this.extendCheckboxChildren(props)}</div>
+                    <div className={css(formStyles.formGroup)} />
                   </form>
                 </div>
-              </FocusTrap>
-            )}
-            {variant === SelectVariant.checkbox && React.Children.count(children) === 0 && (
-              <div className={css(styles.selectMenu, className)} {...maxHeight && {style:({ maxHeight, overflow: 'auto' })}}>
-                <form noValidate className={css(formStyles.form)}>
-                  <div className={css(formStyles.formGroup)}/>
-                </form>
-              </div>
-            )}
+              )}
           </React.Fragment>
         )}
       </SelectConsumer>

@@ -8,7 +8,13 @@ async function verify() {
   const packages = await helpers.getPfPackages(false);
   const pkgConfigs = packages.map(pkg => pkg.toJSON());
   pkgConfigs.forEach(
-    ({ name, dependencies = {}, devDependencies = {}, optionalDependencies = {}, peerDependencies = {} }) => {
+    ({
+      name,
+      dependencies = {},
+      devDependencies = {},
+      optionalDependencies = {},
+      peerDependencies = {}
+    }) => {
       [
         ...Object.entries(dependencies),
         ...Object.entries(devDependencies),
@@ -22,7 +28,9 @@ async function verify() {
     }
   );
   if (versions.size > 1) {
-    console.error(`error: @patternfly/patternfly versions must match for all packages`);
+    console.error(
+      `error: @patternfly/patternfly versions must match for all packages`
+    );
     console.error('-'.repeat(10));
     versions.forEach((packagesNames, version) => {
       console.error(`v${version}: ${packagesNames.join(', ')}`);

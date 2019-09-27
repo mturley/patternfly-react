@@ -14,7 +14,8 @@ import { AboutModalBoxCloseButton } from './AboutModalBoxCloseButton';
 import { AboutModalBox } from './AboutModalBox';
 import { Backdrop } from '../Backdrop/Backdrop';
 
-export interface AboutModalContainerProps extends React.HTMLProps<HTMLDivElement> {
+export interface AboutModalContainerProps
+  extends React.HTMLProps<HTMLDivElement> {
   /** content rendered inside the About Modal Box Content.  */
   children: React.ReactNode;
   /** additional classes added to the About Modal Box  */
@@ -58,12 +59,29 @@ export const AboutModalContainer: React.SFC<AboutModalContainerProps> = ({
   }
   return (
     <Backdrop>
-      <FocusTrap focusTrapOptions={{ clickOutsideDeactivates: true }} className={css(styles.bullseye)}>
-        <AboutModalBox className={className} aria-labelledby={ariaLabelledbyId} aria-describedby={ariaDescribedById}>
+      <FocusTrap
+        focusTrapOptions={{ clickOutsideDeactivates: true }}
+        className={css(styles.bullseye)}
+      >
+        <AboutModalBox
+          className={className}
+          aria-labelledby={ariaLabelledbyId}
+          aria-describedby={ariaDescribedById}
+        >
           <AboutModalBoxBrand src={brandImageSrc} alt={brandImageAlt} />
           <AboutModalBoxCloseButton onClose={onClose} />
-          {productName && <AboutModalBoxHeader id={ariaLabelledbyId} productName={productName} />}
-          <AboutModalBoxContent trademark={trademark} id={ariaDescribedById} noAboutModalBoxContentContainer={false} {...props}>
+          {productName && (
+            <AboutModalBoxHeader
+              id={ariaLabelledbyId}
+              productName={productName}
+            />
+          )}
+          <AboutModalBoxContent
+            trademark={trademark}
+            id={ariaDescribedById}
+            noAboutModalBoxContentContainer={false}
+            {...props}
+          >
             {children}
           </AboutModalBoxContent>
           <AboutModalBoxHero backgroundImageSrc={backgroundImageSrc} />

@@ -7,4 +7,13 @@ import { default as HelpBlock } from './HelpBlock';
 import { default as InputGroup } from './InputGroup';
 import { default as Radio } from './Radio';
 
-export { Checkbox, ControlLabel, Form, FormControl, FormGroup, HelpBlock, InputGroup, Radio };
+export {
+  Checkbox,
+  ControlLabel,
+  Form,
+  FormControl,
+  FormGroup,
+  HelpBlock,
+  InputGroup,
+  Radio
+};

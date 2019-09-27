@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover, ListGroup, ListGroupItem, Pager, Spinner, TypeAheadSelect } from '../../../index';
+import {
+  Popover,
+  ListGroup,
+  ListGroupItem,
+  Pager,
+  Spinner,
+  TypeAheadSelect
+} from '../../../index';
 import EllipsisWithTooltip from 'react-ellipsis-with-tooltip';
 import BreadcrumbSearchInput from './BreadcrumbSearchInput';
 import { noop } from '../../../common/helpers';
-import { removeLastSlashFromPath, getCurrentPath } from '../BreadcrumbSwitcherHelper';
+import {
+  removeLastSlashFromPath,
+  getCurrentPath
+} from '../BreadcrumbSwitcherHelper';
 
 const BreadcrumbSwitcherPopover = ({
   resources,
@@ -32,18 +42,25 @@ const BreadcrumbSwitcherPopover = ({
       </div>
     );
   } else if (hasError) {
-    popoverBody = <div className="breadcrumb-switcher-popover-error">{resourceLoadError}</div>;
+    popoverBody = (
+      <div className="breadcrumb-switcher-popover-error">
+        {resourceLoadError}
+      </div>
+    );
   } else {
     const createItemProps = item => {
       const { id, href, name } = item;
       const key = `${id}-${name}`;
-      const hrefWithName = href ? removeLastSlashFromPath(href.replace(id, name)) : href;
+      const hrefWithName = href
+        ? removeLastSlashFromPath(href.replace(id, name))
+        : href;
 
       const itemProps = {
         key,
         id: key,
         className: 'no-border',
-        active: href === window.location.pathname || getCurrentPath() === hrefWithName
+        active:
+          href === window.location.pathname || getCurrentPath() === hrefWithName
       };
 
       if (itemProps.active) {
@@ -59,7 +76,9 @@ const BreadcrumbSwitcherPopover = ({
             <ListGroupItem {...createItemProps(resource)}>
               <EllipsisWithTooltip>
                 {searchValue && searchValue.length ? (
-                  <TypeAheadSelect.Highlighter search={searchValue}>{resource.name}</TypeAheadSelect.Highlighter>
+                  <TypeAheadSelect.Highlighter search={searchValue}>
+                    {resource.name}
+                  </TypeAheadSelect.Highlighter>
                 ) : (
                   resource.name
                 )}
@@ -74,7 +93,9 @@ const BreadcrumbSwitcherPopover = ({
             onNextPage={onNextPageClick}
             onPreviousPage={onPrevPageClick}
             disablePrevious={currentPage === 1}
-            disableNext={totalPages === 0 || currentPage === Math.ceil(totalPages)}
+            disableNext={
+              totalPages === 0 || currentPage === Math.ceil(totalPages)
+            }
           />
         )}
       </React.Fragment>

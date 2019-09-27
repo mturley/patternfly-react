@@ -47,7 +47,9 @@ const TableGridHead = ({
     return noneSelectedAriaLabel;
   };
 
-  const checkboxTooltip = <Tooltip id={`${id || Date.now()}_tip`}>{getTipText()}</Tooltip>;
+  const checkboxTooltip = (
+    <Tooltip id={`${id || Date.now()}_tip`}>{getTipText()}</Tooltip>
+  );
 
   let iconName;
   if (allSelected) {
@@ -63,7 +65,11 @@ const TableGridHead = ({
       {showCheckbox && (
         <div className="table-grid-pf-checkbox">
           <OverlayTrigger delay={500} overlay={checkboxTooltip}>
-            <Button bsStyle="link" onClick={onToggleSelection} aria-label={getAriaLabel()}>
+            <Button
+              bsStyle="link"
+              onClick={onToggleSelection}
+              aria-label={getAriaLabel()}
+            >
               <Icon type="fa" name={iconName} />
             </Button>
           </OverlayTrigger>

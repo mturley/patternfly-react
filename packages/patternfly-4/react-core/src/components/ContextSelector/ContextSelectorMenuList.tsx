@@ -11,8 +11,9 @@ export interface ContextSelectorMenuListProps {
   isOpen?: boolean;
 }
 
-export class ContextSelectorMenuList extends React.Component<ContextSelectorMenuListProps> {
-
+export class ContextSelectorMenuList extends React.Component<
+  ContextSelectorMenuListProps
+> {
   static defaultProps = {
     children: null as React.ReactNode,
     className: '',
@@ -23,7 +24,7 @@ export class ContextSelectorMenuList extends React.Component<ContextSelectorMenu
 
   sendRef = (index: number, ref: any) => {
     this.refsCollection[index] = ref;
-  }
+  };
 
   extendChildren() {
     return React.Children.map(this.props.children, (child, index) =>
@@ -35,16 +36,16 @@ export class ContextSelectorMenuList extends React.Component<ContextSelectorMenu
   }
 
   render = () => {
-    const {
-      className,
-      isOpen,
-      children,
-      ...props
-    } = this.props;
+    const { className, isOpen, children, ...props } = this.props;
     return (
-      <ul className={css(styles.contextSelectorMenuList, className)} hidden={!isOpen} role="menu" {...props}>
+      <ul
+        className={css(styles.contextSelectorMenuList, className)}
+        hidden={!isOpen}
+        role="menu"
+        {...props}
+      >
         {this.extendChildren()}
       </ul>
     );
-  }
+  };
 }

@@ -7,11 +7,14 @@ import { patternfly } from '../../common/patternfly';
 import { getComposer } from './ChartConstants';
 
 const { pfSetDonutChartTitle } = patternfly;
-const colIndexOfMaxValue = columns => columns.reduce((iMax, x, i, arr) => (x[1] > arr[iMax][1] ? i : iMax), 0);
+const colIndexOfMaxValue = columns =>
+  columns.reduce((iMax, x, i, arr) => (x[1] > arr[iMax][1] ? i : iMax), 0);
 
 const truncateNum = (num, precision) => {
   const pointNotation = num.toString().split('.');
-  if (pointNotation.length === 1) { return pointNotation[0]; }
+  if (pointNotation.length === 1) {
+    return pointNotation[0];
+  }
   return `${pointNotation[0]}.${pointNotation[1].slice(0, precision)}`;
 };
 
@@ -29,7 +32,9 @@ const setDonutTitle = obj => {
 
   switch (type) {
     case 'percent':
-      primary = precision ? `${truncateNum(percentage, precision)}%` : `${Math.round(percentage)}%`;
+      primary = precision
+        ? `${truncateNum(percentage, precision)}%`
+        : `${Math.round(percentage)}%`;
       break;
     case 'max':
       primary = Math.round(columns[iMax][1]).toString();
@@ -61,6 +66,8 @@ const addDonutTitle = lifecycle({
 const DonutChart = compose(
   getComposer('DONUT_CHART'),
   addDonutTitle
-)(({ className, type, data, ...props }) => <C3Chart className={className} type={type} data={data} {...props} />);
+)(({ className, type, data, ...props }) => (
+  <C3Chart className={className} type={type} data={data} {...props} />
+));
 
 export default DonutChart;

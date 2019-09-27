@@ -4,7 +4,10 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
 import { DOCUMENTATION_URL } from 'storybook/constants/siteConstants';
 
-import { MockModalManager, basicExampleSource } from '../__mocks__/mockModalManager';
+import {
+  MockModalManager,
+  basicExampleSource
+} from '../__mocks__/mockModalManager';
 import { Modal } from '../../../index';
 
 const modalExampleWithInfo = stories => {
@@ -12,7 +15,8 @@ const modalExampleWithInfo = stories => {
 
   const description = (
     <div>
-      Adding the class <b>right-side-modal-pf</b> will show the modal on the right side of the window.
+      Adding the class <b>right-side-modal-pf</b> will show the modal on the
+      right side of the window.
     </div>
   );
 
@@ -20,7 +24,13 @@ const modalExampleWithInfo = stories => {
     'Modal',
     withInfo({
       source: false,
-      propTables: [Modal, Modal.CloseButton, Modal.Header, Modal.Body, Modal.Footer],
+      propTables: [
+        Modal,
+        Modal.CloseButton,
+        Modal.Header,
+        Modal.Body,
+        Modal.Footer
+      ],
       propTablesExclude: [MockModalManager],
       text: (
         <div>

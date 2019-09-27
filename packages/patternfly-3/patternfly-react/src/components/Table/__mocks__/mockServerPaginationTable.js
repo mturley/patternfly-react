@@ -58,7 +58,8 @@ export class MockServerPaginationTable extends React.Component {
               index: 0
             },
             formatters: [
-              (value, { rowData, rowIndex }) => selectionCellFormatter({ rowData, rowIndex }, this.onSelectRow)
+              (value, { rowData, rowIndex }) =>
+                selectionCellFormatter({ rowData, rowIndex }, this.onSelectRow)
             ]
           }
         },
@@ -170,7 +171,11 @@ export class MockServerPaginationTable extends React.Component {
             formatters: [
               (value, { rowData }) => [
                 <Table.Actions key="0">
-                  <Table.Button onClick={() => alert(`clicked ${rowData.name}`)}>Actions</Table.Button>
+                  <Table.Button
+                    onClick={() => alert(`clicked ${rowData.name}`)}
+                  >
+                    Actions
+                  </Table.Button>
                 </Table.Actions>,
                 <Table.Actions key="1">
                   <Table.DropdownKebab id="myKebab" pullRight>
@@ -211,14 +216,14 @@ export class MockServerPaginationTable extends React.Component {
     const newPaginationState = Object.assign({}, this.state.pagination);
     newPaginationState.page = page;
     this.getPage(this.state.sortingColumns, newPaginationState);
-  }
+  };
 
   onPerPageSelect = (eventKey, e) => {
     const newPaginationState = Object.assign({}, this.state.pagination);
     newPaginationState.perPage = eventKey;
     newPaginationState.page = 1;
     this.getPage(this.state.sortingColumns, newPaginationState);
-  }
+  };
 
   onSelectAllRows = event => {
     const { sortingColumns, pagination, rows } = this.state;
@@ -227,7 +232,7 @@ export class MockServerPaginationTable extends React.Component {
       // refresh rows after all rows selected
       this.getPage(sortingColumns, pagination);
     });
-  }
+  };
 
   onSelectRow = (event, row) => {
     const { sortingColumns, pagination } = this.state;
@@ -235,21 +240,26 @@ export class MockServerPaginationTable extends React.Component {
       // refresh rows after row is selected
       this.getPage(sortingColumns, pagination);
     });
-  }
+  };
   onSort = (e, column, sortDirection) => {
     // Clearing existing sortingColumns does simple single column sort. To do multisort,
     // set each column based on existing sorts specified and set sort position.
     const updatedSortingColumns = {
       [column.property]: {
-        direction: sortDirection === TABLE_SORT_DIRECTION.ASC ? TABLE_SORT_DIRECTION.DESC : TABLE_SORT_DIRECTION.ASC,
+        direction:
+          sortDirection === TABLE_SORT_DIRECTION.ASC
+            ? TABLE_SORT_DIRECTION.DESC
+            : TABLE_SORT_DIRECTION.ASC,
         position: 0
       }
     };
 
-    alert(`Server API called with: sort by ${column.property} ${updatedSortingColumns[column.property].direction}`);
+    alert(
+      `Server API called with: sort by ${column.property} ${updatedSortingColumns[column.property].direction}`
+    );
 
     this.getPage(updatedSortingColumns, this.state.pagination);
-  }
+  };
 
   getPage(sortingColumns, pagination) {
     const { onServerPageLogger } = this.props;
@@ -299,7 +309,11 @@ export class MockServerPaginationTable extends React.Component {
           }}
         >
           <Table.Header headerRows={resolve.headerRows({ columns })} />
-          <Table.Body rows={rows} rowKey="id" onRow={MockServerPaginationTable.onRow} />
+          <Table.Body
+            rows={rows}
+            rowKey="id"
+            onRow={MockServerPaginationTable.onRow}
+          />
         </Table.PfProvider>
         <Paginator
           viewType={PAGINATION_VIEW.TABLE}

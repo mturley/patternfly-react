@@ -15,7 +15,10 @@ import {
 import { Data } from 'victory-core';
 import { ChartContainer } from '../ChartContainer';
 import { ChartDonut, ChartDonutProps } from '../ChartDonut';
-import { ChartThemeDefinition, ChartDonutUtilizationStyles } from '../ChartTheme';
+import {
+  ChartThemeDefinition,
+  ChartDonutUtilizationStyles
+} from '../ChartTheme';
 import { getDonutUtilizationTheme } from '../ChartUtils';
 
 export enum ChartDonutUtilizationLabelPosition {
@@ -210,7 +213,10 @@ export interface ChartDonutUtilizationProps extends ChartDonutProps {
    *   }
    * ]}
    */
-  events?: EventPropTypeInterface<'data' | 'labels' | 'parent', StringOrNumberOrCallback | string[] | number[]>[];
+  events?: EventPropTypeInterface<
+    'data' | 'labels' | 'parent',
+    StringOrNumberOrCallback | string[] | number[]
+  >[];
   /**
    * ChartDonutUtilization uses the standard externalEventMutations prop.
    */
@@ -320,7 +326,7 @@ export interface ChartDonutUtilizationProps extends ChartDonutProps {
    * Victory components will pass an origin prop is to define the center point in svg coordinates for polar charts.
    * **This prop should not be set manually.**
    */
-  origin?: { x: number, y: number };
+  origin?: { x: number; y: number };
   /**
    * The padAngle prop determines the amount of separation between adjacent data slices
    * in number of degrees
@@ -456,7 +462,9 @@ export interface ChartDonutUtilizationProps extends ChartDonutProps {
   y?: DataGetterPropType;
 }
 
-export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizationProps> = ({
+export const ChartDonutUtilization: React.FunctionComponent<
+  ChartDonutUtilizationProps
+> = ({
   allowTooltip = true,
   ariaDesc,
   ariaTitle,
@@ -481,7 +489,9 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
   // Returns computed data representing pie chart slices
   const getComputedData = () => {
     const datum = getData();
-    const computedData: [{ x?: any, y: any}] = [{ x: datum[0]._x, y: datum[0]._y || 0 }];
+    const computedData: [{ x?: any; y: any }] = [
+      { x: datum[0]._x, y: datum[0]._y || 0 }
+    ];
     if (showStatic) {
       computedData.push({ y: datum[0]._x ? Math.abs(100 - datum[0]._y) : 100 });
     }
@@ -490,7 +500,9 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
 
   const getData = () => {
     const datum = [{ ...data }];
-    return Data.formatData(datum, { x, y, ...rest }, ['x', 'y']).sort((a: any, b: any) => a._y - b._y);
+    return Data.formatData(datum, { x, y, ...rest }, ['x', 'y']).sort(
+      (a: any, b: any) => a._y - b._y
+    );
   };
 
   // Returns thresholds with default color scale
@@ -499,11 +511,13 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
     if (thresholds) {
       // Ensure thresholds are in sorted order
       const sThresholds = orderBy(thresholds, 'value', invert ? 'desc' : 'asc');
-      const numColors = ChartDonutUtilizationStyles.thresholds.colorScale.length;
+      const numColors =
+        ChartDonutUtilizationStyles.thresholds.colorScale.length;
       for (let i = 0; i < sThresholds.length; i++) {
         result.push({
           color: sThresholds[i].color
-            ? sThresholds[i].color : ChartDonutUtilizationStyles.thresholds.colorScale[i % numColors],
+            ? sThresholds[i].color
+            : ChartDonutUtilizationStyles.thresholds.colorScale[i % numColors],
           value: sThresholds[i].value
         });
       }
@@ -553,23 +567,24 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
   );
 
   // Clone so users can override container props
-  const StandaloneContainer = ({children}: any) => React.cloneElement(containerComponent, {
-    desc: ariaDesc,
-    height,
-    title: ariaTitle,
-    width,
-    theme,
-    ...containerComponent.props
-  }, children);
+  const StandaloneContainer = ({ children }: any) =>
+    React.cloneElement(
+      containerComponent,
+      {
+        desc: ariaDesc,
+        height,
+        title: ariaTitle,
+        width,
+        theme,
+        ...containerComponent.props
+      },
+      children
+    );
 
   return standalone ? (
-    <StandaloneContainer>
-      {chart}
-    </StandaloneContainer>
+    <StandaloneContainer>{chart}</StandaloneContainer>
   ) : (
-    <React.Fragment>
-      {chart}
-    </React.Fragment>
+    <React.Fragment>{chart}</React.Fragment>
   );
 };
 

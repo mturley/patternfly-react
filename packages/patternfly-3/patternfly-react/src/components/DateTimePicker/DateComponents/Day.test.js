@@ -10,7 +10,12 @@ test('Day is working properly', () => {
     <table>
       <tbody>
         <tr>
-          <Day day={day} currDate={currDate} selectedDate={selectedDate} classNamesArray={{ weekend: true }} />
+          <Day
+            day={day}
+            currDate={currDate}
+            selectedDate={selectedDate}
+            classNamesArray={{ weekend: true }}
+          />
         </tr>
       </tbody>
     </table>

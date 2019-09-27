@@ -38,7 +38,10 @@ function generateVVFile({ console, type }) {
 }
 
 function generateRDPFile({ console }) {
-  const port = typeof console.port !== 'undefined' && console.port !== null ? console.port : DEFAULT_RDP_PORT;
+  const port =
+    typeof console.port !== 'undefined' && console.port !== null
+      ? console.port
+      : DEFAULT_RDP_PORT;
   const content = [
     `full address:s:${console.address}:${port}`,
     '\nusername:s:Administrator',
@@ -88,5 +91,7 @@ function generateRDPFile({ console }) {
 }
 
 export function generateDescriptorFile({ console, type }) {
-  return type === RDP_CONSOLE_TYPE ? generateRDPFile({ console }) : generateVVFile({ console, type });
+  return type === RDP_CONSOLE_TYPE
+    ? generateRDPFile({ console })
+    : generateVVFile({ console, type });
 }

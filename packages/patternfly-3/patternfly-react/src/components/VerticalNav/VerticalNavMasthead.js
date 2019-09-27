@@ -12,8 +12,13 @@ import { noop, hasDisplayName, filterChildren } from '../../common/helpers';
 const BaseVerticalNavMasthead = props => {
   const { children, href, iconImg, titleImg, title } = props;
 
-  const brandChildren = filterChildren(children, child => hasDisplayName(child, VerticalNavBrand.displayName));
-  const otherChildren = filterChildren(children, child => !hasDisplayName(child, VerticalNavBrand.displayName));
+  const brandChildren = filterChildren(children, child =>
+    hasDisplayName(child, VerticalNavBrand.displayName)
+  );
+  const otherChildren = filterChildren(
+    children,
+    child => !hasDisplayName(child, VerticalNavBrand.displayName)
+  );
 
   return (
     <React.Fragment>
@@ -27,7 +32,12 @@ const BaseVerticalNavMasthead = props => {
         {brandChildren && brandChildren.length > 0 ? (
           brandChildren
         ) : (
-          <VerticalNavBrand title={title} titleImg={titleImg} iconImg={iconImg} href={href} />
+          <VerticalNavBrand
+            title={title}
+            titleImg={titleImg}
+            iconImg={iconImg}
+            href={href}
+          />
         )}
       </Navbar.Header>
       {otherChildren}
@@ -59,7 +69,9 @@ BaseVerticalNavMasthead.defaultProps = {
   children: null
 };
 
-const VerticalNavMasthead = getContext(navContextTypes)(BaseVerticalNavMasthead);
+const VerticalNavMasthead = getContext(navContextTypes)(
+  BaseVerticalNavMasthead
+);
 
 VerticalNavMasthead.propTypes = {
   ...BaseVerticalNavMasthead.propTypes

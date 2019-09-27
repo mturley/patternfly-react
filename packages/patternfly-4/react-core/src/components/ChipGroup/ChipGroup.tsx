@@ -22,7 +22,7 @@ export interface ChipGroupProps extends React.HTMLProps<HTMLDivElement> {
   /** Set heading level to the chip item label */
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   /** Set number of chips to show before overflow */
-  numChips?: number; 
+  numChips?: number;
 }
 
 interface ChipGroupState {
@@ -41,10 +41,10 @@ export class ChipGroup extends React.Component<ChipGroupProps, ChipGroupState> {
     className: '',
     expandedText: 'Show Less',
     collapsedText: '${remaining} more',
-    withToolbar: false, 
+    withToolbar: false,
     defaultIsOpen: false,
     numChips: 3
-  }
+  };
 
   toggleCollapse = () => {
     this.setState(prevState => ({
@@ -95,16 +95,28 @@ interface InnerChipGroupProps extends ChipGroupProps {
 }
 
 const InnerChipGroup = (props: InnerChipGroupProps) => {
-  const { children, expandedText, isOpen, onToggleCollapse, collapsedText, withToolbar, numChips } = props;
-  
-  const collapsedTextResult = fillTemplate(collapsedText as string, { remaining: React.Children.count(children) - numChips });
-  const mappedChildren = React.Children.map(children, (c) => {
+  const {
+    children,
+    expandedText,
+    isOpen,
+    onToggleCollapse,
+    collapsedText,
+    withToolbar,
+    numChips
+  } = props;
+
+  const collapsedTextResult = fillTemplate(collapsedText as string, {
+    remaining: React.Children.count(children) - numChips
+  });
+  const mappedChildren = React.Children.map(children, c => {
     const child = c as React.ReactElement<any>;
     if (withToolbar) {
       return React.cloneElement(child, {
-        children: React.Children.toArray(child.props.children).map((chip: any) => {
-          return React.cloneElement(chip, { component: 'li' });
-        })
+        children: React.Children.toArray(child.props.children).map(
+          (chip: any) => {
+            return React.cloneElement(chip, { component: 'li' });
+          }
+        )
       });
     }
     return React.cloneElement(child, {
@@ -125,7 +137,11 @@ const InnerChipGroup = (props: InnerChipGroupProps) => {
         </React.Fragment>
       )}
       {React.Children.count(children) > numChips && (
-        <Chip isOverflowChip onClick={onToggleCollapse} component={withToolbar ? 'div' : 'li'}>
+        <Chip
+          isOverflowChip
+          onClick={onToggleCollapse}
+          component={withToolbar ? 'div' : 'li'}
+        >
           {isOpen ? expandedText : collapsedTextResult}
         </Chip>
       )}

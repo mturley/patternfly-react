@@ -9,7 +9,11 @@ class Header extends React.Component {
     const { weekStartsOn } = this.props;
     const weekStart = getWeekStart(new Date());
     const dayFormat =
-      Intl.DateTimeFormat(this.props.locale, { weekday: 'short' }).format(weekStart).length > 3 ? 'narrow' : 'short';
+      Intl.DateTimeFormat(this.props.locale, { weekday: 'short' }).format(
+        weekStart
+      ).length > 3
+        ? 'narrow'
+        : 'short';
     return times(7, i =>
       Intl.DateTimeFormat(this.props.locale, { weekday: dayFormat })
         .format(addDays(weekStart, (i + weekStartsOn) % 7))
@@ -19,7 +23,9 @@ class Header extends React.Component {
   render() {
     const { getNextMonth, getPrevMonth, toggleDateView } = this.props;
     const date = new Date(this.props.date);
-    const month = Intl.DateTimeFormat(this.props.locale, { month: 'long' }).format(date);
+    const month = Intl.DateTimeFormat(this.props.locale, {
+      month: 'long'
+    }).format(date);
     const year = date.getFullYear();
     const daysOfTheWeek = this.getWeekArray();
     return (
@@ -28,7 +34,11 @@ class Header extends React.Component {
           <th className="prev" onClick={getPrevMonth}>
             <Icon type="fa" name="angle-left" />
           </th>
-          <th className="picker-switch" colSpan="5" onClick={() => toggleDateView('Y')}>
+          <th
+            className="picker-switch"
+            colSpan="5"
+            onClick={() => toggleDateView('Y')}
+          >
             {month} {year}
           </th>
           <th className="next" onClick={getNextMonth}>

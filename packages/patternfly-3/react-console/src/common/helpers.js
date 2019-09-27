@@ -13,5 +13,8 @@ export const debounce = (func, wait) => {
 
 export const child = (children, index) => {
   const childrenArray = React.Children.toArray(children);
-  return (childrenArray && childrenArray.length > index && childrenArray[index]) || null;
+  return (
+    (childrenArray && childrenArray.length > index && childrenArray[index]) ||
+    null
+  );
 };

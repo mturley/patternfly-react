@@ -27,7 +27,12 @@ class ModalForm extends React.Component {
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header>
-            <button className="close" onClick={this.close} aria-hidden="true" aria-label="Close">
+            <button
+              className="close"
+              onClick={this.close}
+              aria-hidden="true"
+              aria-label="Close"
+            >
               <Icon type="pf" name="close" />
             </button>
             <Modal.Title>Basic Settings</Modal.Title>

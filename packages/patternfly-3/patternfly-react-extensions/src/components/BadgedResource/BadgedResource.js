@@ -64,15 +64,26 @@ const BadgedResource = ({
   const renderResourceName = () => {
     if (href || onClick) {
       return (
-        <a className="badged-resource-pf-resource-name" href={href || '#'} {...props} onClick={e => handleClick(e)}>
+        <a
+          className="badged-resource-pf-resource-name"
+          href={href || '#'}
+          {...props}
+          onClick={e => handleClick(e)}
+        >
           {resourceName}
         </a>
       );
     }
-    return <span className="badged-resource-pf-resource-name">{resourceName}</span>;
+    return (
+      <span className="badged-resource-pf-resource-name">{resourceName}</span>
+    );
   };
 
-  const classes = classNames('badged-resource-pf', { 'badged-resource-pf-lg': large }, className);
+  const classes = classNames(
+    'badged-resource-pf',
+    { 'badged-resource-pf-lg': large },
+    className
+  );
 
   return (
     <span id={id} className={classes} {...props}>

@@ -2,23 +2,36 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info/dist/index';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
-import { MockFilterSidePanelExample, MockFilterSidePanelExampleSource } from './_mocks_/mockFilterSidePanelExample';
+import {
+  storybookPackageName,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
+import {
+  MockFilterSidePanelExample,
+  MockFilterSidePanelExampleSource
+} from './_mocks_/mockFilterSidePanelExample';
 
-import { FilterSidePanel, FilterSidePanelCategory, FilterSidePanelCategoryItem } from './index';
+import {
+  FilterSidePanel,
+  FilterSidePanelCategory,
+  FilterSidePanelCategoryItem
+} from './index';
 
 import { name } from '../../../package.json';
 import { number, withKnobs } from '@storybook/addon-knobs';
 
 const stories = storiesOf(
-  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.FORMS_AND_CONTROLS}/FilterSidePanel`,
+  `${storybookPackageName(name)}/${
+    STORYBOOK_CATEGORY.FORMS_AND_CONTROLS
+  }/FilterSidePanel`,
   module
 );
 
 stories.addDecorator(
   defaultTemplate({
     title: 'Filter Side Panel',
-    description: 'Note: the width, border, and top padding styling are not part of the FilterSidePanel.'
+    description:
+      'Note: the width, border, and top padding styling are not part of the FilterSidePanel.'
   })
 );
 
@@ -27,7 +40,11 @@ stories.add(
   'FilterSidePanel',
   withInfo({
     source: false,
-    propTables: [FilterSidePanel, FilterSidePanelCategory, FilterSidePanelCategoryItem],
+    propTables: [
+      FilterSidePanel,
+      FilterSidePanelCategory,
+      FilterSidePanelCategoryItem
+    ],
     propTablesExclude: [MockFilterSidePanelExample],
     text: (
       <div>
@@ -49,8 +66,13 @@ stories.add(
       step: 1
     });
     return (
-      <div style={{ width: '195px', border: '1px solid grey', paddingTop: '20px' }}>
-        <MockFilterSidePanelExample maxShowCount={maxShowCountValue} leeway={leewayValue} />
+      <div
+        style={{ width: '195px', border: '1px solid grey', paddingTop: '20px' }}
+      >
+        <MockFilterSidePanelExample
+          maxShowCount={maxShowCountValue}
+          leeway={leewayValue}
+        />
       </div>
     );
   })

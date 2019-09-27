@@ -24,7 +24,11 @@ const groupedProps = {
       disabled: false,
       options: [
         { value: '1', label: 'The First Option', disabled: false },
-        { value: '2', label: 'Second option is selected by default', disabled: false }
+        {
+          value: '2',
+          label: 'Second option is selected by default',
+          disabled: false
+        }
       ]
     },
     {
@@ -51,7 +55,12 @@ test('Simple FormSelect input', () => {
   const view = shallow(
     <FormSelect value={props.value} aria-label="simple FormSelect">
       {props.options.map((option, index) => (
-        <FormSelectOption isDisabled={option.disabled} key={index} value={option.value} label={option.label} />
+        <FormSelectOption
+          isDisabled={option.disabled}
+          key={index}
+          value={option.value}
+          label={option.label}
+        />
       ))}
     </FormSelect>
   );
@@ -62,9 +71,18 @@ test('Grouped FormSelect input', () => {
   const view = shallow(
     <FormSelect value={groupedProps.value} aria-label=" grouped FormSelect">
       {groupedProps.groups.map((group, index) => (
-        <FormSelectOptionGroup isDisabled={group.disabled} key={index} label={group.groupLabel}>
+        <FormSelectOptionGroup
+          isDisabled={group.disabled}
+          key={index}
+          label={group.groupLabel}
+        >
           {group.options.map((option, i) => (
-            <FormSelectOption isDisabled={option.disabled} key={i} value={option.value} label={option.label} />
+            <FormSelectOption
+              isDisabled={option.disabled}
+              key={i}
+              value={option.value}
+              label={option.label}
+            />
           ))}
         </FormSelectOptionGroup>
       ))}
@@ -76,7 +94,11 @@ test('Grouped FormSelect input', () => {
 test('Disabled FormSelect input ', () => {
   const view = shallow(
     <FormSelect isDisabled aria-label="disabled  FormSelect">
-      <FormSelectOption key={1} value={props.options[1].value} label={props.options[1].label} />
+      <FormSelectOption
+        key={1}
+        value={props.options[1].value}
+        label={props.options[1].label}
+      />
     </FormSelect>
   );
   expect(view).toMatchSnapshot();
@@ -87,7 +109,11 @@ test('FormSelect input with aria-label does not generate console error', () => {
   global.console = { error: myMock } as any;
   const view = shallow(
     <FormSelect aria-label="FormSelect with aria-label">
-      <FormSelectOption key={1} value={props.options[1].value} label={props.options[1].label} />
+      <FormSelectOption
+        key={1}
+        value={props.options[1].value}
+        label={props.options[1].label}
+      />
     </FormSelect>
   );
   expect(view).toMatchSnapshot();
@@ -99,7 +125,11 @@ test('FormSelect input with id does not generate console error', () => {
   global.console = { error: myMock } as any;
   const view = shallow(
     <FormSelect id="id">
-      <FormSelectOption key={1} value={props.options[1].value} label={props.options[1].label} />
+      <FormSelectOption
+        key={1}
+        value={props.options[1].value}
+        label={props.options[1].label}
+      />
     </FormSelect>
   );
   expect(view).toMatchSnapshot();
@@ -111,7 +141,11 @@ test('FormSelect input with no aria-label or id generates console error', () => 
   global.console = { error: myMock } as any;
   const view = shallow(
     <FormSelect>
-      <FormSelectOption key={1} value={props.options[1].value} label={props.options[1].label} />
+      <FormSelectOption
+        key={1}
+        value={props.options[1].value}
+        label={props.options[1].label}
+      />
     </FormSelect>
   );
   expect(view).toMatchSnapshot();
@@ -121,7 +155,11 @@ test('FormSelect input with no aria-label or id generates console error', () => 
 test('invalid FormSelect input', () => {
   const view = shallow(
     <FormSelect isValid={false} aria-label="invalid FormSelect">
-      <FormSelectOption key={1} value={props.options[1].value} label={props.options[1].label} />
+      <FormSelectOption
+        key={1}
+        value={props.options[1].value}
+        label={props.options[1].label}
+      />
     </FormSelect>
   );
   expect(view).toMatchSnapshot();
@@ -130,7 +168,11 @@ test('invalid FormSelect input', () => {
 test('required FormSelect input', () => {
   const view = shallow(
     <FormSelect required aria-label="required FormSelect">
-      <FormSelectOption key={1} value={props.options[1].value} label={props.options[1].label} />
+      <FormSelectOption
+        key={1}
+        value={props.options[1].value}
+        label={props.options[1].label}
+      />
     </FormSelect>
   );
   expect(view).toMatchSnapshot();
@@ -144,7 +186,11 @@ test('FormSelect passes value and event to onChange handler', () => {
   };
   const view = shallow(
     <FormSelect onChange={myMock} aria-label="onchange FormSelect">
-      <FormSelectOption key={1} value={props.options[1].value} label={props.options[1].label} />
+      <FormSelectOption
+        key={1}
+        value={props.options[1].value}
+        label={props.options[1].label}
+      />
     </FormSelect>
   );
   view.find('select').simulate('change', event);

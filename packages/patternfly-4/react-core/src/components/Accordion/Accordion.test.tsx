@@ -26,7 +26,11 @@ describe('Accordion', () => {
   test('It should pass optional aria props', () => {
     const view = mount(
       <Accordion asDefinitionList>
-        <AccordionToggle aria-label="Toggle details for" aria-labelledby="ex-toggle2 ex-item2" id="ex-toggle2" />
+        <AccordionToggle
+          aria-label="Toggle details for"
+          aria-labelledby="ex-toggle2 ex-item2"
+          id="ex-toggle2"
+        />
       </Accordion>
     );
     const button = view.find('button[id="ex-toggle2"]').getElement();
@@ -38,7 +42,11 @@ describe('Accordion', () => {
   test('Toggle expanded', () => {
     const view = mount(
       <Accordion asDefinitionList>
-        <AccordionToggle aria-label="Toggle details for" id="ex-toggle2" isExpanded />
+        <AccordionToggle
+          aria-label="Toggle details for"
+          id="ex-toggle2"
+          isExpanded
+        />
       </Accordion>
     );
     const button = view.find('button[id="ex-toggle2"]').getElement();
@@ -51,12 +59,20 @@ describe('Accordion', () => {
     const view = mount(
       <Accordion headingLevel="h2">
         <AccordionItem>
-          <AccordionToggle id="item-1" component={container}>Item One</AccordionToggle>
-          <AccordionContent component={container}>Item One Content</AccordionContent>
+          <AccordionToggle id="item-1" component={container}>
+            Item One
+          </AccordionToggle>
+          <AccordionContent component={container}>
+            Item One Content
+          </AccordionContent>
         </AccordionItem>
       </Accordion>
     );
-    expect(view.find(AccordionToggle).getDOMNode().tagName).toBe(container.toLocaleUpperCase());
-    expect(view.find(AccordionContent).getDOMNode().tagName).toBe(container.toLocaleUpperCase());
+    expect(view.find(AccordionToggle).getDOMNode().tagName).toBe(
+      container.toLocaleUpperCase()
+    );
+    expect(view.find(AccordionContent).getDOMNode().tagName).toBe(
+      container.toLocaleUpperCase()
+    );
   });
 });

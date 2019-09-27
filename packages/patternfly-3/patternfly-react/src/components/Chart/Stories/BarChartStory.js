@@ -3,7 +3,10 @@ import { withInfo } from '@storybook/addon-info';
 import { patternfly } from '../../../common/patternfly';
 import { BarChart, GroupedBarChart, StackedBarChart } from '../index';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
-import { DOCUMENTATION_URL, DESCRIPTION } from 'storybook/constants/siteConstants';
+import {
+  DOCUMENTATION_URL,
+  DESCRIPTION
+} from 'storybook/constants/siteConstants';
 
 /**
  * BarChart constants
@@ -22,7 +25,12 @@ const barChartConfigData = {
 };
 
 const groupedcCategories = ['2013', '2014', '2015'];
-const groupedColumnsData = [['Q1', 400, 250, 375], ['Q2', 355, 305, 300], ['Q3', 315, 340, 276], ['Q4', 180, 390, 190]];
+const groupedColumnsData = [
+  ['Q1', 400, 250, 375],
+  ['Q2', 355, 305, 300],
+  ['Q3', 315, 340, 276],
+  ['Q4', 180, 390, 190]
+];
 const groupedColors = {
   pattern: [
     patternfly.pfPaletteColors.red,
@@ -123,7 +131,8 @@ const barChart = stories => {
         documentationLink: `${DOCUMENTATION_URL.PATTERNFLY_ORG_DATA_VISUALIZATION}bar-chart/`,
         description: (
           <span>
-            {DESCRIPTION.C3JS_TEXT} <a href={DESCRIPTION.C3JS_URL}>{DESCRIPTION.C3JS_URL}</a>
+            {DESCRIPTION.C3JS_TEXT}{' '}
+            <a href={DESCRIPTION.C3JS_URL}>{DESCRIPTION.C3JS_URL}</a>
           </span>
         ),
         story

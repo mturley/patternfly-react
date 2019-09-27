@@ -1,12 +1,18 @@
 import React from 'react';
-import { NotificationBadge, NotificationBadgeProps } from '@patternfly/react-core';
+import {
+  NotificationBadge,
+  NotificationBadgeProps
+} from '@patternfly/react-core';
 import { BellIcon } from '@patternfly/react-icons';
 
 interface NotificationBadgeDemoState {
-    isRead: boolean;
+  isRead: boolean;
 }
 
-export class NotificationBadgeDemo extends React.Component <NotificationBadgeProps, NotificationBadgeDemoState> {
+export class NotificationBadgeDemo extends React.Component<
+  NotificationBadgeProps,
+  NotificationBadgeDemoState
+> {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,12 +23,17 @@ export class NotificationBadgeDemo extends React.Component <NotificationBadgePro
     this.setState({
       isRead: true
     });
-  }
+  };
 
   render() {
     const { isRead } = this.state;
     return (
-      <NotificationBadge id="notification-demo-badge" isRead={isRead} onClick={this.onClick} aria-label="Notifications">
+      <NotificationBadge
+        id="notification-demo-badge"
+        isRead={isRead}
+        onClick={this.onClick}
+        aria-label="Notifications"
+      >
         <BellIcon />
       </NotificationBadge>
     );

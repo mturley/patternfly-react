@@ -16,8 +16,10 @@ import {
 // Bullet styles
 export const BulletStyles = {
   axisTickCount: chart_bullet_axis_tick_count.value,
-  comparativeMeasureErrorWidth: chart_bullet_comparative_measure_error_Width.value,
-  comparativeMeasureWarningWidth: chart_bullet_comparative_measure_warning_Width.value,
+  comparativeMeasureErrorWidth:
+    chart_bullet_comparative_measure_error_Width.value,
+  comparativeMeasureWarningWidth:
+    chart_bullet_comparative_measure_warning_Width.value,
   comparativeMeasureWidth: chart_bullet_comparative_measure_Width.value,
   label: {
     groupTitle: {
@@ -35,6 +37,7 @@ export const BulletStyles = {
     }
   },
   primaryDotMeasureSize: chart_bullet_primary_measure_dot_size.value,
-  primarySegmentedMeasureWidth: chart_bullet_primary_measure_segmented_Width.value,
+  primarySegmentedMeasureWidth:
+    chart_bullet_primary_measure_segmented_Width.value,
   qualitativeRangeWidth: chart_bullet_qualitative_range_Width.value
 };

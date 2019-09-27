@@ -4,7 +4,10 @@ import { css, getModifier } from '@patternfly/react-styles';
 import { Omit } from '../../helpers/typeUtils';
 
 export interface RadioProps
-  extends Omit<React.HTMLProps<HTMLInputElement>, 'disabled' | 'label' | 'onChange' | 'type'> {
+  extends Omit<
+    React.HTMLProps<HTMLInputElement>,
+    'disabled' | 'label' | 'onChange' | 'type'
+  > {
   /** Additional classes added to the radio. */
   className?: string;
   /** Id of the radio. */
@@ -20,7 +23,10 @@ export interface RadioProps
   /** Name for group of radios */
   name: string;
   /** A callback for when the radio selection changes. */
-  onChange?: (checked: boolean, event: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (
+    checked: boolean,
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
   /** Aria label for the radio. */
   'aria-label'?: string;
 }
@@ -43,7 +49,7 @@ export class Radio extends React.Component<RadioProps> {
 
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     this.props.onChange(event.currentTarget.checked, event);
-  }
+  };
 
   render() {
     const {
@@ -68,12 +74,15 @@ export class Radio extends React.Component<RadioProps> {
           aria-invalid={!isValid}
           disabled={isDisabled}
           defaultChecked={checked || isChecked}
-          {...!isChecked && { defaultChecked }}
-          {...!label && { 'aria-label': ariaLabel }}
+          {...(!isChecked && { defaultChecked })}
+          {...(!label && { 'aria-label': ariaLabel })}
         />
         {label && (
           <label
-            className={css(styles.radioLabel, getModifier(styles, isDisabled && ('disabled' as any)))}
+            className={css(
+              styles.radioLabel,
+              getModifier(styles, isDisabled && ('disabled' as any))
+            )}
             htmlFor={props.id}
           >
             {label}

@@ -1,4 +1,10 @@
-import { addDays, addMonths, isEqualDate, isWeekend, getMonthStart } from './helpers';
+import {
+  addDays,
+  addMonths,
+  isEqualDate,
+  isWeekend,
+  getMonthStart
+} from './helpers';
 
 describe('addDays ', () => {
   const date = new Date('2/21/2019, 2:22:31 PM');

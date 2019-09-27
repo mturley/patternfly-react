@@ -2,7 +2,13 @@ import PropTypes from 'prop-types';
 import { default as ConfirmButton } from './ConfirmButton';
 import { default as CancelButton } from './CancelButton';
 
-const InlineEdit = ({ value, isEditing, additionalData, renderValue, renderEdit }) => {
+const InlineEdit = ({
+  value,
+  isEditing,
+  additionalData,
+  renderValue,
+  renderEdit
+}) => {
   if (isEditing(additionalData)) {
     return renderEdit(value, additionalData);
   }

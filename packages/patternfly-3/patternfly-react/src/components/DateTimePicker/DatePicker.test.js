@@ -11,7 +11,9 @@ test('DatePicker is working properly', () => {
 test('Edit form of DatePicker', () => {
   const component = mount(<DatePicker value="2/21/2019" />);
   expect(component.render()).toMatchSnapshot();
-  component.find('input').simulate('change', { target: { value: '2/22/2019' } });
+  component
+    .find('input')
+    .simulate('change', { target: { value: '2/22/2019' } });
   component.find('input').simulate('blur');
   expect(component.state().value).toEqual(new Date('2/22/2019'));
 });

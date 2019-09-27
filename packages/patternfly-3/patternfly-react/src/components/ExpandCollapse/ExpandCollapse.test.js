@@ -31,7 +31,10 @@ test('ExpandCollapse with content', () => {
 
 test('localized ExpandCollapse', () => {
   const view = mount(
-    <ExpandCollapse textCollapsed="Click to expand" textExpanded="Click to collapse">
+    <ExpandCollapse
+      textCollapsed="Click to expand"
+      textExpanded="Click to collapse"
+    >
       <div id="content">My text</div>
     </ExpandCollapse>
   );
@@ -92,7 +95,9 @@ test('ExpandCollapse with separator', () => {
     </ExpandCollapse>
   );
   expect(centerNoSep.find('.expand-collapse-pf-separator')).toHaveLength(2);
-  expect(centerNoSep.find('.expand-collapse-pf-separator.bordered')).toHaveLength(0);
+  expect(
+    centerNoSep.find('.expand-collapse-pf-separator.bordered')
+  ).toHaveLength(0);
 });
 
 test('ExpandCollapse with explicit override prop', () => {

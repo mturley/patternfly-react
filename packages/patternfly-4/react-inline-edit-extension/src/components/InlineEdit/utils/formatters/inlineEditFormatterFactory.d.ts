@@ -20,7 +20,11 @@ export interface InlineEditFormatterFactoryProps {
   isEditable?(additionalData: AdditionalData): boolean;
   renderValue?: Formatter;
   resolveValue?(value: ReactNode, additionalData: AdditionalData): ReactNode;
-  renderEdit?(value: ReactNode, additionalData: AdditionalData, computedData: ComputedData): ReactNode;
+  renderEdit?(
+    value: ReactNode,
+    additionalData: AdditionalData,
+    computedData: ComputedData
+  ): ReactNode;
 }
 
 export interface InlineEditFormatterFactory {

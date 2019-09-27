@@ -10,7 +10,12 @@ import { DataListItemRow } from './DataListItemRow';
 import { DataListContent } from './DataListContent';
 import { Button } from '../Button';
 import { css } from '@patternfly/react-styles';
-import { DropdownItem, Dropdown, KebabToggle, DropdownPosition } from '../Dropdown';
+import {
+  DropdownItem,
+  Dropdown,
+  KebabToggle,
+  DropdownPosition
+} from '../Dropdown';
 
 describe('DataList', () => {
   test('List default', () => {
@@ -19,7 +24,13 @@ describe('DataList', () => {
   });
 
   test('List', () => {
-    const view = shallow(<DataList key="list-id-1" className="data-list-custom" aria-label="this is a simple list" />);
+    const view = shallow(
+      <DataList
+        key="list-id-1"
+        className="data-list-custom"
+        aria-label="this is a simple list"
+      />
+    );
     expect(view).toMatchSnapshot();
   });
 
@@ -64,10 +75,18 @@ describe('DataList', () => {
     const view = shallow(
       <DataListItemCells
         dataListCells={[
-          <DataListCell key="list-id-1" id="primary-item" className="data-list-custom">
+          <DataListCell
+            key="list-id-1"
+            id="primary-item"
+            className="data-list-custom"
+          >
             Primary Id
           </DataListCell>,
-          <DataListCell key="list-id-2" id="primary-item" className="data-list-custom">
+          <DataListCell
+            key="list-id-2"
+            id="primary-item"
+            className="data-list-custom"
+          >
             Primary Id 2
           </DataListCell>
         ]}
@@ -91,13 +110,19 @@ describe('DataList', () => {
       );
       testCase.class === ''
         ? expect(view.props().className).toBe('pf-c-data-list__cell')
-        : expect(view.props().className).toBe(`pf-c-data-list__cell ${testCase.class}`);
+        : expect(view.props().className).toBe(
+            `pf-c-data-list__cell ${testCase.class}`
+          );
     });
   });
 
   test('Toggle default with aria label', () => {
     const view = shallow(
-      <DataListToggle aria-label="Toggle details for" aria-labelledby="ex-toggle2 ex-item2" id="ex-toggle2" />
+      <DataListToggle
+        aria-label="Toggle details for"
+        aria-labelledby="ex-toggle2 ex-item2"
+        id="ex-toggle2"
+      />
     );
 
     expect(view.find(Button).props()['aria-label']).toBe('Toggle details for');
@@ -108,13 +133,23 @@ describe('DataList', () => {
   });
 
   test('Toggle expanded', () => {
-    const view = shallow(<DataListToggle aria-label="Toggle details for" id="ex-toggle2" isExpanded />);
+    const view = shallow(
+      <DataListToggle
+        aria-label="Toggle details for"
+        id="ex-toggle2"
+        isExpanded
+      />
+    );
     expect(view.find(Button).props()['aria-expanded']).toBe(true);
   });
 
   test('DataListAction dropdown', () => {
     const view = shallow(
-      <DataListAction aria-label="Actions" aria-labelledby="ex-action" id="ex-action">
+      <DataListAction
+        aria-label="Actions"
+        aria-labelledby="ex-action"
+        id="ex-action"
+      >
         <Dropdown
           isPlain
           position={DropdownPosition.right}
@@ -135,7 +170,11 @@ describe('DataList', () => {
 
   test('DataListAction button', () => {
     const view = shallow(
-      <DataListAction aria-label="Actions" aria-labelledby="ex-action" id="ex-action">
+      <DataListAction
+        aria-label="Actions"
+        aria-labelledby="ex-action"
+        id="ex-action"
+      >
         <Button id="delete-item-1">Delete</Button>
       </DataListAction>
     );
@@ -145,7 +184,10 @@ describe('DataList', () => {
   test('DataListAction visibility - show button when lg', () => {
     const view = shallow(
       <DataListAction
-        className={css(DataListActionVisibility.visibleOnLg, DataListActionVisibility.hidden)}
+        className={css(
+          DataListActionVisibility.visibleOnLg,
+          DataListActionVisibility.hidden
+        )}
         aria-labelledby="check-action-item2 check-action-action2"
         id="check-action-action2"
         aria-label="Actions"
@@ -172,7 +214,12 @@ describe('DataList', () => {
   });
 
   test('DataListContent', () => {
-    const view = shallow(<DataListContent aria-label="Primary Content Details"> test</DataListContent>);
+    const view = shallow(
+      <DataListContent aria-label="Primary Content Details">
+        {' '}
+        test
+      </DataListContent>
+    );
     expect(view).toMatchSnapshot();
   });
 

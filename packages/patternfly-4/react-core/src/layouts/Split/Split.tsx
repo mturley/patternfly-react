@@ -25,7 +25,11 @@ export const Split: React.FunctionComponent<SplitProps> = ({
   return (
     <Component
       {...props}
-      className={css(styles.split, gutter && getGutterModifier(styles, gutter, styles.modifiers.gutter), className)}
+      className={css(
+        styles.split,
+        gutter && getGutterModifier(styles, gutter, styles.modifiers.gutter),
+        className
+      )}
     >
       {children}
     </Component>

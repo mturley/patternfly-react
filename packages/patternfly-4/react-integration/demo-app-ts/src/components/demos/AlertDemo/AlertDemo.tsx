@@ -26,7 +26,12 @@ export class AlertDemo extends React.Component<null, AlertDemoState> {
             id="info-alert"
             variant="info"
             title="Info alert title"
-            action={<AlertActionCloseButton id="test-button" onClose={this.hideAlertOne} />}
+            action={
+              <AlertActionCloseButton
+                id="test-button"
+                onClose={this.hideAlertOne}
+              />
+            }
           >
             Info alert description. <a href="#">This is a link.</a>
           </Alert>
@@ -36,8 +41,8 @@ export class AlertDemo extends React.Component<null, AlertDemoState> {
           variant="default"
           title="Default alert title"
           isInline
-          >
-            Info alert description
+        >
+          Info alert description
         </Alert>
       </React.Fragment>
     );

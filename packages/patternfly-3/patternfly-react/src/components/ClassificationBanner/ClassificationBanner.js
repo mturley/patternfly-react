@@ -56,14 +56,17 @@ class ClassificationBanner extends React.Component {
       ),
       bottom: classNames(
         'classification-banner-pf-banner',
-        defaultColors[bannerColor] ? `classification-banner-${bannerColor}` : '',
+        defaultColors[bannerColor]
+          ? `classification-banner-${bannerColor}`
+          : '',
         'classification-banner-pf-banner-bottom'
       ),
       closeButton: classNames({
         'classification-banner-pf-close pficon-error-circle-o': closeButton
       }),
       children: classNames({
-        'classification-banner-pf-children-no-bottom': !this.state.closed && !bottomBanner,
+        'classification-banner-pf-children-no-bottom':
+          !this.state.closed && !bottomBanner,
         'classification-banner-pf-children': !this.state.closed && bottomBanner
       })
     };
@@ -76,17 +79,24 @@ class ClassificationBanner extends React.Component {
       hostNamePosition === 'right' ? <span>{hostName}</span> : null,
       userNamePosition === 'right' ? <span>{userName}</span> : null
     ];
-    const bannerBackgroundStyle = defaultColors[bannerColor] ? {} : { background: bannerColor };
+    const bannerBackgroundStyle = defaultColors[bannerColor]
+      ? {}
+      : { background: bannerColor };
 
     return (
       <div {...props}>
         {!this.state.closed && (
-          <nav style={bannerBackgroundStyle} className={classificationBannerClasses.top}>
+          <nav
+            style={bannerBackgroundStyle}
+            className={classificationBannerClasses.top}
+          >
             <div className="classification-banner-pf-banner-left">
               {leftLabels[0]}
               {leftLabels[1]}
             </div>
-            <div className="classification-banner-pf-classification-level">{title}</div>
+            <div className="classification-banner-pf-classification-level">
+              {title}
+            </div>
             <div className="classification-banner-pf-banner-right">
               {closeButton && (
                 <Button
@@ -106,8 +116,13 @@ class ClassificationBanner extends React.Component {
         )}
         <div className={classificationBannerClasses.children}>{children}</div>
         {!this.state.closed && bottomBanner && (
-          <footer style={bannerBackgroundStyle} className={classificationBannerClasses.bottom}>
-            <div className="classification-banner-pf-classification-level">{title}</div>
+          <footer
+            style={bannerBackgroundStyle}
+            className={classificationBannerClasses.bottom}
+          >
+            <div className="classification-banner-pf-classification-level">
+              {title}
+            </div>
           </footer>
         )}
       </div>

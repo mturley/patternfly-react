@@ -27,7 +27,12 @@ class CatalogTileViewCategory extends React.Component {
 
     // Watch for resizes and recompute the number shown when it does
     this.computeNumShown();
-    this._resizeSensors.push(new ResizeSensor([this.categoryContainer], helpers.debounce(this.computeNumShown, 100)));
+    this._resizeSensors.push(
+      new ResizeSensor(
+        [this.categoryContainer],
+        helpers.debounce(this.computeNumShown, 100)
+      )
+    );
   }
 
   componentWillUnmount() {
@@ -51,31 +56,46 @@ class CatalogTileViewCategory extends React.Component {
         rows = 2;
       }
 
-      const numShown = Math.floor(this.categoryContainer.clientWidth / 235) * rows;
+      const numShown =
+        Math.floor(this.categoryContainer.clientWidth / 235) * rows;
       const rightSpacerWidth = this.categoryContainer.clientWidth % 235;
       this.setState({ numShown, rightSpacerWidth });
     }
-  }
+  };
 
   handleRef = ref => {
     if (!ref) {
       return;
     }
     this.categoryContainer = ref;
-  }
+  };
 
   render() {
-    const { children, className, title, totalItems, viewAllText, viewAll, onViewAll, ...props } = this.props;
+    const {
+      children,
+      className,
+      title,
+      totalItems,
+      viewAllText,
+      viewAll,
+      onViewAll,
+      ...props
+    } = this.props;
     const { numShown, rightSpacerWidth } = this.state;
     const classes = classNames('catalog-tile-view-pf-category', className);
 
-    const tileValidator = child => helpers.hasDisplayName(child, CatalogTile.displayName);
+    const tileValidator = child =>
+      helpers.hasDisplayName(child, CatalogTile.displayName);
     const filterCatalogTiles = childrenArray =>
       childrenArray &&
       childrenArray.filter(
         child =>
           tileValidator(child) ||
-          (child.props && filterCatalogTiles(helpers.childrenToArray(child.props.children), tileValidator))
+          (child.props &&
+            filterCatalogTiles(
+              helpers.childrenToArray(child.props.children),
+              tileValidator
+            ))
       );
 
     const allChildren = helpers.childrenToArray(children);
@@ -92,7 +112,9 @@ class CatalogTileViewCategory extends React.Component {
     return (
       <div className={classes} {...props} ref={this.handleRef}>
         <div className="catalog-tile-view-pf-category-header">
-          <span className="catalog-tile-view-pf-category-header-title">{title}</span>
+          <span className="catalog-tile-view-pf-category-header-title">
+            {title}
+          </span>
           {!viewAll && numShown < totalItems && (
             <span className="pull-right">
               <Button

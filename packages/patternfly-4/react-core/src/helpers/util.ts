@@ -2,7 +2,10 @@ import * as ReactDOM from 'react-dom';
 import { SIDE } from './constants';
 import { getModifier } from '@patternfly/react-styles';
 import { DataToolbarBreakpointMod } from '../experimental/components/DataToolbar/DataToolbarUtils';
-import { FlexBreakpointMod, FlexItemBreakpointMod }  from '../layouts/Flex/FlexUtils';
+import {
+  FlexBreakpointMod,
+  FlexItemBreakpointMod
+} from '../layouts/Flex/FlexUtils';
 
 export function capitalize(input: string) {
   return input[0].toUpperCase() + input.substring(1);
@@ -17,7 +20,11 @@ export function getUniqueId(prefix = 'pf') {
   return `${prefix}-${uid}`;
 }
 
-export function debounce(this: any, func: (...args: any[]) => any, wait: number) {
+export function debounce(
+  this: any,
+  func: (...args: any[]) => any,
+  wait: number
+) {
   let timeout: number;
   return (...args: any[]) => {
     clearTimeout(timeout);
@@ -33,7 +40,11 @@ export function debounce(this: any, func: (...args: any[]) => any, wait: number)
  *
  * @return {type} True if the component is in View.
  */
-export function isElementInView(container: HTMLElement, element: HTMLElement, partial: boolean) {
+export function isElementInView(
+  container: HTMLElement,
+  element: HTMLElement,
+  partial: boolean
+) {
   const containerBounds = container.getBoundingClientRect();
   const elementBounds = element.getBoundingClientRect();
   const containerBoundsLeft = Math.floor(containerBounds.left);
@@ -42,11 +53,15 @@ export function isElementInView(container: HTMLElement, element: HTMLElement, pa
   const elementBoundsRight = Math.floor(elementBounds.right);
 
   // Check if in view
-  const isTotallyInView = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
+  const isTotallyInView =
+    elementBoundsLeft >= containerBoundsLeft &&
+    elementBoundsRight <= containerBoundsRight;
   const isPartiallyInView =
     partial &&
-    ((elementBoundsLeft < containerBoundsLeft && elementBoundsRight > containerBoundsLeft) ||
-      (elementBoundsRight > containerBoundsRight && elementBoundsLeft < containerBoundsRight));
+    ((elementBoundsLeft < containerBoundsLeft &&
+      elementBoundsRight > containerBoundsLeft) ||
+      (elementBoundsRight > containerBoundsRight &&
+        elementBoundsLeft < containerBoundsRight));
 
   // Return outcome
   return isTotallyInView || isPartiallyInView;
@@ -58,7 +73,10 @@ export function isElementInView(container: HTMLElement, element: HTMLElement, pa
  *
  * @return {type} right if the element is of the right, left if element is off the left or both if it is off on both sides.
  */
-export function sideElementIsOutOfView(container: HTMLElement, element: HTMLElement): string {
+export function sideElementIsOutOfView(
+  container: HTMLElement,
+  element: HTMLElement
+): string {
   const containerBounds = container.getBoundingClientRect();
   const elementBounds = element.getBoundingClientRect();
   const containerBoundsLeft = Math.floor(containerBounds.left);
@@ -99,7 +117,10 @@ export function sideElementIsOutOfView(container: HTMLElement, element: HTMLElem
  * @return {type} The template string literal result
  */
 export function fillTemplate(templateString: string, templateVars: any) {
-  const func = new Function(...Object.keys(templateVars), `return \`${templateString}\`;`);
+  const func = new Function(
+    ...Object.keys(templateVars),
+    `return \`${templateString}\`;`
+  );
   return func(...Object.values(templateVars));
 }
 
@@ -110,7 +131,13 @@ export function fillTemplate(templateString: string, templateVars: any) {
  * @param {Object[]} kids Array of items in the dropdown
  * @param {boolean} [custom] Allows for handling of flexible content
  */
-export function keyHandler(index: number, position: string, refsCollection: any[], kids: any[], custom = false) {
+export function keyHandler(
+  index: number,
+  position: string,
+  refsCollection: any[],
+  kids: any[],
+  custom = false
+) {
   if (!Array.isArray(kids)) {
     return;
   }
@@ -134,7 +161,9 @@ export function keyHandler(index: number, position: string, refsCollection: any[
     if (refsCollection[nextIndex].focus) {
       refsCollection[nextIndex].focus();
     }
-    const element = ReactDOM.findDOMNode(refsCollection[nextIndex]) as HTMLElement;
+    const element = ReactDOM.findDOMNode(
+      refsCollection[nextIndex]
+    ) as HTMLElement;
     element.focus();
   } else {
     refsCollection[nextIndex].focus();
@@ -146,7 +175,11 @@ export function keyHandler(index: number, position: string, refsCollection: any[
  * @param {string} position The orientation of the dropdown
  * @param {string[]} collection Array of refs to the items in the dropdown
  */
-export function getNextIndex(index: number, position: string, collection: any[]) {
+export function getNextIndex(
+  index: number,
+  position: string,
+  collection: any[]
+) {
   let nextIndex;
   if (position === 'up') {
     if (index === 0) {
@@ -185,8 +218,22 @@ export function pluralize(i: number, singular: string, plural?: string) {
  * @param {(DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod)[]} breakpointMods The modifiers object
  * @param {any} styles The appropriate styles object for the component
  */
-export const formatBreakpointMods = (breakpointMods: (DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod)[], styles: any) => {
-  return breakpointMods.reduce((acc: string, curr: (DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod)) => (
-    `${acc}${acc && ' '}${getModifier(styles, `${curr.modifier}${curr.breakpoint  ? `-on-${curr.breakpoint}` : ''}`)}`
-  ), '');
+export const formatBreakpointMods = (
+  breakpointMods: (
+    | DataToolbarBreakpointMod
+    | FlexBreakpointMod
+    | FlexItemBreakpointMod)[],
+  styles: any
+) => {
+  return breakpointMods.reduce(
+    (
+      acc: string,
+      curr: DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod
+    ) =>
+      `${acc}${acc && ' '}${getModifier(
+        styles,
+        `${curr.modifier}${curr.breakpoint ? `-on-${curr.breakpoint}` : ''}`
+      )}`,
+    ''
+  );
 };

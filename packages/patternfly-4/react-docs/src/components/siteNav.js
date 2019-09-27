@@ -2,7 +2,14 @@
 import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import { Location } from '@reach/router';
-import { Nav, NavList, NavExpandable, NavItem, Badge, Tooltip } from '@patternfly-safe/react-core';
+import {
+  Nav,
+  NavList,
+  NavExpandable,
+  NavItem,
+  Badge,
+  Tooltip
+} from '@patternfly-safe/react-core';
 
 const getSlashCount = str => {
   let count = 0;
@@ -15,7 +22,8 @@ const getSlashCount = str => {
   return count;
 };
 
-const capitalizeFirst = str => str.substr(0, 1).toUpperCase() + str.substr(1, str.length - 1);
+const capitalizeFirst = str =>
+  str.substr(0, 1).toUpperCase() + str.substr(1, str.length - 1);
 
 const SiteNav = () => {
   const data = useStaticQuery(graphql`
@@ -42,7 +50,9 @@ const SiteNav = () => {
       if (!node.context.title) {
         const split = node.path.split('/');
         split.forEach(s => {
-          if (s) { node.context.title = s; }
+          if (s) {
+            node.context.title = s;
+          }
         });
       }
       return node;
@@ -57,7 +67,9 @@ const SiteNav = () => {
 
   const isActive = (path, curPath) => {
     const encodedPath = path.replace(/ /g, '%20');
-    return curPath === encodedPath || curPath === data.site.pathPrefix + encodedPath;
+    return (
+      curPath === encodedPath || curPath === data.site.pathPrefix + encodedPath
+    );
   };
 
   const getNavItem = value => (
@@ -67,7 +79,9 @@ const SiteNav = () => {
           <Link to={value.path}>
             {`${value.context.title} `}
             {value.context.typescript && (
-              <Tooltip content={`${value.context.title} is written in Typescript!`}>
+              <Tooltip
+                content={`${value.context.title} is written in Typescript!`}
+              >
                 <Badge>TS</Badge>
               </Tooltip>
             )}
@@ -99,7 +113,11 @@ const SiteNav = () => {
             isActive={hasActiveLink(navGroup, location)}
             isExpanded={hasActiveLink(navGroup, location)}
           >
-            {navGroup.sort((v1, v2) => v1.context.title.localeCompare(v2.context.title)).map(getNavItem)}
+            {navGroup
+              .sort((v1, v2) =>
+                v1.context.title.localeCompare(v2.context.title)
+              )
+              .map(getNavItem)}
           </NavExpandable>
         )}
       </Location>

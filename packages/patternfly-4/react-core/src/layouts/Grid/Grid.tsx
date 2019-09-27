@@ -4,7 +4,19 @@ import { css } from '@patternfly/react-styles';
 import { getModifier } from '@patternfly/react-styles';
 import { DeviceSizes } from '../../styles/sizes';
 
-export type gridItemSpanValueShape = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type gridItemSpanValueShape =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12;
 
 export interface GridProps extends React.HTMLProps<HTMLDivElement> {
   /** content rendered inside the Grid layout */
@@ -27,7 +39,7 @@ export interface GridProps extends React.HTMLProps<HTMLDivElement> {
   xl2?: gridItemSpanValueShape;
 }
 
-export const Grid: React.FunctionComponent<GridProps>  = ({
+export const Grid: React.FunctionComponent<GridProps> = ({
   children = null,
   className = '',
   gutter = null,
@@ -40,18 +52,16 @@ export const Grid: React.FunctionComponent<GridProps>  = ({
     const key = propKey as keyof typeof DeviceSizes;
     const propValue = props[key] as gridItemSpanValueShape;
     if (propValue) {
-      classes.push(getModifier(styles, `all_${propValue}ColOn${gridSpanModifier}`));
+      classes.push(
+        getModifier(styles, `all_${propValue}ColOn${gridSpanModifier}`)
+      );
     }
     delete props[key];
   });
 
   return (
     <div
-      className={css(
-        ...classes,
-        gutter && styles.modifiers.gutter,
-        className
-      )}
+      className={css(...classes, gutter && styles.modifiers.gutter, className)}
       {...props}
     >
       {children}

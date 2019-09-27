@@ -7,9 +7,13 @@ import { labelClasses, mainDivClasses, barStyle } from './helpers';
 
 const randomId = () => Date.now();
 
-const AvailableTooltipFunction = (max, now) => <Tooltip id={randomId()}>Available {max - now} %</Tooltip>;
+const AvailableTooltipFunction = (max, now) => (
+  <Tooltip id={randomId()}>Available {max - now} %</Tooltip>
+);
 
-const UsedTooltipFunction = (max, now) => <Tooltip id={randomId()}>Used {now} %</Tooltip>;
+const UsedTooltipFunction = (max, now) => (
+  <Tooltip id={randomId()}>Used {now} %</Tooltip>
+);
 
 const UtilizationBar = ({
   min,
@@ -24,10 +28,21 @@ const UtilizationBar = ({
   label,
   className
 }) => (
-  <div className={mainDivClasses(!descriptionPlacementTop, className, description, label)}>
+  <div
+    className={mainDivClasses(
+      !descriptionPlacementTop,
+      className,
+      description,
+      label
+    )}
+  >
     <div className={descriptionPlacementTop ? null : 'progress-bar'}>
-      {label && <span className={labelClasses(descriptionPlacementTop)}>{label}</span>}
-      {description && <div className="progress-description label-text">{description}</div>}
+      {label && (
+        <span className={labelClasses(descriptionPlacementTop)}>{label}</span>
+      )}
+      {description && (
+        <div className="progress-description label-text">{description}</div>
+      )}
     </div>
     <div className="progress">
       <OverlayTrigger

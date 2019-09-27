@@ -40,7 +40,9 @@ function setPackageGenerators(plop) {
           const packages = await helpers.getPfPackages(false);
           const pkgConfigs = packages.map(pkg => pkg.toJSON());
           const matchingPackage = pkgConfigs.find(p => p.name === input);
-          return matchingPackage ? `Packages already exits at ${matchingPackage.location}` : true;
+          return matchingPackage
+            ? `Packages already exits at ${matchingPackage.location}`
+            : true;
         }
       },
       {
@@ -67,7 +69,10 @@ function setPackageGenerators(plop) {
     ],
     actions: answers => {
       const packageConfig = packageConfigs[answers.packageType];
-      const packageBaseTemplate = join(packageConfig.location, `./{{${REMOVE_NPM_SCOPE} name}}/`);
+      const packageBaseTemplate = join(
+        packageConfig.location,
+        `./{{${REMOVE_NPM_SCOPE} name}}/`
+      );
 
       return [
         {

@@ -12,10 +12,10 @@ export class LoadingWizardExample extends React.Component {
   }
   close = () => {
     this.setState({ showModal: false });
-  }
+  };
   open = () => {
     this.setState({ showModal: true });
-  }
+  };
   render() {
     const { showModal } = this.state;
 
@@ -33,7 +33,11 @@ export class LoadingWizardExample extends React.Component {
             </Wizard.Row>
           </Wizard.Body>
           <Wizard.Footer>
-            <Button bsStyle="default" className="btn-cancel" onClick={this.close}>
+            <Button
+              bsStyle="default"
+              className="btn-cancel"
+              onClick={this.close}
+            >
               Cancel
             </Button>
             <Button bsStyle="default" disabled>

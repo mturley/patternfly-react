@@ -5,7 +5,9 @@ import { switcherProps } from './BreadcrumbSwitcher.fixtures';
 import { removeLastSlashFromPath } from './BreadcrumbSwitcherHelper';
 
 test('BreadcrumbSwitcher renders properly', () => {
-  const component = mount(<BreadcrumbSwitcher {...switcherProps} />).getElement();
+  const component = mount(
+    <BreadcrumbSwitcher {...switcherProps} />
+  ).getElement();
 
   expect(component).toMatchSnapshot();
 });

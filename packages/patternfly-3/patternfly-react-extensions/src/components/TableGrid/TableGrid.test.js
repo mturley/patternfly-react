@@ -9,12 +9,28 @@ test('TableGrid renders properly', () => {
   const component = mount(
     <TableGrid id="table-grid">
       <TableGrid.Head>
-        <TableGrid.ColumnHeader id="title" sortable isSorted isAscending className="test-class">
+        <TableGrid.ColumnHeader
+          id="title"
+          sortable
+          isSorted
+          isAscending
+          className="test-class"
+        >
           Column 1
         </TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Column 2</TableGrid.ColumnHeader>
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop} />
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop}>
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        />
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        >
           <div>
             <span>test 1</span>
             <span>and two</span>
@@ -60,12 +76,28 @@ test('Bordered TableGrid renders properly', () => {
   const component = mount(
     <TableGrid id="table-grid" bordered>
       <TableGrid.Head>
-        <TableGrid.ColumnHeader id="title" sortable isSorted isAscending className="test-class">
+        <TableGrid.ColumnHeader
+          id="title"
+          sortable
+          isSorted
+          isAscending
+          className="test-class"
+        >
           Column 1
         </TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Column 2</TableGrid.ColumnHeader>
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop} />
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop}>
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        />
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        >
           <div>
             <span>test 1</span>
             <span>and two</span>
@@ -111,12 +143,28 @@ test('TableGrid with Row select renders properly', () => {
   const component = mount(
     <TableGrid id="table-grid" selectType="row">
       <TableGrid.Head>
-        <TableGrid.ColumnHeader id="title" sortable isSorted isAscending className="test-class">
+        <TableGrid.ColumnHeader
+          id="title"
+          sortable
+          isSorted
+          isAscending
+          className="test-class"
+        >
           Column 1
         </TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Column 2</TableGrid.ColumnHeader>
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop} />
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop}>
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        />
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        >
           <div>
             <span>test 1</span>
             <span>and two</span>
@@ -176,12 +224,28 @@ test('TableGrid with Cell select renders properly', () => {
   const component = mount(
     <TableGrid id="table-grid" selectType="cell">
       <TableGrid.Head>
-        <TableGrid.ColumnHeader id="title" sortable isSorted isAscending className="test-class">
+        <TableGrid.ColumnHeader
+          id="title"
+          sortable
+          isSorted
+          isAscending
+          className="test-class"
+        >
           Column 1
         </TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Column 2</TableGrid.ColumnHeader>
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop} />
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop}>
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        />
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        >
           <div>
             <span>test 1</span>
             <span>and two</span>
@@ -227,12 +291,28 @@ test('TableGrid with Checkbox select renders properly', () => {
   const component = mount(
     <TableGrid id="table-grid" selectType="checkbox">
       <TableGrid.Head showCheckbox allSelected>
-        <TableGrid.ColumnHeader id="title" sortable isSorted isAscending className="test-class">
+        <TableGrid.ColumnHeader
+          id="title"
+          sortable
+          isSorted
+          isAscending
+          className="test-class"
+        >
           Column 1
         </TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Column 2</TableGrid.ColumnHeader>
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop} />
-        <TableGrid.ColumnHeader sortable={false} isSorted={false} isAscending={false} onSortToggle={helpers.noop}>
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        />
+        <TableGrid.ColumnHeader
+          sortable={false}
+          isSorted={false}
+          isAscending={false}
+          onSortToggle={helpers.noop}
+        >
           <div>
             <span>test 1</span>
             <span>and two</span>
@@ -240,7 +320,11 @@ test('TableGrid with Checkbox select renders properly', () => {
         </TableGrid.ColumnHeader>
       </TableGrid.Head>
       <TableGrid.Body id="test-grid-body" className="test-grid-body">
-        <TableGrid.Row id="test-grid-row" className="test-grid-row" checkboxAriaLabel="test arial label">
+        <TableGrid.Row
+          id="test-grid-row"
+          className="test-grid-row"
+          checkboxAriaLabel="test arial label"
+        >
           <TableGrid.Col id="test-col-1" className="test-col1">
             item 1 column 1
           </TableGrid.Col>
@@ -297,12 +381,21 @@ test('TableGridHead renders options properly', () => {
         <TableGrid.ColumnHeader>Col 2</TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Col 3</TableGrid.ColumnHeader>
       </TableGrid.Head>
-      <TableGrid.Head id="custom-tip" showCheckbox allSelected toggleTip="Test Custom Tip">
+      <TableGrid.Head
+        id="custom-tip"
+        showCheckbox
+        allSelected
+        toggleTip="Test Custom Tip"
+      >
         <TableGrid.ColumnHeader>Col 1</TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Col 2</TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Col 3</TableGrid.ColumnHeader>
       </TableGrid.Head>
-      <TableGrid.Head id="none-selected-custom-sr-text" showCheckbox noneSelectedAriaLabel="Test No Selected SR Text">
+      <TableGrid.Head
+        id="none-selected-custom-sr-text"
+        showCheckbox
+        noneSelectedAriaLabel="Test No Selected SR Text"
+      >
         <TableGrid.ColumnHeader>Col 1</TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Col 2</TableGrid.ColumnHeader>
         <TableGrid.ColumnHeader>Col 3</TableGrid.ColumnHeader>

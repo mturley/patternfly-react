@@ -16,13 +16,20 @@ class TreeView extends React.Component {
 
   onFocus = node => {
     this.setState(() => ({ focusedNodeId: node.dataset.id }));
-  }
+  };
 
   onKeyDown = event => {
-    const nodes = this.getVisibleNodes([...this.treeRef.current.getElementsByTagName('li')]);
-    const currentNodePosition = nodes.findIndex(element => element.dataset.id === this.state.focusedNodeId);
+    const nodes = this.getVisibleNodes([
+      ...this.treeRef.current.getElementsByTagName('li')
+    ]);
+    const currentNodePosition = nodes.findIndex(
+      element => element.dataset.id === this.state.focusedNodeId
+    );
 
-    if (event.key === KEYS.ARROW_DOWN && currentNodePosition !== nodes.length - 1) {
+    if (
+      event.key === KEYS.ARROW_DOWN &&
+      currentNodePosition !== nodes.length - 1
+    ) {
       nodes[currentNodePosition + 1].focus();
     } else if (event.key === KEYS.ARROW_UP && currentNodePosition !== 0) {
       nodes[currentNodePosition - 1].focus();
@@ -33,11 +40,15 @@ class TreeView extends React.Component {
       const [lastVisibleNode] = nodes.slice(-1);
       lastVisibleNode.focus();
     }
-  }
+  };
 
   onKeyPress = event => {
-    const nodes = this.getVisibleNodes([...this.treeRef.current.getElementsByTagName('li')]);
-    const currentNodePosition = nodes.findIndex(element => element.dataset.id === this.state.focusedNodeId);
+    const nodes = this.getVisibleNodes([
+      ...this.treeRef.current.getElementsByTagName('li')
+    ]);
+    const currentNodePosition = nodes.findIndex(
+      element => element.dataset.id === this.state.focusedNodeId
+    );
     const { key } = event;
 
     if (/[a-zA-Z]{1}/.test(key) && key.length === 1) {
@@ -58,18 +69,25 @@ class TreeView extends React.Component {
     if (key === '*') {
       this.setState(prevState => ({ expandSiblings: prevState.focusedNodeId }));
     }
-  }
+  };
 
-  getVisibleNodes = nodes => nodes.filter(node => !node.className.match(/node-hidden/));
+  getVisibleNodes = nodes =>
+    nodes.filter(node => !node.className.match(/node-hidden/));
 
   clearExpandSiblings = () => {
     this.setState(() => ({ expandSiblings: '' }));
-  }
+  };
 
   treeRef = React.createRef();
 
   render() {
-    const { nodes, selectNode, highlightOnHover, highlightOnSelect, accessibleName } = this.props;
+    const {
+      nodes,
+      selectNode,
+      highlightOnHover,
+      highlightOnSelect,
+      accessibleName
+    } = this.props;
     const { focusedNodeId, expandSiblings } = this.state;
     const classes = classNames('list-group', {
       'treeview-select': highlightOnSelect,

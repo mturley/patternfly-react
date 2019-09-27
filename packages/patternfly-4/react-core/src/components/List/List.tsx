@@ -21,7 +21,14 @@ export const List: React.FunctionComponent<ListProps> = ({
   variant = null,
   ...props
 }) => (
-  <ul {...props} className={css(styles.list, variant && getModifier(styles.modifiers, variant), className)}>
+  <ul
+    {...props}
+    className={css(
+      styles.list,
+      variant && getModifier(styles.modifiers, variant),
+      className
+    )}
+  >
     {children}
   </ul>
 );

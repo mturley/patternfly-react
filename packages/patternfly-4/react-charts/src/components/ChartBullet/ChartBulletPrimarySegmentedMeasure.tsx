@@ -5,14 +5,17 @@ import {
   DomainPropType,
   NumberOrCallback,
   PaddingProps,
-  VictoryBar,
+  VictoryBar
 } from 'victory';
-import { getPrimarySegmentedMeasureData }  from './utils';
+import { getPrimarySegmentedMeasureData } from './utils';
 import { ChartBar } from '../ChartBar';
 import { ChartContainer } from '../ChartContainer';
 import { ChartBulletStyles, ChartThemeDefinition } from '../ChartTheme';
 import { ChartTooltip } from '../ChartTooltip';
-import { getBulletPrimaryNegativeMeasureTheme, getBulletPrimarySegmentedMeasureTheme } from '../ChartUtils';
+import {
+  getBulletPrimaryNegativeMeasureTheme,
+  getBulletPrimarySegmentedMeasureTheme
+} from '../ChartUtils';
 
 /**
  * See https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/victory/index.d.ts
@@ -176,7 +179,9 @@ export interface ChartBulletPrimarySegmentedMeasureProps {
   y0?: DataGetterPropType;
 }
 
-export const ChartBulletPrimarySegmentedMeasure: React.FunctionComponent<ChartBulletPrimarySegmentedMeasureProps> = ({
+export const ChartBulletPrimarySegmentedMeasure: React.FunctionComponent<
+  ChartBulletPrimarySegmentedMeasureProps
+> = ({
   ariaDesc,
   ariaTitle,
   barWidth = ChartBulletStyles.primarySegmentedMeasureWidth,
@@ -196,7 +201,10 @@ export const ChartBulletPrimarySegmentedMeasure: React.FunctionComponent<ChartBu
 
   // destructure last
   theme = getBulletPrimarySegmentedMeasureTheme(themeColor, themeVariant),
-  negativeMeasureTheme = getBulletPrimaryNegativeMeasureTheme(themeColor, themeVariant),
+  negativeMeasureTheme = getBulletPrimaryNegativeMeasureTheme(
+    themeColor,
+    themeVariant
+  ),
   height = theme.group.height,
   width = theme.group.width,
   labelComponent = <ChartTooltip />,
@@ -220,14 +228,16 @@ export const ChartBulletPrimarySegmentedMeasure: React.FunctionComponent<ChartBu
       if (horizontal) {
         return 0;
       }
-      const result = (typeof barWidth === 'function') ? barWidth(data, false) : barWidth;
+      const result =
+        typeof barWidth === 'function' ? barWidth(data, false) : barWidth;
       return result / 2;
     },
     dy: () => {
       if (!horizontal) {
         return 0;
       }
-      const result = (typeof barWidth === 'function') ? barWidth(data, false) : barWidth;
+      const result =
+        typeof barWidth === 'function' ? barWidth(data, false) : barWidth;
       return -(result / 2);
     },
     orientation: 'top',
@@ -237,7 +247,7 @@ export const ChartBulletPrimarySegmentedMeasure: React.FunctionComponent<ChartBu
   const measure = computedData.map((dataPoint: any, index) => {
     return React.cloneElement(measureComponent, {
       barWidth,
-      data: [{...dataPoint}],
+      data: [{ ...dataPoint }],
       domain,
       height,
       horizontal,
@@ -258,13 +268,16 @@ export const ChartBulletPrimarySegmentedMeasure: React.FunctionComponent<ChartBu
   });
 
   return standalone ? (
-    <ChartContainer desc={ariaDesc} height={height} title={ariaTitle} width={width}>
+    <ChartContainer
+      desc={ariaDesc}
+      height={height}
+      title={ariaTitle}
+      width={width}
+    >
       {measure}
     </ChartContainer>
   ) : (
-    <React.Fragment>
-      {measure}
-    </React.Fragment>
+    <React.Fragment>{measure}</React.Fragment>
   );
 };
 

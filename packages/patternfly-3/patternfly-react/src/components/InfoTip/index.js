@@ -4,4 +4,10 @@ import { default as InfoTipMenu } from './InfoTipMenu';
 import { default as InfoTipMenuFooter } from './InfoTipMenuFooter';
 import { default as InfoTipMenuItemIcon } from './InfoTipMenuItemIcon';
 
-export { InfoTip, InfoTipToggle, InfoTipMenu, InfoTipMenuItemIcon, InfoTipMenuFooter };
+export {
+  InfoTip,
+  InfoTipToggle,
+  InfoTipMenu,
+  InfoTipMenuItemIcon,
+  InfoTipMenuFooter
+};

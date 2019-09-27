@@ -5,23 +5,25 @@ import { LoginPage } from './LoginPage';
 
 const needAccountMesseage = (
   <React.Fragment>
-    Login to your account <a href="https://www.patternfly.org">Need an account?</a>
+    Login to your account{' '}
+    <a href="https://www.patternfly.org">Need an account?</a>
   </React.Fragment>
 );
 
 test('check loginpage example against snapshot', () => {
   const view = shallow(
     <LoginPage
-    footerListVariants="inline"
-    brandImgSrc="Brand src"
-    brandImgAlt="Pf-logo"
-    backgroundImgSrc="Background src"
-    backgroundImgAlt="Pf-background"
-    footerListItems="English"
-    textContent="This is placeholder text only."
-    loginTitle="Log into your account"
-    signUpForAccountMessage={needAccountMesseage}
-    socialMediaLoginContent="Footer"
-  />);
+      footerListVariants="inline"
+      brandImgSrc="Brand src"
+      brandImgAlt="Pf-logo"
+      backgroundImgSrc="Background src"
+      backgroundImgAlt="Pf-background"
+      footerListItems="English"
+      textContent="This is placeholder text only."
+      loginTitle="Log into your account"
+      signUpForAccountMessage={needAccountMesseage}
+      socialMediaLoginContent="Footer"
+    />
+  );
   expect(view).toMatchSnapshot();
 });

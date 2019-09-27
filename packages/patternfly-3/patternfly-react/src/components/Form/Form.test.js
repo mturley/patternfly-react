@@ -1,7 +1,15 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Button, DropdownButton, Icon, Form, Grid, MenuItem, Modal } from '../../index';
+import {
+  Button,
+  DropdownButton,
+  Icon,
+  Form,
+  Grid,
+  MenuItem,
+  Modal
+} from '../../index';
 
 test('Inline Form renders properly', () => {
   const component = mount(
@@ -330,7 +338,11 @@ test('Input Groups render properly', () => {
           <Form.FormGroup controlId="control-6">
             <Form.InputGroup>
               <Form.FormControl type="text" />
-              <DropdownButton componentClass={Form.InputGroup.Button} id="input-dropdown-addon" title="Action">
+              <DropdownButton
+                componentClass={Form.InputGroup.Button}
+                id="input-dropdown-addon"
+                title="Action"
+              >
                 <MenuItem>Item</MenuItem>
               </DropdownButton>
             </Form.InputGroup>

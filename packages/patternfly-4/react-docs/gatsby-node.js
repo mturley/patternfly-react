@@ -42,8 +42,13 @@ exports.createPages = ({ graphql, actions }) => {
   return mdx.then(({ data }) => {
     data.allMdx.nodes.forEach(node => {
       const componentName = navHelpers.getFileName(node.fileAbsolutePath);
-      const parentFolderName = navHelpers.getParentFolder(node.fileAbsolutePath, 3);
-      const section = node.frontmatter.section ? node.frontmatter.section : 'components';
+      const parentFolderName = navHelpers.getParentFolder(
+        node.fileAbsolutePath,
+        3
+      );
+      const section = node.frontmatter.section
+        ? node.frontmatter.section
+        : 'components';
 
       let link = '/bad-page/';
       // Create fullscreen example component pages
@@ -70,7 +75,10 @@ exports.createPages = ({ graphql, actions }) => {
             typescript: node.frontmatter.typescript, // For a badge
             fileAbsolutePath: node.fileAbsolutePath, // Helps us get the markdown
             propComponents: node.frontmatter.propComponents || [], // Helps us get the docgenned props
-            pathRegex: node.frontmatter.section === 'experimental' ? '/.*/experimental/.*/' : '/^((?!experimental).)*$/' // Since experimental components have same class names
+            pathRegex:
+              node.frontmatter.section === 'experimental'
+                ? '/.*/experimental/.*/'
+                : '/^((?!experimental).)*$/' // Since experimental components have same class names
           }
         });
       }
@@ -92,13 +100,25 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         '@patternfly/react-charts': path.resolve(__dirname, '../react-charts'),
         '@patternfly/react-core': path.resolve(__dirname, '../react-core'),
         '@patternfly/react-icons': path.resolve(__dirname, '../../react-icons'),
-        '@patternfly/react-inline-edit-extension': path.resolve(__dirname, '../react-inline-edit-extension'),
-        '@patternfly/react-virtualized-extension': path.resolve(__dirname, '../react-virtualized-extension'),
-        '@patternfly/react-styled-system': path.resolve(__dirname, '../react-styled-system'),
+        '@patternfly/react-inline-edit-extension': path.resolve(
+          __dirname,
+          '../react-inline-edit-extension'
+        ),
+        '@patternfly/react-virtualized-extension': path.resolve(
+          __dirname,
+          '../react-virtualized-extension'
+        ),
+        '@patternfly/react-styled-system': path.resolve(
+          __dirname,
+          '../react-styled-system'
+        ),
         '@patternfly/react-styles': path.resolve(__dirname, '../react-styles'),
         '@patternfly/react-table': path.resolve(__dirname, '../react-table'),
         '@patternfly/react-tokens': path.resolve(__dirname, '../react-tokens'),
-        '@patternfly/react-topology': path.resolve(__dirname, '../react-topology'),
+        '@patternfly/react-topology': path.resolve(
+          __dirname,
+          '../react-topology'
+        ),
         // Hack to work downstream in https://github.com/patternfly/patternfly-org
         '@content': path.resolve(__dirname, 'src/components/componentDocs')
       }

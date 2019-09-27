@@ -15,8 +15,10 @@ class AsyncTypeAheadSelect extends React.Component {
   // query is the text string entered by the user.
   handleSearch = query => {
     this.onSearchStart();
-    Promise.resolve(this.props.onSearch(query)).then(options => this.onSearchEnd(options));
-  }
+    Promise.resolve(this.props.onSearch(query)).then(options =>
+      this.onSearchEnd(options)
+    );
+  };
 
   render() {
     const { innerRef, ...props } = this.props;
@@ -49,4 +51,6 @@ AsyncTypeAheadSelect.defaultProps = {
   innerRef: null
 };
 
-export default React.forwardRef((props, ref) => <AsyncTypeAheadSelect {...props} innerRef={ref} />);
+export default React.forwardRef((props, ref) => (
+  <AsyncTypeAheadSelect {...props} innerRef={ref} />
+));

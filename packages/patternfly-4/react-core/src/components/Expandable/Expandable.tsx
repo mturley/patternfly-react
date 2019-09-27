@@ -26,7 +26,10 @@ interface ExpandableState {
   isExpanded: boolean;
 }
 
-export class Expandable extends React.Component<ExpandableProps, ExpandableState> {
+export class Expandable extends React.Component<
+  ExpandableProps,
+  ExpandableState
+> {
   constructor(props: ExpandableProps) {
     super(props);
 
@@ -69,7 +72,14 @@ export class Expandable extends React.Component<ExpandableProps, ExpandableState
     }
 
     return (
-      <div {...props} className={css(styles.expandable, propOrStateIsExpanded && styles.modifiers.expanded, className)}>
+      <div
+        {...props}
+        className={css(
+          styles.expandable,
+          propOrStateIsExpanded && styles.modifiers.expanded,
+          className
+        )}
+      >
         <button
           className={css(
             styles.expandableToggle,
@@ -81,10 +91,16 @@ export class Expandable extends React.Component<ExpandableProps, ExpandableState
           aria-expanded={propOrStateIsExpanded}
           onClick={onToggle}
         >
-          <AngleRightIcon className={css(styles.expandableToggleIcon)} aria-hidden />
+          <AngleRightIcon
+            className={css(styles.expandableToggleIcon)}
+            aria-hidden
+          />
           <span>{toggleText}</span>
         </button>
-        <div className={css(styles.expandableContent)} hidden={!propOrStateIsExpanded}>
+        <div
+          className={css(styles.expandableContent)}
+          hidden={!propOrStateIsExpanded}
+        >
           {children}
         </div>
       </div>

@@ -23,17 +23,28 @@ test('simple text input', () => {
 });
 
 test('disabled text input', () => {
-  const view = shallow(<TextInput isDisabled aria-label="disabled text input" />);
+  const view = shallow(
+    <TextInput isDisabled aria-label="disabled text input" />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('readonly text input', () => {
-  const view = shallow(<TextInput isReadOnly value="read only" aria-label="readonly text input" />);
+  const view = shallow(
+    <TextInput isReadOnly value="read only" aria-label="readonly text input" />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('invalid text input', () => {
-  const view = shallow(<TextInput {...props} required isValid={false} aria-label="invalid text input" />);
+  const view = shallow(
+    <TextInput
+      {...props}
+      required
+      isValid={false}
+      aria-label="invalid text input"
+    />
+  );
   expect(view).toMatchSnapshot();
 });
 

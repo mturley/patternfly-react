@@ -2,11 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const BulletChartThreshold = ({ className, threshold, vertical, percent, maxValue, ...props }) => {
+const BulletChartThreshold = ({
+  className,
+  threshold,
+  vertical,
+  percent,
+  maxValue,
+  ...props
+}) => {
   const percentValue = percent ? threshold : (threshold / maxValue) * 100;
 
   if (percentValue > 0 && percentValue <= 100) {
-    const thresholdClasses = classNames('bullet-chart-pf-threshold-indicator', className);
+    const thresholdClasses = classNames(
+      'bullet-chart-pf-threshold-indicator',
+      className
+    );
     return (
       <div
         className={thresholdClasses}

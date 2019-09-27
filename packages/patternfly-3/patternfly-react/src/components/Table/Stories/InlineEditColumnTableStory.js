@@ -1,7 +1,10 @@
 import React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { MockInlineEditColumnTable, mockInlineEditColumnTableSource } from '../__mocks__/mockInlineEditColumnTable';
+import {
+  MockInlineEditColumnTable,
+  mockInlineEditColumnTableSource
+} from '../__mocks__/mockInlineEditColumnTable';
 import {
   actionHeaderCellFormatter,
   customHeaderFormattersDefinition,
@@ -39,7 +42,11 @@ const inlineEditColumnTable = stories => {
         </div>
       )
     })(() => {
-      const story = <MockInlineEditColumnTable fullTableEdit={boolean('Edit whole table', true)} />;
+      const story = (
+        <MockInlineEditColumnTable
+          fullTableEdit={boolean('Edit whole table', true)}
+        />
+      );
       return inlineTemplate({
         title: 'Table With Inline Edit Column',
         documentationLink: DOCUMENTATION_URL.PATTERNFLY_ORG_INLINE_EDIT,

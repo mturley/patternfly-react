@@ -126,45 +126,48 @@ export interface Shadows {
 }
 export interface StyledConstants {
   space: {
-    [key: string]: Space
+    [key: string]: Space;
   };
   fonts: {
-    [key: string]: Fonts
+    [key: string]: Fonts;
   };
   fontWeights: {
-    [key: string]: FontWeights
+    [key: string]: FontWeights;
   };
   lineHeights: {
-    [key: string]: LineHeights
+    [key: string]: LineHeights;
   };
   fontSizes: {
-    [key: string]: FontSizes
+    [key: string]: FontSizes;
   };
   radii: {
-    [key: string]: Radii
+    [key: string]: Radii;
   };
   borders: {
-    [key: string]: Borders
+    [key: string]: Borders;
   };
   colors: {
-    [key: string]: Colors
+    [key: string]: Colors;
   };
   zIndex: {
-    [key: string]: ZIndices
+    [key: string]: ZIndices;
   };
   ratio: {
-    [key: string]: Ratio
+    [key: string]: Ratio;
   };
   shadows: {
-    [key: string]: Shadows
+    [key: string]: Shadows;
   };
 }
 
-export interface PatternFlyThemeProviderProps extends HTMLProps<HTMLDivElement> {
+export interface PatternFlyThemeProviderProps
+  extends HTMLProps<HTMLDivElement> {
   theme?: Object;
   children: ReactNode;
 }
 
-declare const PatternFlyThemeProvider: FunctionComponent<PatternFlyThemeProviderProps>;
+declare const PatternFlyThemeProvider: FunctionComponent<
+  PatternFlyThemeProviderProps
+>;
 
 export default PatternFlyThemeProvider;

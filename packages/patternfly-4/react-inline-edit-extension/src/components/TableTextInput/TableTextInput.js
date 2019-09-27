@@ -27,10 +27,17 @@ const defaultProps = {
 class TableTextInput extends React.Component {
   handleBlur = event => {
     this.props.onBlur(event.currentTarget.value, event);
-  }
+  };
 
   render() {
-    const { defaultValue, onBlur, autoFocus, value, onChange, ...textInputProps } = this.props;
+    const {
+      defaultValue,
+      onBlur,
+      autoFocus,
+      value,
+      onChange,
+      ...textInputProps
+    } = this.props;
     return (
       <React.Fragment>
         <TextInput

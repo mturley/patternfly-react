@@ -28,7 +28,12 @@ class Paginator extends React.Component {
 
   setPage(value) {
     const page = Number(value);
-    if (!Number.isNaN(value) && value !== '' && page > 0 && page <= this.totalPages()) {
+    if (
+      !Number.isNaN(value) &&
+      value !== '' &&
+      page > 0 &&
+      page <= this.totalPages()
+    ) {
       this.props.onPageSet(page);
     }
   }
@@ -41,7 +46,7 @@ class Paginator extends React.Component {
 
   handleFormSubmit = e => {
     this.setPage(this.state.pageChangeValue);
-  }
+  };
 
   handlePageChange(e) {
     this.setState({ pageChangeValue: e.target.value });

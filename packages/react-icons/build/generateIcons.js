@@ -7,10 +7,14 @@ const pascalCase = plop.getHelper('pascalCase');
 const kebabCase = plop.getHelper('kebabCase');
 
 const allIcons = [
-  ...icons.fontAwesome.solid.map((icon) => getFontAwesomeIcon(icon, 'solid')),
-  ...icons.fontAwesome.brands.map((icon) => getFontAwesomeIcon(icon, 'brands')),
-  ...icons.fontAwesome.regular.map((icon) => getFontAwesomeIcon(icon, 'regular', 'outlined')),
-  ...Object.keys(icons.custom).map((iconName) => generateIcon(icons.custom[iconName], iconName)),
+  ...icons.fontAwesome.solid.map(icon => getFontAwesomeIcon(icon, 'solid')),
+  ...icons.fontAwesome.brands.map(icon => getFontAwesomeIcon(icon, 'brands')),
+  ...icons.fontAwesome.regular.map(icon =>
+    getFontAwesomeIcon(icon, 'regular', 'outlined')
+  ),
+  ...Object.keys(icons.custom).map(iconName =>
+    generateIcon(icons.custom[iconName], iconName)
+  ),
   ...Object.keys(icons.pfIcons).map(getPfIcon)
 ];
 
@@ -22,12 +26,13 @@ plop
 function getPfIcon(iconName) {
   const currentIcon = icons.pfIcons[iconName];
   currentIcon.yOffset = 64;
-  currentIcon.transform = `rotate(180 0 ${currentIcon.height / 2}) scale(-1 1)`
-  return generateIcon(currentIcon, `${iconName}`)
+  currentIcon.transform = `rotate(180 0 ${currentIcon.height / 2}) scale(-1 1)`;
+  return generateIcon(currentIcon, `${iconName}`);
 }
 
 function getFontAwesomeIcon(icon, packageType, prefix = '') {
-  const faIconDef = require(`@fortawesome/free-${packageType}-svg-icons/${icon.name || icon}`); // eslint-disable-line
+  const faIconDef = require(`@fortawesome/free-${packageType}-svg-icons/${icon.name ||
+    icon}`); // eslint-disable-line
   const iconName = kebabCase(`${prefix}${icon.title || icon.substr(2)}`); // remove fa and make name kebab cased
 
   return generateIcon(faIconDef, iconName);

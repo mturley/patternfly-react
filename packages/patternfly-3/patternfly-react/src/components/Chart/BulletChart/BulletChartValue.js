@@ -6,9 +6,20 @@ import { Tooltip } from '../../Tooltip/index';
 
 const randomId = () => Date.now();
 
-const BulletChartValue = ({ className, value, percent, maxValue, prevValue, dot, vertical, ...props }) => {
+const BulletChartValue = ({
+  className,
+  value,
+  percent,
+  maxValue,
+  prevValue,
+  dot,
+  vertical,
+  ...props
+}) => {
   const usedMax = percent ? 100 : maxValue;
-  const percentValue = percent ? value.value + prevValue : ((value.value + prevValue) / maxValue) * 100;
+  const percentValue = percent
+    ? value.value + prevValue
+    : ((value.value + prevValue) / maxValue) * 100;
   const showValue = Math.min(Math.max(percentValue, 0), usedMax * 1.2);
 
   const TooltipFunction = () => {

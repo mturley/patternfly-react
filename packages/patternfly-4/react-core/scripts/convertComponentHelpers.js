@@ -2,7 +2,9 @@
 function getMatches(string, pattern) {
   return string
     .match(new RegExp(pattern.source, pattern.flags))
-    .map(match => (match ? new RegExp(pattern.source, pattern.flags).exec(match) : [[]]));
+    .map(match =>
+      match ? new RegExp(pattern.source, pattern.flags).exec(match) : [[]]
+    );
 }
 
 function fixImports(srcText) {

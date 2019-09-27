@@ -6,7 +6,12 @@ const { Dropdown } = Button;
 const { noop } = helpers;
 
 const SpiceActions = ({ textSendShortcut, textCtrlAltDel, onCtrlAltDel }) => (
-  <Dropdown bsStyle="default" title={textSendShortcut} id="console-send-shortcut" onClick={noop}>
+  <Dropdown
+    bsStyle="default"
+    title={textSendShortcut}
+    id="console-send-shortcut"
+    onClick={noop}
+  >
     <MenuItem eventKey="1" onClick={onCtrlAltDel}>
       {textCtrlAltDel}
     </MenuItem>

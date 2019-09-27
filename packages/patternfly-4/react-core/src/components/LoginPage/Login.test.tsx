@@ -5,7 +5,9 @@ import { LoginFooter } from './LoginFooter';
 import { LoginHeader } from './LoginHeader';
 
 test('Check login layout example against snapshot', () => {
-  const Header = <LoginHeader headerBrand="HeaderBrand">Header Text</LoginHeader>;
+  const Header = (
+    <LoginHeader headerBrand="HeaderBrand">Header Text</LoginHeader>
+  );
   const Footer = <LoginFooter>Footer</LoginFooter>;
   const view = shallow(
     <Login footer={Footer} header={Header}>

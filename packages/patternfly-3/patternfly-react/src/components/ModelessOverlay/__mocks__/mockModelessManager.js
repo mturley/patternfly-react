@@ -11,10 +11,10 @@ export class MockModelessManager extends React.Component {
   }
   close = () => {
     this.setState({ showOverlay: false });
-  }
+  };
   toggleOpen = () => {
     this.setState({ showOverlay: !this.state.showOverlay });
-  }
+  };
   render() {
     const { children, size } = this.props;
     const defaultBody = (
@@ -73,17 +73,26 @@ export class MockModelessManager extends React.Component {
     return (
       <div>
         <Button bsStyle="primary" bsSize="large" onClick={this.toggleOpen}>
-          {this.state.showOverlay ? 'Close Modeless Overlay' : 'Open Modeless Overlay'}
+          {this.state.showOverlay
+            ? 'Close Modeless Overlay'
+            : 'Open Modeless Overlay'}
         </Button>
 
-        <ModelessOverlay show={this.state.showOverlay} bsSize={size !== 'default' ? size : null}>
+        <ModelessOverlay
+          show={this.state.showOverlay}
+          bsSize={size !== 'default' ? size : null}
+        >
           <Modal.Header>
             <Modal.CloseButton onClick={this.close} />
             <Modal.Title>Modal Overlay Title</Modal.Title>
           </Modal.Header>
           <Modal.Body>{children || defaultBody}</Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="default" className="btn-cancel" onClick={this.close}>
+            <Button
+              bsStyle="default"
+              className="btn-cancel"
+              onClick={this.close}
+            >
               Cancel
             </Button>
             <Button bsStyle="primary" onClick={this.close}>

@@ -2,7 +2,10 @@ describe('Simple donut utilization chart with right-aligned legend Demo Test', (
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#donut-utilization-simple-right-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/donut-utilization-simple-right-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/donut-utilization-simple-right-demo-nav-link'
+    );
   });
 
   it('Verify donut chart', () => {

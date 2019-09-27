@@ -33,7 +33,11 @@ test('should render simple tabs', () => {
 
 test('should render accessible tabs', () => {
   const view = render(
-    <Tabs id="accessibleTabs" aria-label="accessible Tabs example" variant="nav">
+    <Tabs
+      id="accessibleTabs"
+      aria-label="accessible Tabs example"
+      variant="nav"
+    >
       <Tab id="tab1" eventKey={0} title="Tab item 1" href="#/items/1">
         Tab 1 section
       </Tab>

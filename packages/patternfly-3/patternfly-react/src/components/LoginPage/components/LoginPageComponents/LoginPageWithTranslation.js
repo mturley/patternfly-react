@@ -11,7 +11,9 @@ class LoginPageWithTranslation extends React.Component {
     this.state = {
       language:
         (selectedLanguage && selectedLanguage.value) ||
-        (availableLanguages && availableLanguages[0] && availableLanguages[0].value),
+        (availableLanguages &&
+          availableLanguages[0] &&
+          availableLanguages[0].value),
       passwordValue: '',
       usernameValue: '',
       translatedProps: {}
@@ -24,19 +26,19 @@ class LoginPageWithTranslation extends React.Component {
       return;
     }
     this.switchToLanguage(newLanguage);
-  }
+  };
 
   onPasswordChange = e => {
     const { card } = this.props;
     card.form.passwordField.onChange && card.form.passwordField.onChange(e);
     this.setState({ passwordValue: e.target.value });
-  }
+  };
 
   onUsernameChange = e => {
     const { card } = this.props;
     card.form.usernameField.onChange && card.form.usernameField.onChange(e);
     this.setState({ usernameValue: e.target.value });
-  }
+  };
 
   getDefaultPropsToPass = () => {
     const { card } = this.props;
@@ -59,7 +61,7 @@ class LoginPageWithTranslation extends React.Component {
         }
       }
     };
-  }
+  };
 
   switchToLanguage = language => {
     const { container, card, header } = this.props;
@@ -124,7 +126,7 @@ class LoginPageWithTranslation extends React.Component {
     };
 
     this.setState({ translatedProps, language });
-  }
+  };
 
   render() {
     const newProps = {

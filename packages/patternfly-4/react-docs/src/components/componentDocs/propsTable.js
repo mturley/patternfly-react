@@ -20,7 +20,11 @@ const renderType = prop => {
 };
 
 export const PropsTable = ({ caption, propList }) => (
-  <table className="pf-c-table pf-m-compact pf-m-grid-md" role="grid" aria-label="Properties for a component">
+  <table
+    className="pf-c-table pf-m-compact pf-m-grid-md"
+    role="grid"
+    aria-label="Properties for a component"
+  >
     <caption>{caption}</caption>
     <thead>
       <tr>
@@ -39,7 +43,9 @@ export const PropsTable = ({ caption, propList }) => (
           <tr key={prop.name}>
             <td className="pf-m-fit-content">{prop.name}</td>
             <td>{renderType(prop)}</td>
-            <td className="pf-c-table__icon">{prop.required && <ExclamationCircleIcon />}</td>
+            <td className="pf-c-table__icon">
+              {prop.required && <ExclamationCircleIcon />}
+            </td>
             <td>{prop.defaultValue && prop.defaultValue.value}</td>
             <td>{`${prop.description}`}</td>
           </tr>

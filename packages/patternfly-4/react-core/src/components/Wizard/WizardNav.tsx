@@ -19,21 +19,18 @@ export const WizardNav: React.FunctionComponent<WizardNavProps> = ({
   isOpen = false,
   returnList = false
 }: WizardNavProps) => {
-  const innerList = (
-    <ol className={css(styles.wizardNavList)}>
-      {children}
-    </ol>
-  );
+  const innerList = <ol className={css(styles.wizardNavList)}>{children}</ol>;
 
   if (returnList) {
     return innerList;
   }
 
   return (
-    <nav className={css(styles.wizardNav, isOpen && 'pf-m-expanded')} aria-label={ariaLabel}>
-      <ol className={css(styles.wizardNavList)}>
-        {children}
-      </ol>
+    <nav
+      className={css(styles.wizardNav, isOpen && 'pf-m-expanded')}
+      aria-label={ariaLabel}
+    >
+      <ol className={css(styles.wizardNavList)}>{children}</ol>
     </nav>
   );
 };

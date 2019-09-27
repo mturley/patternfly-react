@@ -24,7 +24,8 @@ class PopoverBase extends React.Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+      .isRequired,
     isEnabled: PropTypes.bool,
     isVisible: PropTypes.bool,
     onCreate: PropTypes.func,

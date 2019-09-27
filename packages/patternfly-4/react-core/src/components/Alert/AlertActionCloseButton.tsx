@@ -24,7 +24,9 @@ export const AlertActionCloseButton = ({
   <Button
     variant={ButtonVariant.plain}
     onClick={onClose}
-    aria-label={ariaLabel === '' ? `Close ${variantLabel} alert: ${title}` : ariaLabel}
+    aria-label={
+      ariaLabel === '' ? `Close ${variantLabel} alert: ${title}` : ariaLabel
+    }
     {...props}
   >
     <TimesIcon />

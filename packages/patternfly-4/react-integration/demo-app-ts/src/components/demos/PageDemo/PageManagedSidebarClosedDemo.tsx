@@ -1,5 +1,11 @@
 import React from 'react';
-import { Page, PageHeader, PageSidebar, PageSection, PageSectionVariants } from '@patternfly/react-core';
+import {
+  Page,
+  PageHeader,
+  PageSidebar,
+  PageSection,
+  PageSectionVariants
+} from '@patternfly/react-core';
 
 export class PageManagedSidebarClosedDemo extends React.Component {
   componentDidMount() {
@@ -25,10 +31,22 @@ export class PageManagedSidebarClosedDemo extends React.Component {
     const Sidebar = <PageSidebar nav="Navigation" />;
 
     return (
-      <Page id="page-managed-sidebar-closed-demo" header={Header} sidebar={Sidebar} isManagedSidebar defaultManagedSidebarIsOpen={false}>
-        <PageSection variant={PageSectionVariants.darker}>Section with darker background</PageSection>
-        <PageSection variant={PageSectionVariants.dark}>Section with dark background</PageSection>
-        <PageSection variant={PageSectionVariants.light}>Section with light background</PageSection>
+      <Page
+        id="page-managed-sidebar-closed-demo"
+        header={Header}
+        sidebar={Sidebar}
+        isManagedSidebar
+        defaultManagedSidebarIsOpen={false}
+      >
+        <PageSection variant={PageSectionVariants.darker}>
+          Section with darker background
+        </PageSection>
+        <PageSection variant={PageSectionVariants.dark}>
+          Section with dark background
+        </PageSection>
+        <PageSection variant={PageSectionVariants.light}>
+          Section with light background
+        </PageSection>
       </Page>
     );
   }

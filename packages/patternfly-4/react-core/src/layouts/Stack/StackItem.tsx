@@ -17,7 +17,14 @@ export const StackItem: React.FunctionComponent<StackItemProps> = ({
   children = null,
   ...props
 }: StackItemProps) => (
-  <div {...props} className={css(styles.stackItem, isFilled && styles.modifiers.fill, className)}>
+  <div
+    {...props}
+    className={css(
+      styles.stackItem,
+      isFilled && styles.modifiers.fill,
+      className
+    )}
+  >
     {children}
   </div>
 );

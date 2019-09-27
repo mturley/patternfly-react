@@ -92,7 +92,8 @@ export const mockCategories = [
         approved: true
       },
       {
-        title: 'JBoss BPM Suite 6.4 intelligent process server + A-MQ + MySQL (Ephemeral with https)',
+        title:
+          'JBoss BPM Suite 6.4 intelligent process server + A-MQ + MySQL (Ephemeral with https)',
         image: openshift,
         vendor: 'provided by Red Hat, Inc',
         description:
@@ -117,7 +118,8 @@ export const mockCategories = [
         title: 'Nginx',
         image: ngnix,
         vendor: 'provided by Nginx',
-        description: 'The open source web server that powers 400 million websites.',
+        description:
+          'The open source web server that powers 400 million websites.',
         featured: false,
         certified: true,
         approved: false
@@ -149,7 +151,8 @@ export const mockCategories = [
         title: 'Nginx',
         image: ngnix,
         vendor: 'provided by Nginx',
-        description: 'The open source web server that powers 400 million websites.',
+        description:
+          'The open source web server that powers 400 million websites.',
         featured: false,
         certified: true,
         approved: false
@@ -181,7 +184,8 @@ export const mockCategories = [
         title: 'Nginx',
         image: ngnix,
         vendor: 'provided by Nginx',
-        description: 'The open source web server that powers 400 million websites.',
+        description:
+          'The open source web server that powers 400 million websites.',
         featured: false,
         certified: true,
         approved: false
@@ -213,7 +217,8 @@ export const mockCategories = [
         title: 'Nginx',
         image: ngnix,
         vendor: 'provided by Nginx',
-        description: 'The open source web server that powers 400 million websites.',
+        description:
+          'The open source web server that powers 400 million websites.',
         featured: false,
         certified: true,
         approved: false
@@ -245,7 +250,8 @@ export const mockCategories = [
         title: 'Nginx',
         image: ngnix,
         vendor: 'provided by Nginx',
-        description: 'The open source web server that powers 400 million websites.',
+        description:
+          'The open source web server that powers 400 million websites.',
         featured: false,
         certified: true,
         approved: false
@@ -448,7 +454,8 @@ export const mockItems = [
     approved: true
   },
   {
-    title: 'JBoss BPM Suite 6.4 intelligent process server + A-MQ + MySQL (Ephemeral with https)',
+    title:
+      'JBoss BPM Suite 6.4 intelligent process server + A-MQ + MySQL (Ephemeral with https)',
     image: openshift,
     vendor: 'provided by Red Hat, Inc',
     description:

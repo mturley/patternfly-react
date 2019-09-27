@@ -2,14 +2,20 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, STORYBOOK_CATEGORY, DOCUMENTATION_URL } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  STORYBOOK_CATEGORY,
+  DOCUMENTATION_URL
+} from 'storybook/constants/siteConstants';
 import { name } from '../../../package.json';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 
 import { ExpandCollapse } from './index';
 
 const stories = storiesOf(
-  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.FORMS_AND_CONTROLS}/Expand Collapse`,
+  `${storybookPackageName(name)}/${
+    STORYBOOK_CATEGORY.FORMS_AND_CONTROLS
+  }/Expand Collapse`,
   module
 );
 stories.addDecorator(withKnobs);
@@ -31,7 +37,10 @@ stories.add(
         textCollapsed={text('textCollapsed', 'Show Advanced Options')}
         expanded={boolean('expanded', false)}
       >
-        <p>Well done! The component takes 100% width by default and aligns the link to the left or center.</p>
+        <p>
+          Well done! The component takes 100% width by default and aligns the
+          link to the left or center.
+        </p>
         <p>And other text comes here.</p>
       </ExpandCollapse>
     </div>

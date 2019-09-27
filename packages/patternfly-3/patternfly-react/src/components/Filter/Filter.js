@@ -13,7 +13,12 @@ import FilterItem from './FilterItem';
 
 // Disabled eslint due to `isDescendantOfToolbar` being a context property we don't want passed by consumers
 // eslint-disable-next-line react/prop-types
-const ContextualFilter = ({ children, className, isDescendantOfToolbar, ...props }) => {
+const ContextualFilter = ({
+  children,
+  className,
+  isDescendantOfToolbar,
+  ...props
+}) => {
   const classes = classNames(
     {
       'filter-pf form-group': true,

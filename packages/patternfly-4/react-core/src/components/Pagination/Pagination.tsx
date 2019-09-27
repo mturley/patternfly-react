@@ -84,24 +84,49 @@ export interface PaginationProps extends React.HTMLProps<HTMLDivElement> {
   /** Object with titles to display in pagination. */
   titles?: PaginationTitles;
   /** This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle props. */
-  toggleTemplate?: ((props: ToggleTemplateProps) => React.ReactElement) | string;
+  toggleTemplate?:
+    | ((props: ToggleTemplateProps) => React.ReactElement)
+    | string;
   /** Function called when user sets page. */
-  onSetPage?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onSetPage?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks on navigate to first page. */
-  onFirstClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onFirstClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks on navigate to previous page. */
-  onPreviousClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onPreviousClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks on navigate to next page. */
-  onNextClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onNextClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user clicks on navigate to last page. */
-  onLastClick?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onLastClick?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user inputs page number. */
-  onPageInput?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
+  onPageInput?: (
+    event: React.SyntheticEvent<HTMLButtonElement>,
+    page: number
+  ) => void;
   /** Function called when user selects number of items per page. */
-  onPerPageSelect?: (event: React.MouseEvent | React.KeyboardEvent | MouseEvent, perPage: number) => void;
+  onPerPageSelect?: (
+    event: React.MouseEvent | React.KeyboardEvent | MouseEvent,
+    perPage: number
+  ) => void;
 }
 
-const Pagination: React.FunctionComponent<PaginationProps & InjectedOuiaProps> = ({
+const Pagination: React.FunctionComponent<
+  PaginationProps & InjectedOuiaProps
+> = ({
   children = null,
   className = '',
   variant = PaginationVariant.top,
@@ -165,15 +190,20 @@ const Pagination: React.FunctionComponent<PaginationProps & InjectedOuiaProps> =
         className
       )}
       id={widgetId}
-      {...ouiaContext.isOuia && {
+      {...(ouiaContext.isOuia && {
         'data-ouia-component-type': 'Pagination',
         'data-ouia-component-id': ouiaId || ouiaContext.ouiaId
-      }}
+      })}
       {...props}
     >
       {variant === PaginationVariant.top && (
         <div className={css(styles.paginationTotalItems)}>
-          <ToggleTemplate firstIndex={firstIndex} lastIndex={lastIndex} itemCount={itemCount} itemsTitle={titles.items}/>
+          <ToggleTemplate
+            firstIndex={firstIndex}
+            lastIndex={lastIndex}
+            itemCount={itemCount}
+            itemsTitle={titles.items}
+          />
         </div>
       )}
       <PaginationOptionsMenu

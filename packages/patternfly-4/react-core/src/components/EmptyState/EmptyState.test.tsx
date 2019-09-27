@@ -8,15 +8,18 @@ import { EmptyStateIcon } from './EmptyStateIcon';
 import { EmptyStatePrimary } from './EmptyStatePrimary';
 import { Button } from '../Button';
 import { Title } from '../Title';
-import {BaseSizes} from '../../styles/sizes';
+import { BaseSizes } from '../../styles/sizes';
 
 describe('EmptyState', () => {
   test('Main', () => {
     const view = shallow(
       <EmptyState>
-        <Title headingLevel="h5" size="lg">HTTP Proxies</Title>
+        <Title headingLevel="h5" size="lg">
+          HTTP Proxies
+        </Title>
         <EmptyStateBody>
-          Defining HTTP Proxies that exist on your network allows you to perform various actions through those proxies.
+          Defining HTTP Proxies that exist on your network allows you to perform
+          various actions through those proxies.
         </EmptyStateBody>
         <Button variant="primary">New HTTP Proxy</Button>
         <EmptyStateSecondaryActions>
@@ -48,41 +51,70 @@ describe('EmptyState', () => {
   });
 
   test('Body', () => {
-    const view = shallow(<EmptyStateBody className="custom-empty-state-body" id="empty-state-1" />);
-    expect(view.props().className).toBe('pf-c-empty-state__body custom-empty-state-body');
+    const view = shallow(
+      <EmptyStateBody className="custom-empty-state-body" id="empty-state-1" />
+    );
+    expect(view.props().className).toBe(
+      'pf-c-empty-state__body custom-empty-state-body'
+    );
     expect(view.props().id).toBe('empty-state-1');
   });
 
   test('Secondary Action', () => {
-    const view = shallow(<EmptyStateSecondaryActions className="custom-empty-state-secondary" id="empty-state-2" />);
-    expect(view.props().className).toBe('pf-c-empty-state__secondary custom-empty-state-secondary');
+    const view = shallow(
+      <EmptyStateSecondaryActions
+        className="custom-empty-state-secondary"
+        id="empty-state-2"
+      />
+    );
+    expect(view.props().className).toBe(
+      'pf-c-empty-state__secondary custom-empty-state-secondary'
+    );
     expect(view.props().id).toBe('empty-state-2');
   });
 
   test('Icon', () => {
     const view = shallow(
-      <EmptyStateIcon icon={AddressBookIcon} className="custom-empty-state-icon" id="empty-state-icon" />
+      <EmptyStateIcon
+        icon={AddressBookIcon}
+        className="custom-empty-state-icon"
+        id="empty-state-icon"
+      />
     );
-    expect(view.props().className).toBe('pf-c-empty-state__icon custom-empty-state-icon');
+    expect(view.props().className).toBe(
+      'pf-c-empty-state__icon custom-empty-state-icon'
+    );
     expect(view.props().id).toBe('empty-state-icon');
   });
 
   test('Wrap icon in a div', () => {
     const view = shallow(
-      <EmptyStateIcon variant="container" component={AddressBookIcon} className="custom-empty-state-icon" id="empty-state-icon" />
+      <EmptyStateIcon
+        variant="container"
+        component={AddressBookIcon}
+        className="custom-empty-state-icon"
+        id="empty-state-icon"
+      />
     );
     console.log(view.debug());
-    expect(view.find('div').props().className).toBe('pf-c-empty-state__icon custom-empty-state-icon');
+    expect(view.find('div').props().className).toBe(
+      'pf-c-empty-state__icon custom-empty-state-icon'
+    );
     expect(view.find('AddressBookIcon').length).toBe(1);
   });
 
   test('Primary div', () => {
     const view = shallow(
-      <EmptyStatePrimary className="custom-empty-state-prim-cls" id="empty-state-prim-id">
-          <Button variant="link">Link</Button>
+      <EmptyStatePrimary
+        className="custom-empty-state-prim-cls"
+        id="empty-state-prim-id"
+      >
+        <Button variant="link">Link</Button>
       </EmptyStatePrimary>
     );
-    expect(view.props().className).toBe('pf-c-empty-state__primary custom-empty-state-prim-cls');
+    expect(view.props().className).toBe(
+      'pf-c-empty-state__primary custom-empty-state-prim-cls'
+    );
     expect(view.props().id).toBe('empty-state-prim-id');
   });
 });

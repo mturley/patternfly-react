@@ -39,6 +39,8 @@ describe('css', () => {
   });
 
   test('concatenates values together', () => {
-    expect(css(parseValue.parseValue, createValue.createValue, stringValue)).toMatchSnapshot();
+    expect(
+      css(parseValue.parseValue, createValue.createValue, stringValue)
+    ).toMatchSnapshot();
   });
 });

@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { noop } from '../../../common/helpers';
 
-export const DecadeViewTable = ({ yearArray, selectedYear, setSelectedYear }) => (
+export const DecadeViewTable = ({
+  yearArray,
+  selectedYear,
+  setSelectedYear
+}) => (
   <tbody>
     <tr>
       <td colSpan="7">

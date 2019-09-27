@@ -66,7 +66,7 @@ export class LiveEdit extends React.Component {
 
   onCodeOpen = () => {
     this.setState({ codeOpen: !this.state.codeOpen });
-  }
+  };
 
   onCopy = () => {
     const el = document.createElement('textarea');
@@ -76,15 +76,30 @@ export class LiveEdit extends React.Component {
     document.execCommand('copy');
     document.body.removeChild(el);
     this.setState({ copied: true });
-  }
+  };
 
   render() {
     const Toolbar = (
-      <div style={{ borderTop: '1px solid #72767b', borderBottom: '1px solid #72767b' }}>
-        <Button onClick={this.onCodeOpen} variant="plain" title="Toggle code" aria-label="Toggle code">
+      <div
+        style={{
+          borderTop: '1px solid #72767b',
+          borderBottom: '1px solid #72767b'
+        }}
+      >
+        <Button
+          onClick={this.onCodeOpen}
+          variant="plain"
+          title="Toggle code"
+          aria-label="Toggle code"
+        >
           <CodeIcon />
         </Button>
-        <Button onClick={this.onCopy} variant="plain" title="Copy code" aria-label="Copy code">
+        <Button
+          onClick={this.onCopy}
+          variant="plain"
+          title="Copy code"
+          aria-label="Copy code"
+        >
           <CopyIcon />
         </Button>
         <span>{this.state.copied && 'Copied to clipboard!'}</span>
@@ -94,10 +109,19 @@ export class LiveEdit extends React.Component {
     if (this.props.className === 'language-js') {
       return (
         <div style={{ border: '1px solid #72767b' }} className="example">
-          <LiveProvider code={this.code} scope={this.scope} transformCode={transformCode}>
+          <LiveProvider
+            code={this.code}
+            scope={this.scope}
+            transformCode={transformCode}
+          >
             <LivePreview className="ws-preview" />
             {Toolbar}
-            {this.state.codeOpen && <LiveEditor className="code" style={{ backgroundColor: 'black' }} />}
+            {this.state.codeOpen && (
+              <LiveEditor
+                className="code"
+                style={{ backgroundColor: 'black' }}
+              />
+            )}
             <LiveError />
           </LiveProvider>
         </div>
@@ -106,7 +130,12 @@ export class LiveEdit extends React.Component {
       return (
         <LiveProvider code={this.code} disabled>
           {Toolbar}
-          {this.state.codeOpen && <LiveEditor contentEditable={false} style={{ backgroundColor: 'black' }} />}
+          {this.state.codeOpen && (
+            <LiveEditor
+              contentEditable={false}
+              style={{ backgroundColor: 'black' }}
+            />
+          )}
         </LiveProvider>
       );
     }

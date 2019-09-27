@@ -12,14 +12,23 @@ export const dropdownLevel = (
       <MenuItem divider />
       <MenuItem>One more separated link</MenuItem>
     </HorizontalNavMenuItem>
-    <HorizontalNavMenuItem id="dropdown-with-submenu" title="Dropdown with Submenu" dropdown>
+    <HorizontalNavMenuItem
+      id="dropdown-with-submenu"
+      title="Dropdown with Submenu"
+      dropdown
+    >
       <MenuItem>Link</MenuItem>
       <MenuItem>Another link</MenuItem>
       <MenuItem divider />
       <MenuItem>Separated link</MenuItem>
       <MenuItem divider />
       <MenuItem>One more separated link</MenuItem>
-      <HorizontalNavMenuItem id="more-options" title="More options" dropdown submenu>
+      <HorizontalNavMenuItem
+        id="more-options"
+        title="More options"
+        dropdown
+        submenu
+      >
         <MenuItem>Link</MenuItem>
         <MenuItem>Another link</MenuItem>
         <MenuItem divider />
@@ -28,14 +37,24 @@ export const dropdownLevel = (
         <MenuItem>One more separated link</MenuItem>
       </HorizontalNavMenuItem>
     </HorizontalNavMenuItem>
-    <HorizontalNavMenuItem id="dropup-submenu" title="Dropdown with Dropup Submenu" dropdown dropup>
+    <HorizontalNavMenuItem
+      id="dropup-submenu"
+      title="Dropdown with Dropup Submenu"
+      dropdown
+      dropup
+    >
       <MenuItem>Link</MenuItem>
       <MenuItem>Another link</MenuItem>
       <MenuItem divider />
       <MenuItem>Separated link</MenuItem>
       <MenuItem divider />
       <MenuItem>One more separated link</MenuItem>
-      <HorizontalNavMenuItem id="more-options" title="More options" dropdown submenu>
+      <HorizontalNavMenuItem
+        id="more-options"
+        title="More options"
+        dropdown
+        submenu
+      >
         <MenuItem>Link</MenuItem>
         <MenuItem>Another link</MenuItem>
         <MenuItem divider />
@@ -44,14 +63,24 @@ export const dropdownLevel = (
         <MenuItem>One more separated link</MenuItem>
       </HorizontalNavMenuItem>
     </HorizontalNavMenuItem>
-    <HorizontalNavMenuItem id="pull-left" title="Dropdown with Pull-left Submenu" dropdown>
+    <HorizontalNavMenuItem
+      id="pull-left"
+      title="Dropdown with Pull-left Submenu"
+      dropdown
+    >
       <MenuItem>Link</MenuItem>
       <MenuItem>Another link</MenuItem>
       <MenuItem divider />
       <MenuItem>Separated link</MenuItem>
       <MenuItem divider />
       <MenuItem>One more separated link</MenuItem>
-      <HorizontalNavMenuItem id="left-more-options" title="More options" dropdown submenu pullLeft>
+      <HorizontalNavMenuItem
+        id="left-more-options"
+        title="More options"
+        dropdown
+        submenu
+        pullLeft
+      >
         <MenuItem>Link</MenuItem>
         <MenuItem>Another link</MenuItem>
         <MenuItem divider />

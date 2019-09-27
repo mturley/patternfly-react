@@ -1,7 +1,11 @@
 import React from 'react';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
 import { storiesOf } from '@storybook/react';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { number, select, withKnobs } from '@storybook/addon-knobs';
 import { name } from '../../../package.json';
 import { DateTimePicker } from './index';
@@ -9,7 +13,9 @@ import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
 
 const stories = storiesOf(
-  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.FORMS_AND_CONTROLS}/Date Time Picker`,
+  `${storybookPackageName(name)}/${
+    STORYBOOK_CATEGORY.FORMS_AND_CONTROLS
+  }/Date Time Picker`,
   module
 );
 stories.addDecorator(withKnobs);
@@ -40,7 +46,9 @@ stories.add('DateTimePicker', () => {
       <label>Time picker</label>
       <div className="row">
         <div className="col-md-3">
-          <TimePicker placement={select('Placement Time', ['top', 'bottom'], 'top')} />
+          <TimePicker
+            placement={select('Placement Time', ['top', 'bottom'], 'top')}
+          />
         </div>
       </div>
     </div>

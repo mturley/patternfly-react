@@ -65,10 +65,34 @@ const utilizationBarCardStory = stories => {
                   <CardTitle>Quotas</CardTitle>
                 </CardHeading>
                 <CardBody>
-                  <UtilizationBar min={0} max={100} now={25} description="CPU" label="115 of 460 MHz" />
-                  <UtilizationBar min={0} max={100} now={50} description="Memory" label="8 of 16 GB" />
-                  <UtilizationBar min={0} max={100} now={62.5} description="Pods" label="5 of 8 Total" />
-                  <UtilizationBar min={0} max={100} now={100} description="Services" label="2 of 2 Total" />
+                  <UtilizationBar
+                    min={0}
+                    max={100}
+                    now={25}
+                    description="CPU"
+                    label="115 of 460 MHz"
+                  />
+                  <UtilizationBar
+                    min={0}
+                    max={100}
+                    now={50}
+                    description="Memory"
+                    label="8 of 16 GB"
+                  />
+                  <UtilizationBar
+                    min={0}
+                    max={100}
+                    now={62.5}
+                    description="Pods"
+                    label="5 of 8 Total"
+                  />
+                  <UtilizationBar
+                    min={0}
+                    max={100}
+                    now={100}
+                    description="Services"
+                    label="2 of 2 Total"
+                  />
                 </CardBody>
               </Card>
             </CardGrid.Col>

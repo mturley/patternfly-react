@@ -3,20 +3,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { noop } from '../../common/helpers';
 
-const HintBlock = ({ className, onClose, title, body, buttonContent, onButtonClick, ...props }) => {
+const HintBlock = ({
+  className,
+  onClose,
+  title,
+  body,
+  buttonContent,
+  onButtonClick,
+  ...props
+}) => {
   const classes = classNames('hint-block-pf', className);
 
   return (
     <div className={classes} {...props}>
       {onClose && (
-        <button type="button" className="close" aria-hidden="true" aria-label="Close" onClick={onClose}>
+        <button
+          type="button"
+          className="close"
+          aria-hidden="true"
+          aria-label="Close"
+          onClick={onClose}
+        >
           <span className="pficon pficon-close" />
         </button>
       )}
       <div className="hint-block-pf-title">{title}</div>
       <div className="hint-block-pf-body">{body}</div>
       {buttonContent && (
-        <button className="btn btn-primary" type="button" onClick={onButtonClick}>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={onButtonClick}
+        >
           {buttonContent}
         </button>
       )}

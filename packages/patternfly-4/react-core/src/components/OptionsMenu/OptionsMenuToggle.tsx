@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { DropdownToggle, DropdownContext } from '../Dropdown';
 
-export interface OptionsMenuToggleProps  extends React.HTMLProps<HTMLButtonElement> {
+export interface OptionsMenuToggleProps
+  extends React.HTMLProps<HTMLButtonElement> {
   /** Id of the parent Options menu component */
   parentId?: string;
   /** Callback for when this Options menu is toggled */
@@ -18,7 +19,7 @@ export interface OptionsMenuToggleProps  extends React.HTMLProps<HTMLButtonEleme
   /** Forces display of the active state of the Options menu */
   isActive?: boolean;
   /** Disables the options menu toggle */
-   isDisabled?: boolean;
+  isDisabled?: boolean;
   /** hide the toggle caret */
   hideCaret?: boolean;
   /** Provides an accessible name for the button when an icon is used instead of text */
@@ -31,26 +32,28 @@ export interface OptionsMenuToggleProps  extends React.HTMLProps<HTMLButtonEleme
   toggleTemplate?: React.ReactNode;
 }
 
-export const OptionsMenuToggle: React.FunctionComponent<OptionsMenuToggleProps> = ({
-    isPlain = false,
-    isHovered = false,
-    isActive = false,
-    isFocused = false,
-    isDisabled = false,
-    isOpen = false,
-    parentId = '',
-    toggleTemplate = <React.Fragment/>,
-    hideCaret = false,
-    isSplitButton = false,
-    type,
-    'aria-label': ariaLabel = 'Options menu',
-    ...props
+export const OptionsMenuToggle: React.FunctionComponent<
+  OptionsMenuToggleProps
+> = ({
+  isPlain = false,
+  isHovered = false,
+  isActive = false,
+  isFocused = false,
+  isDisabled = false,
+  isOpen = false,
+  parentId = '',
+  toggleTemplate = <React.Fragment />,
+  hideCaret = false,
+  isSplitButton = false,
+  type,
+  'aria-label': ariaLabel = 'Options menu',
+  ...props
 }: OptionsMenuToggleProps) => {
   return (
     <DropdownContext.Consumer>
       {({ id: contextId }) => (
         <DropdownToggle
-          {...(isPlain || hideCaret) && { iconComponent: null }}
+          {...((isPlain || hideCaret) && { iconComponent: null })}
           {...props}
           isPlain={isPlain}
           isOpen={isOpen}
@@ -62,7 +65,7 @@ export const OptionsMenuToggle: React.FunctionComponent<OptionsMenuToggleProps> 
           ariaHasPopup="listbox"
           aria-label={ariaLabel}
           aria-expanded={isOpen}
-          {...toggleTemplate ? { children: toggleTemplate} : {}}
+          {...(toggleTemplate ? { children: toggleTemplate } : {})}
         />
       )}
     </DropdownContext.Consumer>

@@ -31,7 +31,7 @@ class DateTimePicker extends React.Component {
       )} ${parsedValue.toLocaleString(locale, options[1])}`;
     }
     return date;
-  }
+  };
 
   setSelected = date => {
     let newDate = new Date(this.state.value);
@@ -44,7 +44,7 @@ class DateTimePicker extends React.Component {
       typeOfDateInput: 'M',
       isTimeTableOpen: false
     });
-  }
+  };
 
   render() {
     const { locale, weekStartsOn, id, placement } = this.props;

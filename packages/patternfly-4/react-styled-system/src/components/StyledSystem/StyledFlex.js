@@ -2,7 +2,13 @@ import React from 'react';
 import { css } from '@patternfly/react-styles';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
-import { flexWrap, flexDirection, alignItems, alignContent, justifyContent } from 'styled-system';
+import {
+  flexWrap,
+  flexDirection,
+  alignItems,
+  alignContent,
+  justifyContent
+} from 'styled-system';
 import StyledBox, { StyledBoxBase } from './StyledBox';
 
 const StyledFlexBase = styled(StyledBoxBase)(
@@ -34,15 +40,35 @@ StyledFlex.propTypes = {
   ...StyledBox.propTypes,
 
   /** flex-wrap */
-  flexWrap: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  flexWrap: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** flex-direction */
-  flexDirection: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  flexDirection: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** align-items */
-  alignItems: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  alignItems: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** align-content */
-  alignContent: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  alignContent: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** justify-content */
-  justifyContent: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array])
+  justifyContent: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ])
 };
 
 StyledFlex.defaultProps = {

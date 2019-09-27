@@ -52,7 +52,8 @@ export function cssToJSNew(cssString, cssOutputPath = '', useModules = false) {
       classDeclaration.push(`${key}: '${cleanClass}'`);
     }
   });
-  const classSection = classDeclaration.length > 0 ? `${classDeclaration.join(',\n  ')},` : '';
+  const classSection =
+    classDeclaration.length > 0 ? `${classDeclaration.join(',\n  ')},` : '';
 
   if (useModules) {
     return `${cssImport}
@@ -79,12 +80,18 @@ module.exports = {
 }
 
 export function getFullCSS(pathToCSSFile) {
-  const rawCss = readFileSync(pathToCSSFile, 'utf8').replace('@charset "UTF-8";', '');
+  const rawCss = readFileSync(pathToCSSFile, 'utf8').replace(
+    '@charset "UTF-8";',
+    ''
+  );
   return rawCss;
 }
 
 export function getCSS(pathToCSSFile) {
-  const rawCss = readFileSync(pathToCSSFile, 'utf8').replace('@charset "UTF-8";', '');
+  const rawCss = readFileSync(pathToCSSFile, 'utf8').replace(
+    '@charset "UTF-8";',
+    ''
+  );
   return minifyCSS(rawCss);
 }
 
@@ -96,23 +103,36 @@ export function minifyCSS(cssString) {
 
 export function writeCSSFile(destinationPath, contents) {
   ensureDir(path.dirname(destinationPath)).then(() => {
-    const replacementString = contents.replace(/..\/..\/assets/g, '../../../../../styles/assets');
+    const replacementString = contents.replace(
+      /..\/..\/assets/g,
+      '../../../../../styles/assets'
+    );
     outputFileSync(destinationPath, replacementString);
   });
 }
 
-export function writeCSSJSFile(rootPath, originalPath, destinationPath, contents) {
+export function writeCSSJSFile(
+  rootPath,
+  originalPath,
+  destinationPath,
+  contents
+) {
   outputFileSync(destinationPath, contents);
 }
 
 export function getRelativeImportPath(from, to) {
   const parsedTo = path.parse(to);
-  const newImportPath = path.normalize(path.join(relative(from, parsedTo.dir), parsedTo.base));
+  const newImportPath = path.normalize(
+    path.join(relative(from, parsedTo.dir), parsedTo.base)
+  );
   return newImportPath.startsWith('.') ? newImportPath : `./${newImportPath}`;
 }
 
 export function getCSSOutputPath(outDir, rootPath, pathToCSSFile) {
-  return path.join(path.resolve(rootPath, outDir), getFormattedCSSOutputPath(pathToCSSFile));
+  return path.join(
+    path.resolve(rootPath, outDir),
+    getFormattedCSSOutputPath(pathToCSSFile)
+  );
 }
 
 function getFormattedCSSOutputPath(pathToCSSFile) {

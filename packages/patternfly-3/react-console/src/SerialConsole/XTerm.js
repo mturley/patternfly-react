@@ -44,7 +44,10 @@ class XTerm extends React.Component {
   componentDidMount() {
     this.state.terminal.open(this.childTerminal);
 
-    window.addEventListener('resize', debounce(this.onWindowResize.bind(this), 100));
+    window.addEventListener(
+      'resize',
+      debounce(this.onWindowResize.bind(this), 100)
+    );
     this.onWindowResize();
   }
 
@@ -100,7 +103,7 @@ class XTerm extends React.Component {
     // https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
     event.returnValue = '';
     return '';
-  }
+  };
 
   /**
    * Backend closed connection.
@@ -125,11 +128,11 @@ class XTerm extends React.Component {
 
   onFocus = () => {
     window.addEventListener('beforeunload', this.onBeforeUnload);
-  }
+  };
 
   onBlur = () => {
     window.removeEventListener('beforeunload', this.onBeforeUnload);
-  }
+  };
 
   /**
    * If autoFit is enabled, compute the size and set it
@@ -174,8 +177,10 @@ class XTerm extends React.Component {
   }
 
   focus = () => {
-    if (this.state.terminal) { this.state.terminal.focus(); }
-  }
+    if (this.state.terminal) {
+      this.state.terminal.focus();
+    }
+  };
 
   render() {
     // ensure react never reuses this div by keying it with the terminal widget

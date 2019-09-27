@@ -1,6 +1,12 @@
 import React from 'react';
 import { withInfo } from '@storybook/addon-info';
-import { withKnobs, boolean, number, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text
+} from '@storybook/addon-knobs';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
 import { DOCUMENTATION_URL } from 'storybook/constants/siteConstants';
 import { patternfly } from '../../../common/patternfly';
@@ -58,8 +64,10 @@ const bulletChart = stories => {
         );
       }
 
-      const legendTextFunction = value => `${value.title} - ${value.value}${usePercent ? '%' : ' hours'}`;
-      const rangeTextFunction = range => `${range.title} - ${range.value}${usePercent ? '%' : ' hours'}`;
+      const legendTextFunction = value =>
+        `${value.title} - ${value.value}${usePercent ? '%' : ' hours'}`;
+      const rangeTextFunction = range =>
+        `${range.title} - ${range.value}${usePercent ? '%' : ' hours'}`;
       const useColors = select(
         'Use Colors',
         {
@@ -83,7 +91,12 @@ const bulletChart = stories => {
         'Value'
       );
       const valueTitle = text('Value Title', 'Data1', 'Legend');
-      const valueColor = select('Value Color', colorOptions, patternfly.pfPaletteColors.blue, 'Value');
+      const valueColor = select(
+        'Value Color',
+        colorOptions,
+        patternfly.pfPaletteColors.blue,
+        'Value'
+      );
       const valueLegendText = text('Value Legend Text', '', 'Legend');
 
       const showValue2 = boolean('Show Value 2', true, 'Value');
@@ -99,7 +112,12 @@ const bulletChart = stories => {
         'Value'
       );
       const valueTitle2 = text('Value 2 Title', 'Data2', 'Legend');
-      const valueColor2 = select('Value Color 2', colorOptions, patternfly.pfPaletteColors.green, 'Value');
+      const valueColor2 = select(
+        'Value Color 2',
+        colorOptions,
+        patternfly.pfPaletteColors.green,
+        'Value'
+      );
       const valueLegendText2 = text('Value 2 Legend Text', '', 'Legend');
 
       const showValue3 = boolean('Show Value 3', false, 'Value');
@@ -115,7 +133,12 @@ const bulletChart = stories => {
         'Value'
       );
       const valueTitle3 = text('Value 3 Title', 'Data3', 'Legend');
-      const valueColor3 = select('Value Color 3', colorOptions, patternfly.pfPaletteColors.gold, 'Value');
+      const valueColor3 = select(
+        'Value Color 3',
+        colorOptions,
+        patternfly.pfPaletteColors.gold,
+        'Value'
+      );
       const valueLegendText3 = text('Value 3 Legend Text', '', 'Legend');
 
       const showValue4 = boolean('Show Value 4', false, 'Value');
@@ -131,7 +154,12 @@ const bulletChart = stories => {
         'Value'
       );
       const valueTitle4 = text('Value 4 Title', 'Data4', 'Legend');
-      const valueColor4 = select('Value Color 4', colorOptions, patternfly.pfPaletteColors.red, 'Value');
+      const valueColor4 = select(
+        'Value Color 4',
+        colorOptions,
+        patternfly.pfPaletteColors.red,
+        'Value'
+      );
       const valueLegendText4 = text('Value 4 Legend Text', '', 'Legend');
 
       const showValue5 = boolean('Show Value 5', false, 'Value');
@@ -147,12 +175,21 @@ const bulletChart = stories => {
         'Value'
       );
       const valueTitle5 = text('Value 5 Title', 'Data5', 'Legend');
-      const valueColor5 = select('Value Color 5', colorOptions, patternfly.pfPaletteColors.orange, 'Value');
+      const valueColor5 = select(
+        'Value Color 5',
+        colorOptions,
+        patternfly.pfPaletteColors.orange,
+        'Value'
+      );
       const valueLegendText5 = text('Value 5 Legend Text', '', 'Legend');
 
       const useDots = boolean('Use Dots', false, 'Value');
 
-      const showWarnThreshold = boolean('Show Warning Threshold', true, 'Thresholds');
+      const showWarnThreshold = boolean(
+        'Show Warning Threshold',
+        true,
+        'Thresholds'
+      );
       const thresholdWarning = number(
         'Warning Threshold',
         70,
@@ -166,7 +203,11 @@ const bulletChart = stories => {
       );
       const thresholdWarningText = text('Warning Threshold Text', '', 'Legend');
 
-      const showErrorThreshold = boolean('Show Error Threshold', true, 'Thresholds');
+      const showErrorThreshold = boolean(
+        'Show Error Threshold',
+        true,
+        'Thresholds'
+      );
       const thresholdError = number(
         'Error Threshold',
         90,
@@ -239,7 +280,12 @@ const bulletChart = stories => {
       );
       const range4Title = text('Range 4 Title', 'Range 4', 'Legend');
       const range4Legend = text('Range 4 Legend', '', 'Legend');
-      const range4Color = select('Range 4 Color', colorOptions, patternfly.pfPaletteColors.blue, 'Ranges');
+      const range4Color = select(
+        'Range 4 Color',
+        colorOptions,
+        patternfly.pfPaletteColors.blue,
+        'Ranges'
+      );
 
       const showLegend = boolean('Show Legend', false, 'Legend');
       const useCustomLegendText = boolean('Custom Legend', false, 'Legend');
@@ -293,7 +339,9 @@ const bulletChart = stories => {
           color: useColors === 'Custom' ? valueColor : undefined,
           title: valueTitle,
           legendText: valueLegendText,
-          legendTextFunction: useCustomLegendText ? legendTextFunction : undefined
+          legendTextFunction: useCustomLegendText
+            ? legendTextFunction
+            : undefined
         }
       ];
 
@@ -303,7 +351,9 @@ const bulletChart = stories => {
           color: useColors === 'Custom' ? valueColor2 : undefined,
           title: valueTitle2,
           legendText: valueLegendText2,
-          legendTextFunction: useCustomLegendText ? legendTextFunction : undefined
+          legendTextFunction: useCustomLegendText
+            ? legendTextFunction
+            : undefined
         });
       }
       if (showValue3) {
@@ -312,7 +362,9 @@ const bulletChart = stories => {
           color: useColors === 'Custom' ? valueColor3 : undefined,
           title: valueTitle3,
           legendText: valueLegendText3,
-          legendTextFunction: useCustomLegendText ? legendTextFunction : undefined
+          legendTextFunction: useCustomLegendText
+            ? legendTextFunction
+            : undefined
         });
       }
       if (showValue4) {
@@ -321,7 +373,9 @@ const bulletChart = stories => {
           color: useColors === 'Custom' ? valueColor4 : undefined,
           title: valueTitle4,
           legendText: valueLegendText4,
-          legendTextFunction: useCustomLegendText ? legendTextFunction : undefined
+          legendTextFunction: useCustomLegendText
+            ? legendTextFunction
+            : undefined
         });
       }
       if (showValue5) {
@@ -330,7 +384,9 @@ const bulletChart = stories => {
           color: useColors === 'Custom' ? valueColor5 : undefined,
           title: valueTitle5,
           legendText: valueLegendText5,
-          legendTextFunction: useCustomLegendText ? legendTextFunction : undefined
+          legendTextFunction: useCustomLegendText
+            ? legendTextFunction
+            : undefined
         });
       }
       const story = (

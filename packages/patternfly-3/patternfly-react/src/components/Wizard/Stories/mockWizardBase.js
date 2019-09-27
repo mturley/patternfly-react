@@ -20,10 +20,11 @@ class MockWizardBase extends React.Component {
     } else if (activeStepIndex > 0) {
       this.setState(prevState => ({
         activeStepIndex: prevState.activeStepIndex - 1,
-        activeSubStepIndex: steps[prevState.activeStepIndex - 1].subSteps.length - 1
+        activeSubStepIndex:
+          steps[prevState.activeStepIndex - 1].subSteps.length - 1
       }));
     }
-  }
+  };
   onNextButtonClick = () => {
     const { steps } = this.props;
     const { activeStepIndex, activeSubStepIndex } = this.state;
@@ -39,13 +40,13 @@ class MockWizardBase extends React.Component {
         activeSubStepIndex: 0
       }));
     }
-  }
+  };
   onSidebarItemClick = (stepIndex, subStepIndex) => {
     this.setState({
       activeStepIndex: stepIndex,
       activeSubStepIndex: subStepIndex
     });
-  }
+  };
   onStepClick = stepIndex => {
     if (stepIndex === this.state.activeStepIndex) {
       return;
@@ -54,7 +55,7 @@ class MockWizardBase extends React.Component {
       activeStepIndex: stepIndex,
       activeSubStepIndex: 0
     });
-  }
+  };
   render() {
     return false;
   }

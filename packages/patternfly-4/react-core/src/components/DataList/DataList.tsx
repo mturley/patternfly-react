@@ -17,7 +17,11 @@ export const DataList: React.FunctionComponent<DataListProps> = ({
   'aria-label': ariaLabel,
   ...props
 }: DataListProps) => (
-  <ul className={css(styles.dataList, className)} aria-label={ariaLabel} {...props}>
+  <ul
+    className={css(styles.dataList, className)}
+    aria-label={ariaLabel}
+    {...props}
+  >
     {children}
   </ul>
 );

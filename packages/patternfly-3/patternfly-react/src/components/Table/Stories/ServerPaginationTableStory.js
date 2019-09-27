@@ -1,7 +1,10 @@
 import React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { decorateAction } from '@storybook/addon-actions';
-import { MockServerPaginationTable, mockServerPaginationTableSource } from '../__mocks__/mockServerPaginationTable';
+import {
+  MockServerPaginationTable,
+  mockServerPaginationTableSource
+} from '../__mocks__/mockServerPaginationTable';
 import {
   actionHeaderCellFormatter,
   customHeaderFormattersDefinition,
@@ -50,7 +53,11 @@ const serverPaginationTable = stories => {
       )
     })(() => {
       const logAction = decorateAction([args => args]);
-      const story = <MockServerPaginationTable onServerPageLogger={logAction('Server page requested')} />;
+      const story = (
+        <MockServerPaginationTable
+          onServerPageLogger={logAction('Server page requested')}
+        />
+      );
       return inlineTemplate({
         title: 'Server Paginated Table',
         documentationLink: `${DOCUMENTATION_URL.PATTERNFLY_ORG_CONTENT_VIEWS}table-view/`,

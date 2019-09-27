@@ -3,7 +3,11 @@ import styles from '@patternfly/react-styles/css/components/Dropdown/dropdown';
 import { css } from '@patternfly/react-styles';
 import { DropdownMenu } from './DropdownMenu';
 import { DropdownProps } from './Dropdown';
-import { DropdownPosition, DropdownDirection, DropdownContext } from './dropdownConstants';
+import {
+  DropdownPosition,
+  DropdownDirection,
+  DropdownContext
+} from './dropdownConstants';
 
 export class DropdownWithContext extends React.Component<DropdownProps> {
   openedOnEnter = false;
@@ -26,7 +30,11 @@ export class DropdownWithContext extends React.Component<DropdownProps> {
 
   constructor(props: DropdownProps) {
     super(props);
-    if (props.dropdownItems && props.dropdownItems.length > 0 && props.children) {
+    if (
+      props.dropdownItems &&
+      props.dropdownItems.length > 0 &&
+      props.children
+    ) {
       throw new Error(
         'Children and dropdownItems props have been provided. Only the dropdownItems prop items will be rendered '
       );
@@ -35,10 +43,12 @@ export class DropdownWithContext extends React.Component<DropdownProps> {
 
   onEnter = () => {
     this.openedOnEnter = true;
-  }
+  };
 
   componentDidUpdate() {
-    if (!this.props.isOpen) { this.openedOnEnter = false; }
+    if (!this.props.isOpen) {
+      this.openedOnEnter = false;
+    }
   }
 
   render() {
@@ -56,7 +66,8 @@ export class DropdownWithContext extends React.Component<DropdownProps> {
       autoFocus,
       ...props
     } = this.props;
-    const id = toggle.props.id || `pf-toggle-id-${DropdownWithContext.currentId++}`;
+    const id =
+      toggle.props.id || `pf-toggle-id-${DropdownWithContext.currentId++}`;
     let component: string;
     let renderedContent: React.ReactNode[];
     let ariaHasPopup = false;
@@ -84,7 +95,7 @@ export class DropdownWithContext extends React.Component<DropdownProps> {
               )}
               ref={this.baseComponentRef}
             >
-              {React.Children.map(toggle, (oneToggle) =>
+              {React.Children.map(toggle, oneToggle =>
                 React.cloneElement(oneToggle, {
                   parentRef: this.baseComponentRef,
                   isOpen,

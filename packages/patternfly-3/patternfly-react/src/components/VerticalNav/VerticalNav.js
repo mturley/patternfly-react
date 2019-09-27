@@ -4,7 +4,13 @@ import classNames from 'classnames';
 import { ListGroup } from '../ListGroup';
 import VerticalNavItem from './VerticalNavItem';
 import VerticalNavMasthead from './VerticalNavMasthead';
-import { filterChildren, findChild, hasDisplayName, noop, propsChanged } from '../../common/helpers';
+import {
+  filterChildren,
+  findChild,
+  hasDisplayName,
+  noop,
+  propsChanged
+} from '../../common/helpers';
 import Timer from '../../common/Timer';
 import controlled from '../../common/controlled';
 import { layout } from '../../common/patternfly';
@@ -45,7 +51,12 @@ class BaseVerticalNav extends React.Component {
   }
 
   componentDidUpdate(oldProps) {
-    const bodyClassProps = ['navCollapsed', 'pinnedPath', 'showMobileNav', 'isMobile'];
+    const bodyClassProps = [
+      'navCollapsed',
+      'pinnedPath',
+      'showMobileNav',
+      'isMobile'
+    ];
     if (propsChanged(bodyClassProps, oldProps, this.props)) {
       this.updateBodyClasses();
     }
@@ -63,29 +74,29 @@ class BaseVerticalNav extends React.Component {
     const { onLayoutChange, setControlledState } = this.props;
     setControlledState({ isMobile: newLayout === 'mobile' });
     onLayoutChange && onLayoutChange(newLayout);
-  }
+  };
 
   setActivePath = activePath => {
     if (!this.state.controlledActivePath) {
       this.props.setControlledState({ activePath });
     }
-  }
+  };
 
   setControlledActivePath = controlledActivePath => {
     this.setState({ controlledActivePath });
-  }
+  };
 
   setControlledHoverPath = controlledHoverPath => {
     this.setState({ controlledHoverPath });
-  }
+  };
 
   setControlledMobilePath = controlledMobilePath => {
     this.setState({ controlledMobilePath });
-  }
+  };
 
   setControlledPinnedPath = controlledPinnedPath => {
     this.setState({ controlledPinnedPath });
-  }
+  };
 
   setHoverPath = hoverPath => {
     if (!this.state.controlledHoverPath) {
@@ -94,70 +105,88 @@ class BaseVerticalNav extends React.Component {
         ...(hoverPath === null ? { showMobileNav: false } : {})
       });
     }
-  }
+  };
 
   setMobilePath = mobilePath => {
     if (!this.state.controlledMobilePath) {
       this.props.setControlledState({ mobilePath });
     }
-  }
+  };
 
   setPinnedPath = pinnedPath => {
     if (!this.state.controlledPinnedPath) {
       this.props.setControlledState({ pinnedPath });
     }
-  }
+  };
   hoverTimer = new Timer();
   clearBodyClasses = () => {
     if (this.props.dynamicBodyClasses) {
       setBodyClassIf(false, 'collapsed-nav');
       setBodyClassIf(false, 'hidden-nav');
     }
-  }
+  };
 
   collapseMenu = () => {
     const { onCollapse, setControlledState } = this.props;
     setControlledState({ navCollapsed: true });
     onCollapse && onCollapse();
-  }
+  };
 
   expandMenu = () => {
     const { onExpand, setControlledState } = this.props;
     setControlledState({ navCollapsed: false });
     onExpand && onExpand();
-  }
+  };
 
   forceHideSecondaryMenu = () => {
     this.setState({ forceHidden: true }); // eslint-disable-line react/no-unused-state
     setTimeout(() => {
       this.setState({ forceHidden: false }); // eslint-disable-line react/no-unused-state
     }, 500);
-  }
+  };
 
   handleBodyClick = () => {
     // Clear hover state on body click. Helps especially when using blurDisabled prop.
     this.setHoverPath(null);
-  }
+  };
 
   navigateToItem = item => {
     const { onNavigate } = this.props;
     onNavigate(item);
     // Note: This should become router-aware later on.
-  }
+  };
 
   updateBodyClasses = () => {
     // Note: Updating the body element classes from here like this is a hacky, non-react-y pattern.
     // It's only here for consistency. See comments on getBodyContentElement in ./constants.js.
-    const { dynamicBodyClasses, navCollapsed, pinnedPath, isMobile } = this.props;
+    const {
+      dynamicBodyClasses,
+      navCollapsed,
+      pinnedPath,
+      isMobile
+    } = this.props;
     const collapsed = navCollapsed && pinnedPath === null;
     if (dynamicBodyClasses) {
       setBodyClassIf(!isMobile && collapsed, 'collapsed-nav');
       setBodyClassIf(isMobile, 'hidden-nav');
     }
-  }
+  };
 
-  updateNavOnItemBlur = (primary, secondary, tertiary, idPath, parentPath, noDelay, callback) => {
-    const { hoverPath, blurDelay, blurDisabled, setControlledState } = this.props;
+  updateNavOnItemBlur = (
+    primary,
+    secondary,
+    tertiary,
+    idPath,
+    parentPath,
+    noDelay,
+    callback
+  ) => {
+    const {
+      hoverPath,
+      blurDelay,
+      blurDisabled,
+      setControlledState
+    } = this.props;
     const item = deepestOf(primary, secondary, tertiary);
     const hovered = hoverPath && hoverPath.startsWith(idPath);
     this.hoverTimer.clearTimer();
@@ -181,7 +210,7 @@ class BaseVerticalNav extends React.Component {
         }
       }
     }
-  }
+  };
 
   updateNavOnItemClick = (primary, secondary, tertiary, idPath, parentPath) => {
     const { onItemClick, hoverPath, hoverDisabled, isMobile } = this.props;
@@ -201,13 +230,27 @@ class BaseVerticalNav extends React.Component {
       this.navigateToItem(item);
     }
     onItemClick && onItemClick(primary, secondary, tertiary);
-  }
+  };
 
-  updateNavOnItemHover = (primary, secondary, tertiary, idPath, parentPath, callback) => {
-    const { onItemHover, hoverPath, hoverDelay, hoverDisabled, isMobile } = this.props;
+  updateNavOnItemHover = (
+    primary,
+    secondary,
+    tertiary,
+    idPath,
+    parentPath,
+    callback
+  ) => {
+    const {
+      onItemHover,
+      hoverPath,
+      hoverDelay,
+      hoverDisabled,
+      isMobile
+    } = this.props;
     const item = deepestOf(primary, secondary, tertiary);
     const hovered = hoverPath && hoverPath.startsWith(idPath);
-    const targetPath = item.subItems && item.subItems.length > 0 ? idPath : parentPath;
+    const targetPath =
+      item.subItems && item.subItems.length > 0 ? idPath : parentPath;
     const that = this;
     if (!isMobile) {
       this.hoverTimer.clearTimer();
@@ -221,10 +264,16 @@ class BaseVerticalNav extends React.Component {
         }, hoverDelay);
       }
     }
-  }
+  };
 
   updateNavOnMenuToggleClick = () => {
-    const { onMenuToggleClick, isMobile, showMobileNav, navCollapsed, setControlledState } = this.props;
+    const {
+      onMenuToggleClick,
+      isMobile,
+      showMobileNav,
+      navCollapsed,
+      setControlledState
+    } = this.props;
     if (isMobile) {
       if (showMobileNav) {
         setControlledState({ showMobileNav: false });
@@ -238,33 +287,38 @@ class BaseVerticalNav extends React.Component {
       this.collapseMenu();
     }
     onMenuToggleClick && onMenuToggleClick();
-  }
+  };
 
   updateNavOnMobileSelection = (primary, secondary, tertiary) => {
     const { onMobileSelection } = this.props;
     // All the behavior here is handled by mobilePath and setMobilePath,
     // but we still make a callback available here.
     onMobileSelection && onMobileSelection(primary, secondary, tertiary);
-  }
+  };
 
   updateNavOnPin = (item, depth, pinned) => {
     const { onItemPin, isMobile } = this.props;
     if (!isMobile) {
       onItemPin && onItemPin(item, depth, pinned);
     }
-  }
+  };
 
   render() {
     const { items, children } = this.props;
     // Nav items may be passed either as nested VerticalNavItem children, or as nested items in a prop.
     // The items prop will take priority, if present, and must be an array of item objects (not React components).
     // If the items prop is not present, items must be expressed as VerticalNavItem children instead.
-    const itemsFromChildren = filterChildren(children, child => hasDisplayName(child, VerticalNavItem.displayName));
+    const itemsFromChildren = filterChildren(children, child =>
+      hasDisplayName(child, VerticalNavItem.displayName)
+    );
     const itemsFromProps =
       items &&
       items.length > 0 &&
       items.map((primaryItem, i) => (
-        <VerticalNavItem item={primaryItem} key={`primary_${primaryItem.title}`}>
+        <VerticalNavItem
+          item={primaryItem}
+          key={`primary_${primaryItem.title}`}
+        >
           {primaryItem.subItems &&
             primaryItem.subItems.map(secondaryItem => (
               <VerticalNavSecondaryItem
@@ -277,7 +331,10 @@ class BaseVerticalNav extends React.Component {
               >
                 {secondaryItem.subItems &&
                   secondaryItem.subItems.map(tertiaryItem => (
-                    <VerticalNavTertiaryItem item={tertiaryItem} key={`tertiary_${tertiaryItem.title}`} />
+                    <VerticalNavTertiaryItem
+                      item={tertiaryItem}
+                      key={`tertiary_${tertiaryItem.title}`}
+                    />
                   ))}
               </VerticalNavSecondaryItem>
             ))}
@@ -306,11 +363,14 @@ class BaseVerticalNav extends React.Component {
 
     const mastheadElem = masthead || (
       <nav className={classNames('navbar navbar-pf-vertical')}>
-        {findChild(children, child => hasDisplayName(child, VerticalNavMasthead.displayName))}
+        {findChild(children, child =>
+          hasDisplayName(child, VerticalNavMasthead.displayName)
+        )}
       </nav>
     );
 
-    const getPathDepth = path => path && path.split('/').filter(s => s !== '').length;
+    const getPathDepth = path =>
+      path && path.split('/').filter(s => s !== '').length;
     const mobileDepth = getPathDepth(mobilePath);
     const hoverDepth = getPathDepth(hoverPath);
     const pinnedDepth = getPathDepth(pinnedPath);
@@ -355,22 +415,25 @@ class BaseVerticalNav extends React.Component {
       >
         {!hideMasthead && mastheadElem}
         <div
-          className={classNames('nav-pf-vertical nav-pf-vertical-with-sub-menus', {
-            'nav-pf-vertical-collapsible-menus': pinnableMenus,
-            'hidden-icons-pf': hiddenIcons,
-            'nav-pf-vertical-with-badges': showBadges,
-            'nav-pf-persistent-secondary': persistentSecondary,
-            'show-mobile-secondary': showMobileSecondary,
-            'show-mobile-tertiary': showMobileTertiary,
-            'hover-secondary-nav-pf': hoverSecondaryNav,
-            'hover-tertiary-nav-pf': hoverTertiaryNav,
-            'collapsed-secondary-nav-pf': pinnableMenus && pinnedSecondaryNav,
-            'collapsed-tertiary-nav-pf': pinnableMenus && pinnedTertiaryNav,
-            hidden: isMobile,
-            collapsed: !isMobile && navCollapsed,
-            'force-hide-secondary-nav-pf': forceHidden,
-            'show-mobile-nav': showMobileNav
-          })}
+          className={classNames(
+            'nav-pf-vertical nav-pf-vertical-with-sub-menus',
+            {
+              'nav-pf-vertical-collapsible-menus': pinnableMenus,
+              'hidden-icons-pf': hiddenIcons,
+              'nav-pf-vertical-with-badges': showBadges,
+              'nav-pf-persistent-secondary': persistentSecondary,
+              'show-mobile-secondary': showMobileSecondary,
+              'show-mobile-tertiary': showMobileTertiary,
+              'hover-secondary-nav-pf': hoverSecondaryNav,
+              'hover-tertiary-nav-pf': hoverTertiaryNav,
+              'collapsed-secondary-nav-pf': pinnableMenus && pinnedSecondaryNav,
+              'collapsed-tertiary-nav-pf': pinnableMenus && pinnedTertiaryNav,
+              hidden: isMobile,
+              collapsed: !isMobile && navCollapsed,
+              'force-hide-secondary-nav-pf': forceHidden,
+              'show-mobile-nav': showMobileNav
+            }
+          )}
         >
           <ListGroup componentClass="ul">{itemComponents}</ListGroup>
         </div>
@@ -495,7 +558,8 @@ const WithPersist = controlled({
   persist: ['navCollapsed', 'pinnedPath']
 })(BaseVerticalNav);
 
-const VerticalNav = ({ persist, ...props }) => (persist ? <WithPersist {...props} /> : <NoPersist {...props} />);
+const VerticalNav = ({ persist, ...props }) =>
+  persist ? <WithPersist {...props} /> : <NoPersist {...props} />;
 
 VerticalNav.propTypes = {
   ...BaseVerticalNav.propTypes,

@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { noop } from '../../../common/helpers';
 
-export const DecadeViewHeader = ({ currDecade, getPrevDecade, getNextDecade }) => (
+export const DecadeViewHeader = ({
+  currDecade,
+  getPrevDecade,
+  getNextDecade
+}) => (
   <thead>
     <tr>
       <th className="prev" onClick={getPrevDecade}>

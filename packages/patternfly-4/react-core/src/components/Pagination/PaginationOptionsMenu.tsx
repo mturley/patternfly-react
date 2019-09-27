@@ -2,13 +2,20 @@ import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/OptionsMenu/options-menu';
 import paginationStyles from '@patternfly/react-styles/css/components/Pagination/pagination';
 import { css } from '@patternfly/react-styles';
-import { Dropdown, DropdownItem, DropdownDirection, DropdownWithContext, DropdownContext } from '../Dropdown';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownDirection,
+  DropdownWithContext,
+  DropdownContext
+} from '../Dropdown';
 import { CheckIcon } from '@patternfly/react-icons';
 import { OptionsToggle } from './OptionsToggle';
 import { ToggleTemplateProps } from './ToggleTemplate';
 import { PerPageOptions } from './Pagination';
 
-export interface PaginationOptionsMenuProps extends React.HTMLProps<HTMLDivElement> {
+export interface PaginationOptionsMenuProps
+  extends React.HTMLProps<HTMLDivElement> {
   /** Custom class name added to the Pagination Options Menu */
   className?: string;
   /** Id added to the title of the Pagination Options Menu */
@@ -36,41 +43,54 @@ export interface PaginationOptionsMenuProps extends React.HTMLProps<HTMLDivEleme
   /** The number of items to be displayed per page */
   perPage?: number;
   /** This will be shown in pagination toggle span. You can use firstIndex, lastIndex, itemCount, itemsTitle props. */
-  toggleTemplate?: ((props: ToggleTemplateProps) => React.ReactElement) | string;
+  toggleTemplate?:
+    | ((props: ToggleTemplateProps) => React.ReactElement)
+    | string;
   /** Function called when user selects number of items per page. */
-  onPerPageSelect?: (event: React.MouseEvent | React.KeyboardEvent | MouseEvent, perPage: number) => void;
+  onPerPageSelect?: (
+    event: React.MouseEvent | React.KeyboardEvent | MouseEvent,
+    perPage: number
+  ) => void;
 }
 
 interface PaginationOptionsMenuState {
   isOpen: boolean;
 }
 
-export class PaginationOptionsMenu extends React.Component<PaginationOptionsMenuProps, PaginationOptionsMenuState> {
+export class PaginationOptionsMenu extends React.Component<
+  PaginationOptionsMenuProps,
+  PaginationOptionsMenuState
+> {
   private parentRef = React.createRef<HTMLDivElement>();
   static defaultProps = {
-   className: '',
-   widgetId: '',
-   isDisabled: false,
-   dropDirection: DropdownDirection.down,
-   perPageOptions: [] as PerPageOptions[],
-   itemsPerPageTitle: 'Items per page',
-   perPageSuffix: 'per page',
-   optionsToggle: 'Select',
-   perPage: 0,
-   firstIndex: 0,
-   lastIndex: 0,
-   itemCount: 0,
-   itemsTitle: 'items',
-   toggleTemplate: ({firstIndex, lastIndex, itemCount, itemsTitle}: ToggleTemplateProps) => (
-     <React.Fragment>
-       <b>
-         {firstIndex} - {lastIndex}
-       </b>{' '}
-       of<b>{itemCount}</b> {itemsTitle}
-     </React.Fragment>
-   ),
-   onPerPageSelect: () => null as any
- };
+    className: '',
+    widgetId: '',
+    isDisabled: false,
+    dropDirection: DropdownDirection.down,
+    perPageOptions: [] as PerPageOptions[],
+    itemsPerPageTitle: 'Items per page',
+    perPageSuffix: 'per page',
+    optionsToggle: 'Select',
+    perPage: 0,
+    firstIndex: 0,
+    lastIndex: 0,
+    itemCount: 0,
+    itemsTitle: 'items',
+    toggleTemplate: ({
+      firstIndex,
+      lastIndex,
+      itemCount,
+      itemsTitle
+    }: ToggleTemplateProps) => (
+      <React.Fragment>
+        <b>
+          {firstIndex} - {lastIndex}
+        </b>{' '}
+        of<b>{itemCount}</b> {itemsTitle}
+      </React.Fragment>
+    ),
+    onPerPageSelect: () => null as any
+  };
 
   constructor(props: PaginationOptionsMenuProps) {
     super(props);
@@ -81,16 +101,21 @@ export class PaginationOptionsMenu extends React.Component<PaginationOptionsMenu
 
   onToggle = (isOpen: boolean) => {
     this.setState({ isOpen });
-  }
+  };
 
   onSelect = () => {
     this.setState((prevState: PaginationOptionsMenuState) => {
       return { isOpen: !prevState.isOpen };
     });
-  }
+  };
 
   renderItems = () => {
-    const { perPageOptions, perPage, onPerPageSelect, perPageSuffix } = this.props;
+    const {
+      perPageOptions,
+      perPage,
+      onPerPageSelect,
+      perPageSuffix
+    } = this.props;
 
     return perPageOptions.map(({ value, title }) => (
       <DropdownItem
@@ -98,10 +123,12 @@ export class PaginationOptionsMenu extends React.Component<PaginationOptionsMenu
         component="button"
         data-action={`per-page-${value}`}
         className={css(perPage === value && 'pf-m-selected')}
-        onClick={(event) => onPerPageSelect(event, value)}
+        onClick={event => onPerPageSelect(event, value)}
       >
         {title}
-        <span className={css(paginationStyles.paginationMenuText)}>{` ${perPageSuffix}`}</span>
+        <span
+          className={css(paginationStyles.paginationMenuText)}
+        >{` ${perPageSuffix}`}</span>
         {perPage === value && (
           <i className={css(styles.optionsMenuMenuItemIcon)}>
             <CheckIcon />
@@ -109,22 +136,34 @@ export class PaginationOptionsMenu extends React.Component<PaginationOptionsMenu
         )}
       </DropdownItem>
     ));
-  }
+  };
 
   render() {
-    const { widgetId, isDisabled, itemsPerPageTitle, dropDirection, optionsToggle, perPageOptions, toggleTemplate, firstIndex, lastIndex, itemCount, itemsTitle } = this.props;
+    const {
+      widgetId,
+      isDisabled,
+      itemsPerPageTitle,
+      dropDirection,
+      optionsToggle,
+      perPageOptions,
+      toggleTemplate,
+      firstIndex,
+      lastIndex,
+      itemCount,
+      itemsTitle
+    } = this.props;
     const { isOpen } = this.state;
 
     return (
       <DropdownContext.Provider
         value={{
           id: widgetId,
-          onSelect: this.onSelect, 
+          onSelect: this.onSelect,
           toggleIconClass: styles.optionsMenuToggleIcon,
           toggleTextClass: styles.optionsMenuToggleText,
           menuClass: styles.optionsMenuMenu,
           itemClass: styles.optionsMenuMenuItem,
-          toggleClass: " ",
+          toggleClass: ' ',
           baseClass: styles.optionsMenu,
           disabledClass: styles.modifiers.disabled,
           menuComponent: 'ul',

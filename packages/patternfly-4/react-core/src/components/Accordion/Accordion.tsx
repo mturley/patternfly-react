@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from '@patternfly/react-styles';
 import styles from '@patternfly/react-styles/css/components/Accordion/accordion';
-import {AccordionContext} from './AccordionContext';
+import { AccordionContext } from './AccordionContext';
 
 export interface AccordionProps extends React.HTMLProps<HTMLDListElement> {
   /** Content rendered inside the Accordion  */
@@ -26,11 +26,17 @@ export const Accordion: React.FunctionComponent<AccordionProps> = ({
 }: AccordionProps) => {
   const AccordionList: any = asDefinitionList ? 'dl' : 'div';
   return (
-    <AccordionList className={css(styles.accordion, className)} aria-label={ariaLabel} {...props}>
-      <AccordionContext.Provider value={{
-        ContentContainer: asDefinitionList ? 'dd' : 'div',
-        ToggleContainer: asDefinitionList ? 'dt' : headingLevel
-      }}>
+    <AccordionList
+      className={css(styles.accordion, className)}
+      aria-label={ariaLabel}
+      {...props}
+    >
+      <AccordionContext.Provider
+        value={{
+          ContentContainer: asDefinitionList ? 'dd' : 'div',
+          ToggleContainer: asDefinitionList ? 'dt' : headingLevel
+        }}
+      >
         {children}
       </AccordionContext.Provider>
     </AccordionList>

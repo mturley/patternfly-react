@@ -19,12 +19,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -79,12 +81,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -139,12 +143,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -199,12 +205,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -259,12 +267,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -319,12 +329,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -379,12 +391,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -439,12 +453,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -499,12 +515,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -559,12 +577,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -619,12 +639,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -679,12 +701,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -739,12 +763,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -799,12 +825,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -859,12 +887,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -919,12 +949,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -979,12 +1011,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1039,12 +1073,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1099,12 +1135,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1159,12 +1197,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1219,12 +1259,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1279,12 +1321,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1339,12 +1383,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1399,12 +1445,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1459,12 +1507,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1519,12 +1569,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1579,12 +1631,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1639,12 +1693,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1699,12 +1755,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1759,12 +1817,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1819,12 +1879,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9
@@ -1879,12 +1941,14 @@ export const mockVirtualItems = [
   },
   {
     title: 'Item 4',
-    description: 'This is a long description for item 4 that is longer than any other description.',
+    description:
+      'This is a long description for item 4 that is longer than any other description.',
     hosts: 7,
     clusters: 3
   },
   {
-    title: 'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
+    title:
+      'Item 5 with a very long title, showing that it should be truncated when it gets to be to long.',
     description: 'This is Item 5 description',
     hosts: 2,
     clusters: 9

@@ -45,7 +45,11 @@ class DecadeView extends React.Component {
             getNextDecade={this.getNextDecade}
             getPrevDecade={this.getPrevDecade}
           />
-          <DecadeViewTable selectedYear={selectedYear} yearArray={yearArray} setSelectedYear={this.setSelectedYear} />
+          <DecadeViewTable
+            selectedYear={selectedYear}
+            yearArray={yearArray}
+            setSelectedYear={this.setSelectedYear}
+          />
         </table>
       </div>
     );

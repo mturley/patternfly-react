@@ -16,7 +16,10 @@ describe('isValidStyleDeclaration', () => {
     expect(result).toBe(false);
   });
   test('returns true for object with a string __className and function __inject', () => {
-    const result = utils.isValidStyleDeclaration({ __inject: jest.fn(), __className: 'class' });
+    const result = utils.isValidStyleDeclaration({
+      __inject: jest.fn(),
+      __className: 'class'
+    });
     expect(result).toBe(true);
   });
 });

@@ -9,14 +9,16 @@ const DualListHiddenSelect = ({ items, ...props }) => {
       {items ? (
         items.map(({ value, children, label }, index) => {
           if (children) {
-            return children.map(({ value: childValue, label: childLabel }, childIndex) => {
-              selectedValues.push(childValue);
-              return (
-                <option key={`${index}-${childIndex}`} value={childValue}>
-                  {childLabel}
-                </option>
-              );
-            });
+            return children.map(
+              ({ value: childValue, label: childLabel }, childIndex) => {
+                selectedValues.push(childValue);
+                return (
+                  <option key={`${index}-${childIndex}`} value={childValue}>
+                    {childLabel}
+                  </option>
+                );
+              }
+            );
           }
           selectedValues.push(value);
           return (
@@ -43,7 +45,8 @@ DualListHiddenSelect.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        .isRequired,
       children: PropTypes.arrayOf(
         PropTypes.shape({
           label: PropTypes.string,

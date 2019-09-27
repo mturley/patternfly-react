@@ -4,7 +4,10 @@ import styles from '@patternfly/react-styles/css/components/AppLauncher/app-laun
 import { DropdownItem, DropdownItemProps } from '../Dropdown';
 import { ApplicationLauncherContent } from './ApplicationLauncherContent';
 
-export const ApplicationLauncherItemContext = React.createContext({ isExternal: false, icon: null });
+export const ApplicationLauncherItemContext = React.createContext({
+  isExternal: false,
+  icon: null
+});
 
 export interface ApplicationLauncherItemProps {
   /** Icon rendered before the text */
@@ -27,7 +30,9 @@ export interface ApplicationLauncherItemProps {
   component?: React.ReactNode;
 }
 
-export const ApplicationLauncherItem: React.FunctionComponent<ApplicationLauncherItemProps & DropdownItemProps> = ({
+export const ApplicationLauncherItem: React.FunctionComponent<
+  ApplicationLauncherItemProps & DropdownItemProps
+> = ({
   className = '',
   children,
   icon = null,
@@ -47,7 +52,9 @@ export const ApplicationLauncherItem: React.FunctionComponent<ApplicationLaunche
       tooltipProps={tooltipProps}
       {...props}
     >
-      {children && <ApplicationLauncherContent>{children}</ApplicationLauncherContent>}
+      {children && (
+        <ApplicationLauncherContent>{children}</ApplicationLauncherContent>
+      )}
     </DropdownItem>
   </ApplicationLauncherItemContext.Provider>
 );

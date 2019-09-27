@@ -17,8 +17,16 @@ const patternflyTable = stories => {
     withInfo()(() => {
       const story = (
         <div>
-          <h2>PatternFly recommendation: Bootstrap striped, bordered, hover, and responsive</h2>
-          <Table.PfProvider striped bordered hover columns={mockPatternflyColumns}>
+          <h2>
+            PatternFly recommendation: Bootstrap striped, bordered, hover, and
+            responsive
+          </h2>
+          <Table.PfProvider
+            striped
+            bordered
+            hover
+            columns={mockPatternflyColumns}
+          >
             <Table.Header />
             <Table.Body rows={mockBootstrapRows} rowKey="id" />
           </Table.PfProvider>

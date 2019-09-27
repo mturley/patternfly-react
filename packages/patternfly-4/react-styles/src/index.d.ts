@@ -1,4 +1,9 @@
-export { css, StyleSheet, StyleSheetStatic, StyleSheetValueStatic } from './StyleSheet';
+export {
+  css,
+  StyleSheet,
+  StyleSheetStatic,
+  StyleSheetValueStatic
+} from './StyleSheet';
 export {
   isValidStyleDeclaration,
   StyleDeclarationStatic,
@@ -8,4 +13,3 @@ export {
   getClassName,
   pickProperties
 } from './utils';
-

@@ -20,6 +20,11 @@ test('extra props are spread to the root element', () => {
 });
 
 test('title and subtitle are rendered correctly', () => {
-  const view = shallow(<LoginMainHeader title="Log in to your account" subtitle="Use LDAP credentials" />);
+  const view = shallow(
+    <LoginMainHeader
+      title="Log in to your account"
+      subtitle="Use LDAP credentials"
+    />
+  );
   expect(view.prop('className')).toMatchSnapshot();
 });

@@ -5,12 +5,28 @@ import { NO_ITEMS_FOUND, NO_ITEMS } from '../constants';
 import { getFilterredItemsLength } from '../helpers';
 import { noop } from '../../../common/helpers';
 
-const DualListBody = ({ items, filterTerm, onItemChange, side, noItemsFoundMessage, noItemsMessage }) => {
+const DualListBody = ({
+  items,
+  filterTerm,
+  onItemChange,
+  side,
+  noItemsFoundMessage,
+  noItemsMessage
+}) => {
   let listItems;
   if (items.length > 0) {
-    listItems = <DualListItems items={items} filterTerm={filterTerm} onChange={onItemChange} side={side} />;
+    listItems = (
+      <DualListItems
+        items={items}
+        filterTerm={filterTerm}
+        onChange={onItemChange}
+        side={side}
+      />
+    );
     if (getFilterredItemsLength(items) === 0) {
-      listItems = <div className="dual-list-pf-no-items">{noItemsFoundMessage}</div>;
+      listItems = (
+        <div className="dual-list-pf-no-items">{noItemsFoundMessage}</div>
+      );
     }
   } else {
     listItems = <div className="dual-list-pf-no-items">{noItemsMessage}</div>;

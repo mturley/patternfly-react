@@ -8,16 +8,25 @@ class PickTimeTable extends React.Component {
     const { time, setSelected, toggleTimeTable } = this.props;
     const hours = time.getHours();
     newTime = parseInt(newTime, 10);
-    if (type === MINUTE) { time.setMinutes(newTime); }
-    else if (type === HOUR) {
+    if (type === MINUTE) {
+      time.setMinutes(newTime);
+    } else if (type === HOUR) {
       time.setHours(hours < 12 ? newTime % 12 : (newTime % 12) + 12);
     }
     setSelected(time);
     toggleTimeTable();
-  }
+  };
   render() {
-    const hoursArray = [['12', '01', '02', '03'], ['04', '05', '06', '07'], ['08', '09', '10', '11']];
-    const minutesArray = [['00', '05', '10', '15'], ['20', '25', '30', '35'], ['40', '45', '50', '55']];
+    const hoursArray = [
+      ['12', '01', '02', '03'],
+      ['04', '05', '06', '07'],
+      ['08', '09', '10', '11']
+    ];
+    const minutesArray = [
+      ['00', '05', '10', '15'],
+      ['20', '25', '30', '35'],
+      ['40', '45', '50', '55']
+    ];
     return this.props.type === HOUR ? (
       <div className="timepicker-hours">
         <table className="table-condensed">
@@ -25,7 +34,11 @@ class PickTimeTable extends React.Component {
             {hoursArray.map((hoursRow, idx) => (
               <tr key={idx}>
                 {hoursRow.map(hour => (
-                  <td key={hour} className="hour" onClick={() => this.setTime(hour, HOUR)}>
+                  <td
+                    key={hour}
+                    className="hour"
+                    onClick={() => this.setTime(hour, HOUR)}
+                  >
                     {hour}
                   </td>
                 ))}
@@ -41,7 +54,11 @@ class PickTimeTable extends React.Component {
             {minutesArray.map((minutesRow, idx) => (
               <tr key={idx}>
                 {minutesRow.map(minute => (
-                  <td key={minute} className="minute" onClick={() => this.setTime(minute, MINUTE)}>
+                  <td
+                    key={minute}
+                    className="minute"
+                    onClick={() => this.setTime(minute, MINUTE)}
+                  >
                     {minute}
                   </td>
                 ))}

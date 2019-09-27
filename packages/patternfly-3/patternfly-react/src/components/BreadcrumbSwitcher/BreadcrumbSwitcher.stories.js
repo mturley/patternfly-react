@@ -4,19 +4,28 @@ import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { BreadcrumbSwitcher } from './index';
 import { name } from '../../../package.json';
 import { switcherProps } from './BreadcrumbSwitcher.fixtures';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.NAVIGATION}/Breadcrumb`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.NAVIGATION}/Breadcrumb`,
+  module
+);
 
 const description = (
   <p>
-    This component is based on Foreman BreadcrumbSwitcher component. Breadcrumbs are used to indicate the current
-    page&apos;s location. See{' '}
-    <a href={`${DOCUMENTATION_URL.REACT_BOOTSTRAP_COMPONENT}breadcrumb/`}>React Bootstrap Docs</a> for complete
-    Breadcrumb component documentation.
+    This component is based on Foreman BreadcrumbSwitcher component. Breadcrumbs
+    are used to indicate the current page&apos;s location. See{' '}
+    <a href={`${DOCUMENTATION_URL.REACT_BOOTSTRAP_COMPONENT}breadcrumb/`}>
+      React Bootstrap Docs
+    </a>{' '}
+    for complete Breadcrumb component documentation.
   </p>
 );
 

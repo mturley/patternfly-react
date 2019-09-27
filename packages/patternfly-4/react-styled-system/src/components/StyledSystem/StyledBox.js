@@ -122,110 +122,306 @@ StyledBox.propTypes = {
   /** margin - Maps with StyledConstants.space */
   m: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
   /** margin-bottom - Maps with StyledConstants.space */
-  mb: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  mb: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** margin-left - Maps with StyledConstants.space */
-  ml: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  ml: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** margin-right - Maps with StyledConstants.space */
-  mr: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  mr: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** margin-top - Maps with StyledConstants.space */
-  mt: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  mt: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** margin-left and margin-right - Maps with StyledConstants.space */
-  mx: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  mx: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** margin-top and margin-bottom - Maps with StyledConstants.space */
-  my: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  my: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** padding - Maps with StyledConstants.space */
   p: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
   /** padding-bottom - Maps with StyledConstants.space */
-  pb: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  pb: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** padding-left - Maps with StyledConstants.space */
-  pl: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  pl: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** padding-right - Maps with StyledConstants.space */
-  pr: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  pr: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** padding-top - Maps with StyledConstants.space */
-  pt: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  pt: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** padding-left and padding-right - Maps with StyledConstants.space */
-  px: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  px: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** padding-top and padding-bottom - Maps with StyledConstants.space */
-  py: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  py: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
 
   // ...borders.propTypes
   /** border - Maps with StyledConstants.borders */
-  border: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  border: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** border-bottom - Maps with StyledConstants.borders */
-  borderBottom: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  borderBottom: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** border-left - Maps with StyledConstants.borders */
-  borderLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  borderLeft: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** border-right - Maps with StyledConstants.borders */
-  borderRight: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  borderRight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** border-top - Maps with StyledConstants.borders */
-  borderTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  borderTop: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
 
   // ...color.propTypes
   /** background-color - Maps with StyledConstants.colors */
-  bg: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  bg: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** color: Maps with StyledConstants.colors */
-  color: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  color: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
 
   /** height */
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  height: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** width */
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  width: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** font-size */
-  fontSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  fontSize: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** flex */
-  flex: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  flex: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** order */
-  order: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  order: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** align-self */
-  alignSelf: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  alignSelf: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** border-color */
-  borderColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  borderColor: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** border-radius */
-  borderRadius: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  borderRadius: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** box-shadow */
-  boxShadow: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  boxShadow: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** max-width */
-  maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  maxWidth: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** min-width */
-  minWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  minWidth: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** max-height */
-  maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  maxHeight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** min-height */
-  minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  minHeight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** display */
-  display: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  display: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** vertical-align */
-  verticalAlign: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  verticalAlign: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** opacity */
-  opacity: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  opacity: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** overflow */
-  overflow: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  overflow: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** ratio */
-  ratio: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  ratio: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** flex-basis */
-  flexBasis: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  flexBasis: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** background */
-  background: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  background: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** background-image */
-  backgroundImage: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  backgroundImage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** background-size */
-  backgroundSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  backgroundSize: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** background-position */
-  backgroundPosition: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  backgroundPosition: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** background-repeat */
-  backgroundRepeat: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  backgroundRepeat: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** position */
-  position: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  position: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** z-index */
-  zIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  zIndex: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** left */
-  left: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  left: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** top */
-  top: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  top: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** right */
-  right: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array]),
+  right: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
   /** bottom */
-  bottom: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.array])
+  bottom: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ])
 };
 
 StyledBox.defaultProps = {

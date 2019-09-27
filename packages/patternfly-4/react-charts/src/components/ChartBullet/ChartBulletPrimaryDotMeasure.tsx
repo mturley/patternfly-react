@@ -6,7 +6,7 @@ import {
   PaddingProps,
   VictoryScatter
 } from 'victory';
-import { getPrimaryDotMeasureData }  from './utils';
+import { getPrimaryDotMeasureData } from './utils';
 import { ChartContainer } from '../ChartContainer';
 import { ChartScatter } from '../ChartScatter';
 import { ChartBulletStyles, ChartThemeDefinition } from '../ChartTheme';
@@ -163,7 +163,9 @@ export interface ChartBulletPrimaryDotMeasureProps {
   y0?: DataGetterPropType;
 }
 
-export const ChartBulletPrimaryDotMeasure: React.FunctionComponent<ChartBulletPrimaryDotMeasureProps> = ({
+export const ChartBulletPrimaryDotMeasure: React.FunctionComponent<
+  ChartBulletPrimaryDotMeasureProps
+> = ({
   ariaDesc,
   ariaTitle,
   constrainToVisibleArea = false,
@@ -202,14 +204,14 @@ export const ChartBulletPrimaryDotMeasure: React.FunctionComponent<ChartBulletPr
   const tooltip = React.cloneElement(labelComponent, {
     constrainToVisibleArea,
     dx: 0,
-    dy: horizontal ? -(size) : 0,
+    dy: horizontal ? -size : 0,
     orientation: 'top',
     ...labelComponent.props
   });
 
   const measure = computedData.map((dataPoint: any, index) => {
     return React.cloneElement(measureComponent, {
-      data: [{...dataPoint}],
+      data: [{ ...dataPoint }],
       domain,
       height,
       horizontal,
@@ -231,13 +233,16 @@ export const ChartBulletPrimaryDotMeasure: React.FunctionComponent<ChartBulletPr
   });
 
   return standalone ? (
-    <ChartContainer desc={ariaDesc} height={height} title={ariaTitle} width={width}>
+    <ChartContainer
+      desc={ariaDesc}
+      height={height}
+      title={ariaTitle}
+      width={width}
+    >
       {measure}
     </ChartContainer>
   ) : (
-    <React.Fragment>
-      {measure}
-    </React.Fragment>
+    <React.Fragment>{measure}</React.Fragment>
   );
 };
 

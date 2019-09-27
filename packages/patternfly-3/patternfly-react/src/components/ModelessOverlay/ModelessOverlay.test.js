@@ -6,7 +6,10 @@ import { ModelessOverlay } from './index';
 
 test('ModelessOverlay renders properly', () => {
   const component = mount(
-    <ModelessOverlay id="test-modeless-overlay-id" className="test-modeless-overlay-class">
+    <ModelessOverlay
+      id="test-modeless-overlay-id"
+      className="test-modeless-overlay-class"
+    >
       <Modal.Header>
         <Modal.CloseButton />
         <Modal.Title>Modal Overlay Title</Modal.Title>
@@ -25,7 +28,11 @@ test('ModelessOverlay renders properly', () => {
 
 test('ModelessOverlay renders properly when setting size', () => {
   const component = mount(
-    <ModelessOverlay id="test-modeless-overlay-id" className="test-modeless-overlay-class" bsSize="sm">
+    <ModelessOverlay
+      id="test-modeless-overlay-id"
+      className="test-modeless-overlay-class"
+      bsSize="sm"
+    >
       <Modal.Header>
         <Modal.CloseButton />
         <Modal.Title>Modal Overlay Title</Modal.Title>

@@ -13,23 +13,31 @@ class MessageDialogToggleableOptions extends Component {
   primaryAction = () => {
     // Do some stuff
     this.setState(() => ({ show: false }));
-  }
+  };
 
   secondaryAction = () => {
     this.setState(() => ({ show: false }));
-  }
+  };
 
   showModal = () => {
     this.setState(() => ({ show: true }));
-  }
+  };
 
   render() {
     // StoryBook Knobs Config
     // *************************************************************************
-    const value = select('Icon', ['info', 'error-circle-o', 'warning-triangle-o'], 'info');
+    const value = select(
+      'Icon',
+      ['info', 'error-circle-o', 'warning-triangle-o'],
+      'info'
+    );
     const title = boolean('With Title', true) ? 'Modal Title' : '';
-    const primaryContent = boolean('With Primary Content', true) ? <p className="lead">Main Dialog Text</p> : null;
-    const secondaryActionButtonContent = boolean('With Secondary Button', true) ? 'Cancel' : null;
+    const primaryContent = boolean('With Primary Content', true) ? (
+      <p className="lead">Main Dialog Text</p>
+    ) : null;
+    const secondaryActionButtonContent = boolean('With Secondary Button', true)
+      ? 'Cancel'
+      : null;
     // *************************************************************************
 
     const secondaryContent = (
@@ -74,7 +82,9 @@ class MessageDialogToggleableOptions extends Component {
           title={title}
           icon={boolean('With Icon', true) ? icon : null}
           primaryContent={primaryContent}
-          secondaryContent={boolean('With Secondary Content', true) ? secondaryContent : null}
+          secondaryContent={
+            boolean('With Secondary Content', true) ? secondaryContent : null
+          }
           footer={boolean('Custom Footer', false) ? customFooter : null}
           accessibleName="toggleableDialog"
           accessibleDescription="toggleableDialogContent"

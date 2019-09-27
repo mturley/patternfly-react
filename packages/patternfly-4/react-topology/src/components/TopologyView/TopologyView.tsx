@@ -34,12 +34,16 @@ export const TopologyView: React.FunctionComponent<TopologyViewProps> = ({
 
   return (
     <Stack className={className} {...props}>
-      {contextToolbar && <StackItem isFilled={false}>{contextToolbar}</StackItem>}
+      {contextToolbar && (
+        <StackItem isFilled={false}>{contextToolbar}</StackItem>
+      )}
       {viewToolbar && <StackItem isFilled={false}>{viewToolbar}</StackItem>}
       <StackItem isFilled className={containerClasses}>
         <div className="pf-topology-content">
           {children}
-          {controlBar && <span className="pf-topology-control-bar">{controlBar}</span>}
+          {controlBar && (
+            <span className="pf-topology-control-bar">{controlBar}</span>
+          )}
         </div>
         {sideBar}
       </StackItem>

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { PaddingProps } from 'victory';
-import { ChartLegend, ChartLegendOrientation, ChartLegendPosition } from '../ChartLegend';
+import {
+  ChartLegend,
+  ChartLegendOrientation,
+  ChartLegendPosition
+} from '../ChartLegend';
 import { ChartCommonStyles, ChartThemeDefinition } from '../ChartTheme';
 import { getLegendX, getLegendY, getTheme } from '../ChartUtils';
 
@@ -110,7 +114,9 @@ export interface ChartLegendWrapperProps {
   width?: number;
 }
 
-export const ChartLegendWrapper: React.FunctionComponent<ChartLegendWrapperProps> = ({
+export const ChartLegendWrapper: React.FunctionComponent<
+  ChartLegendWrapperProps
+> = ({
   chartType = 'chart',
   dx = 0,
   dy = 0,
@@ -133,7 +139,9 @@ export const ChartLegendWrapper: React.FunctionComponent<ChartLegendWrapperProps
     dx,
     height,
     legendData: legendProps.data,
-    legendOrientation: legendProps.legendOrientation ? legendProps.legendOrientation : orientation,
+    legendOrientation: legendProps.legendOrientation
+      ? legendProps.legendOrientation
+      : orientation,
     legendPosition: position,
     legendProps,
     padding,
@@ -146,8 +154,10 @@ export const ChartLegendWrapper: React.FunctionComponent<ChartLegendWrapperProps
     dy,
     height,
     legendData: legendProps.data,
-    legendOrientation: legendProps.legendOrientation ? legendProps.legendOrientation : orientation,
-    legendProps: legendProps,
+    legendOrientation: legendProps.legendOrientation
+      ? legendProps.legendOrientation
+      : orientation,
+    legendProps,
     legendPosition: position,
     padding,
     theme,
@@ -163,9 +173,5 @@ export const ChartLegendWrapper: React.FunctionComponent<ChartLegendWrapperProps
     ...legendComponent.props
   });
 
-  return (
-    <React.Fragment>
-      {legend}
-    </React.Fragment>
-  );
+  return <React.Fragment>{legend}</React.Fragment>;
 };

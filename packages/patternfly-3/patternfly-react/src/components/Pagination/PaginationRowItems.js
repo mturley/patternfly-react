@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 /**
  * PaginationRowItems component for Patternfly React
  */
-const PaginationRowItems = ({ itemCount, itemsStart, itemsEnd, messagesOf, ...props }) => (
+const PaginationRowItems = ({
+  itemCount,
+  itemsStart,
+  itemsEnd,
+  messagesOf,
+  ...props
+}) => (
   <span {...props}>
     <span className="pagination-pf-items-current">
       {itemsStart}-{itemsEnd}

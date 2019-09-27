@@ -14,14 +14,21 @@ export interface NotificationBadgeProps extends ButtonProps {
   'aria-label'?: string;
 }
 
-export const NotificationBadge: React.FunctionComponent<NotificationBadgeProps> = ({
+export const NotificationBadge: React.FunctionComponent<
+  NotificationBadgeProps
+> = ({
   isRead = false,
   className,
   children,
   ...props
 }: NotificationBadgeProps) => (
   <Button variant={ButtonVariant.plain} className={className} {...props}>
-    <span className={css(styles.notificationBadge, isRead ? styles.modifiers.read : styles.modifiers.unread)}>
+    <span
+      className={css(
+        styles.notificationBadge,
+        isRead ? styles.modifiers.read : styles.modifiers.unread
+      )}
+    >
       {children}
     </span>
   </Button>

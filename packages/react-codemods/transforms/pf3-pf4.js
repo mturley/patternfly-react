@@ -40,7 +40,11 @@ module.exports = (file, api, options) => {
   function addComponentToReactCoreImport(importName, localName) {
     const reactCoreImport = getReactCoreImport();
     if (reactCoreImport.length > 0) {
-      reactCoreImport.get().node.specifiers.push(j.importSpecifier(j.identifier(importName), j.identifier(localName)));
+      reactCoreImport
+        .get()
+        .node.specifiers.push(
+          j.importSpecifier(j.identifier(importName), j.identifier(localName))
+        );
       return;
     }
 
@@ -99,7 +103,11 @@ module.exports = (file, api, options) => {
       const propName = attrPath.node.name.name;
       if (unsupportedProps.includes(propName)) {
         const { start } = attrPath.node.name.loc;
-        console.log(colors.yellow(`UnsupportedProp: ${propName} (./${file.path}:${start.line}:${start.column})`));
+        console.log(
+          colors.yellow(
+            `UnsupportedProp: ${propName} (./${file.path}:${start.line}:${start.column})`
+          )
+        );
         hasSupportedPropReferences = true;
       }
     });
@@ -118,7 +126,10 @@ module.exports = (file, api, options) => {
 
     if (propConfig.defaultValue && propInstances.length === 0) {
       jsxElementPath.node.openingElement.attributes.push(
-        j.jsxAttribute(j.jsxIdentifier(propConfig.name), j.literal(propConfig.defaultValue))
+        j.jsxAttribute(
+          j.jsxIdentifier(propConfig.name),
+          j.literal(propConfig.defaultValue)
+        )
       );
       return;
     }
@@ -170,7 +181,12 @@ module.exports = (file, api, options) => {
 
       const allElements = root.findJSXElements(localName);
 
-      if (verifyNoUnsupportedPropReferences(allElements, transformConfig.unsupportedProps)) {
+      if (
+        verifyNoUnsupportedPropReferences(
+          allElements,
+          transformConfig.unsupportedProps
+        )
+      ) {
         return;
       }
 
@@ -178,7 +194,11 @@ module.exports = (file, api, options) => {
 
       allElements.forEach(elementPath => {
         Object.keys(transformConfig.props).forEach(prop => {
-          transformProp(prop, elementPath, getConfigForProp(transformConfig, prop));
+          transformProp(
+            prop,
+            elementPath,
+            getConfigForProp(transformConfig, prop)
+          );
         });
       });
       addComponentToReactCoreImport(importedName, localName);

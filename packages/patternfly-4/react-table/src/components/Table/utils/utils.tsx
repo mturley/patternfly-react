@@ -1,6 +1,10 @@
 import { IRow, IRowCell } from '../Table';
 
-const hasCompoundParentsExpanded = (parentId: number, compoundParent: number, rows: IRow[]) => {
+const hasCompoundParentsExpanded = (
+  parentId: number,
+  compoundParent: number,
+  rows: IRow[]
+) => {
   // max rows.length parents
   for (const i of rows) {
     if (rows[parentId].hasOwnProperty('parent')) {

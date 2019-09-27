@@ -29,15 +29,28 @@ const Select = ({
 
   const renderResults = results =>
     results.length === 0 ? (
-      <ListGroup.ListGroupItem id="select-empty" key="empty" className="select-empty-list">
+      <ListGroup.ListGroupItem
+        id="select-empty"
+        key="empty"
+        className="select-empty-list"
+      >
         <span id="empty-text">{emptyText}</span>
       </ListGroup.ListGroupItem>
     ) : (
       results.map((opt, i) => (
-        <ListGroup.ListGroupItem {...createItemProps(opt, selectedItem, opt.className || 'no-border', onItemClick)}>
+        <ListGroup.ListGroupItem
+          {...createItemProps(
+            opt,
+            selectedItem,
+            opt.className || 'no-border',
+            onItemClick
+          )}
+        >
           <EllipsisWithTooltip>
             {searchValue && searchValue.length ? (
-              <TypeAheadSelect.Highlighter search={searchValue}>{opt.name}</TypeAheadSelect.Highlighter>
+              <TypeAheadSelect.Highlighter search={searchValue}>
+                {opt.name}
+              </TypeAheadSelect.Highlighter>
             ) : (
               opt.name
             )}
@@ -48,7 +61,12 @@ const Select = ({
 
   return (
     <div className={classes}>
-      <Button disabled={disabled} onClick={onToggle} active={open} className="select-dropdown-toggle">
+      <Button
+        disabled={disabled}
+        onClick={onToggle}
+        active={open}
+        className="select-dropdown-toggle"
+      >
         {selectedItem.id ? (
           <EllipsisWithTooltip>{selectedItem.name}</EllipsisWithTooltip>
         ) : (
@@ -72,9 +90,14 @@ const Select = ({
           )}
           <ListGroup className="select-scrollable-list">
             {isLoading ? (
-              <ListGroup.ListGroupItem id="select-loading" key="loading" className="select-loading-list">
+              <ListGroup.ListGroupItem
+                id="select-loading"
+                key="loading"
+                className="select-loading-list"
+              >
                 <div id="select-loading-container">
-                  <Spinner id="select-spinner" loading size="sm" /> <span>{loadingText}</span>
+                  <Spinner id="select-spinner" loading size="sm" />{' '}
+                  <span>{loadingText}</span>
                 </div>
               </ListGroup.ListGroupItem>
             ) : (

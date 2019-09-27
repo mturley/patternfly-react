@@ -7,9 +7,12 @@ import {
   headerCol,
   IRow
 } from '@patternfly/react-table';
-import { Checkbox } from "@patternfly/react-core";
+import { Checkbox } from '@patternfly/react-core';
 
-export class TableSelectableDemo extends React.Component<TableProps, { columns: any, rows: IRow[], canSelectAll: boolean }> {
+export class TableSelectableDemo extends React.Component<
+  TableProps,
+  { columns: any; rows: IRow[]; canSelectAll: boolean }
+> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
@@ -55,14 +58,14 @@ export class TableSelectableDemo extends React.Component<TableProps, { columns: 
     });
   }
 
-  toggleSelect = (checked) => {
+  toggleSelect = checked => {
     this.setState({
       canSelectAll: checked
     });
-  }
+  };
 
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {
@@ -70,7 +73,13 @@ export class TableSelectableDemo extends React.Component<TableProps, { columns: 
 
     return (
       <div>
-        <Table caption="Selectable Table" onSelect={this.onSelect} cells={columns} rows={rows} canSelectAll={this.state.canSelectAll}>
+        <Table
+          caption="Selectable Table"
+          onSelect={this.onSelect}
+          cells={columns}
+          rows={rows}
+          canSelectAll={this.state.canSelectAll}
+        >
           <TableHeader />
           <TableBody />
         </Table>

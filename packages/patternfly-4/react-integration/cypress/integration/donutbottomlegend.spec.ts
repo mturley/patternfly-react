@@ -2,7 +2,10 @@ describe('Donut Chart with Bottom Legend Demo Test', () => {
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#donut-chart-bottom-legend-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/donut-chart-bottom-legend-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/donut-chart-bottom-legend-demo-nav-link'
+    );
   });
 
   it('Verify donut chart', () => {

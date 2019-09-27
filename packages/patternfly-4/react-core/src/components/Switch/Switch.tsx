@@ -6,7 +6,11 @@ import { getUniqueId } from '../../helpers/util';
 import { Omit } from '../../helpers/typeUtils';
 import { InjectedOuiaProps, withOuiaContext } from '../withOuia';
 
-export interface SwitchProps extends Omit<React.HTMLProps<HTMLInputElement>, 'type' | 'onChange' | 'disabled' | 'label'> {
+export interface SwitchProps
+  extends Omit<
+    React.HTMLProps<HTMLInputElement>,
+    'type' | 'onChange' | 'disabled' | 'label'
+  > {
   /** id for the label. */
   id?: string;
   /** Additional classes added to the Switch */
@@ -20,7 +24,10 @@ export interface SwitchProps extends Omit<React.HTMLProps<HTMLInputElement>, 'ty
   /** Flag to show if the Switch is disabled. */
   isDisabled?: boolean;
   /** A callback for when the Switch selection changes. (isChecked, event) => {} */
-  onChange?: (checked: boolean, event: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (
+    checked: boolean,
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
   /** Adds accessible text to the Switch, and should describe the isChecked="true" state. When label is defined, aria-label should be set to the text string that is visible when isChecked is true. */
   'aria-label'?: string;
 }
@@ -29,45 +36,57 @@ class Switch extends React.Component<SwitchProps & InjectedOuiaProps> {
   id = '';
 
   static defaultProps = {
-    "id": '',
-    "className": '',
-    "label": '',
-    "labelOff": '',
-    "isChecked": true,
-    "isDisabled": false,
+    id: '',
+    className: '',
+    label: '',
+    labelOff: '',
+    isChecked: true,
+    isDisabled: false,
     'aria-label': '',
-    "onChange": () => undefined as any
+    onChange: () => undefined as any
   };
 
   constructor(props: SwitchProps & InjectedOuiaProps) {
     super(props);
     if (!props.id && !props['aria-label']) {
       // tslint:disable-next-line:no-console
-      console.error('Switch: Switch requires either an id or aria-label to be specified');
+      console.error(
+        'Switch: Switch requires either an id or aria-label to be specified'
+      );
     }
     this.id = props.id || getUniqueId();
   }
 
   render() {
-    const { className, label, labelOff, isChecked, isDisabled, onChange, ouiaContext, ouiaId, ...props } = this.props;
+    const {
+      className,
+      label,
+      labelOff,
+      isChecked,
+      isDisabled,
+      onChange,
+      ouiaContext,
+      ouiaId,
+      ...props
+    } = this.props;
     const isAriaLabelledBy = props['aria-label'] === '';
     return (
       <label
         className={css(styles.switch, className)}
         htmlFor={this.id}
-        {...ouiaContext.isOuia && {
+        {...(ouiaContext.isOuia && {
           'data-ouia-component-type': 'Switch',
           'data-ouia-component-id': ouiaId || ouiaContext.ouiaId
-        }}
+        })}
       >
         <input
           id={this.id}
           className={css(styles.switchInput)}
           type="checkbox"
-          onChange={(event) => onChange(event.target.checked, event)}
+          onChange={event => onChange(event.target.checked, event)}
           defaultChecked={isChecked}
           disabled={isDisabled}
-          aria-labelledby={isAriaLabelledBy ? `${this.id}-on`: null}
+          aria-labelledby={isAriaLabelledBy ? `${this.id}-on` : null}
           {...props}
         />
         {label !== '' ? (

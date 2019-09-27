@@ -9,12 +9,16 @@ import { name } from '../../../package.json';
 
 import { CatalogItemHeader } from './index';
 
-const stories = storiesOf(`${storybookPackageName(name)}/Catalog Components/Catalog Item Header`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/Catalog Components/Catalog Item Header`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({
     title: 'Catalog Item Header',
-    description: 'This is a header component used as the header for catalog item details.'
+    description:
+      'This is a header component used as the header for catalog item details.'
   })
 );
 
@@ -49,7 +53,11 @@ stories.add(
         <CatalogItemHeader iconImg={ngnix} title="Nginx" />
       </div>
       <div style={{ marginBottom: '40px' }}>
-        <CatalogItemHeader iconClass="fa fa-codepen" title="CodePen" vendor="provided by CodePen" />
+        <CatalogItemHeader
+          iconClass="fa fa-codepen"
+          title="CodePen"
+          vendor="provided by CodePen"
+        />
       </div>
     </div>
   ))

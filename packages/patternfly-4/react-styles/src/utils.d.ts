@@ -3,9 +3,14 @@ export interface StyleDeclarationStatic {
   __inject(): void;
 }
 
-export function isValidStyleDeclaration(obj: any): obj is StyleDeclarationStatic;
+export function isValidStyleDeclaration(
+  obj: any
+): obj is StyleDeclarationStatic;
 
-export function createStyleDeclaration(className: string, rawCss: string): StyleDeclarationStatic;
+export function createStyleDeclaration(
+  className: string,
+  rawCss: string
+): StyleDeclarationStatic;
 
 export function isModifier(className: string): boolean;
 

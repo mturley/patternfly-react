@@ -2,7 +2,10 @@ describe('Line Chart Green Zoom Demo Test', () => {
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#line-chart-green-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/line-chart-green-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/line-chart-green-demo-nav-link'
+    );
   });
 
   it('Verify line chart', () => {

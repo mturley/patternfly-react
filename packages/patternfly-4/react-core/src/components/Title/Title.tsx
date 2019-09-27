@@ -13,7 +13,8 @@ export enum TitleLevel {
   h6 = 'h6'
 }
 
-export interface TitleProps extends Omit<React.HTMLProps<HTMLHeadingElement>, 'size' | 'className'> {
+export interface TitleProps
+  extends Omit<React.HTMLProps<HTMLHeadingElement>, 'size' | 'className'> {
   /** the size of the Title  */
   size: keyof typeof BaseSizes;
   /** content rendered inside the Title */
@@ -31,7 +32,10 @@ export const Title: React.FunctionComponent<TitleProps> = ({
   headingLevel: HeadingLevel = 'h1',
   ...props
 }: TitleProps) => (
-  <HeadingLevel {...props} className={css(styles.title, getModifier(styles, size), className)}>
+  <HeadingLevel
+    {...props}
+    className={css(styles.title, getModifier(styles, size), className)}
+  >
     {children}
   </HeadingLevel>
 );

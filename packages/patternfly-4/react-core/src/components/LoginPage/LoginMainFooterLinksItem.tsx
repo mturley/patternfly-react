@@ -2,7 +2,8 @@ import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/Login/login';
 import { css } from '@patternfly/react-styles';
 
-export interface LoginMainFooterLinksItemProps extends React.HTMLProps<HTMLLIElement> {
+export interface LoginMainFooterLinksItemProps
+  extends React.HTMLProps<HTMLLIElement> {
   /** Content rendered inside the footer Link Item */
   children?: React.ReactNode;
   /** HREF for Footer Link Item */
@@ -15,7 +16,9 @@ export interface LoginMainFooterLinksItemProps extends React.HTMLProps<HTMLLIEle
   linkComponent?: React.ReactNode;
 }
 
-export const LoginMainFooterLinksItem: React.FunctionComponent<LoginMainFooterLinksItemProps> = ({
+export const LoginMainFooterLinksItem: React.FunctionComponent<
+  LoginMainFooterLinksItemProps
+> = ({
   children = null,
   href = '',
   target = '',
@@ -27,7 +30,11 @@ export const LoginMainFooterLinksItem: React.FunctionComponent<LoginMainFooterLi
 
   return (
     <li className={css(styles.loginMainFooterLinksItem, className)} {...props}>
-      <LinkComponent className={css(styles.loginMainFooterLinksItemLink)} href={href} target={target}>
+      <LinkComponent
+        className={css(styles.loginMainFooterLinksItemLink)}
+        href={href}
+        target={target}
+      >
         {children}
       </LinkComponent>
     </li>

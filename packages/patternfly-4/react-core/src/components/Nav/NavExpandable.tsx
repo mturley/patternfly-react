@@ -7,7 +7,11 @@ import { AngleRightIcon } from '@patternfly/react-icons';
 import { getUniqueId } from '../../helpers/util';
 import { NavContext } from './Nav';
 
-export interface NavExpandableProps extends React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> {
+export interface NavExpandableProps
+  extends React.DetailedHTMLProps<
+    React.LiHTMLAttributes<HTMLLIElement>,
+    HTMLLIElement
+  > {
   /** Title shown for the expandable list */
   title: string;
   /** If defined, screen readers will read this text instead of the list title */
@@ -25,14 +29,20 @@ export interface NavExpandableProps extends React.DetailedHTMLProps<React.LiHTML
   /** Identifier to use for the section aria label */
   id?: string;
   /** allow consumer to optionally override this callback and manage expand state externally */
-  onExpand?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, val: boolean) => void;
+  onExpand?: (
+    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    val: boolean
+  ) => void;
 }
 
 interface NavExpandableState {
   expandedState: boolean;
 }
 
-export class NavExpandable extends React.Component<NavExpandableProps, NavExpandableState> {
+export class NavExpandable extends React.Component<
+  NavExpandableProps,
+  NavExpandableState
+> {
   static defaultProps = {
     srText: '',
     isExpanded: false,
@@ -65,14 +75,20 @@ export class NavExpandable extends React.Component<NavExpandableProps, NavExpand
     } else {
       this.setState({ expandedState: val });
     }
-  }
+  };
 
   handleToggle = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    onToggle: (event: React.MouseEvent<HTMLLIElement, MouseEvent>, groupId: string | number, expandedState: boolean) => void
+    onToggle: (
+      event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+      groupId: string | number,
+      expandedState: boolean
+    ) => void
   ) => {
     // Item events can bubble up, ignore those
-    if ((e.target as any).getAttribute('data-component') !== 'pf-nav-expandable') {
+    if (
+      (e.target as any).getAttribute('data-component') !== 'pf-nav-expandable'
+    ) {
       return;
     }
 
@@ -80,10 +96,21 @@ export class NavExpandable extends React.Component<NavExpandableProps, NavExpand
     const { expandedState } = this.state;
     onToggle(e, groupId, !expandedState);
     this.onExpand(e, !expandedState);
-  }
+  };
 
   render() {
-    const { id, title, srText, children, className, isActive, groupId, isExpanded, onExpand, ...props } = this.props;
+    const {
+      id,
+      title,
+      srText,
+      children,
+      className,
+      isActive,
+      groupId,
+      isExpanded,
+      onExpand,
+      ...props
+    } = this.props;
     const { expandedState } = this.state;
 
     return (
@@ -96,7 +123,9 @@ export class NavExpandable extends React.Component<NavExpandableProps, NavExpand
               isActive && styles.modifiers.current,
               className
             )}
-            onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>) => this.handleToggle(e, context.onToggle)}
+            onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
+              this.handleToggle(e, context.onToggle)
+            }
             {...props}
           >
             <a
@@ -104,8 +133,8 @@ export class NavExpandable extends React.Component<NavExpandableProps, NavExpand
               className={css(styles.navLink)}
               id={srText ? null : this.id}
               href="#"
-              onClick={(e) => e.preventDefault()}
-              onMouseDown={(e) => e.preventDefault()}
+              onClick={e => e.preventDefault()}
+              onMouseDown={e => e.preventDefault()}
               aria-expanded={expandedState}
             >
               {title}
@@ -113,7 +142,11 @@ export class NavExpandable extends React.Component<NavExpandableProps, NavExpand
                 <AngleRightIcon aria-hidden="true" />
               </span>
             </a>
-            <section className={css(styles.navSubnav)} aria-labelledby={this.id} hidden={expandedState ? null : true}>
+            <section
+              className={css(styles.navSubnav)}
+              aria-labelledby={this.id}
+              hidden={expandedState ? null : true}
+            >
               {srText && (
                 <h2 className={css(a11yStyles.screenReader)} id={this.id}>
                   {srText}

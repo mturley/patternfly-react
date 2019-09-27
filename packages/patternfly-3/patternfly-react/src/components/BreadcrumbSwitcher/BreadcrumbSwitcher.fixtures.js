@@ -1,7 +1,11 @@
 export const resources = [
   { id: '1', name: 'Host 1', url: '#' },
   { id: '2', name: 'Host 2', url: '#' },
-  { id: '3', name: 'Host 3 with a very very very very very long name', url: '#' },
+  {
+    id: '3',
+    name: 'Host 3 with a very very very very very long name',
+    url: '#'
+  },
   {
     id: '4',
     name: 'Host 4',

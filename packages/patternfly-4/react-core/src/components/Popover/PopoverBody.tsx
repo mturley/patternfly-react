@@ -2,7 +2,11 @@ import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/Popover/popover';
 import { css } from '@patternfly/react-styles';
 
-export const PopoverBody: React.FunctionComponent<PopoverBodyProps> = ({ children, id, ...props }) => (
+export const PopoverBody: React.FunctionComponent<PopoverBodyProps> = ({
+  children,
+  id,
+  ...props
+}) => (
   <div className={css(styles.popoverBody)} id={id} {...props}>
     {children}
   </div>

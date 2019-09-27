@@ -9,40 +9,40 @@ import ScalingCellSizeAndPositionManager from './ScalingCellSizeAndPositionManag
 
 interface Params {
   // Width or height of cells for the current axis
-  cellSize?: CellSize,
+  cellSize?: CellSize;
 
   // Manages size and position metadata of cells
-  cellSizeAndPositionManager: ScalingCellSizeAndPositionManager,
+  cellSizeAndPositionManager: ScalingCellSizeAndPositionManager;
 
   // Previous number of rows or columns
-  previousCellsCount: number,
+  previousCellsCount: number;
 
   // Previous width or height of cells
-  previousCellSize: CellSize,
+  previousCellSize: CellSize;
 
-  previousScrollToAlignment: Alignment,
+  previousScrollToAlignment: Alignment;
 
   // Previous scroll-to-index
-  previousScrollToIndex: number,
+  previousScrollToIndex: number;
 
   // Previous width or height of the virtualized container
-  previousSize: number,
+  previousSize: number;
 
   // Current scrollLeft or scrollTop
-  scrollOffset: number,
+  scrollOffset: number;
 
-  scrollToAlignment: Alignment,
+  scrollToAlignment: Alignment;
 
   // Scroll-to-index
-  scrollToIndex: number,
+  scrollToIndex: number;
 
   // Width or height of the virtualized container
-  size: number,
+  size: number;
 
-  sizeJustIncreasedFromZero: boolean,
+  sizeJustIncreasedFromZero: boolean;
 
   // Callback to invoke with an scroll-to-index value
-  updateScrollIndexCallback: (index: number) => void
+  updateScrollIndexCallback: (index: number) => void;
 }
 
 export default function updateScrollIndexHelper({
@@ -72,13 +72,19 @@ export default function updateScrollIndexHelper({
   // We should ensure that the scroll target is visible.
   if (
     hasScrollToIndex &&
-    (sizeHasChanged || scrollToAlignment !== previousScrollToAlignment || scrollToIndex !== previousScrollToIndex)
+    (sizeHasChanged ||
+      scrollToAlignment !== previousScrollToAlignment ||
+      scrollToIndex !== previousScrollToIndex)
   ) {
     updateScrollIndexCallback(scrollToIndex);
 
     // If we don't have a selected item but list size or number of children have decreased,
     // Make sure we aren't scrolled too far past the current content.
-  } else if (!hasScrollToIndex && cellCount > 0 && (size < previousSize || cellCount < previousCellsCount)) {
+  } else if (
+    !hasScrollToIndex &&
+    cellCount > 0 &&
+    (size < previousSize || cellCount < previousCellsCount)
+  ) {
     // We need to ensure that the current scroll offset is still within the collection's range.
     // To do this, we don't need to measure everything; CellMeasurer would perform poorly.
     // Just check to make sure we're still okay.

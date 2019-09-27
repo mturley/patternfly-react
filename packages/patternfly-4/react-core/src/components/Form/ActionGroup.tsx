@@ -15,15 +15,25 @@ export const ActionGroup: React.FunctionComponent<ActionGroupProps> = ({
   className = '',
   ...props
 }: ActionGroupProps) => {
-  const customClassName = css(styles.formGroup, styles.modifiers.action, className);
+  const customClassName = css(
+    styles.formGroup,
+    styles.modifiers.action,
+    className
+  );
   const classesHorizontal = css(styles.formHorizontalGroup);
 
-  const formActionsComponent = <div className={css(styles.formActions)}>{children}</div>;
+  const formActionsComponent = (
+    <div className={css(styles.formActions)}>{children}</div>
+  );
   return (
     <FormContext.Consumer>
       {({ isHorizontal }: { isHorizontal: boolean }) => (
         <div {...props} className={customClassName}>
-          {isHorizontal ? <div className={classesHorizontal}>{formActionsComponent}</div> : formActionsComponent}
+          {isHorizontal ? (
+            <div className={classesHorizontal}>{formActionsComponent}</div>
+          ) : (
+            formActionsComponent
+          )}
         </div>
       )}
     </FormContext.Consumer>

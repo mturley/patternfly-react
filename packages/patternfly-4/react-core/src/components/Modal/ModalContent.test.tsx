@@ -23,7 +23,12 @@ test('Modal Content Test isOpen', () => {
 
 test('Modal Content Test with footer', () => {
   const view = shallow(
-    <ModalContent title="Test Modal Content title" id="id" isOpen actions={['Testing']}>
+    <ModalContent
+      title="Test Modal Content title"
+      id="id"
+      isOpen
+      actions={['Testing']}
+    >
       This is a ModalBox header
     </ModalContent>
   );

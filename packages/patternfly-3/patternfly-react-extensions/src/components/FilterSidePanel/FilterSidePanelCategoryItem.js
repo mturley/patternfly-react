@@ -4,7 +4,13 @@ import classNames from 'classnames';
 import { Checkbox } from 'react-bootstrap';
 import { helpers } from '../../common/helpers';
 
-const FilterSidePanelCategoryItem = ({ children, className, icon, count, ...props }) => {
+const FilterSidePanelCategoryItem = ({
+  children,
+  className,
+  icon,
+  count,
+  ...props
+}) => {
   const classes = classNames('filter-panel-pf-category-item', className);
 
   return (
@@ -12,7 +18,9 @@ const FilterSidePanelCategoryItem = ({ children, className, icon, count, ...prop
       <Checkbox {...props}>
         {icon && <span className="item-icon">{icon}</span>}
         {children}
-        {Number.isInteger(count) && <span className="item-count">{`(${count})`}</span>}
+        {Number.isInteger(count) && (
+          <span className="item-count">{`(${count})`}</span>
+        )}
       </Checkbox>
     </div>
   );

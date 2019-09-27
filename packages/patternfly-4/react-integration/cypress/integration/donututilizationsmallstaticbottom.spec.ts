@@ -2,7 +2,10 @@ describe('Small donut utilization chart with static thresholds with bottom-align
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#donut-utilization-sm-static-bottom-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/donut-utilization-sm-static-bottom-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/donut-utilization-sm-static-bottom-demo-nav-link'
+    );
   });
 
   it('Verify donut chart', () => {

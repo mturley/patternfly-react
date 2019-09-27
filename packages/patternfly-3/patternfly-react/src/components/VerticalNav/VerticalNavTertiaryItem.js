@@ -1,6 +1,10 @@
 import React from 'react';
 import { getContext } from 'recompose';
-import { wrongDepth, correctDepth, navContextTypes } from './VerticalNavConstants';
+import {
+  wrongDepth,
+  correctDepth,
+  navContextTypes
+} from './VerticalNavConstants';
 import VerticalNavItemHelper from './VerticalNavItemHelper';
 
 /**
@@ -9,7 +13,9 @@ import VerticalNavItemHelper from './VerticalNavItemHelper';
  * In the future, we could lift some of the tertiary-specific code from Helper into this file.
  */
 const BaseVerticalNavTertiaryItem = props => {
-  if (wrongDepth(props, 'tertiary')) { return correctDepth(props); }
+  if (wrongDepth(props, 'tertiary')) {
+    return correctDepth(props);
+  }
   return <VerticalNavItemHelper {...props} />;
 };
 
@@ -17,7 +23,9 @@ BaseVerticalNavTertiaryItem.propTypes = {
   ...VerticalNavItemHelper.propTypes
 };
 
-const VerticalNavTertiaryItem = getContext(navContextTypes)(BaseVerticalNavTertiaryItem);
+const VerticalNavTertiaryItem = getContext(navContextTypes)(
+  BaseVerticalNavTertiaryItem
+);
 
 VerticalNavTertiaryItem.propTypes = {
   ...BaseVerticalNavTertiaryItem.propTypes

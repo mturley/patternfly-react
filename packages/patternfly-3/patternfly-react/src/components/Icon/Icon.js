@@ -4,7 +4,8 @@ import FontAwesome from 'react-fontawesome';
 import PatternflyIcon from './InnerComponents/PatternflyIcon';
 
 const Icon = ({ type, ...props }) => {
-  const IconComponent = (type === 'fa' && FontAwesome) || (type === 'pf' && PatternflyIcon);
+  const IconComponent =
+    (type === 'fa' && FontAwesome) || (type === 'pf' && PatternflyIcon);
   if (IconComponent) {
     return <IconComponent {...props} />;
   }

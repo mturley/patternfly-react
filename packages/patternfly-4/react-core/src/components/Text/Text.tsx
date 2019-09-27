@@ -17,7 +17,18 @@ export enum TextVariants {
 
 export interface TextProps extends React.HTMLProps<HTMLElement> {
   /** The text component */
-  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'a' | 'small' | 'blockquote' | 'pre';
+  component?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'p'
+    | 'a'
+    | 'small'
+    | 'blockquote'
+    | 'pre';
   /** Content rendered within the Text */
   children?: React.ReactNode;
   /** Additional classes added to the Text */

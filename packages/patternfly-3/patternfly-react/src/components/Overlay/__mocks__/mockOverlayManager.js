@@ -15,17 +15,27 @@ export class MockOverlayManager extends React.Component {
   toggleOverlay = () => {
     const { showOverlay } = this.state;
     this.setState({ showOverlay: !showOverlay });
-  }
+  };
   render() {
     const { placement } = this.props;
     const { showOverlay } = this.state;
 
     return (
       <React.Fragment>
-        <Button bsStyle="primary" bsSize="large" onClick={this.toggleOverlay} ref={this.buttonRef}>
+        <Button
+          bsStyle="primary"
+          bsSize="large"
+          onClick={this.toggleOverlay}
+          ref={this.buttonRef}
+        >
           Click Here
         </Button>
-        <Overlay target={this.buttonRef.current} container={this} show={showOverlay} placement={placement}>
+        <Overlay
+          target={this.buttonRef.current}
+          container={this}
+          show={showOverlay}
+          placement={placement}
+        >
           <Popover id="my-overlay">
             <strong>Holy guacamole!</strong> Check this info.
           </Popover>

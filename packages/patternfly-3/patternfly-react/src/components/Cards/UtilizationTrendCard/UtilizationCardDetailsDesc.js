@@ -3,7 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const UtilizationCardDetailsDesc = ({ children, className, ...props }) => {
-  const classes = classNames('card-pf-utilization-card-details-description', className);
+  const classes = classNames(
+    'card-pf-utilization-card-details-description',
+    className
+  );
 
   return (
     <span className={classes} {...props}>

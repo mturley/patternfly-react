@@ -119,7 +119,9 @@ test('Toggle Caps lock warning in password field by the events: focus, blur and 
   const component = mount(<LoginPage {...createProps()} />);
   const passwordElement = component.find('input[type="password"]').at(0);
 
-  passwordElement.simulate('focus').simulate('keypress', { keyCode: KEY_CODES.A, shiftKey: false });
+  passwordElement
+    .simulate('focus')
+    .simulate('keypress', { keyCode: KEY_CODES.A, shiftKey: false });
 
   expect(
     component
@@ -135,7 +137,9 @@ test('Toggle Caps lock warning in password field by the events: focus, blur and 
       .props().showWarning
   ).toEqual(true);
 
-  passwordElement.simulate('blur').simulate('keypress', { keyCode: KEY_CODES.A, shiftKey: false });
+  passwordElement
+    .simulate('blur')
+    .simulate('keypress', { keyCode: KEY_CODES.A, shiftKey: false });
 
   expect(
     component
@@ -144,7 +148,9 @@ test('Toggle Caps lock warning in password field by the events: focus, blur and 
       .props().showWarning
   ).toEqual(false);
 
-  passwordElement.simulate('keypress', { keyCode: KEY_CODES.A, shiftKey: false }).simulate('focus');
+  passwordElement
+    .simulate('keypress', { keyCode: KEY_CODES.A, shiftKey: false })
+    .simulate('focus');
 
   expect(
     component
@@ -156,7 +162,9 @@ test('Toggle Caps lock warning in password field by the events: focus, blur and 
 
 test('Toggle CapsLock cause warning to show under password field when focused', () => {
   const component = mount(<LoginPage {...createProps()} />);
-  component.find('input[type="password"]').simulate('change', { target: { value: 'test' } });
+  component
+    .find('input[type="password"]')
+    .simulate('change', { target: { value: 'test' } });
   component
     .find(LoginCardWithValidation)
     .instance()
@@ -268,7 +276,9 @@ test('valid form should be submitted and raise a "server error"', () => {
   const passwordElement = component.find('input[type="password"]').at(0);
   const usernameElement = component.find('input[type="email"]').at(0);
   passwordElement.simulate('change', { target: { value: 'validPassword' } });
-  usernameElement.simulate('change', { target: { value: 'validUser@gmail.com' } });
+  usernameElement.simulate('change', {
+    target: { value: 'validUser@gmail.com' }
+  });
 
   const validator = component.find(LoginCardWithValidation).instance();
   validator.onSubmit({ preventDefault: noop, target: { submit: noop } });
@@ -379,7 +389,7 @@ test('Translation works', () => {
 });
 
 test('submitButtonAttributes are added to the DOM', () => {
-  const id = 'submit-button-unique-test-id'
+  const id = 'submit-button-unique-test-id';
   const props = createProps();
   props.card.form.submitButtonAttributes = { id };
   const component = mount(<LoginPage {...props} />);

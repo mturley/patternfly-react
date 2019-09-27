@@ -4,7 +4,8 @@ import { css } from '@patternfly/react-styles';
 import { ClipboardCopyProps } from './ClipboardCopy';
 import { Omit } from '../../helpers/typeUtils';
 
-export interface ClipboardCopyExpandedProps extends Omit<ClipboardCopyProps, 'onChange'> {
+export interface ClipboardCopyExpandedProps
+  extends Omit<ClipboardCopyProps, 'onChange'> {
   className?: string;
   children: React.ReactNode;
   onChange?: (text: string, e: React.FormEvent<HTMLDivElement>) => void;
@@ -12,7 +13,9 @@ export interface ClipboardCopyExpandedProps extends Omit<ClipboardCopyProps, 'on
   isCode?: boolean;
 }
 
-export class ClipboardCopyExpanded extends React.Component<ClipboardCopyExpandedProps> {
+export class ClipboardCopyExpanded extends React.Component<
+  ClipboardCopyExpandedProps
+> {
   contentRef = React.createRef<HTMLDivElement>();
   constructor(props: any) {
     super(props);
@@ -32,17 +35,29 @@ export class ClipboardCopyExpanded extends React.Component<ClipboardCopyExpanded
   }
 
   render() {
-    const { className, children, onChange, isReadOnly, isCode, ...props } = this.props;
-    const clipboardCopyExpandableComponent =
-    <div
-      suppressContentEditableWarning
-      ref={this.contentRef}
-      className={css(styles.clipboardCopyExpandableContent, className)}
-      onInput={(e: any) => onChange(e.target.innerText, e)}
-      contentEditable={!isReadOnly}
-      {...props}
-    />;
+    const {
+      className,
+      children,
+      onChange,
+      isReadOnly,
+      isCode,
+      ...props
+    } = this.props;
+    const clipboardCopyExpandableComponent = (
+      <div
+        suppressContentEditableWarning
+        ref={this.contentRef}
+        className={css(styles.clipboardCopyExpandableContent, className)}
+        onInput={(e: any) => onChange(e.target.innerText, e)}
+        contentEditable={!isReadOnly}
+        {...props}
+      />
+    );
 
-    return (isCode ? <pre>{clipboardCopyExpandableComponent}</pre> : clipboardCopyExpandableComponent);
+    return isCode ? (
+      <pre>{clipboardCopyExpandableComponent}</pre>
+    ) : (
+      clipboardCopyExpandableComponent
+    );
   }
 }

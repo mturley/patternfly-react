@@ -28,7 +28,15 @@ import StatefulWizardPattern from './Patterns/StatefulWizardPattern';
 /**
  * Wizard - main Wizard component.
  */
-const Wizard = ({ children, className, dialogClassName, show, onClose, onExited, ...rest }) => (
+const Wizard = ({
+  children,
+  className,
+  dialogClassName,
+  show,
+  onClose,
+  onExited,
+  ...rest
+}) => (
   <Modal
     show={show}
     onHide={onClose}

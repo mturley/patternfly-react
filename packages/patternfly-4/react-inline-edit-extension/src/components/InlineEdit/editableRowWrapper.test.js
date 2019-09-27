@@ -21,7 +21,10 @@ const getRowWrapper = (row, props) => {
   return <RowWrapper {...props} row={row} />;
 };
 
-const buildRow = (row = {}, editConfirmationType = TableEditConfirmation.ROW) => ({
+const buildRow = (
+  row = {},
+  editConfirmationType = TableEditConfirmation.ROW
+) => ({
   ...row,
   editConfig: { editConfirmationType }
 });
@@ -40,7 +43,11 @@ describe('editableRowWrapper', () => {
       attachTo: container.find('tbody').getDOMNode()
     };
 
-    mockClosest(null, selector => (selector === 'table' ? container.getDOMNode() : undefined), true);
+    mockClosest(
+      null,
+      selector => (selector === 'table' ? container.getDOMNode() : undefined),
+      true
+    );
   });
 
   afterEach(() => {
@@ -63,7 +70,10 @@ describe('editableRowWrapper', () => {
 
   test('sets editable row classname', () => {
     [...Object.keys(TableEditConfirmation), null].forEach(confirmationType => {
-      const view = mount(getRowWrapper(buildRow({}, confirmationType)), mountOptions);
+      const view = mount(
+        getRowWrapper(buildRow({}, confirmationType)),
+        mountOptions
+      );
       expect(view.find('.pf-c-table__editable-row')).toHaveLength(1);
       view.detach();
     });
@@ -73,9 +83,19 @@ describe('editableRowWrapper', () => {
     [
       buildRow({ isEditing: true }),
       buildRow({ isEditing: true, isParentEditing: true }), // expandable
-      buildRow({ isEditing: true, isChildEditing: true, isLastVisibleParent: true }), // expandable
-      buildRow({ isTableEditing: true, isFirstVisible: true }, TableEditConfirmation.TABLE_TOP),
-      buildRow({ isTableEditing: true, isLastVisible: true }, TableEditConfirmation.TABLE_BOTTOM)
+      buildRow({
+        isEditing: true,
+        isChildEditing: true,
+        isLastVisibleParent: true
+      }), // expandable
+      buildRow(
+        { isTableEditing: true, isFirstVisible: true },
+        TableEditConfirmation.TABLE_TOP
+      ),
+      buildRow(
+        { isTableEditing: true, isLastVisible: true },
+        TableEditConfirmation.TABLE_BOTTOM
+      )
     ].forEach(row => {
       const view = mount(getRowWrapper(row), mountOptions);
       expect(view.find('.pf-c-table__inline-edit-buttons')).toHaveLength(1);
@@ -90,12 +110,21 @@ describe('editableRowWrapper', () => {
       buildRow({ isEditing: true }, TableEditConfirmation.TABLE_BOTTOM),
       buildRow({ isEditing: true, isParentEditing: true, isLastVisible: true }), // expandable
       buildRow({ isEditing: true, isChildEditing: true }), // expandable
-      buildRow({ isTableEditing: true, isLastVisible: true }, TableEditConfirmation.NONE),
+      buildRow(
+        { isTableEditing: true, isLastVisible: true },
+        TableEditConfirmation.NONE
+      ),
       buildRow({ isTableEditing: true, isLastVisible: true }),
       buildRow({ isTableEditing: true }, TableEditConfirmation.TABLE_TOP),
       buildRow({ isTableEditing: true }, TableEditConfirmation.TABLE_BOTTOM),
-      buildRow({ isTableEditing: true, isLastVisible: true }, TableEditConfirmation.TABLE_TOP),
-      buildRow({ isTableEditing: true, isFirstVisible: true }, TableEditConfirmation.TABLE_BOTTOM)
+      buildRow(
+        { isTableEditing: true, isLastVisible: true },
+        TableEditConfirmation.TABLE_TOP
+      ),
+      buildRow(
+        { isTableEditing: true, isFirstVisible: true },
+        TableEditConfirmation.TABLE_BOTTOM
+      )
     ].forEach(row => {
       const view = mount(getRowWrapper(row), mountOptions);
       expect(view.find('.pf-c-table__inline-edit-buttons')).toHaveLength(0);
@@ -116,10 +145,14 @@ describe('editableRowWrapper', () => {
     };
 
     const view = mount(getRowWrapper(row, null, React.Fragment), mountOptions);
-    view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary').simulate('mouseup');
+    view
+      .find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary')
+      .simulate('mouseup');
     expect(onEditConfirmed).toHaveBeenCalled();
 
-    view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-plain').simulate('mouseup');
+    view
+      .find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-plain')
+      .simulate('mouseup');
     expect(onEditCanceled).toHaveBeenCalled();
   });
 });

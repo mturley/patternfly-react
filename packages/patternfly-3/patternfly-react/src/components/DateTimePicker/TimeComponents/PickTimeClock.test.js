@@ -13,7 +13,9 @@ test('PickTimeClock is working properly', () => {
 test('Edit minutes of PickTimeClock', () => {
   const time = new Date('2/21/2019, 2:22:31 PM');
   const setSelected = jest.fn();
-  const component = mount(<PickTimeClock time={time} setSelected={setSelected} />);
+  const component = mount(
+    <PickTimeClock time={time} setSelected={setSelected} />
+  );
   expect(component.render()).toMatchSnapshot();
   component.find('[title~="Minute"][title~="Increment"]').simulate('click');
   expect(setSelected).toBeCalledWith(new Date('2/21/2019, 2:23:31 PM'));
@@ -25,7 +27,9 @@ test('Edit minutes of PickTimeClock', () => {
 test('Edit hours of PickTimeClock', () => {
   const time = new Date('2/21/2019, 2:22:31 PM');
   const setSelected = jest.fn();
-  const component = mount(<PickTimeClock time={time} setSelected={setSelected} />);
+  const component = mount(
+    <PickTimeClock time={time} setSelected={setSelected} />
+  );
   expect(component.render()).toMatchSnapshot();
   component.find('[title~="Hour"][title~="Increment"]').simulate('click');
   expect(setSelected).toBeCalledWith(new Date('2/21/2019, 3:22:31 PM'));
@@ -48,7 +52,9 @@ test('Toggle hours of PickTimeClock', () => {
 test('Toggle TimeTable hour from PickTimeClock', () => {
   const time = new Date('2/21/2019, 12:22:31 PM');
   const toggleTimeTable = jest.fn();
-  const component = mount(<PickTimeClock time={time} toggleTimeTable={toggleTimeTable} />);
+  const component = mount(
+    <PickTimeClock time={time} toggleTimeTable={toggleTimeTable} />
+  );
 
   component.find('.timepicker-hour').simulate('click');
   expect(toggleTimeTable).toBeCalledWith(HOUR);
@@ -57,7 +63,9 @@ test('Toggle TimeTable hour from PickTimeClock', () => {
 test('Toggle TimeTable minute from PickTimeClock', () => {
   const time = new Date('2/21/2019, 12:22:31 PM');
   const toggleTimeTable = jest.fn();
-  const component = mount(<PickTimeClock time={time} toggleTimeTable={toggleTimeTable} />);
+  const component = mount(
+    <PickTimeClock time={time} toggleTimeTable={toggleTimeTable} />
+  );
 
   component.find('.timepicker-minute').simulate('click');
   expect(toggleTimeTable).toBeCalledWith(MINUTE);

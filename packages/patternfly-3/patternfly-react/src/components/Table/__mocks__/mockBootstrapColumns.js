@@ -47,8 +47,12 @@ export const mockBootstrapColumns = [
   }
 ];
 
-const headerFormatRightAlign = value => <Table.Heading align="right">{value}</Table.Heading>;
-const cellFormatRightAlign = value => <Table.Cell align="right">{value}</Table.Cell>;
+const headerFormatRightAlign = value => (
+  <Table.Heading align="right">{value}</Table.Heading>
+);
+const cellFormatRightAlign = value => (
+  <Table.Cell align="right">{value}</Table.Cell>
+);
 
 export const mockPatternflyColumns = [
   {
@@ -104,7 +108,9 @@ export const mockPatternflyColumns = [
   {
     header: {
       label: 'Location',
-      formatters: [value => <Table.Heading align="center">{value}</Table.Heading>]
+      formatters: [
+        value => <Table.Heading align="center">{value}</Table.Heading>
+      ]
     },
     cell: {
       formatters: [value => <Table.Cell align="center">{value}</Table.Cell>]

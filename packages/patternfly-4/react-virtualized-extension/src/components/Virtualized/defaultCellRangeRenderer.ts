@@ -34,15 +34,24 @@ export default function defaultCellRangeRenderer({
   // We should never cache styles for compressed offsets though as this can lead to bugs.
   // See issue #576 for more.
   const areOffsetsAdjusted =
-    columnSizeAndPositionManager.areOffsetsAdjusted() || rowSizeAndPositionManager.areOffsetsAdjusted();
+    columnSizeAndPositionManager.areOffsetsAdjusted() ||
+    rowSizeAndPositionManager.areOffsetsAdjusted();
 
   const canCacheStyle = !isScrolling && !areOffsetsAdjusted;
 
   for (let rowIndex = rowStartIndex; rowIndex <= rowStopIndex; rowIndex++) {
-    const rowDatum = rowSizeAndPositionManager.getSizeAndPositionOfCell(rowIndex);
+    const rowDatum = rowSizeAndPositionManager.getSizeAndPositionOfCell(
+      rowIndex
+    );
 
-    for (let columnIndex = columnStartIndex; columnIndex <= columnStopIndex; columnIndex++) {
-      const columnDatum = columnSizeAndPositionManager.getSizeAndPositionOfCell(columnIndex);
+    for (
+      let columnIndex = columnStartIndex;
+      columnIndex <= columnStopIndex;
+      columnIndex++
+    ) {
+      const columnDatum = columnSizeAndPositionManager.getSizeAndPositionOfCell(
+        columnIndex
+      );
       const isVisible =
         columnIndex >= visibleColumnIndices.start &&
         columnIndex <= visibleColumnIndices.stop &&
@@ -57,7 +66,10 @@ export default function defaultCellRangeRenderer({
       } else {
         // In deferred mode, cells will be initially rendered before we know their size.
         // Don't interfere with CellMeasurer's measurements by setting an invalid size.
-        if (deferredMeasurementCache && !deferredMeasurementCache.has(rowIndex, columnIndex)) {
+        if (
+          deferredMeasurementCache &&
+          !deferredMeasurementCache.has(rowIndex, columnIndex)
+        ) {
           // Position not-yet-measured cells at top/left 0,0,
           // And give them width/height of 'auto' so they can grow larger than the parent Grid if necessary.
           // Positioning them further to the right/bottom influences their measured size.
@@ -103,7 +115,11 @@ export default function defaultCellRangeRenderer({
       //
       // If isScrollingOptOut is specified, we always cache cells.
       // For more info refer to issue #1028
-      if ((isScrollingOptOut || isScrolling) && !horizontalOffsetAdjustment && !verticalOffsetAdjustment) {
+      if (
+        (isScrollingOptOut || isScrolling) &&
+        !horizontalOffsetAdjustment &&
+        !verticalOffsetAdjustment
+      ) {
         if (!cellCache[key]) {
           cellCache[key] = cellRenderer(cellRendererParams);
         }
@@ -148,7 +164,9 @@ function warnAboutMissingStyle(parent, renderedCell) {
       ) {
         parent.__warnedAboutMissingStyle = true;
 
-        console.warn('Rendered cell should include style property for positioning.');
+        console.warn(
+          'Rendered cell should include style property for positioning.'
+        );
       }
     }
   }

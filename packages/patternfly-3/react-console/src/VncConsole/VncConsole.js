@@ -73,45 +73,45 @@ class VncConsole extends React.Component {
       return;
     }
     this.rfb.disconnect();
-  }
+  };
 
   onConnected = () => {
     this.setState({ status: CONNECTED });
-  }
+  };
 
   onCtrlAltDel = e => {
     if (this.rfb) {
       this.rfb.sendCtrlAltDel();
       this.focusVnc(e);
     }
-  }
+  };
 
   onDisconnected = e => {
     this.setState({ status: DISCONNECTED });
     this.props.onDisconnected(e);
-  }
+  };
 
   onSecurityFailure = e => {
     this.setState({ status: DISCONNECTED });
     this.props.onSecurityFailure(e);
-  }
+  };
 
   removeEventListeners = () => {
     this.rfb.removeEventListener('connect', this.onConnected);
     this.rfb.removeEventListener('disconnect', this.onDisconnected);
     this.rfb.removeEventListener('securityfailure', this.onSecurityFailure);
-  }
+  };
 
   setNovncElem = e => {
     this.novncElem = e;
-  }
+  };
 
   focusVnc = e => {
     if (e && e.target && e.target.blur) {
       e.target.blur();
     }
     this.novncElem && this.novncElem.focus();
-  }
+  };
 
   render() {
     const {
@@ -140,7 +140,9 @@ class VncConsole extends React.Component {
         );
         break;
       case DISCONNECTED:
-        status = <div className="vnc-console-disconnected">{textDisconnected}</div>;
+        status = (
+          <div className="vnc-console-disconnected">{textDisconnected}</div>
+        );
         break;
       case CONNECTING:
       default:
@@ -149,7 +151,9 @@ class VncConsole extends React.Component {
 
     if (!this.novncStaticComponent) {
       // create just once
-      this.novncStaticComponent = <div id={consoleContainerId} ref={this.setNovncElem} />;
+      this.novncStaticComponent = (
+        <div id={consoleContainerId} ref={this.setNovncElem} />
+      );
     }
 
     return (
@@ -183,12 +187,16 @@ VncConsole.propTypes = {
   host: PropTypes.string.isRequired /** FQDN or IP to connect to */,
   port: PropTypes.string /** TCP Port */,
   path: PropTypes.string /** host:port/path */,
-  encrypt: PropTypes.bool /** For all following, see: https://github.com/novnc/noVNC/blob/master/docs/API.md */,
-  resizeSession: PropTypes.bool /** Change remote session size according to local HTML container */,
-  scaleViewport: PropTypes.bool /** Scale session size according to parent HTML container */,
+  encrypt:
+    PropTypes.bool /** For all following, see: https://github.com/novnc/noVNC/blob/master/docs/API.md */,
+  resizeSession:
+    PropTypes.bool /** Change remote session size according to local HTML container */,
+  scaleViewport:
+    PropTypes.bool /** Scale session size according to parent HTML container */,
   viewOnly: PropTypes.bool,
   shared: PropTypes.bool,
-  credentials: PropTypes.object /** { username: '', password: '', target: ''} */,
+  credentials:
+    PropTypes.object /** { username: '', password: '', target: ''} */,
   repeaterID: PropTypes.string,
   vncLogging: PropTypes.string /** log-level for noVNC */,
   portalToolbarTo: PropTypes.string,

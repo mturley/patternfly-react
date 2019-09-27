@@ -2,7 +2,8 @@ import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/Drawer/drawer';
 import { css } from '@patternfly/react-styles';
 
-export interface DrawerPanelContentProps extends React.HTMLProps<HTMLDivElement> {
+export interface DrawerPanelContentProps
+  extends React.HTMLProps<HTMLDivElement> {
   /** Additional classes added to the Drawer. */
   className?: string;
   /** Content to rendered in the drawer */
@@ -17,9 +18,14 @@ export const DrawerPanelContent: React.SFC<DrawerPanelContentProps> = ({
   noPadding = false,
   ...props
 }: DrawerPanelContentProps) => (
-      <aside className={css(styles.drawerPanel, className)} {...props}>
-        <div className={css(styles.drawerPanelBody, noPadding && styles.modifiers.noPadding)}>
-          {children}
-        </div>
-      </aside>
+  <aside className={css(styles.drawerPanel, className)} {...props}>
+    <div
+      className={css(
+        styles.drawerPanelBody,
+        noPadding && styles.modifiers.noPadding
+      )}
+    >
+      {children}
+    </div>
+  </aside>
 );

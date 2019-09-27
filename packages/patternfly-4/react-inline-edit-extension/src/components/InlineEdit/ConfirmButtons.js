@@ -47,8 +47,16 @@ const ConfirmButtons = ({
 
   return (
     <div style={positionStyle} className={className} key="confirmButtons">
-      <ConfirmButton key="confirm" aria-label={confirmButtonLabel} onMouseUp={onConfirm} />
-      <CancelButton key="cancel" aria-label={cancelButtonLabel} onMouseUp={onCancel} />
+      <ConfirmButton
+        key="confirm"
+        aria-label={confirmButtonLabel}
+        onMouseUp={onConfirm}
+      />
+      <CancelButton
+        key="cancel"
+        aria-label={cancelButtonLabel}
+        onMouseUp={onCancel}
+      />
     </div>
   );
 };

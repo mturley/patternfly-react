@@ -11,18 +11,20 @@ class MessageDialogQuestion extends Component {
 
   primaryAction = () => {
     this.setState(() => ({ show: false }));
-  }
+  };
 
   secondaryAction = () => {
     this.setState(() => ({ show: false }));
-  }
+  };
 
   showModal = () => {
     this.setState(() => ({ show: true }));
-  }
+  };
 
   render() {
-    const primaryContent = <p className="lead">Main Dialog Text. Are you sure you want to xxxxx?</p>;
+    const primaryContent = (
+      <p className="lead">Main Dialog Text. Are you sure you want to xxxxx?</p>
+    );
     const secondaryContent = <p>{lorem}</p>;
     const icon = <Icon type="pf" name="warning-triangle-o" />;
 

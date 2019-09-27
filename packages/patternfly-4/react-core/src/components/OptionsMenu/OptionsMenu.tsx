@@ -49,26 +49,30 @@ export const OptionsMenu: React.FunctionComponent<OptionsMenuProps> = ({
   ref,
   ...props
 }: OptionsMenuProps) => (
-    <DropdownContext.Provider value={{
+  <DropdownContext.Provider
+    value={{
       id,
       onSelect: () => undefined,
       toggleIconClass: styles.optionsMenuToggleIcon,
       toggleTextClass: styles.optionsMenuToggleText,
       menuClass: styles.optionsMenuMenu,
       itemClass: styles.optionsMenuMenuItem,
-      toggleClass: isText ? styles.optionsMenuToggleButton : styles.optionsMenuToggle,
+      toggleClass: isText
+        ? styles.optionsMenuToggleButton
+        : styles.optionsMenuToggle,
       baseClass: styles.optionsMenu,
       disabledClass: styles.modifiers.disabled,
       menuComponent: 'ul',
       baseComponent: 'div'
-    }}>
-      <DropdownWithContext
-        {...props}
-        id={id}
-        dropdownItems={menuItems}
-        className={className}
-        isGrouped={isGrouped}
-        toggle={toggle}
-      />
-    </DropdownContext.Provider>
+    }}
+  >
+    <DropdownWithContext
+      {...props}
+      id={id}
+      dropdownItems={menuItems}
+      className={className}
+      isGrouped={isGrouped}
+      toggle={toggle}
+    />
+  </DropdownContext.Provider>
 );

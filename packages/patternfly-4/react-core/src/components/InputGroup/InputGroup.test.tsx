@@ -27,7 +27,9 @@ test('InputGroup', () => {
 
   expect(view.find('div')).toHaveLength(1);
   const divProps = view.find('div').props();
-  expect(divProps.className).toEqual(expect.stringContaining('text-verify-cls'));
+  expect(divProps.className).toEqual(
+    expect.stringContaining('text-verify-cls')
+  );
   expect(divProps.id).toBe('text-1');
 });
 

@@ -4,32 +4,32 @@ import LinearLayoutVector from 'linear-layout-vector';
 import { Alignment, CellSizeGetter, VisibleCellRange } from '../types';
 
 interface CellSizeAndPositionManagerParams {
-  cellCount: number,
-  cellSizeGetter: CellSizeGetter,
-  estimatedCellSize: number
+  cellCount: number;
+  cellSizeGetter: CellSizeGetter;
+  estimatedCellSize: number;
 }
 
 interface ConfigureParams {
-  cellCount: number,
-  estimatedCellSize: number,
-  cellSizeGetter: CellSizeGetter
+  cellCount: number;
+  estimatedCellSize: number;
+  cellSizeGetter: CellSizeGetter;
 }
 
 interface GetUpdatedOffsetForIndex {
-  align: Alignment,
-  containerSize: number,
-  currentOffset: number,
-  targetIndex: number
+  align: Alignment;
+  containerSize: number;
+  currentOffset: number;
+  targetIndex: number;
 }
 
 interface GetVisibleCellRangeParams {
-  containerSize: number,
-  offset: number
+  containerSize: number;
+  offset: number;
 }
 
 interface SizeAndPositionData {
-  offset: number,
-  size: number
+  offset: number;
+  size: number;
 }
 
 /**
@@ -48,7 +48,11 @@ export default class CellSizeAndPositionManager {
   _cellSizeGetter: CellSizeGetter;
   _estimatedCellSize: number;
 
-  constructor({ cellCount, cellSizeGetter, estimatedCellSize }: CellSizeAndPositionManagerParams) {
+  constructor({
+    cellCount,
+    cellSizeGetter,
+    estimatedCellSize
+  }: CellSizeAndPositionManagerParams) {
     this._cellSizeGetter = cellSizeGetter;
     this._cellCount = cellCount;
     this._estimatedCellSize = estimatedCellSize;
@@ -91,7 +95,9 @@ export default class CellSizeAndPositionManager {
    */
   getSizeAndPositionOfCell(index: number): SizeAndPositionData {
     if (index < 0 || index >= this._cellCount) {
-      throw Error(`Requested index ${index} is outside of range 0..${this._cellCount}`);
+      throw Error(
+        `Requested index ${index} is outside of range 0..${this._cellCount}`
+      );
     }
     const vector = this._layoutVector;
     if (index > this._lastMeasuredIndex) {

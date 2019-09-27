@@ -7,7 +7,9 @@ class CardHeightMatching extends React.Component {
   constructor(props) {
     super(props);
 
-    this._selectors = Array.isArray(props.selector) ? props.selector : [props.selector];
+    this._selectors = Array.isArray(props.selector)
+      ? props.selector
+      : [props.selector];
     this._resizeSensors = [];
   }
 
@@ -31,7 +33,12 @@ class CardHeightMatching extends React.Component {
     // setup the event listening on '_container' for our height matching selectors
     this._selectors.forEach(selector => {
       const elements = this._container.querySelectorAll(selector);
-      this._resizeSensors.push(new ResizeSensor(elements, debounce(() => this._matchHeights([selector]), 200)));
+      this._resizeSensors.push(
+        new ResizeSensor(
+          elements,
+          debounce(() => this._matchHeights([selector]), 200)
+        )
+      );
     });
   }
 
@@ -51,7 +58,9 @@ class CardHeightMatching extends React.Component {
     this._removeSensors();
 
     const arrayMap = elements =>
-      Array.prototype.map.call(elements, el => el.scrollHeight).reduce((pre, cur) => Math.max(pre, cur), -Infinity);
+      Array.prototype.map
+        .call(elements, el => el.scrollHeight)
+        .reduce((pre, cur) => Math.max(pre, cur), -Infinity);
     selectors.forEach(selector => {
       const elements = this._container.querySelectorAll(selector);
       elements.forEach(el => {
@@ -84,7 +93,10 @@ class CardHeightMatching extends React.Component {
 CardHeightMatching.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  selector: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired
+  selector: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]).isRequired
 };
 CardHeightMatching.defaultProps = {
   className: ''

@@ -7,7 +7,10 @@ import { storybookPackageName } from 'storybook/constants/siteConstants';
 
 import { DesktopViewer } from './index';
 
-const stories = storiesOf(`${storybookPackageName(name)}/DesktopViewer`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/DesktopViewer`,
+  module
+);
 
 const spice = {
   address: 'my.host.com',
@@ -53,8 +56,8 @@ stories.add(
       <DesktopViewer rdp={rdp}>
         <div />
         <div>
-          Custom instructions for running an RDP client application. For default content, please see the{' '}
-          <i>DesktopViewer - all</i> storybook.
+          Custom instructions for running an RDP client application. For default
+          content, please see the <i>DesktopViewer - all</i> storybook.
         </div>
       </DesktopViewer>
     );
@@ -82,7 +85,8 @@ stories.add(
     const story = (
       <DesktopViewer spice={spice} vnc={vnc} rdp={rdp}>
         <div>
-          Congratulations! You can provide whatever <b>custom installation instructions</b> here.
+          Congratulations! You can provide whatever{' '}
+          <b>custom installation instructions</b> here.
         </div>
         <div>Same as for RDP.</div>
       </DesktopViewer>

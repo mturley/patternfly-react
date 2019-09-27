@@ -25,7 +25,10 @@ function isTSX(node) {
 }
 
 function isJSX(node) {
-  return node.internal.mediaType === `application/javascript` || node.internal.mediaType === `text/jsx`;
+  return (
+    node.internal.mediaType === `application/javascript` ||
+    node.internal.mediaType === `text/jsx`
+  );
 }
 
 function flattenProps(props) {
@@ -41,7 +44,13 @@ function flattenProps(props) {
 }
 
 // Docs https://www.gatsbyjs.org/docs/actions/#createNode
-async function onCreateNode({ node, actions, loadNodeContent, createNodeId, createContentDigest }) {
+async function onCreateNode({
+  node,
+  actions,
+  loadNodeContent,
+  createNodeId,
+  createContentDigest
+}) {
   if (!canParse(node)) return;
 
   const sourceText = await loadNodeContent(node);

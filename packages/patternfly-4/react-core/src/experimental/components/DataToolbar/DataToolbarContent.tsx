@@ -5,7 +5,8 @@ import { css } from '@patternfly/react-styles';
 import { DataToolbarBreakpointMod } from './DataToolbarUtils';
 import { formatBreakpointMods } from '../../../helpers/util';
 
-export interface DataToolbarContentProps extends React.HTMLProps<HTMLDivElement> {
+export interface DataToolbarContentProps
+  extends React.HTMLProps<HTMLDivElement> {
   /** Classes applied to root element of the Data toolbar content row */
   className?: string;
   /** An array of objects representing the various modifiers to apply to the content row at various breakpoints */
@@ -14,19 +15,21 @@ export interface DataToolbarContentProps extends React.HTMLProps<HTMLDivElement>
   children?: React.ReactNode;
 }
 
-export const DataToolbarContent: React.FunctionComponent<DataToolbarContentProps> = ({
-    className,
-    children,
-    breakpointMods = [] as DataToolbarBreakpointMod[],
-    ...props
-  }: DataToolbarContentProps) => {
-
+export const DataToolbarContent: React.FunctionComponent<
+  DataToolbarContentProps
+> = ({
+  className,
+  children,
+  breakpointMods = [] as DataToolbarBreakpointMod[],
+  ...props
+}: DataToolbarContentProps) => {
   return (
     <div
-      className={
-        css(styles.dataToolbarContent,
-          formatBreakpointMods(breakpointMods, styles),
-          className)}
+      className={css(
+        styles.dataToolbarContent,
+        formatBreakpointMods(breakpointMods, styles),
+        className
+      )}
       {...props}
     >
       {children}

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/Dropdown/dropdown';
-import { DropdownPosition, DropdownDirection, DropdownContext } from './dropdownConstants';
+import {
+  DropdownPosition,
+  DropdownDirection,
+  DropdownContext
+} from './dropdownConstants';
 import { DropdownWithContext } from './DropdownWithContext';
 
 export interface DropdownProps extends React.HTMLProps<HTMLDivElement> {
@@ -37,7 +41,7 @@ export const Dropdown: React.FunctionComponent<DropdownProps> = ({
 }: DropdownProps) => (
   <DropdownContext.Provider
     value={{
-      onSelect: (event) => onSelect && onSelect(event),
+      onSelect: event => onSelect && onSelect(event),
       toggleTextClass: styles.dropdownToggleText,
       toggleIconClass: styles.dropdownToggleIcon,
       menuClass: styles.dropdownMenu,

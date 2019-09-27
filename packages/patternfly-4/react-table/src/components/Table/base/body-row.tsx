@@ -10,7 +10,14 @@ import { columnsAreEqual } from './columns-are-equal';
 import { evaluateFormatters } from './evaluate-formatters';
 import { evaluateTransforms } from './evaluate-transforms';
 import { mergeProps } from './merge-props';
-import { createElementType, formatterValueType, ColumnType, ColumnsType, RowType, RendererType } from './types';
+import {
+  createElementType,
+  formatterValueType,
+  ColumnType,
+  ColumnsType,
+  RowType,
+  RendererType
+} from './types';
 
 export interface BodyRowProps {
   columns: ColumnsType;
@@ -27,22 +34,34 @@ export class BodyRow extends React.Component<BodyRowProps, {}> {
   };
 
   shouldComponentUpdate(nextProps: BodyRowProps) {
-    const {columns, rowData} = this.props;
+    const { columns, rowData } = this.props;
 
     // Check for row based override.
     const { renderers } = nextProps;
 
-    if (renderers && renderers.row && (renderers.row as React.Component).shouldComponentUpdate) {
-      if (isFunction((renderers.row as React.Component).shouldComponentUpdate)) {
-        return (renderers.row as React.Component).shouldComponentUpdate.call(this, nextProps, {}, {});
+    if (
+      renderers &&
+      renderers.row &&
+      (renderers.row as React.Component).shouldComponentUpdate
+    ) {
+      if (
+        isFunction((renderers.row as React.Component).shouldComponentUpdate)
+      ) {
+        return (renderers.row as React.Component).shouldComponentUpdate.call(
+          this,
+          nextProps,
+          {},
+          {}
+        );
       }
 
       return true;
     }
 
     return !(
-      columnsAreEqual(columns, nextProps.columns) && isEqual(rowData, nextProps.rowData)    
-      );
+      columnsAreEqual(columns, nextProps.columns) &&
+      isEqual(rowData, nextProps.rowData)
+    );
   }
   render() {
     const { columns, renderers, onRow, rowKey, rowIndex, rowData } = this.props;
@@ -52,7 +71,8 @@ export class BodyRow extends React.Component<BodyRowProps, {}> {
       onRow(rowData, { rowIndex, rowKey }),
       (columns as []).map((column: ColumnType, columnIndex: number) => {
         const { property, cell, props } = column;
-        const evaluatedProperty = (property || (cell && cell.property)) as string;
+        const evaluatedProperty = (property ||
+          (cell && cell.property)) as string;
         const { transforms = [], formatters = [] } = cell || {};
         const extraParameters = {
           columnIndex,
@@ -62,7 +82,11 @@ export class BodyRow extends React.Component<BodyRowProps, {}> {
           rowIndex,
           rowKey
         };
-        const transformed = evaluateTransforms(transforms, rowData[evaluatedProperty], extraParameters);
+        const transformed = evaluateTransforms(
+          transforms,
+          rowData[evaluatedProperty],
+          extraParameters
+        );
 
         if (!transformed) {
           // tslint:disable-next-line:no-console
@@ -77,7 +101,8 @@ export class BodyRow extends React.Component<BodyRowProps, {}> {
           },
           transformed.children ||
             evaluateFormatters(formatters)(
-              rowData[`_${evaluatedProperty}`] || rowData[evaluatedProperty] as formatterValueType,
+              rowData[`_${evaluatedProperty}`] ||
+                (rowData[evaluatedProperty] as formatterValueType),
               extraParameters
             )
         );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
 export class DonutSmallBottomAlignedLegend extends React.Component {
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -9,15 +8,30 @@ export class DonutSmallBottomAlignedLegend extends React.Component {
   render() {
     return (
       <div>
-        <div style={{height: '200px', width: '300px', paddingTop: '50px', paddingLeft: '50px'}}>
+        <div
+          style={{
+            height: '200px',
+            width: '300px',
+            paddingTop: '50px',
+            paddingLeft: '50px'
+          }}
+        >
           <ChartDonut
             ariaDesc="Average number of pets"
             ariaTitle="Donut chart example"
-            constrainToVisibleArea={true}
-            data={[{ x: 'Cats', y: 35 }, { x: 'Dogs', y: 55 }, { x: 'Birds', y: 10 }]}
+            constrainToVisibleArea
+            data={[
+              { x: 'Cats', y: 35 },
+              { x: 'Dogs', y: 55 },
+              { x: 'Birds', y: 10 }
+            ]}
             height={200}
             labels={({ datum }) => `${datum.x}: ${datum.y}%`}
-            legendData={[{ name: 'Cats: 35' }, { name: 'Dogs: 55' }, { name: 'Birds: 10' }]}
+            legendData={[
+              { name: 'Cats: 35' },
+              { name: 'Dogs: 55' },
+              { name: 'Birds: 10' }
+            ]}
             legendPosition="bottom"
             padding={{
               bottom: 50, // Adjusted to accommodate legend
@@ -32,7 +46,6 @@ export class DonutSmallBottomAlignedLegend extends React.Component {
           />
         </div>
       </div>
-
     );
   }
 }

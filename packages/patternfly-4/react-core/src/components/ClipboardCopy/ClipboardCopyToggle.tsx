@@ -3,7 +3,11 @@ import styles from '@patternfly/react-styles/css/components/ClipboardCopy/clipbo
 import { css } from '@patternfly/react-styles';
 import { AngleRightIcon } from '@patternfly/react-icons';
 
-export interface ClipboardCopyToggleProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+export interface ClipboardCopyToggleProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   onClick: (event: React.MouseEvent) => void;
   id: string;
   textId: string;
@@ -12,7 +16,9 @@ export interface ClipboardCopyToggleProps extends React.DetailedHTMLProps<React.
   className?: string;
 }
 
-export const ClipboardCopyToggle: React.FunctionComponent<ClipboardCopyToggleProps> = ({
+export const ClipboardCopyToggle: React.FunctionComponent<
+  ClipboardCopyToggleProps
+> = ({
   onClick,
   className = '',
   id,
@@ -22,7 +28,7 @@ export const ClipboardCopyToggle: React.FunctionComponent<ClipboardCopyTogglePro
   ...props
 }: ClipboardCopyToggleProps) => {
   return (
-  <button
+    <button
       onClick={onClick}
       className={css(styles.clipboardCopyGroupToggle, className)}
       id={id}
@@ -31,7 +37,10 @@ export const ClipboardCopyToggle: React.FunctionComponent<ClipboardCopyTogglePro
       aria-expanded={isExpanded}
       {...props}
     >
-      <AngleRightIcon aria-hidden="true" className={css(styles.clipboardCopyGroupToggleIcon)} />
+      <AngleRightIcon
+        aria-hidden="true"
+        className={css(styles.clipboardCopyGroupToggleIcon)}
+      />
     </button>
   );
 };

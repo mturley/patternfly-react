@@ -45,7 +45,7 @@ class SpiceConsole extends React.Component {
   }
   onConnected = () => {
     this.setState({ status: CONNECTED });
-  }
+  };
 
   onCtrlAltDel = e => {
     if (this.sc) {
@@ -54,26 +54,31 @@ class SpiceConsole extends React.Component {
       sendCtrlAltDel();
       window.sc = undefined;
     }
-  }
+  };
 
   onSpiceError = e => {
     this.disconnect();
     this.onDisconnected(e);
     //      if (e !== undefined && e.message === "Permission denied.") {
-  }
+  };
 
   onDisconnected = e => {
     this.setState({ status: DISCONNECTED });
     this.props.onDisconnected(e);
-  }
+  };
 
   onSecurityFailure = e => {
     this.setState({ status: DISCONNECTED });
     this.props.onSecurityFailure(e);
-  }
+  };
 
   render() {
-    const { textDisconnected, textConnecting, textSendShortcut, textCtrlAltDel } = this.props;
+    const {
+      textDisconnected,
+      textConnecting,
+      textSendShortcut,
+      textCtrlAltDel
+    } = this.props;
 
     let status = null;
     let rightContent = null;
@@ -88,16 +93,22 @@ class SpiceConsole extends React.Component {
         );
         break;
       case DISCONNECTED:
-        status = <div className="spice-console-disconnected">{textDisconnected}</div>;
+        status = (
+          <div className="spice-console-disconnected">{textDisconnected}</div>
+        );
         break;
       case CONNECTING:
       default:
-        status = <div className="spice-console-connecting">{textConnecting}</div>;
+        status = (
+          <div className="spice-console-connecting">{textConnecting}</div>
+        );
     }
 
     if (!this.SpiceStaticComponent) {
       // create just once
-      this.SpiceStaticComponent = <div id="spice-screen" ref={this.setSpiceElem} />;
+      this.SpiceStaticComponent = (
+        <div id="spice-screen" ref={this.setSpiceElem} />
+      );
     }
 
     return (

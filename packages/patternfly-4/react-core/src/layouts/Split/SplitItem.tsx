@@ -17,7 +17,14 @@ export const SplitItem: React.FunctionComponent<SplitItemProps> = ({
   children = null,
   ...props
 }: SplitItemProps) => (
-  <div {...props} className={css(styles.splitItem, isFilled && styles.modifiers.fill, className)}>
+  <div
+    {...props}
+    className={css(
+      styles.splitItem,
+      isFilled && styles.modifiers.fill,
+      className
+    )}
+  >
     {children}
   </div>
 );

@@ -18,7 +18,11 @@ export const AppToolbar = (
   <Toolbar>
     <ToolbarGroup>
       <ToolbarItem>
-        <Button id="simple-example-uid-02" aria-label="Settings actions" variant={ButtonVariant.plain}>
+        <Button
+          id="simple-example-uid-02"
+          aria-label="Settings actions"
+          variant={ButtonVariant.plain}
+        >
           <CogIcon />
         </Button>
       </ToolbarItem>

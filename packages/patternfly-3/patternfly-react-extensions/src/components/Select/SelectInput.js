@@ -11,11 +11,21 @@ class SelectInput extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.focus) { this.searchInput.current.focus(); }
+    if (this.props.focus) {
+      this.searchInput.current.focus();
+    }
   }
 
   render() {
-    const { id, onClear, className, onKeyDown, onChange, placeholder, searchValue } = this.props;
+    const {
+      id,
+      onClear,
+      className,
+      onKeyDown,
+      onChange,
+      placeholder,
+      searchValue
+    } = this.props;
     const classes = classNames('select-input-search', className);
 
     return (

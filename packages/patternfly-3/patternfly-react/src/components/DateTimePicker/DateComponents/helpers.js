@@ -17,7 +17,9 @@ export const addYears = (date, years) => {
 };
 
 export const isEqualDate = (date1, date2) =>
-  date1.getYear() === date2.getYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
+  date1.getYear() === date2.getYear() &&
+  date1.getMonth() === date2.getMonth() &&
+  date1.getDate() === date2.getDate();
 
 export const isWeekend = date => date.getDay() === 6 || date.getDay() === 5;
 

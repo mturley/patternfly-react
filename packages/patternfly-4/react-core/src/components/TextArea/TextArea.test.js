@@ -23,7 +23,14 @@ test('simple text input', () => {
 });
 
 test('invalid text input', () => {
-  const view = shallow(<TextArea {...props} required isValid={false} aria-label="invalid textarea" />);
+  const view = shallow(
+    <TextArea
+      {...props}
+      required
+      isValid={false}
+      aria-label="invalid textarea"
+    />
+  );
   expect(view).toMatchSnapshot();
 });
 

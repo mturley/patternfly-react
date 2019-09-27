@@ -94,13 +94,13 @@ export class Tooltip extends React.Component<TooltipProps> {
   storeTippyInstance = (tip: TippyInstance) => {
     tip.popperChildren.tooltip.classList.add(styles.tooltip);
     this.tip = tip;
-  }
+  };
 
   handleEscKeyClick = (event: KeyboardEvent) => {
     if (event.keyCode === KEY_CODES.ESCAPE_KEY && this.tip.state.isVisible) {
       this.tip.hide();
     }
-  }
+  };
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleEscKeyClick, false);
@@ -140,7 +140,10 @@ export class Tooltip extends React.Component<TooltipProps> {
     } = this.props;
     const content = (
       <div
-        className={css(!enableFlip && getModifier(styles, position, styles.modifiers.top), className)}
+        className={css(
+          !enableFlip && getModifier(styles, position, styles.modifiers.top),
+          className
+        )}
         role="tooltip"
         {...rest}
       >

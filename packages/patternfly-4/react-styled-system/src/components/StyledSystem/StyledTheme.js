@@ -283,15 +283,22 @@ export const StyledTheme = {
     bg_100: global_BackgroundColor_100 && global_BackgroundColor_100.var,
     bg_200: global_BackgroundColor_200 && global_BackgroundColor_200.var,
     bg_300: global_BackgroundColor_300 && global_BackgroundColor_300.var,
-    bg_light_100: global_BackgroundColor_light_100 && global_BackgroundColor_light_100.var,
-    bg_light_200: global_BackgroundColor_light_200 && global_BackgroundColor_light_200.var,
-    bg_light_300: global_BackgroundColor_light_300 && global_BackgroundColor_light_300.var,
-    bg_dark_100: global_BackgroundColor_dark_100 && global_BackgroundColor_dark_100.var,
-    bg_dark_200: global_BackgroundColor_dark_200 && global_BackgroundColor_dark_200.var,
+    bg_light_100:
+      global_BackgroundColor_light_100 && global_BackgroundColor_light_100.var,
+    bg_light_200:
+      global_BackgroundColor_light_200 && global_BackgroundColor_light_200.var,
+    bg_light_300:
+      global_BackgroundColor_light_300 && global_BackgroundColor_light_300.var,
+    bg_dark_100:
+      global_BackgroundColor_dark_100 && global_BackgroundColor_dark_100.var,
+    bg_dark_200:
+      global_BackgroundColor_dark_200 && global_BackgroundColor_dark_200.var,
     bg_dark_transparent_100:
-      global_BackgroundColor_dark_transparent_100 && global_BackgroundColor_dark_transparent_100.var,
+      global_BackgroundColor_dark_transparent_100 &&
+      global_BackgroundColor_dark_transparent_100.var,
     bg_dark_transparent_200:
-      global_BackgroundColor_dark_transparent_200 && global_BackgroundColor_dark_transparent_200.var,
+      global_BackgroundColor_dark_transparent_200 &&
+      global_BackgroundColor_dark_transparent_200.var,
     color_100: global_Color_100 && global_Color_100.var,
     color_200: global_Color_200 && global_Color_200.var,
     light_100: global_Color_light_100 && global_Color_light_100.var,
@@ -305,8 +312,10 @@ export const StyledTheme = {
     disabled_200: global_disabled_color_200 && global_disabled_color_200.var,
     primary_100: global_primary_color_100 && global_primary_color_100.var,
     primary_200: global_primary_color_200 && global_primary_color_200.var,
-    primary_light_100: global_primary_color_light_100 && global_primary_color_light_100.var,
-    primary_dark_100: global_primary_color_dark_100 && global_primary_color_dark_100.var,
+    primary_light_100:
+      global_primary_color_light_100 && global_primary_color_light_100.var,
+    primary_dark_100:
+      global_primary_color_dark_100 && global_primary_color_dark_100.var,
     secondary_100: global_secondary_color_100 && global_secondary_color_100.var,
     success_100: global_success_color_100 && global_success_color_100.var,
     success_200: global_success_color_200 && global_success_color_200.var,
@@ -319,16 +328,20 @@ export const StyledTheme = {
     danger_300: global_danger_color_300 && global_danger_color_300.var,
     link: global_link_Color && global_link_Color.var,
     link_hover: global_link_Color_hover && global_link_Color_hover.var,
-    link_light_hover: global_link_Color_light_hover && global_link_Color_light_hover.var,
+    link_light_hover:
+      global_link_Color_light_hover && global_link_Color_light_hover.var,
     border_100: global_BorderColor_100 && global_BorderColor_100.var,
     border_300: global_BorderColor_300 && global_BorderColor_300.var,
-    border_light_100: global_BorderColor_light_100 && global_BorderColor_light_100.var,
-    border_dark_100: global_BorderColor_dark_100 && global_BorderColor_dark_100.var
+    border_light_100:
+      global_BorderColor_light_100 && global_BorderColor_light_100.var,
+    border_dark_100:
+      global_BorderColor_dark_100 && global_BorderColor_dark_100.var
   },
 
   // Array or Object: Values for the fontFamily prop
   fonts: {
-    sans_serif: global_FontFamily_sans_serif && global_FontFamily_sans_serif.var,
+    sans_serif:
+      global_FontFamily_sans_serif && global_FontFamily_sans_serif.var,
     monospace: global_FontFamily_monospace && global_FontFamily_monospace.var
   },
 
@@ -389,7 +402,9 @@ export const StyledTheme = {
  * The PatternFlyThemeProvider should be higher up the component tree so that it can wrap any styled components in use.
  * Multiple themes can be nested to override the theme if needed. When nesting themes, the theme object will be merged into the ancestor theme.
  */
-const PatternFlyThemeProvider = ({ theme, children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+const PatternFlyThemeProvider = ({ theme, children }) => (
+  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+);
 
 PatternFlyThemeProvider.propTypes = {
   /** Theme object, defaults to the PatternFly theme */

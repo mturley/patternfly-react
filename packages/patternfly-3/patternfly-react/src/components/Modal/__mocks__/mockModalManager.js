@@ -77,14 +77,22 @@ class MockModalManager extends React.Component {
           Launch Modal
         </Button>
 
-        <Modal show={this.state.showModal} onHide={this.close} className={rightSide ? 'right-side-modal-pf' : ''}>
+        <Modal
+          show={this.state.showModal}
+          onHide={this.close}
+          className={rightSide ? 'right-side-modal-pf' : ''}
+        >
           <Modal.Header>
             <Modal.CloseButton onClick={this.close} />
             <Modal.Title>Modal Overlay Title</Modal.Title>
           </Modal.Header>
           <Modal.Body>{children || defaultBody}</Modal.Body>
           <Modal.Footer>
-            <Button bsStyle="default" className="btn-cancel" onClick={this.close}>
+            <Button
+              bsStyle="default"
+              className="btn-cancel"
+              onClick={this.close}
+            >
               Cancel
             </Button>
             <Button bsStyle="primary" onClick={this.close}>

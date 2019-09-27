@@ -1,7 +1,10 @@
 import React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { decorateAction } from '@storybook/addon-actions';
-import { MockClientPaginationTable, mockClientPaginationTableSource } from '../__mocks__/mockClientPaginationTable';
+import {
+  MockClientPaginationTable,
+  mockClientPaginationTableSource
+} from '../__mocks__/mockClientPaginationTable';
 import {
   actionHeaderCellFormatter,
   customHeaderFormattersDefinition,
@@ -50,7 +53,9 @@ const clientPaginationTable = stories => {
       )
     })(() => {
       const logAction = decorateAction([args => args]);
-      const story = <MockClientPaginationTable onRowsLogger={logAction('onRowsLogger')} />;
+      const story = (
+        <MockClientPaginationTable onRowsLogger={logAction('onRowsLogger')} />
+      );
       return inlineTemplate({
         title: 'Client Paginated Table',
         documentationLink: `${DOCUMENTATION_URL.PATTERNFLY_ORG_CONTENT_VIEWS}table-view/`,

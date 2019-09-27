@@ -11,6 +11,7 @@ const PaginationRowArrowIcon = ({ name, ...props }) => {
 };
 PaginationRowArrowIcon.propTypes = {
   /** icon name */
-  name: PropTypes.oneOf(['left', 'double-left', 'right', 'double-right']).isRequired
+  name: PropTypes.oneOf(['left', 'double-left', 'right', 'double-right'])
+    .isRequired
 };
 export default PaginationRowArrowIcon;

@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DualListCounter from './DualListCounter';
-import { getCounterMessage as counterMessage, getItemsLength } from '../helpers';
+import {
+  getCounterMessage as counterMessage,
+  getItemsLength
+} from '../helpers';
 
 const DualListFooter = ({ items, selectCount, getCounterMessage }) => (
   <div className="dual-list-pf-footer">
-    <DualListCounter selected={selectCount} total={getItemsLength(items)} getCounterMessage={getCounterMessage} />
+    <DualListCounter
+      selected={selectCount}
+      total={getItemsLength(items)}
+      getCounterMessage={getCounterMessage}
+    />
   </div>
 );
 

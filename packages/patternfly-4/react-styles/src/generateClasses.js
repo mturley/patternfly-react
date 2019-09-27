@@ -7,7 +7,9 @@ const { readFileSync } = require('fs');
 const { outputFileSync } = require('fs-extra');
 
 const outDir = resolve(__dirname, '../css');
-const pfStylesDir = dirname(require.resolve('@patternfly/patternfly/patternfly.css'));
+const pfStylesDir = dirname(
+  require.resolve('@patternfly/patternfly/patternfly.css')
+);
 
 const cssFiles = glob.sync('**/*.css', {
   cwd: pfStylesDir,
@@ -31,7 +33,10 @@ const inlineCssFiles = glob.sync('src/css/**/*.css');
 inlineCssFiles.forEach(filePath => {
   const absFilePath = resolve(filePath);
   const cssContent = readFileSync(absFilePath, 'utf8');
-  const cssOutputPath = getCSSOutputPath(outDir, filePath).replace('src/css/', '');
+  const cssOutputPath = getCSSOutputPath(outDir, filePath).replace(
+    'src/css/',
+    ''
+  );
   const newClass = cssToJSNew(cssContent, `./${basename(cssOutputPath)}`);
 
   outputFileSync(cssOutputPath, cssContent);
@@ -53,7 +58,8 @@ function cssToJSNew(cssString, cssOutputPath = '') {
       classDeclaration.push(`${key}: '${cleanClass}'`);
     }
   });
-  const classSection = classDeclaration.length > 0 ? `${classDeclaration.join(',\n  ')},` : '';
+  const classSection =
+    classDeclaration.length > 0 ? `${classDeclaration.join(',\n  ')},` : '';
 
   return `import '${cssOutputPath}';
 
@@ -74,7 +80,9 @@ function formatClassName(className) {
 }
 
 function isModifier(className) {
-  return Boolean(className && className.startsWith) && className.startsWith('.pf-m-');
+  return (
+    Boolean(className && className.startsWith) && className.startsWith('.pf-m-')
+  );
 }
 
 function getCSSOutputPath(absFilePath, pathToCSSFile) {

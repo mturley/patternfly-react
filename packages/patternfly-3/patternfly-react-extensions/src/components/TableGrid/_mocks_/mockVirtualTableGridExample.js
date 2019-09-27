@@ -56,11 +56,11 @@ class MockVirtualTableGridExample extends React.Component {
     });
 
     this.setState({ items, sortField: id, isAscending: updateAscending });
-  }
+  };
 
   onSelect = (item, field) => {
     this.setState({ selectedItem: item, selectedField: field });
-  }
+  };
 
   toggleSelection = item => {
     const { selectedItems } = this.state;
@@ -68,25 +68,42 @@ class MockVirtualTableGridExample extends React.Component {
     const index = selectedItems.indexOf(item);
 
     if (index >= 0) {
-      newSelections = [...selectedItems.slice(0, index), ...selectedItems.slice(index + 1)];
+      newSelections = [
+        ...selectedItems.slice(0, index),
+        ...selectedItems.slice(index + 1)
+      ];
     } else {
       newSelections = [...selectedItems, item];
     }
     this.setState({ selectedItems: newSelections });
-  }
+  };
 
   toggleAllSelections = () => {
     const { items, selectedItems } = this.state;
-    this.setState({ selectedItems: selectedItems.length > 0 ? [] : [...items] });
-  }
+    this.setState({
+      selectedItems: selectedItems.length > 0 ? [] : [...items]
+    });
+  };
 
   ItemHeader = tableData => {
-    const { numItems, selectType, selectedItems, sortField, isAscending } = tableData;
+    const {
+      numItems,
+      selectType,
+      selectedItems,
+      sortField,
+      isAscending
+    } = tableData;
     return (
       <VirtualTableGrid.Head
         showCheckbox={selectType === 'checkbox'}
-        allSelected={selectType === 'checkbox' && selectedItems.length === numItems}
-        partialSelected={selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < numItems}
+        allSelected={
+          selectType === 'checkbox' && selectedItems.length === numItems
+        }
+        partialSelected={
+          selectType === 'checkbox' &&
+          selectedItems.length > 0 &&
+          selectedItems.length < numItems
+        }
         onToggleSelection={this.toggleAllSelections}
       >
         <VirtualTableGrid.ColumnHeader
@@ -116,7 +133,10 @@ class MockVirtualTableGridExample extends React.Component {
           onSortToggle={() => this.onSortToggle('hosts')}
           {...countColSizes}
         >
-          <OverlayTrigger overlay={<Tooltip id="hosts-tip">Hosts</Tooltip>} placement="top">
+          <OverlayTrigger
+            overlay={<Tooltip id="hosts-tip">Hosts</Tooltip>}
+            placement="top"
+          >
             <span>Hosts</span>
           </OverlayTrigger>
         </VirtualTableGrid.ColumnHeader>
@@ -128,59 +148,91 @@ class MockVirtualTableGridExample extends React.Component {
           onSortToggle={() => this.onSortToggle('clusters')}
           {...countColSizes}
         >
-          <OverlayTrigger overlay={<Tooltip id="clusters-tip">Clusters</Tooltip>} placement="top">
+          <OverlayTrigger
+            overlay={<Tooltip id="clusters-tip">Clusters</Tooltip>}
+            placement="top"
+          >
             <span>Clusters</span>
           </OverlayTrigger>
         </VirtualTableGrid.ColumnHeader>
       </VirtualTableGrid.Head>
     );
-  }
+  };
 
   ItemRow = rowProps => {
     const { obj, tableData, index } = rowProps;
-    const { selectType, selectedItem, selectedField, selectedItems } = tableData;
-    const selected = selectType === 'checkbox' ? selectedItems.indexOf(obj) >= 0 : selectedItem === obj;
+    const {
+      selectType,
+      selectedItem,
+      selectedField,
+      selectedItems
+    } = tableData;
+    const selected =
+      selectType === 'checkbox'
+        ? selectedItems.indexOf(obj) >= 0
+        : selectedItem === obj;
     return (
       <VirtualTableGrid.Row
         key={index}
         onClick={() => selectType === 'row' && this.onSelect(obj)}
-        selected={(selectType === 'row' || selectType === 'checkbox') && selected}
+        selected={
+          (selectType === 'row' || selectType === 'checkbox') && selected
+        }
         onToggleSelection={() => this.toggleSelection(obj)}
       >
         <VirtualTableGrid.Col
           {...titleColSizes}
           onClick={() => selectType === 'cell' && this.onSelect(obj, 'title')}
-          selected={selectType === 'cell' && selected && selectedField === 'title'}
+          selected={
+            selectType === 'cell' && selected && selectedField === 'title'
+          }
         >
           {obj.title}
         </VirtualTableGrid.Col>
         <VirtualTableGrid.Col
           {...descrColSizes}
-          onClick={() => selectType === 'cell' && this.onSelect(obj, 'description')}
-          selected={selectType === 'cell' && selected && selectedField === 'description'}
+          onClick={() =>
+            selectType === 'cell' && this.onSelect(obj, 'description')
+          }
+          selected={
+            selectType === 'cell' && selected && selectedField === 'description'
+          }
         >
           {obj.description}
         </VirtualTableGrid.Col>
         <VirtualTableGrid.Col
           {...countColSizes}
           onClick={() => selectType === 'cell' && this.onSelect(obj, 'hosts')}
-          selected={selectType === 'cell' && selected && selectedField === 'hosts'}
+          selected={
+            selectType === 'cell' && selected && selectedField === 'hosts'
+          }
         >
           {obj.hosts}
         </VirtualTableGrid.Col>
         <VirtualTableGrid.Col
           {...countColSizes}
-          onClick={() => selectType === 'cell' && this.onSelect(obj, 'clusters')}
-          selected={selectType === 'cell' && selected && selectedField === 'clusters'}
+          onClick={() =>
+            selectType === 'cell' && this.onSelect(obj, 'clusters')
+          }
+          selected={
+            selectType === 'cell' && selected && selectedField === 'clusters'
+          }
         >
           {obj.clusters}
         </VirtualTableGrid.Col>
       </VirtualTableGrid.Row>
     );
-  }
+  };
 
   render() {
-    const { items, selectedItem, selectedItems, selectedField, sortField, isAscending } = this.state;
+    const {
+      items,
+      selectedItem,
+      selectedItems,
+      selectedField,
+      sortField,
+      isAscending
+    } = this.state;
     const { bordered, selectType } = this.props;
     const tableData = {
       selectedItem,

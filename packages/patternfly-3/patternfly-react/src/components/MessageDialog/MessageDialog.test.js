@@ -39,7 +39,12 @@ describe('rendering with options', () => {
   test('renders with the provided title', () => {
     const title = 'Modal Title';
     const wrapper = shallow(
-      <MessageDialog {...baseProps} onHide={onHide} primaryAction={primaryAction} title={title} />
+      <MessageDialog
+        {...baseProps}
+        onHide={onHide}
+        primaryAction={primaryAction}
+        title={title}
+      />
     );
 
     expect(
@@ -53,7 +58,12 @@ describe('rendering with options', () => {
   test('renders with the provided primary text', () => {
     const primaryContent = <h1>Modal Heading</h1>;
     const wrapper = shallow(
-      <MessageDialog {...baseProps} onHide={onHide} primaryAction={primaryAction} primaryContent={primaryContent} />
+      <MessageDialog
+        {...baseProps}
+        onHide={onHide}
+        primaryAction={primaryAction}
+        primaryContent={primaryContent}
+      />
     );
 
     expect(wrapper.contains(primaryContent)).toBe(true);
@@ -62,7 +72,12 @@ describe('rendering with options', () => {
   test('renders with the provided secondary text', () => {
     const secondaryContent = <div>Modal Body</div>;
     const wrapper = shallow(
-      <MessageDialog {...baseProps} onHide={onHide} primaryAction={primaryAction} secondaryContent={secondaryContent} />
+      <MessageDialog
+        {...baseProps}
+        onHide={onHide}
+        primaryAction={primaryAction}
+        secondaryContent={secondaryContent}
+      />
     );
 
     expect(wrapper.contains(secondaryContent)).toBe(true);
@@ -70,7 +85,9 @@ describe('rendering with options', () => {
 
   test('renders with a custom footer', () => {
     const footer = <button>Close</button>;
-    const wrapper = shallow(<MessageDialog show onHide={onHide} footer={footer} />);
+    const wrapper = shallow(
+      <MessageDialog show onHide={onHide} footer={footer} />
+    );
 
     expect(wrapper.contains(footer)).toBe(true);
   });
@@ -126,7 +143,9 @@ describe('test primary action and footer props conflict', () => {
   });
 
   test('check that props check fails if footer is null and primary action is not set', () => {
-    shallow(<MessageDialog show onHide={jest.fn()} primaryActionButtonContent="OK" />);
+    shallow(
+      <MessageDialog show onHide={jest.fn()} primaryActionButtonContent="OK" />
+    );
     expect(global.console.error).toBeCalledWith(
       'Warning: Failed primaryAction type: The primaryAction `primaryAction` is marked as required in `MessageDialog`, but its value is `null`.'
     );
@@ -140,7 +159,13 @@ describe('test primary action and footer props conflict', () => {
   });
 
   test('check that props check does not fail if footer is not null and primary action props are not set', () => {
-    shallow(<MessageDialog show onHide={jest.fn()} footer={<div>This is my footer</div>} />);
+    shallow(
+      <MessageDialog
+        show
+        onHide={jest.fn()}
+        footer={<div>This is my footer</div>}
+      />
+    );
     expect(global.console.error).not.toBeCalled();
   });
 });

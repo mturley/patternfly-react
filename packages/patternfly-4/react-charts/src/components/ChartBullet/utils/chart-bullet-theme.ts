@@ -4,7 +4,7 @@ import {
   getComparativeWarningMeasureData,
   getPrimarySegmentedMeasureData,
   getQualitativeRangeData
-}  from './chart-bullet-data';
+} from './chart-bullet-data';
 import { ChartThemeDefinition } from '../../ChartTheme';
 import { getBulletTheme } from '../../ChartUtils';
 
@@ -57,41 +57,60 @@ export const getColorScale = ({
       data: primaryDotMeasureData,
       invert
     });
-    colorScale.push(...getLegendColorScale(computedData, primaryDotMeasureLegendData));
+    colorScale.push(
+      ...getLegendColorScale(computedData, primaryDotMeasureLegendData)
+    );
   }
-  if (primarySegmentedMeasureLegendData && primarySegmentedMeasureLegendData.length) {
+  if (
+    primarySegmentedMeasureLegendData &&
+    primarySegmentedMeasureLegendData.length
+  ) {
     const computedData = getPrimarySegmentedMeasureData({
       data: primarySegmentedMeasureData,
       invert,
       themeColor,
       themeVariant
     });
-    colorScale.push(...getLegendColorScale(computedData, primarySegmentedMeasureLegendData));
+    colorScale.push(
+      ...getLegendColorScale(computedData, primarySegmentedMeasureLegendData)
+    );
   }
-  if (comparativeWarningMeasureLegendData && comparativeWarningMeasureLegendData.length) {
+  if (
+    comparativeWarningMeasureLegendData &&
+    comparativeWarningMeasureLegendData.length
+  ) {
     const computedData = getComparativeWarningMeasureData({
       data: comparativeWarningMeasureData,
       invert,
       themeColor,
       themeVariant
     });
-    colorScale.push(...getLegendColorScale(computedData, comparativeWarningMeasureLegendData));
+    colorScale.push(
+      ...getLegendColorScale(computedData, comparativeWarningMeasureLegendData)
+    );
   }
-  if (comparativeErrorMeasureLegendData && comparativeErrorMeasureLegendData.length) {
+  if (
+    comparativeErrorMeasureLegendData &&
+    comparativeErrorMeasureLegendData.length
+  ) {
     const computedData = getComparativeErrorMeasureData({
       data: comparativeErrorMeasureData,
       invert,
       themeColor,
       themeVariant
     });
-    colorScale.push(...getLegendColorScale(computedData, comparativeErrorMeasureLegendData));
+    colorScale.push(
+      ...getLegendColorScale(computedData, comparativeErrorMeasureLegendData)
+    );
   }
   if (qualitativeRangeLegendData && qualitativeRangeLegendData.length) {
     const computedData = getQualitativeRangeData({
       data: qualitativeRangeData,
       invert
     });
-    colorScale.push(...getLegendColorScale(computedData, qualitativeRangeLegendData));
+    colorScale.push(
+      ...getLegendColorScale(computedData, qualitativeRangeLegendData)
+    );
   }
   return colorScale;
 };
@@ -125,7 +144,8 @@ export const getBulletThemeWithLegendColorScale = ({
     qualitativeRangeData,
     qualitativeRangeLegendData,
     themeColor,
-    themeVariant});
+    themeVariant
+  });
 
   const theme = getBulletTheme(themeColor, themeVariant);
   theme.legend.colorScale = [...colorScale];

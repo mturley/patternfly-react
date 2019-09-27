@@ -1,5 +1,11 @@
 import React from 'react';
-import { DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell } from '@patternfly/react-core';
+import {
+  DataList,
+  DataListItem,
+  DataListItemRow,
+  DataListItemCells,
+  DataListCell
+} from '@patternfly/react-core';
 
 export class DataListDemo extends React.Component {
   render() {
@@ -24,10 +30,18 @@ export class DataListDemo extends React.Component {
             <DataListItemCells
               dataListCells={[
                 <DataListCell isFilled={false} key="secondary content fill">
-                  <span id="simple-item3">Secondary content (pf-m-no-fill)</span>
+                  <span id="simple-item3">
+                    Secondary content (pf-m-no-fill)
+                  </span>
                 </DataListCell>,
-                <DataListCell isFilled={false} alignRight key="secondary content align">
-                  <span id="simple-item4">Secondary content (pf-m-align-right pf-m-no-fill)</span>
+                <DataListCell
+                  isFilled={false}
+                  alignRight
+                  key="secondary content align"
+                >
+                  <span id="simple-item4">
+                    Secondary content (pf-m-align-right pf-m-no-fill)
+                  </span>
                 </DataListCell>
               ]}
             />

@@ -58,7 +58,14 @@ test('DesktopViewer with Spice, VNC and RDP (different hostname)', () => {
 test('DesktopViewer launch button', () => {
   const onDownload = jest.fn();
   const onGenerate = jest.fn().mockReturnValue({ content: 'Foo' });
-  const wrapper = mount(<DesktopViewer spice={spice} vnc={vnc} onDownload={onDownload} onGenerate={onGenerate} />);
+  const wrapper = mount(
+    <DesktopViewer
+      spice={spice}
+      vnc={vnc}
+      onDownload={onDownload}
+      onGenerate={onGenerate}
+    />
+  );
   const launchButton = wrapper.find('button.remote-viewer-pf-launch-vv');
   expect(launchButton).toHaveLength(1);
   launchButton.simulate('click');
@@ -69,7 +76,9 @@ test('DesktopViewer launch button', () => {
 test('DesktopViewer RDP launch button', () => {
   const onDownload = jest.fn();
   const onGenerate = jest.fn().mockReturnValue({ content: 'Foo' });
-  const wrapper = mount(<DesktopViewer rdp={rdp} onDownload={onDownload} onGenerate={onGenerate} />);
+  const wrapper = mount(
+    <DesktopViewer rdp={rdp} onDownload={onDownload} onGenerate={onGenerate} />
+  );
   const launchButton = wrapper.find('button.remote-viewer-pf-launch-rdp');
   expect(launchButton).toHaveLength(1);
   launchButton.simulate('click');
@@ -97,7 +106,10 @@ test('default MoreInformationContent', () => {
 });
 
 test('default implementation of generateVVFile()', () => {
-  const output = generateDescriptorFile({ console: spice, type: SPICE_CONSOLE_TYPE });
+  const output = generateDescriptorFile({
+    console: spice,
+    type: SPICE_CONSOLE_TYPE
+  });
   expect(output.mimeType).toMatch('application/x-virt-viewer');
   expect(output.content).toMatch(
     '[virt-viewer]\ntype=spice\nhost=my.host.com\nport=5900\ndelete-this-file=1\nfullscreen=0\n'
@@ -105,7 +117,12 @@ test('default implementation of generateVVFile()', () => {
 });
 
 test('default implementation of generateRDPFile()', () => {
-  const output = generateDescriptorFile({ console: rdp, type: RDP_CONSOLE_TYPE });
+  const output = generateDescriptorFile({
+    console: rdp,
+    type: RDP_CONSOLE_TYPE
+  });
   expect(output.mimeType).toMatch('application/rdp');
-  expect(output.content).toEqual(expect.stringContaining('full address:s:my.host.com:3389\n')); // the rest is a constant so far
+  expect(output.content).toEqual(
+    expect.stringContaining('full address:s:my.host.com:3389\n')
+  ); // the rest is a constant so far
 });

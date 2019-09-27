@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const LoginPageContainer = ({ backgroundUrl, className, children }) => {
-  const style = backgroundUrl ? { backgroundImage: `url(${backgroundUrl})` } : {};
+  const style = backgroundUrl
+    ? { backgroundImage: `url(${backgroundUrl})` }
+    : {};
 
   return (
     <div className="login-pf" style={style}>

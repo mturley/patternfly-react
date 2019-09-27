@@ -18,16 +18,23 @@ class StatefulToggleNotificationDrawerWrapper extends React.Component {
     this.setState(prevState => ({
       isDrawerOpen: !prevState.isDrawerOpen
     }));
-  }
+  };
 
   updateUnreadCount = bool => {
-    if (bool) { this.setState({ hasUnreadMessages: true }); } else { this.setState({ hasUnreadMessages: false }); }
-  }
+    if (bool) {
+      this.setState({ hasUnreadMessages: true });
+    } else {
+      this.setState({ hasUnreadMessages: false });
+    }
+  };
 
   render() {
     return (
       <ul className="nav navbar-nav navbar-right navbar-iconic">
-        <NotificationDrawer.Toggle hasUnreadMessages={this.state.hasUnreadMessages} onClick={this.toggleDrawer} />
+        <NotificationDrawer.Toggle
+          hasUnreadMessages={this.state.hasUnreadMessages}
+          onClick={this.toggleDrawer}
+        />
         {this.state.isDrawerOpen && (
           <StatefulNotificationDrawerWrapper
             panels={this.state.panels}

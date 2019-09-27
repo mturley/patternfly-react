@@ -21,7 +21,11 @@ export const NavGroup: React.FunctionComponent<NavGroupProps> = ({
   id = getUniqueId(),
   ...props
 }: NavGroupProps) => (
-  <section className={css(styles.navSection, className)} aria-labelledby={id} {...props}>
+  <section
+    className={css(styles.navSection, className)}
+    aria-labelledby={id}
+    {...props}
+  >
     <h2 className={css(styles.navSectionTitle)} id={id}>
       {title}
     </h2>

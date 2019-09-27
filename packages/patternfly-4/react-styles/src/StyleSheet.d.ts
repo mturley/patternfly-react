@@ -2,11 +2,15 @@ import { StyleDeclarationStatic } from './utils';
 import { Interpolation } from 'emotion';
 import { ClassNameArg } from 'create-emotion';
 
-type emotionCss = (...classNames: Array<ClassNameArg | StyleDeclarationStatic>) => string;
+type emotionCss = (
+  ...classNames: Array<ClassNameArg | StyleDeclarationStatic>
+) => string;
 
 export interface StyleSheetStatic {
   parse(cssString: string): StyleSheetValueStatic;
-  create<T extends Record<keyof T, Interpolation>>(styles: T): Record<keyof T, string>;
+  create<T extends Record<keyof T, Interpolation>>(
+    styles: T
+  ): Record<keyof T, string>;
 }
 
 export type StyleSheetValueStatic = {

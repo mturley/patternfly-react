@@ -1,5 +1,9 @@
 import React from 'react';
-import { TableContext, TableBody, isRowExpanded } from '@patternfly/react-table';
+import {
+  TableContext,
+  TableBody,
+  isRowExpanded
+} from '@patternfly/react-table';
 
 import PropTypes from 'prop-types';
 import { TableEditConfirmation } from './constants';
@@ -25,7 +29,9 @@ const defaultProps = {
 
 const resolveCascadeEditability = rows => {
   const isRowExpandedIndexes = new Set(
-    rows.map((row, idx) => (isRowExpanded(row, rows) ? idx : null)).filter(row => row !== null)
+    rows
+      .map((row, idx) => (isRowExpanded(row, rows) ? idx : null))
+      .filter(row => row !== null)
   );
 
   // flag parents and their children which are edited together
@@ -43,19 +49,30 @@ const resolveCascadeEditability = rows => {
       row.isParentEditing = true;
     });
 
-  const lastVisibleRow = rows.filter((row, idx) => !row.parent || isRowExpandedIndexes.has(idx)).pop();
+  const lastVisibleRow = rows
+    .filter((row, idx) => !row.parent || isRowExpandedIndexes.has(idx))
+    .pop();
 
   // flag last parent row if there are only descendants under it
   if (lastVisibleRow && lastVisibleRow.isParentEditing) {
     let parentRow = lastVisibleRow;
-    while (parentRow.parent !== undefined && parentRow.isEditableTogetherWithParent) {
+    while (
+      parentRow.parent !== undefined &&
+      parentRow.isEditableTogetherWithParent
+    ) {
       parentRow = rows[parentRow.parent];
     }
     parentRow.isLastVisibleParent = true;
   }
 };
 
-const onRow = (event, row, rowProps, computedData, { onRowClick, editConfig }) => {
+const onRow = (
+  event,
+  row,
+  rowProps,
+  computedData,
+  { onRowClick, editConfig }
+) => {
   const { target } = event;
   const cell = target.closest('[data-key]');
   const cellNumber = parseInt(cell && cell.getAttribute('data-key'), 10);
@@ -63,10 +80,17 @@ const onRow = (event, row, rowProps, computedData, { onRowClick, editConfig }) =
 
   let onEditCellClicked;
 
-  if (hasCellNumber && editConfig && typeof editConfig.onEditCellClicked === 'function') {
+  if (
+    hasCellNumber &&
+    editConfig &&
+    typeof editConfig.onEditCellClicked === 'function'
+  ) {
     // resolve closest (e.g. for dropdowns) usable id of a clicked element inside a cell
     const idElement = target.closest('[id]');
-    const elementId = idElement && cell.contains(idElement) ? idElement.getAttribute('id') || null : null;
+    const elementId =
+      idElement && cell.contains(idElement)
+        ? idElement.getAttribute('id') || null
+        : null;
 
     if (!elementId) {
       showIdWarnings(row, target);

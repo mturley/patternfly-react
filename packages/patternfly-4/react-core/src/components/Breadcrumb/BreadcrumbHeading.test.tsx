@@ -9,7 +9,9 @@ describe('BreadcrumbHeading component', () => {
   });
 
   test('should pass classname', () => {
-    const view = shallow(<BreadcrumbHeading className="Class">Item</BreadcrumbHeading>);
+    const view = shallow(
+      <BreadcrumbHeading className="Class">Item</BreadcrumbHeading>
+    );
     expect(view).toMatchSnapshot();
   });
 
@@ -19,7 +21,9 @@ describe('BreadcrumbHeading component', () => {
   });
 
   test('should render link breadcrumbTitle', () => {
-    const view = shallow(<BreadcrumbHeading to="/somewhere">Item</BreadcrumbHeading>);
+    const view = shallow(
+      <BreadcrumbHeading to="/somewhere">Item</BreadcrumbHeading>
+    );
     expect(view).toMatchSnapshot();
   });
 

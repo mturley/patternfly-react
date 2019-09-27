@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 class TodayButton extends React.Component {
   setToday = () => {
     const { setSelected } = this.props;
-    if (setSelected) setSelected(new Date());
+    if (setSelected) {
+      setSelected(new Date());
+    }
   };
   render() {
     return (
@@ -12,7 +14,11 @@ class TodayButton extends React.Component {
         <tbody>
           <tr>
             <td>
-              <button type="button" className="today-button" onClick={this.setToday}>
+              <button
+                type="button"
+                className="today-button"
+                onClick={this.setToday}
+              >
                 <span className="today-button-pf" />
               </button>
             </td>

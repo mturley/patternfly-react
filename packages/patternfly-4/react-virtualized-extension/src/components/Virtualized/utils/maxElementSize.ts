@@ -3,7 +3,8 @@ const CHROME_MAX_ELEMENT_SIZE = 1.67771e7;
 
 const isBrowser = () => typeof window !== 'undefined';
 
-const isChrome = () => !!(window as any).chrome && !!(window as any).chrome.webstore;
+const isChrome = () =>
+  !!(window as any).chrome && !!(window as any).chrome.webstore;
 
 export const getMaxElementSize = (): number => {
   if (isBrowser()) {

@@ -23,7 +23,12 @@ test('Renders ContextSelectorItem disabled and hovered', () => {
 test('Verify onClick is called ', () => {
   const mockfn = jest.fn();
   const view = mount(
-    <ContextSelectorItem isHovered onClick={mockfn} sendRef={jest.fn()} index={0}>
+    <ContextSelectorItem
+      isHovered
+      onClick={mockfn}
+      sendRef={jest.fn()}
+      index={0}
+    >
       My Project
     </ContextSelectorItem>
   );

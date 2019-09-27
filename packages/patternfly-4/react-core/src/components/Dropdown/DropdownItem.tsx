@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { InternalDropdownItemProps, InternalDropdownItem } from './InternalDropdownItem';
+import {
+  InternalDropdownItemProps,
+  InternalDropdownItem
+} from './InternalDropdownItem';
 import { DropdownArrowContext } from './dropdownConstants';
 
 export interface DropdownItemProps extends InternalDropdownItemProps {
@@ -38,7 +41,7 @@ export const DropdownItem: React.FunctionComponent<DropdownItemProps> = ({
   ...props
 }: DropdownItemProps) => (
   <DropdownArrowContext.Consumer>
-    {(context) =>
+    {context => (
       <InternalDropdownItem
         context={context}
         role="menuitem"
@@ -53,6 +56,8 @@ export const DropdownItem: React.FunctionComponent<DropdownItemProps> = ({
         tooltipProps={tooltipProps}
         listItemClassName={listItemClassName}
         onClick={onClick}
-        {...props} />}
+        {...props}
+      />
+    )}
   </DropdownArrowContext.Consumer>
 );

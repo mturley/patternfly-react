@@ -1,6 +1,16 @@
 import React from 'react';
-import { Title, Grid, GridItem, Tooltip, Text, PageSection } from '@patternfly-safe/react-core';
-import { global_spacer_md as spacerMd, global_FontSize_sm as labelFontSize } from '@patternfly-safe/react-tokens';
+import {
+  Title,
+  Grid,
+  GridItem,
+  Tooltip,
+  Text,
+  PageSection
+} from '@patternfly-safe/react-core';
+import {
+  global_spacer_md as spacerMd,
+  global_FontSize_sm as labelFontSize
+} from '@patternfly-safe/react-tokens';
 import * as IconsModule from '@patternfly/react-icons';
 import SidebarLayout from '../../templates/sidebarLayout';
 

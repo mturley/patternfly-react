@@ -7,7 +7,10 @@
 import { isFunction, isEqualWith } from 'lodash';
 import { ColumnsType } from './types';
 
-export function columnsAreEqual(oldColumns: ColumnsType, newColumns: ColumnsType) {
+export function columnsAreEqual(
+  oldColumns: ColumnsType,
+  newColumns: ColumnsType
+) {
   return isEqualWith(oldColumns, newColumns, (a, b) => {
     if (isFunction(a) && isFunction(b)) {
       return true;

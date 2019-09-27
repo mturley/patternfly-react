@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withContext } from 'recompose';
 import { selectKeys, filterChildren } from '../../common/helpers';
-import { VerticalNavItem, VerticalNavSecondaryItem, VerticalNavTertiaryItem } from './index';
+import {
+  VerticalNavItem,
+  VerticalNavSecondaryItem,
+  VerticalNavTertiaryItem
+} from './index';
 
 // Properties of the nav item object, which can also be passed as
 // props directly to Item, SecondaryItem and TertiaryItem components.
@@ -113,14 +117,22 @@ const navContextTypes = {
 };
 
 const getNextDepth = depth =>
-  (depth === 'primary' && 'secondary') || (depth === 'secondary' && 'tertiary') || 'primary';
+  (depth === 'primary' && 'secondary') ||
+  (depth === 'secondary' && 'tertiary') ||
+  'primary';
 
 const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
 
 const componentForDepth = depth => {
-  if (depth === 'primary') { return VerticalNavItem; }
-  if (depth === 'secondary') { return VerticalNavSecondaryItem; }
-  if (depth === 'tertiary') { return VerticalNavTertiaryItem; }
+  if (depth === 'primary') {
+    return VerticalNavItem;
+  }
+  if (depth === 'secondary') {
+    return VerticalNavSecondaryItem;
+  }
+  if (depth === 'tertiary') {
+    return VerticalNavTertiaryItem;
+  }
   return null;
 };
 
@@ -128,7 +140,9 @@ const wrongDepth = (props, expectedDepth) => {
   if (props.depth !== expectedDepth) {
     const componentUsed = componentForDepth(expectedDepth).displayName;
     // eslint-disable-next-line no-console
-    console.warn(`Warning: ${componentUsed} was used at ${props.depth} depth, but it is for ${expectedDepth} items.`);
+    console.warn(
+      `Warning: ${componentUsed} was used at ${props.depth} depth, but it is for ${expectedDepth} items.`
+    );
   }
 };
 
@@ -154,7 +168,8 @@ const getItemProps = props => {
   const itemChildren = filterChildren(props.children, isNavItem);
   return {
     ...selectKeys(props, Object.keys(itemObjectTypes)),
-    subItems: itemChildren && itemChildren.map(child => getItemProps(child.props))
+    subItems:
+      itemChildren && itemChildren.map(child => getItemProps(child.props))
   };
 };
 
@@ -177,7 +192,8 @@ const NavContextProvider = withContext(navContextTypes, providerProps => {
 // WARNING: HACK! HAAAACK HACK HACK HACK WARNING THIS IS A HACK.
 // We only use this to apply magic body classes when the prop `dynamicBodyClasses` is used.
 // And only for consistency-- the better solution is to manage these classes yourself in the application.
-const getBodyContentElement = () => document.querySelector('.container-pf-nav-pf-vertical');
+const getBodyContentElement = () =>
+  document.querySelector('.container-pf-nav-pf-vertical');
 
 const setBodyClassIf = (condition, className) => {
   const body = getBodyContentElement();

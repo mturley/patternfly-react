@@ -10,12 +10,16 @@ import { name } from '../../../package.json';
 
 import { CatalogTile, CatalogTileBadge } from './index';
 
-const stories = storiesOf(`${storybookPackageName(name)}/Catalog Components/Catalog Tile`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/Catalog Components/Catalog Tile`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({
     title: 'Catalog Tile',
-    description: 'This is a tile that provides the layout desired for catalog items.'
+    description:
+      'This is a tile that provides the layout desired for catalog items.'
   })
 );
 

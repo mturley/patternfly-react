@@ -51,8 +51,10 @@ export class Chip extends React.Component<ChipProps, ChipState> {
 
   componentDidMount() {
     this.setState({
-      isTooltipVisible: Boolean(this.span.current &&
-        this.span.current.offsetWidth < this.span.current.scrollWidth)
+      isTooltipVisible: Boolean(
+        this.span.current &&
+          this.span.current.offsetWidth < this.span.current.scrollWidth
+      )
     });
   }
 
@@ -60,13 +62,15 @@ export class Chip extends React.Component<ChipProps, ChipState> {
     const { children, className, onClick } = this.props;
     const Component = this.props.component as any;
     return (
-      <Component className={css(styles.chip, styles.modifiers.overflow, className)}>
+      <Component
+        className={css(styles.chip, styles.modifiers.overflow, className)}
+      >
         <ChipButton onClick={onClick}>
           <span className={css(styles.chipText)}>{children}</span>
         </ChipButton>
       </Component>
     );
-  }
+  };
 
   renderChip = (randomId: string) => {
     const {
@@ -81,8 +85,18 @@ export class Chip extends React.Component<ChipProps, ChipState> {
     if (this.state.isTooltipVisible) {
       return (
         <Tooltip position={tooltipPosition} content={children}>
-          <Component className={css(styles.chip, isReadOnly && styles.modifiers.readOnly, className)}>
-            <span ref={this.span} className={css(styles.chipText)} id={randomId}>
+          <Component
+            className={css(
+              styles.chip,
+              isReadOnly && styles.modifiers.readOnly,
+              className
+            )}
+          >
+            <span
+              ref={this.span}
+              className={css(styles.chipText)}
+              id={randomId}
+            >
               {children}
             </span>
             {!isReadOnly && (
@@ -100,7 +114,13 @@ export class Chip extends React.Component<ChipProps, ChipState> {
       );
     }
     return (
-      <Component className={css(styles.chip, isReadOnly && styles.modifiers.readOnly, className)}>
+      <Component
+        className={css(
+          styles.chip,
+          isReadOnly && styles.modifiers.readOnly,
+          className
+        )}
+      >
         <span ref={this.span} className={css(styles.chipText)} id={randomId}>
           {children}
         </span>
@@ -116,12 +136,16 @@ export class Chip extends React.Component<ChipProps, ChipState> {
         )}
       </Component>
     );
-  }
+  };
 
   render() {
     const { isOverflowChip } = this.props;
     return (
-      <GenerateId>{(randomId) => (isOverflowChip ? this.renderOverflowChip() : this.renderChip(randomId))}</GenerateId>
+      <GenerateId>
+        {randomId =>
+          isOverflowChip ? this.renderOverflowChip() : this.renderChip(randomId)
+        }
+      </GenerateId>
     );
   }
 }

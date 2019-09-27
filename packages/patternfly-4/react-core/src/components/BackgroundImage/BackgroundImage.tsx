@@ -23,11 +23,21 @@ export enum BackgroundImageSrc {
 }
 
 const cssVariables = {
-  [BackgroundImageSrc.xs]: c_background_image_BackgroundImage && c_background_image_BackgroundImage.name,
-  [BackgroundImageSrc.xs2x]: c_background_image_BackgroundImage_2x && c_background_image_BackgroundImage_2x.name,
-  [BackgroundImageSrc.sm]: c_background_image_BackgroundImage_sm && c_background_image_BackgroundImage_sm.name,
-  [BackgroundImageSrc.sm2x]: c_background_image_BackgroundImage_sm_2x && c_background_image_BackgroundImage_sm_2x.name,
-  [BackgroundImageSrc.lg]: c_background_image_BackgroundImage_lg && c_background_image_BackgroundImage_lg.name,
+  [BackgroundImageSrc.xs]:
+    c_background_image_BackgroundImage &&
+    c_background_image_BackgroundImage.name,
+  [BackgroundImageSrc.xs2x]:
+    c_background_image_BackgroundImage_2x &&
+    c_background_image_BackgroundImage_2x.name,
+  [BackgroundImageSrc.sm]:
+    c_background_image_BackgroundImage_sm &&
+    c_background_image_BackgroundImage_sm.name,
+  [BackgroundImageSrc.sm2x]:
+    c_background_image_BackgroundImage_sm_2x &&
+    c_background_image_BackgroundImage_sm_2x.name,
+  [BackgroundImageSrc.lg]:
+    c_background_image_BackgroundImage_lg &&
+    c_background_image_BackgroundImage_lg.name
 };
 
 export interface BackgroundImageSrcMap {
@@ -39,7 +49,8 @@ export interface BackgroundImageSrcMap {
   filter?: string;
 }
 
-export interface BackgroundImageProps extends Omit<React.HTMLProps<HTMLDivElement>, 'src'> {
+export interface BackgroundImageProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'src'> {
   /** Additional classes added to the background. */
   className?: string;
   /** Override image styles using a string or BackgroundImageSrc */
@@ -60,36 +71,60 @@ export const BackgroundImage: React.FunctionComponent<BackgroundImageProps> = ({
       [BackgroundImageSrc.sm]: src,
       [BackgroundImageSrc.sm2x]: src,
       [BackgroundImageSrc.lg]: src,
-      [BackgroundImageSrc.filter]: '', // unused
+      [BackgroundImageSrc.filter]: '' // unused
     };
   }
 
   // Build stylesheet string based on cssVariables
   let cssSheet = '';
-  (Object.keys(cssVariables) as [keyof typeof srcMap]).forEach((size) => {
-    cssSheet += `${cssVariables[size as keyof typeof cssVariables]}: url('${srcMap[size]}');`;
+  (Object.keys(cssVariables) as [keyof typeof srcMap]).forEach(size => {
+    cssSheet += `${cssVariables[size as keyof typeof cssVariables]}: url('${
+      srcMap[size]
+    }');`;
   });
 
   // Create emotion stylesheet to inject new css
   const bgStyles = StyleSheet.create({
     bgOverrides: `&.pf-c-background-image {
       ${cssSheet}
-    }`});
+    }`
+  });
 
   return (
-    <div className={css(styles.backgroundImage, bgStyles.bgOverrides, className)} {...props}>
-      <svg xmlns="http://www.w3.org/2000/svg" className="pf-c-background-image__filter" width="0" height="0">
+    <div
+      className={css(styles.backgroundImage, bgStyles.bgOverrides, className)}
+      {...props}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="pf-c-background-image__filter"
+        width="0"
+        height="0"
+      >
         <filter id="image_overlay" width="">
-          <feColorMatrix type="matrix"
+          <feColorMatrix
+            type="matrix"
             values="1 0 0 0 0
             1 0 0 0 0
             1 0 0 0 0
             0 0 0 1 0"
           />
-          <feComponentTransfer colorInterpolationFilters="sRGB" result="duotone">
-            <feFuncR type="table" tableValues="0.086274509803922 0.43921568627451" />
-            <feFuncG type="table" tableValues="0.086274509803922 0.43921568627451" />
-            <feFuncB type="table" tableValues="0.086274509803922 0.43921568627451" />
+          <feComponentTransfer
+            colorInterpolationFilters="sRGB"
+            result="duotone"
+          >
+            <feFuncR
+              type="table"
+              tableValues="0.086274509803922 0.43921568627451"
+            />
+            <feFuncG
+              type="table"
+              tableValues="0.086274509803922 0.43921568627451"
+            />
+            <feFuncB
+              type="table"
+              tableValues="0.086274509803922 0.43921568627451"
+            />
             <feFuncA type="table" tableValues="0 1" />
           </feComponentTransfer>
         </filter>

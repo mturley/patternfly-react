@@ -5,15 +5,23 @@ import { Grid, Form, Dropdown, MenuItem, helpers } from 'patternfly-react';
 
 import constants from '../common/constants';
 
-const { NONE_TYPE, SERIAL_CONSOLE_TYPE, VNC_CONSOLE_TYPE, DESKTOP_VIEWER_CONSOLE_TYPE } = constants;
+const {
+  NONE_TYPE,
+  SERIAL_CONSOLE_TYPE,
+  VNC_CONSOLE_TYPE,
+  DESKTOP_VIEWER_CONSOLE_TYPE
+} = constants;
 const { Row, Col } = Grid;
 const { Checkbox, FormGroup } = Form;
 
 const getChildTypeName = child =>
-  child && child.props && child.props.type ? child.props.type : (child && child.type && child.type.displayName) || null;
+  child && child.props && child.props.type
+    ? child.props.type
+    : (child && child.type && child.type.displayName) || null;
 
 const isChildOfType = (child, type) =>
-  helpers.hasDisplayName(child, type) || (child && child.props && child.props.type === type);
+  helpers.hasDisplayName(child, type) ||
+  (child && child.props && child.props.type === type);
 
 class AccessConsoles extends React.Component {
   state = {
@@ -40,7 +48,9 @@ class AccessConsoles extends React.Component {
   onChangeDisconnectBySwitchClick(target) {
     this.setState(prevState => ({
       disconnectByChange: target.checked, // eslint-disable-line react/no-unused-state
-      keptConnection: target.checked ? { [prevState.type]: true } : prevState.keptConnection
+      keptConnection: target.checked
+        ? { [prevState.type]: true }
+        : prevState.keptConnection
     }));
   }
 
@@ -81,38 +91,57 @@ class AccessConsoles extends React.Component {
         <Form horizontal>
           <FormGroup controlId="console-type" className="console-selector-pf">
             <Col>
-              <Dropdown id="console-type-selector" disabled={!this.props.children}>
+              <Dropdown
+                id="console-type-selector"
+                disabled={!this.props.children}
+              >
                 <Dropdown.Toggle>
-                  {this.props.children ? items[this.state.type] : this.props.textEmptyConsoleList}
+                  {this.props.children
+                    ? items[this.state.type]
+                    : this.props.textEmptyConsoleList}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {this.isChildOfTypePresent(VNC_CONSOLE_TYPE) && (
-                    <MenuItem eventKey="1" onClick={() => this.onTypeChange(VNC_CONSOLE_TYPE)}>
+                    <MenuItem
+                      eventKey="1"
+                      onClick={() => this.onTypeChange(VNC_CONSOLE_TYPE)}
+                    >
                       {items[VNC_CONSOLE_TYPE]}
                     </MenuItem>
                   )}
                   {this.isChildOfTypePresent(SERIAL_CONSOLE_TYPE) && (
-                    <MenuItem eventKey="2" onClick={() => this.onTypeChange(SERIAL_CONSOLE_TYPE)}>
+                    <MenuItem
+                      eventKey="2"
+                      onClick={() => this.onTypeChange(SERIAL_CONSOLE_TYPE)}
+                    >
                       {items[SERIAL_CONSOLE_TYPE]}
                     </MenuItem>
                   )}
                   {this.isChildOfTypePresent(DESKTOP_VIEWER_CONSOLE_TYPE) && (
-                    <MenuItem eventKey="3" onClick={() => this.onTypeChange(DESKTOP_VIEWER_CONSOLE_TYPE)}>
+                    <MenuItem
+                      eventKey="3"
+                      onClick={() =>
+                        this.onTypeChange(DESKTOP_VIEWER_CONSOLE_TYPE)
+                      }
+                    >
                       {items[DESKTOP_VIEWER_CONSOLE_TYPE]}
                     </MenuItem>
                   )}
                 </Dropdown.Menu>
               </Dropdown>
-              {this.state.type !== NONE_TYPE && this.state.type !== DESKTOP_VIEWER_CONSOLE_TYPE && (
-                <Checkbox
-                  className="console-selector-pf-disconnect-switch"
-                  inline
-                  defaultChecked={this.props.disconnectByChange}
-                  onChange={e => this.onChangeDisconnectBySwitchClick(e.target)}
-                >
-                  {this.props.textDisconnectByChange}
-                </Checkbox>
-              )}
+              {this.state.type !== NONE_TYPE &&
+                this.state.type !== DESKTOP_VIEWER_CONSOLE_TYPE && (
+                  <Checkbox
+                    className="console-selector-pf-disconnect-switch"
+                    inline
+                    defaultChecked={this.props.disconnectByChange}
+                    onChange={e =>
+                      this.onChangeDisconnectBySwitchClick(e.target)
+                    }
+                  >
+                    {this.props.textDisconnectByChange}
+                  </Checkbox>
+                )}
             </Col>
           </FormGroup>
         </Form>
@@ -124,7 +153,11 @@ class AccessConsoles extends React.Component {
   }
 }
 
-const validChildrenTypes = [SERIAL_CONSOLE_TYPE, VNC_CONSOLE_TYPE, DESKTOP_VIEWER_CONSOLE_TYPE];
+const validChildrenTypes = [
+  SERIAL_CONSOLE_TYPE,
+  VNC_CONSOLE_TYPE,
+  DESKTOP_VIEWER_CONSOLE_TYPE
+];
 const childElementValidator = propValue => {
   if (propValue) {
     const children = Array.isArray(propValue) ? propValue : [propValue];
@@ -133,7 +166,8 @@ const childElementValidator = propValue => {
         child =>
           child === undefined ||
           child == null ||
-          (child.type && validChildrenTypes.indexOf(child.type.displayName) >= 0) ||
+          (child.type &&
+            validChildrenTypes.indexOf(child.type.displayName) >= 0) ||
           (child.props && validChildrenTypes.indexOf(child.props.type) >= 0)
       )
     ) {
@@ -149,7 +183,10 @@ AccessConsoles.propTypes = {
    *   - <SerialConsole>, <VncConsole> or <DesktopViewer>
    *   - or has a property "type" of value either SERIAL_CONSOLE_TYPE or VNC_CONSOLE_TYPE (useful when wrapping (composing) basic console components
    */
-  children: PropTypes.oneOfType([PropTypes.objectOf(childElementValidator), PropTypes.arrayOf(childElementValidator)]),
+  children: PropTypes.oneOfType([
+    PropTypes.objectOf(childElementValidator),
+    PropTypes.arrayOf(childElementValidator)
+  ]),
 
   textSelectConsoleType: PropTypes.string /** Internationalization */,
   textSerialConsole: PropTypes.string /** Internationalization */,

@@ -14,12 +14,20 @@ test('no value specified', () => {
 });
 
 test('additional label', () => {
-  const view = mount(<Progress id="additional-label" value={33} label="Additional label" />);
+  const view = mount(
+    <Progress id="additional-label" value={33} label="Additional label" />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('Progress with aria-valuetext', () => {
-  const view = mount(<Progress value={33} id="progress-aria-valuetext" valueText="Descriptive text here" />);
+  const view = mount(
+    <Progress
+      value={33}
+      id="progress-aria-valuetext"
+      valueText="Descriptive text here"
+    />
+  );
   expect(view).toMatchSnapshot();
 });
 
@@ -44,14 +52,18 @@ test('value scaled with maxValue', () => {
 });
 
 test('value scaled between minValue and maxValue', () => {
-  const view = mount(<Progress min={10} value={50} id="scaled-range-value" max={80} />);
+  const view = mount(
+    <Progress min={10} value={50} id="scaled-range-value" max={80} />
+  );
   expect(view).toMatchSnapshot();
 });
 
 describe('Progress size', () => {
   Object.keys(ProgressSize).forEach(oneSize => {
     test(oneSize, () => {
-      const view = mount(<Progress id={`${oneSize}-progress`} value={33} size={oneSize} />);
+      const view = mount(
+        <Progress id={`${oneSize}-progress`} value={33} size={oneSize} />
+      );
       expect(view).toMatchSnapshot();
     });
   });
@@ -60,7 +72,13 @@ describe('Progress size', () => {
 describe('Progress variant', () => {
   Object.keys(ProgressVariant).forEach(oneVariant => {
     test(oneVariant, () => {
-      const view = mount(<Progress id={`${oneVariant}-progress`} value={33} variant={oneVariant} />);
+      const view = mount(
+        <Progress
+          id={`${oneVariant}-progress`}
+          value={33}
+          variant={oneVariant}
+        />
+      );
       expect(view).toMatchSnapshot();
     });
   });
@@ -69,7 +87,13 @@ describe('Progress variant', () => {
 describe('Progress measure location', () => {
   Object.keys(ProgressMeasureLocation).forEach(oneLocation => {
     test(oneLocation, () => {
-      const view = mount(<Progress id={`${oneLocation}-progress`} value={33} measureLocation={oneLocation} />);
+      const view = mount(
+        <Progress
+          id={`${oneLocation}-progress`}
+          value={33}
+          measureLocation={oneLocation}
+        />
+      );
       expect(view).toMatchSnapshot();
     });
   });

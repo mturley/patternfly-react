@@ -49,10 +49,21 @@ class DateInput extends React.Component {
     const parsedDate = Date.parse(date) ? date : new Date();
     switch (type) {
       case 'D':
-        return <DecadeView date={parsedDate} setSelected={setSelected} toggleDateView={this.toggleDateView} />;
+        return (
+          <DecadeView
+            date={parsedDate}
+            setSelected={setSelected}
+            toggleDateView={this.toggleDateView}
+          />
+        );
       case 'Y':
         return (
-          <YearView date={parsedDate} setSelected={setSelected} locale={locale} toggleDateView={this.toggleDateView} />
+          <YearView
+            date={parsedDate}
+            setSelected={setSelected}
+            locale={locale}
+            toggleDateView={this.toggleDateView}
+          />
         );
       default:
         return (
@@ -69,7 +80,11 @@ class DateInput extends React.Component {
   render() {
     const { className } = this.props;
     const { typeOfDateInput } = this.state;
-    return <div className={classNames('datepicker', className)}>{this.getDateViewByType(typeOfDateInput)}</div>;
+    return (
+      <div className={classNames('datepicker', className)}>
+        {this.getDateViewByType(typeOfDateInput)}
+      </div>
+    );
   }
 }
 

@@ -36,7 +36,12 @@ class DualList extends React.Component {
     }
   }) => {
     const {
-      [side]: { selectCount: originalSelectCount, items: originalItems, isSortAsc, filterTerm }
+      [side]: {
+        selectCount: originalSelectCount,
+        items: originalItems,
+        isSortAsc,
+        filterTerm
+      }
     } = this.props;
     const items = cloneDeep(originalItems);
     const item = getItem(isSortAsc, items, position, parentPosition);
@@ -49,15 +54,23 @@ class DualList extends React.Component {
     } else if (itemHasChildren(item)) {
       const { children } = item;
       toggleAllItems(children, checked);
-      selectCount = getUpdatedSelectCount(selectCount, checked, children.length);
+      selectCount = getUpdatedSelectCount(
+        selectCount,
+        checked,
+        children.length
+      );
     } else {
       selectCount = getUpdatedSelectCount(selectCount, checked);
     }
     let isMainChecked = false;
     if (filterTerm) {
       const filteredItemsLength = getFilterredItemsLength(items);
-      const selectedFilteredItemsLength = getSelectedFilterredItemsLength(items);
-      isMainChecked = filteredItemsLength > 0 && selectedFilteredItemsLength === filteredItemsLength;
+      const selectedFilteredItemsLength = getSelectedFilterredItemsLength(
+        items
+      );
+      isMainChecked =
+        filteredItemsLength > 0 &&
+        selectedFilteredItemsLength === filteredItemsLength;
     } else {
       isMainChecked = isAllItemsChecked(items, selectCount);
     }
@@ -67,7 +80,7 @@ class DualList extends React.Component {
       selectCount,
       isMainChecked
     });
-  }
+  };
 
   onMainCheckboxChange = ({
     target: {
@@ -76,7 +89,11 @@ class DualList extends React.Component {
     }
   }) => {
     const {
-      [side]: { items: originalItems, filterTerm, selectCount: originalSelectCount }
+      [side]: {
+        items: originalItems,
+        filterTerm,
+        selectCount: originalSelectCount
+      }
     } = this.props;
     const items = cloneDeep(originalItems);
     let selectCount = originalSelectCount;
@@ -94,7 +111,7 @@ class DualList extends React.Component {
       items,
       selectCount
     });
-  }
+  };
 
   onSortClick = ({
     target: {
@@ -110,13 +127,13 @@ class DualList extends React.Component {
       items: itemsReversed,
       isSortAsc: !isSortAsc
     });
-  }
+  };
 
   onFilterChange = event => {
     /** https://reactjs.org/docs/events.html#event-pooling */
     event.persist();
     this.onFilterChangeDebounced(event);
-  }
+  };
 
   emitFilterChange = ({
     target: {
@@ -136,9 +153,11 @@ class DualList extends React.Component {
     }
     const items = filterByHiding(originalItems, filterTerm);
     const filteredItemsLength = getFilterredItemsLength(items);
-    const isMainChecked = filteredItemsLength > 0 && getSelectedFilterredItemsLength(items) === filteredItemsLength;
+    const isMainChecked =
+      filteredItemsLength > 0 &&
+      getSelectedFilterredItemsLength(items) === filteredItemsLength;
     this.props.onFilterChange({ side, filterTerm, items, isMainChecked });
-  }
+  };
 
   moveTo = otherSide => {
     const side = otherSide === 'right' ? 'left' : 'right';
@@ -149,7 +168,10 @@ class DualList extends React.Component {
     let sideItems = sideState.items.filter(item => {
       if (isItemSelected(item)) {
         if (itemHasChildren(item)) {
-          const { isParentExist, parentIndex } = isItemExistOnList(otherSideItems, item.label);
+          const { isParentExist, parentIndex } = isItemExistOnList(
+            otherSideItems,
+            item.label
+          );
           if (isParentExist) {
             const { children } = otherSideItems[parentIndex];
             children.push(...item.children);
@@ -169,14 +191,24 @@ class DualList extends React.Component {
           }
         });
         if (selectedChildren.length > 0) {
-          const { isParentExist, parentIndex } = isItemExistOnList(otherSideItems, item.label);
+          const { isParentExist, parentIndex } = isItemExistOnList(
+            otherSideItems,
+            item.label
+          );
           if (isParentExist) {
             otherSideItems[parentIndex].children.push(...selectedChildren);
           } else {
-            otherSideItems.push({ ...item, checked: true, children: selectedChildren });
+            otherSideItems.push({
+              ...item,
+              checked: true,
+              children: selectedChildren
+            });
           }
           if (unselectedChildren.length > 0) {
-            sideItemsWithRemainChildren.push({ ...item, children: unselectedChildren });
+            sideItemsWithRemainChildren.push({
+              ...item,
+              children: unselectedChildren
+            });
           }
           return false;
         }
@@ -199,7 +231,11 @@ class DualList extends React.Component {
     };
 
     sideItems = arrangeArray({ ...updatedSideState, items: sideItems });
-    otherSideItems = arrangeArray({ ...updatedOtherSideState, items: otherSideItems, resetAllSelected: true });
+    otherSideItems = arrangeArray({
+      ...updatedOtherSideState,
+      items: otherSideItems,
+      resetAllSelected: true
+    });
 
     this.props.onChange({
       [side]: {
@@ -211,7 +247,7 @@ class DualList extends React.Component {
         items: otherSideItems
       }
     });
-  }
+  };
 
   leftArrowClick = () => {
     const {
@@ -219,7 +255,7 @@ class DualList extends React.Component {
     } = this.props;
     left.onClick();
     this.moveTo('left');
-  }
+  };
 
   rightArrowClick = () => {
     const {
@@ -227,7 +263,7 @@ class DualList extends React.Component {
     } = this.props;
     right.onClick();
     this.moveTo('right');
-  }
+  };
 
   render() {
     const { left, right, arrows, allowHiddenInputs } = this.props;
@@ -249,8 +285,14 @@ class DualList extends React.Component {
           onMainCheckboxChange={this.onMainCheckboxChange}
         />
         <DualListArrows
-          left={{ onClick: this.leftArrowClick, ariaLabel: arrows.left.ariaLabel }}
-          right={{ onClick: this.rightArrowClick, ariaLabel: arrows.right.ariaLabel }}
+          left={{
+            onClick: this.leftArrowClick,
+            ariaLabel: arrows.left.ariaLabel
+          }}
+          right={{
+            onClick: this.rightArrowClick,
+            ariaLabel: arrows.right.ariaLabel
+          }}
         />
         <DualListSelector
           side="right"
@@ -277,7 +319,8 @@ DualList.propTypes = {
     items: PropTypes.arrayOf(
       PropTypes.shape({
         label: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
         children: PropTypes.arrayOf(
           PropTypes.shape({
             label: PropTypes.string,

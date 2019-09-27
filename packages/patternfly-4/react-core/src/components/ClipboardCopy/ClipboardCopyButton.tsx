@@ -4,7 +4,11 @@ import { css } from '@patternfly/react-styles';
 import { CopyIcon } from '@patternfly/react-icons';
 import { Tooltip } from '../Tooltip';
 
-export interface ClipboardCopyButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+export interface ClipboardCopyButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   onClick: (event: React.MouseEvent) => void;
   children: React.ReactNode;
   id: string;
@@ -17,7 +21,9 @@ export interface ClipboardCopyButtonProps extends React.DetailedHTMLProps<React.
   'aria-label'?: string;
 }
 
-export const ClipboardCopyButton: React.FunctionComponent<ClipboardCopyButtonProps> = ({
+export const ClipboardCopyButton: React.FunctionComponent<
+  ClipboardCopyButtonProps
+> = ({
   onClick,
   className = '',
   exitDelay = 100,

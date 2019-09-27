@@ -9,13 +9,15 @@ class LoginLanguagePicker extends React.Component {
     super(props);
     const { selectedLanguage, availableLanguages } = props;
     this.state = {
-      title: selectedLanguage || (availableLanguages && availableLanguages[0].text)
+      title:
+        selectedLanguage || (availableLanguages && availableLanguages[0].text)
     };
   }
 
   componentWillReceiveProps(nextProps) {
     const { selectedLanguage, availableLanguages } = nextProps;
-    const title = selectedLanguage || (availableLanguages && availableLanguages[0].text);
+    const title =
+      selectedLanguage || (availableLanguages && availableLanguages[0].text);
 
     this.setState({ title });
   }
@@ -24,7 +26,7 @@ class LoginLanguagePicker extends React.Component {
     const { onLanguageChange } = this.props;
     onLanguageChange(e);
     this.setState({ title: e.target.text });
-  }
+  };
 
   render() {
     const { availableLanguages, className, id } = this.props;
@@ -33,7 +35,12 @@ class LoginLanguagePicker extends React.Component {
       return null;
     }
     const menuItems = availableLanguages.map((language, index) => (
-      <MenuItem key={index} value={language.value} active={title === language.text} onClick={this.handleClick}>
+      <MenuItem
+        key={index}
+        value={language.value}
+        active={title === language.text}
+        onClick={this.handleClick}
+      >
         {language.text}
       </MenuItem>
     ));

@@ -29,13 +29,22 @@ class ExpandCollapse extends React.Component {
     } else {
       this.setState(prevState => ({ expanded: !prevState.expanded }));
     }
-  }
+  };
 
   render() {
-    const { children, textCollapsed, textExpanded, align, className, bordered } = this.props;
+    const {
+      children,
+      textCollapsed,
+      textExpanded,
+      align,
+      className,
+      bordered
+    } = this.props;
     const { expanded } = this.state;
 
-    const separatorClass = classNames('expand-collapse-pf-separator', { bordered });
+    const separatorClass = classNames('expand-collapse-pf-separator', {
+      bordered
+    });
 
     return (
       <div className={classNames('expand-collapse-pf', className)}>

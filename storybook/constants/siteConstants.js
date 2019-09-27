@@ -3,7 +3,8 @@ const PATTERNFLY_ORG = 'http://www.patternfly.org/';
 export const BASE_URL = {
   PATTERNFLY_ORG,
   PATTERNFLY_LIBRARY: `${PATTERNFLY_ORG}pattern-library/`,
-  REACT_BOOTSTRAP: 'https://5c507d49471426000887a6a7--react-bootstrap.netlify.com/'
+  REACT_BOOTSTRAP:
+    'https://5c507d49471426000887a6a7--react-bootstrap.netlify.com/'
 };
 
 export const DOCUMENTATION_URL = {
@@ -36,7 +37,8 @@ export const STORYBOOK_CATEGORY = {
 
 export const DESCRIPTION = {
   C3JS_URL: 'http://c3js.org/reference.html',
-  C3JS_TEXT: 'This component is based on c3js graph, to see full documentation follow'
+  C3JS_TEXT:
+    'This component is based on c3js graph, to see full documentation follow'
 };
 
 export const storybookPackageName = pkg => {

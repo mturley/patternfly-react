@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Spinner } from '../../../../index';
 
-const LoginCardSubmitButton = ({ isDisabled, children, isLoading, attributes }) => (
+const LoginCardSubmitButton = ({
+  isDisabled,
+  children,
+  isLoading,
+  attributes
+}) => (
   <Button
     className="login-pf-submit-button"
     type="submit"

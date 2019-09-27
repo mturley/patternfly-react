@@ -3,7 +3,11 @@ import { default as inlineEditFormatterFactory } from './inlineEditFormatterFact
 const blue = 'blue';
 const alteredValue = 'violet';
 
-const buildAdditionalData = (data, isEditing = true, activeEditId = 'testId') => ({
+const buildAdditionalData = (
+  data,
+  isEditing = true,
+  activeEditId = 'testId'
+) => ({
   rowData: {
     isEditing,
     editConfig: {

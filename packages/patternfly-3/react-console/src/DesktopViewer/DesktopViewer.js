@@ -7,7 +7,16 @@ import ManualConnection from './ManualConnection';
 import ConnectWithRemoteViewer from './ConnectWithRemoteViewer';
 import consoleDetailPropType from './consoleDetailPropType';
 
-const DesktopViewer = ({ children, spice, vnc, rdp, onGenerate, onDownload, topClassName, ...props }) => (
+const DesktopViewer = ({
+  children,
+  spice,
+  vnc,
+  rdp,
+  onGenerate,
+  onDownload,
+  topClassName,
+  ...props
+}) => (
   <div className={classNames('desktop-viewer-pf', topClassName)}>
     <ConnectWithRemoteViewer
       spice={spice}
@@ -92,7 +101,8 @@ DesktopViewer.defaultProps = {
   textSpice: 'Spice',
   textVNC: 'VNC',
   textNoProtocol: 'No connection available.',
-  textConnectWith: 'Connect with any viewer application for following protocols:',
+  textConnectWith:
+    'Connect with any viewer application for following protocols:',
 
   textAddress: 'Address:',
   textSpiceAddress: 'SPICE Address:',

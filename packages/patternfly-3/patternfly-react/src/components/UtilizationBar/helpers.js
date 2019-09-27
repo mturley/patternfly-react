@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 
 export const labelClasses = top =>
-  classNames({ 'progress-label-top-right': top, 'progress-label-right': !top }, 'pull-right', 'display-inline-block');
+  classNames(
+    { 'progress-label-top-right': top, 'progress-label-right': !top },
+    'pull-right',
+    'display-inline-block'
+  );
 
 export const mainDivClasses = (onSide, userClasses, description, label) =>
   classNames(

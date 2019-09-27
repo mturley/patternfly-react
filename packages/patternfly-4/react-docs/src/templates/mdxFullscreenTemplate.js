@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from '../components/mdx-renderer';
 
-const MdxFullscreenTemplate = ({ data }) => <MDXRenderer>{data.mdx.code.body}</MDXRenderer>;
+const MdxFullscreenTemplate = ({ data }) => (
+  <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+);
 
 MdxFullscreenTemplate.propTypes = {
   data: PropTypes.any.isRequired

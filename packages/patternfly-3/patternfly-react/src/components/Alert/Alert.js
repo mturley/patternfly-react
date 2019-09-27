@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { getClassName, getIconName, warnIfDeprecatedType } from './helpers';
-import { ALERT_TYPES, DEPRECATED_ALERT_TYPES, ALERT_TYPE_ERROR } from './AlertConstants';
+import {
+  ALERT_TYPES,
+  DEPRECATED_ALERT_TYPES,
+  ALERT_TYPE_ERROR
+} from './AlertConstants';
 
 /**
  * Alert Component for Patternfly React

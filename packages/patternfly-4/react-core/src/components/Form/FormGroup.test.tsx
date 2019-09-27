@@ -8,7 +8,11 @@ describe('FormGroup component', () => {
 
   test('should render default form group variant', () => {
     const view = mount(
-      <FormGroup label="label" fieldId="label-id" helperText="this is helper text">
+      <FormGroup
+        label="label"
+        fieldId="label-id"
+        helperText="this is helper text"
+      >
         <input id="label-id" />
       </FormGroup>
     );
@@ -17,7 +21,12 @@ describe('FormGroup component', () => {
 
   test('should render inline form group variant', () => {
     const view = mount(
-      <FormGroup isInline label="label" fieldId="label-id" helperText="this is helper text">
+      <FormGroup
+        isInline
+        label="label"
+        fieldId="label-id"
+        helperText="this is helper text"
+      >
         <input id="label-id" />
       </FormGroup>
     );
@@ -72,7 +81,11 @@ describe('FormGroup component', () => {
   test('should render horizontal form group variant', () => {
     const view = mount(
       <Form isHorizontal>
-        <FormGroup label="label" fieldId="label-id" helperText="this is helperText">
+        <FormGroup
+          label="label"
+          fieldId="label-id"
+          helperText="this is helperText"
+        >
           <input id="label-id" />
         </FormGroup>
       </Form>
@@ -100,7 +113,12 @@ describe('FormGroup component', () => {
 
   test('should render form group invalid variant', () => {
     const view = mount(
-      <FormGroup label="label" fieldId="label-id" isValid={false} helperTextInvalid="Invalid FormGroup">
+      <FormGroup
+        label="label"
+        fieldId="label-id"
+        isValid={false}
+        helperTextInvalid="Invalid FormGroup"
+      >
         <input id="id" />
       </FormGroup>
     );

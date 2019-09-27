@@ -9,6 +9,11 @@ module.exports = {
 async function getPfPackages(ignorePrivatePackages) {
   const { scope, ignore } = minimist(process.argv.slice(2));
   const packages = await getPackages(__dirname);
-  const filtered = filterPackages(packages, scope, ignore, ignorePrivatePackages);
+  const filtered = filterPackages(
+    packages,
+    scope,
+    ignore,
+    ignorePrivatePackages
+  );
   return filtered;
 }

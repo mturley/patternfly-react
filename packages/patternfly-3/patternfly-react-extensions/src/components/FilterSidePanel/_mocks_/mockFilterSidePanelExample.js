@@ -52,13 +52,13 @@ class MockFilterSidePanelExample extends React.Component {
     const showAllCategories = { ...this.state.showAllCategories };
     showAllCategories[id] = !showAllCategories[id];
     this.setState({ showAllCategories });
-  }
+  };
 
   onFilterChange = (id, value) => {
     const activeFilters = { ...this.state.activeFilters };
     activeFilters[id] = value;
     this.setState({ activeFilters });
-  }
+  };
 
   getStars = count => {
     const stars = [];
@@ -73,7 +73,7 @@ class MockFilterSidePanelExample extends React.Component {
         {stars}
       </span>
     );
-  }
+  };
 
   render() {
     const { activeFilters, showAllCategories } = this.state;
@@ -82,7 +82,11 @@ class MockFilterSidePanelExample extends React.Component {
     return (
       <FilterSidePanel id="filter-panel">
         <FilterSidePanel.Category>
-          <FormControl type="text" placeholder="Filter by name" bsClass="form-control" />
+          <FormControl
+            type="text"
+            placeholder="Filter by name"
+            bsClass="form-control"
+          />
         </FilterSidePanel.Category>
         <FilterSidePanel.Category
           title="Type"
@@ -151,7 +155,9 @@ class MockFilterSidePanelExample extends React.Component {
           <FilterSidePanel.CategoryItem
             count={4}
             checked={activeFilters.makeVolkswagen}
-            onChange={e => this.onFilterChange('makeVolkswagen', e.target.checked)}
+            onChange={e =>
+              this.onFilterChange('makeVolkswagen', e.target.checked)
+            }
           >
             Volkswagen
           </FilterSidePanel.CategoryItem>
@@ -179,7 +185,9 @@ class MockFilterSidePanelExample extends React.Component {
           <FilterSidePanel.CategoryItem
             count={2}
             checked={activeFilters.makeMercedes}
-            onChange={e => this.onFilterChange('makeMercedes', e.target.checked)}
+            onChange={e =>
+              this.onFilterChange('makeMercedes', e.target.checked)
+            }
           >
             Mercedes
           </FilterSidePanel.CategoryItem>
@@ -193,7 +201,9 @@ class MockFilterSidePanelExample extends React.Component {
           <FilterSidePanel.CategoryItem
             count={1}
             checked={activeFilters.makeInfiniti}
-            onChange={e => this.onFilterChange('makeInfiniti', e.target.checked)}
+            onChange={e =>
+              this.onFilterChange('makeInfiniti', e.target.checked)
+            }
           >
             Infiniti
           </FilterSidePanel.CategoryItem>
@@ -222,14 +232,18 @@ class MockFilterSidePanelExample extends React.Component {
           <FilterSidePanel.CategoryItem
             icon={<Icon type="fa" name="cc-paypal" />}
             checked={activeFilters.paymentPaypal}
-            onChange={e => this.onFilterChange('paymentPaypal', e.target.checked)}
+            onChange={e =>
+              this.onFilterChange('paymentPaypal', e.target.checked)
+            }
           >
             PayPal
           </FilterSidePanel.CategoryItem>
           <FilterSidePanel.CategoryItem
             icon={<Icon type="fa" name="cc-discover" />}
             checked={activeFilters.paymentDiscover}
-            onChange={e => this.onFilterChange('paymentDiscover', e.target.checked)}
+            onChange={e =>
+              this.onFilterChange('paymentDiscover', e.target.checked)
+            }
           >
             Discover
           </FilterSidePanel.CategoryItem>
@@ -243,7 +257,9 @@ class MockFilterSidePanelExample extends React.Component {
           <FilterSidePanel.CategoryItem
             icon={<Icon type="fa" name="cc-mastercard" />}
             checked={activeFilters.paymentMastercard}
-            onChange={e => this.onFilterChange('paymentMastercard', e.target.checked)}
+            onChange={e =>
+              this.onFilterChange('paymentMastercard', e.target.checked)
+            }
           >
             Mastercard
           </FilterSidePanel.CategoryItem>
@@ -257,9 +273,11 @@ class MockFilterSidePanelExample extends React.Component {
           <FilterSidePanel.CategoryItem
             icon={<Icon type="fa" name="cc-diners-club" />}
             checked={activeFilters.paymentDinersClub}
-            onChange={e => this.onFilterChange('paymentDinersClub', e.target.checked)}
+            onChange={e =>
+              this.onFilterChange('paymentDinersClub', e.target.checked)
+            }
           >
-            {'Diner\'s Club'}
+            {"Diner's Club"}
           </FilterSidePanel.CategoryItem>
         </FilterSidePanel.Category>
         <FilterSidePanel.Category
@@ -301,7 +319,9 @@ class MockFilterSidePanelExample extends React.Component {
             count={8}
             checked={activeFilters.mileage10}
             onChange={e => this.onFilterChange('mileage10', e.target.checked)}
-          >{'< 20'}</FilterSidePanel.CategoryItem>
+          >
+            {'< 20'}
+          </FilterSidePanel.CategoryItem>
         </FilterSidePanel.Category>
         <FilterSidePanel.Category
           title="Rating"

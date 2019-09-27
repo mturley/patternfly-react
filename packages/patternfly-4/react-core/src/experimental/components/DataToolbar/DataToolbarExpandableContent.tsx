@@ -7,7 +7,8 @@ import { DataToolbarItem } from './DataToolbarItem';
 import { Button } from '../../../components/Button';
 import { DataToolbarGroup } from './DataToolbarGroup';
 
-export interface DataToolbarExpandableContentProps extends React.HTMLProps<HTMLDivElement> {
+export interface DataToolbarExpandableContentProps
+  extends React.HTMLProps<HTMLDivElement> {
   /** Classes added to the root element of the Data toolbar expandable content */
   className?: string;
   /** Flag indicating the expandable content is expanded */
@@ -20,8 +21,9 @@ export interface DataToolbarExpandableContentProps extends React.HTMLProps<HTMLD
   showClearFiltersButton: boolean;
 }
 
-export class DataToolbarExpandableContent extends React.Component<DataToolbarExpandableContentProps> {
-
+export class DataToolbarExpandableContent extends React.Component<
+  DataToolbarExpandableContentProps
+> {
   static defaultProps = {
     isExpanded: false
   };
@@ -45,17 +47,20 @@ export class DataToolbarExpandableContent extends React.Component<DataToolbarExp
         className={css(
           styles.dataToolbarExpandableContent,
           isExpanded && getModifier(styles, 'expanded'),
-          className)}
+          className
+        )}
         ref={expandableContentRef}
         {...props}
       >
         <DataToolbarGroup />
-        {showClearFiltersButton &&
+        {showClearFiltersButton && (
           <DataToolbarItem className={css(getModifier(styles, 'clear'))}>
-            <Button variant="link" onClick={clearChipGroups}>Clear all filters</Button>
+            <Button variant="link" onClick={clearChipGroups}>
+              Clear all filters
+            </Button>
           </DataToolbarItem>
-        }
+        )}
       </div>
     );
-}
+  }
 }

@@ -2,7 +2,8 @@ import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/InputGroup/input-group';
 import { css } from '@patternfly/react-styles';
 
-export interface InputGroupTextProps extends React.HTMLProps<HTMLSpanElement | HTMLLabelElement> {
+export interface InputGroupTextProps
+  extends React.HTMLProps<HTMLSpanElement | HTMLLabelElement> {
   /** Additional classes added to the input group text. */
   className?: string;
   /** Content rendered inside the input group text. */

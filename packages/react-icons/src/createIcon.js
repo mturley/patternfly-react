@@ -4,7 +4,12 @@ import { getSize, propTypes, defaultProps } from './common';
 let currentId = 0;
 
 const createIcon = iconDefinition => {
-  const viewBox = [iconDefinition.xOffset || 0, iconDefinition.yOffset || 0, iconDefinition.width, iconDefinition.height].join(' ');
+  const viewBox = [
+    iconDefinition.xOffset || 0,
+    iconDefinition.yOffset || 0,
+    iconDefinition.width,
+    iconDefinition.height
+  ].join(' ');
   const transform = iconDefinition.transform;
   class Icon extends React.Component {
     static displayName = iconDefinition.name;
@@ -14,12 +19,21 @@ const createIcon = iconDefinition => {
     id = `icon-title-${currentId++}`;
 
     render() {
-      const { size, color, title, noStyle, noVerticalAlign, ...props } = this.props;
+      const {
+        size,
+        color,
+        title,
+        noStyle,
+        noVerticalAlign,
+        ...props
+      } = this.props;
 
       const hasTitle = Boolean(title);
       const heightWidth = getSize(size);
-      const baseAlign = -.125 * Number.parseFloat(heightWidth);
-      const style = noVerticalAlign ? null : { verticalAlign: `${baseAlign}em` };
+      const baseAlign = -0.125 * Number.parseFloat(heightWidth);
+      const style = noVerticalAlign
+        ? null
+        : { verticalAlign: `${baseAlign}em` };
 
       return (
         <svg

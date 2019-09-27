@@ -51,7 +51,6 @@ export interface PageState {
 }
 
 export class Page extends React.Component<PageProps, PageState> {
-
   static defaultProps = {
     breadcrumb: null as React.ReactNode,
     children: null as React.ReactNode,
@@ -68,8 +67,10 @@ export class Page extends React.Component<PageProps, PageState> {
   constructor(props: PageProps) {
     super(props);
 
-    const {isManagedSidebar, defaultManagedSidebarIsOpen} = props;
-    const managedSidebarOpen = !isManagedSidebar ? true : defaultManagedSidebarIsOpen;
+    const { isManagedSidebar, defaultManagedSidebarIsOpen } = props;
+    const managedSidebarOpen = !isManagedSidebar
+      ? true
+      : defaultManagedSidebarIsOpen;
     this.state = {
       desktopIsNavOpen: managedSidebarOpen,
       mobileIsNavOpen: false,
@@ -96,26 +97,27 @@ export class Page extends React.Component<PageProps, PageState> {
   handleResize = () => {
     const { onPageResize } = this.props;
     const windowSize = window.innerWidth;
-    const mobileView = windowSize < Number.parseInt(globalBreakpointMd.value, 10);
+    const mobileView =
+      windowSize < Number.parseInt(globalBreakpointMd.value, 10);
     if (onPageResize) {
       onPageResize({ mobileView, windowSize });
     }
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       mobileView
     }));
-  }
+  };
 
   onNavToggleMobile = () => {
     this.setState({
       mobileIsNavOpen: !this.state.mobileIsNavOpen
     });
-  }
+  };
 
   onNavToggleDesktop = () => {
     this.setState({
       desktopIsNavOpen: !this.state.desktopIsNavOpen
     });
-  }
+  };
 
   render() {
     const {
@@ -135,7 +137,9 @@ export class Page extends React.Component<PageProps, PageState> {
 
     const context = {
       isManagedSidebar,
-      onNavToggle: mobileView ? this.onNavToggleMobile : this.onNavToggleDesktop,
+      onNavToggle: mobileView
+        ? this.onNavToggleMobile
+        : this.onNavToggleDesktop,
       isNavOpen: mobileView ? mobileIsNavOpen : desktopIsNavOpen
     };
 
@@ -145,8 +149,17 @@ export class Page extends React.Component<PageProps, PageState> {
           {skipToContent}
           {header}
           {sidebar}
-          <main role="main" id={mainContainerId} className={css(styles.pageMain)} tabIndex={-1}>
-            {breadcrumb && <section className={css(styles.pageMainBreadcrumb)}>{breadcrumb}</section>}
+          <main
+            role="main"
+            id={mainContainerId}
+            className={css(styles.pageMain)}
+            tabIndex={-1}
+          >
+            {breadcrumb && (
+              <section className={css(styles.pageMainBreadcrumb)}>
+                {breadcrumb}
+              </section>
+            )}
             {children}
           </main>
         </div>

@@ -23,7 +23,9 @@ test('Renders ContextSelector open', () => {
 
 test('Verify onToggle is called ', () => {
   const mockfn = jest.fn();
-  const view = mount(<ContextSelector onToggle={mockfn}> {items} </ContextSelector>);
+  const view = mount(
+    <ContextSelector onToggle={mockfn}> {items} </ContextSelector>
+  );
   view
     .find('button')
     .at(0)

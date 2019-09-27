@@ -2,16 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const CatalogItemHeader = ({ className, iconImg, iconClass, title, vendor, ...props }) => {
+const CatalogItemHeader = ({
+  className,
+  iconImg,
+  iconClass,
+  title,
+  vendor,
+  ...props
+}) => {
   const classes = classNames('catalog-item-header-pf', className);
 
   return (
     <header className={classes} {...props}>
-      {iconImg && <img className="catalog-item-header-pf-icon" src={iconImg} alt="" />}
-      {!iconImg && iconClass && <span className={`catalog-item-header-pf-icon ${iconClass}`} />}
+      {iconImg && (
+        <img className="catalog-item-header-pf-icon" src={iconImg} alt="" />
+      )}
+      {!iconImg && iconClass && (
+        <span className={`catalog-item-header-pf-icon ${iconClass}`} />
+      )}
       <div className="catalog-item-header-pf-text">
         <h1 className="catalog-item-header-pf-title">{title}</h1>
-        {vendor && <h5 className="catalog-item-header-pf-subtitle">{vendor}</h5>}
+        {vendor && (
+          <h5 className="catalog-item-header-pf-subtitle">{vendor}</h5>
+        )}
       </div>
     </header>
   );

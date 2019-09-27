@@ -29,7 +29,10 @@ export const ProgressBar: React.FunctionComponent<ProgressBarProps> = ({
   ...props
 }: ProgressBarProps) => (
   <div {...props} className={css(styles.progressBar, className)} {...ariaProps}>
-    <div className={css(styles.progressIndicator)} style={{ width: `${value}%` }}>
+    <div
+      className={css(styles.progressIndicator)}
+      style={{ width: `${value}%` }}
+    >
       <span className={css(styles.progressMeasure)}>{children}</span>
     </div>
   </div>

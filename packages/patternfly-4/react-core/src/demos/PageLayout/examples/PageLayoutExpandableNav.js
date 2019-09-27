@@ -54,72 +54,130 @@ class PageLayoutExpandableNav extends React.Component {
     this.setState({
       isDropdownOpen
     });
-  }
+  };
 
   onDropdownSelect = event => {
     this.setState({
       isDropdownOpen: !this.state.isDropdownOpen
     });
-  }
+  };
 
   onKebabDropdownToggle = isKebabDropdownOpen => {
     this.setState({
       isKebabDropdownOpen
     });
-  }
+  };
 
   onKebabDropdownSelect = event => {
     this.setState({
       isKebabDropdownOpen: !this.state.isKebabDropdownOpen
     });
-  }
+  };
 
   onNavSelect = result => {
     this.setState({
       activeItem: result.itemId,
       activeGroup: result.groupId
     });
-  }
+  };
 
   render() {
-    const { isDropdownOpen, isKebabDropdownOpen, activeItem, activeGroup } = this.state;
+    const {
+      isDropdownOpen,
+      isKebabDropdownOpen,
+      activeItem,
+      activeGroup
+    } = this.state;
 
     const PageNav = (
       <Nav onSelect={this.onNavSelect} aria-label="Nav" theme="dark">
         <NavList>
-          <NavExpandable title="System Panel" groupId="grp-1" isActive={activeGroup === 'grp-1'} isExpanded>
-            <NavItem groupId="grp-1" itemId="grp-1_itm-1" isActive={activeItem === 'grp-1_itm-1'}>
+          <NavExpandable
+            title="System Panel"
+            groupId="grp-1"
+            isActive={activeGroup === 'grp-1'}
+            isExpanded
+          >
+            <NavItem
+              groupId="grp-1"
+              itemId="grp-1_itm-1"
+              isActive={activeItem === 'grp-1_itm-1'}
+            >
               Overview
             </NavItem>
-            <NavItem groupId="grp-1" itemId="grp-1_itm-2" isActive={activeItem === 'grp-1_itm-2'}>
+            <NavItem
+              groupId="grp-1"
+              itemId="grp-1_itm-2"
+              isActive={activeItem === 'grp-1_itm-2'}
+            >
               Resource Usage
             </NavItem>
-            <NavItem groupId="grp-1" itemId="grp-1_itm-3" isActive={activeItem === 'grp-1_itm-3'}>
+            <NavItem
+              groupId="grp-1"
+              itemId="grp-1_itm-3"
+              isActive={activeItem === 'grp-1_itm-3'}
+            >
               Hypervisors
             </NavItem>
-            <NavItem groupId="grp-1" itemId="grp-1_itm-4" isActive={activeItem === 'grp-1_itm-4'}>
+            <NavItem
+              groupId="grp-1"
+              itemId="grp-1_itm-4"
+              isActive={activeItem === 'grp-1_itm-4'}
+            >
               Instances
             </NavItem>
-            <NavItem groupId="grp-1" itemId="grp-1_itm-5" isActive={activeItem === 'grp-1_itm-5'}>
+            <NavItem
+              groupId="grp-1"
+              itemId="grp-1_itm-5"
+              isActive={activeItem === 'grp-1_itm-5'}
+            >
               Volumes
             </NavItem>
-            <NavItem groupId="grp-1" itemId="grp-1_itm-6" isActive={activeItem === 'grp-1_itm-6'}>
+            <NavItem
+              groupId="grp-1"
+              itemId="grp-1_itm-6"
+              isActive={activeItem === 'grp-1_itm-6'}
+            >
               Network
             </NavItem>
           </NavExpandable>
-          <NavExpandable title="Policy" groupId="grp-2" isActive={activeGroup === 'grp-2'}>
-            <NavItem groupId="grp-2" itemId="grp-2_itm-1" isActive={activeItem === 'grp-2_itm-1'}>
+          <NavExpandable
+            title="Policy"
+            groupId="grp-2"
+            isActive={activeGroup === 'grp-2'}
+          >
+            <NavItem
+              groupId="grp-2"
+              itemId="grp-2_itm-1"
+              isActive={activeItem === 'grp-2_itm-1'}
+            >
               Subnav Link 1
             </NavItem>
-            <NavItem groupId="grp-2" itemId="grp-2_itm-2" isActive={activeItem === 'grp-2_itm-2'}>
+            <NavItem
+              groupId="grp-2"
+              itemId="grp-2_itm-2"
+              isActive={activeItem === 'grp-2_itm-2'}
+            >
               Subnav Link 2
             </NavItem>
           </NavExpandable>
-          <NavExpandable title="Authentication" groupId="grp-3" isActive={activeGroup === 'grp-3'}>
-            <NavItem groupId="grp-3" itemId="grp-3_itm-1" isActive={activeItem === 'grp-3_itm-1'}>
+          <NavExpandable
+            title="Authentication"
+            groupId="grp-3"
+            isActive={activeGroup === 'grp-3'}
+          >
+            <NavItem
+              groupId="grp-3"
+              itemId="grp-3_itm-1"
+              isActive={activeItem === 'grp-3_itm-1'}
+            >
               Subnav Link 1
             </NavItem>
-            <NavItem groupId="grp-3" itemId="grp-3_itm-2" isActive={activeItem === 'grp-3_itm-2'}>
+            <NavItem
+              groupId="grp-3"
+              itemId="grp-3_itm-2"
+              isActive={activeItem === 'grp-3_itm-2'}
+            >
               Subnav Link 2
             </NavItem>
           </NavExpandable>
@@ -147,20 +205,35 @@ class PageLayoutExpandableNav extends React.Component {
     ];
     const PageToolbar = (
       <Toolbar>
-        <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
+        <ToolbarGroup
+          className={css(
+            accessibleStyles.screenReader,
+            accessibleStyles.visibleOnLg
+          )}
+        >
           <ToolbarItem>
-            <Button id="expanded-example-uid-01" aria-label="Notifications actions" variant={ButtonVariant.plain}>
+            <Button
+              id="expanded-example-uid-01"
+              aria-label="Notifications actions"
+              variant={ButtonVariant.plain}
+            >
               <BellIcon />
             </Button>
           </ToolbarItem>
           <ToolbarItem>
-            <Button id="expanded-example-uid-02" aria-label="Settings actions" variant={ButtonVariant.plain}>
+            <Button
+              id="expanded-example-uid-02"
+              aria-label="Settings actions"
+              variant={ButtonVariant.plain}
+            >
               <CogIcon />
             </Button>
           </ToolbarItem>
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarItem className={css(accessibleStyles.hiddenOnLg, spacingStyles.mr_0)}>
+          <ToolbarItem
+            className={css(accessibleStyles.hiddenOnLg, spacingStyles.mr_0)}
+          >
             <Dropdown
               isPlain
               position="right"
@@ -170,13 +243,22 @@ class PageLayoutExpandableNav extends React.Component {
               dropdownItems={kebabDropdownItems}
             />
           </ToolbarItem>
-          <ToolbarItem className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnMd)}>
+          <ToolbarItem
+            className={css(
+              accessibleStyles.screenReader,
+              accessibleStyles.visibleOnMd
+            )}
+          >
             <Dropdown
               isPlain
               position="right"
               onSelect={this.onDropdownSelect}
               isOpen={isDropdownOpen}
-              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>Kyle Baker</DropdownToggle>}
+              toggle={
+                <DropdownToggle onToggle={this.onDropdownToggle}>
+                  Kyle Baker
+                </DropdownToggle>
+              }
               dropdownItems={userDropdownItems}
             />
           </ToolbarItem>
@@ -204,7 +286,9 @@ class PageLayoutExpandableNav extends React.Component {
       </Breadcrumb>
     );
     const pageId = 'main-content-page-layout-expandable-nav';
-    const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
+    const PageSkipToContent = (
+      <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>
+    );
 
     return (
       <React.Fragment>
@@ -220,7 +304,8 @@ class PageLayoutExpandableNav extends React.Component {
             <TextContent>
               <Text component="h1">Main Title</Text>
               <Text component="p">
-                Body text should be Overpass Regular at 16px. It should have leading of 24px because <br />
+                Body text should be Overpass Regular at 16px. It should have
+                leading of 24px because <br />
                 of it’s relative line height of 1.5.
               </Text>
             </TextContent>

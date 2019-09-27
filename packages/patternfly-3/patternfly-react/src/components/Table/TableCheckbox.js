@@ -11,7 +11,13 @@ const TableCheckbox = ({ id, label, checked, onChange, ...props }) => (
     <ControlLabel srOnly htmlFor={id}>
       {label}
     </ControlLabel>
-    <input type="checkbox" id={id} checked={checked} onChange={onChange} {...props} />
+    <input
+      type="checkbox"
+      id={id}
+      checked={checked}
+      onChange={onChange}
+      {...props}
+    />
   </React.Fragment>
 );
 TableCheckbox.propTypes = {

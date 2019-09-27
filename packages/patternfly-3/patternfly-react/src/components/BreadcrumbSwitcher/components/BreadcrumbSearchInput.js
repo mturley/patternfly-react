@@ -15,7 +15,13 @@ class BreadcrumbSearchInput extends React.Component {
   }
 
   render() {
-    const { onSearchChange, searchValue, timeout, onClear, placeHolder } = this.props;
+    const {
+      onSearchChange,
+      searchValue,
+      timeout,
+      onClear,
+      placeHolder
+    } = this.props;
 
     return (
       <div className="input-search">

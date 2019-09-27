@@ -8,7 +8,8 @@ test('tooltip renders', () => {
       position="top"
       content={
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id
+          feugiat augue, nec fringilla turpis.
         </div>
       }
     >
@@ -24,7 +25,8 @@ test('tooltip passes along values to tippy.js', () => {
       position="top"
       content={
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id
+          feugiat augue, nec fringilla turpis.
         </div>
       }
       tippyProps={{

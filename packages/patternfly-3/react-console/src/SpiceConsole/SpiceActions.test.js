@@ -10,14 +10,22 @@ test('placeholder render test', () => {
 
 test('SpiceActions renders correctly component hierarchy', () => {
   const view = shallow(
-    <SpiceActions textSendShortcut="My Send Shortcut description" textCtrlAltDel="foobar" onCtrlAltDel={jest.fn()} />
+    <SpiceActions
+      textSendShortcut="My Send Shortcut description"
+      textCtrlAltDel="foobar"
+      onCtrlAltDel={jest.fn()}
+    />
   );
   expect(view).toMatchSnapshot();
 });
 
 test('SpiceActions renders correctly html', () => {
   const view = shallow(
-    <SpiceActions textSendShortcut="My Send Shortcut description" textCtrlAltDel="foobar" onCtrlAltDel={jest.fn()} />
+    <SpiceActions
+      textSendShortcut="My Send Shortcut description"
+      textCtrlAltDel="foobar"
+      onCtrlAltDel={jest.fn()}
+    />
   );
   expect(view.html()).toMatchSnapshot();
 });

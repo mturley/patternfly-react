@@ -9,7 +9,9 @@ test('Renders ContextSelectorToggle', () => {
 
 test('Verify onToggle is called ', () => {
   const mockfnOnToggle = jest.fn();
-  const view = mount(<ContextSelectorToggle onToggle={mockfnOnToggle} id="toggle-id" />);
+  const view = mount(
+    <ContextSelectorToggle onToggle={mockfnOnToggle} id="toggle-id" />
+  );
   view
     .find('button')
     .at(0)
@@ -24,7 +26,9 @@ test('Verify ESC press ', () => {
 });
 
 test('Verify ESC press with not isOpen', () => {
-  const view = mount(<ContextSelectorToggle onToggle={jest.fn()} id="toggle-id" />);
+  const view = mount(
+    <ContextSelectorToggle onToggle={jest.fn()} id="toggle-id" />
+  );
   view.simulate('keyDown', { key: 'Escape' });
   expect(view).toMatchSnapshot();
 });
@@ -36,7 +40,13 @@ test('Verify keydown tab ', () => {
 });
 
 test('Verify keydown enter ', () => {
-  const view = mount(<ContextSelectorToggle onToggle={jest.fn()} onEnter={jest.fn()} id="toggle-id" />);
+  const view = mount(
+    <ContextSelectorToggle
+      onToggle={jest.fn()}
+      onEnter={jest.fn()}
+      id="toggle-id"
+    />
+  );
   view.simulate('keyDown', { key: 'Enter' });
   expect(view).toMatchSnapshot();
 });

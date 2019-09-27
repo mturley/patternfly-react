@@ -10,7 +10,9 @@ import constants from '../common/constants';
 
 const { SERIAL_CONSOLE_TYPE, VNC_CONSOLE_TYPE, LOADING } = constants;
 
-const MyVncConsoleTestWrapper = () => <p>This can be VncConsole component or a wrapper</p>;
+const MyVncConsoleTestWrapper = () => (
+  <p>This can be VncConsole component or a wrapper</p>
+);
 
 const vnc = {
   address: 'my.host.com',
@@ -30,7 +32,10 @@ test('AccessConsoles with SerialConsole as a single child', () => {
 test('AccessConsoles with VncConsole as a single child', () => {
   const view = shallow(
     <AccessConsoles>
-      <VncConsole host="foo.bar.host" textDisconnected="Disconnected state text" />
+      <VncConsole
+        host="foo.bar.host"
+        textDisconnected="Disconnected state text"
+      />
     </AccessConsoles>
   );
   expect(view).toMatchSnapshot();
@@ -40,7 +45,10 @@ test('AccessConsoles with SerialConsole and VncConsole as children', () => {
   const view = shallow(
     <AccessConsoles>
       <SerialConsole onConnect={noop} onDisconnect={noop} status={LOADING} />
-      <VncConsole host="foo.bar.host" textDisconnected="Disconnected state text" />
+      <VncConsole
+        host="foo.bar.host"
+        textDisconnected="Disconnected state text"
+      />
     </AccessConsoles>
   );
   expect(view).toMatchSnapshot();
@@ -48,7 +56,8 @@ test('AccessConsoles with SerialConsole and VncConsole as children', () => {
 
 const SerialConsoleConnected = () => (
   <p>
-    Whatever component, preferably wrapping <i>SerialConsole</i> with callbacks adapted to a particular backend.
+    Whatever component, preferably wrapping <i>SerialConsole</i> with callbacks
+    adapted to a particular backend.
   </p>
 );
 
@@ -121,7 +130,9 @@ test('AccessConsoles default setting', () => {
       <MyVncConsoleTestWrapper type={VNC_CONSOLE_TYPE} />
     </AccessConsoles>
   );
-  expect(wrapperDefault.find('.console-selector-pf-disconnect-switch')).toHaveLength(0);
+  expect(
+    wrapperDefault.find('.console-selector-pf-disconnect-switch')
+  ).toHaveLength(0);
 
   const wrapperKeepConnection = mount(
     <AccessConsoles disconnectByChange={false}>
@@ -129,14 +140,18 @@ test('AccessConsoles default setting', () => {
       <MyVncConsoleTestWrapper type={VNC_CONSOLE_TYPE} />
     </AccessConsoles>
   );
-  expect(wrapperKeepConnection.find('.console-selector-pf-disconnect-switch')).toHaveLength(0); // not rendered when no type selected
+  expect(
+    wrapperKeepConnection.find('.console-selector-pf-disconnect-switch')
+  ).toHaveLength(0); // not rendered when no type selected
   wrapperKeepConnection.find('button#console-type-selector').simulate('click');
   wrapperKeepConnection
     .find('ul li')
     .first()
     .find('a')
     .simulate('click'); // Select SerialConsole
-  expect(wrapperKeepConnection.find('label.console-selector-pf-disconnect-switch')).toHaveLength(1); // switch should be rendered now
+  expect(
+    wrapperKeepConnection.find('label.console-selector-pf-disconnect-switch')
+  ).toHaveLength(1); // switch should be rendered now
 });
 
 test('AccessConsoles disconnects when switching types', () => {

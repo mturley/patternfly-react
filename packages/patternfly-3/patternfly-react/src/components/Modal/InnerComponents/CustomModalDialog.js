@@ -26,7 +26,14 @@ const Size = {
 // eslint-disable-next-line react/prefer-stateless-function
 class CustomModalDialog extends React.Component {
   render() {
-    const { dialogClassName, contentClassName, className, style, children, ...props } = this.props;
+    const {
+      dialogClassName,
+      contentClassName,
+      className,
+      style,
+      children,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const bsClassName = prefix(bsProps);
@@ -48,7 +55,10 @@ class CustomModalDialog extends React.Component {
         className={classNames(className, bsClassName)}
       >
         <div className={classNames(dialogClassName, dialogClasses)}>
-          <div className={classNames(prefix(bsProps, 'content'), contentClassName)} role="document">
+          <div
+            className={classNames(prefix(bsProps, 'content'), contentClassName)}
+            role="document"
+          >
             {children}
           </div>
         </div>
@@ -78,4 +88,7 @@ CustomModalDialog.defaultProps = {
   children: null
 };
 
-export default bsClass('modal', bsSizes([Size.LARGE, Size.SMALL], CustomModalDialog));
+export default bsClass(
+  'modal',
+  bsSizes([Size.LARGE, Size.SMALL], CustomModalDialog)
+);

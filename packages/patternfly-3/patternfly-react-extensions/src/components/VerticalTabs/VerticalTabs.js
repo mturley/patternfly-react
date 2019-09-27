@@ -6,8 +6,18 @@ import VerticalTabsTab from './VerticalTabsTab';
 /**
  * VerticalTabs Component for PatternFly
  */
-const VerticalTabs = ({ children, className, restrictTabs, activeTab, ...props }) => {
-  const classes = classNames('vertical-tabs-pf', { 'restrict-tabs': restrictTabs, 'active-tab': activeTab }, className);
+const VerticalTabs = ({
+  children,
+  className,
+  restrictTabs,
+  activeTab,
+  ...props
+}) => {
+  const classes = classNames(
+    'vertical-tabs-pf',
+    { 'restrict-tabs': restrictTabs, 'active-tab': activeTab },
+    className
+  );
   return (
     <ul className={classes} {...props}>
       {children}

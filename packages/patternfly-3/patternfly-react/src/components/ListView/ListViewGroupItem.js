@@ -5,7 +5,13 @@ import PropTypes from 'prop-types';
 /**
  * ListViewGroupItem is a root node of each ListViewItem
  */
-const ListViewGroupItem = ({ children, className, stacked, expanded, ...props }) => {
+const ListViewGroupItem = ({
+  children,
+  className,
+  stacked,
+  expanded,
+  ...props
+}) => {
   const classes = classNames(
     'list-group-item',
     {

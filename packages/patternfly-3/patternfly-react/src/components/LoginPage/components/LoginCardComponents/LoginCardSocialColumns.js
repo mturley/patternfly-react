@@ -22,7 +22,7 @@ class LoginCardSocialColumns extends React.Component {
     this.setState({
       width: window.innerWidth
     });
-  }
+  };
 
   getListItems = () => {
     this.hiddenLinks = [];
@@ -38,21 +38,24 @@ class LoginCardSocialColumns extends React.Component {
         return <LoginCardSocialLink link={link} key={link.key || index} />;
       })
     );
-  }
+  };
 
   getHiddenListItems = () => {
     const { numberOfButtonsToShow } = this.props;
     return (
       this.hiddenLinks &&
       this.hiddenLinks.map((link, index) => (
-        <LoginCardSocialLink link={link} key={link.key || index + numberOfButtonsToShow} />
+        <LoginCardSocialLink
+          link={link}
+          key={link.key || index + numberOfButtonsToShow}
+        />
       ))
     );
-  }
+  };
 
   toggleExpend = () => {
     this.setState({ expend: !this.state.expend });
-  }
+  };
 
   render() {
     const { links, numberOfButtonsToShow } = this.props;
@@ -61,7 +64,11 @@ class LoginCardSocialColumns extends React.Component {
     }
     const { expend, width } = this.state;
     const expendButton = width > 768 && links.length > numberOfButtonsToShow && (
-      <Button bsStyle="link" bsClass="btn btn-link login-pf-social-toggle" onClick={this.toggleExpend}>
+      <Button
+        bsStyle="link"
+        bsClass="btn btn-link login-pf-social-toggle"
+        onClick={this.toggleExpend}
+      >
         {expend ? 'Less' : 'More'} &nbsp;
         <Icon name={`angle-${expend ? 'up' : 'down'}`} />
       </Button>
@@ -71,7 +78,9 @@ class LoginCardSocialColumns extends React.Component {
     const moreItems = expend || width < 768 ? this.getHiddenListItems() : null;
     return (
       <div>
-        <ul className={classNames('login-pf-social list-unstyled', doubleColumn)}>
+        <ul
+          className={classNames('login-pf-social list-unstyled', doubleColumn)}
+        >
           {this.getListItems()}
           {moreItems}
         </ul>
@@ -83,7 +92,9 @@ class LoginCardSocialColumns extends React.Component {
 
 LoginCardSocialColumns.propTypes = {
   /** Array of social links to generate. */
-  links: PropTypes.arrayOf(PropTypes.shape({ ...LoginCardSocialLink.propTypes })),
+  links: PropTypes.arrayOf(
+    PropTypes.shape({ ...LoginCardSocialLink.propTypes })
+  ),
   /** The amount of buttons to show. Above this number, the buttons would be hidden */
   numberOfButtonsToShow: PropTypes.number
 };

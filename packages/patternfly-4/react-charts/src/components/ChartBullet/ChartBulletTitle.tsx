@@ -1,13 +1,19 @@
 import * as React from 'react';
-import {
-  PaddingProps,
-  StringOrNumberOrCallback,
-} from 'victory';
+import { PaddingProps, StringOrNumberOrCallback } from 'victory';
 import { ChartContainer } from '../ChartContainer';
 import { ChartLabel } from '../ChartLabel';
 import { ChartLegendPosition } from '../ChartLegend';
-import { ChartBulletStyles, ChartCommonStyles, ChartThemeDefinition } from '../ChartTheme';
-import { getBulletTheme, getBulletLabelX, getBulletLabelY, getPaddingForSide } from '../ChartUtils';
+import {
+  ChartBulletStyles,
+  ChartCommonStyles,
+  ChartThemeDefinition
+} from '../ChartTheme';
+import {
+  getBulletTheme,
+  getBulletLabelX,
+  getBulletLabelY,
+  getPaddingForSide
+} from '../ChartUtils';
 
 /**
  * See https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/victory/index.d.ts
@@ -122,7 +128,9 @@ export interface ChartBulletTitleProps {
   width?: number;
 }
 
-export const ChartBulletTitle: React.FunctionComponent<ChartBulletTitleProps> = ({
+export const ChartBulletTitle: React.FunctionComponent<
+  ChartBulletTitleProps
+> = ({
   ariaDesc,
   ariaTitle,
   capHeight = 1.1,
@@ -150,17 +158,19 @@ export const ChartBulletTitle: React.FunctionComponent<ChartBulletTitleProps> = 
   };
 
   const defaultPadding = {
-    bottom: getPaddingForSide('bottom',  padding, theme.chart.padding),
+    bottom: getPaddingForSide('bottom', padding, theme.chart.padding),
     left: getPaddingForSide('left', padding, theme.chart.padding),
     right: getPaddingForSide('right', padding, theme.chart.padding),
-    top: getPaddingForSide('top', padding, theme.chart.padding),
+    top: getPaddingForSide('top', padding, theme.chart.padding)
   };
 
   // Returns title
   const getTitle = () => {
     const showBoth = title && subTitle;
 
-    let labelPosition: 'bottom' | 'left' | 'top-left' = horizontal ? 'left' : 'bottom';
+    let labelPosition: 'bottom' | 'left' | 'top-left' = horizontal
+      ? 'left'
+      : 'bottom';
     if (titlePosition && titlePosition.includes('left') && horizontal) {
       labelPosition = titlePosition;
     }
@@ -168,32 +178,40 @@ export const ChartBulletTitle: React.FunctionComponent<ChartBulletTitleProps> = 
     // The x and y calculations below are used to adjust the position of the title, based on padding and scale.
     // This ensures that when padding is adjusted, the title moves along with the chart's position.
     return React.cloneElement(titleComponent, {
-      ...showBoth && { capHeight },
+      ...(showBoth && { capHeight }),
       style: [ChartBulletStyles.label.title, ChartBulletStyles.label.subTitle],
       text: showBoth ? [title, subTitle] : title,
-      textAnchor: labelPosition === 'top-left' ? 'start' : horizontal ? 'end' : 'middle',
+      textAnchor:
+        labelPosition === 'top-left' ? 'start' : horizontal ? 'end' : 'middle',
       verticalAnchor: labelPosition === 'top-left' ? 'end' : 'middle',
       // Adjust for padding
       x: horizontal
         ? getBulletLabelX({
-          chartWidth: chartSize.width,
-          dx: labelPosition === 'top-left'
-            ? defaultPadding.left
-            : defaultPadding.left - ChartCommonStyles.label.margin * 1.75,
-          labelPosition: 'left', // skip 'bottom'
-          legendPosition,
-          svgWidth: width
-        })
-        : defaultPadding.left * .5 + (defaultPadding.right * .5 - (defaultPadding.right - 50)) +
+            chartWidth: chartSize.width,
+            dx:
+              labelPosition === 'top-left'
+                ? defaultPadding.left
+                : defaultPadding.left - ChartCommonStyles.label.margin * 1.75,
+            labelPosition: 'left', // skip 'bottom'
+            legendPosition,
+            svgWidth: width
+          })
+        : defaultPadding.left * 0.5 +
+          (defaultPadding.right * 0.5 - (defaultPadding.right - 50)) +
           ChartBulletStyles.qualitativeRangeWidth / 2,
       y: getBulletLabelY({
         chartHeight: chartSize.height,
         // Adjust for padding
-        dy: labelPosition === 'top-left'
-          ? defaultPadding.top * .5 + (defaultPadding.bottom * .5 - (defaultPadding.bottom)) + 58 -
-            ChartCommonStyles.legend.margin + (showBoth ? 0 : 1)
-          : horizontal
-            ? defaultPadding.top * .5 + (defaultPadding.bottom * .5 - (defaultPadding.bottom))
+        dy:
+          labelPosition === 'top-left'
+            ? defaultPadding.top * 0.5 +
+              (defaultPadding.bottom * 0.5 - defaultPadding.bottom) +
+              58 -
+              ChartCommonStyles.legend.margin +
+              (showBoth ? 0 : 1)
+            : horizontal
+            ? defaultPadding.top * 0.5 +
+              (defaultPadding.bottom * 0.5 - defaultPadding.bottom)
             : ChartCommonStyles.legend.margin * 2 - defaultPadding.bottom,
         labelPosition
       }),
@@ -202,12 +220,15 @@ export const ChartBulletTitle: React.FunctionComponent<ChartBulletTitleProps> = 
   };
 
   return standalone ? (
-    <ChartContainer desc={ariaDesc} height={height} title={ariaTitle} width={width}>
+    <ChartContainer
+      desc={ariaDesc}
+      height={height}
+      title={ariaTitle}
+      width={width}
+    >
       {getTitle()}
     </ChartContainer>
   ) : (
-    <React.Fragment>
-      {getTitle()}
-    </React.Fragment>
+    <React.Fragment>{getTitle()}</React.Fragment>
   );
 };

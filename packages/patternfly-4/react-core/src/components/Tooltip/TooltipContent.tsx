@@ -9,7 +9,11 @@ export interface TooltipContentProps extends React.HTMLProps<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const TooltipContent = ({ className, children, ...props }: TooltipContentProps) => (
+export const TooltipContent = ({
+  className,
+  children,
+  ...props
+}: TooltipContentProps) => (
   <div className={css(styles.tooltipContent, className)} {...props}>
     {children}
   </div>

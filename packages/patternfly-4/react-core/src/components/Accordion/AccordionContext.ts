@@ -5,4 +5,6 @@ interface AccordionContextProps {
   ToggleContainer: React.ElementType;
 }
 
-export const AccordionContext = React.createContext<Partial<AccordionContextProps>>({});
+export const AccordionContext = React.createContext<
+  Partial<AccordionContextProps>
+>({});

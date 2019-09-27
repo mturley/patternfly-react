@@ -9,7 +9,9 @@ describe('BreadcrumbItem component', () => {
   });
 
   test('should render breadcrumbItem with className', () => {
-    const view = shallow(<BreadcrumbItem className="Class">Item</BreadcrumbItem>);
+    const view = shallow(
+      <BreadcrumbItem className="Class">Item</BreadcrumbItem>
+    );
     expect(view).toMatchSnapshot();
   });
 
@@ -29,7 +31,9 @@ describe('BreadcrumbItem component', () => {
   });
 
   test('should render breadcrumbItem with target', () => {
-    const view = shallow(<BreadcrumbItem target="/somewhere">Item</BreadcrumbItem>);
+    const view = shallow(
+      <BreadcrumbItem target="/somewhere">Item</BreadcrumbItem>
+    );
     expect(view).toMatchSnapshot();
   });
 

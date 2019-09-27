@@ -22,8 +22,14 @@ const TablePfProvider = ({
   const tableRow = rowProps => <tr {...rowProps}>{rowProps.children}</tr>;
   tableRow.shouldComponentUpdate = true;
 
-  components.header = Object.assign({ cell: headerCell }, components.header || {});
-  components.body = Object.assign({ cell: tableCell, row: tableRow }, components.body || {});
+  components.header = Object.assign(
+    { cell: headerCell },
+    components.header || {}
+  );
+  components.body = Object.assign(
+    { cell: tableCell, row: tableRow },
+    components.body || {}
+  );
 
   const classes = classNames(
     {
@@ -43,7 +49,12 @@ const TablePfProvider = ({
   }
 
   return (
-    <Table.Provider className={classes} renderers={components} {...props} {...attributes}>
+    <Table.Provider
+      className={classes}
+      renderers={components}
+      {...props}
+      {...attributes}
+    >
       {children}
     </Table.Provider>
   );

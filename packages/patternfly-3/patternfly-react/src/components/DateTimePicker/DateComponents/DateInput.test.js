@@ -11,7 +11,9 @@ test('DateInput is working properly', () => {
 
 test('DateInput changes selected on click', () => {
   const setSelected = jest.fn();
-  const component = mount(<DateInput date="1/21/2019, 2:22:31 PM" setSelected={setSelected} />);
+  const component = mount(
+    <DateInput date="1/21/2019, 2:22:31 PM" setSelected={setSelected} />
+  );
   component
     .find('.weekend')
     .first()
@@ -42,5 +44,7 @@ test('DateInput toggles view to decades', () => {
 
 test('DateInput is working properly with wrong date format', () => {
   const component = shallow(<DateInput date="ABC" />);
-  expect(isEqualDate(component.get(0).props.children.props.date, new Date())).toBeTruthy();
+  expect(
+    isEqualDate(component.get(0).props.children.props.date, new Date())
+  ).toBeTruthy();
 });

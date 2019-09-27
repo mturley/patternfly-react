@@ -43,7 +43,9 @@ const NotificationDrawerWrapper = ({
       translations={translationsWrapper}
     />
   ));
-  const noNotificationsMessage = <NotificationDrawer.EmptyState title={translations.emptyState} />;
+  const noNotificationsMessage = (
+    <NotificationDrawer.EmptyState title={translations.emptyState} />
+  );
 
   return (
     <NotificationDrawer expanded={isExpanded}>
@@ -54,7 +56,9 @@ const NotificationDrawerWrapper = ({
         onExpandClick={toggleDrawerExpand}
       />
       <NotificationDrawer.Accordion>
-        {notificationPanels.length === 0 ? noNotificationsMessage : notificationPanels}
+        {notificationPanels.length === 0
+          ? noNotificationsMessage
+          : notificationPanels}
       </NotificationDrawer.Accordion>
     </NotificationDrawer>
   );

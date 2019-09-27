@@ -46,7 +46,9 @@ const FilterSidePanelCategory = ({
   return (
     <form className={classes} {...props}>
       <fieldset className="checkbox filter-panel-pf-category-items">
-        {title && <legend className="filter-panel-pf-category-title">{title}</legend>}
+        {title && (
+          <legend className="filter-panel-pf-category-title">{title}</legend>
+        )}
         {shownChildren}
         {showAllToggle}
       </fieldset>

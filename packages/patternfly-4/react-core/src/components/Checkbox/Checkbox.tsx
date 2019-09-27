@@ -4,7 +4,10 @@ import { css, getModifier } from '@patternfly/react-styles';
 import { Omit } from '../../helpers/typeUtils';
 
 export interface CheckboxProps
-  extends Omit<React.HTMLProps<HTMLInputElement>, 'type' | 'onChange' | 'disabled' | 'label'> {
+  extends Omit<
+    React.HTMLProps<HTMLInputElement>,
+    'type' | 'onChange' | 'disabled' | 'label'
+  > {
   /** Additional classes added to the Checkbox. */
   className?: string;
   /** Flag to show if the Checkbox selection is valid or invalid. */
@@ -15,7 +18,10 @@ export interface CheckboxProps
   isChecked?: boolean;
   checked?: boolean;
   /** A callback for when the Checkbox selection changes. */
-  onChange?: (checked: boolean, event: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (
+    checked: boolean,
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
   /** Label text of the checkbox. */
   label?: React.ReactNode;
   /** Id of the checkbox. */
@@ -42,7 +48,7 @@ export class Checkbox extends React.Component<CheckboxProps> {
 
   private handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.props.onChange(event.currentTarget.checked, event);
-  }
+  };
 
   render() {
     const {
@@ -59,7 +65,7 @@ export class Checkbox extends React.Component<CheckboxProps> {
     } = this.props;
     const checkedProps: { checked?: boolean; defaultChecked?: boolean } = {};
     if ([true, false].includes(checked) || isChecked === true) {
-      checkedProps.checked =  checked || isChecked;
+      checkedProps.checked = checked || isChecked;
     }
     if (onChange !== defaultOnChange) {
       checkedProps.checked = isChecked;
@@ -68,7 +74,8 @@ export class Checkbox extends React.Component<CheckboxProps> {
       checkedProps.defaultChecked = defaultChecked;
     }
 
-    checkedProps.checked = checkedProps.checked === null ? false : checkedProps.checked;
+    checkedProps.checked =
+      checkedProps.checked === null ? false : checkedProps.checked;
     return (
       <div className={css(styles.check, className)}>
         <input
@@ -79,12 +86,15 @@ export class Checkbox extends React.Component<CheckboxProps> {
           aria-invalid={!isValid}
           aria-label={ariaLabel}
           disabled={isDisabled}
-          ref={(elem) => elem && (elem.indeterminate = isChecked === null)}
+          ref={elem => elem && (elem.indeterminate = isChecked === null)}
           {...checkedProps}
         />
         {label && (
           <label
-            className={css(styles.checkLabel, isDisabled ? getModifier(styles, 'disabled') : '')}
+            className={css(
+              styles.checkLabel,
+              isDisabled ? getModifier(styles, 'disabled') : ''
+            )}
             htmlFor={props.id}
           >
             {label}

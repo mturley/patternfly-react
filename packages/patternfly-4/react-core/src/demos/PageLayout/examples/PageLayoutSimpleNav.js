@@ -51,31 +51,31 @@ class PageLayoutSimpleNav extends React.Component {
     this.setState({
       isDropdownOpen
     });
-  }
+  };
 
   onDropdownSelect = event => {
     this.setState({
       isDropdownOpen: !this.state.isDropdownOpen
     });
-  }
+  };
 
   onKebabDropdownToggle = isKebabDropdownOpen => {
     this.setState({
       isKebabDropdownOpen
     });
-  }
+  };
 
   onKebabDropdownSelect = event => {
     this.setState({
       isKebabDropdownOpen: !this.state.isKebabDropdownOpen
     });
-  }
+  };
 
   onNavSelect = result => {
     this.setState({
       activeItem: result.itemId
     });
-  }
+  };
 
   render() {
     const { isDropdownOpen, isKebabDropdownOpen, activeItem } = this.state;
@@ -122,20 +122,35 @@ class PageLayoutSimpleNav extends React.Component {
     ];
     const PageToolbar = (
       <Toolbar>
-        <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
+        <ToolbarGroup
+          className={css(
+            accessibleStyles.screenReader,
+            accessibleStyles.visibleOnLg
+          )}
+        >
           <ToolbarItem>
-            <Button id="simple-example-uid-01" aria-label="Notifications actions" variant={ButtonVariant.plain}>
+            <Button
+              id="simple-example-uid-01"
+              aria-label="Notifications actions"
+              variant={ButtonVariant.plain}
+            >
               <BellIcon />
             </Button>
           </ToolbarItem>
           <ToolbarItem>
-            <Button id="simple-example-uid-02" aria-label="Settings actions" variant={ButtonVariant.plain}>
+            <Button
+              id="simple-example-uid-02"
+              aria-label="Settings actions"
+              variant={ButtonVariant.plain}
+            >
               <CogIcon />
             </Button>
           </ToolbarItem>
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarItem className={css(accessibleStyles.hiddenOnLg, spacingStyles.mr_0)}>
+          <ToolbarItem
+            className={css(accessibleStyles.hiddenOnLg, spacingStyles.mr_0)}
+          >
             <Dropdown
               isPlain
               position="right"
@@ -145,13 +160,22 @@ class PageLayoutSimpleNav extends React.Component {
               dropdownItems={kebabDropdownItems}
             />
           </ToolbarItem>
-          <ToolbarItem className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnMd)}>
+          <ToolbarItem
+            className={css(
+              accessibleStyles.screenReader,
+              accessibleStyles.visibleOnMd
+            )}
+          >
             <Dropdown
               isPlain
               position="right"
               onSelect={this.onDropdownSelect}
               isOpen={isDropdownOpen}
-              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>Kyle Baker</DropdownToggle>}
+              toggle={
+                <DropdownToggle onToggle={this.onDropdownToggle}>
+                  Kyle Baker
+                </DropdownToggle>
+              }
               dropdownItems={userDropdownItems}
             />
           </ToolbarItem>
@@ -168,7 +192,9 @@ class PageLayoutSimpleNav extends React.Component {
     );
     const Sidebar = <PageSidebar nav={PageNav} theme="dark" />;
     const pageId = 'main-content-page-layout-simple-nav';
-    const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
+    const PageSkipToContent = (
+      <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>
+    );
 
     return (
       <React.Fragment>
@@ -183,7 +209,8 @@ class PageLayoutSimpleNav extends React.Component {
             <TextContent>
               <Text component="h1">Main Title</Text>
               <Text component="p">
-                Body text should be Overpass Regular at 16px. It should have leading of 24px because <br />
+                Body text should be Overpass Regular at 16px. It should have
+                leading of 24px because <br />
                 of it’s relative line height of 1.5.
               </Text>
             </TextContent>

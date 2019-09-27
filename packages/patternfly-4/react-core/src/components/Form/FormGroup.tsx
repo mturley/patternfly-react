@@ -5,7 +5,8 @@ import { ASTERISK } from '../../helpers/htmlConstants';
 import { FormContext } from './FormContext';
 import { css, getModifier } from '@patternfly/react-styles';
 
-export interface FormGroupProps extends Omit<React.HTMLProps<HTMLDivElement>, 'label'> {
+export interface FormGroupProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'label'> {
   /** Anything that can be rendered as FormGroup content. */
   children?: React.ReactNode;
   /** Additional classes added to the FormGroup. */
@@ -40,23 +41,37 @@ export const FormGroup: React.FunctionComponent<FormGroupProps> = ({
 }: FormGroupProps) => (
   <FormContext.Consumer>
     {({ isHorizontal }: { isHorizontal: boolean }) => (
-      <div {...props} className={css(styles.formGroup, isInline ? getModifier(styles, 'inline', className) : className)}>
+      <div
+        {...props}
+        className={css(
+          styles.formGroup,
+          isInline ? getModifier(styles, 'inline', className) : className
+        )}
+      >
         {label && (
           <label className={css(styles.formLabel)} htmlFor={fieldId}>
-            <span className={css(styles.formLabelText)}>
-              {label}
-            </span>
+            <span className={css(styles.formLabelText)}>{label}</span>
             {isRequired && (
-              <span className={css(styles.formLabelRequired)} aria-hidden="true">
+              <span
+                className={css(styles.formLabelRequired)}
+                aria-hidden="true"
+              >
                 {ASTERISK}
               </span>
             )}
           </label>
         )}
-        {isHorizontal ? <div className={css(styles.formHorizontalGroup)}>{children}</div> : children}
+        {isHorizontal ? (
+          <div className={css(styles.formHorizontalGroup)}>{children}</div>
+        ) : (
+          children
+        )}
         {((isValid && helperText) || (!isValid && helperTextInvalid)) && (
           <div
-            className={css(styles.formHelperText, !isValid ? getModifier(styles, 'error') : '')}
+            className={css(
+              styles.formHelperText,
+              !isValid ? getModifier(styles, 'error') : ''
+            )}
             id={`${fieldId}-helper`}
             aria-live="polite"
           >

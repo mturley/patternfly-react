@@ -23,7 +23,12 @@ const DualListItem = ({
   tooltipID,
   tooltipText
 }) => {
-  const cx = classNames('dual-list-pf-item', className, checked && 'selected', disabled && 'disabled');
+  const cx = classNames(
+    'dual-list-pf-item',
+    className,
+    checked && 'selected',
+    disabled && 'disabled'
+  );
   const itemLabel = (
     <span className="dual-list-pf-item-label">
       <Highlighter search={filterTerm}>{label}</Highlighter>

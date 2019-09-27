@@ -5,7 +5,12 @@
  * https://github.com/reactabular/reactabular/tree/v8.14.0/packages/reactabular-table/src
  */
 import * as React from 'react';
-import { createElementType, RowsType, ColumnsType, RenderersTypes } from './types';
+import {
+  createElementType,
+  RowsType,
+  ColumnsType,
+  RenderersTypes
+} from './types';
 import { ProviderContext } from './provider';
 import { HeaderRow } from './header-row';
 
@@ -20,21 +25,29 @@ export interface HeaderProps {
 
 class BaseHeader extends React.Component<HeaderProps, {}> {
   render() {
-    const { children, headerRows, onRow, renderers, columns, ...props } = this.props;
+    const {
+      children,
+      headerRows,
+      onRow,
+      renderers,
+      columns,
+      ...props
+    } = this.props;
 
     // If headerRows aren't passed, default to bodyColumns as header rows
     return React.createElement(
       renderers.header.wrapper as createElementType,
       props,
       [
-        (headerRows || [columns] as ColumnsType).map((rowData: RowsType, rowIndex) =>
-          React.createElement(HeaderRow, {
-            key: `${rowIndex}-header-row`,
-            renderers: renderers.header,
-            onRow,
-            rowData,
-            rowIndex
-          })
+        (headerRows || ([columns] as ColumnsType)).map(
+          (rowData: RowsType, rowIndex) =>
+            React.createElement(HeaderRow, {
+              key: `${rowIndex}-header-row`,
+              renderers: renderers.header,
+              onRow,
+              rowData,
+              rowIndex
+            })
         )
       ].concat(children as any)
     );
@@ -43,6 +56,8 @@ class BaseHeader extends React.Component<HeaderProps, {}> {
 
 export const Header = (props: HeaderProps) => (
   <ProviderContext.Consumer>
-    {({ columns, renderers }) => <BaseHeader columns={columns} renderers={renderers} {...props} />}
+    {({ columns, renderers }) => (
+      <BaseHeader columns={columns} renderers={renderers} {...props} />
+    )}
   </ProviderContext.Consumer>
 );

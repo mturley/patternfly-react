@@ -29,7 +29,12 @@ class InfoTipMenu extends React.Component {
       bsClass, // eslint-disable-line react/prop-types
       ...props
     } = this.props;
-    const infoTipMenuClass = classNames('dropdown-menu', 'infotip', 'bottom-right', className);
+    const infoTipMenuClass = classNames(
+      'dropdown-menu',
+      'infotip',
+      'bottom-right',
+      className
+    );
 
     return (
       <div className={infoTipMenuClass} style={{ padding: '' }} {...props}>
