@@ -20,7 +20,10 @@ class TreeViewNode extends Component {
     // tabindex of -1. Subsequently, the tabindex "roves" to whatever node has
     // gained focus
     const tabIndex =
-      nextProps.focusedNodeId === prevState.nodeId || (!nextProps.focusedNodeId && prevState.nodeId === '0') ? 0 : -1;
+      nextProps.focusedNodeId === prevState.nodeId ||
+      (!nextProps.focusedNodeId && prevState.nodeId === '0')
+        ? 0
+        : -1;
 
     if (tabIndex !== prevState.tabIndex) {
       return { tabIndex };
@@ -51,7 +54,11 @@ class TreeViewNode extends Component {
     const { node, focusedNodeId } = this.props;
     const { key } = e;
 
-    if (node.nodes && focusedNodeId === nodeId && (key === KEYS.ARROW_RIGHT || key === KEYS.ARROW_LEFT)) {
+    if (
+      node.nodes &&
+      focusedNodeId === nodeId &&
+      (key === KEYS.ARROW_RIGHT || key === KEYS.ARROW_LEFT)
+    ) {
       e.stopPropagation();
       if (key === KEYS.ARROW_RIGHT) {
         this.setState(() => ({ expanded: true }));
@@ -64,17 +71,17 @@ class TreeViewNode extends Component {
       e.stopPropagation();
       this.handleSelect(e);
     }
-  }
+  };
 
   onFocus = e => {
     e.stopPropagation();
     this.props.onFocus(this.nodeRef.current);
     this.setState(() => ({ focused: true }));
-  }
+  };
 
   onBlur = () => {
     this.setState(() => ({ focused: false }));
-  }
+  };
 
   handleSelect = e => {
     const { node, selectNode } = this.props;
@@ -85,16 +92,16 @@ class TreeViewNode extends Component {
       this.nodeRef.current.focus();
       selectNode(node);
     }
-  }
+  };
 
   toggleExpand = e => {
     e.stopPropagation();
     this.toggleExpandedState();
-  }
+  };
 
   toggleExpandedState = () => {
     this.setState(prevState => ({ expanded: !prevState.expanded }));
-  }
+  };
 
   nodeRef = React.createRef();
 

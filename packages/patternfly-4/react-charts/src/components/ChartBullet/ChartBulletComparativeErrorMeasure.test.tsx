@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ChartBulletComparativeErrorMeasure } from './ChartBulletComparativeErrorMeasure';
 
-Object.values([true, false]).forEach((isRead) => {
+Object.values([true, false]).forEach(isRead => {
   test('ChartBulletComparativeErrorMeasure', () => {
     const view = shallow(<ChartBulletComparativeErrorMeasure />);
     expect(view).toMatchSnapshot();
@@ -11,11 +11,7 @@ Object.values([true, false]).forEach((isRead) => {
 
 test('renders component data', () => {
   const view = shallow(
-    <ChartBulletComparativeErrorMeasure
-      data={[{y: 88}]}
-      domain={{ x: [0, 200]}}
-      width={450}
-    />
+    <ChartBulletComparativeErrorMeasure data={[{ y: 88 }]} domain={{ x: [0, 200] }} width={450} />
   );
   expect(view).toMatchSnapshot();
 });

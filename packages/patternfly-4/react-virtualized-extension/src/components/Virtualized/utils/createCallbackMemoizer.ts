@@ -8,17 +8,19 @@ export default function createCallbackMemoizer(requireAllKeys = true) {
     const keys = Object.keys(indices);
     const allInitialized =
       !requireAllKeys ||
-      keys.every((key) => {
+      keys.every(key => {
         const value = indices[key];
         return Array.isArray(value) ? value.length > 0 : value >= 0;
       });
     const indexChanged =
       keys.length !== Object.keys(cachedIndices).length ||
-      keys.some((key) => {
+      keys.some(key => {
         const cachedValue = cachedIndices[key];
         const value = indices[key];
 
-        return Array.isArray(value) ? cachedValue.join(',') !== value.join(',') : cachedValue !== value;
+        return Array.isArray(value)
+          ? cachedValue.join(',') !== value.join(',')
+          : cachedValue !== value;
       });
 
     cachedIndices = indices;

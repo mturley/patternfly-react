@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const BulletChartRange = ({ className, value, percent, maxValue, index, color, vertical, ...props }) => {
+const BulletChartRange = ({
+  className,
+  value,
+  percent,
+  maxValue,
+  index,
+  color,
+  vertical,
+  ...props
+}) => {
   const rangeClasses = classNames('bullet-chart-pf-range-bar', `range-${index}`, className);
   if (value > 0 && (percent ? value <= 100 : value <= maxValue)) {
     const showValue = percent ? value : (value / maxValue) * 100;

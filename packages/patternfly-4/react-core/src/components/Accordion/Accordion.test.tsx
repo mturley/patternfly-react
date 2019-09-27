@@ -26,7 +26,11 @@ describe('Accordion', () => {
   test('It should pass optional aria props', () => {
     const view = mount(
       <Accordion asDefinitionList>
-        <AccordionToggle aria-label="Toggle details for" aria-labelledby="ex-toggle2 ex-item2" id="ex-toggle2" />
+        <AccordionToggle
+          aria-label="Toggle details for"
+          aria-labelledby="ex-toggle2 ex-item2"
+          id="ex-toggle2"
+        />
       </Accordion>
     );
     const button = view.find('button[id="ex-toggle2"]').getElement();
@@ -51,7 +55,9 @@ describe('Accordion', () => {
     const view = mount(
       <Accordion headingLevel="h2">
         <AccordionItem>
-          <AccordionToggle id="item-1" component={container}>Item One</AccordionToggle>
+          <AccordionToggle id="item-1" component={container}>
+            Item One
+          </AccordionToggle>
           <AccordionContent component={container}>Item One Content</AccordionContent>
         </AccordionItem>
       </Accordion>

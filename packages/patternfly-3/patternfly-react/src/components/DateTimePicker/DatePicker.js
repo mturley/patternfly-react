@@ -27,7 +27,12 @@ class DatePicker extends React.Component {
       <Popover id={id} className="bootstrap-datetimepicker-widget date-picker-pf usetwentyfour">
         <ul className="list-unstyled">
           <li>
-            <DateInput date={value} setSelected={this.setSelected} locale={locale} weekStartsOn={weekStartsOn} />
+            <DateInput
+              date={value}
+              setSelected={this.setSelected}
+              locale={locale}
+              weekStartsOn={weekStartsOn}
+            />
           </li>
           <li className="picker-switch accordion-toggle">
             <TodayButton setSelected={this.setSelected} />
@@ -46,7 +51,10 @@ class DatePicker extends React.Component {
             onBlur={e => this.setSelected(e.target.value)}
           />
           <OverlayTrigger trigger="click" placement={placement} overlay={popover} rootClose>
-            <InputGroup.Addon className="date-picker-pf" onClick={() => this.setState({ tmpValue: formatDate(value) })}>
+            <InputGroup.Addon
+              className="date-picker-pf"
+              onClick={() => this.setState({ tmpValue: formatDate(value) })}
+            >
               <Icon type="fa" name="calendar" />
             </InputGroup.Addon>
           </OverlayTrigger>

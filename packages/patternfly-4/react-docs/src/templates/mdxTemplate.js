@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import SidebarLayout from './sidebarLayout';
 import { CSSVars, PropsTable, LiveEdit } from '../components/componentDocs';
-import { Alert, Title, PageSection, Text, TextList, TextListItem } from '@patternfly-safe/react-core';
+import {
+  Alert,
+  Title,
+  PageSection,
+  Text,
+  TextList,
+  TextListItem
+} from '@patternfly-safe/react-core';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from '../components/mdx-renderer';
 
@@ -25,25 +32,26 @@ for (let i = 1; i <= 6; i++) {
 }
 
 const getWarning = state => {
-  switch(state) {
+  switch (state) {
     case 'early':
       return "This is an experimental feature in the early stages of testing. It's not intended for production use.";
     case 'deprecated':
-      return "This experimental feature has been deprecated and will be removed in a future release. We recommend you avoid or move away from using this feature in your projects.";
+      return 'This experimental feature has been deprecated and will be removed in a future release. We recommend you avoid or move away from using this feature in your projects.';
     default:
       return (
         <React.Fragment>
-This experimental feature has been promoted to a <a href={`../../components/${state}`}>production-level component</a> and will be removed in a future release. Use the production-ready version of this feature instead."
+          This experimental feature has been promoted to a{' '}
+          <a href={`../../components/${state}`}>production-level component</a> and will be removed
+          in a future release. Use the production-ready version of this feature instead."
         </React.Fragment>
       );
   }
-}
+};
 
 const MdxTemplate = ({ data }) => {
   const { cssPrefix } = data.mdx.frontmatter;
   const section = data.mdx.frontmatter.section || 'component';
   const { nodes } = data.props;
-
 
   return (
     <SidebarLayout>
@@ -51,9 +59,9 @@ const MdxTemplate = ({ data }) => {
         <Title size="4xl" className="pf-u-mb-lg">
           {data.mdx.frontmatter.title} {section.indexOf('-') === -1 ? section : ''}
         </Title>
-        {data.mdx.frontmatter.stage &&
+        {data.mdx.frontmatter.stage && (
           <Alert variant="warning" title={getWarning(data.mdx.frontmatter.stage)} />
-        }
+        )}
         <MDXProvider components={components}>
           <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
         </MDXProvider>
@@ -73,7 +81,11 @@ const MdxTemplate = ({ data }) => {
             caption={
               <p>
                 CSS Variables starting with <strong>--{cssPrefix}</strong> from&nbsp;
-                <a href="https://github.com/patternfly/patternfly-next/" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://github.com/patternfly/patternfly-next/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   patternfly-next
                 </a>
               </p>
@@ -107,7 +119,9 @@ export const pageQuery = graphql`
         stage
       }
     }
-    props: allComponentMetadata(filter: { name: { in: $propComponents }, path: { regex: $pathRegex } }) {
+    props: allComponentMetadata(
+      filter: { name: { in: $propComponents }, path: { regex: $pathRegex } }
+    ) {
       nodes {
         name
         props {

@@ -289,9 +289,11 @@ export const StyledTheme = {
     bg_dark_100: global_BackgroundColor_dark_100 && global_BackgroundColor_dark_100.var,
     bg_dark_200: global_BackgroundColor_dark_200 && global_BackgroundColor_dark_200.var,
     bg_dark_transparent_100:
-      global_BackgroundColor_dark_transparent_100 && global_BackgroundColor_dark_transparent_100.var,
+      global_BackgroundColor_dark_transparent_100 &&
+      global_BackgroundColor_dark_transparent_100.var,
     bg_dark_transparent_200:
-      global_BackgroundColor_dark_transparent_200 && global_BackgroundColor_dark_transparent_200.var,
+      global_BackgroundColor_dark_transparent_200 &&
+      global_BackgroundColor_dark_transparent_200.var,
     color_100: global_Color_100 && global_Color_100.var,
     color_200: global_Color_200 && global_Color_200.var,
     light_100: global_Color_light_100 && global_Color_light_100.var,
@@ -389,7 +391,9 @@ export const StyledTheme = {
  * The PatternFlyThemeProvider should be higher up the component tree so that it can wrap any styled components in use.
  * Multiple themes can be nested to override the theme if needed. When nesting themes, the theme object will be merged into the ancestor theme.
  */
-const PatternFlyThemeProvider = ({ theme, children }) => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+const PatternFlyThemeProvider = ({ theme, children }) => (
+  <ThemeProvider theme={theme}>{children}</ThemeProvider>
+);
 
 PatternFlyThemeProvider.propTypes = {
   /** Theme object, defaults to the PatternFly theme */

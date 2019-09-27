@@ -4,7 +4,10 @@ import Collapse from 'react-collapse';
 import { default as cx } from 'classnames';
 
 const LoginFormError = ({ children, show, topErrorOnly, className, ...props }) => (
-  <div className={cx('login-form-error', className)} style={topErrorOnly ? { minHeight: '20px' } : null}>
+  <div
+    className={cx('login-form-error', className)}
+    style={topErrorOnly ? { minHeight: '20px' } : null}
+  >
     <Collapse {...props} isOpened={children !== null && show}>
       {children}
     </Collapse>

@@ -11,7 +11,9 @@ class YearView extends React.Component {
   };
   getMonthArray = () => {
     const date = new Date('1/1/1');
-    return times(12, i => Intl.DateTimeFormat(this.props.locale, { month: 'short' }).format(addMonths(date, i)));
+    return times(12, i =>
+      Intl.DateTimeFormat(this.props.locale, { month: 'short' }).format(addMonths(date, i))
+    );
   };
   getPrevYear = () => {
     const { date } = this.state;
@@ -41,7 +43,11 @@ class YearView extends React.Component {
               <th className="prev" onClick={this.getPrevYear}>
                 <span className="glyphicon glyphicon-chevron-left" />
               </th>
-              <th className="picker-switch" onClick={() => this.props.toggleDateView('D')} colSpan="5">
+              <th
+                className="picker-switch"
+                onClick={() => this.props.toggleDateView('D')}
+                colSpan="5"
+              >
                 {currYear}
               </th>
               <th className="next" onClick={this.getNextYear}>
@@ -55,7 +61,9 @@ class YearView extends React.Component {
                 {monthArray.map((month, idx) => (
                   <span
                     onClick={() => this.setSelectedMonth(idx)}
-                    className={`month ${idx === currMonth && selectedYear === currYear ? 'active' : ''}`}
+                    className={`month ${
+                      idx === currMonth && selectedYear === currYear ? 'active' : ''
+                    }`}
                     key={idx}
                   >
                     {month}

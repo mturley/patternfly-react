@@ -3,7 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '../../Icon';
 
-const NotificationDrawerTitle = ({ expandable, onCloseClick, onExpandClick, title, children, className, ...props }) => {
+const NotificationDrawerTitle = ({
+  expandable,
+  onCloseClick,
+  onExpandClick,
+  title,
+  children,
+  className,
+  ...props
+}) => {
   const classes = classNames('drawer-pf-title', className);
 
   return (

@@ -26,7 +26,9 @@ const ItemHeader = tableData => {
     <VirtualTableGrid.Head
       showCheckbox={selectType === 'checkbox'}
       allSelected={selectType === 'checkbox' && selectedItems.length === numItems}
-      partialSelected={selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < numItems}
+      partialSelected={
+        selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < numItems
+      }
     >
       <VirtualTableGrid.ColumnHeader
         id="title"
@@ -71,9 +73,13 @@ const ItemHeader = tableData => {
 const ItemRow = rowProps => {
   const { obj, tableData, index } = rowProps;
   const { selectType, selectedItem, selectedField, selectedItems } = tableData;
-  const selected = selectType === 'checkbox' ? selectedItems.indexOf(obj) >= 0 : selectedItem === obj;
+  const selected =
+    selectType === 'checkbox' ? selectedItems.indexOf(obj) >= 0 : selectedItem === obj;
   return (
-    <VirtualTableGrid.Row key={index} selected={(selectType === 'row' || selectType === 'checkbox') && selected}>
+    <VirtualTableGrid.Row
+      key={index}
+      selected={(selectType === 'row' || selectType === 'checkbox') && selected}
+    >
       <VirtualTableGrid.Col
         {...titleColSizes}
         selected={selectType === 'cell' && selected && selectedField === 'title'}

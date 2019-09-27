@@ -210,7 +210,10 @@ export interface ChartDonutUtilizationProps extends ChartDonutProps {
    *   }
    * ]}
    */
-  events?: EventPropTypeInterface<'data' | 'labels' | 'parent', StringOrNumberOrCallback | string[] | number[]>[];
+  events?: EventPropTypeInterface<
+    'data' | 'labels' | 'parent',
+    StringOrNumberOrCallback | string[] | number[]
+  >[];
   /**
    * ChartDonutUtilization uses the standard externalEventMutations prop.
    */
@@ -320,7 +323,7 @@ export interface ChartDonutUtilizationProps extends ChartDonutProps {
    * Victory components will pass an origin prop is to define the center point in svg coordinates for polar charts.
    * **This prop should not be set manually.**
    */
-  origin?: { x: number, y: number };
+  origin?: { x: number; y: number };
   /**
    * The padAngle prop determines the amount of separation between adjacent data slices
    * in number of degrees
@@ -481,7 +484,7 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
   // Returns computed data representing pie chart slices
   const getComputedData = () => {
     const datum = getData();
-    const computedData: [{ x?: any, y: any}] = [{ x: datum[0]._x, y: datum[0]._y || 0 }];
+    const computedData: [{ x?: any; y: any }] = [{ x: datum[0]._x, y: datum[0]._y || 0 }];
     if (showStatic) {
       computedData.push({ y: datum[0]._x ? Math.abs(100 - datum[0]._y) : 100 });
     }
@@ -490,7 +493,9 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
 
   const getData = () => {
     const datum = [{ ...data }];
-    return Data.formatData(datum, { x, y, ...rest }, ['x', 'y']).sort((a: any, b: any) => a._y - b._y);
+    return Data.formatData(datum, { x, y, ...rest }, ['x', 'y']).sort(
+      (a: any, b: any) => a._y - b._y
+    );
   };
 
   // Returns thresholds with default color scale
@@ -503,7 +508,8 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
       for (let i = 0; i < sThresholds.length; i++) {
         result.push({
           color: sThresholds[i].color
-            ? sThresholds[i].color : ChartDonutUtilizationStyles.thresholds.colorScale[i % numColors],
+            ? sThresholds[i].color
+            : ChartDonutUtilizationStyles.thresholds.colorScale[i % numColors],
           value: sThresholds[i].value
         });
       }
@@ -553,23 +559,24 @@ export const ChartDonutUtilization: React.FunctionComponent<ChartDonutUtilizatio
   );
 
   // Clone so users can override container props
-  const StandaloneContainer = ({children}: any) => React.cloneElement(containerComponent, {
-    desc: ariaDesc,
-    height,
-    title: ariaTitle,
-    width,
-    theme,
-    ...containerComponent.props
-  }, children);
+  const StandaloneContainer = ({ children }: any) =>
+    React.cloneElement(
+      containerComponent,
+      {
+        desc: ariaDesc,
+        height,
+        title: ariaTitle,
+        width,
+        theme,
+        ...containerComponent.props
+      },
+      children
+    );
 
   return standalone ? (
-    <StandaloneContainer>
-      {chart}
-    </StandaloneContainer>
+    <StandaloneContainer>{chart}</StandaloneContainer>
   ) : (
-    <React.Fragment>
-      {chart}
-    </React.Fragment>
+    <React.Fragment>{chart}</React.Fragment>
   );
 };
 

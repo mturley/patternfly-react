@@ -100,7 +100,12 @@ describe('FormGroup component', () => {
 
   test('should render form group invalid variant', () => {
     const view = mount(
-      <FormGroup label="label" fieldId="label-id" isValid={false} helperTextInvalid="Invalid FormGroup">
+      <FormGroup
+        label="label"
+        fieldId="label-id"
+        isValid={false}
+        helperTextInvalid="Invalid FormGroup"
+      >
         <input id="id" />
       </FormGroup>
     );

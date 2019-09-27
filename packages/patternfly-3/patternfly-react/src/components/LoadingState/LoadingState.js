@@ -25,7 +25,9 @@ class LoadingState extends Component {
     const { loading, loadingText, children, size, additionalClasses } = this.props;
 
     const spinner = (
-      <div className={classNames('loading-state-pf', `loading-state-pf-${size}`, additionalClasses)}>
+      <div
+        className={classNames('loading-state-pf', `loading-state-pf-${size}`, additionalClasses)}
+      >
         <Spinner loading={loading} size={size} />
         {loadingText}
       </div>

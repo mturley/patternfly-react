@@ -33,7 +33,9 @@ test('readonly text input', () => {
 });
 
 test('invalid text input', () => {
-  const view = shallow(<TextInput {...props} required isValid={false} aria-label="invalid text input" />);
+  const view = shallow(
+    <TextInput {...props} required isValid={false} aria-label="invalid text input" />
+  );
   expect(view).toMatchSnapshot();
 });
 

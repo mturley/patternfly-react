@@ -12,7 +12,8 @@ const modalExampleWithInfo = stories => {
 
   const description = (
     <div>
-      Adding the class <b>right-side-modal-pf</b> will show the modal on the right side of the window.
+      Adding the class <b>right-side-modal-pf</b> will show the modal on the right side of the
+      window.
     </div>
   );
 

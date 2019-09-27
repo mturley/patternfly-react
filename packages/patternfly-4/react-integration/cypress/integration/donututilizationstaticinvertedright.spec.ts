@@ -2,7 +2,10 @@ describe('Donut utilization chart with inverted static thresholds and right-alig
   it('Navigate to demo section', () => {
     cy.visit('http://localhost:3000/');
     cy.get('#donut-utilization-static-inverted-right-demo-nav-item-link').click();
-    cy.url().should('eq', 'http://localhost:3000/donut-utilization-static-inverted-right-demo-nav-link');
+    cy.url().should(
+      'eq',
+      'http://localhost:3000/donut-utilization-static-inverted-right-demo-nav-link'
+    );
   });
 
   it('Verify donut chart', () => {

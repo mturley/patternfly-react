@@ -19,7 +19,12 @@ stories.add(
   withInfo()(() => {
     const story = (
       <AccessConsoles>
-        <SerialConsoleConnector onConnect={noop} onDisconnect={noop} status={DISCONNECTED} type={SERIAL_CONSOLE_TYPE} />
+        <SerialConsoleConnector
+          onConnect={noop}
+          onDisconnect={noop}
+          status={DISCONNECTED}
+          type={SERIAL_CONSOLE_TYPE}
+        />
         <VncConsole
           host="foo.bar.host"
           textDisconnected="Disconnected as expected - VncConsole component is not connected to a real backend"
@@ -38,7 +43,12 @@ stories.add(
   withInfo()(() => {
     const story = (
       <AccessConsoles preselectedType={SERIAL_CONSOLE_TYPE}>
-        <SerialConsoleConnector onConnect={noop} onDisconnect={noop} status={DISCONNECTED} type={SERIAL_CONSOLE_TYPE} />
+        <SerialConsoleConnector
+          onConnect={noop}
+          onDisconnect={noop}
+          status={DISCONNECTED}
+          type={SERIAL_CONSOLE_TYPE}
+        />
       </AccessConsoles>
     );
     return inlineTemplate({

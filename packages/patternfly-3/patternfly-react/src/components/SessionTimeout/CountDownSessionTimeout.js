@@ -35,7 +35,10 @@ class CountDownSessionTimeout extends React.Component {
       }
       case 'continue': {
         this.setState(() => ({ timeLeft: sessionTime }));
-        this.timer.startTimer(() => this.setTimeout('dialog'), (sessionTime - displayBefore) * msTimes[units]);
+        this.timer.startTimer(
+          () => this.setTimeout('dialog'),
+          (sessionTime - displayBefore) * msTimes[units]
+        );
         break;
       }
       case 'dialog': {
@@ -46,7 +49,10 @@ class CountDownSessionTimeout extends React.Component {
       }
       case 'init': {
         this.setState(() => ({ timeLeft }));
-        this.timer.startTimer(() => this.setTimeout('dialog'), (timeLeft - displayBefore) * msTimes[units]);
+        this.timer.startTimer(
+          () => this.setTimeout('dialog'),
+          (timeLeft - displayBefore) * msTimes[units]
+        );
         break;
       }
       default: {

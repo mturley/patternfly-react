@@ -12,8 +12,8 @@ const stories = storiesOf(`${storybookPackageName(name)}/Spice Console`, module)
 
 const SpiceConsoleConnector = () => (
   <div>
-    There is recently no mock Spice backend implemented, so preview of the <strong>SpiceConsole</strong> component is
-    not available.
+    There is recently no mock Spice backend implemented, so preview of the{' '}
+    <strong>SpiceConsole</strong> component is not available.
   </div>
 );
 

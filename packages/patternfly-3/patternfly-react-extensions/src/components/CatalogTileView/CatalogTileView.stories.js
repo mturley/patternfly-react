@@ -6,7 +6,10 @@ import { storybookPackageName } from 'storybook/constants/siteConstants';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 
 import { name } from '../../../package.json';
-import { MockCatalogTileViewExample, MockCatalogTileViewExampleSource } from './__mocks__/mockCatalogTileViewExample';
+import {
+  MockCatalogTileViewExample,
+  MockCatalogTileViewExampleSource
+} from './__mocks__/mockCatalogTileViewExample';
 import {
   MockCatalogTileViewNoCategoriesExample,
   MockCatalogTileViewNoCategoriesExampleSource
@@ -15,7 +18,10 @@ import {
 import { CatalogTileView, CatalogTileViewCategory } from './index';
 import { CatalogTile, CatalogTileBadge } from '../CatalogTile';
 
-const stories = storiesOf(`${storybookPackageName(name)}/Catalog Components/Catalog Tile View`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/Catalog Components/Catalog Tile View`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({
@@ -46,7 +52,10 @@ stories.add(
   })
 );
 
-const noCategoryStories = storiesOf(`${storybookPackageName(name)}/Catalog Components/Catalog Tile View`, module);
+const noCategoryStories = storiesOf(
+  `${storybookPackageName(name)}/Catalog Components/Catalog Tile View`,
+  module
+);
 
 noCategoryStories.addDecorator(
   defaultTemplate({

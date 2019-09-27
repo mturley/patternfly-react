@@ -4,7 +4,10 @@ import { Button } from '@patternfly/react-core';
 import styles from '@patternfly/react-styles/css/components/Table/table';
 import { IExtra, IFormatterValueType } from '../../Table';
 
-export const compoundExpand = (value: IFormatterValueType, { rowIndex, columnIndex, rowData, column, property }: IExtra) => {
+export const compoundExpand = (
+  value: IFormatterValueType,
+  { rowIndex, columnIndex, rowData, column, property }: IExtra
+) => {
   if (!value) {
     return null;
   }
@@ -26,7 +29,12 @@ export const compoundExpand = (value: IFormatterValueType, { rowIndex, columnInd
   return {
     className: css(styles.tableCompoundExpansionToggle, props.isOpen && styles.modifiers.expanded),
     children: props.isOpen !== undefined && (
-      <Button variant="link" onClick={onToggle} aria-expanded={props.isOpen} aria-controls={props.ariaControls}>
+      <Button
+        variant="link"
+        onClick={onToggle}
+        aria-expanded={props.isOpen}
+        aria-controls={props.ariaControls}
+      >
         {title}
       </Button>
     )

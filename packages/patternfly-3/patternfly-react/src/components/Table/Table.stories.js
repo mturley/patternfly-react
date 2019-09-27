@@ -14,7 +14,10 @@ import {
 } from './Stories';
 import { name } from '../../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.CONTENT_VIEWS}/Table View`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.CONTENT_VIEWS}/Table View`,
+  module
+);
 stories.addDecorator(withKnobs);
 
 /**

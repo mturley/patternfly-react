@@ -1,7 +1,11 @@
 import React from 'react';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
 import { storiesOf } from '@storybook/react';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { number, select, withKnobs } from '@storybook/addon-knobs';
 import { name } from '../../../package.json';
 import { DatePicker } from './index';

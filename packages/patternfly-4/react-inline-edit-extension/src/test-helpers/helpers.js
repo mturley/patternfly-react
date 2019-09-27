@@ -1,6 +1,7 @@
 export const mockClosest = (map, resolveFunction, force = false) => {
   if (!Element.prototype.closest || force) {
-    Element.prototype.closest = selector => (map && map[selector]) || (resolveFunction && resolveFunction(selector));
+    Element.prototype.closest = selector =>
+      (map && map[selector]) || (resolveFunction && resolveFunction(selector));
   }
 };
 

@@ -18,11 +18,13 @@ export const HeaderCell: React.FunctionComponent<HeaderCellProps> = ({
   scope = '',
   textCenter = false,
   ...props
-}: HeaderCellProps ) => {
+}: HeaderCellProps) => {
   const Component = component as any;
   const mappedProps = {
     ...(scope ? { scope } : {}),
     ...props
   };
-  return <Component {...mappedProps} className={css(className, textCenter && styles.modifiers.center)} />;
+  return (
+    <Component {...mappedProps} className={css(className, textCenter && styles.modifiers.center)} />
+  );
 };

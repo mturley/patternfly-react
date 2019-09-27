@@ -16,7 +16,7 @@ export class PageDemo extends React.Component {
     this.setState({
       isNavOpen: !this.state.isNavOpen
     });
-  }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -43,14 +43,20 @@ export class PageDemo extends React.Component {
       />
     );
     const pageId = 'page-demo-page-id';
-    const PageSkipToContent = (
-      <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>
-    );
+    const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
     const Sidebar = <PageSidebar id="page-demo-sidebar" nav="Navigation" isNavOpen={isNavOpen} />;
 
     return (
-      <Page id="page-demo" header={Header} sidebar={Sidebar} mainContainerId={pageId} skipToContent={PageSkipToContent}>
-        <PageSection variant={PageSectionVariants.darker}>Section with darker background</PageSection>
+      <Page
+        id="page-demo"
+        header={Header}
+        sidebar={Sidebar}
+        mainContainerId={pageId}
+        skipToContent={PageSkipToContent}
+      >
+        <PageSection variant={PageSectionVariants.darker}>
+          Section with darker background
+        </PageSection>
         <PageSection variant={PageSectionVariants.dark}>Section with dark background</PageSection>
         <PageSection variant={PageSectionVariants.light}>Section with light background</PageSection>
       </Page>

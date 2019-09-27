@@ -17,7 +17,10 @@ export const ModalBoxFooter: React.FunctionComponent<ModalBoxFooterProps> = ({
   isLeftAligned = false,
   ...props
 }: ModalBoxFooterProps) => (
-  <div {...props} className={css(styles.modalBoxFooter, isLeftAligned && styles.modifiers.alignLeft, className)}>
+  <div
+    {...props}
+    className={css(styles.modalBoxFooter, isLeftAligned && styles.modifiers.alignLeft, className)}
+  >
     {children}
   </div>
 );

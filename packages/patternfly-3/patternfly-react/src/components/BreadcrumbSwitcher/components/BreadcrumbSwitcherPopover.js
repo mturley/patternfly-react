@@ -59,7 +59,9 @@ const BreadcrumbSwitcherPopover = ({
             <ListGroupItem {...createItemProps(resource)}>
               <EllipsisWithTooltip>
                 {searchValue && searchValue.length ? (
-                  <TypeAheadSelect.Highlighter search={searchValue}>{resource.name}</TypeAheadSelect.Highlighter>
+                  <TypeAheadSelect.Highlighter search={searchValue}>
+                    {resource.name}
+                  </TypeAheadSelect.Highlighter>
                 ) : (
                   resource.name
                 )}

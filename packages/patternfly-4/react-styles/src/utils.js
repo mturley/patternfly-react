@@ -2,7 +2,11 @@ import camelcase from 'camel-case';
 import { injectGlobal, caches as emotionCache } from 'emotion';
 
 export function isValidStyleDeclaration(styleObj) {
-  return Boolean(styleObj) && typeof styleObj.__className === 'string' && typeof styleObj.__inject === 'function';
+  return (
+    Boolean(styleObj) &&
+    typeof styleObj.__className === 'string' &&
+    typeof styleObj.__inject === 'function'
+  );
 }
 
 export function createStyleDeclaration(className, rawCss) {

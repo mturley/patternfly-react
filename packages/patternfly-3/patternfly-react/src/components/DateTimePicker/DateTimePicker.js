@@ -25,13 +25,13 @@ class DateTimePicker extends React.Component {
     ];
     if (Date.parse(date)) {
       const parsedValue = new Date(date);
-      return `${parsedValue.toLocaleString(
+      return `${parsedValue.toLocaleString(locale, options[0])} ${parsedValue.toLocaleString(
         locale,
-        options[0]
-      )} ${parsedValue.toLocaleString(locale, options[1])}`;
+        options[1]
+      )}`;
     }
     return date;
-  }
+  };
 
   setSelected = date => {
     let newDate = new Date(this.state.value);
@@ -44,7 +44,7 @@ class DateTimePicker extends React.Component {
       typeOfDateInput: 'M',
       isTimeTableOpen: false
     });
-  }
+  };
 
   render() {
     const { locale, weekStartsOn, id, placement } = this.props;
@@ -86,17 +86,10 @@ class DateTimePicker extends React.Component {
             onChange={e => this.setState({ tmpValue: e.target.value })}
             onBlur={e => this.setSelected(e.target.value)}
           />
-          <OverlayTrigger
-            trigger="click"
-            placement={placement}
-            overlay={popover}
-            rootClose
-          >
+          <OverlayTrigger trigger="click" placement={placement} overlay={popover} rootClose>
             <InputGroup.Addon
               className="date-time-picker-pf"
-              onClick={() =>
-                this.setState({ tmpValue: formatTime(value, locale) })
-              }
+              onClick={() => this.setState({ tmpValue: formatTime(value, locale) })}
             >
               <Icon type="fa" name="calendar" />
             </InputGroup.Addon>

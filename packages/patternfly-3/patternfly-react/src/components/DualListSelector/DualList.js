@@ -57,7 +57,8 @@ class DualList extends React.Component {
     if (filterTerm) {
       const filteredItemsLength = getFilterredItemsLength(items);
       const selectedFilteredItemsLength = getSelectedFilterredItemsLength(items);
-      isMainChecked = filteredItemsLength > 0 && selectedFilteredItemsLength === filteredItemsLength;
+      isMainChecked =
+        filteredItemsLength > 0 && selectedFilteredItemsLength === filteredItemsLength;
     } else {
       isMainChecked = isAllItemsChecked(items, selectCount);
     }
@@ -67,7 +68,7 @@ class DualList extends React.Component {
       selectCount,
       isMainChecked
     });
-  }
+  };
 
   onMainCheckboxChange = ({
     target: {
@@ -94,7 +95,7 @@ class DualList extends React.Component {
       items,
       selectCount
     });
-  }
+  };
 
   onSortClick = ({
     target: {
@@ -110,13 +111,13 @@ class DualList extends React.Component {
       items: itemsReversed,
       isSortAsc: !isSortAsc
     });
-  }
+  };
 
   onFilterChange = event => {
     /** https://reactjs.org/docs/events.html#event-pooling */
     event.persist();
     this.onFilterChangeDebounced(event);
-  }
+  };
 
   emitFilterChange = ({
     target: {
@@ -136,9 +137,10 @@ class DualList extends React.Component {
     }
     const items = filterByHiding(originalItems, filterTerm);
     const filteredItemsLength = getFilterredItemsLength(items);
-    const isMainChecked = filteredItemsLength > 0 && getSelectedFilterredItemsLength(items) === filteredItemsLength;
+    const isMainChecked =
+      filteredItemsLength > 0 && getSelectedFilterredItemsLength(items) === filteredItemsLength;
     this.props.onFilterChange({ side, filterTerm, items, isMainChecked });
-  }
+  };
 
   moveTo = otherSide => {
     const side = otherSide === 'right' ? 'left' : 'right';
@@ -199,7 +201,11 @@ class DualList extends React.Component {
     };
 
     sideItems = arrangeArray({ ...updatedSideState, items: sideItems });
-    otherSideItems = arrangeArray({ ...updatedOtherSideState, items: otherSideItems, resetAllSelected: true });
+    otherSideItems = arrangeArray({
+      ...updatedOtherSideState,
+      items: otherSideItems,
+      resetAllSelected: true
+    });
 
     this.props.onChange({
       [side]: {
@@ -211,7 +217,7 @@ class DualList extends React.Component {
         items: otherSideItems
       }
     });
-  }
+  };
 
   leftArrowClick = () => {
     const {
@@ -219,7 +225,7 @@ class DualList extends React.Component {
     } = this.props;
     left.onClick();
     this.moveTo('left');
-  }
+  };
 
   rightArrowClick = () => {
     const {
@@ -227,7 +233,7 @@ class DualList extends React.Component {
     } = this.props;
     right.onClick();
     this.moveTo('right');
-  }
+  };
 
   render() {
     const { left, right, arrows, allowHiddenInputs } = this.props;

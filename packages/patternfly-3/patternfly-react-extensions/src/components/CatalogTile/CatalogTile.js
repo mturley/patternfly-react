@@ -30,7 +30,8 @@ class CatalogTile extends React.Component {
     const heightStyle = {};
 
     if (this.descFullHeight && this.descLineHeight) {
-      heightStyle.maxHeight = `${Math.floor(this.descFullHeight / this.descLineHeight) * this.descLineHeight}px`;
+      heightStyle.maxHeight = `${Math.floor(this.descFullHeight / this.descLineHeight) *
+        this.descLineHeight}px`;
     }
 
     this.setState({ heightStyle });
@@ -42,15 +43,18 @@ class CatalogTile extends React.Component {
     }
 
     this.descFullHeight = ref.clientHeight;
-  }
+  };
 
   handleDescriptionSpanRef = ref => {
     if (!ref) {
       return;
     }
 
-    this.descLineHeight = parseInt(window.getComputedStyle(ref).getPropertyValue('line-height'), 10);
-  }
+    this.descLineHeight = parseInt(
+      window.getComputedStyle(ref).getPropertyValue('line-height'),
+      10
+    );
+  };
 
   handleClick = e => {
     const { onClick, href } = this.props;
@@ -61,7 +65,7 @@ class CatalogTile extends React.Component {
     if (onClick) {
       onClick(e);
     }
-  }
+  };
 
   renderBadges = badges => {
     if (!badges || !badges.length) {
@@ -75,7 +79,7 @@ class CatalogTile extends React.Component {
         ))}
       </div>
     );
-  }
+  };
 
   render() {
     const {
@@ -105,7 +109,13 @@ class CatalogTile extends React.Component {
     const OuterComponent =
       href || onClick
         ? ({ children }) => (
-            <a id={id} className={classes} href={href || '#'} {...otherProps} onClick={e => this.handleClick(e)}>
+            <a
+              id={id}
+              className={classes}
+              href={href || '#'}
+              {...otherProps}
+              onClick={e => this.handleClick(e)}
+            >
               {children}
             </a>
           )
@@ -119,13 +129,19 @@ class CatalogTile extends React.Component {
       <OuterComponent>
         <div className="catalog-tile-pf-header">
           {iconImg && <img className="catalog-tile-pf-icon" src={iconImg} alt={iconAlt} />}
-          {!iconImg && (iconClass || icon) && <span className={`catalog-tile-pf-icon ${iconClass}`}>{icon}</span>}
+          {!iconImg && (iconClass || icon) && (
+            <span className={`catalog-tile-pf-icon ${iconClass}`}>{icon}</span>
+          )}
           {this.renderBadges(badges)}
         </div>
         <div className="catalog-tile-pf-body">
           <div className="catalog-tile-pf-title">{title}</div>
           <div className="catalog-tile-pf-subtitle">{vendor}</div>
-          <div className="catalog-tile-pf-description" ref={this.handleDescriptionRef} style={heightStyle}>
+          <div
+            className="catalog-tile-pf-description"
+            ref={this.handleDescriptionRef}
+            style={heightStyle}
+          >
             <span ref={this.handleDescriptionSpanRef}>
               {truncateDescription(description, maxDescriptionLength, id)}
             </span>

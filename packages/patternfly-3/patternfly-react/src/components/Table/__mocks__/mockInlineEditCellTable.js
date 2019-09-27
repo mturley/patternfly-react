@@ -131,7 +131,10 @@ export class MockInlineEditCellTable extends React.Component {
       isEditing: additionalData => inlineEditController.isEditing(additionalData),
       renderValue: (value, additionalData) => (
         <td className="editable">
-          <div onMouseUp={e => inlineEditController.onActivate(e, additionalData)} className="input">
+          <div
+            onMouseUp={e => inlineEditController.onActivate(e, additionalData)}
+            className="input"
+          >
             {value}
           </div>
         </td>
@@ -139,7 +142,10 @@ export class MockInlineEditCellTable extends React.Component {
       renderEdit: (value, additionalData) => {
         const { rowData, property, rowIndex, columnIndex } = additionalData;
         const { lastSelected } = this.state;
-        const selected = lastSelected && lastSelected.rowIndex === rowIndex && lastSelected.columnIndex === columnIndex;
+        const selected =
+          lastSelected &&
+          lastSelected.rowIndex === rowIndex &&
+          lastSelected.columnIndex === columnIndex;
 
         return (
           <td className="editable editing">

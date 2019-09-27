@@ -21,16 +21,17 @@ export const sortable = (label: IFormatterValueType, { columnIndex, column, prop
     if (!isSortedBy) {
       reversedDirection = SortByDirection.asc;
     } else {
-      reversedDirection = sortBy.direction === SortByDirection.asc ? SortByDirection.desc : SortByDirection.asc;
+      reversedDirection =
+        sortBy.direction === SortByDirection.asc ? SortByDirection.desc : SortByDirection.asc;
     }
     // tslint:disable-next-line:no-unused-expression
     onSort && onSort(event, columnIndex, reversedDirection, extraData);
   }
 
   return {
-    "className": css(styles.tableSort, isSortedBy && styles.modifiers.selected),
+    className: css(styles.tableSort, isSortedBy && styles.modifiers.selected),
     'aria-sort': isSortedBy ? `${sortBy.direction}ending` : 'none',
-    "children": (
+    children: (
       <SortColumn
         isSortedBy={isSortedBy}
         sortDirection={isSortedBy ? sortBy.direction : ''}

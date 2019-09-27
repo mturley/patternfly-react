@@ -56,11 +56,11 @@ class MockVirtualTableGridExample extends React.Component {
     });
 
     this.setState({ items, sortField: id, isAscending: updateAscending });
-  }
+  };
 
   onSelect = (item, field) => {
     this.setState({ selectedItem: item, selectedField: field });
-  }
+  };
 
   toggleSelection = item => {
     const { selectedItems } = this.state;
@@ -73,12 +73,12 @@ class MockVirtualTableGridExample extends React.Component {
       newSelections = [...selectedItems, item];
     }
     this.setState({ selectedItems: newSelections });
-  }
+  };
 
   toggleAllSelections = () => {
     const { items, selectedItems } = this.state;
     this.setState({ selectedItems: selectedItems.length > 0 ? [] : [...items] });
-  }
+  };
 
   ItemHeader = tableData => {
     const { numItems, selectType, selectedItems, sortField, isAscending } = tableData;
@@ -86,7 +86,9 @@ class MockVirtualTableGridExample extends React.Component {
       <VirtualTableGrid.Head
         showCheckbox={selectType === 'checkbox'}
         allSelected={selectType === 'checkbox' && selectedItems.length === numItems}
-        partialSelected={selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < numItems}
+        partialSelected={
+          selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < numItems
+        }
         onToggleSelection={this.toggleAllSelections}
       >
         <VirtualTableGrid.ColumnHeader
@@ -134,12 +136,13 @@ class MockVirtualTableGridExample extends React.Component {
         </VirtualTableGrid.ColumnHeader>
       </VirtualTableGrid.Head>
     );
-  }
+  };
 
   ItemRow = rowProps => {
     const { obj, tableData, index } = rowProps;
     const { selectType, selectedItem, selectedField, selectedItems } = tableData;
-    const selected = selectType === 'checkbox' ? selectedItems.indexOf(obj) >= 0 : selectedItem === obj;
+    const selected =
+      selectType === 'checkbox' ? selectedItems.indexOf(obj) >= 0 : selectedItem === obj;
     return (
       <VirtualTableGrid.Row
         key={index}
@@ -177,10 +180,17 @@ class MockVirtualTableGridExample extends React.Component {
         </VirtualTableGrid.Col>
       </VirtualTableGrid.Row>
     );
-  }
+  };
 
   render() {
-    const { items, selectedItem, selectedItems, selectedField, sortField, isAscending } = this.state;
+    const {
+      items,
+      selectedItem,
+      selectedItems,
+      selectedField,
+      sortField,
+      isAscending
+    } = this.state;
     const { bordered, selectType } = this.props;
     const tableData = {
       selectedItem,

@@ -51,7 +51,12 @@ test('Simple FormSelect input', () => {
   const view = shallow(
     <FormSelect value={props.value} aria-label="simple FormSelect">
       {props.options.map((option, index) => (
-        <FormSelectOption isDisabled={option.disabled} key={index} value={option.value} label={option.label} />
+        <FormSelectOption
+          isDisabled={option.disabled}
+          key={index}
+          value={option.value}
+          label={option.label}
+        />
       ))}
     </FormSelect>
   );
@@ -64,7 +69,12 @@ test('Grouped FormSelect input', () => {
       {groupedProps.groups.map((group, index) => (
         <FormSelectOptionGroup isDisabled={group.disabled} key={index} label={group.groupLabel}>
           {group.options.map((option, i) => (
-            <FormSelectOption isDisabled={option.disabled} key={i} value={option.value} label={option.label} />
+            <FormSelectOption
+              isDisabled={option.disabled}
+              key={i}
+              value={option.value}
+              label={option.label}
+            />
           ))}
         </FormSelectOptionGroup>
       ))}

@@ -3,7 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { Slider } from './index';
 import { Form, FormControl, ControlLabel, FormGroup, Col } from '../../index';
 import { name } from '../../../package.json';
@@ -24,8 +28,11 @@ SliderStories.addDecorator(
 SliderStories.add('Slider', () => (
   <div>
     <p>
-      The component uses the Bootstrap-slider library, for more reading and available props please visit:
-      <a href="https://github.com/seiyria/bootstrap-slider">&nbsp;https://github.com/seiyria/bootstrap-slider</a>
+      The component uses the Bootstrap-slider library, for more reading and available props please
+      visit:
+      <a href="https://github.com/seiyria/bootstrap-slider">
+        &nbsp;https://github.com/seiyria/bootstrap-slider
+      </a>
     </p>
     <br />
     <br />
@@ -89,7 +96,16 @@ SliderStories.add('Slider', () => (
 
         <FormGroup>
           <Col sm={10}>
-            <Slider label="Size" id="size" min={0} max={100} tooltip="show" showBoundaries input inputFormat="GB" />
+            <Slider
+              label="Size"
+              id="size"
+              min={0}
+              max={100}
+              tooltip="show"
+              showBoundaries
+              input
+              inputFormat="GB"
+            />
           </Col>
         </FormGroup>
 
@@ -106,13 +122,30 @@ SliderStories.add('Slider', () => (
 
       <br />
 
-      <Slider id="slider-pf" min={0} max={100} tooltip="show" showBoundaries input inputFormat="GB" />
+      <Slider
+        id="slider-pf"
+        min={0}
+        max={100}
+        tooltip="show"
+        showBoundaries
+        input
+        inputFormat="GB"
+      />
 
       <br />
       <br />
       <br />
 
-      <Slider id="slider-pf" min={0} max={100} tooltip="show" showBoundaries input dropdownList={['MB', 'GB']} dropup />
+      <Slider
+        id="slider-pf"
+        min={0}
+        max={100}
+        tooltip="show"
+        showBoundaries
+        input
+        dropdownList={['MB', 'GB']}
+        dropup
+      />
     </div>
   </div>
 )).add('onSlide function', () => (

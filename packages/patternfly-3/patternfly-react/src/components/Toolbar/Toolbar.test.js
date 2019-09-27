@@ -1,6 +1,15 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Button, DropdownKebab, Filter, FormControl, Icon, MenuItem, Sort, Toolbar } from '../../index';
+import {
+  Button,
+  DropdownKebab,
+  Filter,
+  FormControl,
+  Icon,
+  MenuItem,
+  Sort,
+  Toolbar
+} from '../../index';
 
 import { mockFilterExampleFields } from '../Filter/__mocks__/mockFilterExample';
 import { mockSortFields } from '../Sort/__mocks__/mockSortExample';
@@ -9,8 +18,15 @@ test('Toolbar renders properly', () => {
   const component = mount(
     <Toolbar>
       <Filter>
-        <Filter.TypeSelector filterTypes={mockFilterExampleFields} currentFilterType={mockFilterExampleFields[0]} />
-        <FormControl type={mockFilterExampleFields[0].filterType} id="filterInput" placeholder="Filter by Name" />
+        <Filter.TypeSelector
+          filterTypes={mockFilterExampleFields}
+          currentFilterType={mockFilterExampleFields[0]}
+        />
+        <FormControl
+          type={mockFilterExampleFields[0].filterType}
+          id="filterInput"
+          placeholder="Filter by Name"
+        />
       </Filter>
       <Sort>
         <Sort.TypeSelector sortTypes={mockSortFields} currentSortType={mockSortFields[0]} />

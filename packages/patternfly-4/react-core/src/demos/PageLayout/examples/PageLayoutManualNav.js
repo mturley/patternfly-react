@@ -53,49 +53,49 @@ class PageLayoutManualNav extends React.Component {
     this.setState({
       isDropdownOpen
     });
-  }
+  };
 
   onDropdownSelect = event => {
     this.setState({
       isDropdownOpen: !this.state.isDropdownOpen
     });
-  }
+  };
 
   onKebabDropdownToggle = isKebabDropdownOpen => {
     this.setState({
       isKebabDropdownOpen
     });
-  }
+  };
 
   onKebabDropdownSelect = event => {
     this.setState({
       isKebabDropdownOpen: !this.state.isKebabDropdownOpen
     });
-  }
+  };
 
   onNavSelect = result => {
     this.setState({
       activeItem: result.itemId
     });
-  }
+  };
 
   onNavToggleDesktop = () => {
     this.setState({
       isNavOpenDesktop: !this.state.isNavOpenDesktop
     });
-  }
+  };
 
   onNavToggleMobile = () => {
     this.setState({
       isNavOpenMobile: !this.state.isNavOpenMobile
     });
-  }
+  };
 
   onPageResize = ({ mobileView, windowSize }) => {
     this.setState({
       isMobileView: mobileView
     });
-  }
+  };
 
   render() {
     const {
@@ -151,12 +151,20 @@ class PageLayoutManualNav extends React.Component {
       <Toolbar>
         <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
           <ToolbarItem>
-            <Button id="default-example-uid-01" aria-label="Notifications actions" variant={ButtonVariant.plain}>
+            <Button
+              id="default-example-uid-01"
+              aria-label="Notifications actions"
+              variant={ButtonVariant.plain}
+            >
               <BellIcon />
             </Button>
           </ToolbarItem>
           <ToolbarItem>
-            <Button id="default-example-uid-02" aria-label="Settings actions" variant={ButtonVariant.plain}>
+            <Button
+              id="default-example-uid-02"
+              aria-label="Settings actions"
+              variant={ButtonVariant.plain}
+            >
               <CogIcon />
             </Button>
           </ToolbarItem>
@@ -196,7 +204,13 @@ class PageLayoutManualNav extends React.Component {
         isNavOpen={isMobileView ? isNavOpenMobile : isNavOpenDesktop}
       />
     );
-    const Sidebar = <PageSidebar nav={PageNav} isNavOpen={isMobileView ? isNavOpenMobile : isNavOpenDesktop} theme="dark" />;
+    const Sidebar = (
+      <PageSidebar
+        nav={PageNav}
+        isNavOpen={isMobileView ? isNavOpenMobile : isNavOpenDesktop}
+        theme="dark"
+      />
+    );
     const pageId = 'main-content-page-layout-manual-nav';
     const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
 
@@ -213,7 +227,8 @@ class PageLayoutManualNav extends React.Component {
             <TextContent>
               <Text component="h1">Main Title</Text>
               <Text component="p">
-                Body text should be Overpass Regular at 16px. It should have leading of 24px because <br />
+                Body text should be Overpass Regular at 16px. It should have leading of 24px because{' '}
+                <br />
                 of it’s relative line height of 1.5.
               </Text>
             </TextContent>

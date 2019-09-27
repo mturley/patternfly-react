@@ -48,7 +48,8 @@ test('AccessConsoles with SerialConsole and VncConsole as children', () => {
 
 const SerialConsoleConnected = () => (
   <p>
-    Whatever component, preferably wrapping <i>SerialConsole</i> with callbacks adapted to a particular backend.
+    Whatever component, preferably wrapping <i>SerialConsole</i> with callbacks adapted to a
+    particular backend.
   </p>
 );
 

@@ -11,21 +11,27 @@ import GithubMenuItem from './GithubMenuItem';
 const storyDescription = (
   <React.Fragment>
     <p>
-      This component is based on the react-bootstrap-typeahead component. Please visit the following for complete
-      documentation
+      This component is based on the react-bootstrap-typeahead component. Please visit the following
+      for complete documentation
     </p>
     <ul>
       <li>
-        <a href="https://github.com/ericgio/react-bootstrap-typeahead">React-bootstrap-typeahead github page</a>
+        <a href="https://github.com/ericgio/react-bootstrap-typeahead">
+          React-bootstrap-typeahead github page
+        </a>
       </li>
       <li>
         <a href="http://ericgio.github.io/react-bootstrap-typeahead/">Examples</a>
       </li>
       <li>
-        <a href="https://github.com/ericgio/react-bootstrap-typeahead/blob/master/docs/Props.md">Props documentation</a>
+        <a href="https://github.com/ericgio/react-bootstrap-typeahead/blob/master/docs/Props.md">
+          Props documentation
+        </a>
       </li>
       <li>
-        <a href="https://github.com/ericgio/react-bootstrap-typeahead/blob/master/docs/API.md">API documentation</a>
+        <a href="https://github.com/ericgio/react-bootstrap-typeahead/blob/master/docs/API.md">
+          API documentation
+        </a>
       </li>
     </ul>
   </React.Fragment>
@@ -138,7 +144,9 @@ TypeAheadSelectStories.add('Allow Adding New Items', () => {
       <br />
       <h2>Allow Adding New Items</h2>
       <p>
-        <strong>If a search result doesn&apos;t exist, allow the user to add a custom input.</strong>
+        <strong>
+          If a search result doesn&apos;t exist, allow the user to add a custom input.
+        </strong>
       </p>
       <TypeAheadSelect
         id="some-typeahead"

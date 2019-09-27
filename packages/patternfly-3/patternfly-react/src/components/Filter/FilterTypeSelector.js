@@ -39,7 +39,11 @@ const FilterTypeSelector = ({
               selected: item === currentFilterType
             };
             return (
-              <MenuItem className={menuItemClasses} key={item.id || index} onSelect={() => onFilterTypeSelected(item)}>
+              <MenuItem
+                className={menuItemClasses}
+                key={item.id || index}
+                onSelect={() => onFilterTypeSelected(item)}
+              >
                 {item.title || item}
               </MenuItem>
             );

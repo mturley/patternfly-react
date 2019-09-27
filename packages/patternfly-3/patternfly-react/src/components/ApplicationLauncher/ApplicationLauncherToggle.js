@@ -13,14 +13,24 @@ const ApplicationLauncherToggle = ({ open, tooltip, onClick, tooltipPlacement })
         id="applauncher-pf-block-list"
         overlay={<Tooltip id={tooltip}>{tooltip}</Tooltip>}
       >
-        <Button onClick={onClick} bsStyle="link" className="nav-item-iconic dropdown-toggle" aria-expanded={open}>
+        <Button
+          onClick={onClick}
+          bsStyle="link"
+          className="nav-item-iconic dropdown-toggle"
+          aria-expanded={open}
+        >
           <Icon name="th applauncher-pf-icon" />
         </Button>
       </OverlayTrigger>
     );
   }
   return (
-    <Button onClick={onClick} bsStyle="link" className="nav-item-iconic dropdown-toggle" aria-expanded={open}>
+    <Button
+      onClick={onClick}
+      bsStyle="link"
+      className="nav-item-iconic dropdown-toggle"
+      aria-expanded={open}
+    >
       <Icon name="th applauncher-pf-icon" />
       <span className="dropdown-title">
         <span className="applauncher-pf-title">

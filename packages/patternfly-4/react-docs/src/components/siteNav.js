@@ -42,7 +42,9 @@ const SiteNav = () => {
       if (!node.context.title) {
         const split = node.path.split('/');
         split.forEach(s => {
-          if (s) { node.context.title = s; }
+          if (s) {
+            node.context.title = s;
+          }
         });
       }
       return node;
@@ -99,7 +101,9 @@ const SiteNav = () => {
             isActive={hasActiveLink(navGroup, location)}
             isExpanded={hasActiveLink(navGroup, location)}
           >
-            {navGroup.sort((v1, v2) => v1.context.title.localeCompare(v2.context.title)).map(getNavItem)}
+            {navGroup
+              .sort((v1, v2) => v1.context.title.localeCompare(v2.context.title))
+              .map(getNavItem)}
           </NavExpandable>
         )}
       </Location>

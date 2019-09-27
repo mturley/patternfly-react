@@ -10,7 +10,8 @@ import {
   headerCol,
   sortable,
   expandable,
-  compoundExpand, IRow
+  compoundExpand,
+  IRow
 } from './index';
 import { rows, columns, actions } from '../../test-helpers/data-sets';
 import { ColumnsType } from './base';
@@ -59,7 +60,7 @@ test('Sortable table', () => {
 });
 
 describe('Table variants', () => {
-  Object.values(TableGridBreakpoint).forEach((oneBreakpoint) => {
+  Object.values(TableGridBreakpoint).forEach(oneBreakpoint => {
     test(`Breakpoint - ${oneBreakpoint}`, () => {
       const view = mount(
         <Table aria-label="Aria labeled" gridBreakPoint={oneBreakpoint} cells={columns} rows={rows}>
@@ -70,7 +71,7 @@ describe('Table variants', () => {
       expect(view).toMatchSnapshot();
     });
   });
-  Object.values(TableVariant).forEach((onevariant) => {
+  Object.values(TableVariant).forEach(onevariant => {
     test(`Size - ${onevariant}`, () => {
       const view = mount(
         <Table aria-label="Aria labeled" variant={onevariant} cells={columns} rows={rows}>
@@ -93,7 +94,12 @@ test('Simple Actions table', () => {
   ];
 
   const view = mount(
-    <Table aria-label="Aria labeled" actions={actions} cells={columns} rows={rowsWithDisabledAction}>
+    <Table
+      aria-label="Aria labeled"
+      actions={actions}
+      cells={columns}
+      rows={rowsWithDisabledAction}
+    >
       <TableHeader />
       <TableBody />
     </Table>
@@ -150,14 +156,25 @@ test('Compound Expandable table', () => {
     { title: 'col2', cell: { transforms: [compoundExpand] } }
   ];
   const compoundRows: IRow[] = [
-    { isOpen: true, cells: [{ title: '1', props: { isOpen: true } }, { title: '2', props: { isOpen: false } }] },
+    {
+      isOpen: true,
+      cells: [{ title: '1', props: { isOpen: true } }, { title: '2', props: { isOpen: false } }]
+    },
     { parent: 0, compoundParent: 0, cells: [{ title: 'expanded', props: { colSpan: 2 } }] },
-    { isOpen: false, cells: [{ title: '3', props: { isOpen: false } }, { title: '4', props: { isOpen: false } }] },
+    {
+      isOpen: false,
+      cells: [{ title: '3', props: { isOpen: false } }, { title: '4', props: { isOpen: false } }]
+    },
     { parent: 2, compoundParent: 0, cells: [{ title: 'expanded', props: { colSpan: 2 } }] }
   ];
   const onExpand = () => undefined as any;
   const view = mount(
-    <Table aria-label="Aria labeled" onExpand={onExpand} cells={compoundColumns} rows={compoundRows}>
+    <Table
+      aria-label="Aria labeled"
+      onExpand={onExpand}
+      cells={compoundColumns}
+      rows={compoundRows}
+    >
       <TableHeader />
       <TableBody />
     </Table>

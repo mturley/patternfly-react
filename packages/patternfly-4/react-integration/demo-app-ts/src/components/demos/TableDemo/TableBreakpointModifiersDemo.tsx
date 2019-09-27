@@ -15,15 +15,19 @@ import {
   IRow
 } from '@patternfly/react-table';
 
-export class TableBreakpointModifersDemo extends React.Component<TableProps, { columns: any, rows: IRow[] }> {
-  
+export class TableBreakpointModifersDemo extends React.Component<
+  TableProps,
+  { columns: any; rows: IRow[] }
+> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
       columns: [
         {
           title: 'Repositories',
-          columnTransforms: [classNames(Visibility.hidden, Visibility.visibleOnMd, Visibility.hiddenOnLg)]
+          columnTransforms: [
+            classNames(Visibility.hidden, Visibility.visibleOnMd, Visibility.hiddenOnLg)
+          ]
         },
         'Branches',
         {
@@ -37,7 +41,13 @@ export class TableBreakpointModifersDemo extends React.Component<TableProps, { c
         }
       ],
       rows: [
-        ['Visible only on md breakpoint', '10', 'Hidden only on md breakpoint', '5', 'Hidden on xs breakpoint'],
+        [
+          'Visible only on md breakpoint',
+          '10',
+          'Hidden only on md breakpoint',
+          '5',
+          'Hidden on xs breakpoint'
+        ],
         ['Repository 2', '10', '25', '5', '2 days ago'],
         ['Repository 3', '10', '25', '5', '2 days ago'],
         ['Repository 4', '10', '25', '5', '2 days ago']
@@ -45,8 +55,8 @@ export class TableBreakpointModifersDemo extends React.Component<TableProps, { c
     };
   }
 
-    componentDidMount() {
-    window.scrollTo(0, 0)
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   render() {

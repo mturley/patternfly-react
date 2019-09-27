@@ -37,21 +37,21 @@ export class ProjectToolbar extends React.Component {
 
   onProjectDropDownToggle = isOpen => {
     this.setState({ projectDropDownOpen: isOpen });
-  }
+  };
 
   onProjectSelect = (e, project) => {
     e.preventDefault();
     this.setState({ selectedProject: project, projectDropDownOpen: false });
-  }
+  };
 
   onApplicationDropDownToggle = isOpen => {
     this.setState({ applicationDropDownOpen: isOpen });
-  }
+  };
 
   onApplicationSelect = (e, application) => {
     e.preventDefault();
     this.setState({ selectedApplication: application, applicationDropDownOpen: false });
-  }
+  };
 
   renderProjectDropdown = () => {
     const { projectDropDownOpen, selectedProject } = this.state;
@@ -65,7 +65,11 @@ export class ProjectToolbar extends React.Component {
           <Dropdown
             onToggle={this.onProjectDropDownToggle}
             position={DropdownPosition.right}
-            toggle={<DropdownToggle onToggle={this.onProjectDropDownToggle}>{selectedProject.name}</DropdownToggle>}
+            toggle={
+              <DropdownToggle onToggle={this.onProjectDropDownToggle}>
+                {selectedProject.name}
+              </DropdownToggle>
+            }
             isOpen={projectDropDownOpen}
             dropdownItems={projects.map(project => (
               <DropdownItem key={project.id} onClick={e => this.onProjectSelect(e, project)}>
@@ -76,7 +80,7 @@ export class ProjectToolbar extends React.Component {
         </StackItem>
       </Stack>
     );
-  }
+  };
 
   renderApplicationDropdown = () => {
     const { applicationDropDownOpen, selectedApplication } = this.state;
@@ -91,11 +95,16 @@ export class ProjectToolbar extends React.Component {
             onToggle={this.onApplicationDropDownToggle}
             position={DropdownPosition.right}
             toggle={
-              <DropdownToggle onToggle={this.onApplicationDropDownToggle}>{selectedApplication.name}</DropdownToggle>
+              <DropdownToggle onToggle={this.onApplicationDropDownToggle}>
+                {selectedApplication.name}
+              </DropdownToggle>
             }
             isOpen={applicationDropDownOpen}
             dropdownItems={applications.map(application => (
-              <DropdownItem key={application.id} onClick={e => this.onApplicationSelect(e, application)}>
+              <DropdownItem
+                key={application.id}
+                onClick={e => this.onApplicationSelect(e, application)}
+              >
                 {application.name}
               </DropdownItem>
             ))}
@@ -103,7 +112,7 @@ export class ProjectToolbar extends React.Component {
         </StackItem>
       </Stack>
     );
-  }
+  };
 
   render() {
     return (

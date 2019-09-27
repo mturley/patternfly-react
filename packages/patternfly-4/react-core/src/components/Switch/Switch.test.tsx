@@ -24,19 +24,25 @@ test('switch is checked', () => {
 });
 
 test('switch is not checked', () => {
-  const view = mount(<Switch id="switch-is-not-checked" label="On" labelOff="Off" isChecked={false} />);
+  const view = mount(
+    <Switch id="switch-is-not-checked" label="On" labelOff="Off" isChecked={false} />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('switch with only label is checked', () => {
   const check = true;
-  const view = mount(<Switch id="switch-is-checked" label={check ? "On" : "Off"} isChecked={check} />);
+  const view = mount(
+    <Switch id="switch-is-checked" label={check ? 'On' : 'Off'} isChecked={check} />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('switch with only label is not checked', () => {
   const check = false;
-  const view = mount(<Switch id="switch-is-not-checked" label={check ? "On" : "Off"} isChecked={check} />);
+  const view = mount(
+    <Switch id="switch-is-not-checked" label={check ? 'On' : 'Off'} isChecked={check} />
+  );
   expect(view).toMatchSnapshot();
 });
 
@@ -56,7 +62,9 @@ test('switch is checked and disabled', () => {
 });
 
 test('switch is not checked and disabled', () => {
-  const view = mount(<Switch id="switch-is-not-checked-and-disabled" isChecked={false} isDisabled />);
+  const view = mount(
+    <Switch id="switch-is-not-checked-and-disabled" isChecked={false} isDisabled />
+  );
   expect(view).toMatchSnapshot();
 });
 

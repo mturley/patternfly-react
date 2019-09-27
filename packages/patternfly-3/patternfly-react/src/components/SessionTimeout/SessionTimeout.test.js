@@ -23,13 +23,17 @@ test('SessionTimeout render session timeout message dialog', () => {
 });
 
 test('SessionTimeout hidden when timeLeft bigger than displayBefore', () => {
-  const component = shallow(<SessionTimeout logoutFnc={noop} continueFnc={noop} displayBefore={10} timeLeft={11} />);
+  const component = shallow(
+    <SessionTimeout logoutFnc={noop} continueFnc={noop} displayBefore={10} timeLeft={11} />
+  );
 
   expect(component.find(MessageDialog).prop('show')).toBe(false);
 });
 
 test('SessionTimeout displayed when timeLeft not bigger than displayBefore', () => {
-  const component = shallow(<SessionTimeout logoutFnc={noop} continueFnc={noop} displayBefore={10} timeLeft={10} />);
+  const component = shallow(
+    <SessionTimeout logoutFnc={noop} continueFnc={noop} displayBefore={10} timeLeft={10} />
+  );
 
   expect(component.find(MessageDialog).prop('show')).toBe(true);
 });

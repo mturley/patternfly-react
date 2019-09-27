@@ -40,14 +40,22 @@ const ConnectWithRemoteViewer = ({
     const type = spice ? SPICE_CONSOLE_TYPE : VNC_CONSOLE_TYPE;
     if (console) {
       const vv = onGenerate({ console, type });
-      onDownload(vv.fileName || DEFAULT_VV_FILENAME, vv.content, vv.mimeType || DEFAULT_VV_MIMETYPE);
+      onDownload(
+        vv.fileName || DEFAULT_VV_FILENAME,
+        vv.content,
+        vv.mimeType || DEFAULT_VV_MIMETYPE
+      );
     }
   };
 
   const onClickRDP = () => {
     if (rdp) {
       const rdpFile = onGenerate({ console: rdp, type: RDP_CONSOLE_TYPE });
-      onDownload(rdpFile.fileName || DEFAULT_RDP_FILENAME, rdpFile.content, rdpFile.mimeType || DEFAULT_RDP_MIMETYPE);
+      onDownload(
+        rdpFile.fileName || DEFAULT_RDP_FILENAME,
+        rdpFile.content,
+        rdpFile.mimeType || DEFAULT_RDP_MIMETYPE
+      );
     }
   };
 
@@ -67,12 +75,22 @@ const ConnectWithRemoteViewer = ({
         )}
       </div>
       {!!console && (
-        <ExpandCollapse bordered={false} align="center" textExpanded={textMoreInfo} textCollapsed={textMoreInfo}>
+        <ExpandCollapse
+          bordered={false}
+          align="center"
+          textExpanded={textMoreInfo}
+          textCollapsed={textMoreInfo}
+        >
           {child(children, 0) || <MoreInformationDefaultContent />}
         </ExpandCollapse>
       )}
       {!!rdp && (
-        <ExpandCollapse bordered={false} align="center" textExpanded={textMoreRDPInfo} textCollapsed={textMoreRDPInfo}>
+        <ExpandCollapse
+          bordered={false}
+          align="center"
+          textExpanded={textMoreRDPInfo}
+          textCollapsed={textMoreRDPInfo}
+        >
           {child(children, 1) || <MoreInformationDefaultRDPContent />}
         </ExpandCollapse>
       )}

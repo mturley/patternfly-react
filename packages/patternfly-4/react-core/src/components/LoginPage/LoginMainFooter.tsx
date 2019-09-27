@@ -25,7 +25,9 @@ export const LoginMainFooter: React.FunctionComponent<LoginMainFooterProps> = ({
 }: LoginMainFooterProps) => (
   <div className={css(styles.loginMainFooter, className)} {...props}>
     {children}
-    {socialMediaLoginContent && <ul className={css(styles.loginMainFooterLinks)}>{socialMediaLoginContent}</ul>}
+    {socialMediaLoginContent && (
+      <ul className={css(styles.loginMainFooterLinks)}>{socialMediaLoginContent}</ul>
+    )}
     {(signUpForAccountMessage || forgotCredentials) && (
       <div className={css(styles.loginMainFooterBand)}>
         {signUpForAccountMessage}

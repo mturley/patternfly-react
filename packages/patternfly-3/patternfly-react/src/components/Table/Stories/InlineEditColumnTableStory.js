@@ -1,7 +1,10 @@
 import React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { MockInlineEditColumnTable, mockInlineEditColumnTableSource } from '../__mocks__/mockInlineEditColumnTable';
+import {
+  MockInlineEditColumnTable,
+  mockInlineEditColumnTableSource
+} from '../__mocks__/mockInlineEditColumnTable';
 import {
   actionHeaderCellFormatter,
   customHeaderFormattersDefinition,

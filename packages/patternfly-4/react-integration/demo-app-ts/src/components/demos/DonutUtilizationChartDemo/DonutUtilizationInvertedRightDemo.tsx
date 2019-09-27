@@ -1,7 +1,10 @@
 import React from 'react';
 import { ChartDonutUtilization } from '@patternfly/react-charts';
 
-export class DonutUtilizationInvertedRightDemo extends React.Component<{}, { used: number; spacer: string }> {
+export class DonutUtilizationInvertedRightDemo extends React.Component<
+  {},
+  { used: number; spacer: string }
+> {
   interval: any;
   constructor(props) {
     super(props);
@@ -12,7 +15,6 @@ export class DonutUtilizationInvertedRightDemo extends React.Component<{}, { use
   }
 
   componentDidMount() {
-
     window.scrollTo(0, 0);
 
     this.interval = setInterval(() => {
@@ -33,11 +35,11 @@ export class DonutUtilizationInvertedRightDemo extends React.Component<{}, { use
     const { spacer, used } = this.state;
     return (
       <div>
-        <div style={{backgroundColor: 'white', height: '230px', width: '435px'}}>
+        <div style={{ backgroundColor: 'white', height: '230px', width: '435px' }}>
           <ChartDonutUtilization
             data={{ x: 'GBps capacity', y: used }}
             invert
-            labels={({ datum }) => datum.x ? `${datum.x}: ${datum.y}%` : null}
+            labels={({ datum }) => (datum.x ? `${datum.x}: ${datum.y}%` : null)}
             legendData={[{ name: `Storage capacity: ${spacer}${used}%` }, { name: 'Unused' }]}
             legendOrientation="vertical"
             subTitle="of 100 GBps"

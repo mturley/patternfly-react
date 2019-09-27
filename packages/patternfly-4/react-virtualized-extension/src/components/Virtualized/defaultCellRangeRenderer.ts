@@ -34,7 +34,8 @@ export default function defaultCellRangeRenderer({
   // We should never cache styles for compressed offsets though as this can lead to bugs.
   // See issue #576 for more.
   const areOffsetsAdjusted =
-    columnSizeAndPositionManager.areOffsetsAdjusted() || rowSizeAndPositionManager.areOffsetsAdjusted();
+    columnSizeAndPositionManager.areOffsetsAdjusted() ||
+    rowSizeAndPositionManager.areOffsetsAdjusted();
 
   const canCacheStyle = !isScrolling && !areOffsetsAdjusted;
 
@@ -103,7 +104,11 @@ export default function defaultCellRangeRenderer({
       //
       // If isScrollingOptOut is specified, we always cache cells.
       // For more info refer to issue #1028
-      if ((isScrollingOptOut || isScrolling) && !horizontalOffsetAdjustment && !verticalOffsetAdjustment) {
+      if (
+        (isScrollingOptOut || isScrolling) &&
+        !horizontalOffsetAdjustment &&
+        !verticalOffsetAdjustment
+      ) {
         if (!cellCache[key]) {
           cellCache[key] = cellRenderer(cellRendererParams);
         }

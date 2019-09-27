@@ -13,7 +13,9 @@ const props = {
   ariaDescribedById: 'ariaDescribedById'
 };
 test('About Modal Container Test simple', () => {
-  const view = shallow(<AboutModalContainer {...props}>This is ModalBox content</AboutModalContainer>);
+  const view = shallow(
+    <AboutModalContainer {...props}>This is ModalBox content</AboutModalContainer>
+  );
   expect(view).toMatchSnapshot();
 });
 

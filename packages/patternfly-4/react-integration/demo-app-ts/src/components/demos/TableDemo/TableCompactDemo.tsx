@@ -13,7 +13,7 @@ import {
   IRow
 } from '@patternfly/react-table';
 
-export class TableCompactDemo extends React.Component<TableProps, { columns: any, rows: IRow[] }> {
+export class TableCompactDemo extends React.Component<TableProps, { columns: any; rows: IRow[] }> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
@@ -23,14 +23,18 @@ export class TableCompactDemo extends React.Component<TableProps, { columns: any
         { title: 'Pull requests', props: { className: 'pf-u-text-align-center' } },
         '' // deliberately empty
       ],
-      rows: [['one', 'two', 'three', 'four'], ['one', 'two', 'three', 'four'], ['one', 'two', 'three', 'four']]
+      rows: [
+        ['one', 'two', 'three', 'four'],
+        ['one', 'two', 'three', 'four'],
+        ['one', 'two', 'three', 'four']
+      ]
     };
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
-  
+
   render() {
     const { columns, rows } = this.state;
 

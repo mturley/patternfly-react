@@ -28,13 +28,17 @@ export const SupportedControlsFormFields = [
     controlId: 'file',
     label: 'File',
     help: 'Help text',
-    formControl: ({ validationState, bsSize, ...props }) => <Form.FormControl type="file" {...props} />
+    formControl: ({ validationState, bsSize, ...props }) => (
+      <Form.FormControl type="file" {...props} />
+    )
   },
   {
     controlId: 'checkbox',
     label: 'Checkbox',
     help: 'Help text',
-    formControl: ({ validationState, ...props }) => <Form.Checkbox {...props}>Checkbox</Form.Checkbox>
+    formControl: ({ validationState, ...props }) => (
+      <Form.Checkbox {...props}>Checkbox</Form.Checkbox>
+    )
   },
   {
     controlId: 'radio',
@@ -93,7 +97,9 @@ export const SupportedControlsFormFields = [
     controlId: 'textarea',
     label: 'Textarea',
     help: 'Help text',
-    formControl: ({ validationState, ...props }) => <Form.FormControl componentClass="textarea" {...props} />
+    formControl: ({ validationState, ...props }) => (
+      <Form.FormControl componentClass="textarea" {...props} />
+    )
   },
   {
     controlId: 'static',

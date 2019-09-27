@@ -39,7 +39,10 @@ describe('TopologyView', () => {
     );
     expect(view).toMatchSnapshot();
     expect(view.find('div.pf-topology-container__with-sidebar').length).toBe(1);
-    expect(view.find('div.pf-topology-container__with-sidebar.pf-topology-container__with-sidebar--open').length).toBe(0);
+    expect(
+      view.find('div.pf-topology-container__with-sidebar.pf-topology-container__with-sidebar--open')
+        .length
+    ).toBe(0);
   });
   test('should display topology w/ open sidebar correctly', () => {
     const view = mount(
@@ -56,6 +59,9 @@ describe('TopologyView', () => {
       </TopologyView>
     );
     expect(view).toMatchSnapshot();
-    expect(view.find('div.pf-topology-container__with-sidebar.pf-topology-container__with-sidebar--open').length).toBe(1);
+    expect(
+      view.find('div.pf-topology-container__with-sidebar.pf-topology-container__with-sidebar--open')
+        .length
+    ).toBe(1);
   });
 });

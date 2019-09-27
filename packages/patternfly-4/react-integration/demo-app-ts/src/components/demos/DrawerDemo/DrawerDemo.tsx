@@ -1,5 +1,9 @@
 import React from 'react';
-import { Drawer, DrawerPanelContent, DrawerProps } from '@patternfly/react-core/dist/esm/experimental';
+import {
+  Drawer,
+  DrawerPanelContent,
+  DrawerProps
+} from '@patternfly/react-core/dist/esm/experimental';
 import { Button } from '@patternfly/react-core';
 
 export interface DrawerDemoState {
@@ -19,7 +23,7 @@ export class DrawerDemo extends React.Component<DrawerProps, DrawerDemoState> {
     this.setState({
       isExpanded
     });
-  }
+  };
 
   render() {
     const { isExpanded } = this.state;
@@ -30,7 +34,9 @@ export class DrawerDemo extends React.Component<DrawerProps, DrawerDemoState> {
 
     return (
       <React.Fragment>
-        <Button id="toggleButton" onClick={this.onClick}>Toggle Drawer</Button>
+        <Button id="toggleButton" onClick={this.onClick}>
+          Toggle Drawer
+        </Button>
         <Drawer isExpanded={isExpanded} isInline panelContent={panelContent}>
           {drawerContent}
         </Drawer>

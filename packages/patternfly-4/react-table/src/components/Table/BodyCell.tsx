@@ -25,13 +25,17 @@ export const BodyCell: React.FunctionComponent<BodyCellProps> = ({
   isOpen,
   ariaControls = '',
   ...props
-}: BodyCellProps ) => {
+}: BodyCellProps) => {
   const Component = component as any;
   const mappedProps = {
     ...(dataLabel ? { 'data-label': dataLabel } : {}),
     ...props
   };
   return (parentId !== undefined && colSpan === undefined) || !isVisible ? null : (
-    <Component {...mappedProps} className={css(className, textCenter && styles.modifiers.center)} colSpan={colSpan} />
+    <Component
+      {...mappedProps}
+      className={css(className, textCenter && styles.modifiers.center)}
+      colSpan={colSpan}
+    />
   );
 };

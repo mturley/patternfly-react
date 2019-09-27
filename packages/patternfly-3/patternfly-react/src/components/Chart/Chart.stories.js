@@ -3,7 +3,10 @@ import { storybookPackageName, STORYBOOK_CATEGORY } from 'storybook/constants/si
 import { name } from '../../../package.json';
 import { areaChart, barChart, bulletChart, donutChart, lineChart, pieChart } from './Stories';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.DATA_VISUALIZATION}/Charts`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.DATA_VISUALIZATION}/Charts`,
+  module
+);
 
 /**
  * Chart stories

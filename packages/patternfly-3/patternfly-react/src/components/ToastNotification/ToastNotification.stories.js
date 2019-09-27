@@ -4,7 +4,11 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { withInfo } from '@storybook/addon-info';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { Button } from '../Button';
 import { DropdownKebab } from '../DropdownKebab';
 import { MenuItem } from '../MenuItem';
@@ -19,46 +23,51 @@ stories.addDecorator(withKnobs);
 
 stories.add(
   'Toast Notification',
-  withInfo('Toast Notifications pop onto the screen to notify the user of a system occurrence')(() => {
-    const header = text('Header', 'Great job!');
-    const message = text('Message', 'This is really working out.');
-    const type = select('Type', ToastNotification.TOAST_NOTIFICATION_TYPES, 'success');
-    const dismissEnabled = boolean('Dismiss', false);
-    const menuEnabled = boolean('Menu', true);
-    const actionEnabled = boolean('Action', true);
+  withInfo('Toast Notifications pop onto the screen to notify the user of a system occurrence')(
+    () => {
+      const header = text('Header', 'Great job!');
+      const message = text('Message', 'This is really working out.');
+      const type = select('Type', ToastNotification.TOAST_NOTIFICATION_TYPES, 'success');
+      const dismissEnabled = boolean('Dismiss', false);
+      const menuEnabled = boolean('Menu', true);
+      const actionEnabled = boolean('Action', true);
 
-    const story = (
-      <ToastNotificationList>
-        <ToastNotification type={type} onDismiss={dismissEnabled && !menuEnabled ? action('onDismiss') : null}>
-          {menuEnabled && (
-            <DropdownKebab id="dropdownKebab" pullRight className="pull-right">
-              <MenuItem>Action</MenuItem>
-              <MenuItem>Another Action</MenuItem>
-              <MenuItem>Something else here</MenuItem>
-              <MenuItem divider />
-              <MenuItem>Separated link</MenuItem>
-              {dismissEnabled && <MenuItem>Close</MenuItem>}
-            </DropdownKebab>
-          )}
-          {actionEnabled && (
-            <div className="pull-right toast-pf-action">
-              <a href="#">Start Server</a>
-            </div>
-          )}
-          <span>
-            <strong>{header}</strong> &nbsp;
-            {message}
-          </span>
-        </ToastNotification>
-      </ToastNotificationList>
-    );
+      const story = (
+        <ToastNotificationList>
+          <ToastNotification
+            type={type}
+            onDismiss={dismissEnabled && !menuEnabled ? action('onDismiss') : null}
+          >
+            {menuEnabled && (
+              <DropdownKebab id="dropdownKebab" pullRight className="pull-right">
+                <MenuItem>Action</MenuItem>
+                <MenuItem>Another Action</MenuItem>
+                <MenuItem>Something else here</MenuItem>
+                <MenuItem divider />
+                <MenuItem>Separated link</MenuItem>
+                {dismissEnabled && <MenuItem>Close</MenuItem>}
+              </DropdownKebab>
+            )}
+            {actionEnabled && (
+              <div className="pull-right toast-pf-action">
+                <a href="#">Start Server</a>
+              </div>
+            )}
+            <span>
+              <strong>{header}</strong> &nbsp;
+              {message}
+            </span>
+          </ToastNotification>
+        </ToastNotificationList>
+      );
 
-    return inlineTemplate({
-      title: 'Toast Notification',
-      documentationLink: `${DOCUMENTATION_URL.PATTERNFLY_ORG_COMMUNICATION}toast-notifications/`,
-      story
-    });
-  })
+      return inlineTemplate({
+        title: 'Toast Notification',
+        documentationLink: `${DOCUMENTATION_URL.PATTERNFLY_ORG_COMMUNICATION}toast-notifications/`,
+        story
+      });
+    }
+  )
 );
 
 class ToastNotificationStoryWrapper extends React.Component {
@@ -70,7 +79,7 @@ class ToastNotificationStoryWrapper extends React.Component {
         type: 'info',
         persistent: false,
         timerdelay: 8000,
-        message: 'By default, a toast notification\'s timer expires after eight seconds.'
+        message: "By default, a toast notification's timer expires after eight seconds."
       },
       {
         key: 2,
@@ -100,7 +109,9 @@ class ToastNotificationStoryWrapper extends React.Component {
     this.removeNotificationAction = notificationToRemove => {
       action(`${notificationToRemove.type} notification: onDismiss fired`)();
       this.setState({
-        notifications: this.state.notifications.filter(notification => notificationToRemove.key !== notification.key)
+        notifications: this.state.notifications.filter(
+          notification => notificationToRemove.key !== notification.key
+        )
       });
     };
   }

@@ -1,6 +1,9 @@
 import React from 'react';
 import { withInfo } from '@storybook/addon-info';
-import { MockClientSortableTable, mockClientSortableTableSource } from '../__mocks__/mockClientSortableTable';
+import {
+  MockClientSortableTable,
+  mockClientSortableTableSource
+} from '../__mocks__/mockClientSortableTable';
 import {
   actionHeaderCellFormatter,
   customHeaderFormattersDefinition,

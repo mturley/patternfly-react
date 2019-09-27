@@ -40,7 +40,16 @@ export class ContextSelectorItem extends React.Component<ContextSelectorItemProp
   }
 
   render() {
-    const { className, children, isHovered, onClick, isDisabled, index, sendRef, ...props } = this.props;
+    const {
+      className,
+      children,
+      isHovered,
+      onClick,
+      isDisabled,
+      index,
+      sendRef,
+      ...props
+    } = this.props;
     return (
       <ContextSelectorContext.Consumer>
         {({ onSelect }) => (
@@ -53,7 +62,7 @@ export class ContextSelectorItem extends React.Component<ContextSelectorItemProp
                 className
               )}
               ref={this.ref}
-              onClick={(event) => {
+              onClick={event => {
                 if (!isDisabled) {
                   onClick(event);
                   onSelect(event, children);

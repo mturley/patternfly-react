@@ -3,7 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
 import { HorizontalNav } from './index';
 import { name } from '../../../package.json';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import pfFitBrand from 'storybook/img/brand.svg';
 import { mastheadMock } from './__mocks__/masthead';
 import { singleLevel } from './__mocks__/singleLevel';
@@ -18,7 +22,9 @@ const stories = storiesOf(
 const description = (
   <p>
     This component is based on Patternfly horizontal navigation component. See{' '}
-    <a href={`${DOCUMENTATION_URL.PATTERNFLY_ORG_NAVIGATION}horizontal-navigation/`}>Patternfly Docs</a>
+    <a href={`${DOCUMENTATION_URL.PATTERNFLY_ORG_NAVIGATION}horizontal-navigation/`}>
+      Patternfly Docs
+    </a>
     for complete Horizontal Navigation component documentation.
   </p>
 );

@@ -18,7 +18,7 @@ export class MockHorizontalMasthead extends React.Component {
     this.setState({
       menuCollapsed: !this.state.menuCollapsed
     });
-  }
+  };
 
   render() {
     const { menuCollapsed } = this.state;
@@ -30,7 +30,13 @@ export class MockHorizontalMasthead extends React.Component {
       in: !menuCollapsed
     });
     return (
-      <Masthead titleImg={pfFitBrand} title="Patternfly React" navToggle thin onNavToggleClick={this.onNavToggleClick}>
+      <Masthead
+        titleImg={pfFitBrand}
+        title="Patternfly React"
+        navToggle
+        thin
+        onNavToggleClick={this.onNavToggleClick}
+      >
         <Masthead.Collapse>
           <Masthead.Dropdown
             id="app-help-dropdown"

@@ -98,7 +98,10 @@ export interface PaginationProps extends React.HTMLProps<HTMLDivElement> {
   /** Function called when user inputs page number. */
   onPageInput?: (event: React.SyntheticEvent<HTMLButtonElement>, page: number) => void;
   /** Function called when user selects number of items per page. */
-  onPerPageSelect?: (event: React.MouseEvent | React.KeyboardEvent | MouseEvent, perPage: number) => void;
+  onPerPageSelect?: (
+    event: React.MouseEvent | React.KeyboardEvent | MouseEvent,
+    perPage: number
+  ) => void;
 }
 
 const Pagination: React.FunctionComponent<PaginationProps & InjectedOuiaProps> = ({
@@ -165,15 +168,20 @@ const Pagination: React.FunctionComponent<PaginationProps & InjectedOuiaProps> =
         className
       )}
       id={widgetId}
-      {...ouiaContext.isOuia && {
+      {...(ouiaContext.isOuia && {
         'data-ouia-component-type': 'Pagination',
         'data-ouia-component-id': ouiaId || ouiaContext.ouiaId
-      }}
+      })}
       {...props}
     >
       {variant === PaginationVariant.top && (
         <div className={css(styles.paginationTotalItems)}>
-          <ToggleTemplate firstIndex={firstIndex} lastIndex={lastIndex} itemCount={itemCount} itemsTitle={titles.items}/>
+          <ToggleTemplate
+            firstIndex={firstIndex}
+            lastIndex={lastIndex}
+            itemCount={itemCount}
+            itemsTitle={titles.items}
+          />
         </div>
       )}
       <PaginationOptionsMenu

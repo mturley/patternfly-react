@@ -49,7 +49,7 @@ export interface TabsState {
   showRightScrollButton: boolean;
   highlightLeftScrollButton: boolean;
   highlightRightScrollButton: boolean;
-  shownKeys: (string|number)[];
+  shownKeys: (string | number)[];
 }
 
 class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
@@ -75,7 +75,7 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
     rightScrollAriaLabel: 'Scroll right',
     variant: TabsVariant.div,
     mountOnEnter: false,
-    unmountOnExit: false,
+    unmountOnExit: false
   };
 
   handleTabClick(
@@ -109,10 +109,18 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
     if (this.tabList.current) {
       const container = this.tabList.current;
       // get first element and check if it is in view
-      const showLeftScrollButton = !isElementInView(container, container.firstChild as HTMLElement, false);
+      const showLeftScrollButton = !isElementInView(
+        container,
+        container.firstChild as HTMLElement,
+        false
+      );
 
       // get lase element and check if it is in view
-      const showRightScrollButton = !isElementInView(container, container.lastChild as HTMLElement, false);
+      const showRightScrollButton = !isElementInView(
+        container,
+        container.lastChild as HTMLElement,
+        false
+      );
 
       // determine if selected tab is out of view and apply styles
       let selectedTab;
@@ -129,12 +137,13 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
       this.setState({
         showLeftScrollButton,
         showRightScrollButton,
-        highlightLeftScrollButton: (sideOutOfView === SIDE.LEFT || sideOutOfView === SIDE.BOTH) && showLeftScrollButton,
+        highlightLeftScrollButton:
+          (sideOutOfView === SIDE.LEFT || sideOutOfView === SIDE.BOTH) && showLeftScrollButton,
         highlightRightScrollButton:
           (sideOutOfView === SIDE.RIGHT || sideOutOfView === SIDE.BOTH) && showRightScrollButton
       });
     }
-  }
+  };
 
   scrollLeft = () => {
     // find first Element that is fully in view on the left, then scroll to the element before it
@@ -154,7 +163,7 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
         container.scrollLeft -= lastElementOutOfView.scrollWidth;
       }
     }
-  }
+  };
 
   scrollRight = () => {
     // find last Element that is fully in view on the right, then scroll to the element after it
@@ -173,7 +182,7 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
         container.scrollLeft += firstElementOutOfView.scrollWidth;
       }
     }
-  }
+  };
 
   componentDidMount() {
     window.addEventListener('resize', this.handleScrollButtons, false);
@@ -228,34 +237,56 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
             highlightRightScrollButton && styles.modifiers.endCurrent,
             className
           )}
-          {...ouiaContext.isOuia && {
+          {...(ouiaContext.isOuia && {
             'data-ouia-component-type': 'Tabs',
             'data-ouia-component-id': ouiaId || ouiaContext.ouiaId
-          }}
+          })}
           id={id && id}
           {...props}
         >
           <button
-            className={css(styles.tabsScrollButton, isSecondary && buttonStyles.modifiers.secondary)}
+            className={css(
+              styles.tabsScrollButton,
+              isSecondary && buttonStyles.modifiers.secondary
+            )}
             aria-label={leftScrollAriaLabel}
             onClick={this.scrollLeft}
           >
             <AngleLeftIcon />
           </button>
-          <ul className={css(styles.tabsList)} ref={this.tabList} onScroll={this.handleScrollButtons}>
+          <ul
+            className={css(styles.tabsList)}
+            ref={this.tabList}
+            onScroll={this.handleScrollButtons}
+          >
             {React.Children.map(children, (child: any, index) => {
-              const { title, eventKey, tabContentRef, id: childId, tabContentId, ...rest } = child.props;
+              const {
+                title,
+                eventKey,
+                tabContentRef,
+                id: childId,
+                tabContentId,
+                ...rest
+              } = child.props;
               return (
                 <li
                   key={index}
-                  className={css(styles.tabsItem, eventKey === activeKey && styles.modifiers.current, className)}
+                  className={css(
+                    styles.tabsItem,
+                    eventKey === activeKey && styles.modifiers.current,
+                    className
+                  )}
                 >
                   <Tab
                     className={css(styles.tabsButton)}
-                    onClick={(event: any) => this.handleTabClick(event, eventKey, tabContentRef, mountOnEnter)}
+                    onClick={(event: any) =>
+                      this.handleTabClick(event, eventKey, tabContentRef, mountOnEnter)
+                    }
                     id={`pf-tab-${eventKey}-${childId || uniqueId}`}
                     aria-controls={
-                      tabContentId ? `${tabContentId}` : `pf-tab-section-${eventKey}-${childId || uniqueId}`
+                      tabContentId
+                        ? `${tabContentId}`
+                        : `pf-tab-section-${eventKey}-${childId || uniqueId}`
                     }
                     tabContentId={tabContentId}
                     tabContentRef={tabContentRef}
@@ -269,7 +300,10 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
             })}
           </ul>
           <button
-            className={css(styles.tabsScrollButton, isSecondary && buttonStyles.modifiers.secondary)}
+            className={css(
+              styles.tabsScrollButton,
+              isSecondary && buttonStyles.modifiers.secondary
+            )}
             aria-label={rightScrollAriaLabel}
             onClick={this.scrollRight}
           >
@@ -277,13 +311,23 @@ class Tabs extends React.Component<TabsProps & InjectedOuiaProps, TabsState> {
           </button>
         </Component>
         {React.Children.map(children, (child: any, index) => {
-          if (!child.props.children || (unmountOnExit && child.props.eventKey !== activeKey) || (mountOnEnter && shownKeys.indexOf(child.props.eventKey) === -1)) {
+          if (
+            !child.props.children ||
+            (unmountOnExit && child.props.eventKey !== activeKey) ||
+            (mountOnEnter && shownKeys.indexOf(child.props.eventKey) === -1)
+          ) {
             return null;
           } else {
-            return <TabContent key={index} activeKey={activeKey} child={child} id={child.props.id || uniqueId} />;
+            return (
+              <TabContent
+                key={index}
+                activeKey={activeKey}
+                child={child}
+                id={child.props.id || uniqueId}
+              />
+            );
           }
-        }
-        )}
+        })}
       </React.Fragment>
     );
   }

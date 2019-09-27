@@ -4,13 +4,20 @@ import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
 import { withKnobs, text, number, select, boolean } from '@storybook/addon-knobs';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 
 import { Pager, PaginationRow, Paginator, PAGINATION_VIEW_TYPES } from './index';
 import { MockPaginationRow, mockPaginationSource } from './__mocks__/mockPaginationRow';
 import { name } from '../../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Pagination`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Pagination`,
+  module
+);
 stories.addDecorator(withKnobs);
 
 stories.add(
@@ -46,7 +53,8 @@ stories.add(
       story,
       description: (
         <div>
-          Pager is a stateless functional component which previous and next links. See Action Logger for details.
+          Pager is a stateless functional component which previous and next links. See Action Logger
+          for details.
         </div>
       )
     });
@@ -94,8 +102,8 @@ stories.add(
       story,
       description: (
         <div>
-          Pagination Row is a stateless functional component which exposes all pagination callbacks (i.e.:{' '}
-          <i>onFirstPage, onPreviousPage, onNextPage, onLastPage</i>
+          Pagination Row is a stateless functional component which exposes all pagination callbacks
+          (i.e.: <i>onFirstPage, onPreviousPage, onNextPage, onLastPage</i>
           ). See Action Logger for details.
         </div>
       )
@@ -133,8 +141,8 @@ stories.add(
       story,
       description: (
         <div>
-          Paginator is a stateful component which manages pagination state for you and exposes a single <i>onPageSet</i>{' '}
-          callback. See Action Logger for details.
+          Paginator is a stateful component which manages pagination state for you and exposes a
+          single <i>onPageSet</i> callback. See Action Logger for details.
         </div>
       )
     });

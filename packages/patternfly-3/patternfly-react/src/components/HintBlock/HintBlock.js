@@ -9,7 +9,13 @@ const HintBlock = ({ className, onClose, title, body, buttonContent, onButtonCli
   return (
     <div className={classes} {...props}>
       {onClose && (
-        <button type="button" className="close" aria-hidden="true" aria-label="Close" onClick={onClose}>
+        <button
+          type="button"
+          className="close"
+          aria-hidden="true"
+          aria-label="Close"
+          onClick={onClose}
+        >
           <span className="pficon pficon-close" />
         </button>
       )}

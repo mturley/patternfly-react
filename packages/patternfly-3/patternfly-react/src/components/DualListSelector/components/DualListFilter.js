@@ -6,7 +6,13 @@ import { FILTER_LABEL } from '../constants';
 
 const DualListFilter = ({ onChange, side, placeHolder }) => (
   <span className="dual-list-pf-filter">
-    <input onChange={onChange} type="text" placeholder={placeHolder} autoComplete="off" data-side={side} />
+    <input
+      onChange={onChange}
+      type="text"
+      placeholder={placeHolder}
+      autoComplete="off"
+      data-side={side}
+    />
     <Icon size="lg" name="search" className="search-icon" />
   </span>
 );

@@ -31,7 +31,11 @@ const LoginCardForm = ({
     <LoginCardInput {...{ ...passwordField, topErrorOnly }} />
     {additionalFields}
     <LoginCardSettings rememberMe={rememberMe} forgotPassword={forgotPassword} />
-    <LoginCardSubmitButton isDisabled={disableSubmit} isLoading={isSubmitting} attributes={submitButtonAttributes}>
+    <LoginCardSubmitButton
+      isDisabled={disableSubmit}
+      isLoading={isSubmitting}
+      attributes={submitButtonAttributes}
+    >
       {submitText}
     </LoginCardSubmitButton>
   </Form>

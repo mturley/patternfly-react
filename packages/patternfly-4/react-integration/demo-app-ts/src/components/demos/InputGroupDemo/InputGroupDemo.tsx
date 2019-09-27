@@ -1,5 +1,11 @@
 import React from 'react';
-import { DollarSignIcon, AtIcon, CalendarAltIcon, SearchIcon, QuestionCircleIcon } from '@patternfly/react-icons';
+import {
+  DollarSignIcon,
+  AtIcon,
+  CalendarAltIcon,
+  SearchIcon,
+  QuestionCircleIcon
+} from '@patternfly/react-icons';
 import {
   Button,
   ButtonVariant,
@@ -28,12 +34,12 @@ export class InputGroupDemo extends React.Component<{}, InputGroupState> {
       isOpen: false,
       selected: ''
     };
-    this.onToggle = (isOpen) => {
+    this.onToggle = isOpen => {
       this.setState({
         isOpen
       });
     };
-    this.onSelect = (event) => {
+    this.onSelect = event => {
       this.setState({
         isOpen: false,
         selected: event.currentTarget.value
@@ -77,7 +83,8 @@ export class InputGroupDemo extends React.Component<{}, InputGroupState> {
             toggle={
               <DropdownToggle onToggle={this.onToggle}>
                 {this.state.selected ? this.state.selected : 'Dropdown'}
-              </DropdownToggle>}
+              </DropdownToggle>
+            }
             isOpen={this.state.isOpen}
             dropdownItems={[
               <DropdownItem key="opt-1" value="Option 1" component="button">
@@ -90,10 +97,11 @@ export class InputGroupDemo extends React.Component<{}, InputGroupState> {
                 Option 3
               </DropdownItem>
             ]}
-          >
-          </Dropdown>
+          ></Dropdown>
           <TextInput id="textInput3" aria-label="input with dropdown and button" />
-          <Button id="inputDropdownButton1" variant={ButtonVariant.control}>Button</Button>
+          <Button id="inputDropdownButton1" variant={ButtonVariant.control}>
+            Button
+          </Button>
         </InputGroup>
         <br />
         <br />
@@ -116,7 +124,12 @@ export class InputGroupDemo extends React.Component<{}, InputGroupState> {
           <InputGroupText id="username" aria-label="@">
             <AtIcon />
           </InputGroupText>
-          <TextInput isValid={false} id="textInput7" type="email" aria-label="Error state username example" />
+          <TextInput
+            isValid={false}
+            id="textInput7"
+            type="email"
+            aria-label="Error state username example"
+          />
         </InputGroup>
         <br />
         <br />
@@ -124,12 +137,22 @@ export class InputGroupDemo extends React.Component<{}, InputGroupState> {
           <InputGroupText component="label" htmlFor="textInput9">
             <CalendarAltIcon />
           </InputGroupText>
-          <TextInput name="textInput9" id="textInput9" type="date" aria-label="Date input example" />
+          <TextInput
+            name="textInput9"
+            id="textInput9"
+            type="date"
+            aria-label="Date input example"
+          />
         </InputGroup>
         <br />
         <br />
         <InputGroup>
-          <TextInput name="textInput11" id="textInput11" type="search" aria-label="search input example" />
+          <TextInput
+            name="textInput11"
+            id="textInput11"
+            type="search"
+            aria-label="search input example"
+          />
           <Button variant={ButtonVariant.control} aria-label="search button for search input">
             <SearchIcon />
           </Button>
@@ -137,7 +160,12 @@ export class InputGroupDemo extends React.Component<{}, InputGroupState> {
         <br />
         <br />
         <InputGroup>
-          <TextInput name="textInput10" id="textInput10" type="search" aria-label="input example with popover" />
+          <TextInput
+            name="textInput10"
+            id="textInput10"
+            type="search"
+            aria-label="input example with popover"
+          />
           <Popover
             aria-label="popover example"
             position={PopoverPosition.top}

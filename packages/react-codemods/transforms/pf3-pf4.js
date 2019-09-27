@@ -40,7 +40,9 @@ module.exports = (file, api, options) => {
   function addComponentToReactCoreImport(importName, localName) {
     const reactCoreImport = getReactCoreImport();
     if (reactCoreImport.length > 0) {
-      reactCoreImport.get().node.specifiers.push(j.importSpecifier(j.identifier(importName), j.identifier(localName)));
+      reactCoreImport
+        .get()
+        .node.specifiers.push(j.importSpecifier(j.identifier(importName), j.identifier(localName)));
       return;
     }
 
@@ -99,7 +101,11 @@ module.exports = (file, api, options) => {
       const propName = attrPath.node.name.name;
       if (unsupportedProps.includes(propName)) {
         const { start } = attrPath.node.name.loc;
-        console.log(colors.yellow(`UnsupportedProp: ${propName} (./${file.path}:${start.line}:${start.column})`));
+        console.log(
+          colors.yellow(
+            `UnsupportedProp: ${propName} (./${file.path}:${start.line}:${start.column})`
+          )
+        );
         hasSupportedPropReferences = true;
       }
     });

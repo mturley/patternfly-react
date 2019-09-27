@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Table, TableHeader, TableBody, TableVariant, sortable, SortByDirection } from '@patternfly/react-table';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableVariant,
+  sortable,
+  SortByDirection
+} from '@patternfly/react-table';
 
 export default class DemoSortableTable extends React.Component {
   constructor(props) {
@@ -14,7 +21,11 @@ export default class DemoSortableTable extends React.Component {
         'Workspaces',
         'Last Commit'
       ],
-      rows: [props.firstColumnRows, ['a', 'two', 'k', 'four', 'five'], ['p', 'two', 'b', 'four', 'five']],
+      rows: [
+        props.firstColumnRows,
+        ['a', 'two', 'k', 'four', 'five'],
+        ['p', 'two', 'b', 'four', 'five']
+      ],
       sortBy: {}
     };
     this.onSort = this.onSort.bind(this);

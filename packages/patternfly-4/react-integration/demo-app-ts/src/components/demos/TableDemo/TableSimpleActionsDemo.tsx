@@ -14,7 +14,10 @@ import {
   IRow
 } from '@patternfly/react-table';
 
-export class TableSimpleActionsDemo extends React.Component<TableProps, { columns: any, rows: IRow[], actions: any}> {
+export class TableSimpleActionsDemo extends React.Component<
+  TableProps,
+  { columns: any; rows: IRow[]; actions: any }
+> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
@@ -40,25 +43,28 @@ export class TableSimpleActionsDemo extends React.Component<TableProps, { column
       actions: [
         {
           title: 'Some action',
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Some action, on row: ', rowId)
+          onClick: (event, rowId, rowData, extra) =>
+            console.log('clicked on Some action, on row: ', rowId)
         },
         {
           title: 'Another action',
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Another action, on row: ', rowId)
+          onClick: (event, rowId, rowData, extra) =>
+            console.log('clicked on Another action, on row: ', rowId)
         },
         {
           isSeparator: true
         },
         {
           title: 'Third action',
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Third action, on row: ', rowId)
+          onClick: (event, rowId, rowData, extra) =>
+            console.log('clicked on Third action, on row: ', rowId)
         }
       ]
     };
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {
@@ -69,5 +75,5 @@ export class TableSimpleActionsDemo extends React.Component<TableProps, { column
         <TableBody />
       </Table>
     );
-  };
-};
+  }
+}

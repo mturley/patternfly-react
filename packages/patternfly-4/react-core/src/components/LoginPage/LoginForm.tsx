@@ -34,7 +34,7 @@ export interface LoginFormProps extends React.HTMLProps<HTMLFormElement> {
   /** Flag indicating if the Login Button is disabled */
   isLoginButtonDisabled?: boolean;
   /** Function that is called when the Login button is clicked */
-  onLoginButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onLoginButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   /** Label for the Remember Me Checkbox that indicates the user should be kept logged in.  If the label is not provided, the checkbox will not show. */
   rememberMeLabel?: string;
   /** Flag indicating if the remember me Checkbox is checked. */
@@ -54,18 +54,18 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
   helperText = null,
   usernameLabel = 'Username',
   usernameValue = '',
-  onChangeUsername =  () => undefined as any,
+  onChangeUsername = () => undefined as any,
   isValidUsername = true,
   passwordLabel = 'Password',
   passwordValue = '',
-  onChangePassword =  () => undefined as any,
+  onChangePassword = () => undefined as any,
   isValidPassword = true,
   loginButtonLabel = 'Log In',
   isLoginButtonDisabled = false,
-  onLoginButtonClick =  () => undefined as any,
+  onLoginButtonClick = () => undefined as any,
   rememberMeLabel = '',
   isRememberMeChecked = false,
-  onChangeRememberMe =  () => undefined as any,
+  onChangeRememberMe = () => undefined as any,
   rememberMeAriaLabel = '',
   ...props
 }: LoginFormProps) => (
@@ -73,8 +73,14 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
     <FormHelperText isError={!isValidUsername || !isValidPassword} isHidden={!showHelperText}>
       {helperText}
     </FormHelperText>
-    <FormGroup label={usernameLabel} isRequired isValid={isValidUsername} fieldId="pf-login-username-id">
-      <TextInput autoFocus={!noAutoFocus}
+    <FormGroup
+      label={usernameLabel}
+      isRequired
+      isValid={isValidUsername}
+      fieldId="pf-login-username-id"
+    >
+      <TextInput
+        autoFocus={!noAutoFocus}
         id="pf-login-username-id"
         isRequired
         isValid={isValidUsername}
@@ -84,7 +90,12 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
         onChange={onChangeUsername}
       />
     </FormGroup>
-    <FormGroup label={passwordLabel} isRequired isValid={isValidPassword} fieldId="pf-login-password-id">
+    <FormGroup
+      label={passwordLabel}
+      isRequired
+      isValid={isValidPassword}
+      fieldId="pf-login-password-id"
+    >
       <TextInput
         isRequired
         type="password"
@@ -106,7 +117,13 @@ export const LoginForm: React.FunctionComponent<LoginFormProps> = ({
       </FormGroup>
     )}
     <ActionGroup>
-      <Button variant="primary" type="submit" onClick={onLoginButtonClick} isBlock isDisabled={isLoginButtonDisabled}>
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={onLoginButtonClick}
+        isBlock
+        isDisabled={isLoginButtonDisabled}
+      >
         {loginButtonLabel}
       </Button>
     </ActionGroup>

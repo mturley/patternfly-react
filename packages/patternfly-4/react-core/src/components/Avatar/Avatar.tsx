@@ -17,6 +17,4 @@ export const Avatar: React.SFC<AvatarProps> = ({
   src = '',
   alt,
   ...props
-}: AvatarProps) => (
-  <img {...props} src={src} alt={alt} className={css(styles.avatar, className)} />
-);
+}: AvatarProps) => <img {...props} src={src} alt={alt} className={css(styles.avatar, className)} />;

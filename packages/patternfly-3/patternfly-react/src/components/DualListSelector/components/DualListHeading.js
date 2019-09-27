@@ -21,7 +21,12 @@ const DualListHeading = ({
   <div className="dual-list-pf-heading">
     <DualListMainCheckbox side={side} onChange={onMainCheckboxChange} isChecked={isMainChecked} />
     <DualListFilter side={side} onChange={onFilterChange} />
-    <DualListSort side={side} onClick={onSortClick} isSortAsc={isSortAsc} ariaLabel={sortAriaLabel} />
+    <DualListSort
+      side={side}
+      onClick={onSortClick}
+      isSortAsc={isSortAsc}
+      ariaLabel={sortAriaLabel}
+    />
     <DualListDropDown id={kebabID}>{kebabMenu}</DualListDropDown>
   </div>
 );

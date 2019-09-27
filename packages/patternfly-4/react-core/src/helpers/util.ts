@@ -2,7 +2,7 @@ import * as ReactDOM from 'react-dom';
 import { SIDE } from './constants';
 import { getModifier } from '@patternfly/react-styles';
 import { DataToolbarBreakpointMod } from '../experimental/components/DataToolbar/DataToolbarUtils';
-import { FlexBreakpointMod, FlexItemBreakpointMod }  from '../layouts/Flex/FlexUtils';
+import { FlexBreakpointMod, FlexItemBreakpointMod } from '../layouts/Flex/FlexUtils';
 
 export function capitalize(input: string) {
   return input[0].toUpperCase() + input.substring(1);
@@ -42,7 +42,8 @@ export function isElementInView(container: HTMLElement, element: HTMLElement, pa
   const elementBoundsRight = Math.floor(elementBounds.right);
 
   // Check if in view
-  const isTotallyInView = elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
+  const isTotallyInView =
+    elementBoundsLeft >= containerBoundsLeft && elementBoundsRight <= containerBoundsRight;
   const isPartiallyInView =
     partial &&
     ((elementBoundsLeft < containerBoundsLeft && elementBoundsRight > containerBoundsLeft) ||
@@ -110,7 +111,13 @@ export function fillTemplate(templateString: string, templateVars: any) {
  * @param {Object[]} kids Array of items in the dropdown
  * @param {boolean} [custom] Allows for handling of flexible content
  */
-export function keyHandler(index: number, position: string, refsCollection: any[], kids: any[], custom = false) {
+export function keyHandler(
+  index: number,
+  position: string,
+  refsCollection: any[],
+  kids: any[],
+  custom = false
+) {
   if (!Array.isArray(kids)) {
     return;
   }
@@ -185,8 +192,16 @@ export function pluralize(i: number, singular: string, plural?: string) {
  * @param {(DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod)[]} breakpointMods The modifiers object
  * @param {any} styles The appropriate styles object for the component
  */
-export const formatBreakpointMods = (breakpointMods: (DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod)[], styles: any) => {
-  return breakpointMods.reduce((acc: string, curr: (DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod)) => (
-    `${acc}${acc && ' '}${getModifier(styles, `${curr.modifier}${curr.breakpoint  ? `-on-${curr.breakpoint}` : ''}`)}`
-  ), '');
+export const formatBreakpointMods = (
+  breakpointMods: (DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod)[],
+  styles: any
+) => {
+  return breakpointMods.reduce(
+    (acc: string, curr: DataToolbarBreakpointMod | FlexBreakpointMod | FlexItemBreakpointMod) =>
+      `${acc}${acc && ' '}${getModifier(
+        styles,
+        `${curr.modifier}${curr.breakpoint ? `-on-${curr.breakpoint}` : ''}`
+      )}`,
+    ''
+  );
 };

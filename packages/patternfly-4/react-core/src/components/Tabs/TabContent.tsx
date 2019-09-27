@@ -43,7 +43,11 @@ const TabContent0: React.FC<TabContentProps> = ({
       <section
         ref={innerRef}
         hidden={children ? null : child.props.eventKey !== activeKey}
-        className={children ? css('pf-c-tab-content', className) : css('pf-c-tab-content', child.props.className)}
+        className={
+          children
+            ? css('pf-c-tab-content', className)
+            : css('pf-c-tab-content', child.props.className)
+        }
         id={children ? id : `pf-tab-section-${child.props.eventKey}-${id}`}
         aria-label={ariaLabel}
         aria-labelledby={labelledBy}
@@ -59,4 +63,6 @@ const TabContent0: React.FC<TabContentProps> = ({
 };
 
 // eslint-disable-next-line react/no-multi-comp
-export const TabContent = React.forwardRef<any, TabContentProps>((props, ref) => <TabContent0 innerRef={ref} {...props} />);
+export const TabContent = React.forwardRef<any, TabContentProps>((props, ref) => (
+  <TabContent0 innerRef={ref} {...props} />
+));

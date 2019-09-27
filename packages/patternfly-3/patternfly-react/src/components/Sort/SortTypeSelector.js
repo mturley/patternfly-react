@@ -4,7 +4,14 @@ import { DropdownButton } from '../Button';
 import { MenuItem } from '../MenuItem';
 import { noop } from '../../common/helpers';
 
-const SortTypeSelector = ({ className, id, sortTypes, currentSortType, onSortTypeSelected, ...props }) => {
+const SortTypeSelector = ({
+  className,
+  id,
+  sortTypes,
+  currentSortType,
+  onSortTypeSelected,
+  ...props
+}) => {
   let menuId = 'sortTypeMenu';
   menuId += id ? `_${id}` : '';
   if (sortTypes && sortTypes.length > 1) {

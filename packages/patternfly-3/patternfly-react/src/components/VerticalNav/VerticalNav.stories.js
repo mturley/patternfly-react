@@ -5,12 +5,19 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { withKnobs } from '@storybook/addon-knobs';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 
 import { mockNavItems } from './__mocks__/mockNavItems';
 import { MockIconBarChildren } from './__mocks__/mockIconBarChildren';
 import { basicExample } from './__mocks__/basicExample';
-import { MockWithMastHeadComponent, mockWithMastHeadSource } from './__mocks__/mockWithMastHeadComponent';
+import {
+  MockWithMastHeadComponent,
+  mockWithMastHeadSource
+} from './__mocks__/mockWithMastHeadComponent';
 
 import pfLogo from 'storybook/img/logo-alt.svg';
 import pfBrand from 'storybook/img/brand-alt.svg';
@@ -26,7 +33,9 @@ import { name } from '../../../package.json';
 // translateZ trick found at https://stackoverflow.com/a/38796408.
 // This emulates the effects of <html class="layout-pf layout-pf-fixed"> too (60px padding)
 const MockFixedLayout = props => (
-  <div style={{ transform: 'translateZ(0)', height: '100vh', paddingTop: '60px' }}>{props.children}</div>
+  <div style={{ transform: 'translateZ(0)', height: '100vh', paddingTop: '60px' }}>
+    {props.children}
+  </div>
 );
 MockFixedLayout.propTypes = { children: PropTypes.node.isRequired };
 
@@ -51,7 +60,10 @@ const mockBodyContainer = className => (
 const propTypesAreBroke = `***Note: Prop Type descriptions are missing on this page
 due to a Storybook bug. Please see the source code for propType description comments.***`;
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.NAVIGATION}/Vertical Navigation`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.NAVIGATION}/Vertical Navigation`,
+  module
+);
 stories.addDecorator(withKnobs);
 stories.addDecorator(
   defaultTemplate({
@@ -214,8 +226,17 @@ stories.add(
 stories.add(
   'Custom Masthead',
   withInfo({
-    propTablesExclude: [MockFixedLayout, MockIconBarChildren, Icon, MenuItem, Dropdown, Dropdown.Menu, Dropdown.Toggle],
-    text: 'Example using the **Masthead**, **Brand** and **IconBar** components with images. (items from \'Items as Objects\').'
+    propTablesExclude: [
+      MockFixedLayout,
+      MockIconBarChildren,
+      Icon,
+      MenuItem,
+      Dropdown,
+      Dropdown.Menu,
+      Dropdown.Toggle
+    ],
+    text:
+      "Example using the **Masthead**, **Brand** and **IconBar** components with images. (items from 'Items as Objects')."
   })(() => (
     <MockFixedLayout>
       <div className="layout-pf layout-pf-fixed faux-layout">

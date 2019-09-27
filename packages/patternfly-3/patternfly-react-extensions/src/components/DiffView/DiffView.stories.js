@@ -9,7 +9,10 @@ import { DiffView } from './index';
 import { name } from '../../../package.json';
 import { boolean, text, select, withKnobs } from '@storybook/addon-knobs';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.CONTENT_VIEWS}/DiffView`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.CONTENT_VIEWS}/DiffView`,
+  module
+);
 const emptyState = <h1>No Diff</h1>;
 
 stories.addDecorator(
@@ -17,9 +20,10 @@ stories.addDecorator(
     title: 'Diff View',
     description: (
       <div>
-        The Diff View is based on the <a href="https://www.npmjs.com/package/react-diff-view">react-diff-view</a>{' '}
-        package. This Component supports both git diff Patch and Old/New text inputs and displays the diff in Unified or
-        Split View.
+        The Diff View is based on the{' '}
+        <a href="https://www.npmjs.com/package/react-diff-view">react-diff-view</a> package. This
+        Component supports both git diff Patch and Old/New text inputs and displays the diff in
+        Unified or Split View.
       </div>
     )
   })

@@ -4,7 +4,7 @@ import { css } from '@patternfly/react-styles';
 import { Omit } from '../../helpers/typeUtils';
 import { NavContext, NavSelectClickHandler } from './Nav';
 
-export interface NavItemProps extends Omit<React.HTMLProps<HTMLAnchorElement>,  'onClick'> {
+export interface NavItemProps extends Omit<React.HTMLProps<HTMLAnchorElement>, 'onClick'> {
   /** Content rendered inside the nav item */
   children?: React.ReactNode;
   /** Additional classes added to the nav item */
@@ -46,7 +46,9 @@ export const NavItem: React.FunctionComponent<NavItemProps> = ({
         {(context: any) => (
           <Component
             href={to}
-            onClick={(e: any) => context.onSelect(e, groupId, itemId, to, preventLinkDefault, onClick)}
+            onClick={(e: any) =>
+              context.onSelect(e, groupId, itemId, to, preventLinkDefault, onClick)
+            }
             className={css(styles.navLink, isActive && styles.modifiers.current, className)}
             aria-current={isActive ? 'page' : null}
             {...props}
@@ -62,8 +64,13 @@ export const NavItem: React.FunctionComponent<NavItemProps> = ({
     <NavContext.Consumer>
       {(context: any) =>
         React.cloneElement(child, {
-          "onClick": (e: MouseEvent) => context.onSelect(e, groupId, itemId, to, preventDefault, onClick),
-          "className": css(styles.navLink, isActive && styles.modifiers.current, child.props && child.props.className),
+          onClick: (e: MouseEvent) =>
+            context.onSelect(e, groupId, itemId, to, preventDefault, onClick),
+          className: css(
+            styles.navLink,
+            isActive && styles.modifiers.current,
+            child.props && child.props.className
+          ),
           'aria-current': isActive ? 'page' : null
         })
       }
@@ -72,7 +79,9 @@ export const NavItem: React.FunctionComponent<NavItemProps> = ({
 
   return (
     <li className={css(styles.navItem, className)}>
-      {React.isValidElement(children) ? renderClonedChild(children as React.ReactElement) : renderDefaultLink()}
+      {React.isValidElement(children)
+        ? renderClonedChild(children as React.ReactElement)
+        : renderDefaultLink()}
     </li>
   );
 };

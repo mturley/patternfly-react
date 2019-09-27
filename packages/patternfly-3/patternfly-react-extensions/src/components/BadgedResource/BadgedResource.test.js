@@ -20,7 +20,11 @@ test('BadgedResource renders properly', () => {
         resourceKind={BadgedResource.KINDS.ROLE_BINDING}
         onClick={onClickMock}
       />
-      <BadgedResource resourceKind={BadgedResource.KINDS.NAMESPACE} resourceName="No Tooltip Item" tipDelay={-1} />
+      <BadgedResource
+        resourceKind={BadgedResource.KINDS.NAMESPACE}
+        resourceName="No Tooltip Item"
+        tipDelay={-1}
+      />
       <BadgedResource
         kindAbbr="APIS"
         kindStr="API Service"
@@ -28,7 +32,11 @@ test('BadgedResource renders properly', () => {
         tipDelay={0}
         badgeColor={BadgedResource.COLORS.cyan500}
       />
-      <BadgedResource resourceName="Long Tooltip" tipDelay={1500} resourceKind={resourceTypes.DEPLOYMENT_CONFIG} />
+      <BadgedResource
+        resourceName="Long Tooltip"
+        tipDelay={1500}
+        resourceKind={resourceTypes.DEPLOYMENT_CONFIG}
+      />
       <BadgedResource
         resourceKind={BadgedResource.KINDS.PROJECT}
         large

@@ -23,7 +23,8 @@ class MockWizardDeployContents extends React.Component {
           <div className="spinner spinner-lg blank-slate-pf-icon" />
           <h3 className="blank-slate-pf-main-action">Deployment in progress</h3>
           <p className="blank-slate-pf-secondary-action">
-            Lorem ipsum dolor sit amet, porta at suspendisse ac, ut wisi vivamus, lorem sociosqu eget nunc amet.{' '}
+            Lorem ipsum dolor sit amet, porta at suspendisse ac, ut wisi vivamus, lorem sociosqu
+            eget nunc amet.{' '}
           </p>
         </div>
       );
@@ -35,7 +36,8 @@ class MockWizardDeployContents extends React.Component {
         </div>
         <h3 className="blank-slate-pf-main-action">Deployment was successful</h3>
         <p className="blank-slate-pf-secondary-action">
-          Lorem ipsum dolor sit amet, porta at suspendisse ac, ut wisi vivamus, lorem sociosqu eget nunc amet.{' '}
+          Lorem ipsum dolor sit amet, porta at suspendisse ac, ut wisi vivamus, lorem sociosqu eget
+          nunc amet.{' '}
         </p>
         <button type="button" className="btn btn-lg btn-primary">
           View Deployment

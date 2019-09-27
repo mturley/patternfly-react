@@ -8,7 +8,15 @@ import { helpers } from '../../common/helpers';
  * TableGridColumnHeader Component for PatternFly
  */
 
-const TableGridColumnHeader = ({ children, className, sortable, isSorted, isAscending, onSortToggle, ...props }) => {
+const TableGridColumnHeader = ({
+  children,
+  className,
+  sortable,
+  isSorted,
+  isAscending,
+  onSortToggle,
+  ...props
+}) => {
   const classes = classNames(
     'table-grid-pf-column-header text-nowrap',
     { 'active-sort': isSorted, descending: !isAscending },

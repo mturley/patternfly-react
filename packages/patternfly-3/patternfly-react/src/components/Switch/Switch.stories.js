@@ -7,9 +7,16 @@ import { inlineTemplate } from 'storybook/decorators/storyTemplates';
 import { Switch } from './index';
 import { name } from '../../../package.json';
 
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Switch`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Switch`,
+  module
+);
 stories.addDecorator(withKnobs);
 
 stories.add(
@@ -20,8 +27,12 @@ stories.add(
     const offColor = select('Off Color', Switch.SWITCH_COLORS, 'default');
     const props = { bsSize, title: bsSize, id: 'bsSize-example' };
 
-    if (onColor) { props.onColor = onColor; }
-    if (offColor) { props.offColor = offColor; }
+    if (onColor) {
+      props.onColor = onColor;
+    }
+    if (offColor) {
+      props.offColor = offColor;
+    }
 
     const story = (
       <div>

@@ -9,7 +9,7 @@ class MockVerticalTabsExample extends React.Component {
 
   onActivateTab = id => {
     this.setState({ activeTabId: id });
-  }
+  };
 
   render() {
     const { restrictTabs, wrapStyle } = this.props;
@@ -41,7 +41,11 @@ class MockVerticalTabsExample extends React.Component {
     };
 
     return (
-      <VerticalTabs id="vertical-tabs" restrictTabs={restrictTabs} activeTab={topLevelIds.includes(activeTabId)}>
+      <VerticalTabs
+        id="vertical-tabs"
+        restrictTabs={restrictTabs}
+        activeTab={topLevelIds.includes(activeTabId)}
+      >
         {renderTab('all', 'All', null, { shown: true })}
         {renderTab('one', 'Tab One', [
           renderTab('one-one', 'Tab One-One', [

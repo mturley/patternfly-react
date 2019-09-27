@@ -56,7 +56,13 @@ export const shouldItemBeChecked = (item, isMainChecked, resetAllSelected) => {
   return checked;
 };
 
-export const arrangeArray = ({ items, sortBy, isSortAsc = true, isMainChecked = false, resetAllSelected = false }) => {
+export const arrangeArray = ({
+  items,
+  sortBy,
+  isSortAsc = true,
+  isMainChecked = false,
+  resetAllSelected = false
+}) => {
   // sort the items
   let itemsCopy = sortItems(items, sortBy).map((item, index) => {
     // add position to the item and update if the main checkbox is initialy checked.
@@ -159,7 +165,9 @@ export const getItemsLength = items => {
 
 export const reverseAllItemsOrder = items => {
   const reversedItems = [...items].reverse();
-  return reversedItems.map(item => (item.children ? { ...item, children: item.children.reverse() } : item));
+  return reversedItems.map(item =>
+    item.children ? { ...item, children: item.children.reverse() } : item
+  );
 };
 
 export const getItem = (isSortAsc, items, position, parentPosition) => {
@@ -178,7 +186,8 @@ export const itemHasParent = item => item.parentPosition !== undefined;
 
 export const itemHasChildren = item => item.children !== undefined;
 
-export const getItemPosition = (array, position, isSortAsc) => (isSortAsc ? position : array.length - position - 1);
+export const getItemPosition = (array, position, isSortAsc) =>
+  isSortAsc ? position : array.length - position - 1;
 
 export const toggleAllItems = (list, checked) => {
   let toggleCount = 0;
@@ -209,7 +218,8 @@ export const toggleAllItems = (list, checked) => {
   return toggleCount;
 };
 
-export const isAllItemsChecked = (items, selectCount) => selectCount > 0 && selectCount === getItemsLength(items);
+export const isAllItemsChecked = (items, selectCount) =>
+  selectCount > 0 && selectCount === getItemsLength(items);
 
 export const isItemExistOnList = (list, itemLabel) => {
   let parentIndex = null;

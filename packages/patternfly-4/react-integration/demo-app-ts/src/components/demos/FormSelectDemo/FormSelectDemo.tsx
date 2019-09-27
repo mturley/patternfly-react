@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { FormSelect, FormSelectOption, FormSelectOptionGroup } from '@patternfly/react-core';
 
 interface FormSelectState {
@@ -42,16 +42,16 @@ export class FormSelectDemo extends Component<{}, FormSelectState> {
 
   onChange = (value: string, event: any) => {
     this.setState({ value });
-  }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
-  getOptionLbl = (option) => option.label;
-  getOptionVal = (option) => option.value;
-  getOptionsGroupLbl = (group) => group && group.groupLabel;
-  getGroupOptions = (group) => group && group.options;
+  getOptionLbl = option => option.label;
+  getOptionVal = option => option.value;
+  getOptionsGroupLbl = group => group && group.groupLabel;
+  getGroupOptions = group => group && group.options;
 
   render() {
     return (
@@ -59,7 +59,12 @@ export class FormSelectDemo extends Component<{}, FormSelectState> {
         {this.groups.map((group, index) => (
           <FormSelectOptionGroup isDisabled={group.disabled} key={index} label={group.groupLabel}>
             {group.options.map((option, i) => (
-              <FormSelectOption isDisabled={option.disabled} key={i} value={option.value} label={option.label} />
+              <FormSelectOption
+                isDisabled={option.disabled}
+                key={i}
+                value={option.value}
+                label={option.label}
+              />
             ))}
           </FormSelectOptionGroup>
         ))}

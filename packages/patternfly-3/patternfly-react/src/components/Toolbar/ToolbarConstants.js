@@ -10,6 +10,8 @@ const getToolbarContext = props => ({
 
 const provideToolbarContext = withContext(toolbarContextTypes, getToolbarContext);
 
-const ToolbarContextProvider = provideToolbarContext(props => <React.Fragment>{props.children}</React.Fragment>);
+const ToolbarContextProvider = provideToolbarContext(props => (
+  <React.Fragment>{props.children}</React.Fragment>
+));
 
 export { toolbarContextTypes, getToolbarContext, ToolbarContextProvider };

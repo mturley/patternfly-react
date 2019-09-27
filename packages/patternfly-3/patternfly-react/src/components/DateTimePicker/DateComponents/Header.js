@@ -9,7 +9,9 @@ class Header extends React.Component {
     const { weekStartsOn } = this.props;
     const weekStart = getWeekStart(new Date());
     const dayFormat =
-      Intl.DateTimeFormat(this.props.locale, { weekday: 'short' }).format(weekStart).length > 3 ? 'narrow' : 'short';
+      Intl.DateTimeFormat(this.props.locale, { weekday: 'short' }).format(weekStart).length > 3
+        ? 'narrow'
+        : 'short';
     return times(7, i =>
       Intl.DateTimeFormat(this.props.locale, { weekday: dayFormat })
         .format(addDays(weekStart, (i + weekStartsOn) % 7))

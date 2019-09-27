@@ -4,7 +4,8 @@ import { noop } from '../../../common/helpers';
 import TableHeading from '../TableHeading';
 
 const sortableHeaderCellFormatter = ({ cellProps, column, sortingColumns, onSort }) => {
-  const sortDirection = sortingColumns[column.property] && sortingColumns[column.property].direction;
+  const sortDirection =
+    sortingColumns[column.property] && sortingColumns[column.property].direction;
   return (
     <TableHeading
       onClick={e => {

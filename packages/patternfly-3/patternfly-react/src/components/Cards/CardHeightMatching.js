@@ -31,7 +31,9 @@ class CardHeightMatching extends React.Component {
     // setup the event listening on '_container' for our height matching selectors
     this._selectors.forEach(selector => {
       const elements = this._container.querySelectorAll(selector);
-      this._resizeSensors.push(new ResizeSensor(elements, debounce(() => this._matchHeights([selector]), 200)));
+      this._resizeSensors.push(
+        new ResizeSensor(elements, debounce(() => this._matchHeights([selector]), 200))
+      );
     });
   }
 
@@ -51,7 +53,9 @@ class CardHeightMatching extends React.Component {
     this._removeSensors();
 
     const arrayMap = elements =>
-      Array.prototype.map.call(elements, el => el.scrollHeight).reduce((pre, cur) => Math.max(pre, cur), -Infinity);
+      Array.prototype.map
+        .call(elements, el => el.scrollHeight)
+        .reduce((pre, cur) => Math.max(pre, cur), -Infinity);
     selectors.forEach(selector => {
       const elements = this._container.querySelectorAll(selector);
       elements.forEach(el => {

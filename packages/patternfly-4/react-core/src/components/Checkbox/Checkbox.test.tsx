@@ -34,22 +34,30 @@ test('label is string', () => {
 
 test('label is function', () => {
   const functionLabel = () => <h1>Header</h1>;
-  const view = shallow(<Checkbox label={functionLabel()} id="check" isChecked aria-label="check" />);
+  const view = shallow(
+    <Checkbox label={functionLabel()} id="check" isChecked aria-label="check" />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('label is node', () => {
-  const view = shallow(<Checkbox label={<h1>Header</h1>} id="check" isChecked aria-label="check" />);
+  const view = shallow(
+    <Checkbox label={<h1>Header</h1>} id="check" isChecked aria-label="check" />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('passing class', () => {
-  const view = shallow(<Checkbox label="label" className="class-123" id="check" isChecked aria-label="check" />);
+  const view = shallow(
+    <Checkbox label="label" className="class-123" id="check" isChecked aria-label="check" />
+  );
   expect(view).toMatchSnapshot();
 });
 
 test('passing HTML attribute', () => {
-  const view = shallow(<Checkbox label="label" aria-labelledby="labelId" id="check" isChecked aria-label="check" />);
+  const view = shallow(
+    <Checkbox label="label" aria-labelledby="labelId" id="check" isChecked aria-label="check" />
+  );
   expect(view).toMatchSnapshot();
 });
 

@@ -24,31 +24,50 @@ describe('Radio check component', () => {
 
   test('label is string', () => {
     const view = shallow(
-      <Radio label="Label" id="check" isChecked aria-label="check" name="check" />);
+      <Radio label="Label" id="check" isChecked aria-label="check" name="check" />
+    );
     expect(view).toMatchSnapshot();
   });
 
   test('label is function', () => {
     const functionLabel = () => <h1>Header</h1>;
-    const view = shallow(<Radio label={functionLabel()} id="check" isChecked aria-label="check" name="check" />);
+    const view = shallow(
+      <Radio label={functionLabel()} id="check" isChecked aria-label="check" name="check" />
+    );
     expect(view).toMatchSnapshot();
   });
 
   test('label is node', () => {
-    const view = shallow(<Radio label={<h1>Header</h1>} id="check" isChecked aria-label="check" name="check" />);
+    const view = shallow(
+      <Radio label={<h1>Header</h1>} id="check" isChecked aria-label="check" name="check" />
+    );
     expect(view).toMatchSnapshot();
   });
 
   test('passing class', () => {
     const view = shallow(
-      <Radio label="label" className="class-123" id="check" isChecked aria-label="check" name="check" />
+      <Radio
+        label="label"
+        className="class-123"
+        id="check"
+        isChecked
+        aria-label="check"
+        name="check"
+      />
     );
     expect(view).toMatchSnapshot();
   });
 
   test('passing HTML attribute', () => {
     const view = shallow(
-      <Radio label="label" aria-labelledby="labelId" id="check" isChecked aria-label="check" name="check" />
+      <Radio
+        label="label"
+        aria-labelledby="labelId"
+        id="check"
+        isChecked
+        aria-label="check"
+        name="check"
+      />
     );
     expect(view).toMatchSnapshot();
   });

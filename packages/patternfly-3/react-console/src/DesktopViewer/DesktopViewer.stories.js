@@ -53,8 +53,8 @@ stories.add(
       <DesktopViewer rdp={rdp}>
         <div />
         <div>
-          Custom instructions for running an RDP client application. For default content, please see the{' '}
-          <i>DesktopViewer - all</i> storybook.
+          Custom instructions for running an RDP client application. For default content, please see
+          the <i>DesktopViewer - all</i> storybook.
         </div>
       </DesktopViewer>
     );

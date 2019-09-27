@@ -5,7 +5,11 @@ import { PropertiesSidePanel, PropertyItem } from './index';
 
 test('PropertyItem renders properly', () => {
   const component = mount(
-    <PropertyItem label="Operator Version" value="0.9.8 (latest)" className="test-property-item-class" />
+    <PropertyItem
+      label="Operator Version"
+      value="0.9.8 (latest)"
+      className="test-property-item-class"
+    />
   );
   expect(component.render()).toMatchSnapshot();
 });
@@ -13,7 +17,11 @@ test('PropertyItem renders properly', () => {
 test('PropertiesSidePanel renders properly', () => {
   const component = mount(
     <PropertiesSidePanel className="test-properties-side-panel-class">
-      <PropertyItem label="Operator Version" value="0.9.8 (latest)" className="test-property-item-class" />
+      <PropertyItem
+        label="Operator Version"
+        value="0.9.8 (latest)"
+        className="test-property-item-class"
+      />
       <PropertyItem
         label="Certified Level"
         value={

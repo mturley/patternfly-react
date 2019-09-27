@@ -12,8 +12,13 @@ import { noop, hasDisplayName, filterChildren } from '../../common/helpers';
 const BaseVerticalNavMasthead = props => {
   const { children, href, iconImg, titleImg, title } = props;
 
-  const brandChildren = filterChildren(children, child => hasDisplayName(child, VerticalNavBrand.displayName));
-  const otherChildren = filterChildren(children, child => !hasDisplayName(child, VerticalNavBrand.displayName));
+  const brandChildren = filterChildren(children, child =>
+    hasDisplayName(child, VerticalNavBrand.displayName)
+  );
+  const otherChildren = filterChildren(
+    children,
+    child => !hasDisplayName(child, VerticalNavBrand.displayName)
+  );
 
   return (
     <React.Fragment>

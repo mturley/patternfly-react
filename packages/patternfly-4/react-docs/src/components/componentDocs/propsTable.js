@@ -20,7 +20,11 @@ const renderType = prop => {
 };
 
 export const PropsTable = ({ caption, propList }) => (
-  <table className="pf-c-table pf-m-compact pf-m-grid-md" role="grid" aria-label="Properties for a component">
+  <table
+    className="pf-c-table pf-m-compact pf-m-grid-md"
+    role="grid"
+    aria-label="Properties for a component"
+  >
     <caption>{caption}</caption>
     <thead>
       <tr>

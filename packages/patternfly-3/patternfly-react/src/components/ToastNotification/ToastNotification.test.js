@@ -7,7 +7,13 @@ import ToastNotificationList from './ToastNotificationList';
 
 const testToastNotificationSnapshot = (Component, props, notificationProps) => (
   <ToastNotificationList {...notificationProps}>
-    <Component type="success" onDismiss={jest.fn()} onMouseEnter={jest.fn()} onMouseLeave={jest.fn()} {...props}>
+    <Component
+      type="success"
+      onDismiss={jest.fn()}
+      onMouseEnter={jest.fn()}
+      onMouseLeave={jest.fn()}
+      {...props}
+    >
       <span>Success Will Robinson!</span>
     </Component>
   </ToastNotificationList>

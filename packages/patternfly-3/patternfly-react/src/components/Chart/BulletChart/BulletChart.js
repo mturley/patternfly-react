@@ -60,7 +60,11 @@ const BulletChart = ({
   customLegend,
   className
 }) => {
-  const classes = classNames('bullet-chart-pf', { 'bullet-chart-pf-vertical': vertical }, className);
+  const classes = classNames(
+    'bullet-chart-pf',
+    { 'bullet-chart-pf-vertical': vertical },
+    className
+  );
 
   // Order the ranges into an array of 3 ranges lowest to highest, insert 0's if necessary
   // this is to keep darkest as highest and use darkest colors first (ie. 1 range still uses darkest)
@@ -125,8 +129,10 @@ const BulletChart = ({
         return customLegend;
       }
 
-      const warningThreshold = thresholdWarningLegendTextFunction(thresholdWarning) || thresholdWarningLegendText;
-      const errorThreshold = thresholdErrorLegendTextFunction(thresholdError) || thresholdErrorLegendText;
+      const warningThreshold =
+        thresholdWarningLegendTextFunction(thresholdWarning) || thresholdWarningLegendText;
+      const errorThreshold =
+        thresholdErrorLegendTextFunction(thresholdError) || thresholdErrorLegendText;
       const thresholdTipFunction = (title, value) => {
         if (thresholdWarningTooltipFunction) {
           return thresholdWarningTooltipFunction(title, value);
@@ -262,7 +268,11 @@ const BulletChart = ({
           text={percents ? undefined : `${Math.floor(maxValue * 0.75)}`}
           vertical={vertical}
         />
-        <BulletChartAxisTic value={100} text={percents ? undefined : `${Math.floor(maxValue)}`} vertical={vertical} />
+        <BulletChartAxisTic
+          value={100}
+          text={percents ? undefined : `${Math.floor(maxValue)}`}
+          vertical={vertical}
+        />
       </BulletChartAxis>
     );
   };

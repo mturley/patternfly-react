@@ -4,7 +4,12 @@ import { Wizard } from '../index';
 import { mockWizardFormContents } from './mockWizardItems';
 import MockWizardReviewStepsManager from './mockWizardReviewStepsManager';
 
-export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepIndex, onStepClick) => {
+export const renderWizardSteps = (
+  wizardSteps,
+  activeStepIndex,
+  activeSubStepIndex,
+  onStepClick
+) => {
   const activeStep = wizardSteps[activeStepIndex];
   const activeSubStep = activeStep.subSteps[activeSubStepIndex];
 
@@ -30,7 +35,12 @@ export const renderWizardSteps = (wizardSteps, activeStepIndex, activeSubStepInd
   ));
 };
 
-export const renderSidebarItems = (wizardSteps, activeStepIndex, activeSubStepIndex, onSidebarItemClick) => {
+export const renderSidebarItems = (
+  wizardSteps,
+  activeStepIndex,
+  activeSubStepIndex,
+  onSidebarItemClick
+) => {
   const activeStep = wizardSteps[activeStepIndex];
   const activeSubStep = activeStep.subSteps[activeSubStepIndex];
 
@@ -91,7 +101,9 @@ export const renderWizardContents = (wizardSteps, activeStepIndex, activeSubStep
             activeStepIndex={activeStepIndex}
             activeSubStepIndex={activeSubStepIndex}
           >
-            <MockWizardDeployContents active={stepIndex === activeStepIndex && subStepIndex === activeSubStepIndex} />
+            <MockWizardDeployContents
+              active={stepIndex === activeStepIndex && subStepIndex === activeSubStepIndex}
+            />
           </Wizard.Contents>
         );
       }

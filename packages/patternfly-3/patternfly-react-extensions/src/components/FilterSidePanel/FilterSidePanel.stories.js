@@ -3,7 +3,10 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info/dist/index';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
 import { storybookPackageName, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
-import { MockFilterSidePanelExample, MockFilterSidePanelExampleSource } from './_mocks_/mockFilterSidePanelExample';
+import {
+  MockFilterSidePanelExample,
+  MockFilterSidePanelExampleSource
+} from './_mocks_/mockFilterSidePanelExample';
 
 import { FilterSidePanel, FilterSidePanelCategory, FilterSidePanelCategoryItem } from './index';
 
@@ -18,7 +21,8 @@ const stories = storiesOf(
 stories.addDecorator(
   defaultTemplate({
     title: 'Filter Side Panel',
-    description: 'Note: the width, border, and top padding styling are not part of the FilterSidePanel.'
+    description:
+      'Note: the width, border, and top padding styling are not part of the FilterSidePanel.'
   })
 );
 

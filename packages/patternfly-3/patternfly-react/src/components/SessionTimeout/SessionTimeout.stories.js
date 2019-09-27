@@ -6,7 +6,10 @@ import { storybookPackageName, STORYBOOK_CATEGORY } from 'storybook/constants/si
 import { name } from '../../../package.json';
 import { SessionTimeout, CountDownSessionTimeout } from './index';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/Session Timeout`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/Session Timeout`,
+  module
+);
 
 stories.addDecorator(withKnobs).addDecorator(
   defaultTemplate({
@@ -22,8 +25,12 @@ stories
       continueFnc={() => {}}
       displayBefore={number('displayBefore', 30)}
       timeLeft={number('timeLeft', 30)}
-      primaryContent={<p className="lead">{text('primary content', 'Your session is about to expire')}</p>}
-      secondaryContent={<div>{text('secondary content', 'to continue click on "Continue Session".')}</div>}
+      primaryContent={
+        <p className="lead">{text('primary content', 'Your session is about to expire')}</p>
+      }
+      secondaryContent={
+        <div>{text('secondary content', 'to continue click on "Continue Session".')}</div>
+      }
     />
   ))
   .add('Count Down Session Timeout', () => (

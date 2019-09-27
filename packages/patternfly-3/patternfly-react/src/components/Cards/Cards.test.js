@@ -1,7 +1,16 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { MenuItem } from '../MenuItem';
-import { Card, CardTitle, CardBody, CardGrid, CardHeading, CardFooter, CardLink, CardDropdownButton } from './index';
+import {
+  Card,
+  CardTitle,
+  CardBody,
+  CardGrid,
+  CardHeading,
+  CardFooter,
+  CardLink,
+  CardDropdownButton
+} from './index';
 
 test('Card is working properly', () => {
   const component = mount(

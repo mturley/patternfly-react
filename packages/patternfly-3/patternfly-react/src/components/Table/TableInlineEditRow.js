@@ -17,7 +17,13 @@ const TableInlineEditRow = props => {
 
   const buttonsClassName = props.last ? 'top' : 'bottom';
 
-  return <TableConfirmButtonsRow {...props} buttonsPosition={buttonsPosition} buttonsClassName={buttonsClassName} />;
+  return (
+    <TableConfirmButtonsRow
+      {...props}
+      buttonsPosition={buttonsPosition}
+      buttonsClassName={buttonsClassName}
+    />
+  );
 };
 
 TableInlineEditRow.shouldComponentUpdate = true;

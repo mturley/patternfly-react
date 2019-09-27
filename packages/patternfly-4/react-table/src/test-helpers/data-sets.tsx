@@ -44,13 +44,19 @@ export const rows: any = [
 export const actions: any = [
   {
     title: 'Some action',
-    onClick: ({ event }: { event: React.MouseEvent<HTMLAnchorElement, MouseEvent> }, { rowId }: { rowId: number }) =>
+    onClick: (
+      { event }: { event: React.MouseEvent<HTMLAnchorElement, MouseEvent> },
+      { rowId }: { rowId: number }
+    ) =>
       // tslint:disable-next-line:no-console
       console.log('clicked on Some action, on row: ', rowId)
   },
   {
     title: <div>Another action</div>,
-    onClick: ({ event }: { event: React.MouseEvent<HTMLAnchorElement, MouseEvent> }, { rowId }: { rowId: number }) =>
+    onClick: (
+      { event }: { event: React.MouseEvent<HTMLAnchorElement, MouseEvent> },
+      { rowId }: { rowId: number }
+    ) =>
       // tslint:disable-next-line:no-console
       console.log('clicked on Another action, on row: ', rowId)
   },
@@ -59,7 +65,10 @@ export const actions: any = [
   },
   {
     title: 'Third action',
-    onClick: ({ event }: { event: React.MouseEvent<HTMLAnchorElement, MouseEvent> }, { rowId }: { rowId: number }) =>
+    onClick: (
+      { event }: { event: React.MouseEvent<HTMLAnchorElement, MouseEvent> },
+      { rowId }: { rowId: number }
+    ) =>
       // tslint:disable-next-line:no-console
       console.log('clicked on Third action, on row: ', rowId)
   }

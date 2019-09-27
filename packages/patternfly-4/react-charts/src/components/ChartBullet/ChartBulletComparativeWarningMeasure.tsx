@@ -5,10 +5,10 @@ import {
   DomainPropType,
   NumberOrCallback,
   PaddingProps,
-  VictoryBar,
+  VictoryBar
 } from 'victory';
 import { ChartContainer } from '../ChartContainer';
-import { ChartThemeDefinition}  from '../ChartTheme';
+import { ChartThemeDefinition } from '../ChartTheme';
 import { getBulletComparativeWarningMeasureTheme } from '../ChartUtils';
 import { ChartBulletComparativeMeasure } from './ChartBulletComparativeMeasure';
 
@@ -155,7 +155,9 @@ export interface ChartBulletComparativeWarningMeasureProps {
   y?: DataGetterPropType;
 }
 
-export const ChartBulletComparativeWarningMeasure: React.FunctionComponent<ChartBulletComparativeWarningMeasureProps> = ({
+export const ChartBulletComparativeWarningMeasure: React.FunctionComponent<
+  ChartBulletComparativeWarningMeasureProps
+> = ({
   ariaDesc,
   ariaTitle,
   barWidth,
@@ -203,9 +205,7 @@ export const ChartBulletComparativeWarningMeasure: React.FunctionComponent<Chart
       {measure}
     </ChartContainer>
   ) : (
-    <React.Fragment>
-      {measure}
-    </React.Fragment>
+    <React.Fragment>{measure}</React.Fragment>
   );
 };
 

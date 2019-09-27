@@ -11,6 +11,7 @@ const mockLayout = {
   removeChangeListener: () => {}
 };
 
-const layout = process.env.NODE_ENV === 'test' ? mockLayout : Break({ mobile: 0, ...patternfly.pfBreakpoints });
+const layout =
+  process.env.NODE_ENV === 'test' ? mockLayout : Break({ mobile: 0, ...patternfly.pfBreakpoints });
 
 export { patternfly, c3ChartDefaults, layout };

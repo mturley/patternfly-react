@@ -11,7 +11,9 @@ test('Wizard header renders properly', () => {
 });
 
 test('Wizard body renders properly', () => {
-  const component = shallow(<Wizard.Body className="someAdditionalClass">Some Children</Wizard.Body>);
+  const component = shallow(
+    <Wizard.Body className="someAdditionalClass">Some Children</Wizard.Body>
+  );
   expect(component).toMatchSnapshot('Wizard body snapshot');
 });
 
@@ -20,11 +22,27 @@ test('Wizard steps renders properly', () => {
     <Wizard.Steps
       className="someAdditionalClass"
       steps={[
-        <Wizard.Step key={0} stepIndex={0} step={0} activeStep={0} label="Step 1" title="Step 1" onClick={jest.fn()}>
+        <Wizard.Step
+          key={0}
+          stepIndex={0}
+          step={0}
+          activeStep={0}
+          label="Step 1"
+          title="Step 1"
+          onClick={jest.fn()}
+        >
           <Wizard.SubStep subStep="1.1" title="Step 1.1" activeSubStep={0} />
           <Wizard.SubStep subStep="1.2" title="Step 1.2" activeSubStep={0} />
         </Wizard.Step>,
-        <Wizard.Step key={1} stepIndex={1} step={1} label="Step 2" title="Step 2" activeStep={0} onClick={jest.fn()}>
+        <Wizard.Step
+          key={1}
+          stepIndex={1}
+          step={1}
+          label="Step 2"
+          title="Step 2"
+          activeStep={0}
+          onClick={jest.fn()}
+        >
           <Wizard.SubStep subStep="2.1" title="Step 2.1" activeSubStep={0} />
           <Wizard.SubStep subStep="2.2" title="Step 2.2" activeSubStep={0} />
         </Wizard.Step>
@@ -36,7 +54,15 @@ test('Wizard steps renders properly', () => {
 
 test('Wizard step renders properly', () => {
   const component = shallow(
-    <Wizard.Step key={0} stepIndex={0} step={0} activeStep={0} label="Step 1" title="Step 1" onClick={jest.fn()}>
+    <Wizard.Step
+      key={0}
+      stepIndex={0}
+      step={0}
+      activeStep={0}
+      label="Step 1"
+      title="Step 1"
+      onClick={jest.fn()}
+    >
       <Wizard.SubStep subStep="1.1" title="Step 1.1" activeSubStep={0} />
       <Wizard.SubStep subStep="1.2" title="Step 1.2" activeSubStep={0} />
     </Wizard.Step>
@@ -55,7 +81,9 @@ test('Wizard row renders properly', () => {
 });
 
 test('Wizard sidebar renders properly', () => {
-  const component = shallow(<Wizard.Sidebar className="someAdditionalClass" items={['item1', 'item2']} />);
+  const component = shallow(
+    <Wizard.Sidebar className="someAdditionalClass" items={['item1', 'item2']} />
+  );
   expect(component).toMatchSnapshot('Wizard sidebar snapshot');
 });
 
@@ -92,7 +120,9 @@ test('Wizard sidebar group item renders properly', () => {
 });
 
 test('Wizard main renders properly', () => {
-  const component = shallow(<Wizard.Main className="someAdditionalClass">Some Children</Wizard.Main>);
+  const component = shallow(
+    <Wizard.Main className="someAdditionalClass">Some Children</Wizard.Main>
+  );
   expect(component).toMatchSnapshot('Wizard main snapshot');
 });
 
@@ -127,7 +157,9 @@ test('Wizard contents renders hidden class when not active', () => {
 });
 
 test('Wizard review steps renders properly', () => {
-  const component = shallow(<Wizard.ReviewSteps className="someAdditionalClass">Some Children</Wizard.ReviewSteps>);
+  const component = shallow(
+    <Wizard.ReviewSteps className="someAdditionalClass">Some Children</Wizard.ReviewSteps>
+  );
   expect(component).toMatchSnapshot('Wizard review steps snapshot');
 });
 
@@ -174,12 +206,16 @@ test('Wizard review content renders properly', () => {
 });
 
 test('Wizard review item renders properly', () => {
-  const component = shallow(<Wizard.ReviewItem className="someAdditionalClass">Some Children</Wizard.ReviewItem>);
+  const component = shallow(
+    <Wizard.ReviewItem className="someAdditionalClass">Some Children</Wizard.ReviewItem>
+  );
   expect(component).toMatchSnapshot('Wizard review item snapshot');
 });
 
 test('Wizard footer renders properly', () => {
-  const component = shallow(<Wizard.Footer className="someAdditionalClass">Some Children</Wizard.Footer>);
+  const component = shallow(
+    <Wizard.Footer className="someAdditionalClass">Some Children</Wizard.Footer>
+  );
   expect(component).toMatchSnapshot('Wizard footer snapshot');
 });
 

@@ -33,7 +33,11 @@ export const AccordionToggle: React.FunctionComponent<AccordionToggleProps> = ({
         <Container>
           <button
             id={id}
-            className={css(styles.accordionToggle, isExpanded && styles.modifiers.expanded, className)}
+            className={css(
+              styles.accordionToggle,
+              isExpanded && styles.modifiers.expanded,
+              className
+            )}
             {...props}
             aria-expanded={isExpanded}
           >

@@ -18,7 +18,11 @@ test('uncontrolled', () => {
 });
 
 test('with text', () => {
-  const view = shallow(<DropdownToggleCheckbox id="check" isDisabled aria-label="check">Some text</DropdownToggleCheckbox>);
+  const view = shallow(
+    <DropdownToggleCheckbox id="check" isDisabled aria-label="check">
+      Some text
+    </DropdownToggleCheckbox>
+  );
   expect(view).toMatchSnapshot();
 });
 
@@ -34,14 +38,26 @@ test('3rd state', () => {
 
 test('passing class', () => {
   const view = shallow(
-    <DropdownToggleCheckbox label="label" className="class-123" id="check" isChecked aria-label="check" />
+    <DropdownToggleCheckbox
+      label="label"
+      className="class-123"
+      id="check"
+      isChecked
+      aria-label="check"
+    />
   );
   expect(view).toMatchSnapshot();
 });
 
 test('passing HTML attribute', () => {
   const view = shallow(
-    <DropdownToggleCheckbox label="label" aria-labelledby="labelId" id="check" isChecked aria-label="check" />
+    <DropdownToggleCheckbox
+      label="label"
+      aria-labelledby="labelId"
+      id="check"
+      isChecked
+      aria-label="check"
+    />
   );
   expect(view).toMatchSnapshot();
 });

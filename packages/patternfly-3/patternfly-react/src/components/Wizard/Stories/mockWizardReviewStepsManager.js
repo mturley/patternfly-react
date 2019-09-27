@@ -16,15 +16,16 @@ class MockWizardReviewStepsManager extends React.Component {
     this.setState({
       steps: updated
     });
-  }
+  };
   subStepClicked = (e, stepIndex, subStepIndex) => {
     e.preventDefault();
     const updated = [...this.state.steps];
-    updated[stepIndex].subSteps[subStepIndex].collapsed = !updated[stepIndex].subSteps[subStepIndex].collapsed;
+    updated[stepIndex].subSteps[subStepIndex].collapsed = !updated[stepIndex].subSteps[subStepIndex]
+      .collapsed;
     this.setState({
       steps: updated
     });
-  }
+  };
   render() {
     const { steps } = this.state;
     return (
@@ -56,7 +57,9 @@ class MockWizardReviewStepsManager extends React.Component {
                       </Wizard.ReviewItem>
                       <Wizard.ReviewItem>
                         <span className="wizard-pf-review-item-label">{sub.contents.label2}:</span>
-                        <span className="wizard-pf-review-item-value">This is the description.</span>
+                        <span className="wizard-pf-review-item-value">
+                          This is the description.
+                        </span>
                       </Wizard.ReviewItem>
                     </Wizard.ReviewContent>
                   </Wizard.ReviewSubStep>

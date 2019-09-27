@@ -8,7 +8,7 @@ import { Omit } from '../../helpers/typeUtils';
 export enum ProgressSize {
   sm = 'sm',
   md = 'md',
-  lg = 'lg',
+  lg = 'lg'
 }
 
 export interface ProgressProps extends Omit<React.HTMLProps<HTMLDivElement>, 'size' | 'label'> {
@@ -70,10 +70,12 @@ export class Progress extends React.Component<ProgressProps> {
     } = this.props;
     const additionalProps = {
       ...props,
-      ...(valueText ? { 'aria-valuetext': valueText } : { 'aria-describedby': `${this.id}-description` })
+      ...(valueText
+        ? { 'aria-valuetext': valueText }
+        : { 'aria-describedby': `${this.id}-description` })
     };
 
-    const ariaProps: {[k: string]: any} = {
+    const ariaProps: { [k: string]: any } = {
       'aria-describedby': `${this.id}-description`,
       'aria-valuemin': min,
       'aria-valuenow': value,
@@ -92,7 +94,11 @@ export class Progress extends React.Component<ProgressProps> {
           styles.progress,
           getModifier(styles, variant, ''),
           getModifier(styles, measureLocation, ''),
-          getModifier(styles, measureLocation === ProgressMeasureLocation.inside ? ProgressSize.lg : size, ''),
+          getModifier(
+            styles,
+            measureLocation === ProgressMeasureLocation.inside ? ProgressSize.lg : size,
+            ''
+          ),
           !title && getModifier(styles, 'singleline', ''),
           className
         )}

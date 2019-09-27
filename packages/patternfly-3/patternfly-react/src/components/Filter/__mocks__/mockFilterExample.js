@@ -87,7 +87,7 @@ export class MockFilterExample extends React.Component {
       keyEvent.stopPropagation();
       keyEvent.preventDefault();
     }
-  }
+  };
 
   categoryValueSelected = value => {
     const { currentValue, currentFilterType, filterCategory } = this.state;
@@ -102,11 +102,11 @@ export class MockFilterExample extends React.Component {
         this.filterAdded(currentFilterType, filterValue);
       }
     }
-  }
+  };
 
   clearFilters = () => {
     this.setState({ activeFilters: [] });
-  }
+  };
 
   filterAdded = (field, value) => {
     let filterText = '';
@@ -118,28 +118,31 @@ export class MockFilterExample extends React.Component {
     filterText += ': ';
 
     if (value.filterCategory) {
-      filterText += `${value.filterCategory.title || value.filterCategory}-${value.filterValue.title ||
-        value.filterValue}`;
+      filterText += `${value.filterCategory.title || value.filterCategory}-${value.filterValue
+        .title || value.filterValue}`;
     } else if (value.title) {
       filterText += value.title;
     } else {
       filterText += value;
     }
 
-    if ((field.filterType === 'select' || field.filterType === 'complex-select') && this.filterExists(field.title)) {
+    if (
+      (field.filterType === 'select' || field.filterType === 'complex-select') &&
+      this.filterExists(field.title)
+    ) {
       this.enforceSingleSelect(field.title);
     }
 
     const activeFilters = [...this.state.activeFilters, { label: filterText }];
     this.setState({ activeFilters });
-  }
+  };
 
   filterCategorySelected = category => {
     const { filterCategory } = this.state;
     if (filterCategory !== category) {
       this.setState({ filterCategory: category, currentValue: '' });
     }
-  }
+  };
 
   filterValueSelected = filterValue => {
     const { currentFilterType, currentValue } = this.state;
@@ -150,24 +153,24 @@ export class MockFilterExample extends React.Component {
         this.filterAdded(currentFilterType, filterValue);
       }
     }
-  }
+  };
 
   filterExists = fieldTitle => {
     const { activeFilters } = this.state;
     const index = findIndex(activeFilters, filter => filter.label.startsWith(fieldTitle));
     return index !== -1;
-  }
+  };
 
   getFilterValue = fieldTitle => {
     const { activeFilters } = this.state;
     const existingFilter = find(activeFilters, filter => filter.label.startsWith(fieldTitle));
     return existingFilter.label.substring(existingFilter.label.indexOf(': ') + 2);
-  }
+  };
 
   enforceSingleSelect = fieldTitle => {
     const { activeFilters } = this.state;
     remove(activeFilters, filter => filter.label.startsWith(fieldTitle));
-  }
+  };
 
   removeFilter = filter => {
     const { activeFilters } = this.state;
@@ -177,7 +180,7 @@ export class MockFilterExample extends React.Component {
       const updated = [...activeFilters.slice(0, index), ...activeFilters.slice(index + 1)];
       this.setState({ activeFilters: updated });
     }
-  }
+  };
 
   selectFilterType = filterType => {
     const { currentFilterType } = this.state;
@@ -193,7 +196,10 @@ export class MockFilterExample extends React.Component {
           } else {
             const categoryValues = filterValue.split('-');
             [newFilterCategory, newCurrentValue] = categoryValues;
-            newFilterCategory = find(filterType.filterCategories, filterCat => filterCat.title === newFilterCategory);
+            newFilterCategory = find(
+              filterType.filterCategories,
+              filterCat => filterCat.title === newFilterCategory
+            );
           }
         }
       }
@@ -203,11 +209,11 @@ export class MockFilterExample extends React.Component {
         filterCategory: newFilterCategory
       });
     }
-  }
+  };
 
   updateCurrentValue = event => {
     this.setState({ currentValue: event.target.value });
-  }
+  };
 
   renderInput() {
     const { currentFilterType, currentValue, filterCategory } = this.state;
@@ -215,7 +221,10 @@ export class MockFilterExample extends React.Component {
       return null;
     }
 
-    if (currentFilterType.filterType === 'select' || currentFilterType.filterType === 'complex-select') {
+    if (
+      currentFilterType.filterType === 'select' ||
+      currentFilterType.filterType === 'complex-select'
+    ) {
       // remove selected value in dropdown(s) if filter was removed
       if (currentValue !== '' && !this.filterExists(currentFilterType.title)) {
         this.setState({

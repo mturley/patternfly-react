@@ -69,7 +69,14 @@ export class Expandable extends React.Component<ExpandableProps, ExpandableState
     }
 
     return (
-      <div {...props} className={css(styles.expandable, propOrStateIsExpanded && styles.modifiers.expanded, className)}>
+      <div
+        {...props}
+        className={css(
+          styles.expandable,
+          propOrStateIsExpanded && styles.modifiers.expanded,
+          className
+        )}
+      >
         <button
           className={css(
             styles.expandableToggle,

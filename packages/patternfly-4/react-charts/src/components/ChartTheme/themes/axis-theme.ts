@@ -15,5 +15,5 @@ export const AxisTheme = {
         stroke: chart_axis_tick_stroke_Color.value
       }
     }
-  },
+  }
 };

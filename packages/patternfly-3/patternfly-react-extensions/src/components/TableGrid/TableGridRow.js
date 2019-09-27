@@ -8,12 +8,24 @@ import { helpers } from '../../common/helpers';
  * TableGridRow Component for PatternFly
  */
 
-const TableGridRow = ({ children, className, selected, onToggleSelection, checkboxAriaLabel, ...props }) => {
+const TableGridRow = ({
+  children,
+  className,
+  selected,
+  onToggleSelection,
+  checkboxAriaLabel,
+  ...props
+}) => {
   const classes = classNames('table-grid-pf-row', { active: selected }, className);
   return (
     <Grid.Row className={classes} {...props}>
       <div className="table-grid-pf-checkbox">
-        <input type="checkbox" checked={selected} onChange={onToggleSelection} aria-label={checkboxAriaLabel} />
+        <input
+          type="checkbox"
+          checked={selected}
+          onChange={onToggleSelection}
+          aria-label={checkboxAriaLabel}
+        />
       </div>
       {children}
     </Grid.Row>

@@ -5,7 +5,11 @@ import { TopologySideBar } from './index';
 describe('TopologySideBar', () => {
   test('should display topology sidebar correctly', () => {
     const view = mount(
-      <TopologySideBar className="my-test-class" show header={<span id="test-header-id">Header</span>}>
+      <TopologySideBar
+        className="my-test-class"
+        show
+        header={<span id="test-header-id">Header</span>}
+      >
         <div id="test-canvas" />
       </TopologySideBar>
     );
@@ -17,7 +21,7 @@ describe('TopologySideBar', () => {
     const mockClose = jest.fn();
     const view = mount(
       <TopologySideBar className="my-test-class" show onClose={mockClose}>
-      >
+        >
         <div id="test-canvas" />
       </TopologySideBar>
     );
@@ -28,7 +32,11 @@ describe('TopologySideBar', () => {
 
   test('should hide the sidebar correctly', () => {
     const view = mount(
-      <TopologySideBar className="my-test-class" show={false} header={<span id="test-header-id">Header</span>}>
+      <TopologySideBar
+        className="my-test-class"
+        show={false}
+        header={<span id="test-header-id">Header</span>}
+      >
         >
         <div id="test-canvas" />
       </TopologySideBar>

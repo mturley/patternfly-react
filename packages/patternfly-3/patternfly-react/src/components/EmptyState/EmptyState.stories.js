@@ -3,12 +3,19 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { Button } from '../Button';
 import { EmptyState } from './index';
 import { name } from '../../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/Empty State`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/Empty State`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({
@@ -24,9 +31,9 @@ stories.add(
       <EmptyState.Icon />
       <EmptyState.Title>Empty State Title</EmptyState.Title>
       <EmptyState.Info>
-        This is the Empty State component. The goal of a empty state pattern is to provide a good first impression that
-        helps users to achieve their goals. It should be used when a view is empty because no objects exists and you
-        want to guide the user to perform specific actions.
+        This is the Empty State component. The goal of a empty state pattern is to provide a good
+        first impression that helps users to achieve their goals. It should be used when a view is
+        empty because no objects exists and you want to guide the user to perform specific actions.
       </EmptyState.Info>
       <EmptyState.Help onClick={action('help action')}>
         For more information please see{' '}

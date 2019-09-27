@@ -70,14 +70,20 @@ test('Footer updates when items are selected ', () => {
 test('selecting child items works properly', () => {
   const props = getProps();
   const component = mount(<DualListControlled {...props} />);
-  const childItemsCheckbox = component.find('label.dual-list-pf-item.child > input[type="checkbox"]');
+  const childItemsCheckbox = component.find(
+    'label.dual-list-pf-item.child > input[type="checkbox"]'
+  );
   const {
     'data-side': side,
     'data-position': position,
     'data-parent-position': parentPosition
   } = childItemsCheckbox.first().props();
-  const firstMockedEvent = { target: { checked: true, dataset: { position, side, parentPosition } } };
-  const secondMockedEvent = { target: { checked: true, dataset: { position: position + 1, side, parentPosition } } };
+  const firstMockedEvent = {
+    target: { checked: true, dataset: { position, side, parentPosition } }
+  };
+  const secondMockedEvent = {
+    target: { checked: true, dataset: { position: position + 1, side, parentPosition } }
+  };
   childItemsCheckbox.first().simulate('change', firstMockedEvent);
   childItemsCheckbox.at(1).simulate('change', secondMockedEvent);
   expect(component.state().left.items[0].checked).toBeTruthy();
@@ -86,13 +92,17 @@ test('selecting child items works properly', () => {
 test('move child items works properly', () => {
   const props = getProps();
   const component = mount(<DualListControlled {...props} />);
-  const childItemsCheckbox = component.find('label.dual-list-pf-item.child > input[type="checkbox"]');
+  const childItemsCheckbox = component.find(
+    'label.dual-list-pf-item.child > input[type="checkbox"]'
+  );
   const {
     'data-side': side,
     'data-position': position,
     'data-parent-position': parentPosition
   } = childItemsCheckbox.first().props();
-  const firstMockedEvent = { target: { checked: true, dataset: { position, side, parentPosition } } };
+  const firstMockedEvent = {
+    target: { checked: true, dataset: { position, side, parentPosition } }
+  };
   childItemsCheckbox.first().simulate('change', firstMockedEvent);
   const rightArrow = component
     .find('DualListArrows')

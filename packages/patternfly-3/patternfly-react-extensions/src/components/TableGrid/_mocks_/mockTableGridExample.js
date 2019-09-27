@@ -56,11 +56,11 @@ class MockTableGridExample extends React.Component {
     });
 
     this.setState({ items, sortField: id, isAscending: updateAscending });
-  }
+  };
 
   onSelect = (item, field) => {
     this.setState({ selectedItem: item, selectedField: field });
-  }
+  };
 
   toggleSelection = item => {
     const { selectedItems } = this.state;
@@ -73,17 +73,18 @@ class MockTableGridExample extends React.Component {
       newSelections = [...selectedItems, item];
     }
     this.setState({ selectedItems: newSelections });
-  }
+  };
 
   toggleAllSelections = () => {
     const { items, selectedItems } = this.state;
     this.setState({ selectedItems: selectedItems.length > 0 ? [] : [...items] });
-  }
+  };
 
   renderItemRow = (item, index) => {
     const { selectType } = this.props;
     const { selectedItem, selectedField, selectedItems } = this.state;
-    const selected = selectType === 'checkbox' ? selectedItems.indexOf(item) >= 0 : selectedItem === item;
+    const selected =
+      selectType === 'checkbox' ? selectedItems.indexOf(item) >= 0 : selectedItem === item;
     return (
       <TableGrid.Row
         key={index}
@@ -121,7 +122,7 @@ class MockTableGridExample extends React.Component {
         </TableGrid.Col>
       </TableGrid.Row>
     );
-  }
+  };
 
   render() {
     const { items, selectedItems, sortField, isAscending } = this.state;
@@ -131,7 +132,11 @@ class MockTableGridExample extends React.Component {
         <TableGrid.Head
           showCheckbox={selectType === 'checkbox'}
           allSelected={selectType === 'checkbox' && selectedItems.length === items.length}
-          partialSelected={selectType === 'checkbox' && selectedItems.length > 0 && selectedItems.length < items.length}
+          partialSelected={
+            selectType === 'checkbox' &&
+            selectedItems.length > 0 &&
+            selectedItems.length < items.length
+          }
           onToggleSelection={this.toggleAllSelections}
         >
           <TableGrid.ColumnHeader
@@ -178,7 +183,9 @@ class MockTableGridExample extends React.Component {
             </OverlayTrigger>
           </TableGrid.ColumnHeader>
         </TableGrid.Head>
-        <TableGrid.Body>{items.map((item, index) => this.renderItemRow(item, index))}</TableGrid.Body>
+        <TableGrid.Body>
+          {items.map((item, index) => this.renderItemRow(item, index))}
+        </TableGrid.Body>
       </TableGrid>
     );
   }

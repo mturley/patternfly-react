@@ -1,5 +1,11 @@
 import React from 'react';
-import { DataList, DataListItem, DataListItemRow, DataListItemCells, DataListCell } from '@patternfly/react-core';
+import {
+  DataList,
+  DataListItem,
+  DataListItemRow,
+  DataListItemCells,
+  DataListCell
+} from '@patternfly/react-core';
 
 export class DataListDemo extends React.Component {
   render() {

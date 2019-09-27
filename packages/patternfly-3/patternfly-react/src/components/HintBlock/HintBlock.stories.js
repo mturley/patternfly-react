@@ -8,14 +8,18 @@ import { HintBlock } from './index';
 import { name } from '../../../package.json';
 import { defaultTemplate } from '../../../../../../storybook/decorators/storyTemplates';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/HintBlock`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/HintBlock`,
+  module
+);
 
 const description = (
   <div>
-    The <b>Hint Block</b> pattern is similar to an informational inline notification, but with additional emphasis (blue
-    highlight). The intention is to use this for specific use cases involving new users, new features, or cases where
-    extra guidance may assist in successfully completing a flow. The hint pattern involves a one-step reminder,
-    explanation, or call to action. Potential Use Cases
+    The <b>Hint Block</b> pattern is similar to an informational inline notification, but with
+    additional emphasis (blue highlight). The intention is to use this for specific use cases
+    involving new users, new features, or cases where extra guidance may assist in successfully
+    completing a flow. The hint pattern involves a one-step reminder, explanation, or call to
+    action. Potential Use Cases
     <ul>
       <li>
         To provide guidance to <b>new users</b> who do not know how to use the application

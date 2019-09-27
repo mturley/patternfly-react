@@ -23,7 +23,7 @@ test('Wizard should match snapshot', () => {
     { name: 'C', component: <p>Step 4</p> },
     { name: 'D', component: <p>Step 5</p> }
   ];
-  const onBack: WizardStepFunctionType = (step) => {
+  const onBack: WizardStepFunctionType = step => {
     const name = { step };
   };
   const view = mount(

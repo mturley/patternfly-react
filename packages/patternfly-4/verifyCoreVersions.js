@@ -8,7 +8,13 @@ async function verify() {
   const packages = await helpers.getPfPackages(false);
   const pkgConfigs = packages.map(pkg => pkg.toJSON());
   pkgConfigs.forEach(
-    ({ name, dependencies = {}, devDependencies = {}, optionalDependencies = {}, peerDependencies = {} }) => {
+    ({
+      name,
+      dependencies = {},
+      devDependencies = {},
+      optionalDependencies = {},
+      peerDependencies = {}
+    }) => {
       [
         ...Object.entries(dependencies),
         ...Object.entries(devDependencies),

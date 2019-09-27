@@ -43,7 +43,9 @@ const resolveCascadeEditability = rows => {
       row.isParentEditing = true;
     });
 
-  const lastVisibleRow = rows.filter((row, idx) => !row.parent || isRowExpandedIndexes.has(idx)).pop();
+  const lastVisibleRow = rows
+    .filter((row, idx) => !row.parent || isRowExpandedIndexes.has(idx))
+    .pop();
 
   // flag last parent row if there are only descendants under it
   if (lastVisibleRow && lastVisibleRow.isParentEditing) {
@@ -66,7 +68,8 @@ const onRow = (event, row, rowProps, computedData, { onRowClick, editConfig }) =
   if (hasCellNumber && editConfig && typeof editConfig.onEditCellClicked === 'function') {
     // resolve closest (e.g. for dropdowns) usable id of a clicked element inside a cell
     const idElement = target.closest('[id]');
-    const elementId = idElement && cell.contains(idElement) ? idElement.getAttribute('id') || null : null;
+    const elementId =
+      idElement && cell.contains(idElement) ? idElement.getAttribute('id') || null : null;
 
     if (!elementId) {
       showIdWarnings(row, target);

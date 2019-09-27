@@ -5,4 +5,11 @@ import EmptyStateInfo from './EmptyStateInfo';
 import EmptyStateHelp from './EmptyStateHelp';
 import EmptyStateAction from './EmptyStateAction';
 
-export { EmptyState, EmptyStateIcon, EmptyStateTitle, EmptyStateInfo, EmptyStateHelp, EmptyStateAction };
+export {
+  EmptyState,
+  EmptyStateIcon,
+  EmptyStateTitle,
+  EmptyStateInfo,
+  EmptyStateHelp,
+  EmptyStateAction
+};

@@ -11,10 +11,10 @@ import { renderWizardSteps, renderSidebarItems, renderWizardContents } from './m
 export class WizardExample extends MockWizardBase {
   open = () => {
     this.setState({ showModal: true });
-  }
+  };
   close = () => {
     this.setState({ showModal: false });
-  }
+  };
   render() {
     const { showModal, activeStepIndex, activeSubStepIndex } = this.state;
 
@@ -28,7 +28,12 @@ export class WizardExample extends MockWizardBase {
           <Wizard.Header onClose={this.close} title="Wizard Title" />
           <Wizard.Body>
             <Wizard.Steps
-              steps={renderWizardSteps(mockWizardItems, activeStepIndex, activeSubStepIndex, this.onStepClick)}
+              steps={renderWizardSteps(
+                mockWizardItems,
+                activeStepIndex,
+                activeSubStepIndex,
+                this.onStepClick
+              )}
             />
             <Wizard.Row>
               <Wizard.Sidebar
@@ -39,7 +44,9 @@ export class WizardExample extends MockWizardBase {
                   this.onSidebarItemClick
                 )}
               />
-              <Wizard.Main>{renderWizardContents(mockWizardItems, activeStepIndex, activeSubStepIndex)}</Wizard.Main>
+              <Wizard.Main>
+                {renderWizardContents(mockWizardItems, activeStepIndex, activeSubStepIndex)}
+              </Wizard.Main>
             </Wizard.Row>
           </Wizard.Body>
           <Wizard.Footer>

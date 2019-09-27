@@ -89,7 +89,12 @@ const PaginationRow = ({
         />
 
         <ControlLabel className="sr-only">{messages.currentPage}</ControlLabel>
-        <FormControl className="pagination-pf-page" type="text" value={pageValue} onChange={onPageInput} />
+        <FormControl
+          className="pagination-pf-page"
+          type="text"
+          value={pageValue}
+          onChange={onPageInput}
+        />
 
         <PaginationRowAmountOfPages messagesOf={messages.of} amountOfPages={amountOfPages} />
 

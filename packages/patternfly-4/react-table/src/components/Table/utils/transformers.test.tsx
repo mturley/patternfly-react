@@ -16,25 +16,32 @@ import {
   textCenter
 } from './transformers';
 import { DropdownDirection, DropdownPosition } from '@patternfly/react-core';
-import { IAction, IActions, IActionsResolver, IAreActionsDisabled, IExtra, IExtraData, IRowData, ISeparator } from '../Table';
+import {
+  IAction,
+  IActions,
+  IActionsResolver,
+  IAreActionsDisabled,
+  IExtra,
+  IExtraData,
+  IRowData,
+  ISeparator
+} from '../Table';
 
-const testCellActions = (
-  {
-    actions,
-    actionResolver,
-    areActionsDisabled,
-    rowData,
-    extraData,
-    expectDisabled
-  }: {
-    actions?: IActions,
-    actionResolver?: IActionsResolver,
-    areActionsDisabled?: IAreActionsDisabled,
-    rowData?: IRowData,
-    extraData?: IExtraData,
-    expectDisabled?: boolean
-  }
-) => {
+const testCellActions = ({
+  actions,
+  actionResolver,
+  areActionsDisabled,
+  rowData,
+  extraData,
+  expectDisabled
+}: {
+  actions?: IActions;
+  actionResolver?: IActionsResolver;
+  areActionsDisabled?: IAreActionsDisabled;
+  rowData?: IRowData;
+  extraData?: IExtraData;
+  expectDisabled?: boolean;
+}) => {
   const returnedData = cellActions(actions, actionResolver, areActionsDisabled)('', {
     rowIndex: 0,
     rowData,
@@ -84,7 +91,11 @@ describe('Transformer functions', () => {
       const column = {
         extraParams: { onSelect }
       };
-      const returnedData = selectable('', { column, rowIndex: 0, rowData: { selected: true } } as IExtra);
+      const returnedData = selectable('', {
+        column,
+        rowIndex: 0,
+        rowData: { selected: true }
+      } as IExtra);
       expect(returnedData).toMatchObject({ className: 'pf-c-table__check' });
       const view = mount(returnedData.children);
       view.find('input').simulate('change');
@@ -97,7 +108,11 @@ describe('Transformer functions', () => {
       const column = {
         extraParams: { onSelect }
       };
-      const returnedData = selectable('', { column, rowIndex: 0, rowData: { selected: false } } as IExtra);
+      const returnedData = selectable('', {
+        column,
+        rowIndex: 0,
+        rowData: { selected: false }
+      } as IExtra);
       expect(returnedData).toMatchSnapshot();
       const view = mount(returnedData.children);
       view.find('input').simulate('change');
@@ -182,7 +197,7 @@ describe('Transformer functions', () => {
 
   describe('cellWidth', () => {
     const widths = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 'max'];
-    widths.forEach((width) =>
+    widths.forEach(width =>
       test(`${width}`, () => {
         expect(cellWidth(width as string)()).toEqual({ className: `pf-m-width-${width}` });
       })
@@ -218,7 +233,11 @@ describe('Transformer functions', () => {
 
   describe('expandable', () => {
     test('with parent', () => {
-      const returned = expandable('test', { rowIndex: 2, rowData: { parent: 1 }, column: { extraParams: {} } } as IExtra);
+      const returned = expandable('test', {
+        rowIndex: 2,
+        rowData: { parent: 1 },
+        column: { extraParams: {} }
+      } as IExtra);
       const view = mount(returned as React.ReactElement<any>);
       expect(view.find('div.pf-c-table__expandable-row-content')).toHaveLength(1);
       expect(view).toMatchSnapshot();
@@ -239,7 +258,9 @@ describe('Transformer functions', () => {
     });
 
     test('no parent', () => {
-      expect(expandedRow(5)({ title: 'test' }, { rowData: {}, column: { extraParams: {} } })).toBe(false);
+      expect(expandedRow(5)({ title: 'test' }, { rowData: {}, column: { extraParams: {} } })).toBe(
+        false
+      );
     });
 
     test('full width', () => {
@@ -255,7 +276,11 @@ describe('Transformer functions', () => {
         { title: 'test' },
         { rowIndex: 2, rowData: { parent: 1, noPadding: true }, column: { extraParams: {} } }
       );
-      expect(returned).toMatchObject({ colSpan: 5, id: 'expanded-content2', className: 'pf-m-no-padding' });
+      expect(returned).toMatchObject({
+        colSpan: 5,
+        id: 'expanded-content2',
+        className: 'pf-m-no-padding'
+      });
     });
   });
 

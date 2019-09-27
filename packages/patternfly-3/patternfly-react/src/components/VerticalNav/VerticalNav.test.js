@@ -44,7 +44,10 @@ test('VerticalNav renders properly with item objects', () => {
   const component = mount(
     <VerticalNav items={mockNavItems} pinnableMenus>
       <Masthead>
-        <Brand iconImg="../../../storybook/img/logo-alt.svg" titleImg="../../../storybook/img/brand-alt.svg" />
+        <Brand
+          iconImg="../../../storybook/img/logo-alt.svg"
+          titleImg="../../../storybook/img/brand-alt.svg"
+        />
         <IconBar>
           <MockIconBarChildren />
         </IconBar>

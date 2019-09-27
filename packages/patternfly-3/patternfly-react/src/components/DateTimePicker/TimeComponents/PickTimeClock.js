@@ -20,7 +20,7 @@ class PickTimeClock extends React.Component {
       time.setMinutes(time.getMinutes() + amount);
     }
     setSelected(time);
-  }
+  };
   toggleAMPM = () => {
     const { time, setSelected } = this.props;
     if (this.state.ampm === AM) {
@@ -31,7 +31,7 @@ class PickTimeClock extends React.Component {
       this.setState({ ampm: AM });
     }
     setSelected(time);
-  }
+  };
   render() {
     const { time, toggleTimeTable } = this.props;
     const minutes = time.getMinutes();
@@ -75,13 +75,21 @@ class PickTimeClock extends React.Component {
             </tr>
             <tr>
               <td>
-                <a title="Decrement Hour" className="btn clock-btn" onClick={() => this.setTime(HOUR, -1)}>
+                <a
+                  title="Decrement Hour"
+                  className="btn clock-btn"
+                  onClick={() => this.setTime(HOUR, -1)}
+                >
                   <span className="glyphicon glyphicon-chevron-down" />
                 </a>
               </td>
               <td className="separator" />
               <td>
-                <a title="Decrement Minute" className="btn clock-btn" onClick={() => this.setTime(MINUTE, -1)}>
+                <a
+                  title="Decrement Minute"
+                  className="btn clock-btn"
+                  onClick={() => this.setTime(MINUTE, -1)}
+                >
                   <span className="glyphicon glyphicon-chevron-down" />
                 </a>
               </td>

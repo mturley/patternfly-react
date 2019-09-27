@@ -7,17 +7,20 @@ import { name } from '../../../package.json';
 
 import { BadgedResource } from './index';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Badged Resource`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Badged Resource`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({
     title: 'Badged Resource',
     description: (
       <div>
-        The resourceKind should be chosen from <b>BadgedResource.KINDS</b>.<br />A list of supported resource types can
-        be found in <b>resourceTypes</b>.<br />
-        Setting this field gives appropriate values for the badge background color, kindAbbr, and kindStr (any of which
-        can be overridden).
+        The resourceKind should be chosen from <b>BadgedResource.KINDS</b>.<br />A list of supported
+        resource types can be found in <b>resourceTypes</b>.<br />
+        Setting this field gives appropriate values for the badge background color, kindAbbr, and
+        kindStr (any of which can be overridden).
       </div>
     )
   })
@@ -78,7 +81,10 @@ stories.add(
   })(() => (
     <div>
       <div style={{ marginBottom: 10 }}>
-        <BadgedResource resourceName="Standard Item" resourceKind={BadgedResource.KINDS.DEPLOYMENT_CONFIG} />
+        <BadgedResource
+          resourceName="Standard Item"
+          resourceKind={BadgedResource.KINDS.DEPLOYMENT_CONFIG}
+        />
       </div>
       <div style={{ marginBottom: 10 }}>
         <BadgedResource
@@ -88,10 +94,19 @@ stories.add(
         />
       </div>
       <div style={{ marginBottom: 10 }}>
-        <BadgedResource resourceName="No Tooltip Item" resourceKind={BadgedResource.KINDS.POLICY} tipDelay={-1} />
+        <BadgedResource
+          resourceName="No Tooltip Item"
+          resourceKind={BadgedResource.KINDS.POLICY}
+          tipDelay={-1}
+        />
       </div>
       <div style={{ marginBottom: 10 }}>
-        <BadgedResource kindAbbr="APIS" kindStr="API Service" resourceName="Fast Tooltip" tipDelay={0} />
+        <BadgedResource
+          kindAbbr="APIS"
+          kindStr="API Service"
+          resourceName="Fast Tooltip"
+          tipDelay={0}
+        />
       </div>
       <div style={{ marginBottom: 10 }}>
         <BadgedResource
@@ -110,7 +125,11 @@ stories.add(
         />
       </div>
       <div style={{ marginBottom: 10 }}>
-        <BadgedResource resourceName="Large Item" large resourceKind={BadgedResource.KINDS.PROJECT} />
+        <BadgedResource
+          resourceName="Large Item"
+          large
+          resourceKind={BadgedResource.KINDS.PROJECT}
+        />
       </div>
       <div style={{ marginBottom: 10 }}>
         <BadgedResource

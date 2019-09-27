@@ -22,7 +22,12 @@ const barChartConfigData = {
 };
 
 const groupedcCategories = ['2013', '2014', '2015'];
-const groupedColumnsData = [['Q1', 400, 250, 375], ['Q2', 355, 305, 300], ['Q3', 315, 340, 276], ['Q4', 180, 390, 190]];
+const groupedColumnsData = [
+  ['Q1', 400, 250, 375],
+  ['Q2', 355, 305, 300],
+  ['Q3', 315, 340, 276],
+  ['Q4', 180, 390, 190]
+];
 const groupedColors = {
   pattern: [
     patternfly.pfPaletteColors.red,

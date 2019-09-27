@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { TABLE_ALIGN, TABLE_ALIGNMENT_TYPES, TABLE_SORT_DIRECTION, TABLE_SORT_DIRECTIONS } from './TableConstants';
+import {
+  TABLE_ALIGN,
+  TABLE_ALIGNMENT_TYPES,
+  TABLE_SORT_DIRECTION,
+  TABLE_SORT_DIRECTIONS
+} from './TableConstants';
 
 /**
  * TableHeading component for Patternfly React

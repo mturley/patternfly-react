@@ -12,12 +12,12 @@ describe('component render', () => {
     const wrapper = mount(<Pagination itemCount={20} variant={PaginationVariant.bottom} />);
     expect(wrapper).toMatchSnapshot();
   });
-  
+
   test('should render correctly compact', () => {
     const wrapper = mount(<Pagination itemCount={20} isCompact />);
     expect(wrapper).toMatchSnapshot();
   });
-  
+
   test('should render correctly disabled', () => {
     const wrapper = mount(<Pagination itemCount={20} isDisabled />);
     expect(wrapper).toMatchSnapshot();
@@ -39,7 +39,9 @@ describe('component render', () => {
   });
 
   test('custom perPageOptions', () => {
-    const wrapper = mount(<Pagination itemCount={40} perPageOptions={[{ title: 'some', value: 1 }]} />);
+    const wrapper = mount(
+      <Pagination itemCount={40} perPageOptions={[{ title: 'some', value: 1 }]} />
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -59,14 +61,19 @@ describe('component render', () => {
   });
 
   test('titles', () => {
-    const wrapper = mount(<Pagination itemCount={40} titles={{ items: 'values', page: 'books' }} />);
+    const wrapper = mount(
+      <Pagination itemCount={40} titles={{ items: 'values', page: 'books' }} />
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   test('custom pagination toggle', () => {
     const wrapper = mount(
       // eslint-disable-next-line no-template-curly-in-string
-      <Pagination itemCount={40} toggleTemplate={'${firstIndex} - ${lastIndex} - ${itemCount} - ${itemsTitle}'} />
+      <Pagination
+        itemCount={40}
+        toggleTemplate={'${firstIndex} - ${lastIndex} - ${itemCount} - ${itemsTitle}'}
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });

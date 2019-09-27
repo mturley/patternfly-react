@@ -149,7 +149,9 @@ test('StatefulNotificationDrawerWrapper is working properly', () => {
 });
 
 test('StatefulToggleNotificationDrawerWrapper is working properly', () => {
-  const component = shallow(<StatefulToggleNotificationDrawerWrapper panels={panel} isDrawerOpen hasUnreadMessages />);
+  const component = shallow(
+    <StatefulToggleNotificationDrawerWrapper panels={panel} isDrawerOpen hasUnreadMessages />
+  );
   component.instance().toggleDrawer();
   component.instance().updateUnreadCount(true);
 

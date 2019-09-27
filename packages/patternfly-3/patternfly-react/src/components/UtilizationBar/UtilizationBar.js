@@ -7,7 +7,9 @@ import { labelClasses, mainDivClasses, barStyle } from './helpers';
 
 const randomId = () => Date.now();
 
-const AvailableTooltipFunction = (max, now) => <Tooltip id={randomId()}>Available {max - now} %</Tooltip>;
+const AvailableTooltipFunction = (max, now) => (
+  <Tooltip id={randomId()}>Available {max - now} %</Tooltip>
+);
 
 const UsedTooltipFunction = (max, now) => <Tooltip id={randomId()}>Used {now} %</Tooltip>;
 

@@ -17,13 +17,13 @@ const description = (
     <i>StatefulWizardPattern</i> pattern components.
     <br />
     <br />
-    The <i>WizardPattern</i> is a <b>stateless</b> wizard pattern which provides loading contents and some common step
-    handling logic for the provided steps.
+    The <i>WizardPattern</i> is a <b>stateless</b> wizard pattern which provides loading contents
+    and some common step handling logic for the provided steps.
     <br />
     <br />
-    The <i>StatefulWizardPattern</i> is a <b>stateful</b> wizard pattern which provides loading contents, step handling
-    logic, and will automatically manage the <i>activeStepIndex</i> for the provided steps. This can be overriden by
-    passing <i>activeStepIndex</i> as a prop.
+    The <i>StatefulWizardPattern</i> is a <b>stateful</b> wizard pattern which provides loading
+    contents, step handling logic, and will automatically manage the <i>activeStepIndex</i> for the
+    provided steps. This can be overriden by passing <i>activeStepIndex</i> as a prop.
   </div>
 );
 const documentationLink = `${DOCUMENTATION_URL.PATTERNFLY_ORG_COMMUNICATION}wizard/#overview`;

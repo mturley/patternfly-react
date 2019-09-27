@@ -1,7 +1,12 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/Table/table';
 import stylesGrid from '@patternfly/react-styles/css/components/Table/table-grid';
-import { DropdownPosition, DropdownDirection, DropdownItemProps, Omit } from '@patternfly/react-core';
+import {
+  DropdownPosition,
+  DropdownDirection,
+  DropdownItemProps,
+  Omit
+} from '@patternfly/react-core';
 import { css, getModifier } from '@patternfly/react-styles';
 import { Provider } from './base';
 import { BodyCell } from './BodyCell';
@@ -24,18 +29,41 @@ export enum TableVariant {
   compact = 'compact'
 }
 
-export type OnSort = (event: React.MouseEvent, columnIndex: number, sortByDirection: SortByDirection, extraData: IExtraColumnData) => void;
-export type OnCollapse = (event: React.MouseEvent, rowIndex: number, isOpen: boolean, rowData: IRowData, extraData: IExtraData) => void;
-export type OnExpand = (event: React.MouseEvent, rowIndex: number, colIndex: number, isOpen: boolean, rowData: IRowData, extraData: IExtraData) => void;
-export type OnSelect = (event: React.MouseEvent, isSelected: boolean, rowIndex: number, rowData: IRowData, extraData: IExtraData) => void;
+export type OnSort = (
+  event: React.MouseEvent,
+  columnIndex: number,
+  sortByDirection: SortByDirection,
+  extraData: IExtraColumnData
+) => void;
+export type OnCollapse = (
+  event: React.MouseEvent,
+  rowIndex: number,
+  isOpen: boolean,
+  rowData: IRowData,
+  extraData: IExtraData
+) => void;
+export type OnExpand = (
+  event: React.MouseEvent,
+  rowIndex: number,
+  colIndex: number,
+  isOpen: boolean,
+  rowData: IRowData,
+  extraData: IExtraData
+) => void;
+export type OnSelect = (
+  event: React.MouseEvent,
+  isSelected: boolean,
+  rowIndex: number,
+  rowData: IRowData,
+  extraData: IExtraData
+) => void;
 
 export enum SortByDirection {
   asc = 'asc',
   desc = 'desc'
 }
 
-export interface IHeaderRow extends ColumnType {
-}
+export interface IHeaderRow extends ColumnType {}
 
 export interface IRowData extends IRow {
   disableActions?: boolean;
@@ -68,8 +96,7 @@ export interface IExtraColumnData {
   property?: string;
 }
 
-export interface IExtraData extends IExtraColumnData, IExtraRowData {
-}
+export interface IExtraData extends IExtraColumnData, IExtraRowData {}
 
 export interface IExtra extends IExtraData {
   rowData?: IRowData;
@@ -89,7 +116,12 @@ export interface IAction extends Omit<DropdownItemProps, 'title' | 'onClick'> {
   isSeparator?: boolean;
   itemKey?: string;
   title?: string | React.ReactNode;
-  onClick: (event: React.MouseEvent, rowIndex: number, rowData: IRowData, extraData: IExtraData) => void;
+  onClick: (
+    event: React.MouseEvent,
+    rowIndex: number,
+    rowData: IRowData,
+    extraData: IExtraData
+  ) => void;
 }
 
 export interface ISeparator extends IAction {
@@ -97,7 +129,10 @@ export interface ISeparator extends IAction {
 }
 
 export type IActions = (IAction | ISeparator)[];
-export type IActionsResolver = (rowData: IRowData, extraData: IExtraData) => (IAction | ISeparator)[];
+export type IActionsResolver = (
+  rowData: IRowData,
+  extraData: IExtraData
+) => (IAction | ISeparator)[];
 export type IAreActionsDisabled = (rowData: IRowData, extraData: IExtraData) => boolean;
 
 // to be removed in future, this interface is no longer accurate
@@ -113,16 +148,18 @@ export type ITransforms = ((
   column?: IColumn,
   property?: string,
   rowIndex?: number,
-  rowKey?: RowKeyType ) => { className: string; 'aria-sort': string; children: React.ReactNode; })[];
+  rowKey?: RowKeyType
+) => { className: string; 'aria-sort': string; children: React.ReactNode })[];
 
 export type IFormatters = ((
-    data?: IFormatterValueType,
-    rowData?: IRowData,
-    columnIndex?: number,
-    column?: IColumn,
-    property?: string,
-    rowIndex?: number,
-    rowKey?: RowKeyType ) => formatterValueType)[];
+  data?: IFormatterValueType,
+  rowData?: IRowData,
+  columnIndex?: number,
+  column?: IColumn,
+  property?: string,
+  rowIndex?: number,
+  rowKey?: RowKeyType
+) => formatterValueType)[];
 
 export interface ICell {
   title?: string | React.ReactNode;
@@ -206,21 +243,21 @@ export const TableContext = React.createContext({
 
 export class Table extends React.Component<TableProps, {}> {
   static defaultProps = {
-    "children": null as React.ReactNode,
-    "className": '',
-    "variant": null as TableVariant,
-    "borders": true,
-    "rowLabeledBy": 'simple-node',
-    "expandId": 'expandable-toggle',
-    "contentId": 'expanded-content',
-    "dropdownPosition": DropdownPosition.right,
-    "dropdownDirection": DropdownDirection.down,
-    "header": undefined as React.ReactNode,
-    "caption": undefined as React.ReactNode,
+    children: null as React.ReactNode,
+    className: '',
+    variant: null as TableVariant,
+    borders: true,
+    rowLabeledBy: 'simple-node',
+    expandId: 'expandable-toggle',
+    contentId: 'expanded-content',
+    dropdownPosition: DropdownPosition.right,
+    dropdownDirection: DropdownDirection.down,
+    header: undefined as React.ReactNode,
+    caption: undefined as React.ReactNode,
     'aria-label': undefined as string,
-    "gridBreakPoint": TableGridBreakpoint.gridMd,
-    "role": 'grid',
-    "canSelectAll": true
+    gridBreakPoint: TableGridBreakpoint.gridMd,
+    role: 'grid',
+    canSelectAll: true
   };
 
   isSelected = (row: IRow) => row.selected === true;
@@ -229,8 +266,10 @@ export class Table extends React.Component<TableProps, {}> {
     if (rows === undefined || rows.length === 0) {
       return false;
     }
-    return rows.every((row) => this.isSelected(row) || (row.hasOwnProperty('parent') && !row.showSelect));
-  }
+    return rows.every(
+      row => this.isSelected(row) || (row.hasOwnProperty('parent') && !row.showSelect)
+    );
+  };
 
   render() {
     const {
@@ -285,7 +324,7 @@ export class Table extends React.Component<TableProps, {}> {
       contentId,
       dropdownPosition,
       dropdownDirection,
-      firstUserColumnIndex: [onCollapse, onSelect].filter((callback) => callback).length
+      firstUserColumnIndex: [onCollapse, onSelect].filter(callback => callback).length
     });
 
     return (
@@ -316,8 +355,11 @@ export class Table extends React.Component<TableProps, {}> {
             styles.table,
             gridBreakPoint && getModifier(stylesGrid, gridBreakPoint),
             getModifier(styles, variant),
-            ((onCollapse && variant === TableVariant.compact) || onExpand) && styles.modifiers.expandable,
-            variant === TableVariant.compact && borders === false ? styles.modifiers.noBorderRows : null,
+            ((onCollapse && variant === TableVariant.compact) || onExpand) &&
+              styles.modifiers.expandable,
+            variant === TableVariant.compact && borders === false
+              ? styles.modifiers.noBorderRows
+              : null,
             className
           )}
         >

@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { AutoSizer, List as VirtualList, WindowScroller, CellMeasurerCache, CellMeasurer } from 'react-virtualized';
+import {
+  AutoSizer,
+  List as VirtualList,
+  WindowScroller,
+  CellMeasurerCache,
+  CellMeasurer
+} from 'react-virtualized';
 
 import TableGridHead from './TableGridHead';
 import TableGridColumnHeader from './TableGridColumnHeader';
@@ -41,7 +47,13 @@ const VirtualTableGrid = ({
     const obj = data[index];
 
     return (
-      <CellMeasurer cache={cellMeasurementCache} columnIndex={0} key={key} rowIndex={index} parent={parent}>
+      <CellMeasurer
+        cache={cellMeasurementCache}
+        columnIndex={0}
+        key={key}
+        rowIndex={index}
+        parent={parent}
+      >
         <div style={style}>{row({ obj, tableData, index })}</div>
       </CellMeasurer>
     );

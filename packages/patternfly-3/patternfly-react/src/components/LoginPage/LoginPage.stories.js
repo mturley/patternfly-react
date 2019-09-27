@@ -2,7 +2,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, number } from '@storybook/addon-knobs';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, STORYBOOK_CATEGORY, DOCUMENTATION_URL } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  STORYBOOK_CATEGORY,
+  DOCUMENTATION_URL
+} from 'storybook/constants/siteConstants';
 import LoginPage from './LoginPage';
 
 import { name } from '../../../package.json';

@@ -45,7 +45,9 @@ PAGINATION_VIEW_TYPES.forEach(viewType => {
 });
 
 test('PaginationRow.Items renders', () => {
-  const component = mount(<PaginationRow.Items itemCount={55} itemsStart={0} itemsEnd={10} messagesOf="of" />);
+  const component = mount(
+    <PaginationRow.Items itemCount={55} itemsStart={0} itemsEnd={10} messagesOf="of" />
+  );
 
   expect(component.render()).toMatchSnapshot();
 });

@@ -6,4 +6,12 @@ import TableGridRow from './TableGridRow';
 import TableGridCol from './TableGridCol';
 import VirtualTableGrid from './VirtualTableGrid';
 
-export { TableGrid, VirtualTableGrid, TableGridHead, TableGridColumnHeader, TableGridBody, TableGridRow, TableGridCol };
+export {
+  TableGrid,
+  VirtualTableGrid,
+  TableGridHead,
+  TableGridColumnHeader,
+  TableGridBody,
+  TableGridRow,
+  TableGridCol
+};

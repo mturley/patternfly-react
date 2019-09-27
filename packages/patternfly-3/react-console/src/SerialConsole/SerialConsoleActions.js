@@ -25,7 +25,11 @@ const SerialConsoleActions = ({
       {textDisconnect}
     </button>
 
-    <button id={`${idPrefix}-reconnect`} className="btn btn-default console-actions-buttons-pf" onClick={onReset}>
+    <button
+      id={`${idPrefix}-reconnect`}
+      className="btn btn-default console-actions-buttons-pf"
+      onClick={onReset}
+    >
       {textReconnect}
     </button>
   </div>

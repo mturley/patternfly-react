@@ -28,7 +28,7 @@ class TimeInput extends React.Component {
       typeOfTimeInput: type,
       isTimeTableOpen: !this.state.isTimeTableOpen
     });
-  }
+  };
   render() {
     const { time, setSelected, className } = this.props;
     const { typeOfTimeInput, isTimeTableOpen } = this.state;
@@ -44,7 +44,11 @@ class TimeInput extends React.Component {
             toggleTimeTable={this.toggleTimeTable}
           />
         ) : (
-          <PickTimeClock time={parsedTime} setSelected={setSelected} toggleTimeTable={this.toggleTimeTable} />
+          <PickTimeClock
+            time={parsedTime}
+            setSelected={setSelected}
+            toggleTimeTable={this.toggleTimeTable}
+          />
         )}
       </div>
     );

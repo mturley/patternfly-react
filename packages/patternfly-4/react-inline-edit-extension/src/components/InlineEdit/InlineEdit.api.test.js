@@ -59,7 +59,8 @@ describe('Editable table', () => {
           getAttribute: () => makeTableId(firstColEditedRowInputId)
         }
       },
-      selector => (selector === 'table' ? container.getDOMNode().getElementsByTagName('table')[0] : undefined),
+      selector =>
+        selector === 'table' ? container.getDOMNode().getElementsByTagName('table')[0] : undefined,
       true
     );
   });
@@ -133,7 +134,12 @@ describe('Editable table', () => {
       onEditCanceled: jest.fn()
     };
     const view = mount(
-      <Table caption="Editable table" cells={editableCols} rows={editableRows} rowWrapper={ComposedRowWrapper}>
+      <Table
+        caption="Editable table"
+        cells={editableCols}
+        rows={editableRows}
+        rowWrapper={ComposedRowWrapper}
+      >
         <TableHeader />
         <ComposedBody editConfig={editConfig} />
       </Table>,
@@ -161,7 +167,9 @@ describe('Editable table', () => {
     setTimeout(() => expect(editConfig.onEditCellClicked).toHaveBeenCalled(), 0);
 
     // responds to confirmation button clicks
-    view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary').simulate('mouseup');
+    view
+      .find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary')
+      .simulate('mouseup');
     expect(editConfig.onEditConfirmed).toHaveBeenCalled();
 
     view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-plain').simulate('mouseup');

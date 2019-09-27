@@ -11,8 +11,13 @@ import ToolbarViewSelector from './ToolbarViewSelector';
 import { toolbarContextTypes, getToolbarContext, ToolbarContextProvider } from './ToolbarConstants';
 
 const ContextualToolbar = ({ children, className, preventSubmit, ...props }) => {
-  const toolbarChildren = filterChildren(children, child => !hasDisplayName(child, ToolbarResults.displayName));
-  const resultsChildren = filterChildren(children, child => hasDisplayName(child, ToolbarResults.displayName));
+  const toolbarChildren = filterChildren(
+    children,
+    child => !hasDisplayName(child, ToolbarResults.displayName)
+  );
+  const resultsChildren = filterChildren(children, child =>
+    hasDisplayName(child, ToolbarResults.displayName)
+  );
 
   return (
     <ToolbarContextProvider isDescendantOfToolbar>

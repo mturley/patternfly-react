@@ -3,12 +3,19 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { withInfo } from '@storybook/addon-info';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { name } from '../../../package.json';
 import { MockOverlayManager, basicExampleSource } from './__mocks__/mockOverlayManager';
 import { Overlay } from './index';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Overlay`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Overlay`,
+  module
+);
 stories.addDecorator(withKnobs);
 stories.addDecorator(
   defaultTemplate({
@@ -31,7 +38,11 @@ stories.add(
     )
   })(() => (
     <MockOverlayManager
-      placement={select('Placement', { top: 'Top', bottom: 'Bottom', right: 'Right', left: 'Left' }, 'top')}
+      placement={select(
+        'Placement',
+        { top: 'Top', bottom: 'Bottom', right: 'Right', left: 'Left' },
+        'top'
+      )}
     />
   ))
 );

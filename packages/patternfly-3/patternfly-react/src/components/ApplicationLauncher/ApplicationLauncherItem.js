@@ -5,7 +5,16 @@ import { Tooltip } from '../Tooltip';
 import { OverlayTrigger } from '../OverlayTrigger';
 import { Icon } from '../Icon';
 
-const ApplicationLauncherItem = ({ onClick, tooltip, tooltipPlacement, title, icon, noIcons, className, ...props }) => {
+const ApplicationLauncherItem = ({
+  onClick,
+  tooltip,
+  tooltipPlacement,
+  title,
+  icon,
+  noIcons,
+  className,
+  ...props
+}) => {
   const classes = classNames('applauncher-pf-item', className);
 
   if (tooltip !== null) {

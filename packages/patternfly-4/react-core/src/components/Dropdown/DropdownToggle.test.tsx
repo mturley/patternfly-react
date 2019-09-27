@@ -22,7 +22,12 @@ describe('API', () => {
   test('click on opened', () => {
     const mockToggle = jest.fn();
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" onToggle={mockToggle} isOpen parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        onToggle={mockToggle}
+        isOpen
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
@@ -46,7 +51,12 @@ describe('API', () => {
     });
     const mockToggle = jest.fn();
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" onToggle={mockToggle} isOpen parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        onToggle={mockToggle}
+        isOpen
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );
@@ -68,7 +78,12 @@ describe('API', () => {
     });
     const mockToggle = jest.fn();
     const view = mount(
-      <DropdownToggle id="Dropdown Toggle" onToggle={mockToggle} isOpen parentRef={document.createElement('div')}>
+      <DropdownToggle
+        id="Dropdown Toggle"
+        onToggle={mockToggle}
+        isOpen
+        parentRef={document.createElement('div')}
+      >
         Dropdown
       </DropdownToggle>
     );

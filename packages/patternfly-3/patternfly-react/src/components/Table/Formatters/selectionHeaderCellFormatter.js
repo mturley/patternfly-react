@@ -9,7 +9,12 @@ const selectionHeaderCellFormatter = ({ cellProps, column, rows, onSelectAllRows
   const id = cellProps.id || 'selectAll';
   return (
     <TableSelectionHeading aria-label={column.header.label} {...cellProps}>
-      <TableCheckbox id={id} label={column.header.label} checked={!unselectedRows} onChange={onSelectAllRows} />
+      <TableCheckbox
+        id={id}
+        label={column.header.label}
+        checked={!unselectedRows}
+        onChange={onSelectAllRows}
+      />
     </TableSelectionHeading>
   );
 };

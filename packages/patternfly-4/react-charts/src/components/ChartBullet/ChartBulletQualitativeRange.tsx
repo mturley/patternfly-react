@@ -7,7 +7,7 @@ import {
   PaddingProps,
   VictoryBar
 } from 'victory';
-import { getQualitativeRangeData }  from './utils';
+import { getQualitativeRangeData } from './utils';
 import { ChartBar } from '../ChartBar';
 import { ChartContainer } from '../ChartContainer';
 import { ChartBulletStyles, ChartThemeDefinition } from '../ChartTheme';
@@ -186,7 +186,9 @@ interface ConstrainToVisibleAreaInterface {
   width?: number;
 }
 
-export const ChartBulletQualitativeRange: React.FunctionComponent<ChartBulletQualitativeRangeProps> = ({
+export const ChartBulletQualitativeRange: React.FunctionComponent<
+  ChartBulletQualitativeRangeProps
+> = ({
   ariaDesc,
   ariaTitle,
   barWidth = ChartBulletStyles.qualitativeRangeWidth,
@@ -231,14 +233,14 @@ export const ChartBulletQualitativeRange: React.FunctionComponent<ChartBulletQua
       if (horizontal) {
         return 0;
       }
-      const result = (typeof barWidth === 'function') ? barWidth(data, false) : barWidth;
+      const result = typeof barWidth === 'function' ? barWidth(data, false) : barWidth;
       return result / 2;
     },
     dy: () => {
       if (!horizontal) {
         return 0;
       }
-      const result = (typeof barWidth === 'function') ? barWidth(data, false) : barWidth;
+      const result = typeof barWidth === 'function' ? barWidth(data, false) : barWidth;
       return -(result / 2);
     },
     orientation: 'top',
@@ -248,7 +250,7 @@ export const ChartBulletQualitativeRange: React.FunctionComponent<ChartBulletQua
   const measure = computedData.map((dataPoint: any, index) => {
     return React.cloneElement(measureComponent, {
       barWidth,
-      data: [{...dataPoint}],
+      data: [{ ...dataPoint }],
       domain,
       height,
       horizontal,
@@ -273,9 +275,7 @@ export const ChartBulletQualitativeRange: React.FunctionComponent<ChartBulletQua
       {measure}
     </ChartContainer>
   ) : (
-    <React.Fragment>
-      {measure}
-    </React.Fragment>
+    <React.Fragment>{measure}</React.Fragment>
   );
 };
 

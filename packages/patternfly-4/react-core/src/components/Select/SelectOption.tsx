@@ -9,7 +9,8 @@ import { Omit } from '../../helpers/typeUtils';
 export interface SelectOptionObject {
   toString(): string;
 }
-export interface SelectOptionProps extends Omit<React.HTMLProps<HTMLElement>, 'type' | 'ref' | 'value'> {
+export interface SelectOptionProps
+  extends Omit<React.HTMLProps<HTMLElement>, 'type' | 'ref' | 'value'> {
   /** Optional alternate display for the option */
   children?: React.ReactNode;
   /** Additional classes added to the Select Option */
@@ -75,7 +76,7 @@ export class SelectOption extends React.Component<SelectOptionProps> {
         this.ref.current.focus();
       }
     }
-  }
+  };
 
   render() {
     const {
@@ -108,7 +109,7 @@ export class SelectOption extends React.Component<SelectOptionProps> {
                     isFocused && styles.modifiers.focus,
                     className
                   )}
-                  onClick={(event) => {
+                  onClick={event => {
                     if (!isDisabled) {
                       onClick(event);
                       onSelect(event, value, isPlaceholder);
@@ -122,7 +123,9 @@ export class SelectOption extends React.Component<SelectOptionProps> {
                   type="button"
                 >
                   {children || value.toString()}
-                  {isSelected && <CheckIcon className={css(styles.selectMenuItemIcon)} aria-hidden />}
+                  {isSelected && (
+                    <CheckIcon className={css(styles.selectMenuItemIcon)} aria-hidden />
+                  )}
                 </button>
               </li>
             )}
@@ -141,7 +144,7 @@ export class SelectOption extends React.Component<SelectOptionProps> {
                   id={value.toString()}
                   className={css(checkStyles.checkInput)}
                   type="checkbox"
-                  onChange={(event) => {
+                  onChange={event => {
                     if (!isDisabled) {
                       onClick(event);
                       onSelect(event, value);
@@ -151,7 +154,11 @@ export class SelectOption extends React.Component<SelectOptionProps> {
                   defaultChecked={isChecked || false}
                   disabled={isDisabled}
                 />
-                <span className={css(checkStyles.checkLabel, isDisabled && styles.modifiers.disabled)}>{children || value.toString()}</span>
+                <span
+                  className={css(checkStyles.checkLabel, isDisabled && styles.modifiers.disabled)}
+                >
+                  {children || value.toString()}
+                </span>
               </label>
             )}
           </React.Fragment>

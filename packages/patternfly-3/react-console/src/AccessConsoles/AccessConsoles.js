@@ -10,7 +10,9 @@ const { Row, Col } = Grid;
 const { Checkbox, FormGroup } = Form;
 
 const getChildTypeName = child =>
-  child && child.props && child.props.type ? child.props.type : (child && child.type && child.type.displayName) || null;
+  child && child.props && child.props.type
+    ? child.props.type
+    : (child && child.type && child.type.displayName) || null;
 
 const isChildOfType = (child, type) =>
   helpers.hasDisplayName(child, type) || (child && child.props && child.props.type === type);
@@ -97,7 +99,10 @@ class AccessConsoles extends React.Component {
                     </MenuItem>
                   )}
                   {this.isChildOfTypePresent(DESKTOP_VIEWER_CONSOLE_TYPE) && (
-                    <MenuItem eventKey="3" onClick={() => this.onTypeChange(DESKTOP_VIEWER_CONSOLE_TYPE)}>
+                    <MenuItem
+                      eventKey="3"
+                      onClick={() => this.onTypeChange(DESKTOP_VIEWER_CONSOLE_TYPE)}
+                    >
                       {items[DESKTOP_VIEWER_CONSOLE_TYPE]}
                     </MenuItem>
                   )}
@@ -149,7 +154,10 @@ AccessConsoles.propTypes = {
    *   - <SerialConsole>, <VncConsole> or <DesktopViewer>
    *   - or has a property "type" of value either SERIAL_CONSOLE_TYPE or VNC_CONSOLE_TYPE (useful when wrapping (composing) basic console components
    */
-  children: PropTypes.oneOfType([PropTypes.objectOf(childElementValidator), PropTypes.arrayOf(childElementValidator)]),
+  children: PropTypes.oneOfType([
+    PropTypes.objectOf(childElementValidator),
+    PropTypes.arrayOf(childElementValidator)
+  ]),
 
   textSelectConsoleType: PropTypes.string /** Internationalization */,
   textSerialConsole: PropTypes.string /** Internationalization */,

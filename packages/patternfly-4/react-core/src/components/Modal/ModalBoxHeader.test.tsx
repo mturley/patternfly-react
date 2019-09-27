@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import {TitleLevel} from '../Title';
+import { TitleLevel } from '../Title';
 import { ModalBoxHeader } from './ModalBoxHeader';
 
 test('ModalBoxHeader Test', () => {
@@ -10,7 +10,9 @@ test('ModalBoxHeader Test', () => {
 });
 
 test('ModalBoxHeader Test with H3', () => {
-  const view = shallow(<ModalBoxHeader headingLevel={TitleLevel.h3}>This is a ModalBox header</ModalBoxHeader>);
+  const view = shallow(
+    <ModalBoxHeader headingLevel={TitleLevel.h3}>This is a ModalBox header</ModalBoxHeader>
+  );
   expect(view).toMatchSnapshot();
 });
 

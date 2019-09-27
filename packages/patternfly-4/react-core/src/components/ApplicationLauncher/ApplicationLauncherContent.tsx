@@ -12,9 +12,9 @@ export interface ApplicationLauncherContentProps {
   children: React.ReactNode;
 }
 
-export const ApplicationLauncherContent: React.FunctionComponent<ApplicationLauncherContentProps> = ({
-  children
-}: ApplicationLauncherContentProps) => (
+export const ApplicationLauncherContent: React.FunctionComponent<
+  ApplicationLauncherContentProps
+> = ({ children }: ApplicationLauncherContentProps) => (
   <ApplicationLauncherItemContext.Consumer>
     {({ isExternal, icon }) => (
       <>
@@ -22,7 +22,9 @@ export const ApplicationLauncherContent: React.FunctionComponent<ApplicationLaun
         {icon ? <ApplicationLauncherText>{children}</ApplicationLauncherText> : children}
         {isExternal && (
           <>
-            <span className={css(styles.appLauncherMenuItemExternalIcon)}><ExternalLinkAltIcon /></span>
+            <span className={css(styles.appLauncherMenuItemExternalIcon)}>
+              <ExternalLinkAltIcon />
+            </span>
             <span className={css(accessibleStyles.screenReader)}>(opens new window)</span>
           </>
         )}

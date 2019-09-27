@@ -1,5 +1,7 @@
 export const matches =
-  Element.prototype.matches || Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+  Element.prototype.matches ||
+  Element.prototype.msMatchesSelector ||
+  Element.prototype.webkitMatchesSelector;
 
 if (!Element.prototype.matches) {
   Element.prototype.matches = matches;
@@ -9,7 +11,9 @@ export function closest(selector) {
   let el = this;
   if (document.documentElement.contains(el)) {
     while (el && el.nodeType === 1) {
-      if (el.matches(selector)) { return el; }
+      if (el.matches(selector)) {
+        return el;
+      }
       el = el.parentElement || el.parentNode;
     }
   }

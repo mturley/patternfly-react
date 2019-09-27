@@ -86,7 +86,8 @@ const basicNotificationDrawerStory = stories => {
                     <Icon className="pull-left" type="pf" name="warning-triangle-o" />
                     <Notification.Content>
                       <Notification.Message>
-                        Another Event Notification that is really long to see how it reacts on smaller screens sizes.
+                        Another Event Notification that is really long to see how it reacts on
+                        smaller screens sizes.
                       </Notification.Message>
                       <Notification.Info leftText="3/31/16" rightText="12:12:44 PM" />
                     </Notification.Content>
@@ -111,7 +112,10 @@ const basicNotificationDrawerStory = stories => {
                   </Notification>
                 </NotificationDrawer.PanelBody>
                 <NotificationDrawer.PanelAction>
-                  <NotificationDrawer.PanelActionLink className="drawer-pf-action-link" data-toggle="mark-all-read">
+                  <NotificationDrawer.PanelActionLink
+                    className="drawer-pf-action-link"
+                    data-toggle="mark-all-read"
+                  >
                     <Button bsStyle="link">Mark All Read</Button>
                   </NotificationDrawer.PanelActionLink>
                   <NotificationDrawer.PanelActionLink data-toggle="clear-all">

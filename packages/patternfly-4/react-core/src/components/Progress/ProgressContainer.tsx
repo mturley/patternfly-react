@@ -35,7 +35,7 @@ export interface ProgressContainerProps extends Omit<React.HTMLProps<HTMLDivElem
   value: number;
 }
 
-const variantToIcon: {[k: string]: React.FunctionComponent} = {
+const variantToIcon: { [k: string]: React.FunctionComponent } = {
   danger: TimesCircleIcon,
   success: CheckCircleIcon
 };
@@ -56,7 +56,8 @@ export const ProgressContainer: React.FunctionComponent<ProgressContainerProps> 
         {title}
       </div>
       <div className={css(progressStyle.progressStatus)}>
-        {(measureLocation === ProgressMeasureLocation.top || measureLocation === ProgressMeasureLocation.outside) && (
+        {(measureLocation === ProgressMeasureLocation.top ||
+          measureLocation === ProgressMeasureLocation.outside) && (
           <span className={css(progressStyle.progressMeasure)}>{label || `${value}%`}</span>
         )}
         {variantToIcon.hasOwnProperty(variant) && (

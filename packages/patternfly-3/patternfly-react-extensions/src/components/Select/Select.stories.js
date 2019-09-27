@@ -9,11 +9,17 @@ import Select from './Select';
 import { optionsArray } from './Select.fixtures';
 import { name } from '../../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Select`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Select`,
+  module
+);
 
 const description = (
   <p>
-    See <a href="http://silviomoreto.github.io/bootstrap-select/">http://silviomoreto.github.io/bootstrap-select/</a>{' '}
+    See{' '}
+    <a href="http://silviomoreto.github.io/bootstrap-select/">
+      http://silviomoreto.github.io/bootstrap-select/
+    </a>{' '}
     for complete Bootstrap Select documentation.
   </p>
 );

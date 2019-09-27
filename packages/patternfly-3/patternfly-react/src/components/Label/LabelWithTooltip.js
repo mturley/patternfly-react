@@ -6,7 +6,15 @@ import { Tooltip } from '../Tooltip';
 
 const tooltip = text => <Tooltip id="tooltip">{text}</Tooltip>;
 
-const LabelWithTooltip = ({ onDeleteClick, category, value, truncate, bsStyle, className, overlayPlacement }) => (
+const LabelWithTooltip = ({
+  onDeleteClick,
+  category,
+  value,
+  truncate,
+  bsStyle,
+  className,
+  overlayPlacement
+}) => (
   <li key={value.id}>
     <OverlayTrigger placement={overlayPlacement} overlay={tooltip(value.label)}>
       <Label

@@ -16,7 +16,12 @@ const VncActions = ({
 }) => {
   const toolbar = (
     <div>
-      <Dropdown bsStyle="default" title={textSendShortcut} id="console-send-shortcut" onClick={noop}>
+      <Dropdown
+        bsStyle="default"
+        title={textSendShortcut}
+        id="console-send-shortcut"
+        onClick={noop}
+      >
         <MenuItem eventKey="1" onClick={onCtrlAltDel}>
           {textCtrlAltDel}
         </MenuItem>
@@ -31,7 +36,8 @@ const VncActions = ({
     return toolbar;
   }
   return (
-    document.getElementById(portalToolbarTo) && ReactDOM.createPortal(toolbar, document.getElementById(portalToolbarTo))
+    document.getElementById(portalToolbarTo) &&
+    ReactDOM.createPortal(toolbar, document.getElementById(portalToolbarTo))
   );
 };
 

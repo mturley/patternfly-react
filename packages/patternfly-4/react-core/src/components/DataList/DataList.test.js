@@ -19,7 +19,9 @@ describe('DataList', () => {
   });
 
   test('List', () => {
-    const view = shallow(<DataList key="list-id-1" className="data-list-custom" aria-label="this is a simple list" />);
+    const view = shallow(
+      <DataList key="list-id-1" className="data-list-custom" aria-label="this is a simple list" />
+    );
     expect(view).toMatchSnapshot();
   });
 
@@ -97,7 +99,11 @@ describe('DataList', () => {
 
   test('Toggle default with aria label', () => {
     const view = shallow(
-      <DataListToggle aria-label="Toggle details for" aria-labelledby="ex-toggle2 ex-item2" id="ex-toggle2" />
+      <DataListToggle
+        aria-label="Toggle details for"
+        aria-labelledby="ex-toggle2 ex-item2"
+        id="ex-toggle2"
+      />
     );
 
     expect(view.find(Button).props()['aria-label']).toBe('Toggle details for');
@@ -108,7 +114,9 @@ describe('DataList', () => {
   });
 
   test('Toggle expanded', () => {
-    const view = shallow(<DataListToggle aria-label="Toggle details for" id="ex-toggle2" isExpanded />);
+    const view = shallow(
+      <DataListToggle aria-label="Toggle details for" id="ex-toggle2" isExpanded />
+    );
     expect(view.find(Button).props()['aria-expanded']).toBe(true);
   });
 
@@ -172,7 +180,9 @@ describe('DataList', () => {
   });
 
   test('DataListContent', () => {
-    const view = shallow(<DataListContent aria-label="Primary Content Details"> test</DataListContent>);
+    const view = shallow(
+      <DataListContent aria-label="Primary Content Details"> test</DataListContent>
+    );
     expect(view).toMatchSnapshot();
   });
 

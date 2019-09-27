@@ -5,7 +5,11 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
 import LinkTo from '@storybook/addon-links/react';
 
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { name } from '../../../package.json';
 
 import MessageDialog from './MessageDialog';
@@ -21,7 +25,9 @@ import MessageDialogDeleteConfirmation, {
   MessageDialogDeleteConfirmationSource
 } from './Stories/MessageDialogDeleteConfirmation';
 import MessageDialogWarning, { MessageDialogWarningSource } from './Stories/MessageDialogWarning';
-import MessageDialogQuestion, { MessageDialogQuestionSource } from './Stories/MessageDialogQuestion';
+import MessageDialogQuestion, {
+  MessageDialogQuestionSource
+} from './Stories/MessageDialogQuestion';
 import MessageDialogInfo, { MessageDialogInfoSource } from './Stories/MessageDialogInfo';
 import MessageDialogSuccess, { MessageDialogSuccessSource } from './Stories/MessageDialogSuccess';
 
@@ -30,8 +36,8 @@ const modalStoryKind = `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGE
 const storyDescription = (
   <React.Fragment>
     <p>
-      This component is based on the React Bootstrap Modal component. Please visit the following for complete
-      documentation
+      This component is based on the React Bootstrap Modal component. Please visit the following for
+      complete documentation
     </p>
     <ul>
       <li>
@@ -46,7 +52,10 @@ const storyDescription = (
   </React.Fragment>
 );
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/Message Dialog`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/Message Dialog`,
+  module
+);
 stories.addDecorator(withKnobs);
 stories.addDecorator(
   defaultTemplate({

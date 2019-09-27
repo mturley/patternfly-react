@@ -4,14 +4,21 @@ import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 
 import { Grid, Row, Col, MenuItem } from '../../index';
 import { Button, ButtonGroup, DropdownButton, SplitButton } from './index';
 import { BUTTON_BS_STYLES } from './ButtonConstants';
 import { name } from '../../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Button`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.WIDGETS}/Button`,
+  module
+);
 
 stories.addDecorator(withKnobs);
 
@@ -24,12 +31,13 @@ stories.add(
           <Button>Default Button</Button> <Button bsStyle="primary">Primary Button</Button>{' '}
           <Button bsStyle="success">Success Button</Button>
           <Button bsStyle="warning">Warning Button</Button>
-          <Button bsStyle="danger">Danger Button</Button> <Button bsStyle="info">Info Button</Button>{' '}
-          <Button bsStyle="link">Link Button</Button>
+          <Button bsStyle="danger">Danger Button</Button>{' '}
+          <Button bsStyle="info">Info Button</Button> <Button bsStyle="link">Link Button</Button>
         </p>
         <p>
           <Button bsSize="large">Large Button</Button> <Button>Default Button</Button>{' '}
-          <Button bsSize="small">Small Button</Button> <Button bsSize="xsmall">Extra Small Button</Button>
+          <Button bsSize="small">Small Button</Button>{' '}
+          <Button bsSize="xsmall">Extra Small Button</Button>
         </p>
       </div>
     );
@@ -217,7 +225,9 @@ stories.add(
     const bsStyle = select('Style', BUTTON_BS_STYLES, 'default');
     const bsSize = select('Size', [undefined, 'xsmall', 'small', 'large']);
     const props = { bsStyle, title: bsStyle, id: 'dropdown-example' };
-    if (bsSize) { props.bsSize = bsSize; }
+    if (bsSize) {
+      props.bsSize = bsSize;
+    }
 
     const story = (
       <DropdownButton {...props} onClick={action('onClick')}>
@@ -245,7 +255,9 @@ stories.add(
     const bsSize = select('Size', [undefined, 'xsmall', 'small', 'large']);
 
     const props = { bsStyle, title: bsStyle, id: 'dropdown-example' };
-    if (bsSize) { props.bsSize = bsSize; }
+    if (bsSize) {
+      props.bsSize = bsSize;
+    }
 
     const story = (
       <SplitButton {...props} onClick={action('onClick')}>

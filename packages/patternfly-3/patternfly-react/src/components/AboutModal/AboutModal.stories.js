@@ -9,7 +9,10 @@ import { AboutModal, AboutModalVersions, AboutModalVersionItem } from '../../ind
 
 import { MockAboutModal, MockAboutModalSource } from './__mocks__/mockAboutModal';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/About Modal`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.COMMUNICATION}/About Modal`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({

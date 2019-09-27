@@ -43,7 +43,9 @@ function getComputedStyles(classNames, cssStr) {
     const key = cs[i];
     const value = cs
       .getPropertyValue(key)
-      .replace(/rgb\(([\d|,|\s]+)\)/g, (full, match) => rgbToHex(...match.split(',').map(n => parseInt(n, 10))));
+      .replace(/rgb\(([\d|,|\s]+)\)/g, (full, match) =>
+        rgbToHex(...match.split(',').map(n => parseInt(n, 10)))
+      );
     values[key] = value;
   }
   return values;
@@ -97,7 +99,10 @@ function getStyles(nodeSelectors, insertedStyles, globalCSS) {
         return acc;
       }
 
-      const computedStyles = getComputedStyles(sel.map(s => s.replace('.', '')).join(' '), css.stringify(ast));
+      const computedStyles = getComputedStyles(
+        sel.map(s => s.replace('.', '')).join(' '),
+        css.stringify(ast)
+      );
 
       return [...acc, formatComputedStyles(sel, computedStyles)];
     }, [])

@@ -27,13 +27,13 @@ export class MockTreeView extends React.Component {
         return { ...node, selected: false };
       }
       return node;
-    })
+    });
 
   selectNode = selectedNode => {
     this.setState(prevState => ({
       nodes: this.nodeSelector(prevState.nodes, selectedNode)
     }));
-  }
+  };
 
   render() {
     const { nodes } = this.state;
@@ -128,7 +128,8 @@ export const keyboardNavigation = (
       for details)
     </li>
     <li>
-      <code>ArrowUp/ArrowDown</code> shifts focus, <code>ArrowRight/ArrowLeft</code> expands/collapses parent nodes
+      <code>ArrowUp/ArrowDown</code> shifts focus, <code>ArrowRight/ArrowLeft</code>{' '}
+      expands/collapses parent nodes
     </li>
     <li>
       <code>Enter/Space</code> triggers default action
@@ -139,7 +140,10 @@ export const keyboardNavigation = (
         <code>[a-zA-Z]</code>
       </li>
       <li>Focus moves to the next node whose text starts with the typed character</li>
-      <li>Search wraps to the first node if matching name is not found among the nodes that follow the focused node</li>
+      <li>
+        Search wraps to the first node if matching name is not found among the nodes that follow the
+        focused node
+      </li>
       <li>Ignores nodes that are descendants of closed nodes</li>
     </ul>
     <li>

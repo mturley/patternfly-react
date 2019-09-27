@@ -13,8 +13,11 @@ stories.addDecorator(
     title: 'Wooden Tree View',
     description: (
       <div>
-        This is a Tree View component to display trees and hierarchical data using React Wooden Tree. The tree uses the{' '}
-        <a href="https://www.npmjs.com/package/react-wooden-tree">https://www.npmjs.com/package/react-wooden-tree</a>{' '}
+        This is a Tree View component to display trees and hierarchical data using React Wooden
+        Tree. The tree uses the{' '}
+        <a href="https://www.npmjs.com/package/react-wooden-tree">
+          https://www.npmjs.com/package/react-wooden-tree
+        </a>{' '}
         component.
       </div>
     )

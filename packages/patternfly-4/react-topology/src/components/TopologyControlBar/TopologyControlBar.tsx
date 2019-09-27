@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Button, Toolbar, ToolbarGroup, ToolbarItem, Tooltip } from '@patternfly/react-core';
-import { ExpandIcon, ExpandArrowsAltIcon, SearchPlusIcon, SearchMinusIcon } from '@patternfly/react-icons';
+import {
+  ExpandIcon,
+  ExpandArrowsAltIcon,
+  SearchPlusIcon,
+  SearchMinusIcon
+} from '@patternfly/react-icons';
 import '@patternfly/react-styles/css/components/Topology/topology-controlbar.css';
 
 /* ID's for common control buttons */
@@ -114,12 +119,12 @@ export const defaultControlButtonsOptions: TopologyControlButtonsOptions = {
 /* Utility function to create the common control buttons, can pass null for all defaults, or specify overrides */
 export const createTopologyControlButtons = ({
   zoomIn = defaultControlButtonsOptions.zoomIn,
-  zoomInIcon= defaultControlButtonsOptions.zoomInIcon,
-  zoomInTip= defaultControlButtonsOptions.zoomInTip,
-  zoomInAriaLabel= defaultControlButtonsOptions.zoomInAriaLabel,
-  zoomInCallback= defaultControlButtonsOptions.zoomInCallback,
-  zoomInDisabled= defaultControlButtonsOptions.zoomInDisabled,
-  zoomInHidden= defaultControlButtonsOptions.zoomInHidden,
+  zoomInIcon = defaultControlButtonsOptions.zoomInIcon,
+  zoomInTip = defaultControlButtonsOptions.zoomInTip,
+  zoomInAriaLabel = defaultControlButtonsOptions.zoomInAriaLabel,
+  zoomInCallback = defaultControlButtonsOptions.zoomInCallback,
+  zoomInDisabled = defaultControlButtonsOptions.zoomInDisabled,
+  zoomInHidden = defaultControlButtonsOptions.zoomInHidden,
 
   zoomOut = defaultControlButtonsOptions.zoomOut,
   zoomOutIcon = defaultControlButtonsOptions.zoomOutIcon,
@@ -153,8 +158,8 @@ export const createTopologyControlButtons = ({
   legendDisabled = defaultControlButtonsOptions.legendDisabled,
   legendHidden = defaultControlButtonsOptions.legendHidden,
 
-  customButtons = defaultControlButtonsOptions.customButtons,
-}: TopologyControlButtonsOptions  = defaultControlButtonsOptions): TopologyControlButton[] => {
+  customButtons = defaultControlButtonsOptions.customButtons
+}: TopologyControlButtonsOptions = defaultControlButtonsOptions): TopologyControlButton[] => {
   const controlButtons: TopologyControlButton[] = [];
 
   if (zoomIn) {
@@ -242,8 +247,10 @@ export const TopologyControlBar: React.FunctionComponent<TopologyControlBarProps
   onButtonClick = () => undefined,
   ...props
 }: TopologyControlBarProps) => {
-
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, button: TopologyControlButton) => {
+  const handleButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    button: TopologyControlButton
+  ) => {
     event.preventDefault();
     onButtonClick(button.id);
     if (button.callback) {
@@ -256,7 +263,9 @@ export const TopologyControlBar: React.FunctionComponent<TopologyControlBarProps
       <Button
         id={button.id}
         className={`pf-topology-control-bar__button${button.disabled ? ' pf-m-disabled' : ''}`}
-        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleButtonClick(event, button)}
+        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+          handleButtonClick(event, button)
+        }
         disabled={button.disabled}
         aria-disabled={button.disabled}
         variant="tertiary"
@@ -269,9 +278,7 @@ export const TopologyControlBar: React.FunctionComponent<TopologyControlBarProps
     );
 
     if (button.tooltip) {
-      return (
-        <Tooltip content={button.tooltip}>{renderedButton}</Tooltip>
-      );
+      return <Tooltip content={button.tooltip}>{renderedButton}</Tooltip>;
     }
 
     return renderedButton;
@@ -281,7 +288,9 @@ export const TopologyControlBar: React.FunctionComponent<TopologyControlBarProps
     <Toolbar className={className} {...props}>
       <ToolbarGroup>
         {controlButtons.map((button: TopologyControlButton) => {
-          return button.hidden ? null : <ToolbarItem key={button.id}>{renderButton(button)}</ToolbarItem>;
+          return button.hidden ? null : (
+            <ToolbarItem key={button.id}>{renderButton(button)}</ToolbarItem>
+          );
         })}
         {children}
       </ToolbarGroup>

@@ -58,7 +58,9 @@ test('DesktopViewer with Spice, VNC and RDP (different hostname)', () => {
 test('DesktopViewer launch button', () => {
   const onDownload = jest.fn();
   const onGenerate = jest.fn().mockReturnValue({ content: 'Foo' });
-  const wrapper = mount(<DesktopViewer spice={spice} vnc={vnc} onDownload={onDownload} onGenerate={onGenerate} />);
+  const wrapper = mount(
+    <DesktopViewer spice={spice} vnc={vnc} onDownload={onDownload} onGenerate={onGenerate} />
+  );
   const launchButton = wrapper.find('button.remote-viewer-pf-launch-vv');
   expect(launchButton).toHaveLength(1);
   launchButton.simulate('click');
@@ -69,7 +71,9 @@ test('DesktopViewer launch button', () => {
 test('DesktopViewer RDP launch button', () => {
   const onDownload = jest.fn();
   const onGenerate = jest.fn().mockReturnValue({ content: 'Foo' });
-  const wrapper = mount(<DesktopViewer rdp={rdp} onDownload={onDownload} onGenerate={onGenerate} />);
+  const wrapper = mount(
+    <DesktopViewer rdp={rdp} onDownload={onDownload} onGenerate={onGenerate} />
+  );
   const launchButton = wrapper.find('button.remote-viewer-pf-launch-rdp');
   expect(launchButton).toHaveLength(1);
   launchButton.simulate('click');

@@ -9,16 +9,14 @@ import {
   IRowCell
 } from '@patternfly/react-table';
 
-import {
-  CodeBranchIcon,
-  CodeIcon,
-  CubeIcon
-} from '@patternfly/react-icons';
+import { CodeBranchIcon, CodeIcon, CubeIcon } from '@patternfly/react-icons';
 
-import { DemoSortableTable } from './TableSortableForCompoundExpandableDemo'
+import { DemoSortableTable } from './TableSortableForCompoundExpandableDemo';
 
-
-export class TableCompoundExpandableDemo extends React.Component<TableProps, { columns: any, rows: any[] }> {
+export class TableCompoundExpandableDemo extends React.Component<
+  TableProps,
+  { columns: any; rows: any[] }
+> {
   constructor(props: TableProps) {
     super(props);
     this.state = {
@@ -43,14 +41,14 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
         {
           isOpen: true,
           cells: [
-            { title: <a href="#">siemur/test-space</a>, props: { component: 'th'} },
+            { title: <a href="#">siemur/test-space</a>, props: { component: 'th' } },
             {
               title: (
                 <React.Fragment>
                   <CodeBranchIcon key="icon" /> 10
                 </React.Fragment>
               ),
-              props: { isOpen: true, ariaControls : 'compoound-expansion-table-1' }
+              props: { isOpen: true, ariaControls: 'compoound-expansion-table-1' }
             },
             {
               title: (
@@ -58,7 +56,7 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
                   <CodeIcon key="icon" /> 4
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-2' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-2' }
             },
             {
               title: (
@@ -66,7 +64,7 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
                   <CubeIcon key="icon" /> 4
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-3' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-3' }
             },
             '20 minutes',
             { title: <a href="#">Open in Github</a> }
@@ -77,7 +75,12 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
           compoundParent: 1,
           cells: [
             {
-              title: <DemoSortableTable firstColumnRows={['parent-0', 'compound-1', 'three', 'four','five']} id="compoound-expansion-table-1" />,
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-0', 'compound-1', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-1"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -87,7 +90,12 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
           compoundParent: 2,
           cells: [
             {
-              title: <DemoSortableTable firstColumnRows={['parent-0', 'compound-2', 'three', 'four','five']} id="compoound-expansion-table-2" />,
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-0', 'compound-2', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-2"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -97,7 +105,12 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
           compoundParent: 3,
           cells: [
             {
-              title: <DemoSortableTable firstColumnRows={['parent-0', 'compound-3', 'three', 'four','five']} id="compoound-expansion-table-3" />,
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-0', 'compound-3', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-3"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -105,14 +118,14 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
         {
           isOpen: false,
           cells: [
-            { title: <a href="#">siemur/test-space</a>, props: { component: 'th'} },
+            { title: <a href="#">siemur/test-space</a>, props: { component: 'th' } },
             {
               title: (
                 <React.Fragment>
                   <CodeBranchIcon key="icon" /> 3
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-4' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-4' }
             },
             {
               title: (
@@ -120,7 +133,7 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
                   <CodeIcon key="icon" /> 4
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-5' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-5' }
             },
             {
               title: (
@@ -128,7 +141,7 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
                   <CubeIcon key="icon" /> 2
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-6' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-6' }
             },
             '20 minutes',
             { title: <a href="#">Open in Github</a> }
@@ -139,7 +152,12 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
           compoundParent: 1,
           cells: [
             {
-              title: <DemoSortableTable firstColumnRows={['parent-4', 'compound-1', 'three', 'four','five']} id="compoound-expansion-table-4" />,
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-4', 'compound-1', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-4"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -149,7 +167,12 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
           compoundParent: 2,
           cells: [
             {
-              title: <DemoSortableTable firstColumnRows={['parent-4', 'compound-2', 'three', 'four','five']} id="compoound-expansion-table-5"/>,
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-4', 'compound-2', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-5"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -159,7 +182,12 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
           compoundParent: 3,
           cells: [
             {
-              title: <DemoSortableTable firstColumnRows={['parent-4', 'compound-3', 'three', 'four','five']} id="compoound-expansion-table-6"/>,
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-4', 'compound-3', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-6"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -174,7 +202,9 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
     if (!isOpen) {
       // set all other expanded cells false in this row if we are expanding
       rows[rowIndex].cells.forEach(cell => {
-        if (cell.props) { cell.props.isOpen = false; }
+        if (cell.props) {
+          cell.props.isOpen = false;
+        }
       });
       rows[rowIndex].cells[colIndex].props.isOpen = true;
       rows[rowIndex].isOpen = true;
@@ -188,14 +218,19 @@ export class TableCompoundExpandableDemo extends React.Component<TableProps, { c
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {
     const { columns, rows } = this.state;
 
     return (
-      <Table caption="Compound expandable table" onExpand={this.onExpand} rows={rows} cells={columns}>
+      <Table
+        caption="Compound expandable table"
+        onExpand={this.onExpand}
+        rows={rows}
+        cells={columns}
+      >
         <TableHeader />
         <TableBody />
       </Table>

@@ -24,7 +24,7 @@ class ListViewItem extends React.Component {
       onExpand();
     }
     this.setState(prevState => ({ expanded: !prevState.expanded }));
-  }
+  };
 
   render() {
     const {
@@ -81,7 +81,10 @@ class ListViewItem extends React.Component {
               actions={actions}
             />
           </ListViewGroupItemHeader>
-          <ListViewGroupItemContainer expanded={expanded} onClose={hideCloseIcon ? undefined : this.toggleExpanded}>
+          <ListViewGroupItemContainer
+            expanded={expanded}
+            onClose={hideCloseIcon ? undefined : this.toggleExpanded}
+          >
             {children}
           </ListViewGroupItemContainer>
         </ListViewGroupItem>

@@ -118,9 +118,15 @@ const getNextDepth = depth =>
 const deepestOf = (pri, sec, ter) => (pri && sec && ter) || (pri && sec) || pri;
 
 const componentForDepth = depth => {
-  if (depth === 'primary') { return VerticalNavItem; }
-  if (depth === 'secondary') { return VerticalNavSecondaryItem; }
-  if (depth === 'tertiary') { return VerticalNavTertiaryItem; }
+  if (depth === 'primary') {
+    return VerticalNavItem;
+  }
+  if (depth === 'secondary') {
+    return VerticalNavSecondaryItem;
+  }
+  if (depth === 'tertiary') {
+    return VerticalNavTertiaryItem;
+  }
   return null;
 };
 
@@ -128,7 +134,9 @@ const wrongDepth = (props, expectedDepth) => {
   if (props.depth !== expectedDepth) {
     const componentUsed = componentForDepth(expectedDepth).displayName;
     // eslint-disable-next-line no-console
-    console.warn(`Warning: ${componentUsed} was used at ${props.depth} depth, but it is for ${expectedDepth} items.`);
+    console.warn(
+      `Warning: ${componentUsed} was used at ${props.depth} depth, but it is for ${expectedDepth} items.`
+    );
   }
 };
 

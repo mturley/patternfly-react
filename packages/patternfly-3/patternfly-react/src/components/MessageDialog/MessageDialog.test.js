@@ -53,7 +53,12 @@ describe('rendering with options', () => {
   test('renders with the provided primary text', () => {
     const primaryContent = <h1>Modal Heading</h1>;
     const wrapper = shallow(
-      <MessageDialog {...baseProps} onHide={onHide} primaryAction={primaryAction} primaryContent={primaryContent} />
+      <MessageDialog
+        {...baseProps}
+        onHide={onHide}
+        primaryAction={primaryAction}
+        primaryContent={primaryContent}
+      />
     );
 
     expect(wrapper.contains(primaryContent)).toBe(true);
@@ -62,7 +67,12 @@ describe('rendering with options', () => {
   test('renders with the provided secondary text', () => {
     const secondaryContent = <div>Modal Body</div>;
     const wrapper = shallow(
-      <MessageDialog {...baseProps} onHide={onHide} primaryAction={primaryAction} secondaryContent={secondaryContent} />
+      <MessageDialog
+        {...baseProps}
+        onHide={onHide}
+        primaryAction={primaryAction}
+        secondaryContent={secondaryContent}
+      />
     );
 
     expect(wrapper.contains(secondaryContent)).toBe(true);

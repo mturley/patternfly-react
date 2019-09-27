@@ -40,7 +40,11 @@ describe('editableRowWrapper', () => {
       attachTo: container.find('tbody').getDOMNode()
     };
 
-    mockClosest(null, selector => (selector === 'table' ? container.getDOMNode() : undefined), true);
+    mockClosest(
+      null,
+      selector => (selector === 'table' ? container.getDOMNode() : undefined),
+      true
+    );
   });
 
   afterEach(() => {
@@ -116,7 +120,9 @@ describe('editableRowWrapper', () => {
     };
 
     const view = mount(getRowWrapper(row, null, React.Fragment), mountOptions);
-    view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary').simulate('mouseup');
+    view
+      .find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-primary')
+      .simulate('mouseup');
     expect(onEditConfirmed).toHaveBeenCalled();
 
     view.find('.pf-c-table__inline-edit-buttons button.pf-c-button.pf-m-plain').simulate('mouseup');

@@ -4,7 +4,17 @@ import classNames from 'classnames';
 import { Dropdown, ListGroup, ListGroupItem } from '../../index';
 
 const HorizontalNavMenuItem = props => {
-  const { children, onItemClick, title, active, dropdown, submenu, dropup, pullLeft, ...otherProps } = props;
+  const {
+    children,
+    onItemClick,
+    title,
+    active,
+    dropdown,
+    submenu,
+    dropup,
+    pullLeft,
+    ...otherProps
+  } = props;
 
   const dropdownClasses = classNames({
     'dropdown-submenu': submenu,

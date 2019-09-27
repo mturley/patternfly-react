@@ -19,7 +19,9 @@ test('additional label', () => {
 });
 
 test('Progress with aria-valuetext', () => {
-  const view = mount(<Progress value={33} id="progress-aria-valuetext" valueText="Descriptive text here" />);
+  const view = mount(
+    <Progress value={33} id="progress-aria-valuetext" valueText="Descriptive text here" />
+  );
   expect(view).toMatchSnapshot();
 });
 
@@ -60,7 +62,9 @@ describe('Progress size', () => {
 describe('Progress variant', () => {
   Object.keys(ProgressVariant).forEach(oneVariant => {
     test(oneVariant, () => {
-      const view = mount(<Progress id={`${oneVariant}-progress`} value={33} variant={oneVariant} />);
+      const view = mount(
+        <Progress id={`${oneVariant}-progress`} value={33} variant={oneVariant} />
+      );
       expect(view).toMatchSnapshot();
     });
   });
@@ -69,7 +73,9 @@ describe('Progress variant', () => {
 describe('Progress measure location', () => {
   Object.keys(ProgressMeasureLocation).forEach(oneLocation => {
     test(oneLocation, () => {
-      const view = mount(<Progress id={`${oneLocation}-progress`} value={33} measureLocation={oneLocation} />);
+      const view = mount(
+        <Progress id={`${oneLocation}-progress`} value={33} measureLocation={oneLocation} />
+      );
       expect(view).toMatchSnapshot();
     });
   });

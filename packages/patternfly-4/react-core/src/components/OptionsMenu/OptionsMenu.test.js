@@ -26,7 +26,11 @@ const menuItems = [
 describe('optionsMenu', () => {
   test('regular', () => {
     const view = mount(
-      <OptionsMenu id="regular" menuItems={menuItems} toggle={<OptionsMenuToggle>Options Menu</OptionsMenuToggle>} />
+      <OptionsMenu
+        id="regular"
+        menuItems={menuItems}
+        toggle={<OptionsMenuToggle>Options Menu</OptionsMenuToggle>}
+      />
     );
     expect(view).toMatchSnapshot();
   });
@@ -98,7 +102,10 @@ describe('optionsMenu', () => {
         id="text"
         menuItems={menuItems}
         toggle={
-          <OptionsMenuToggleWithText toggleButtonContents={<React.Fragment>Test</React.Fragment>} toggleText="Test" />
+          <OptionsMenuToggleWithText
+            toggleButtonContents={<React.Fragment>Test</React.Fragment>}
+            toggleText="Test"
+          />
         }
       />
     );

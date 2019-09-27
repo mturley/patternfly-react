@@ -4,7 +4,10 @@ import buttonStyles from '@patternfly/react-styles/css/components/Button/button'
 import { css, getModifier } from '@patternfly/react-styles';
 
 export interface SkipToContentProps
-  extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {
+  extends React.DetailedHTMLProps<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    HTMLAnchorElement
+  > {
   /** Sets the base component to render. Defaults to an anchor */
   component?: any;
   /** The skip to content link. */

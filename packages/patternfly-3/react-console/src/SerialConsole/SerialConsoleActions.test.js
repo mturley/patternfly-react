@@ -10,7 +10,12 @@ test('placeholder render test', () => {
 
 test('Render SerialConsoleActions with the Disconnect button enabled', () => {
   const view = shallow(
-    <SerialConsoleActions idPrefix="idPrefix" isDisconnectEnabled onDisconnect={jest.fn()} onReset={jest.fn()} />
+    <SerialConsoleActions
+      idPrefix="idPrefix"
+      isDisconnectEnabled
+      onDisconnect={jest.fn()}
+      onReset={jest.fn()}
+    />
   );
   expect(view).toMatchSnapshot();
 });

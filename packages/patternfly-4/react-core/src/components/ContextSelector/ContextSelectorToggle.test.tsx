@@ -36,7 +36,9 @@ test('Verify keydown tab ', () => {
 });
 
 test('Verify keydown enter ', () => {
-  const view = mount(<ContextSelectorToggle onToggle={jest.fn()} onEnter={jest.fn()} id="toggle-id" />);
+  const view = mount(
+    <ContextSelectorToggle onToggle={jest.fn()} onEnter={jest.fn()} id="toggle-id" />
+  );
   view.simulate('keyDown', { key: 'Enter' });
   expect(view).toMatchSnapshot();
 });

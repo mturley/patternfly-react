@@ -5,7 +5,12 @@ import { Dropdown } from '../../../Dropdown';
 import { Icon } from '../../../Icon';
 
 const NotificationDrawerDropDown = ({ id, children, className, pullRight, ...props }) => {
-  const classes = classNames('dropdown', { 'pull-right': pullRight }, 'dropdown-kebab-pf', className);
+  const classes = classNames(
+    'dropdown',
+    { 'pull-right': pullRight },
+    'dropdown-kebab-pf',
+    className
+  );
 
   return (
     <Dropdown className={classes} id={id}>

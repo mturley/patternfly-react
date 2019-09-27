@@ -3,7 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { withInfo } from '@storybook/addon-info';
 import { defaultTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { ClassificationBanner } from './index';
 import { name } from '../../../package.json';
 
@@ -41,7 +45,7 @@ class ClassificationBannerStoryWrapper extends React.Component {
     this.setState({
       closed: false
     });
-  }
+  };
 
   render() {
     const bottomBanner = boolean('Show Bottom Banner', true);
@@ -49,7 +53,11 @@ class ClassificationBannerStoryWrapper extends React.Component {
     const hostName = text('Host Name', 'localhost');
     const hostNamePosition = select('Host Name Position', { left: 'Left', right: 'Right' }, 'left');
     const userName = text('User Name', 'John Smith');
-    const userNamePosition = select('User Name Position', { left: 'Left', right: 'Right' }, 'right');
+    const userNamePosition = select(
+      'User Name Position',
+      { left: 'Left', right: 'Right' },
+      'right'
+    );
     const bannerColor = text('Banner Color', 'pf-green');
     const title = text('Title', 'Unclassified');
 

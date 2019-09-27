@@ -1,7 +1,9 @@
-const inlineEditFormatterFactory = ({ renderEdit, renderValue, resolveValue, isEditable = null } = {}) => (
-  value,
-  additionalData
-) => {
+const inlineEditFormatterFactory = ({
+  renderEdit,
+  renderValue,
+  resolveValue,
+  isEditable = null
+} = {}) => (value, additionalData) => {
   const { rowData } = additionalData;
 
   if (resolveValue) {

@@ -5,15 +5,27 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { withInfo } from '@storybook/addon-info';
 import { inlineTemplate } from 'storybook/decorators/storyTemplates';
-import { storybookPackageName, DOCUMENTATION_URL, STORYBOOK_CATEGORY } from 'storybook/constants/siteConstants';
+import {
+  storybookPackageName,
+  DOCUMENTATION_URL,
+  STORYBOOK_CATEGORY
+} from 'storybook/constants/siteConstants';
 import { Col, Row, Grid } from '../Grid';
 import { Button } from '../Button';
 import { Form, FormGroup, FormControl, ControlLabel } from './index';
 
 import { FormExample, FormExampleSource } from './Stories/FormExample';
 import { InlineFormFields, InlineFormButtons, getInlineFormKnobs } from './Stories/InlineForm';
-import { BasicFormFields, BasicFormButtons, BasicFormSpinner, getBasicFormKnobs } from './Stories/BasicForm';
-import { SupportedControlsFormFields, getSupportedControlsFormKnobs } from './Stories/SupportedControlsForm';
+import {
+  BasicFormFields,
+  BasicFormButtons,
+  BasicFormSpinner,
+  getBasicFormKnobs
+} from './Stories/BasicForm';
+import {
+  SupportedControlsFormFields,
+  getSupportedControlsFormKnobs
+} from './Stories/SupportedControlsForm';
 import { InputGroupsFormFields, getInputGroupsFormKnobs } from './Stories/InputGroupsForm';
 import { InlineFormField } from './Stories/InlineFormField';
 import { HorizontalFormField } from './Stories/HorizontalFormField';
@@ -21,7 +33,10 @@ import { VerticalFormField } from './Stories/VerticalFormField';
 import { ModalForm } from './Stories/ModalForm';
 import { name } from '../../../package.json';
 
-const stories = storiesOf(`${storybookPackageName(name)}/${STORYBOOK_CATEGORY.FORMS_AND_CONTROLS}/Forms`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/${STORYBOOK_CATEGORY.FORMS_AND_CONTROLS}/Forms`,
+  module
+);
 
 stories.addDecorator(withKnobs);
 
@@ -84,10 +99,16 @@ exampleStories.add(
     const { bsSize, disabled } = formFieldsKnobs;
     const buttonsProps = {};
 
-    if (bsSize) { buttonsProps.bsSize = bsSize; }
-    if (disabled) { buttonsProps.disabled = disabled; }
+    if (bsSize) {
+      buttonsProps.bsSize = bsSize;
+    }
+    if (disabled) {
+      buttonsProps.disabled = disabled;
+    }
 
-    const formFields = InlineFormFields.map(formField => InlineFormField({ ...formField, ...formFieldsKnobs })).reduce(
+    const formFields = InlineFormFields.map(formField =>
+      InlineFormField({ ...formField, ...formFieldsKnobs })
+    ).reduce(
       (result = [], element) => [...result, element, ' '], // create spacing betwwen elements
       []
     );
@@ -120,11 +141,17 @@ exampleStories.add(
     const { bsSize, disabled } = formFieldsKnobs;
     const buttonsProps = {};
 
-    if (bsSize) { buttonsProps.bsSize = bsSize; }
-    if (disabled) { buttonsProps.disabled = disabled; }
+    if (bsSize) {
+      buttonsProps.bsSize = bsSize;
+    }
+    if (disabled) {
+      buttonsProps.disabled = disabled;
+    }
 
     const showLoading = boolean('Show Loading', false);
-    const formFields = BasicFormFields.map(formField => HorizontalFormField({ ...formField, ...formFieldsKnobs }));
+    const formFields = BasicFormFields.map(formField =>
+      HorizontalFormField({ ...formField, ...formFieldsKnobs })
+    );
     const formButtons = BasicFormButtons.map(({ text, ...props }) => (
       <span key={text}>
         <Button {...props} {...buttonsProps}>
@@ -168,11 +195,17 @@ exampleStories.add(
     const { bsSize, disabled } = formFieldsKnobs;
     const buttonsProps = {};
 
-    if (bsSize) { buttonsProps.bsSize = bsSize; }
-    if (disabled) { buttonsProps.disabled = disabled; }
+    if (bsSize) {
+      buttonsProps.bsSize = bsSize;
+    }
+    if (disabled) {
+      buttonsProps.disabled = disabled;
+    }
 
     const showLoading = boolean('Show Loading', false);
-    const formFields = BasicFormFields.map(formField => VerticalFormField({ ...formField, ...formFieldsKnobs }));
+    const formFields = BasicFormFields.map(formField =>
+      VerticalFormField({ ...formField, ...formFieldsKnobs })
+    );
     const formButtons = BasicFormButtons.map(({ text, ...props }) => (
       <span key={text}>
         <Button {...props} {...buttonsProps}>
@@ -214,18 +247,26 @@ exampleStories.add(
     const { bsSize, disabled } = formFieldsKnobs;
     const buttonsProps = {};
 
-    if (bsSize) { buttonsProps.bsSize = bsSize; }
-    if (disabled) { buttonsProps.disabled = disabled; }
+    if (bsSize) {
+      buttonsProps.bsSize = bsSize;
+    }
+    if (disabled) {
+      buttonsProps.disabled = disabled;
+    }
 
     const showLoading = boolean('Show Loading', false);
-    const formFields = BasicFormFields.map(formField => HorizontalFormField({ ...formField, ...formFieldsKnobs }));
+    const formFields = BasicFormFields.map(formField =>
+      HorizontalFormField({ ...formField, ...formFieldsKnobs })
+    );
     const formButtons = BasicFormButtons.map(({ text, ...props }) => (
       <Button key={text} {...props} {...buttonsProps}>
         {text}
       </Button>
     )).reverse();
     const formSpinner = (
-      <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>{[...BasicFormSpinner].reverse()}</div>
+      <div style={{ paddingTop: '20px', paddingBottom: '10px' }}>
+        {[...BasicFormSpinner].reverse()}
+      </div>
     );
     const story = (
       <ModalForm
@@ -249,7 +290,9 @@ exampleStories.add(
   'Input Groups',
   withInfo()(() => {
     const formFieldsKnobs = getInputGroupsFormKnobs();
-    const formFields = InputGroupsFormFields.map(formField => VerticalFormField({ ...formField, ...formFieldsKnobs }));
+    const formFields = InputGroupsFormFields.map(formField =>
+      VerticalFormField({ ...formField, ...formFieldsKnobs })
+    );
     const story = (
       <Grid>
         <Form>

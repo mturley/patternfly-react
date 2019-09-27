@@ -25,7 +25,9 @@ function isTSX(node) {
 }
 
 function isJSX(node) {
-  return node.internal.mediaType === `application/javascript` || node.internal.mediaType === `text/jsx`;
+  return (
+    node.internal.mediaType === `application/javascript` || node.internal.mediaType === `text/jsx`
+  );
 }
 
 function flattenProps(props) {

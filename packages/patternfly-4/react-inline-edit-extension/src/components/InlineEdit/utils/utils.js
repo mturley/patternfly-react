@@ -2,10 +2,18 @@ const requiredElements = ['INPUT', 'BUTTON'];
 let warningCompleted = false;
 
 export const showIdWarnings = (row, target) => {
-  if ((row.isEditing || row.isTableEditing) && requiredElements.indexOf(target.tagName) >= 0 && !warningCompleted) {
+  if (
+    (row.isEditing || row.isTableEditing) &&
+    requiredElements.indexOf(target.tagName) >= 0 &&
+    !warningCompleted
+  ) {
     warningCompleted = true;
     // eslint-disable-next-line no-console
-    console.warn(`${requiredElements.join(', ')} elements are required to have an id for editing to work properly.`);
+    console.warn(
+      `${requiredElements.join(
+        ', '
+      )} elements are required to have an id for editing to work properly.`
+    );
   }
 };
 

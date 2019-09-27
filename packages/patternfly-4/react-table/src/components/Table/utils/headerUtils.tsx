@@ -10,7 +10,15 @@ import {
   parentId
 } from './transformers';
 import { defaultTitle } from './formatters';
-import { ICell, IRow, IActions, IActionsResolver, IAreActionsDisabled, OnSelect, OnCollapse } from '../Table';
+import {
+  ICell,
+  IRow,
+  IActions,
+  IActionsResolver,
+  IAreActionsDisabled,
+  OnSelect,
+  OnCollapse
+} from '../Table';
 
 /**
  * Generate header with transforms and formatters from custom header object.
@@ -19,8 +27,17 @@ import { ICell, IRow, IActions, IActionsResolver, IAreActionsDisabled, OnSelect,
  * @return {*} header, label, transforms: Array, formatters: Array.
  */
 const generateHeader = (
-  { transforms: origTransforms, formatters: origFormatters, columnTransforms, header }:
-  { transforms?: ICell['transforms'], formatters?: ICell['formatters'], columnTransforms?: ICell['columnTransforms'], header?: ICell},
+  {
+    transforms: origTransforms,
+    formatters: origFormatters,
+    columnTransforms,
+    header
+  }: {
+    transforms?: ICell['transforms'];
+    formatters?: ICell['formatters'];
+    columnTransforms?: ICell['columnTransforms'];
+    header?: ICell;
+  },
   title?: string | ICell
 ) => ({
   ...header,
@@ -32,7 +49,10 @@ const generateHeader = (
     ...(columnTransforms || []),
     ...(header && header.hasOwnProperty('transforms') ? header.transforms : [])
   ],
-  formatters: [...(origFormatters || []), ...(header && header.hasOwnProperty('formatters') ? header.formatters : [])]
+  formatters: [
+    ...(origFormatters || []),
+    ...(header && header.hasOwnProperty('formatters') ? header.formatters : [])
+  ]
 });
 
 /**
@@ -40,8 +60,20 @@ const generateHeader = (
  * @param {*} customCell config with cellFormatters, cellTransforms, columnTransforms and rest of cell config.
  * @returns {*} cell, transforms: Array, formatters: Array.
  */
-const generateCell = ({ cellFormatters, cellTransforms, columnTransforms, cell }:
-  { cellFormatters?: ICell['cellFormatters'], cellTransforms?: ICell['cellTransforms'], columnTransforms?: ICell['columnTransforms'], cell?: ICell}, extra: any) => ({
+const generateCell = (
+  {
+    cellFormatters,
+    cellTransforms,
+    columnTransforms,
+    cell
+  }: {
+    cellFormatters?: ICell['cellFormatters'];
+    cellTransforms?: ICell['cellTransforms'];
+    columnTransforms?: ICell['columnTransforms'];
+    cell?: ICell;
+  },
+  extra: any
+) => ({
   ...cell,
   transforms: [
     ...(cellTransforms || []),
@@ -93,7 +125,13 @@ const mapHeader = (column: ICell, extra: any, key: number, ...props: any) => {
  * @param {*} extraObject with onSelect callback.
  * @returns {*} object with empty title, tranforms - Array, cellTransforms - Array.
  */
-const selectableTransforms = ({ onSelect, canSelectAll }: { onSelect: OnSelect, canSelectAll: boolean}) => [
+const selectableTransforms = ({
+  onSelect,
+  canSelectAll
+}: {
+  onSelect: OnSelect;
+  canSelectAll: boolean;
+}) => [
   ...(onSelect
     ? [
         {
@@ -110,8 +148,15 @@ const selectableTransforms = ({ onSelect, canSelectAll }: { onSelect: OnSelect, 
  * @param {*} extraObject with actions array.
  * @returns {*} object with empty title, tranforms - Array, cellTransforms - Array.
  */
-const actionsTransforms = ({ actions, actionResolver, areActionsDisabled }:
-  { actions: IActions, actionResolver: IActionsResolver, areActionsDisabled: IAreActionsDisabled}) => [
+const actionsTransforms = ({
+  actions,
+  actionResolver,
+  areActionsDisabled
+}: {
+  actions: IActions;
+  actionResolver: IActionsResolver;
+  areActionsDisabled: IAreActionsDisabled;
+}) => [
   ...(actionResolver || actions
     ? [
         {
@@ -128,7 +173,7 @@ const actionsTransforms = ({ actions, actionResolver, areActionsDisabled }:
  * @param {*}  extraObject with onCollapse callback.
  * @returns {*} object with empty title, tranforms - Array, cellTransforms - Array.
  */
-const collapsibleTransfroms = ({ onCollapse }: { onCollapse: OnCollapse}) => [
+const collapsibleTransfroms = ({ onCollapse }: { onCollapse: OnCollapse }) => [
   ...(onCollapse
     ? [
         {
@@ -148,7 +193,10 @@ const collapsibleTransfroms = ({ onCollapse }: { onCollapse: OnCollapse}) => [
  */
 const addAdditionalCellTranforms = (cell: ICell, additional: any) => ({
   ...(cell.hasOwnProperty('title') ? cell : { title: cell }),
-  cellTransforms: [...(cell.hasOwnProperty('cellTransforms') ? cell.cellTransforms : []), additional]
+  cellTransforms: [
+    ...(cell.hasOwnProperty('cellTransforms') ? cell.cellTransforms : []),
+    additional
+  ]
 });
 
 /**
@@ -163,7 +211,9 @@ const expandContent = (header: (ICell | string)[], { onCollapse }: { onCollapse:
 
   return header.map((cell: ICell | string, key: number) => {
     const parentIdCell = addAdditionalCellTranforms(cell as ICell, parentId);
-    return key === 0 ? addAdditionalCellTranforms(parentIdCell as ICell, expandedRow(header.length)) : parentIdCell;
+    return key === 0
+      ? addAdditionalCellTranforms(parentIdCell as ICell, expandedRow(header.length))
+      : parentIdCell;
   });
 };
 
@@ -181,7 +231,9 @@ export const mapOpenedRows = (rows: IRow[], children: any) =>
         if (curr.hasOwnProperty('compoundParent')) {
           // if this is compound expand, check for any open child cell
           acc[acc.length - 1].isOpen = acc[acc.length - 1].rows.some((oneRow: IRow) =>
-            oneRow.props.rowData.cells.some((oneCell: ICell) => oneCell.props && oneCell.props.isOpen)
+            oneRow.props.rowData.cells.some(
+              (oneCell: ICell) => oneCell.props && oneCell.props.isOpen
+            )
           );
         }
       }

@@ -9,7 +9,10 @@ import { name } from '../../../package.json';
 
 import { CatalogItemHeader } from './index';
 
-const stories = storiesOf(`${storybookPackageName(name)}/Catalog Components/Catalog Item Header`, module);
+const stories = storiesOf(
+  `${storybookPackageName(name)}/Catalog Components/Catalog Item Header`,
+  module
+);
 
 stories.addDecorator(
   defaultTemplate({

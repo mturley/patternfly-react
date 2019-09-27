@@ -80,7 +80,11 @@ export const DropdownToggle: React.FunctionComponent<DropdownToggleProps> = ({
           isPrimary={isPrimary}
           onToggle={onToggle}
           ariaHasPopup={ariaHasPopup}
-          {...splitButtonItems && { "isSplitButton": true, 'aria-label': props['aria-label'] || 'Select' }}>
+          {...(splitButtonItems && {
+            isSplitButton: true,
+            'aria-label': props['aria-label'] || 'Select'
+          })}
+        >
           {children && <span className={IconComponent && css(toggleTextClass)}>{children}</span>}
           {IconComponent && <IconComponent className={css(children && toggleIconClass)} />}
         </Toggle>

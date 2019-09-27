@@ -5,7 +5,11 @@ import { getCounterMessage as counterMessage, getItemsLength } from '../helpers'
 
 const DualListFooter = ({ items, selectCount, getCounterMessage }) => (
   <div className="dual-list-pf-footer">
-    <DualListCounter selected={selectCount} total={getItemsLength(items)} getCounterMessage={getCounterMessage} />
+    <DualListCounter
+      selected={selectCount}
+      total={getItemsLength(items)}
+      getCounterMessage={getCounterMessage}
+    />
   </div>
 );
 

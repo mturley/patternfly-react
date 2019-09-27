@@ -25,9 +25,8 @@ const utilizationCardAddWithInfo = stories => {
       order: null
     };
     const pfGetUtilizationDonutTooltipContents = d =>
-      `<span class="donut-tooltip-pf" style="white-space: nowrap;">${Math.round(d[0].ratio * 1000) / 10} ${
-        d[0].name
-      }</span>`;
+      `<span class="donut-tooltip-pf" style="white-space: nowrap;">${Math.round(d[0].ratio * 1000) /
+        10} ${d[0].name}</span>`;
 
     const donutConfigTooltip = {
       contents: pfGetUtilizationDonutTooltipContents

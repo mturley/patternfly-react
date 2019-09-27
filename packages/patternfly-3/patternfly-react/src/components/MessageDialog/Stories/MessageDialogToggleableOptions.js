@@ -13,22 +13,24 @@ class MessageDialogToggleableOptions extends Component {
   primaryAction = () => {
     // Do some stuff
     this.setState(() => ({ show: false }));
-  }
+  };
 
   secondaryAction = () => {
     this.setState(() => ({ show: false }));
-  }
+  };
 
   showModal = () => {
     this.setState(() => ({ show: true }));
-  }
+  };
 
   render() {
     // StoryBook Knobs Config
     // *************************************************************************
     const value = select('Icon', ['info', 'error-circle-o', 'warning-triangle-o'], 'info');
     const title = boolean('With Title', true) ? 'Modal Title' : '';
-    const primaryContent = boolean('With Primary Content', true) ? <p className="lead">Main Dialog Text</p> : null;
+    const primaryContent = boolean('With Primary Content', true) ? (
+      <p className="lead">Main Dialog Text</p>
+    ) : null;
     const secondaryActionButtonContent = boolean('With Secondary Button', true) ? 'Cancel' : null;
     // *************************************************************************
 

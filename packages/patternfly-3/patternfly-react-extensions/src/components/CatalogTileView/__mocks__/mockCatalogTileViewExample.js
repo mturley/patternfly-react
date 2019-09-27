@@ -17,7 +17,7 @@ class MockCatalogTileViewExample extends React.Component {
 
   onViewAll = id => {
     this.setState({ showAll: id });
-  }
+  };
 
   getBadges = item => {
     const badges = [];
@@ -39,13 +39,13 @@ class MockCatalogTileViewExample extends React.Component {
     }
 
     return badges;
-  }
+  };
 
   renderEmptyState = category => (
     <EmptyState className="blank-slate-content-pf">
       <EmptyState.Info>There are no items in this category.</EmptyState.Info>
     </EmptyState>
-  )
+  );
 
   renderCategory = category => {
     const { showAll } = this.state;
@@ -80,12 +80,14 @@ class MockCatalogTileViewExample extends React.Component {
     }
 
     return null;
-  }
+  };
 
   render() {
     const { showAll } = this.state;
 
-    const activeCategory = showAll ? mockCategories.find(category => category.id === showAll) : null;
+    const activeCategory = showAll
+      ? mockCategories.find(category => category.id === showAll)
+      : null;
 
     return (
       <div>

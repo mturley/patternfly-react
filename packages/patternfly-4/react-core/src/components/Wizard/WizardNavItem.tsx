@@ -35,9 +35,14 @@ export const WizardNavItem: React.FunctionComponent<WizardNavItemProps> = ({
       <NavItemComponent
         aria-current={isCurrent && !children ? 'page' : false}
         onClick={() => onNavItemClick(step)}
-        className={css(styles.wizardNavLink, isCurrent && 'pf-m-current', isDisabled && 'pf-m-disabled')}
+        className={css(
+          styles.wizardNavLink,
+          isCurrent && 'pf-m-current',
+          isDisabled && 'pf-m-disabled'
+        )}
         aria-disabled={isDisabled ? true : false}
-        tabIndex={isDisabled ? -1 : undefined}>
+        tabIndex={isDisabled ? -1 : undefined}
+      >
         {text}
       </NavItemComponent>
       {children}

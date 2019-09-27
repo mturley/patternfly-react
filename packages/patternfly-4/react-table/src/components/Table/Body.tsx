@@ -15,7 +15,9 @@ export interface TableBodyProps {
 }
 
 const flagVisibility = (rows: IRow[]) => {
-  const visibleRows = (rows as []).filter((oneRow: IRow) => !oneRow.parent || oneRow.isExpanded) as IRow[];
+  const visibleRows = (rows as []).filter(
+    (oneRow: IRow) => !oneRow.parent || oneRow.isExpanded
+  ) as IRow[];
   if (visibleRows.length > 0) {
     visibleRows[0].isFirstVisible = true;
     visibleRows[visibleRows.length - 1].isLastVisible = true;
@@ -40,7 +42,7 @@ class ContextBody extends React.Component<TableBodyProps, {}> {
         onRowClick(event, row, rowProps, computedData);
       }
     };
-  }
+  };
 
   mapCells = (headerData: IRow[], row: IRow, rowKey: number) => {
     // column indexes start after generated optional columns
@@ -74,7 +76,7 @@ class ContextBody extends React.Component<TableBodyProps, {}> {
           { id: row.id !== undefined ? row.id : rowKey }
         ))
     };
-  }
+  };
 
   render() {
     const { className, headerData, rows, rowKey, children, onRowClick, ...props } = this.props;
@@ -119,7 +121,7 @@ export const TableBody = ({
   ...props
 }: TableBodyProps) => (
   <TableContext.Consumer>
-    {({ headerData = [], rows = [], ...rest }) =>
+    {({ headerData = [], rows = [], ...rest }) => (
       <ContextBody
         headerData={headerData}
         rows={rows as IRow[]}
@@ -127,6 +129,10 @@ export const TableBody = ({
         className={className}
         children={children}
         rowKey={rowKey}
-        onRowClick={onRowClick} {...props} {...rest} />}
+        onRowClick={onRowClick}
+        {...props}
+        {...rest}
+      />
+    )}
   </TableContext.Consumer>
 );

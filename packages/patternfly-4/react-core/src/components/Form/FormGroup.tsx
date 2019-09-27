@@ -40,12 +40,16 @@ export const FormGroup: React.FunctionComponent<FormGroupProps> = ({
 }: FormGroupProps) => (
   <FormContext.Consumer>
     {({ isHorizontal }: { isHorizontal: boolean }) => (
-      <div {...props} className={css(styles.formGroup, isInline ? getModifier(styles, 'inline', className) : className)}>
+      <div
+        {...props}
+        className={css(
+          styles.formGroup,
+          isInline ? getModifier(styles, 'inline', className) : className
+        )}
+      >
         {label && (
           <label className={css(styles.formLabel)} htmlFor={fieldId}>
-            <span className={css(styles.formLabelText)}>
-              {label}
-            </span>
+            <span className={css(styles.formLabelText)}>{label}</span>
             {isRequired && (
               <span className={css(styles.formLabelRequired)} aria-hidden="true">
                 {ASTERISK}
@@ -53,7 +57,11 @@ export const FormGroup: React.FunctionComponent<FormGroupProps> = ({
             )}
           </label>
         )}
-        {isHorizontal ? <div className={css(styles.formHorizontalGroup)}>{children}</div> : children}
+        {isHorizontal ? (
+          <div className={css(styles.formHorizontalGroup)}>{children}</div>
+        ) : (
+          children
+        )}
         {((isValid && helperText) || (!isValid && helperTextInvalid)) && (
           <div
             className={css(styles.formHelperText, !isValid ? getModifier(styles, 'error') : '')}

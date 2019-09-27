@@ -31,7 +31,10 @@ export const EmptyState: React.FunctionComponent<EmptyStateProps> = ({
 }: EmptyStateProps) => {
   const maxWidthModifier = maxWidthModifiers[variant];
   return (
-    <div className={css(styles.emptyState, getModifier(styles, maxWidthModifier, null), className)} {...props}>
+    <div
+      className={css(styles.emptyState, getModifier(styles, maxWidthModifier, null), className)}
+      {...props}
+    >
       {children}
     </div>
   );

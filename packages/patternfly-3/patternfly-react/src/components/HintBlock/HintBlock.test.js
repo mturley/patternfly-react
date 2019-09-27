@@ -47,7 +47,9 @@ test('HintBlock hides close button when no close callback', () => {
 
 test('HintBlock hides optional button when no button content', () => {
   const onClose = jest.fn();
-  const component = mount(<HintBlock title="Test Title Text" onClose={onClose} body="Test Body Text" />);
+  const component = mount(
+    <HintBlock title="Test Title Text" onClose={onClose} body="Test Body Text" />
+  );
 
   expect(component.render()).toMatchSnapshot();
 });
@@ -63,12 +65,14 @@ test('HintBlock display complex content', () => {
       body={
         <div>
           <p>
-            This pattern does not yet exist in <a href="http://www.patternfly.org/pattern-library/">PatternFly</a>.
+            This pattern does not yet exist in{' '}
+            <a href="http://www.patternfly.org/pattern-library/">PatternFly</a>.
           </p>
-          The <b>Hint Block</b> pattern is similar to an informational inline notification, but with additional emphasis
-          (blue highlight). The intention is to use this for specific use cases involving new users, new features, or
-          cases where extra guidance may assist in successfully completing a flow. The hint pattern involves a one-step
-          reminder, explanation, or call to action. Potential Use Cases
+          The <b>Hint Block</b> pattern is similar to an informational inline notification, but with
+          additional emphasis (blue highlight). The intention is to use this for specific use cases
+          involving new users, new features, or cases where extra guidance may assist in
+          successfully completing a flow. The hint pattern involves a one-step reminder,
+          explanation, or call to action. Potential Use Cases
           <ul>
             <li>
               To provide guidance to <b>new users</b> who do not know how to use the application

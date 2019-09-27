@@ -46,7 +46,11 @@ const lineChart = stories => {
         <div>
           <h2>Sparkline</h2>
           <div>
-            <SparklineChart id="line-chart-1" data={singleLineChartConfigData} size={{ width: 200, height: 40 }} />
+            <SparklineChart
+              id="line-chart-1"
+              data={singleLineChartConfigData}
+              size={{ width: 200, height: 40 }}
+            />
           </div>
           <div>Less than one year remaining</div>
 
@@ -57,7 +61,11 @@ const lineChart = stories => {
 
           <h2>Single Line Chart</h2>
           <div>
-            <SingleLineChart id="line-chart-3" data={singleLineChartConfigData} size={{ width: 600 }} />
+            <SingleLineChart
+              id="line-chart-3"
+              data={singleLineChartConfigData}
+              size={{ width: 600 }}
+            />
           </div>
 
           <h2>Spline Chart</h2>
@@ -67,7 +75,11 @@ const lineChart = stories => {
 
           <h2>Single Spline Chart</h2>
           <div>
-            <SingleLineChart id="line-chart-5" data={singleSplineChartConfigData} size={{ width: 600 }} />
+            <SingleLineChart
+              id="line-chart-5"
+              data={singleSplineChartConfigData}
+              size={{ width: 600 }}
+            />
           </div>
 
           <h2>Zoomable Single Line Chart</h2>

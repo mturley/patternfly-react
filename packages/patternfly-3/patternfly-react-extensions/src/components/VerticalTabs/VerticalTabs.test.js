@@ -11,7 +11,12 @@ test('Vertical Tabs renders tabs properly', () => {
           <VerticalTabs.Tab key="one-one" id="one-one" title="Tab One-One">
             <VerticalTabs activeTab>
               <VerticalTabs.Tab key="one-one-one" id="one-one-one" title="Tab One-One-One" active />
-              <VerticalTabs.Tab key="one-one-two" id="one-one-two" title="Tab One-One-Two" active={false} />
+              <VerticalTabs.Tab
+                key="one-one-two"
+                id="one-one-two"
+                title="Tab One-One-Two"
+                active={false}
+              />
               <VerticalTabs.Tab key="one-one-three" id="one-one-three" title="Tab One-One-Three" />
             </VerticalTabs>
           </VerticalTabs.Tab>
@@ -50,7 +55,12 @@ test('Vertical Tabs renders restricted tabs properly', () => {
           <VerticalTabs.Tab key="one-one" id="one-one" title="Tab One-One">
             <VerticalTabs restrictTabs activeTab>
               <VerticalTabs.Tab key="one-one-one" id="one-one-one" title="Tab One-One-One" active />
-              <VerticalTabs.Tab key="one-one-two" id="one-one-two" title="Tab One-One-Two" active={false} />
+              <VerticalTabs.Tab
+                key="one-one-two"
+                id="one-one-two"
+                title="Tab One-One-Two"
+                active={false}
+              />
               <VerticalTabs.Tab key="one-one-three" id="one-one-three" title="Tab One-One-Three" />
             </VerticalTabs>
           </VerticalTabs.Tab>
@@ -83,7 +93,9 @@ test('Vertical Tabs renders restricted tabs properly', () => {
 test('Vertical Tabs Tab onActivate is called correctly', () => {
   const onActivateMock = jest.fn();
 
-  const component = mount(<VerticalTabs.Tab id="text-click" title="Click Me" onActivate={onActivateMock} />);
+  const component = mount(
+    <VerticalTabs.Tab id="text-click" title="Click Me" onActivate={onActivateMock} />
+  );
   component.find('#text-click > a').simulate('click');
 
   expect(component.render()).toMatchSnapshot();
