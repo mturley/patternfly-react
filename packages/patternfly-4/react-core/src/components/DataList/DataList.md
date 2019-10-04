@@ -1,28 +1,39 @@
 ---
 title: 'Data list'
 cssPrefix: 'pf-c-data-list'
-propComponents: ['DataList', 'DataListAction', 'DataListCell', 'DataListCheck', 'DataListItem', 'DataListItemCells', 'DataListItemRow', 'DataListToggle', 'DataListContent']
+propComponents:
+  [
+    'DataList',
+    'DataListAction',
+    'DataListCell',
+    'DataListCheck',
+    'DataListItem',
+    'DataListItemCells',
+    'DataListItemRow',
+    'DataListToggle',
+    'DataListContent',
+  ]
 typescript: true
 ---
 
 ## Simple data list
 
 import {
-  Button,
-  DataList,
-  DataListItem,
-  DataListItemCells,
-  DataListItemRow,
-  DataListCell,
-  DataListCheck,
-  DataListAction,
-  DataListActionVisibility,
-  DataListToggle,
-  DataListContent,
-  Dropdown,
-  DropdownPosition,
-  KebabToggle,
-  DropdownItem
+Button,
+DataList,
+DataListItem,
+DataListItemCells,
+DataListItemRow,
+DataListCell,
+DataListCheck,
+DataListAction,
+DataListActionVisibility,
+DataListToggle,
+DataListContent,
+Dropdown,
+DropdownPosition,
+KebabToggle,
+DropdownItem
 } from '@patternfly/react-core';
 import { CodeBranchIcon } from '@patternfly/react-icons';
 import { css } from '@patternfly/react-styles';
@@ -209,8 +220,12 @@ class CheckboxActionDataList extends React.Component {
                 onSelect={this.onSelect2}
                 toggle={<KebabToggle onToggle={this.onToggle2} />}
                 dropdownItems={[
-                  <DropdownItem key="pri-action2" component="button">Primary</DropdownItem>,
-                  <DropdownItem key="sec-action2" component="button">Secondary</DropdownItem>,
+                  <DropdownItem key="pri-action2" component="button">
+                    Primary
+                  </DropdownItem>,
+                  <DropdownItem key="sec-action2" component="button">
+                    Secondary
+                  </DropdownItem>
                 ]}
               />
             </DataListAction>
@@ -252,10 +267,18 @@ class CheckboxActionDataList extends React.Component {
                 onSelect={this.onSelect3}
                 toggle={<KebabToggle onToggle={this.onToggle3} />}
                 dropdownItems={[
-                  <DropdownItem key="pri-action3" component="button">Primary</DropdownItem>,
-                  <DropdownItem key="sec1-action3" component="button">Secondary</DropdownItem>,
-                  <DropdownItem key="sec2-action3" component="button">Secondary</DropdownItem>,
-                  <DropdownItem key="sec3-action3" component="button">Secondary</DropdownItem>,
+                  <DropdownItem key="pri-action3" component="button">
+                    Primary
+                  </DropdownItem>,
+                  <DropdownItem key="sec1-action3" component="button">
+                    Secondary
+                  </DropdownItem>,
+                  <DropdownItem key="sec2-action3" component="button">
+                    Secondary
+                  </DropdownItem>,
+                  <DropdownItem key="sec3-action3" component="button">
+                    Secondary
+                  </DropdownItem>
                 ]}
               />
             </DataListAction>

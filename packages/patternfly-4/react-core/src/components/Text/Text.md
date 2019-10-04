@@ -6,16 +6,17 @@ propComponents: ['TextContent', 'Text', 'TextList', 'TextListItem']
 ---
 
 import {
-  TextContent,
-  Text,
-  TextVariants,
-  TextList,
-  TextListVariants,
-  TextListItem,
-  TextListItemVariants
+TextContent,
+Text,
+TextVariants,
+TextList,
+TextListVariants,
+TextListItem,
+TextListItemVariants
 } from '@patternfly/react-core';
 
 ## Headings
+
 ```js
 import React from 'react';
 import {
@@ -35,10 +36,11 @@ import {
   <Text component={TextVariants.h4}>Fourth level</Text>
   <Text component={TextVariants.h5}>Fifth level</Text>
   <Text component={TextVariants.h6}>Sixth level</Text>
-</TextContent>
+</TextContent>;
 ```
 
 ## Body text
+
 ```js
 import React from 'react';
 import {
@@ -69,7 +71,7 @@ import {
     turpis.
   </Text>
   <Text component={TextVariants.small}>Sometimes you need small text to display things like date created</Text>
-</TextContent>
+</TextContent>;
 ```
 
 ## Unordered list
@@ -101,10 +103,11 @@ import {
     </TextListItem>
     <TextListItem>Ut non enim metus.</TextListItem>
   </TextList>
-</TextContent>
+</TextContent>;
 ```
 
 ## Ordered list
+
 ```js
 import React from 'react';
 import {
@@ -127,10 +130,11 @@ import {
     <TextListItem>Quisque aliquam cursus urna, non bibendum massa viverra eget.</TextListItem>
     <TextListItem>Vivamus maximus ultricies pulvinar.</TextListItem>
   </TextList>
-</TextContent>
+</TextContent>;
 ```
 
 ## Data list
+
 ```js
 import React from 'react';
 import {
@@ -154,5 +158,5 @@ import {
     <TextListItem component={TextListItemVariants.dt}>CSS</TextListItem>
     <TextListItem component={TextListItemVariants.dd}>A technology to make HTML look better</TextListItem>
   </TextList>
-</TextContent>
+</TextContent>;
 ```

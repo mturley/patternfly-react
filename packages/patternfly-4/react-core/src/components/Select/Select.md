@@ -59,29 +59,29 @@ class SingleSelectInput extends React.Component {
       });
     };
 
-    this.toggleDisabled = (checked) => {
+    this.toggleDisabled = checked => {
       this.setState({
         isDisabled: checked
-      })
-    }
+      });
+    };
 
-    this.setIcon = (checked) => {
+    this.setIcon = checked => {
       this.setState({
         isToggleIcon: checked
-      })
-    }
+      });
+    };
 
     this.toggleDirection = () => {
-      if(this.state.direction === SelectDirection.up) {
+      if (this.state.direction === SelectDirection.up) {
         this.setState({
           direction: SelectDirection.down
         });
       } else {
         this.setState({
           direction: SelectDirection.up
-        })
+        });
       }
-    }
+    };
   }
 
   render() {
@@ -346,11 +346,11 @@ class TypeaheadSelectInput extends React.Component {
       }
     };
 
-    this.onCreateOption = (newValue) => {
+    this.onCreateOption = newValue => {
       this.setState({
-        options: [...this.state.options, {value: newValue}]
+        options: [...this.state.options, { value: newValue }]
       });
-    }
+    };
 
     this.clearSelection = () => {
       this.setState({
@@ -359,23 +359,23 @@ class TypeaheadSelectInput extends React.Component {
       });
     };
 
-    this.toggleDisabled = (checked) => {
+    this.toggleDisabled = checked => {
       this.setState({
         isDisabled: checked
-      })
-    }
+      });
+    };
 
-    this.toggleCreatable = (checked) => {
+    this.toggleCreatable = checked => {
       this.setState({
         isCreatable: checked
-      })
-    }
+      });
+    };
 
-    this.toggleCreateNew = (checked) => {
+    this.toggleCreateNew = checked => {
       this.setState({
         hasOnCreateOption: checked
-      })
-    }
+      });
+    };
   }
 
   render() {
@@ -398,7 +398,7 @@ class TypeaheadSelectInput extends React.Component {
           placeholderText="Select a state"
           isDisabled={isDisabled}
           isCreatable={isCreatable}
-          onCreateOption={hasOnCreateOption && this.onCreateOption || undefined}
+          onCreateOption={(hasOnCreateOption && this.onCreateOption) || undefined}
         >
           {options.map((option, index) => (
             <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
@@ -481,7 +481,7 @@ class TypeaheadSelectInput extends React.Component {
       });
     };
 
-    this.customFilter = (e) => {
+    this.customFilter = e => {
       let input;
       try {
         input = new RegExp(e.target.value, 'i');
@@ -489,11 +489,9 @@ class TypeaheadSelectInput extends React.Component {
         input = new RegExp(e.target.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
       }
       let typeaheadFilteredChildren =
-        e.target.value !== ''
-          ? this.options.filter(child => input.test(child.props.value))
-          : this.options;
+        e.target.value !== '' ? this.options.filter(child => input.test(child.props.value)) : this.options;
       return typeaheadFilteredChildren;
-    }
+    };
   }
 
   render() {
@@ -524,7 +522,6 @@ class TypeaheadSelectInput extends React.Component {
 }
 ```
 
-
 ## Multiple typeahead select input
 
 ```js
@@ -550,9 +547,9 @@ class MultiTypeaheadSelectInput extends React.Component {
       hasOnCreateOption: false
     };
 
-    this.onCreateOption = (newValue) => {
+    this.onCreateOption = newValue => {
       this.setState({
-        options: [...this.state.options, {value: newValue}]
+        options: [...this.state.options, { value: newValue }]
       });
     };
 
@@ -584,17 +581,17 @@ class MultiTypeaheadSelectInput extends React.Component {
       });
     };
 
-    this.toggleCreatable = (checked) => {
+    this.toggleCreatable = checked => {
       this.setState({
         isCreatable: checked
-      })
-    }
+      });
+    };
 
-    this.toggleCreateNew = (checked) => {
+    this.toggleCreateNew = checked => {
       this.setState({
         hasOnCreateOption: checked
-      })
-    }
+      });
+    };
   }
 
   render() {
@@ -617,7 +614,7 @@ class MultiTypeaheadSelectInput extends React.Component {
           ariaLabelledBy={titleId}
           placeholderText="Select a state"
           isCreatable={isCreatable}
-          onCreateOption={hasOnCreateOption && this.onCreateOption || undefined}
+          onCreateOption={(hasOnCreateOption && this.onCreateOption) || undefined}
         >
           {this.state.options.map((option, index) => (
             <SelectOption isDisabled={option.disabled} key={index} value={option.value} />
@@ -644,6 +641,7 @@ class MultiTypeaheadSelectInput extends React.Component {
   }
 }
 ```
+
 ## Multiple typeahead select input with custom objects
 
 ```js
@@ -654,23 +652,23 @@ class MultiTypeaheadSelectInputCustomObjects extends React.Component {
   constructor(props) {
     super(props);
     this.createState = (name, abbreviation, capital, founded) => {
-    return {
-      name: name,
-      abbreviation: abbreviation,
-      capital: capital,
-      founded: founded,
-      toString: function() {
-        return `${this.name} (${this.abbreviation}) - Founded: ${this.founded}`;
-      }
-    }
-  }
+      return {
+        name: name,
+        abbreviation: abbreviation,
+        capital: capital,
+        founded: founded,
+        toString: function() {
+          return `${this.name} (${this.abbreviation}) - Founded: ${this.founded}`;
+        }
+      };
+    };
     this.options = [
-      <SelectOption value={ this.createState('Alabama', 'AL', 'Montgomery', 1846)} />,
-      <SelectOption value={ this.createState('Florida', 'FL', 'Tailahassee', 1845)} />,
-      <SelectOption value={ this.createState('New Jersey', 'NJ', 'Trenton', 1787)} />,
-      <SelectOption value={ this.createState('New Mexico', 'NM', 'Santa Fe', 1912)} />,
-      <SelectOption value={ this.createState('New York', 'NY', 'Albany', 1788)} />,
-      <SelectOption value={ this.createState('North Carolina', 'NC', 'Raleigh', 1789)} />
+      <SelectOption value={this.createState('Alabama', 'AL', 'Montgomery', 1846)} />,
+      <SelectOption value={this.createState('Florida', 'FL', 'Tailahassee', 1845)} />,
+      <SelectOption value={this.createState('New Jersey', 'NJ', 'Trenton', 1787)} />,
+      <SelectOption value={this.createState('New Mexico', 'NM', 'Santa Fe', 1912)} />,
+      <SelectOption value={this.createState('New York', 'NY', 'Albany', 1788)} />,
+      <SelectOption value={this.createState('North Carolina', 'NC', 'Raleigh', 1789)} />
     ];
 
     this.state = {
@@ -706,8 +704,7 @@ class MultiTypeaheadSelectInputCustomObjects extends React.Component {
       });
     };
 
-
-    this.customFilter = (e) => {
+    this.customFilter = e => {
       let input;
       try {
         input = new RegExp(e.target.value.toString(), 'i');
@@ -719,7 +716,7 @@ class MultiTypeaheadSelectInputCustomObjects extends React.Component {
           ? this.options.filter(option => input.test(option.props.value.toString()))
           : this.options;
       return typeaheadFilteredChildren;
-    }
+    };
   }
 
   render() {
@@ -750,6 +747,7 @@ class MultiTypeaheadSelectInputCustomObjects extends React.Component {
   }
 }
 ```
+
 ## Plain multiple typeahead select input
 
 ```js
@@ -776,7 +774,7 @@ class PlainSelectInput extends React.Component {
 
     this.onToggle = isExpanded => {
       this.setState({
-        isExpanded,
+        isExpanded
       });
     };
 
@@ -833,7 +831,3 @@ class PlainSelectInput extends React.Component {
   }
 }
 ```
-
-
-
-

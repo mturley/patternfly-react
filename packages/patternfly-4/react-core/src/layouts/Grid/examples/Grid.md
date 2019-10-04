@@ -3,7 +3,7 @@ title: 'Grid'
 cssPrefix: 'pf-l-grid'
 section: 'layouts'
 propComponents: ['Grid', 'GridItem']
-typescript: true 
+typescript: true
 ---
 
 ## Simple grid
@@ -32,10 +32,11 @@ import { Grid, GridItem } from '@patternfly/react-core';
   <GridItem span={2}>span = 2</GridItem>
   <GridItem span={4}>span = 4</GridItem>
   <GridItem span={4}>span = 4</GridItem>
-</Grid>
+</Grid>;
 ```
 
 ## Grid with gutters
+
 ```js
 import React from 'react';
 import { Grid, GridItem } from '@patternfly/react-core';
@@ -57,10 +58,11 @@ import { Grid, GridItem } from '@patternfly/react-core';
   <GridItem span={2}>span = 2</GridItem>
   <GridItem span={4}>span = 4</GridItem>
   <GridItem span={4}>span = 4</GridItem>
-</Grid>
+</Grid>;
 ```
 
 ## Grid with overrides
+
 ```js
 import React from 'react';
 import { Grid, GridItem } from '@patternfly/react-core';
@@ -81,6 +83,5 @@ import ItemControl from './ItemControl';
   <GridItem>Grid Item</GridItem>
   <GridItem>Grid Item</GridItem>
   <GridItem>Grid Item</GridItem>
-</Grid>
+</Grid>;
 ```
-

@@ -62,4 +62,3 @@ import RawPageLayoutManualNav from '!!raw-loader!./examples/PageLayoutManualNav'
 <LinkPreview name="Legacy/Light Nav" path="pagelayoutlightnav" />
 
 <code className="language-nolive">{RawPageLayoutLightNav}</code>
-

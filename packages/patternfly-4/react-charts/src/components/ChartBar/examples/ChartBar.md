@@ -17,6 +17,7 @@ Learn to build a bar chart using a Katacoda tutorial starting with a simple char
 [Start course](https://katacoda.com/patternfly/courses/charts/bar-chart)
 
 ## Simple bar chart with right aligned legend
+
 ```js
 import React from 'react';
 import { Chart, ChartBar } from '@patternfly/react-charts';
@@ -26,8 +27,10 @@ import { Chart, ChartBar } from '@patternfly/react-charts';
     <Chart
       ariaDesc="Average number of pets"
       ariaTitle="Bar chart example"
-      containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
-      domain={{y: [0,9]}}
+      containerComponent={
+        <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+      }
+      domain={{ y: [0, 9] }}
       domainPadding={{ x: [30, 25] }}
       legendData={[{ name: 'Cats' }, { name: 'Dogs' }, { name: 'Birds' }, { name: 'Mice' }]}
       legendOrientation="vertical"
@@ -44,17 +47,46 @@ import { Chart, ChartBar } from '@patternfly/react-charts';
       <ChartAxis />
       <ChartAxis dependentAxis showGrid />
       <ChartGroup offset={11}>
-        <ChartBar data={[{ name: 'Cats', x: '2015', y: 1 }, { name: 'Cats', x: '2016', y: 2 }, { name: 'Cats', x: '2017', y: 5 }, { name: 'Cats', x: '2018', y: 3 }]} />
-        <ChartBar data={[{ name: 'Dogs', x: '2015', y: 2 }, { name: 'Dogs', x: '2016', y: 1 }, { name: 'Dogs', x: '2017', y: 7 }, { name: 'Dogs', x: '2018', y: 4 }]} />
-        <ChartBar data={[{ name: 'Birds', x: '2015', y: 4 }, { name: 'Birds', x: '2016', y: 4 }, { name: 'Birds', x: '2017', y: 9 }, { name: 'Birds', x: '2018', y: 7 }]} />
-        <ChartBar data={[{ name: 'Mice', x: '2015', y: 3 }, { name: 'Mice', x: '2016', y: 3 }, { name: 'Mice', x: '2017', y: 8 }, { name: 'Mice', x: '2018', y: 5 }]} />
+        <ChartBar
+          data={[
+            { name: 'Cats', x: '2015', y: 1 },
+            { name: 'Cats', x: '2016', y: 2 },
+            { name: 'Cats', x: '2017', y: 5 },
+            { name: 'Cats', x: '2018', y: 3 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Dogs', x: '2015', y: 2 },
+            { name: 'Dogs', x: '2016', y: 1 },
+            { name: 'Dogs', x: '2017', y: 7 },
+            { name: 'Dogs', x: '2018', y: 4 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Birds', x: '2015', y: 4 },
+            { name: 'Birds', x: '2016', y: 4 },
+            { name: 'Birds', x: '2017', y: 9 },
+            { name: 'Birds', x: '2018', y: 7 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Mice', x: '2015', y: 3 },
+            { name: 'Mice', x: '2016', y: 3 },
+            { name: 'Mice', x: '2017', y: 8 },
+            { name: 'Mice', x: '2018', y: 5 }
+          ]}
+        />
       </ChartGroup>
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Purple bar chart with right aligned legend
+
 ```js
 import React from 'react';
 import { Chart, ChartBar, ChartGroup, ChartThemeColor, ChartVoronoiContainer } from '@patternfly/react-charts';
@@ -64,7 +96,9 @@ import { Chart, ChartBar, ChartGroup, ChartThemeColor, ChartVoronoiContainer } f
     <Chart
       ariaDesc="Average number of pets"
       ariaTitle="Bar chart example"
-      containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
+      containerComponent={
+        <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+      }
       domainPadding={{ x: [30, 25] }}
       legendData={[{ name: 'Cats' }, { name: 'Dogs' }, { name: 'Birds' }, { name: 'Mice' }]}
       legendPosition="bottom"
@@ -81,18 +115,48 @@ import { Chart, ChartBar, ChartGroup, ChartThemeColor, ChartVoronoiContainer } f
       <ChartAxis />
       <ChartAxis dependentAxis showGrid />
       <ChartGroup offset={11}>
-        <ChartBar data={[{ name: 'Cats', x: '2015', y: 1 }, { name: 'Cats', x: '2016', y: 2 }, { name: 'Cats', x: '2017', y: 5 }, { name: 'Cats', x: '2018', y: 3 }]} />
-        <ChartBar data={[{ name: 'Dogs', x: '2015', y: 2 }, { name: 'Dogs', x: '2016', y: 1 }, { name: 'Dogs', x: '2017', y: 7 }, { name: 'Dogs', x: '2018', y: 4 }]} />
-        <ChartBar data={[{ name: 'Birds', x: '2015', y: 4 }, { name: 'Birds', x: '2016', y: 4 }, { name: 'Birds', x: '2017', y: 9 }, { name: 'Birds', x: '2018', y: 7 }]} />
-        <ChartBar data={[{ name: 'Mice', x: '2015', y: 3 }, { name: 'Mice', x: '2016', y: 3 }, { name: 'Mice', x: '2017', y: 8 }, { name: 'Mice', x: '2018', y: 5 }]} />
+        <ChartBar
+          data={[
+            { name: 'Cats', x: '2015', y: 1 },
+            { name: 'Cats', x: '2016', y: 2 },
+            { name: 'Cats', x: '2017', y: 5 },
+            { name: 'Cats', x: '2018', y: 3 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Dogs', x: '2015', y: 2 },
+            { name: 'Dogs', x: '2016', y: 1 },
+            { name: 'Dogs', x: '2017', y: 7 },
+            { name: 'Dogs', x: '2018', y: 4 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Birds', x: '2015', y: 4 },
+            { name: 'Birds', x: '2016', y: 4 },
+            { name: 'Birds', x: '2017', y: 9 },
+            { name: 'Birds', x: '2018', y: 7 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Mice', x: '2015', y: 3 },
+            { name: 'Mice', x: '2016', y: 3 },
+            { name: 'Mice', x: '2017', y: 8 },
+            { name: 'Mice', x: '2018', y: 5 }
+          ]}
+        />
       </ChartGroup>
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Multi-color (ordered), horizontal bar chart with bottom-left aligned legend
+
 This demonstrates zoom for both the x and y axis
+
 ```js
 import React from 'react';
 import { Chart, ChartBar, ChartGroup, ChartThemeColor } from '@patternfly/react-charts';
@@ -119,17 +183,46 @@ import { Chart, ChartBar, ChartGroup, ChartThemeColor } from '@patternfly/react-
       <ChartAxis />
       <ChartAxis dependentAxis showGrid />
       <ChartGroup offset={11} horizontal>
-        <ChartBar data={[{ name: 'Cats', x: '2015', y: 1 }, { name: 'Cats', x: '2016', y: 2 }, { name: 'Cats', x: '2017', y: 5 }, { name: 'Cats', x: '2018', y: 3 }]} />
-        <ChartBar data={[{ name: 'Dogs', x: '2015', y: 2 }, { name: 'Dogs', x: '2016', y: 1 }, { name: 'Dogs', x: '2017', y: 7 }, { name: 'Dogs', x: '2018', y: 4 }]} />
-        <ChartBar data={[{ name: 'Birds', x: '2015', y: 4 }, { name: 'Birds', x: '2016', y: 4 }, { name: 'Birds', x: '2017', y: 9 }, { name: 'Birds', x: '2018', y: 7 }]} />
-        <ChartBar data={[{ name: 'Mice', x: '2015', y: 3 }, { name: 'Mice', x: '2016', y: 3 }, { name: 'Mice', x: '2017', y: 8 }, { name: 'Mice', x: '2018', y: 5 }]} />
+        <ChartBar
+          data={[
+            { name: 'Cats', x: '2015', y: 1 },
+            { name: 'Cats', x: '2016', y: 2 },
+            { name: 'Cats', x: '2017', y: 5 },
+            { name: 'Cats', x: '2018', y: 3 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Dogs', x: '2015', y: 2 },
+            { name: 'Dogs', x: '2016', y: 1 },
+            { name: 'Dogs', x: '2017', y: 7 },
+            { name: 'Dogs', x: '2018', y: 4 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Birds', x: '2015', y: 4 },
+            { name: 'Birds', x: '2016', y: 4 },
+            { name: 'Birds', x: '2017', y: 9 },
+            { name: 'Birds', x: '2018', y: 7 }
+          ]}
+        />
+        <ChartBar
+          data={[
+            { name: 'Mice', x: '2015', y: 3 },
+            { name: 'Mice', x: '2016', y: 3 },
+            { name: 'Mice', x: '2017', y: 8 },
+            { name: 'Mice', x: '2018', y: 5 }
+          ]}
+        />
       </ChartGroup>
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Single bar chart with right aligned legend
+
 ```js
 import React from 'react';
 import { Chart, ChartBar } from '@patternfly/react-charts';
@@ -139,8 +232,10 @@ import { Chart, ChartBar } from '@patternfly/react-charts';
     <Chart
       ariaDesc="Average number of pets"
       ariaTitle="Bar chart example"
-      containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
-      domain={{y: [0,9]}}
+      containerComponent={
+        <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+      }
+      domain={{ y: [0, 9] }}
       domainPadding={{ x: [30, 25] }}
       legendData={[{ name: 'Cats' }]}
       legendOrientation="vertical"
@@ -154,10 +249,17 @@ import { Chart, ChartBar } from '@patternfly/react-charts';
       }}
       width={600}
     >
-      <ChartBar data={[{ name: 'Cats', x: '2015', y: 1 }, { name: 'Cats', x: '2016', y: 2 }, { name: 'Cats', x: '2017', y: 5 }, { name: 'Cats', x: '2018', y: 3 }]} />
+      <ChartBar
+        data={[
+          { name: 'Cats', x: '2015', y: 1 },
+          { name: 'Cats', x: '2016', y: 2 },
+          { name: 'Cats', x: '2017', y: 5 },
+          { name: 'Cats', x: '2018', y: 3 }
+        ]}
+      />
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Tips
@@ -169,12 +271,13 @@ import { Chart, ChartBar } from '@patternfly/react-charts';
 - The `theme` and `themeColor` props should be applied at the most top level component
 
 ## Docs
-Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the 
+
+Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the
 components used in the examples above, Victory pass-thru props are also documented here:
 
- - For `Chart` props, see <a href="https://formidable.com/open-source/victory/docs/victory-chart" target="_blank">VictoryChart</a>
- - For `ChartAxis` props, see <a href="https://formidable.com/open-source/victory/docs/victory-axis" target="_blank">VictoryAxis</a>
- - For `ChartBar` props, see <a href="https://formidable.com/open-source/victory/docs/victory-bar" target="_blank">VictoryBar</a>
- - For `ChartGroup` props, see <a href="https://formidable.com/open-source/victory/docs/victory-group" target="_blank">VictoryGroup</a>
- - For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>
- - For `ChartVoronoiContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-voronoi-container" target="_blank">VictoryVoronoiContainer</a>
+- For `Chart` props, see <a href="https://formidable.com/open-source/victory/docs/victory-chart" target="_blank">VictoryChart</a>
+- For `ChartAxis` props, see <a href="https://formidable.com/open-source/victory/docs/victory-axis" target="_blank">VictoryAxis</a>
+- For `ChartBar` props, see <a href="https://formidable.com/open-source/victory/docs/victory-bar" target="_blank">VictoryBar</a>
+- For `ChartGroup` props, see <a href="https://formidable.com/open-source/victory/docs/victory-group" target="_blank">VictoryGroup</a>
+- For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>
+- For `ChartVoronoiContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-voronoi-container" target="_blank">VictoryVoronoiContainer</a>

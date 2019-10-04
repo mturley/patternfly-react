@@ -8,14 +8,14 @@ propComponents: ['EmptyState', 'EmptyStateBody', 'EmptyStateIcon', 'EmptyStateSe
 ## Empty state
 
 import {
-  Title,
-  Button,
-  EmptyState,
-  EmptyStateVariant,
-  EmptyStateIcon,
-  EmptyStateBody,
-  EmptyStateSecondaryActions,
-  EmptyStatePrimary
+Title,
+Button,
+EmptyState,
+EmptyStateVariant,
+EmptyStateIcon,
+EmptyStateBody,
+EmptyStateSecondaryActions,
+EmptyStatePrimary
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 
@@ -56,6 +56,7 @@ SimpleEmptyState = () => (
 ```
 
 ## Empty state small
+
 ```js
 import React from 'react';
 import {
@@ -93,6 +94,7 @@ SimpleEmptyState = () => (
 ```
 
 ## Empty state large
+
 ```js
 import React from 'react';
 import {
@@ -130,6 +132,7 @@ SimpleEmptyState = () => (
 ```
 
 ## Empty state spinner
+
 ```js
 import React from 'react';
 import {
@@ -142,7 +145,6 @@ import {
   EmptyStateSecondaryActions
 } from '@patternfly/react-core';
 
-
 EmptyStateSpinner = () => {
   const Spinner = () => (
     <span className="pf-c-spinner" role="progressbar" aria-valuetext="Loading...">
@@ -150,19 +152,18 @@ EmptyStateSpinner = () => {
       <span class="pf-c-spinner__lead-ball" />
       <span class="pf-c-spinner__tail-ball" />
     </span>
-  )
+  );
   return (
     <EmptyState>
       <EmptyStateIcon variant="container" component={Spinner} />
-      <Title size="lg">
-        Loading
-      </Title>
+      <Title size="lg">Loading</Title>
     </EmptyState>
   );
-}
+};
 ```
 
 ## Empty state no match found
+
 ```js
 import React from 'react';
 import {
@@ -176,14 +177,11 @@ import {
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
 
-
 NoMatchEmptyState = () => {
   return (
     <EmptyState>
       <EmptyStateIcon icon={SearchIcon} />
-      <Title size="lg">
-        No results found
-      </Title>
+      <Title size="lg">No results found</Title>
       <EmptyStateBody>
         No results match the filter criteria. Remove all filters or clear all filters to show results.
       </EmptyStateBody>
@@ -192,5 +190,5 @@ NoMatchEmptyState = () => {
       </EmptyStatePrimary>
     </EmptyState>
   );
-}
+};
 ```

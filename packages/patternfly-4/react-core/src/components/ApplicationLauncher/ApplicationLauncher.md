@@ -2,8 +2,9 @@
 title: 'Application launcher'
 cssPrefix: 'pf-c-app-launcher'
 propComponents: ['ApplicationLauncher', 'ApplicationLauncherItem']
-typescript: true 
+typescript: true
 ---
+
 Note: Application launcher is built on Dropdown, for extended API go to [`Dropdown`](/components/dropdown/) documentation.
 To add a tooltip, use the `tooltip` prop and optionally add more tooltip props by using `tooltipProps`. For more tooltip information go to [`Tooltip`](/components/tooltip/).
 
@@ -12,6 +13,7 @@ import { HelpIcon } from '@patternfly/react-icons';
 import pfIcon from './examples/pf-logo-small.svg';
 
 ## Simple application launcher
+
 ```js
 import React from 'react';
 import { ApplicationLauncher, ApplicationLauncherItem } from '@patternfly/react-core';
@@ -48,18 +50,14 @@ class SimpleApplicationLauncher extends React.Component {
       </ApplicationLauncherItem>
     ];
     return (
-      <ApplicationLauncher
-        onSelect={this.onSelect}
-        onToggle={this.onToggle}
-        isOpen={isOpen}
-        items={appLauncherItems}
-      />
+      <ApplicationLauncher onSelect={this.onSelect} onToggle={this.onToggle} isOpen={isOpen} items={appLauncherItems} />
     );
   }
 }
 ```
 
 ## Application launcher with router link
+
 ```js
 import React from 'react';
 import { ApplicationLauncher, ApplicationLauncherItem, ApplicationLauncherContent, Text } from '@patternfly/react-core';
@@ -91,14 +89,24 @@ class SimpleApplicationLauncher extends React.Component {
     };
     // Using Text component below to demonstrate, but in reality you'd use a router Link component
     const appLauncherItems = [
-      <ApplicationLauncherItem key="router1" component={
-        <Text component="a" href="#" style={exampleStyle}>Router link</Text>
-      } />,
-      <ApplicationLauncherItem key="router2" isExternal icon={icon} component={
-        <Text component="a" href="#" style={exampleStyle}>
-          <ApplicationLauncherContent>Router link with icon</ApplicationLauncherContent>
-        </Text>
-      } />,
+      <ApplicationLauncherItem
+        key="router1"
+        component={
+          <Text component="a" href="#" style={exampleStyle}>
+            Router link
+          </Text>
+        }
+      />,
+      <ApplicationLauncherItem
+        key="router2"
+        isExternal
+        icon={icon}
+        component={
+          <Text component="a" href="#" style={exampleStyle}>
+            <ApplicationLauncherContent>Router link with icon</ApplicationLauncherContent>
+          </Text>
+        }
+      />,
       <ApplicationLauncherItem key="application_1a" href="#">
         Application 1 (anchor link)
       </ApplicationLauncherItem>,
@@ -110,18 +118,14 @@ class SimpleApplicationLauncher extends React.Component {
       </ApplicationLauncherItem>
     ];
     return (
-      <ApplicationLauncher
-        onSelect={this.onSelect}
-        onToggle={this.onToggle}
-        isOpen={isOpen}
-        items={appLauncherItems}
-      />
+      <ApplicationLauncher onSelect={this.onSelect} onToggle={this.onToggle} isOpen={isOpen} items={appLauncherItems} />
     );
   }
 }
 ```
 
 ## Application launcher disabled
+
 ```js
 import React from 'react';
 import { ApplicationLauncher, ApplicationLauncherItem } from '@patternfly/react-core';
@@ -171,6 +175,7 @@ class SimpleApplicationLauncher extends React.Component {
 ```
 
 ## Application launcher align right
+
 ```js
 import React from 'react';
 import { ApplicationLauncher, ApplicationLauncherItem } from '@patternfly/react-core';
@@ -207,7 +212,7 @@ class SimpleApplicationLauncher extends React.Component {
         Unavailable Application
       </ApplicationLauncherItem>
     ];
-    const style = { marginLeft: 'calc(100% - 46px)'};
+    const style = { marginLeft: 'calc(100% - 46px)' };
     return (
       <ApplicationLauncher
         onSelect={this.onSelect}
@@ -223,6 +228,7 @@ class SimpleApplicationLauncher extends React.Component {
 ```
 
 ## Application launcher top
+
 ```js
 import React from 'react';
 import { ApplicationLauncher, ApplicationLauncherItem } from '@patternfly/react-core';
@@ -273,6 +279,7 @@ class SimpleApplicationLauncher extends React.Component {
 ```
 
 ## Application launcher with tooltip
+
 ```js
 import React from 'react';
 import { ApplicationLauncher, ApplicationLauncherItem } from '@patternfly/react-core';
@@ -298,50 +305,47 @@ class TooltipApplicationLauncher extends React.Component {
   render() {
     const { isOpen } = this.state;
     const appLauncherItems = [
-      <ApplicationLauncherItem 
-        key="application_1b" 
-        href="#" 
-        tooltip={<div>Launch Application 1</div>}
-      >
+      <ApplicationLauncherItem key="application_1b" href="#" tooltip={<div>Launch Application 1</div>}>
         Application 1 (anchor link)
-      </ApplicationLauncherItem>
-      ,
-      <ApplicationLauncherItem 
-        key="application_2b" 
+      </ApplicationLauncherItem>,
+      <ApplicationLauncherItem
+        key="application_2b"
         component="button"
-        tooltip={<div>Launch Application 2</div>} 
-        tooltipProps={{ position: 'right' }} 
+        tooltip={<div>Launch Application 2</div>}
+        tooltipProps={{ position: 'right' }}
         onClick={() => alert('Clicked item 2')}
       >
         Application 2 (onClick)
-      </ApplicationLauncherItem>
-      ,
-      <ApplicationLauncherItem 
-        key="application_3b" 
+      </ApplicationLauncherItem>,
+      <ApplicationLauncherItem
+        key="application_3b"
         component="button"
-        tooltip={<div>Launch Application 3</div>} 
-        tooltipProps={{ position: 'bottom' }} 
+        tooltip={<div>Launch Application 3</div>}
+        tooltipProps={{ position: 'bottom' }}
         onClick={() => alert('Clicked item 3')}
       >
         Application 3 (onClick)
       </ApplicationLauncherItem>
     ];
     return (
-      <ApplicationLauncher
-        onSelect={this.onSelect}
-        onToggle={this.onToggle}
-        isOpen={isOpen}
-        items={appLauncherItems}
-      />
+      <ApplicationLauncher onSelect={this.onSelect} onToggle={this.onToggle} isOpen={isOpen} items={appLauncherItems} />
     );
   }
 }
 ```
 
 ## Application launcher w/ sections and icons
+
 ```js
 import React from 'react';
-import { ApplicationLauncher, ApplicationLauncherIcon, ApplicationLauncherText, ApplicationLauncherItem, ApplicationLauncherGroup, ApplicationLauncherSeparator } from '@patternfly/react-core';
+import {
+  ApplicationLauncher,
+  ApplicationLauncherIcon,
+  ApplicationLauncherText,
+  ApplicationLauncherItem,
+  ApplicationLauncherGroup,
+  ApplicationLauncherSeparator
+} from '@patternfly/react-core';
 import pfIcon from './examples/pf-logo-small.svg';
 
 class ApplicationLauncherSections extends React.Component {
@@ -373,13 +377,21 @@ class ApplicationLauncherSections extends React.Component {
         <ApplicationLauncherSeparator key="separator" />
       </ApplicationLauncherGroup>,
       <ApplicationLauncherGroup label="Group 2" key="group 2c">
-        <ApplicationLauncherItem key="group 2a" isExternal icon={icon} component="button">Group 2 button</ApplicationLauncherItem>
-        <ApplicationLauncherItem key="group 2b" isExternal href="#" icon={icon}>Group 2 anchor link</ApplicationLauncherItem>
+        <ApplicationLauncherItem key="group 2a" isExternal icon={icon} component="button">
+          Group 2 button
+        </ApplicationLauncherItem>
+        <ApplicationLauncherItem key="group 2b" isExternal href="#" icon={icon}>
+          Group 2 anchor link
+        </ApplicationLauncherItem>
         <ApplicationLauncherSeparator key="separator" />
       </ApplicationLauncherGroup>,
       <ApplicationLauncherGroup label="Group 3" key="group 3c">
-        <ApplicationLauncherItem key="group 3a" isExternal icon={icon} component="button">Group 3 button</ApplicationLauncherItem>
-        <ApplicationLauncherItem key="group 3b" isExternal href="#" icon={icon}>Group 3 anchor link</ApplicationLauncherItem>
+        <ApplicationLauncherItem key="group 3a" isExternal icon={icon} component="button">
+          Group 3 button
+        </ApplicationLauncherItem>
+        <ApplicationLauncherItem key="group 3b" isExternal href="#" icon={icon}>
+          Group 3 anchor link
+        </ApplicationLauncherItem>
       </ApplicationLauncherGroup>
     ];
     return (
@@ -396,6 +408,7 @@ class ApplicationLauncherSections extends React.Component {
 ```
 
 ## Application launcher w/ custom icon
+
 ```js
 import React from 'react';
 import { ApplicationLauncher, ApplicationLauncherItem } from '@patternfly/react-core';

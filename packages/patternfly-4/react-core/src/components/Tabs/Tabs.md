@@ -60,6 +60,7 @@ class SimpleTabs extends React.Component {
 ```
 
 ## Simple tabs with children that mount on tab click
+
 ```js
 import React from 'react';
 import { Tabs, Tab, TabsVariant, TabContent } from '@patternfly/react-core';
@@ -97,6 +98,7 @@ class MountingSimpleTabs extends React.Component {
 ```
 
 ## Simple tabs with children that unmount when they're no longer visible
+
 ```js
 import React from 'react';
 import { Tabs, Tab, TabsVariant, TabContent } from '@patternfly/react-core';

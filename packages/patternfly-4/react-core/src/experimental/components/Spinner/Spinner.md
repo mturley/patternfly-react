@@ -16,7 +16,7 @@ import { Alert } from '@patternfly/react-core';
 import React from 'react';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
-SpinnerSimple = () => (<Spinner/>);
+SpinnerSimple = () => <Spinner />;
 ```
 
 # Spinner size variations
@@ -26,11 +26,11 @@ import React from 'react';
 import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
 
 SpinnerSizeVariations = () => (
-<React.Fragment>
-    <Spinner size="sm"/>
-    <Spinner size="md"/>
-    <Spinner size="lg"/>
-    <Spinner size="xl"/>
-</React.Fragment>
+  <React.Fragment>
+    <Spinner size="sm" />
+    <Spinner size="md" />
+    <Spinner size="lg" />
+    <Spinner size="xl" />
+  </React.Fragment>
 );
 ```

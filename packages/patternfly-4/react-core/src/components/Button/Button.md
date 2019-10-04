@@ -19,6 +19,7 @@ BlockButton = () => <Button isBlock>Block level button</Button>;
 ```
 
 ## Button variants
+
 ```js
 import React from 'react';
 import { Button } from '@patternfly/react-core';
@@ -43,6 +44,7 @@ ButtonVariants = () => (
 ```
 
 ## Link button
+
 ```js
 import React from 'react';
 import { Button } from '@patternfly/react-core';

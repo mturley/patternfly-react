@@ -11,7 +11,7 @@ This package is currently an extension. Extension components do not undergo the 
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import \* as React from 'react';
 import { debounce } from 'lodash';
 import { Table, TableHeader, TableGridBreakpoint } from '@patternfly/react-table';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
@@ -34,7 +34,7 @@ import virtualGridStyles from './VirtualGrid.example.css';
 import windowScrollerStyles from './WindowScroller.example.css';
 
 class WindowScrollerExample extends React.Component {
-  constructor(){
+  constructor() {
     const rows = [];
     for (let i = 0; i < 100000; i++) {
       const cells = [];
@@ -61,11 +61,23 @@ class WindowScrollerExample extends React.Component {
       scrollToIndex: -1, //can be used to programmatically set current index
       scrollableElement: null,
       columns: [
-        { title: 'Repositories', props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl'} },
-        { title: 'Branches', props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl'} },
-        { title: 'Pull requests', props: { className: 'pf-m-4-col-on-md pf-m-4-col-on-lg pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-md'} },
-        { title: 'Workspaces', props: { className: 'pf-m-2-col-on-lg pf-m-2-col-on-xl pf-m-hidden pf-m-visible-on-lg'} },
-        { title: 'Last Commit', props: { className: 'pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-xl'} }
+        {
+          title: 'Repositories',
+          props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
+        },
+        {
+          title: 'Branches',
+          props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
+        },
+        {
+          title: 'Pull requests',
+          props: { className: 'pf-m-4-col-on-md pf-m-4-col-on-lg pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-md' }
+        },
+        {
+          title: 'Workspaces',
+          props: { className: 'pf-m-2-col-on-lg pf-m-2-col-on-xl pf-m-hidden pf-m-visible-on-lg' }
+        },
+        { title: 'Last Commit', props: { className: 'pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-xl' } }
       ],
       rows
     };
@@ -74,7 +86,7 @@ class WindowScrollerExample extends React.Component {
     this._bindBodyRef = this._bindBodyRef.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // re-render after resize
     window.addEventListener('resize', this._handleResize);
 
@@ -87,7 +99,7 @@ class WindowScrollerExample extends React.Component {
     window.addEventListener('resize', this._handleResize);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener('resize', this._handleResize);
   }
 
@@ -101,31 +113,38 @@ class WindowScrollerExample extends React.Component {
   }
 
   render() {
-    const {scrollToIndex, columns, rows, scollableElement} = this.state;
+    const { scrollToIndex, columns, rows, scollableElement } = this.state;
 
-    const rowRenderer = ({index, isScrolling, isVisible, key, style, parent}) => {
-      const {rows, columns} = this.state;
+    const rowRenderer = ({ index, isScrolling, isVisible, key, style, parent }) => {
+      const { rows, columns } = this.state;
       const text = rows[index].cells[0];
 
       const className = clsx({
         isVisible: isVisible
       });
 
-      return <CellMeasurer
-        cache={this._cellMeasurementCache}
-        columnIndex={0}
-        key={key}
-        parent={parent}
-        rowIndex={index}>
-        <tr style={style} className={className} role="row">
-          <td className={columns[0].props.className} role="gridcell">{text}</td>
-          <td className={columns[1].props.className} role="gridcell">{text}</td>
-          <td className={columns[2].props.className} role="gridcell">{text}</td>
-          <td className={columns[3].props.className} role="gridcell">{text}</td>
-          <td className={columns[4].props.className} role="gridcell">{text}</td>
-        </tr>
-      </CellMeasurer>;
-    }
+      return (
+        <CellMeasurer cache={this._cellMeasurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
+          <tr style={style} className={className} role="row">
+            <td className={columns[0].props.className} role="gridcell">
+              {text}
+            </td>
+            <td className={columns[1].props.className} role="gridcell">
+              {text}
+            </td>
+            <td className={columns[2].props.className} role="gridcell">
+              {text}
+            </td>
+            <td className={columns[3].props.className} role="gridcell">
+              {text}
+            </td>
+            <td className={columns[4].props.className} role="gridcell">
+              {text}
+            </td>
+          </tr>
+        </CellMeasurer>
+      );
+    };
 
     return (
       <div
@@ -135,7 +154,7 @@ class WindowScrollerExample extends React.Component {
         className="pf-c-scrollablegrid"
         aria-rowcount={rows.length}
         style={{
-          height: 500, /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */
+          height: 500 /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */,
           overflowX: 'auto',
           overflowY: 'scroll',
           scrollBehavior: 'smooth',
@@ -143,7 +162,9 @@ class WindowScrollerExample extends React.Component {
           position: 'relative'
         }}
       >
-        <div style={{ padding: 15}}> {/* WindowScroller scrollbar gutter spacing */}
+        <div style={{ padding: 15 }}>
+          {' '}
+          {/* WindowScroller scrollbar gutter spacing */}
           <Table
             caption="WindowScoller allows scrolling of a parent container or the window instead of tbody. It also can be used to dynamically size the table to the size of the scroll element."
             cells={columns}
@@ -154,9 +175,9 @@ class WindowScrollerExample extends React.Component {
             <TableHeader />
           </Table>
           <WindowScroller scrollElement={scollableElement}>
-            {({height, isScrolling, registerChild, onChildScroll, scrollTop}) => (
+            {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
               <AutoSizer disableHeight>
-                {({width}) => (
+                {({ width }) => (
                   <div ref={registerChild}>
                     <VirtualTableBody
                       ref={this._bindBodyRef}
@@ -181,9 +202,9 @@ class WindowScrollerExample extends React.Component {
                 )}
               </AutoSizer>
             )}
-        </WindowScroller>
+          </WindowScroller>
+        </div>
       </div>
-    </div>
     );
   }
 }

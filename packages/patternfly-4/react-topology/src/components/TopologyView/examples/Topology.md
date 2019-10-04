@@ -16,7 +16,12 @@ import './topology-example.scss';
 
 ```js
 import React from 'react';
-import { TopologyView, TopologyControlBar, createTopologyControlButtons, TopologySideBar } from '@patternfly/react-topology';
+import {
+  TopologyView,
+  TopologyControlBar,
+  createTopologyControlButtons,
+  TopologySideBar
+} from '@patternfly/react-topology';
 import { ProjectToolbar } from './ProjectToolbar';
 import { ViewToolbar } from './ViewToolbar';
 import { ItemDetails } from './ItemDetails';
@@ -35,7 +40,7 @@ class DefaultTopologyView extends React.Component {
 
     return (
       <div className="topology-example">
-        <TopologyView 
+        <TopologyView
           contextToolbar={<ProjectToolbar />}
           viewToolbar={<ViewToolbar />}
           controlBar={<TopologyControlBar controlButtons={controlButtons} />}
@@ -134,9 +139,9 @@ class CustomTopologyView extends React.Component {
         callback: null,
         disabled: false,
         hidden: true
-      },
-    ]
-    const controlButtons = createTopologyControlButtons({ fitToScreen: false, customButtons});
+      }
+    ];
+    const controlButtons = createTopologyControlButtons({ fitToScreen: false, customButtons });
 
     return (
       <div className="topology-example">

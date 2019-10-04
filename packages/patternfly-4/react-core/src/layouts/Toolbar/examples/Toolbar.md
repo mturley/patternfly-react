@@ -10,6 +10,7 @@ import { Toolbar, ToolbarGroup, ToolbarSection, ToolbarItem } from '@patternfly/
 import './toolbar.scss';
 
 ## Simple toolbar layout
+
 ```js
 import React from 'react';
 import { Toolbar, ToolbarGroup, ToolbarSection, ToolbarItem } from '@patternfly/react-core';
@@ -25,10 +26,11 @@ import { Toolbar, ToolbarGroup, ToolbarSection, ToolbarItem } from '@patternfly/
   <ToolbarGroup>
     <ToolbarItem>Item 4</ToolbarItem>
   </ToolbarGroup>
-</Toolbar>
+</Toolbar>;
 ```
 
 ## Toolbar with sections
+
 ```js
 import React from 'react';
 import { Toolbar, ToolbarGroup, ToolbarSection, ToolbarItem } from '@patternfly/react-core';
@@ -53,5 +55,5 @@ import { Toolbar, ToolbarGroup, ToolbarSection, ToolbarItem } from '@patternfly/
       <ToolbarItem>Item 7</ToolbarItem>
     </ToolbarGroup>
   </ToolbarSection>
-</Toolbar>
+</Toolbar>;
 ```

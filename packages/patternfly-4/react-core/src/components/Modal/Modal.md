@@ -2,7 +2,8 @@
 title: 'Modal'
 cssPrefix: 'pf-c-modal-box'
 typescript: true
-propComponents: ['Modal', 'ModalBox', 'ModalBoxBody', 'ModalBoxCloseButton', 'ModalBoxFooter', 'ModalBoxHeader', 'ModalContent']
+propComponents:
+  ['Modal', 'ModalBox', 'ModalBoxBody', 'ModalBoxCloseButton', 'ModalBoxFooter', 'ModalBoxHeader', 'ModalContent']
 optIn: In a future breaking-change release, the modal footer buttons will default to be left aligned. You can opt into this now by setting the Modal isFooterLeftAligned prop to true.
 ---
 
@@ -10,6 +11,7 @@ import { Modal, Button, BaseSizes, TitleLevel } from '@patternfly/react-core';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
 
 ## Simple modal
+
 ```js
 import React from 'react';
 import { Modal, Button } from '@patternfly/react-core';
@@ -62,6 +64,7 @@ class SimpleModal extends React.Component {
 ```
 
 ## Modal (small)
+
 ```js
 import React from 'react';
 import { Modal, Button } from '@patternfly/react-core';
@@ -115,6 +118,7 @@ class SmallModal extends React.Component {
 ```
 
 ## Modal (large)
+
 ```js
 import React from 'react';
 import { Modal, Button } from '@patternfly/react-core';
@@ -168,6 +172,7 @@ class LargeModal extends React.Component {
 ```
 
 ## Modal (width)
+
 ```js
 import React from 'react';
 import { Modal, Button } from '@patternfly/react-core';
@@ -221,6 +226,7 @@ class WidthModal extends React.Component {
 ```
 
 ## Modal (custom header and footer)
+
 ```js
 import React from 'react';
 import { Modal, Button, BaseSizes, TitleLevel } from '@patternfly/react-core';
@@ -243,19 +249,17 @@ class CustomHeaderFooter extends React.Component {
 
     const header = (
       <React.Fragment>
-        <Title headingLevel={TitleLevel.h1} size={BaseSizes["2xl"]}>
+        <Title headingLevel={TitleLevel.h1} size={BaseSizes['2xl']}>
           Custom Modal Header/Footer
         </Title>
-        <p className="pf-u-pt-sm">
-          Allows for custom content in the header and/or footer by passing components.
-        </p>
+        <p className="pf-u-pt-sm">Allows for custom content in the header and/or footer by passing components.</p>
       </React.Fragment>
     );
 
     const footer = (
       <Title headingLevel={TitleLevel.h4} size={BaseSizes.sm}>
         <WarningTriangleIcon />
-        <span  className="pf-u-pl-sm">Custom modal footer.</span>
+        <span className="pf-u-pl-sm">Custom modal footer.</span>
       </Title>
     );
 
@@ -280,9 +284,9 @@ class CustomHeaderFooter extends React.Component {
           </span>
           <br />
           <br />
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </Modal>
       </React.Fragment>
     );
@@ -291,6 +295,7 @@ class CustomHeaderFooter extends React.Component {
 ```
 
 ## Modal (no header)
+
 ```js
 import React from 'react';
 import { Modal, Button } from '@patternfly/react-core';
@@ -310,11 +315,7 @@ class NoHeader extends React.Component {
 
   render() {
     const { isModalOpen } = this.state;
-    const footer = (
-      <React.Fragment>
-        Modal Footer
-      </React.Fragment>
-    );
+    const footer = <React.Fragment>Modal Footer</React.Fragment>;
 
     return (
       <React.Fragment>
@@ -338,9 +339,9 @@ class NoHeader extends React.Component {
           </span>
           <br />
           <br />
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </Modal>
       </React.Fragment>
     );

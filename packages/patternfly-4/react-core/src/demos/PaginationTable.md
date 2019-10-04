@@ -11,7 +11,7 @@ import { Table, TableHeader, TableBody} from '@patternfly/react-table';
 ```js
 import React from 'react';
 import { Pagination, PaginationVariant, Title } from '@patternfly/react-core';
-import { Table, TableHeader, TableBody} from '@patternfly/react-table';
+import { Table, TableHeader, TableBody } from '@patternfly/react-table';
 
 class ComplexPaginationTableDemo extends React.Component {
   constructor(props) {
@@ -62,7 +62,11 @@ class ComplexPaginationTableDemo extends React.Component {
             <TableBody />
           </Table>
         )}
-        {loading && <center><Title size="3xl">Please wait while loading data</Title></center>}
+        {loading && (
+          <center>
+            <Title size="3xl">Please wait while loading data</Title>
+          </center>
+        )}
       </React.Fragment>
     );
   }

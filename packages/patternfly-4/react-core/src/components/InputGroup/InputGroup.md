@@ -9,17 +9,17 @@ typescript: true
 
 import { DollarSignIcon, AtIcon, CalendarAltIcon, SearchIcon, QuestionCircleIcon } from '@patternfly/react-icons';
 import {
-  Button,
-  ButtonVariant,
-  TextArea,
-  InputGroup,
-  InputGroupText,
-  TextInput,
-  Dropdown,
-  DropdownToggle,
-  DropdownItem,
-  Popover,
-  PopoverPosition
+Button,
+ButtonVariant,
+TextArea,
+InputGroup,
+InputGroupText,
+TextInput,
+Dropdown,
+DropdownToggle,
+DropdownItem,
+Popover,
+PopoverPosition
 } from '@patternfly/react-core';
 
 Buttons and TextArea
@@ -113,7 +113,9 @@ class SimpleInputGroups extends React.Component {
             ]}
           />
           <TextInput id="textInput3" aria-label="input with dropdown and button" />
-          <Button id="inputDropdownButton1" variant={ButtonVariant.control}>Button</Button>
+          <Button id="inputDropdownButton1" variant={ButtonVariant.control}>
+            Button
+          </Button>
         </InputGroup>
         <br />
         <br />

@@ -9,30 +9,30 @@ propComponents: ['Table', 'TableHeader', 'TableBody']
 Note: Table lives in its own package at [@patternfly/react-table](https://www.npmjs.com/package/@patternfly/react-table)!
 
 import {
-  Table,
-  TableHeader,
-  TableBody,
-  sortable,
-  SortByDirection,
-  headerCol,
-  TableVariant,
-  expandable,
-  compoundExpand,
-  cellWidth,
-  textCenter,
-  wrappable,
-  classNames,
-  Visibility
+Table,
+TableHeader,
+TableBody,
+sortable,
+SortByDirection,
+headerCol,
+TableVariant,
+expandable,
+compoundExpand,
+cellWidth,
+textCenter,
+wrappable,
+classNames,
+Visibility
 } from '@patternfly/react-table';
 
 import {
-    Checkbox
+Checkbox
 } from '@patternfly/react-core';
 
 import {
-  CodeBranchIcon,
-  CodeIcon,
-  CubeIcon
+CodeBranchIcon,
+CodeIcon,
+CubeIcon
 } from '@patternfly/react-icons';
 
 import DemoSortableTable from './demo/DemoSortableTable';
@@ -51,7 +51,7 @@ import {
   TableVariant,
   expandable,
   cellWidth,
-  textCenter,
+  textCenter
 } from '@patternfly/react-table';
 
 class SimpleTable extends React.Component {
@@ -184,9 +184,7 @@ import {
   expandable,
   cellWidth
 } from '@patternfly/react-table';
-import {
-    Checkbox
-} from '@patternfly/react-core';
+import { Checkbox } from '@patternfly/react-core';
 
 class SelectableTable extends React.Component {
   constructor(props) {
@@ -243,18 +241,24 @@ class SelectableTable extends React.Component {
 
     return (
       <div>
-      <Table caption="Selectable Table" onSelect={this.onSelect} cells={columns} rows={rows} canSelectAll={this.state.canSelectAll}>
-        <TableHeader />
-        <TableBody />
-      </Table>
-      <Checkbox
-        label="canSelectAll"
-        isChecked={this.state.canSelectAll}
-        onChange={this.toggleSelect}
-        aria-label="toggle select all checkbox"
-        id="toggle-select-all"
-        name="toggle-select-all"
-      />
+        <Table
+          caption="Selectable Table"
+          onSelect={this.onSelect}
+          cells={columns}
+          rows={rows}
+          canSelectAll={this.state.canSelectAll}
+        >
+          <TableHeader />
+          <TableBody />
+        </Table>
+        <Checkbox
+          label="canSelectAll"
+          isChecked={this.state.canSelectAll}
+          onChange={this.toggleSelect}
+          aria-label="toggle select all checkbox"
+          id="toggle-select-all"
+          name="toggle-select-all"
+        />
       </div>
     );
   }
@@ -738,7 +742,9 @@ class HiddenVisibleBreakpointTable extends React.Component {
       columns: [
         {
           title: 'Repositories',
-          columnTransforms: [classNames(Visibility.hidden, Visibility.visibleOnMd, Visibility.hiddenOnLg, Visibility.visibleOn2Xl)]
+          columnTransforms: [
+            classNames(Visibility.hidden, Visibility.visibleOnMd, Visibility.hiddenOnLg, Visibility.visibleOn2Xl)
+          ]
         },
         'Branches',
         {
@@ -870,18 +876,9 @@ class CollapsibleTable extends React.Component {
 
 ```js
 import React from 'react';
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  compoundExpand
-} from '@patternfly/react-table';
+import { Table, TableHeader, TableBody, compoundExpand } from '@patternfly/react-table';
 
-import {
-  CodeBranchIcon,
-  CodeIcon,
-  CubeIcon
-} from '@patternfly/react-icons';
+import { CodeBranchIcon, CodeIcon, CubeIcon } from '@patternfly/react-icons';
 
 import DemoSortableTable from './demo/DemoSortableTable';
 
@@ -910,14 +907,14 @@ class CompoundExpandableTable extends React.Component {
         {
           isOpen: true,
           cells: [
-            { title: <a href="#">siemur/test-space</a>, props: { component: 'th'} },
+            { title: <a href="#">siemur/test-space</a>, props: { component: 'th' } },
             {
               title: (
                 <React.Fragment>
                   <CodeBranchIcon key="icon" /> 10
                 </React.Fragment>
               ),
-              props: { isOpen: true, ariaControls : 'compoound-expansion-table-1' }
+              props: { isOpen: true, ariaControls: 'compoound-expansion-table-1' }
             },
             {
               title: (
@@ -925,7 +922,7 @@ class CompoundExpandableTable extends React.Component {
                   <CodeIcon key="icon" /> 4
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-2' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-2' }
             },
             {
               title: (
@@ -933,7 +930,7 @@ class CompoundExpandableTable extends React.Component {
                   <CubeIcon key="icon" /> 4
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-3' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-3' }
             },
             '20 minutes',
             { title: <a href="#">Open in Github</a> }
@@ -943,8 +940,13 @@ class CompoundExpandableTable extends React.Component {
           parent: 0,
           compoundParent: 1,
           cells: [
-            { 
-              title: <DemoSortableTable firstColumnRows={['parent-0', 'compound-1', 'three', 'four','five']} id="compoound-expansion-table-1" />,
+            {
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-0', 'compound-1', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-1"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -953,8 +955,13 @@ class CompoundExpandableTable extends React.Component {
           parent: 0,
           compoundParent: 2,
           cells: [
-            { 
-              title: <DemoSortableTable firstColumnRows={['parent-0', 'compound-2', 'three', 'four','five']} id="compoound-expansion-table-2" />, 
+            {
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-0', 'compound-2', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-2"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -963,8 +970,13 @@ class CompoundExpandableTable extends React.Component {
           parent: 0,
           compoundParent: 3,
           cells: [
-            { 
-              title: <DemoSortableTable firstColumnRows={['parent-0', 'compound-3', 'three', 'four','five']} id="compoound-expansion-table-3" />, 
+            {
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-0', 'compound-3', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-3"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -972,14 +984,14 @@ class CompoundExpandableTable extends React.Component {
         {
           isOpen: false,
           cells: [
-            { title: <a href="#">siemur/test-space</a>, props: { component: 'th'} },
+            { title: <a href="#">siemur/test-space</a>, props: { component: 'th' } },
             {
               title: (
                 <React.Fragment>
                   <CodeBranchIcon key="icon" /> 3
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-4' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-4' }
             },
             {
               title: (
@@ -987,7 +999,7 @@ class CompoundExpandableTable extends React.Component {
                   <CodeIcon key="icon" /> 4
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-5' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-5' }
             },
             {
               title: (
@@ -995,7 +1007,7 @@ class CompoundExpandableTable extends React.Component {
                   <CubeIcon key="icon" /> 2
                 </React.Fragment>
               ),
-              props: { isOpen: false, ariaControls : 'compoound-expansion-table-6' }
+              props: { isOpen: false, ariaControls: 'compoound-expansion-table-6' }
             },
             '20 minutes',
             { title: <a href="#">Open in Github</a> }
@@ -1005,8 +1017,13 @@ class CompoundExpandableTable extends React.Component {
           parent: 4,
           compoundParent: 1,
           cells: [
-            { 
-              title: <DemoSortableTable firstColumnRows={['parent-4', 'compound-1', 'three', 'four','five']} id="compoound-expansion-table-4" />, 
+            {
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-4', 'compound-1', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-4"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -1015,8 +1032,13 @@ class CompoundExpandableTable extends React.Component {
           parent: 4,
           compoundParent: 2,
           cells: [
-            { 
-              title: <DemoSortableTable firstColumnRows={['parent-4', 'compound-2', 'three', 'four','five']} id="compoound-expansion-table-5"/>, 
+            {
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-4', 'compound-2', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-5"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -1025,8 +1047,13 @@ class CompoundExpandableTable extends React.Component {
           parent: 4,
           compoundParent: 3,
           cells: [
-            { 
-              title: <DemoSortableTable firstColumnRows={['parent-4', 'compound-3', 'three', 'four','five']} id="compoound-expansion-table-6"/>, 
+            {
+              title: (
+                <DemoSortableTable
+                  firstColumnRows={['parent-4', 'compound-3', 'three', 'four', 'five']}
+                  id="compoound-expansion-table-6"
+                />
+              ),
               props: { colSpan: 6, className: 'pf-m-no-padding' }
             }
           ]
@@ -1071,29 +1098,24 @@ class CompoundExpandableTable extends React.Component {
 
 ```js
 import React from 'react';
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  wrappable
-} from '@patternfly/react-table';
+import { Table, TableHeader, TableBody, wrappable } from '@patternfly/react-table';
 
 class WrappableHeadersTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       columns: [
-        {title: 'This is a really long table header that goes on for a long time 1.', transforms: [wrappable]},
-        {title: 'This is a really long table header that goes on for a long time 2.', transforms: [wrappable]},
-        {title: 'This is a really long table header that goes on for a long time 3.', transforms: [wrappable]},
-        {title: 'This is a really long table header that goes on for a long time 4.', transforms: [wrappable]},
-        {title: 'This is a really long table header that goes on for a long time 5.', transforms: [wrappable]},
+        { title: 'This is a really long table header that goes on for a long time 1.', transforms: [wrappable] },
+        { title: 'This is a really long table header that goes on for a long time 2.', transforms: [wrappable] },
+        { title: 'This is a really long table header that goes on for a long time 3.', transforms: [wrappable] },
+        { title: 'This is a really long table header that goes on for a long time 4.', transforms: [wrappable] },
+        { title: 'This is a really long table header that goes on for a long time 5.', transforms: [wrappable] }
       ],
       rows: [
         ['Repository 1', '10', '25', '5', '2 days ago'],
         ['Repository 2', '10', '25', '5', '2 days ago'],
         ['Repository 3', '10', '25', '5', '2 days ago'],
-        ['Repository 4', '10', '25', '5', '2 days ago'],
+        ['Repository 4', '10', '25', '5', '2 days ago']
       ]
     };
   }

@@ -6,9 +6,10 @@ propComponents: ['Card', 'CardHeader', 'CardBody', 'CardFooter']
 ---
 
 import { Card, CardActions, CardHead, CardHeader, CardBody, CardFooter, Checkbox, DropdownActions } from '@patternfly/react-core';
-import pfLogo from './examples/pfLogo.svg'; 
+import pfLogo from './examples/pfLogo.svg';
 
 ## Simple card
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -22,11 +23,25 @@ SimpleCard = () => (
 );
 ```
 
-## Card with image and actions 
+## Card with image and actions
+
 ```js
-import React from 'react'; 
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle, Card, CardHead, CardActions, CardHeader, CardBody } from '@patternfly/react-core'; 
-import pfLogo from './examples/pfLogo.svg'; 
+import React from 'react';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle,
+  Card,
+  CardHead,
+  CardActions,
+  CardHeader,
+  CardBody
+} from '@patternfly/react-core';
+import pfLogo from './examples/pfLogo.svg';
 
 class KebabDropdown extends React.Component {
   constructor(props) {
@@ -46,11 +61,11 @@ class KebabDropdown extends React.Component {
       });
     };
     this.onClick = (checked, event) => {
-      const target = event.target; 
-      const value = target.type === 'checkbox' ? target.checked : target.value; 
-      const name = target.name; 
-      this.setState({ [name]: value }); 
-    }; 
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      this.setState({ [name]: value });
+    };
   }
 
   render() {
@@ -75,7 +90,7 @@ class KebabDropdown extends React.Component {
     return (
       <Card>
         <CardHead>
-          <img src={pfLogo} style={{height: "50px"}}/>
+          <img src={pfLogo} style={{ height: '50px' }} />
           <CardActions>
             <Dropdown
               onSelect={this.onSelect}
@@ -86,7 +101,7 @@ class KebabDropdown extends React.Component {
               position={'right'}
             />
             <input
-              type="checkbox" 
+              type="checkbox"
               isChecked={this.state.check1}
               onChange={this.onClick}
               aria-label="card checkbox example"
@@ -104,10 +119,24 @@ class KebabDropdown extends React.Component {
 }
 ```
 
-## Card header in card head 
+## Card header in card head
+
 ```js
- import React from 'react'; 
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle, Card, CardHead, CardActions, CardHeader, CardBody } from '@patternfly/react-core'; 
+import React from 'react';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle,
+  Card,
+  CardHead,
+  CardActions,
+  CardHeader,
+  CardBody
+} from '@patternfly/react-core';
 
 class KebabDropdown extends React.Component {
   constructor(props) {
@@ -127,11 +156,11 @@ class KebabDropdown extends React.Component {
       });
     };
     this.onClick = (checked, event) => {
-      const target = event.target; 
-      const value = target.type === 'checkbox' ? target.checked : target.value; 
-      const name = target.name; 
-      this.setState({ [name]: value }); 
-    }; 
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      this.setState({ [name]: value });
+    };
   }
 
   render() {
@@ -166,7 +195,7 @@ class KebabDropdown extends React.Component {
               position={'right'}
             />
             <input
-              type="checkbox" 
+              type="checkbox"
               isChecked={this.state.check1}
               onChange={this.onClick}
               aria-label="card checkbox example"
@@ -174,7 +203,9 @@ class KebabDropdown extends React.Component {
               name="check1"
             />
           </CardActions>
-        <CardHeader>This is a really really really really really really really really really really long header</CardHeader>
+          <CardHeader>
+            This is a really really really really really really really really really really long header
+          </CardHeader>
         </CardHead>
         <CardBody>Body</CardBody>
         <CardFooter>Footer</CardFooter>
@@ -185,9 +216,23 @@ class KebabDropdown extends React.Component {
 ```
 
 ## Only actions in card head (no header/footer)
+
 ```js
- import React from 'react'; 
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle, Card, CardHead, CardActions, CardHeader, CardBody } from '@patternfly/react-core'; 
+import React from 'react';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle,
+  Card,
+  CardHead,
+  CardActions,
+  CardHeader,
+  CardBody
+} from '@patternfly/react-core';
 
 class KebabDropdown extends React.Component {
   constructor(props) {
@@ -207,11 +252,11 @@ class KebabDropdown extends React.Component {
       });
     };
     this.onClick = (checked, event) => {
-      const target = event.target; 
-      const value = target.type === 'checkbox' ? target.checked : target.value; 
-      const name = target.name; 
-      this.setState({ [name]: value }); 
-    }; 
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const name = target.name;
+      this.setState({ [name]: value });
+    };
   }
 
   render() {
@@ -246,7 +291,7 @@ class KebabDropdown extends React.Component {
               position={'right'}
             />
             <input
-              type="checkbox" 
+              type="checkbox"
               isChecked={this.state.check1}
               onChange={this.onClick}
               aria-label="card checkbox example"
@@ -263,6 +308,7 @@ class KebabDropdown extends React.Component {
 ```
 
 ## Only image in the card head
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -270,8 +316,8 @@ import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
 ImageCard = () => (
   <Card>
     <CardHead>
-      <img src={pfLogo} style={{height: "50px"}}/>
-    </CardHead> 
+      <img src={pfLogo} style={{ height: '50px' }} />
+    </CardHead>
     <CardHeader>Header</CardHeader>
     <CardBody>Body</CardBody>
     <CardFooter>Footer</CardFooter>
@@ -280,6 +326,7 @@ ImageCard = () => (
 ```
 
 ## Card with no footer
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -293,6 +340,7 @@ NoFooterCard = () => (
 ```
 
 ## Card with no header
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -306,6 +354,7 @@ NoHeaderCard = () => (
 ```
 
 ## Card with only a content section
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -318,6 +367,7 @@ ContentOnlyCard = () => (
 ```
 
 ## Card with multiple body sections
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -334,6 +384,7 @@ MultipleBodyCard = () => (
 ```
 
 ## Card with only one body that fills
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -350,6 +401,7 @@ NoFillBodyCard = () => (
 ```
 
 ## Card hover example
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
@@ -364,6 +416,7 @@ HoverableCard = () => (
 ```
 
 ## Card compact example
+
 ```js
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';

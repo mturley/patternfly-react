@@ -4,10 +4,12 @@ cssPrefix: 'pf-c-alert'
 typescript: true
 propComponents: ['Alert', 'AlertActionCloseButton', 'AlertActionLink']
 ---
+
 import { Alert, AlertActionLink, AlertActionCloseButton } from '@patternfly/react-core';
 import './examples/alert.scss';
 
 ## Default alert
+
 ```js
 import React from 'react';
 import { Alert, AlertActionLink, AlertActionCloseButton } from '@patternfly/react-core';
@@ -40,7 +42,11 @@ class DefaultAlert extends React.Component {
             action={<AlertActionCloseButton onClose={this.hideAlertTwo} />}
           />
         )}
-        <Alert variant="default" title="Default alert title" action={<AlertActionLink>Action Button</AlertActionLink>} />
+        <Alert
+          variant="default"
+          title="Default alert title"
+          action={<AlertActionLink>Action Button</AlertActionLink>}
+        />
         <Alert variant="default" title="Default alert title" />
       </React.Fragment>
     );
@@ -49,6 +55,7 @@ class DefaultAlert extends React.Component {
 ```
 
 ## Info alert
+
 ```js
 import React from 'react';
 import { Alert, AlertActionLink, AlertActionCloseButton } from '@patternfly/react-core';
@@ -90,6 +97,7 @@ class InfoAlert extends React.Component {
 ```
 
 ## Success alert
+
 ```js
 import React from 'react';
 import { Alert, AlertActionLink, AlertActionCloseButton } from '@patternfly/react-core';
@@ -134,6 +142,7 @@ class SuccessAlert extends React.Component {
 ```
 
 ## Warning alert
+
 ```js
 import React from 'react';
 import { Alert, AlertActionLink, AlertActionCloseButton } from '@patternfly/react-core';
@@ -178,6 +187,7 @@ class WarningAlert extends React.Component {
 ```
 
 ## Danger alert
+
 ```js
 import React from 'react';
 import { Alert, AlertActionLink, AlertActionCloseButton } from '@patternfly/react-core';
@@ -218,6 +228,7 @@ class DangerAlert extends React.Component {
 ```
 
 ## Inline alert types
+
 ```js
 import React from 'react';
 import { Alert } from '@patternfly/react-core';
@@ -226,8 +237,8 @@ class InlineAlert extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Alert variant="default" isInline title="Default inline alert title"/>
-        <Alert variant="info" isInline title="Info inline alert title"/>
+        <Alert variant="default" isInline title="Default inline alert title" />
+        <Alert variant="info" isInline title="Info inline alert title" />
         <Alert variant="success" isInline title="Success inline alert title" />
         <Alert variant="warning" isInline title="Warning inline alert title" />
         <Alert variant="danger" isInline title="Danger inline alert title" />
@@ -238,6 +249,7 @@ class InlineAlert extends React.Component {
 ```
 
 ## Inline alert variations
+
 ```js
 import React from 'react';
 import { Alert, AlertActionLink, AlertActionCloseButton } from '@patternfly/react-core';

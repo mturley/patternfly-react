@@ -8,6 +8,7 @@ typescript: true
 import { TextArea } from '@patternfly/react-core';
 
 ## Simple text area
+
 ```js
 import React from 'react';
 import { TextArea } from '@patternfly/react-core';
@@ -33,6 +34,7 @@ class SimpleTextArea extends React.Component {
 ```
 
 ## Invalid text area
+
 ```js
 import React from 'react';
 import { TextArea } from '@patternfly/react-core';
@@ -43,7 +45,7 @@ class InvalidTextArea extends React.Component {
     this.state = {
       value: ''
     };
-    
+
     this.handleInvalidTextAreaChange = value => {
       this.setState({ value });
     };
@@ -66,11 +68,10 @@ class InvalidTextArea extends React.Component {
 ```
 
 ## Uncontrolled text area
+
 ```js
 import React from 'react';
 import { TextArea } from '@patternfly/react-core';
 
-UncontrolledTextArea = () => (
-  <TextArea defaultValue="default value" aria-label="uncontrolled text area example" />
-)
+UncontrolledTextArea = () => <TextArea defaultValue="default value" aria-label="uncontrolled text area example" />;
 ```

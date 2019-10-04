@@ -48,7 +48,13 @@ class SimpleTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      columns: [{ title: 'Repositories', props: null }, 'Branches', { title: 'Pull requests', props: null }, 'Workspaces', 'Last Commit'],
+      columns: [
+        { title: 'Repositories', props: null },
+        'Branches',
+        { title: 'Pull requests', props: null },
+        'Workspaces',
+        'Last Commit'
+      ],
       rows: [['one', 'two', 'three', 'four', 'five']]
     };
   }
@@ -70,9 +76,11 @@ export default SimpleTable;
 This library makes use of the babel plugin from [@patternfly/react-styles](../react-styles/README.md) to enable providing the CSS alongside the components. This removes the need for consumers to use (style|css|sass)-loaders. For an example of using CSS from core you can reference [Button.js](./src/components/Button/Button.js). For any CSS not provided by core please use the `StyleSheet.create` utility from [@patternfly/react-styles](../react-styles/README.md). This will prevent collisions with any consumers, and allow the CSS to be bundled with the component.
 
 ### Custom transformators
+
 If you want to add custom transformators to show some special column (collapsible, checkbox) you have to include `isVisible` there as well so cellRenderer knows which cells to render (main purpose is for colSpan).
 
 Example of such transformator can be:
+
 ```JSX
 function someTransform(value) {
   return {

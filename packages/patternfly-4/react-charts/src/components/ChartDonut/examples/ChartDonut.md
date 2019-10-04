@@ -17,6 +17,7 @@ Learn to build a donut chart using a Katacoda tutorial starting with a simple ch
 [Start course](https://katacoda.com/patternfly/courses/charts/donut-chart)
 
 ## Simple donut chart
+
 ```js
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
@@ -33,10 +34,11 @@ import { ChartDonut } from '@patternfly/react-charts';
       title="100"
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Donut chart with right aligned legend
+
 ```js
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
@@ -63,10 +65,11 @@ import { ChartDonut } from '@patternfly/react-charts';
       width={350}
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Multi-color (ordered) donut chart with right aligned legend
+
 ```js
 import React from 'react';
 import { ChartDonut, ChartThemeColor, ChartThemeVariant } from '@patternfly/react-charts';
@@ -94,10 +97,11 @@ import { ChartDonut, ChartThemeColor, ChartThemeVariant } from '@patternfly/reac
       width={350}
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Donut chart with bottom aligned legend
+
 ```js
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
@@ -126,10 +130,11 @@ import { ChartDonut } from '@patternfly/react-charts';
       width={300}
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Small donut chart
+
 ```js
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
@@ -148,10 +153,11 @@ import { ChartDonut } from '@patternfly/react-charts';
       width={150}
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Small donut chart with right aligned legend
+
 ```js
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
@@ -179,10 +185,11 @@ import { ChartDonut } from '@patternfly/react-charts';
       width={275}
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Small donut chart with right aligned legend and bottom aligned subtitle
+
 ```js
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
@@ -211,10 +218,11 @@ import { ChartDonut } from '@patternfly/react-charts';
       width={275}
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Small donut chart with bottom aligned legend and right aligned subtitle
+
 ```js
 import React from 'react';
 import { ChartDonut } from '@patternfly/react-charts';
@@ -242,7 +250,7 @@ import { ChartDonut } from '@patternfly/react-charts';
       width={300}
     />
   </div>
-</div>
+</div>;
 ```
 
 ## Tips
@@ -251,8 +259,9 @@ import { ChartDonut } from '@patternfly/react-charts';
 - `ChartLegend` may be used as a standalone component, instead of using `legendData` and `legendPosition`
 
 ## Docs
-Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the 
+
+Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the
 components used in the examples above, Victory pass-thru props are also documented here:
 
- - For `ChartDonut` props, see <a href="https://formidable.com/open-source/victory/docs/victory-pie" target="_blank">VictoryPie</a>
- - For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>
+- For `ChartDonut` props, see <a href="https://formidable.com/open-source/victory/docs/victory-pie" target="_blank">VictoryPie</a>
+- For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>

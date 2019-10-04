@@ -8,16 +8,16 @@ propComponents: ['ActionGroup', 'Form', 'FormGroup', 'FormHelperText']
 ## Simple form
 
 import {
-  Form,
-  FormGroup,
-  TextInput,
-  TextArea,
-  FormSelectionOption,
-  FormSelect,
-  Checkbox,
-  ActionGroup,
-  Button,
-  Radio
+Form,
+FormGroup,
+TextInput,
+TextArea,
+FormSelectionOption,
+FormSelect,
+Checkbox,
+ActionGroup,
+Button,
+Radio
 } from '@patternfly/react-core';
 
 ```js
@@ -59,12 +59,7 @@ class SimpleForm extends React.Component {
 
     return (
       <Form>
-        <FormGroup
-          label="Name"
-          isRequired
-          fieldId="simple-form-name"
-          helperText="Please provide your full name"
-        >
+        <FormGroup label="Name" isRequired fieldId="simple-form-name" helperText="Please provide your full name">
           <TextInput
             isRequired
             type="text"
@@ -99,7 +94,7 @@ class SimpleForm extends React.Component {
         <FormGroup isInline label="How can we contact you?" isRequired>
           <Checkbox label="Email" aria-label="Email" id="inlinecheck1" />
           <Checkbox label="Phone" aria-label="Phone" id="inlinecheck2" />
-          <Checkbox label="Please don't contact me" aria-label="Please don't contact me" id="inlinecheck3"/>
+          <Checkbox label="Please don't contact me" aria-label="Please don't contact me" id="inlinecheck3" />
         </FormGroup>
         <FormGroup label="Additional Note:" fieldId="simple-form-note">
           <TextInput isDisabled type="text" id="simple-form-note" name="simple-form-number" value="disabled" />
@@ -118,6 +113,7 @@ class SimpleForm extends React.Component {
 ```
 
 ## Form (horizontal)
+
 ```js
 import React from 'react';
 import {
@@ -170,12 +166,7 @@ class HorizontalForm extends React.Component {
 
     return (
       <Form isHorizontal>
-        <FormGroup
-          label="Name"
-          isRequired
-          fieldId="horizontal-form-name"
-          helperText="Please provide your full name"
-        >
+        <FormGroup label="Name" isRequired fieldId="horizontal-form-name" helperText="Please provide your full name">
           <TextInput
             value={value1}
             isRequired
@@ -233,6 +224,7 @@ class HorizontalForm extends React.Component {
 ```
 
 ## Form (invalid)
+
 ```js
 import React from 'react';
 import {

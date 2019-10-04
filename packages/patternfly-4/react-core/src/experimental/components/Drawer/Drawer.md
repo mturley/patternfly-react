@@ -10,7 +10,6 @@ stage: 'early'
 import { Drawer, DrawerPanelContent, DrawerContent } from '@patternfly/react-core/dist/esm/experimental';
 import { Alert } from '@patternfly/react-core';
 
-
 ## Simple drawer component
 
 ```js
@@ -26,7 +25,7 @@ class SimpleDrawer extends React.Component {
       isExpanded: false
     };
 
-    this.onClick = () => { 
+    this.onClick = () => {
       const isExpanded = !this.state.isExpanded;
       this.setState({
         isExpanded
@@ -50,7 +49,6 @@ class SimpleDrawer extends React.Component {
 }
 ```
 
-
 ## Simple drawer content inline component
 
 ```js
@@ -66,7 +64,7 @@ class SimpleDrawerInlineContent extends React.Component {
       isExpanded: false
     };
 
-    this.onClick = () => { 
+    this.onClick = () => {
       const isExpanded = !this.state.isExpanded;
       this.setState({
         isExpanded

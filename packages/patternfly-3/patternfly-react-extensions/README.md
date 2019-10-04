@@ -53,4 +53,3 @@ yarn test packages/patternfly-3/patternfly-react-extensions
 ```
 yarn publish
 ```
-

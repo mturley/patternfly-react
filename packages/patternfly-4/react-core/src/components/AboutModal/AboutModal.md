@@ -4,11 +4,13 @@ cssPrefix: 'pf-c-about-modal-box'
 typescript: true
 propComponents: ['AboutModal']
 ---
+
 import { AboutModal, Button, TextContent, TextList, TextListItem } from '@patternfly/react-core';
 import brandImg from './examples/brandImg.svg';
 import bgImg from './examples/patternfly-orb.svg';
 
 ## Simple about modal
+
 ```js
 import React from 'react';
 import { AboutModal, Button, TextContent, TextList, TextListItem } from '@patternfly/react-core';

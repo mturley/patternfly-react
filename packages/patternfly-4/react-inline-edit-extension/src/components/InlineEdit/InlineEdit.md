@@ -14,11 +14,11 @@ This package is currently an extension. Extension components do not undergo the 
 
 import { Table, TableHeader, TableBody, RowWrapper, TableVariant, ExpandableRowContent } from '@patternfly/react-table';
 import {
-  editableTableBody,
-  editableRowWrapper,
-  inlineEditFormatterFactory,
-  TableEditConfirmation,
-  TableTextInput
+editableTableBody,
+editableRowWrapper,
+inlineEditFormatterFactory,
+TableEditConfirmation,
+TableTextInput
 } from '@patternfly/react-inline-edit-extension';
 import { Dropdown, DropdownToggle, DropdownItem, Checkbox } from '@patternfly/react-core';
 
@@ -337,6 +337,7 @@ class EditableTable extends React.Component {
 ```
 
 ## Editable table with inline edit columns
+
 ```js
 import React from 'react';
 import { Table, TableHeader, TableBody, RowWrapper, TableVariant, ExpandableRowContent } from '@patternfly/react-table';
@@ -497,6 +498,7 @@ class EditableTableColumn extends React.Component {
 ```
 
 ## Editable table with collapsible rows
+
 ```js
 import React from 'react';
 import { Table, TableHeader, TableBody, RowWrapper, TableVariant, ExpandableRowContent } from '@patternfly/react-table';

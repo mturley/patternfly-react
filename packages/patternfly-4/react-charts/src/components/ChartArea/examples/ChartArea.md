@@ -3,15 +3,7 @@ title: 'Area'
 section: 'charts'
 typescript: true
 propComponents:
-  [
-    'Chart',
-    'ChartAreaProps',
-    'ChartAxis',
-    'ChartGroup',
-    'ChartLegend',
-    'ChartThreshold',
-    'ChartVoronoiContainer',
-  ]
+  ['Chart', 'ChartAreaProps', 'ChartAxis', 'ChartGroup', 'ChartLegend', 'ChartThreshold', 'ChartVoronoiContainer']
 ---
 
 import { Chart, ChartArea, ChartAxis, ChartGroup, ChartLegend, ChartThreshold, ChartThemeColor, ChartThemeVariant, ChartVoronoiContainer } from '@patternfly/react-charts';
@@ -27,6 +19,7 @@ Learn to build an area chart using a Katacoda tutorial starting with a simple ch
 [Start course](https://katacoda.com/patternfly/courses/charts/area-chart)
 
 ## Simple area chart with right aligned legend
+
 ```js
 import React from 'react';
 import { Chart, ChartArea, ChartAxis, ChartGroup, ChartVoronoiContainer } from '@patternfly/react-charts';
@@ -37,12 +30,14 @@ import { Chart, ChartArea, ChartAxis, ChartGroup, ChartVoronoiContainer } from '
     <Chart
       ariaDesc="Average number of pets"
       ariaTitle="Area chart example"
-      containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
+      containerComponent={
+        <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+      }
       legendData={[{ name: 'Cats' }, { name: 'Dogs' }, { name: 'Birds' }]}
       legendOrientation="vertical"
       legendPosition="right"
       height={200}
-      maxDomain={{y: 9}}
+      maxDomain={{ y: 9 }}
       padding={{
         bottom: 50,
         left: 50,
@@ -52,7 +47,7 @@ import { Chart, ChartArea, ChartAxis, ChartGroup, ChartVoronoiContainer } from '
       width={800}
     >
       <ChartAxis />
-      <ChartAxis dependentAxis showGrid/>
+      <ChartAxis dependentAxis showGrid />
       <ChartGroup>
         <ChartArea
           data={[
@@ -86,10 +81,11 @@ import { Chart, ChartArea, ChartAxis, ChartGroup, ChartVoronoiContainer } from '
       </ChartGroup>
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Cyan area chart with bottom aligned legend and axis label
+
 ```js
 import React from 'react';
 import { Chart, ChartArea, ChartAxis, ChartGroup, ChartThemeColor } from '@patternfly/react-charts';
@@ -100,7 +96,9 @@ import { Chart, ChartArea, ChartAxis, ChartGroup, ChartThemeColor } from '@patte
     <Chart
       ariaDesc="Average number of pets"
       ariaTitle="Area chart example"
-      containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
+      containerComponent={
+        <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+      }
       legendData={[{ name: 'Cats' }, { name: 'Dogs' }, { name: 'Birds' }]}
       legendPosition="bottom"
       height={250}
@@ -108,14 +106,14 @@ import { Chart, ChartArea, ChartAxis, ChartGroup, ChartThemeColor } from '@patte
         bottom: 100, // Adjusted to accommodate legend
         left: 50,
         right: 50,
-        top: 50,
+        top: 50
       }}
-      maxDomain={{y: 9}}
+      maxDomain={{ y: 9 }}
       themeColor={ChartThemeColor.cyan}
       width={650}
     >
-      <ChartAxis label="Years"/>
-      <ChartAxis dependentAxis showGrid/>
+      <ChartAxis label="Years" />
+      <ChartAxis dependentAxis showGrid />
       <ChartGroup>
         <ChartArea
           data={[
@@ -149,10 +147,11 @@ import { Chart, ChartArea, ChartAxis, ChartGroup, ChartThemeColor } from '@patte
       </ChartGroup>
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Multi-color (unorderd) chart with bottom-left aligned legend and responsive container
+
 ```js
 import React from 'react';
 import { Chart, ChartArea, ChartAxis, ChartGroup, ChartThemeColor } from '@patternfly/react-charts';
@@ -166,7 +165,7 @@ class MultiColorChart extends React.Component {
       width: 0
     };
     this.handleResize = () => {
-      if(this.containerRef.current && this.containerRef.current.clientWidth){
+      if (this.containerRef.current && this.containerRef.current.clientWidth) {
         this.setState({ width: this.containerRef.current.clientWidth });
       }
     };
@@ -190,7 +189,9 @@ class MultiColorChart extends React.Component {
           <Chart
             ariaDesc="Average number of pets"
             ariaTitle="Area chart example"
-            containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
+            containerComponent={
+              <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+            }
             legendData={[{ name: 'Cats' }, { name: 'Dogs' }, { name: 'Birds' }]}
             legendPosition="bottom-left"
             height={225}
@@ -198,9 +199,9 @@ class MultiColorChart extends React.Component {
               bottom: 75, // Adjusted to accommodate legend
               left: 50,
               right: 50,
-              top: 50,
+              top: 50
             }}
-            maxDomain={{y: 9}}
+            maxDomain={{ y: 9 }}
             themeColor={ChartThemeColor.multiUnordered}
             width={width}
           >
@@ -254,12 +255,13 @@ class MultiColorChart extends React.Component {
 - The `theme` and `themeColor` props should be applied at the most top level component
 
 ## Docs
-Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the 
+
+Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the
 components used in the examples above, Victory pass-thru props are also documented here:
 
- - For `Chart` props, see <a href="https://formidable.com/open-source/victory/docs/victory-chart" target="_blank">VictoryChart</a>
- - For `ChartArea` props, see <a href="https://formidable.com/open-source/victory/docs/victory-area" target="_blank">VictoryArea</a>
- - For `ChartAxis` props, see <a href="https://formidable.com/open-source/victory/docs/victory-axis" target="_blank">VictoryAxis</a>
- - For `ChartGroup` props, see <a href="https://formidable.com/open-source/victory/docs/victory-group" target="_blank">VictoryGroup</a>
- - For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>
- - For `ChartVoronoiContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-voronoi-container" target="_blank">VictoryVoronoiContainer</a>
+- For `Chart` props, see <a href="https://formidable.com/open-source/victory/docs/victory-chart" target="_blank">VictoryChart</a>
+- For `ChartArea` props, see <a href="https://formidable.com/open-source/victory/docs/victory-area" target="_blank">VictoryArea</a>
+- For `ChartAxis` props, see <a href="https://formidable.com/open-source/victory/docs/victory-axis" target="_blank">VictoryAxis</a>
+- For `ChartGroup` props, see <a href="https://formidable.com/open-source/victory/docs/victory-group" target="_blank">VictoryGroup</a>
+- For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>
+- For `ChartVoronoiContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-voronoi-container" target="_blank">VictoryVoronoiContainer</a>

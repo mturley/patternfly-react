@@ -18,6 +18,7 @@ Learn to build a line chart using a Katacoda tutorial starting with a simple cha
 [Start course](https://katacoda.com/patternfly/courses/charts/line-chart)
 
 ## Simple line chart with right aligned legend
+
 ```js
 import React from 'react';
 import { Chart, ChartAxis, ChartGroup, ChartLine, ChartVoronoiContainer } from '@patternfly/react-charts';
@@ -27,13 +28,15 @@ import { Chart, ChartAxis, ChartGroup, ChartLine, ChartVoronoiContainer } from '
     <Chart
       ariaDesc="Average number of pets"
       ariaTitle="Line chart example"
-      containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
+      containerComponent={
+        <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+      }
       legendData={[{ name: 'Cats' }, { name: 'Dogs', symbol: { type: 'dash' } }, { name: 'Birds' }, { name: 'Mice' }]}
       legendOrientation="vertical"
       legendPosition="right"
       height={250}
-      maxDomain={{y: 10}}
-      minDomain={{y: 0}}
+      maxDomain={{ y: 10 }}
+      minDomain={{ y: 0 }}
       padding={{
         bottom: 50,
         left: 50,
@@ -85,25 +88,35 @@ import { Chart, ChartAxis, ChartGroup, ChartLine, ChartVoronoiContainer } from '
       </ChartGroup>
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Green line chart with right aligned legend
+
 ```js
 import React from 'react';
-import { Chart, ChartAxis, ChartGroup, ChartLine, ChartThemeColor, ChartVoronoiContainer } from '@patternfly/react-charts';
+import {
+  Chart,
+  ChartAxis,
+  ChartGroup,
+  ChartLine,
+  ChartThemeColor,
+  ChartVoronoiContainer
+} from '@patternfly/react-charts';
 
 <div>
   <div className="line-chart-legend-bottom">
     <Chart
       ariaDesc="Average number of pets"
       ariaTitle="Line chart example"
-      containerComponent={<ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />}
+      containerComponent={
+        <ChartVoronoiContainer labels={({ datum }) => `${datum.name}: ${datum.y}`} constrainToVisibleArea />
+      }
       legendData={[{ name: 'Cats' }, { name: 'Dogs', symbol: { type: 'dash' } }, { name: 'Birds' }, { name: 'Mice' }]}
       legendPosition="bottom"
       height={275}
-      maxDomain={{y: 10}}
-      minDomain={{y: 0}}
+      maxDomain={{ y: 10 }}
+      minDomain={{ y: 0 }}
       padding={{
         bottom: 75, // Adjusted to accommodate legend
         left: 50,
@@ -156,11 +169,13 @@ import { Chart, ChartAxis, ChartGroup, ChartLine, ChartThemeColor, ChartVoronoiC
       </ChartGroup>
     </Chart>
   </div>
-</div>
+</div>;
 ```
 
 ## Multi-color (unorderd) line chart with bottom-left aligned legend and responsive container
+
 This demonstrates zoom for the x axis only
+
 ```js
 import React from 'react';
 import { Chart, ChartAxis, ChartGroup, ChartLine, ChartThemeColor } from '@patternfly/react-charts';
@@ -174,7 +189,7 @@ class MultiColorChart extends React.Component {
       width: 0
     };
     this.handleResize = () => {
-      if(this.containerRef.current && this.containerRef.current.clientWidth){
+      if (this.containerRef.current && this.containerRef.current.clientWidth) {
         this.setState({ width: this.containerRef.current.clientWidth });
       }
     };
@@ -191,7 +206,7 @@ class MultiColorChart extends React.Component {
 
   render() {
     const { width } = this.state;
-    
+
     return (
       <div ref={this.containerRef}>
         <div className="line-chart-legend-bottom-responsive">
@@ -199,11 +214,16 @@ class MultiColorChart extends React.Component {
             ariaDesc="Average number of pets"
             ariaTitle="Line chart example"
             containerComponent={<VictoryZoomContainer zoomDimension="x" />}
-            legendData={[{ name: 'Cats' }, { name: 'Dogs', symbol: { type: 'dash' } }, { name: 'Birds' }, { name: 'Mice' }]}
+            legendData={[
+              { name: 'Cats' },
+              { name: 'Dogs', symbol: { type: 'dash' } },
+              { name: 'Birds' },
+              { name: 'Mice' }
+            ]}
             legendPosition="bottom-left"
             height={275}
-            maxDomain={{y: 10}}
-            minDomain={{y: 0}}
+            maxDomain={{ y: 10 }}
+            minDomain={{ y: 0 }}
             padding={{
               bottom: 75, // Adjusted to accommodate legend
               left: 50,
@@ -212,7 +232,7 @@ class MultiColorChart extends React.Component {
             }}
             themeColor={ChartThemeColor.multiUnordered}
             width={width}
-           >
+          >
             <ChartAxis tickValues={[2, 3, 4]} />
             <ChartAxis dependentAxis showGrid tickValues={[2, 5, 8]} />
             <ChartGroup>
@@ -271,13 +291,14 @@ class MultiColorChart extends React.Component {
 - The `theme` and `themeColor` props should be applied at the most top level component
 
 ## Docs
-Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the 
+
+Currently, the generated documention below is not able to resolve type definitions from Victory imports. For the
 components used in the examples above, Victory pass-thru props are also documented here:
 
- - For `Chart` props, see <a href="https://formidable.com/open-source/victory/docs/victory-chart" target="_blank">VictoryChart</a>
- - For `ChartAxis` props, see <a href="https://formidable.com/open-source/victory/docs/victory-axis" target="_blank">VictoryAxis</a>
- - For `ChartGroup` props, see <a href="https://formidable.com/open-source/victory/docs/victory-group" target="_blank">VictoryGroup</a>
- - For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>
- - For `ChartLine` props, see <a href="https://formidable.com/open-source/victory/docs/victory-line" target="_blank">Victoryline</a>
- - For `ChartVoronoiContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-voronoi-container" target="_blank">VictoryVoronoiContainer</a>
- - For `VictoryZoomContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-zoom-container" target="_blank">VictoryZoomContainer</a>
+- For `Chart` props, see <a href="https://formidable.com/open-source/victory/docs/victory-chart" target="_blank">VictoryChart</a>
+- For `ChartAxis` props, see <a href="https://formidable.com/open-source/victory/docs/victory-axis" target="_blank">VictoryAxis</a>
+- For `ChartGroup` props, see <a href="https://formidable.com/open-source/victory/docs/victory-group" target="_blank">VictoryGroup</a>
+- For `ChartLegend` props, see <a href="https://formidable.com/open-source/victory/docs/victory-legend" target="_blank">VictoryLegend</a>
+- For `ChartLine` props, see <a href="https://formidable.com/open-source/victory/docs/victory-line" target="_blank">Victoryline</a>
+- For `ChartVoronoiContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-voronoi-container" target="_blank">VictoryVoronoiContainer</a>
+- For `VictoryZoomContainer` props, see <a href="https://formidable.com/open-source/victory/docs/victory-zoom-container" target="_blank">VictoryZoomContainer</a>

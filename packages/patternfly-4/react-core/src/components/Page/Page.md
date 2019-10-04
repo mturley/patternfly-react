@@ -8,6 +8,7 @@ propComponents: ['Page', 'PageHeader', 'PageSidebar', 'PageSection']
 import { Page, PageHeader, PageSidebar, PageSection, PageSectionVariants } from '@patternfly/react-core';
 
 ## Vertical page layout
+
 ```js
 import React from 'react';
 import { Page, PageHeader, PageSidebar, PageSection, PageSectionVariants } from '@patternfly/react-core';
@@ -58,6 +59,7 @@ class VerticalPage extends React.Component {
 ```
 
 ## Horizontal page layout
+
 ```js
 import React from 'react';
 import { Page, PageHeader, PageSidebar, PageSection, PageSectionVariants } from '@patternfly/react-core';
@@ -83,6 +85,7 @@ HorizontalPage = () => {
 ```
 
 ## Main Section Padding Modifiers
+
 ```js
 import React from 'react';
 import { Page, PageHeader, PageSidebar, PageSection, PageSectionVariants } from '@patternfly/react-core';
@@ -124,14 +127,18 @@ class VerticalPage extends React.Component {
     return (
       <Page header={Header} sidebar={Sidebar}>
         <PageSection>Section with default padding</PageSection>
-        <PageSection variant={PageSectionVariants.light} noPadding={true}>Section with no padding</PageSection>
+        <PageSection variant={PageSectionVariants.light} noPadding={true}>
+          Section with no padding
+        </PageSection>
         <PageSection noPaddingMobile={true}>Section with no padding on mobile only</PageSection>
       </Page>
     );
   }
 }
 ```
+
 ## Main section fill/no-fill modifiers
+
 ```js
 import React from 'react';
 import { Page, PageHeader, PageSidebar, PageSection, PageSectionVariants } from '@patternfly/react-core';
@@ -172,9 +179,14 @@ class FillPage extends React.Component {
 
     return (
       <Page header={Header} sidebar={Sidebar}>
-        <PageSection style={{height: '10em'}}>This section is set to the default fill variant</PageSection>
-        <PageSection style={{height: '10em'}} isFilled={true}>This section fills the available space.</PageSection>
-        <PageSection style={{height: '10em'}} isFilled={false}> This section does not fill the available space.</PageSection>
+        <PageSection style={{ height: '10em' }}>This section is set to the default fill variant</PageSection>
+        <PageSection style={{ height: '10em' }} isFilled={true}>
+          This section fills the available space.
+        </PageSection>
+        <PageSection style={{ height: '10em' }} isFilled={false}>
+          {' '}
+          This section does not fill the available space.
+        </PageSection>
       </Page>
     );
   }

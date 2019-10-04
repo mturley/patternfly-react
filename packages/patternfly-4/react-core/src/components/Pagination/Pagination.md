@@ -1,7 +1,7 @@
 ---
-title: "Pagination"
+title: 'Pagination'
 cssPrefix: null
-propComponents: ["Pagination"]
+propComponents: ['Pagination']
 typescript: true
 ---
 
@@ -10,8 +10,8 @@ import { Pagination, PaginationVariant } from '@patternfly/react-core';
 ## Pagination top
 
 ```js
-import React from "react";
-import { Pagination, PaginationVariant } from "@patternfly/react-core";
+import React from 'react';
+import { Pagination, PaginationVariant } from '@patternfly/react-core';
 
 class PaginationTop extends React.Component {
   constructor(props) {
@@ -52,8 +52,8 @@ class PaginationTop extends React.Component {
 ## Pagination bottom
 
 ```js
-import React from "react";
-import { Pagination, PaginationVariant } from "@patternfly/react-core";
+import React from 'react';
+import { Pagination, PaginationVariant } from '@patternfly/react-core';
 
 class PaginationBottom extends React.Component {
   constructor(props) {
@@ -92,8 +92,8 @@ class PaginationBottom extends React.Component {
 ## Pagination disabled
 
 ```js
-import React from "react";
-import { Pagination, PaginationVariant } from "@patternfly/react-core";
+import React from 'react';
+import { Pagination, PaginationVariant } from '@patternfly/react-core';
 
 class PaginationDisabled extends React.Component {
   constructor(props) {
@@ -135,8 +135,8 @@ class PaginationDisabled extends React.Component {
 ## No items
 
 ```js
-import React from "react";
-import { Pagination, PaginationVariant } from "@patternfly/react-core";
+import React from 'react';
+import { Pagination, PaginationVariant } from '@patternfly/react-core';
 
 class PaginationTop extends React.Component {
   constructor(props) {
@@ -177,8 +177,8 @@ class PaginationTop extends React.Component {
 ## One page
 
 ```js
-import React from "react";
-import { Pagination, PaginationVariant } from "@patternfly/react-core";
+import React from 'react';
+import { Pagination, PaginationVariant } from '@patternfly/react-core';
 
 class PaginationTop extends React.Component {
   constructor(props) {
@@ -219,8 +219,8 @@ class PaginationTop extends React.Component {
 ## Compact
 
 ```js
-import React from "react";
-import { Pagination, PaginationVariant } from "@patternfly/react-core";
+import React from 'react';
+import { Pagination, PaginationVariant } from '@patternfly/react-core';
 
 class PaginationTop extends React.Component {
   constructor(props) {

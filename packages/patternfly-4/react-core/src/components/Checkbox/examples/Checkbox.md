@@ -9,6 +9,7 @@ import { Checkbox } from '@patternfly/react-core';
 import './checkbox.scss';
 
 ## Controlled checkbox
+
 ```js
 import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
@@ -34,14 +35,14 @@ class ControlledCheckbox extends React.Component {
     if (prevState.check1 !== this.state.check1 && this.state.check1 !== null) {
       this.setState({
         check2: this.state.check1,
-        check3: this.state.check1,
-      })
+        check3: this.state.check1
+      });
     }
 
     if (prevState.check2 !== this.state.check2 || prevState.check3 !== this.state.check3) {
       this.setState({
         check1: (this.state.check2 && this.state.check3) || (this.state.check2 || this.state.check3 ? null : false)
-      })
+      });
     }
   }
 
@@ -89,6 +90,7 @@ class ControlledCheckbox extends React.Component {
 ```
 
 ## Uncontrolled checkbox
+
 ```js
 import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
@@ -102,6 +104,7 @@ UncontrolledCheckbox = () => (
 ```
 
 ## Disabled checkbox
+
 ```js
 import React from 'react';
 import { Checkbox } from '@patternfly/react-core';

@@ -6,7 +6,7 @@ This package provides Core PatternFly React components for PatternFly 3.
 
 ## patternfly-4
 
-This package provides Core PatternFly components for PatternFly 4.  
+This package provides Core PatternFly components for PatternFly 4.
 
 ## eslint-plugin-patterngly-react
 

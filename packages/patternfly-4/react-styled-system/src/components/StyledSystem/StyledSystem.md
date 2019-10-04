@@ -2,15 +2,18 @@
 title: 'Styled system'
 section: 'styled-system'
 ---
+
 ## **Warning, the StyledSystem components are experimental and in their own package _@patternfly/react-styled-system_. Use at your own risk!**
+
 The PatternFlyThemeProvider component maps CSS to PatternFly global values that can be used with StyledBox, StyledFlex, and StyledText components. The StyledFlex and StyledText components inherit all the props from StyledBox in addition to their own props. To apply the PatternFly theme, use <strong>PatternFlyThemeProvider</strong> at the root of your application.
 
 ## Space
+
 The space utility converts shorthand margin and padding props to margin and padding CSS declarations.
 
 Use StyledConstants.space with margin and padding props.
 
-Negative values from StyledConstants.space (neg_*) can be used for negative margins.
+Negative values from StyledConstants.space (neg\_\*) can be used for negative margins.
 
 String values are passed as raw CSS values.
 
@@ -39,10 +42,11 @@ SpaceStyles = () => {
       </React.Fragment>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Width
+
 Numbers from 0-1 are converted to percentage widths.
 
 Numbers greater than 1 are converted to pixel values.
@@ -50,6 +54,7 @@ Numbers greater than 1 are converted to pixel values.
 String values are passed as raw CSS values.
 
 Array values are converted into responsive width styles.
+
 ```js
 import React from 'react';
 import { PatternFlyThemeProvider, StyledConstants, StyledBox, StyledText } from '@patternfly/react-styled-system';
@@ -77,10 +82,11 @@ WidthStyles = () => {
       </React.Fragment>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Responsive
+
 All props accept arrays as values for responsive styling. You can specify up to 4 array values for each of the breakpoints.
 
 ```js
@@ -94,8 +100,8 @@ ResponsiveStyles = () => {
     <PatternFlyThemeProvider>
       <StyledBox pb={space.md}>
         <StyledText py={space.md}>
-          In this example, the Box widths are: 100% below the smallest breakpoint, 50% from the next breakpoint and
-          up, 25% from the next breakpoint and up
+          In this example, the Box widths are: 100% below the smallest breakpoint, 50% from the next breakpoint and up,
+          25% from the next breakpoint and up
         </StyledText>
         <StyledBox width={[1, 1 / 2, 1 / 4]} height={50} bg={colors.success_100} display="inline-block" />
         <StyledBox width={[1, 1 / 2, 1 / 4]} height={50} bg={colors.info_100} display="inline-block" />
@@ -113,10 +119,11 @@ ResponsiveStyles = () => {
       </StyledBox>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Colors
+
 Use color or bg (background) props with StyledConstants.colors to set a color.
 
 Array values are converted into responsive values.
@@ -139,10 +146,11 @@ ColorStyles = () => {
       </React.Fragment>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Typography
+
 ```js
 import React from 'react';
 import { PatternFlyThemeProvider, StyledConstants, StyledBox, StyledText } from '@patternfly/react-styled-system';
@@ -173,10 +181,11 @@ TypographyStyles = () => {
       </React.Fragment>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Borders
+
 ```js
 import React from 'react';
 import { PatternFlyThemeProvider, StyledConstants, StyledBox, StyledText } from '@patternfly/react-styled-system';
@@ -213,10 +222,11 @@ BorderStyles = () => {
       </React.Fragment>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Box shadow
+
 ```js
 import React from 'react';
 import { PatternFlyThemeProvider, StyledConstants, StyledBox, StyledText } from '@patternfly/react-styled-system';
@@ -250,10 +260,11 @@ BoxShadowStyles = () => {
       </React.Fragment>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Position
+
 ```js
 import React from 'react';
 import { PatternFlyThemeProvider, StyledConstants, StyledBox, StyledText } from '@patternfly/react-styled-system';
@@ -290,10 +301,11 @@ PositionStyles = () => {
       </StyledBox>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```
 
 ## Override theme
+
 You can override the theme by supplying a theme object.
 
 If multiple PatternFlyThemeProviders are nested, the theme object of the lower provider will be merged into the ancestor theme.
@@ -339,5 +351,5 @@ OverrideTheme = () => {
       </React.Fragment>
     </PatternFlyThemeProvider>
   );
-}
+};
 ```

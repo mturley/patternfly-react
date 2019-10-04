@@ -10,6 +10,7 @@ import { Split, SplitItem } from '@patternfly/react-core';
 import './split.scss';
 
 ## Simple split
+
 ```js
 import React from 'react';
 import { Split, SplitItem } from '@patternfly/react-core';
@@ -18,10 +19,11 @@ import { Split, SplitItem } from '@patternfly/react-core';
   <SplitItem>content</SplitItem>
   <SplitItem isFilled>pf-m-fill</SplitItem>
   <SplitItem>content</SplitItem>
-</Split>
+</Split>;
 ```
 
 ## Split layout with gutter
+
 ```js
 import React from 'react';
 import { Split, SplitItem } from '@patternfly/react-core';
@@ -30,5 +32,5 @@ import { Split, SplitItem } from '@patternfly/react-core';
   <SplitItem>content</SplitItem>
   <SplitItem isFilled>pf-m-fill</SplitItem>
   <SplitItem>content</SplitItem>
-</Split>
+</Split>;
 ```

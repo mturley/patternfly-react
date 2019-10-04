@@ -17,7 +17,7 @@ class ControlledRadio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      check1: false,
+      check1: false
     };
 
     this.handleChange = (_, event) => {
@@ -91,7 +91,13 @@ import { Radio } from '@patternfly/react-core';
 DisabledRadio = () => (
   <React.Fragment>
     <Radio id="radio-disabled" label="Disabled radio example" isDisabled name="radio-5" />
-    <Radio id="radio-disabled-checked" defaultChecked label="Disabled and checked radio example" isDisabled name="radio-6" />
+    <Radio
+      id="radio-disabled-checked"
+      defaultChecked
+      label="Disabled and checked radio example"
+      isDisabled
+      name="radio-6"
+    />
   </React.Fragment>
 );
 ```

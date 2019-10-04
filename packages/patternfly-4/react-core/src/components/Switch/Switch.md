@@ -8,6 +8,7 @@ typescript: true
 import { Switch } from '@patternfly/react-core';
 
 ## Simple switch
+
 ```js
 import React from 'react';
 import { Switch } from '@patternfly/react-core';
@@ -39,6 +40,7 @@ class SimpleSwitch extends React.Component {
 ```
 
 ## Switch (no labels)
+
 ```js
 import React from 'react';
 import { Switch } from '@patternfly/react-core';
@@ -64,13 +66,21 @@ class NoLabelSwitch extends React.Component {
 ```
 
 ## Switch (disabled)
+
 ```js
 import React from 'react';
 import { Switch } from '@patternfly/react-core';
 
 DisabledSwitch = () => (
   <React.Fragment>
-    <Switch id="disabled-switch-on" aria-label="Message when on" label="Message when on" labelOff="Message when off" isChecked isDisabled />
+    <Switch
+      id="disabled-switch-on"
+      aria-label="Message when on"
+      label="Message when on"
+      labelOff="Message when off"
+      isChecked
+      isDisabled
+    />
     <br />
     <Switch
       id="disabled-switch-off"
@@ -89,15 +99,28 @@ DisabledSwitch = () => (
 ```
 
 ## Switch (uncontrolled)
+
 ```js
 import React from 'react';
 import { Switch } from '@patternfly/react-core';
 
 UncontrolledSwitch = () => (
   <React.Fragment>
-    <Switch id="uncontrolled-switch-on" aria-label="Message when on" label="Message when on" labelOff="Message when off" isChecked />
+    <Switch
+      id="uncontrolled-switch-on"
+      aria-label="Message when on"
+      label="Message when on"
+      labelOff="Message when off"
+      isChecked
+    />
     <br />
-    <Switch id="uncontrolled-switch-off" aria-label="Message when on" label="Message when on" labelOff="Message when off" isChecked={false} />
+    <Switch
+      id="uncontrolled-switch-off"
+      aria-label="Message when on"
+      label="Message when on"
+      labelOff="Message when off"
+      isChecked={false}
+    />
     <br />
     <Switch id="uncontrolled-no-label-switch-on" aria-label="Message when on" isChecked />
     <br />

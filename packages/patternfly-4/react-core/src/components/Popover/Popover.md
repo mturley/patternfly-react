@@ -8,6 +8,7 @@ propComponents: ['Popover']
 import { Popover, PopoverPosition, Checkbox, Button } from '@patternfly/react-core';
 
 ## Simple popover
+
 ```js
 import React from 'react';
 import { Popover, PopoverPosition, Button } from '@patternfly/react-core';
@@ -26,6 +27,7 @@ SimplePopover = () => (
 ```
 
 ## Advanced popover
+
 ```js
 import React from 'react';
 import { Popover, PopoverPosition, Checkbox, Button } from '@patternfly/react-core';
@@ -113,6 +115,7 @@ class AdvancedPopover extends React.Component {
 ```
 
 ## Popover (headless)
+
 ```js
 import React from 'react';
 import { Popover, PopoverPosition, Button } from '@patternfly/react-core';
@@ -132,6 +135,7 @@ HeadlessPopover = () => (
 ```
 
 ## Popover with Link
+
 ```js
 import React from 'react';
 import { Popover, PopoverPosition, Button } from '@patternfly/react-core';
@@ -139,7 +143,13 @@ import { Popover, PopoverPosition, Button } from '@patternfly/react-core';
 HeadlessPopover = () => (
   <Popover
     bodyContent={
-      <div><a href="https://www.patternfly.org/" target="_blank">PatternFly</a> is a community project that promotes design commonality and improved user experience. Its offerings include open source code, patterns, style guides, and an active community that helps support it all.</div>
+      <div>
+        <a href="https://www.patternfly.org/" target="_blank">
+          PatternFly
+        </a>{' '}
+        is a community project that promotes design commonality and improved user experience. Its offerings include open
+        source code, patterns, style guides, and an active community that helps support it all.
+      </div>
     }
     aria-label="Popover with Link"
     closeBtnAriaLabel="Close Popover with Link"

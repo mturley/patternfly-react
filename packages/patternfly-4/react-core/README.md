@@ -49,9 +49,9 @@ export default <Button variant="primary">Button</Button>;
 
 All css related to each component is provided within it. There is no component level CSS to import.
 
-# Applying Red Hat Fonts (Optional) 
-If you would like to use Red Hat fonts instead of Overpass, simply add the class `.pf-m-redhat-font` to an element that wraps your application (ideally `<html>` or `<body>`) to adopt the CSS changes that introduce the Red Hat fonts into PatternFly.
+# Applying Red Hat Fonts (Optional)
 
+If you would like to use Red Hat fonts instead of Overpass, simply add the class `.pf-m-redhat-font` to an element that wraps your application (ideally `<html>` or `<body>`) to adopt the CSS changes that introduce the Red Hat fonts into PatternFly.
 
 # Documentation
 
@@ -108,5 +108,3 @@ yarn test packages/patternfly-4/react-core
 
 [patternfly-4]: https://github.com/patternfly/patternfly-next
 [docs]: https://patternfly-react.surge.sh/patternfly-4
-
-

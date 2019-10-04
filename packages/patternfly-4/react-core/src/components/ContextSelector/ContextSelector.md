@@ -7,6 +7,7 @@ typescript: true
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';
 
 ## Simple context selector
+
 ```js
 import React from 'react';
 import { ContextSelector, ContextSelectorItem } from '@patternfly/react-core';

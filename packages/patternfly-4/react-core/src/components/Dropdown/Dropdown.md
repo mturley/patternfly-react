@@ -12,7 +12,15 @@ import { ThIcon, CaretDownIcon } from '@patternfly/react-icons';
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon, CaretDownIcon } from '@patternfly/react-icons';
 
 class SimpleDropdown extends React.Component {
@@ -55,7 +63,11 @@ class SimpleDropdown extends React.Component {
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={<DropdownToggle onToggle={this.onToggle} iconComponent={CaretDownIcon}>Dropdown</DropdownToggle>}
+        toggle={
+          <DropdownToggle onToggle={this.onToggle} iconComponent={CaretDownIcon}>
+            Dropdown
+          </DropdownToggle>
+        }
         isOpen={isOpen}
         dropdownItems={dropdownItems}
       />
@@ -68,7 +80,15 @@ class SimpleDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class IntialSelectionDropdown extends React.Component {
@@ -184,7 +204,15 @@ class GroupedDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class DisabledDropdown extends React.Component {
@@ -244,7 +272,14 @@ class DisabledDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection
+} from '@patternfly/react-core';
 import { ThIcon, CaretDownIcon } from '@patternfly/react-icons';
 
 class PrimaryDropdown extends React.Component {
@@ -287,7 +322,11 @@ class PrimaryDropdown extends React.Component {
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={<DropdownToggle onToggle={this.onToggle} iconComponent={CaretDownIcon} isPrimary>Dropdown</DropdownToggle>}
+        toggle={
+          <DropdownToggle onToggle={this.onToggle} iconComponent={CaretDownIcon} isPrimary>
+            Dropdown
+          </DropdownToggle>
+        }
         isOpen={isOpen}
         dropdownItems={dropdownItems}
       />
@@ -300,7 +339,15 @@ class PrimaryDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class PositionRightDropdown extends React.Component {
@@ -357,7 +404,15 @@ class PositionRightDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class DirectionUpDropdown extends React.Component {
@@ -411,9 +466,18 @@ class DirectionUpDropdown extends React.Component {
 ```
 
 ## Dropdown with kebab
+
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class KebabDropdown extends React.Component {
@@ -470,7 +534,15 @@ class KebabDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class IconDropdown extends React.Component {
@@ -531,7 +603,16 @@ class IconDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownToggleCheckbox, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownToggleCheckbox,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class SplitButtonDropdown extends React.Component {
@@ -574,18 +655,14 @@ class SplitButtonDropdown extends React.Component {
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={(
+        toggle={
           <DropdownToggle
             splitButtonItems={[
-              <DropdownToggleCheckbox
-                id="example-checkbox-1"
-                key="split-checkbox"
-                aria-label="Select all"
-              />
+              <DropdownToggleCheckbox id="example-checkbox-1" key="split-checkbox" aria-label="Select all" />
             ]}
             onToggle={this.onToggle}
           />
-        )}
+        }
         isOpen={isOpen}
         dropdownItems={dropdownItems}
       />
@@ -598,7 +675,16 @@ class SplitButtonDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownToggleCheckbox, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownToggleCheckbox,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class SplitButtonDropdown extends React.Component {
@@ -641,18 +727,16 @@ class SplitButtonDropdown extends React.Component {
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={(
+        toggle={
           <DropdownToggle
             splitButtonItems={[
-              <DropdownToggleCheckbox
-                id="example-checkbox-2"
-                key="split-checkbox"
-                aria-label="Select all"
-              >10 selected</DropdownToggleCheckbox>
+              <DropdownToggleCheckbox id="example-checkbox-2" key="split-checkbox" aria-label="Select all">
+                10 selected
+              </DropdownToggleCheckbox>
             ]}
             onToggle={this.onToggle}
           />
-        )}
+        }
         isOpen={isOpen}
         dropdownItems={dropdownItems}
       />
@@ -665,7 +749,16 @@ class SplitButtonDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownToggleCheckbox, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownToggleCheckbox,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 class SplitButtonDropdown extends React.Component {
   constructor(props) {
@@ -684,11 +777,11 @@ class SplitButtonDropdown extends React.Component {
         isOpen: !this.state.isOpen
       });
     };
-    this.onChange = (isChecked) => {
+    this.onChange = isChecked => {
       this.setState({
         isChecked
-      })
-    }
+      });
+    };
   }
   render() {
     const { isOpen, isChecked } = this.state;
@@ -712,20 +805,20 @@ class SplitButtonDropdown extends React.Component {
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={(
+        toggle={
           <DropdownToggle
             splitButtonItems={[
               <DropdownToggleCheckbox
                 id="example-checkbox-3rd-state"
                 key="split-checkbox"
                 aria-label="Select all"
-                onChange={(checked) => this.onChange(checked)}
+                onChange={checked => this.onChange(checked)}
                 isChecked={isChecked}
               />
             ]}
             onToggle={this.onToggle}
           />
-        )}
+        }
         isOpen={isOpen}
         dropdownItems={dropdownItems}
       />
@@ -738,7 +831,16 @@ class SplitButtonDropdown extends React.Component {
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownToggleCheckbox, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownToggleCheckbox,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class SplitButtonDisabledDropdown extends React.Component {
@@ -781,7 +883,7 @@ class SplitButtonDisabledDropdown extends React.Component {
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={(
+        toggle={
           <DropdownToggle
             splitButtonItems={[
               <DropdownToggleCheckbox
@@ -794,7 +896,7 @@ class SplitButtonDisabledDropdown extends React.Component {
             isDisabled
             onToggle={this.onToggle}
           />
-        )}
+        }
         isOpen={isOpen}
         dropdownItems={dropdownItems}
       />
@@ -809,7 +911,15 @@ The Basic Dropdown is provided for flexibility in allowing various content withi
 
 ```js
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownSeparator, DropdownPosition, DropdownDirection, KebabToggle } from '@patternfly/react-core';
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownPosition,
+  DropdownDirection,
+  KebabToggle
+} from '@patternfly/react-core';
 import { ThIcon } from '@patternfly/react-icons';
 
 class DropdownPanel extends React.Component {

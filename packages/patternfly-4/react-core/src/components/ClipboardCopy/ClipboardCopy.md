@@ -8,6 +8,7 @@ typescript: true
 import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
 
 ## Clipboard copy
+
 ```js
 import React from 'react';
 import { ClipboardCopy } from '@patternfly/react-core';
@@ -16,6 +17,7 @@ import { ClipboardCopy } from '@patternfly/react-core';
 ```
 
 ## Read only clipboard copy
+
 ```js
 import React from 'react';
 import { ClipboardCopy } from '@patternfly/react-core';
@@ -24,6 +26,7 @@ import { ClipboardCopy } from '@patternfly/react-core';
 ```
 
 ## Expanded clipboard copy
+
 ```js
 import React from 'react';
 import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
@@ -31,9 +34,11 @@ import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
 <ClipboardCopy variant={ClipboardCopyVariant.expansion}>
   Got a lot of text here, need to see all of it? Click that arrow on the left side and check out the resulting
   expansion.
-</ClipboardCopy>
+</ClipboardCopy>;
 ```
+
 ## Read only expanded clipboard copy
+
 ```js
 import React from 'react';
 import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
@@ -41,10 +46,11 @@ import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
 <ClipboardCopy isReadOnly variant={ClipboardCopyVariant.expansion}>
   Got a lot of text here, need to see all of it? Click that arrow on the left side and check out the resulting
   expansion.
-</ClipboardCopy>
+</ClipboardCopy>;
 ```
 
 ## Read only expanded by default clipboard copy
+
 ```js
 import React from 'react';
 import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
@@ -52,35 +58,33 @@ import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
 <ClipboardCopy isReadOnly isExpanded variant={ClipboardCopyVariant.expansion}>
   Got a lot of text here, need to see all of it? Click that arrow on the left side and check out the resulting
   expansion.
-</ClipboardCopy>
+</ClipboardCopy>;
 ```
 
 ## Expanded clipboard copy with array
+
 ```js
 import React from 'react';
 import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
 
 ClipboardCopyArrayOfElements = () => {
   let text = [
-    "Got a lot of text here," ,
-    "need to see all of it?" ,
-    "Click that arrow on the left side and check out the resulting expansion."
-  ]
-  return <ClipboardCopy variant={ClipboardCopyVariant.expansion}>
-    {text.join(" ")}
-  </ClipboardCopy>
-}
+    'Got a lot of text here,',
+    'need to see all of it?',
+    'Click that arrow on the left side and check out the resulting expansion.'
+  ];
+  return <ClipboardCopy variant={ClipboardCopyVariant.expansion}>{text.join(' ')}</ClipboardCopy>;
+};
 ```
 
 ## JSON object (wrap code with pre)
+
 ```js
 import React from 'react';
 import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
 
 <ClipboardCopy isCode variant={ClipboardCopyVariant.expansion}>
-  
-
-{ `{ "menu": {
+  {`{ "menu": {
   "id": "file",
   "value": "File",
   "popup": {
@@ -91,6 +95,5 @@ import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
     ]
   }
 }} `}
-  
-</ClipboardCopy>
+</ClipboardCopy>;
 ```

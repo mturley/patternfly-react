@@ -8,6 +8,7 @@ propComponents: ['Title']
 import { Title } from '@patternfly/react-core';
 
 ## Title sizes
+
 ```js
 import React from 'react';
 import { Title } from '@patternfly/react-core';
@@ -31,5 +32,5 @@ import { Title } from '@patternfly/react-core';
   <Title headingLevel="h6" size="md">
     md Title
   </Title>
-</React.Fragment>
+</React.Fragment>;
 ```
