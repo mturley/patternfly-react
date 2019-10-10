@@ -85,7 +85,7 @@ export class DataToolbarFilter extends React.Component<DataToolbarFilterProps, D
       return (
         <React.Fragment>
           <DataToolbarItem {...props}>{children}</DataToolbarItem>
-          {ReactDOM.createPortal(chipGroup, chipGroupContentRef.current.firstElementChild)}
+          {ReactDOM.createPortal(chipGroup, chipGroupContentRef.current)}
         </React.Fragment>
       );
     }

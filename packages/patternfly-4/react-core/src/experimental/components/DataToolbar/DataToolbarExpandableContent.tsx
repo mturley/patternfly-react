@@ -42,10 +42,9 @@ export class DataToolbarExpandableContent extends React.Component<DataToolbarExp
     return (
       <div
         className={css(styles.dataToolbarExpandableContent, isExpanded && getModifier(styles, 'expanded'), className)}
-        ref={expandableContentRef}
         {...props}
       >
-        <DataToolbarGroup />
+        <DataToolbarGroup contentRef={expandableContentRef} />
         {showClearFiltersButton && (
           <DataToolbarItem className={css(getModifier(styles, 'clear'))}>
             <Button variant="link" onClick={clearChipGroups}>

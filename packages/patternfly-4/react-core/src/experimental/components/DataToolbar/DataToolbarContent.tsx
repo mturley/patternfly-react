@@ -38,7 +38,8 @@ interface FilterInfo {
   [key: string]: number;
 }
 
-export class DataToolbarContent extends React.Component<DataToolbarContentProps, DataToolbarContentState> {private expandableContentRef = React.createRef<HTMLDivElement>();
+export class DataToolbarContent extends React.Component<DataToolbarContentProps, DataToolbarContentState> {
+  private expandableContentRef = React.createRef<HTMLDivElement>();
   private chipGroupContentRef = React.createRef<HTMLDivElement>();
 
   static defaultProps = {

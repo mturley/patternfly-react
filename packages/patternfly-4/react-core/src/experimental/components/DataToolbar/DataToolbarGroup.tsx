@@ -20,6 +20,8 @@ export interface DataToolbarGroupProps extends React.HTMLProps<HTMLDivElement> {
   breakpointMods?: DataToolbarBreakpointMod[];
   /** Content to be rendered inside the Data toolbar group */
   children?: React.ReactNode;
+  /** Ref to the root element of the Data toolbar group */
+  contentRef?: React.RefObject<HTMLDivElement>;
 }
 
 export const DataToolbarGroup: React.FunctionComponent<DataToolbarGroupProps> = ({
@@ -27,10 +29,12 @@ export const DataToolbarGroup: React.FunctionComponent<DataToolbarGroupProps> = 
   className,
   variant,
   children,
+  contentRef,
   ...props
 }: DataToolbarGroupProps) => {
   return (
     <div
+      ref={contentRef}
       className={css(
         styles.dataToolbarGroup,
         variant && getModifier(styles, variant),

@@ -50,10 +50,9 @@ export class DataToolbarChipGroupContent extends React.Component<DataToolbarChip
       <div
         className={css(styles.dataToolbarContent, getModifier(styles, 'hidden'), className)}
         hidden
-        ref={chipGroupContentRef}
         {...props}
       >
-        <DataToolbarGroup variant="filter-group" />
+        <DataToolbarGroup contentRef={chipGroupContentRef} variant="filter-group" />
         {
           /** if user provided toggle breakpoint is passed, display #filters here */
           <DataToolbarGroup className={css(getModifier(styles, 'toggle-group-summary'))}>
