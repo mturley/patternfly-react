@@ -553,7 +553,7 @@ class DataToolbarConsumerMangedToggleGroup extends React.Component {
     
     const items =  <DataToolbarToggleGroup toggleIcon={<FilterIcon />} breakpoint='xl'>{toggleGroupItems}</DataToolbarToggleGroup>;
     
-    return <DataToolbar id="data-toolbar-consumer-managed-toggle-groups" isExpanded={isExpanded} toggleIsExpanded={this.toggleIsExpanded}><DataToolbarContent>{items}</DataToolbarContent></DataToolbar>;
+    return <DataToolbar id="data-toolbar-consumer-managed-toggle-groups"><DataToolbarContent isExpanded={isExpanded} toggleIsExpanded={this.toggleIsExpanded}>{items}</DataToolbarContent></DataToolbar>;
   }
 }
 ```
@@ -774,7 +774,7 @@ class DataToolbarWithChipGroupExample extends React.Component {
       </DataToolbarItem>
     </React.Fragment>;
     
-    return <DataToolbar id="data-toolbar-with-chip-groups" clearAllFilters={this.onDelete} showClearFiltersButton={ filters.risk.length !== 0 || filters.status.length !== 0 }><DataToolbarContent>{toolbarItems}</DataToolbarContent></DataToolbar>;
+    return <DataToolbar id="data-toolbar-with-chip-groups"><DataToolbarContent clearAllFilters={this.onDelete} showClearFiltersButton={ filters.risk.length !== 0 || filters.status.length !== 0 }>{toolbarItems}</DataToolbarContent></DataToolbar>;
   }
 }
 

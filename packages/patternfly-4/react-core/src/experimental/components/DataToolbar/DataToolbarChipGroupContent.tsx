@@ -16,18 +16,29 @@ export interface DataToolbarChipGroupContentProps extends React.HTMLProps<HTMLDi
   clearAllFilters?: () => void;
   /** Flag indicating that the Clear all filters button should be visible */
   showClearFiltersButton: boolean;
+  /** Text to display in the Clear all filters button */
+  clearFiltersButtonText?: string;
   /** Flag indicating if a Data toolbar toggle group's expandable content is expanded */
   expandableContentIsExpanded: boolean;
+  /** TODO */
+  numberOfFilters: number;
 }
 
 export class DataToolbarChipGroupContent extends React.Component<DataToolbarChipGroupContentProps> {
+
+  static defaultProps = {
+    clearFiltersButtonText: "Clear all filters"
+  };
+
   render() {
     const {
       className,
       chipGroupContentRef,
       clearAllFilters,
       showClearFiltersButton,
+      clearFiltersButtonText,
       expandableContentIsExpanded,
+      numberOfFilters,
       ...props
     } = this.props;
 
@@ -43,10 +54,16 @@ export class DataToolbarChipGroupContent extends React.Component<DataToolbarChip
         {...props}
       >
         <DataToolbarGroup variant="filter-group" />
+        {
+          /** if user provided toggle breakpoint is passed, display #filters here */
+          <DataToolbarGroup className={css(getModifier(styles, 'toggle-group-summary'))}>
+            <DataToolbarItem>{numberOfFilters} filters applied</DataToolbarItem>
+          </DataToolbarGroup>
+        }
         {showClearFiltersButton && !expandableContentIsExpanded && (
           <DataToolbarItem className={css(getModifier(styles, 'clear'))}>
             <Button variant="link" onClick={clearChipGroups}>
-              Clear all filters
+              {clearFiltersButtonText}
             </Button>
           </DataToolbarItem>
         )}
