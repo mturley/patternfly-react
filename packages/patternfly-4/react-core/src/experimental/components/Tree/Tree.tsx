@@ -5,6 +5,10 @@ export interface TreeProps extends React.HTMLProps<HTMLTableElement> {
   className?: string;
 }
 
+// TODO add basic expandable CSS
+// TODO figure out how to indent additional rows inside the expanded content (same table though!)
+// TODO what's the deal with tbody? only top-level containers?
+
 export const Tree: React.FunctionComponent<TreeProps> = ({ className = '', ...props }) => (
   <table className="pf-c-table pf-m-grid-lg" role="grid" {...props}>
     <thead>
