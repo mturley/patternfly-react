@@ -1,8 +1,12 @@
 import * as React from 'react';
-// import styles from '@patternfly/react-styles/css/components/FormControl/form-control';
+import styles from '@patternfly/react-styles/css/components/FileUpload/file-upload';
 import { css } from '@patternfly/react-styles';
 import { Omit, withInnerRef } from '../../helpers';
 import { ValidatedOptions } from '../../helpers/constants';
+import { InputGroup } from '../InputGroup';
+import { TextInput } from '../TextInput';
+import { Button, ButtonVariant } from '../Button';
+import { TextArea, TextAreResizeOrientation } from '../TextArea';
 
 // What is the main element (Not HTMLDivElement?) Should props be spread?
 export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
@@ -29,6 +33,11 @@ export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, '
   'aria-label'?: string; // TODO where does this go?
 }
 
+// TODO there should be a stateless presentational component and a stateful Dropzone component.
+// TODO make sure the Dropzone version is compatible with our minimum React version (no hooks)
+// TODO maybe call the stateless one "FileUploadField" and the stateful one "FileUpload"?
+//      or stateless "FileUpload" and stateful "StatefulFileUpload"?
+
 export class FileUpload extends React.Component<FileUploadProps> {
   static defaultProps: FileUploadProps = {
     'aria-label': null as string,
@@ -45,7 +54,7 @@ export class FileUpload extends React.Component<FileUploadProps> {
     super(props);
     if (!props.id && !props['aria-label'] && !props['aria-labelledby']) {
       // eslint-disable-next-line no-console
-      console.error('File upload:', 'File upload requires either an id or aria-label to be specified'); // TODO do we need this?
+      console.error('File upload:', 'File upload requires either an id or aria-label to be specified');
     }
   }
 
@@ -59,7 +68,6 @@ export class FileUpload extends React.Component<FileUploadProps> {
   render() {
     const {
       className,
-      type,
       value,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
@@ -68,27 +76,40 @@ export class FileUpload extends React.Component<FileUploadProps> {
       isReadOnly,
       isRequired,
       isDisabled,
-      ...props
+      ...props // TODO where do we spread these? form? textarea?
     } = this.props;
     return (
-      <div>
-        <h1>TODO: File upload component here</h1>
-      </div>
-      /* <input
-        {...props}
-        className={css(
-          //styles.formControl, // TODO
-          //validated === ValidatedOptions.success && styles.modifiers.success,  // TODO
-          className
-        )}
-        onChange={this.handleChange}
-        type={type}
-        value={value}
-        aria-invalid={!isValid || validated === ValidatedOptions.error}
-        required={isRequired}
-        disabled={isDisabled}
-        readOnly={isReadOnly}
-      /> */
+      <form className={css(styles.fileUpload, className)}>
+        <div className={styles.fileUploadInputGroup}>
+          <InputGroup>
+            <TextInput
+              isReadOnly
+              id="TODO-textinput-id" // TODO make this a prop? is it based on top-level id/name?
+              name="TODO-textinput-name" // TODO make this a prop? is it required? use id?
+              aria-label="Drag a file here or browse to upload" // TODO use placeholder, or 'Read only filename' after browse?
+              placeholder="Drag a file here or browse to upload" // TODO make this a prop
+              aria-describedby="TODO-browse-button-id" // TODO
+            />
+            <Button id="TODO-browse-button-id" variant={ButtonVariant.control}>
+              Browse... {/* TODO make this a prop for a11y */}
+            </Button>
+            <Button variant={ButtonVariant.control} isDisabled>
+              Clear {/* TODO make this a prop for a11y */}
+            </Button>
+          </InputGroup>
+        </div>
+        <div className={styles.fileUploadTextarea}>
+          <TextArea
+            resizeOrientation={TextAreResizeOrientation.vertical}
+            validated="default" // TODO handle validation, maybe pass this down from the top
+            id="TODO-textarea-id" // TODO make this a prop? is it based on top-level id/name?
+            name="TODO-textarea-name" // TODO make this a prop? is it based on top-level id/name?
+            aria-label="Text area" // TODO make this a prop?
+            readOnly // TODO maybe put an isReadOnly prop on TextArea, also make this a prop and base it on file upload state
+            value="Foo text contents here"
+          />
+        </div>
+      </form>
     );
   }
 }
