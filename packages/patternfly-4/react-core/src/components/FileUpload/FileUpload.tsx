@@ -13,24 +13,22 @@ export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, '
   /** Additional classes added to the FileUpload container. */
   className?: string;
   /** Flag to show if the input is disabled. */
-  isDisabled?: boolean; // TODO
+  isDisabled?: boolean;
   /** Flag to show if the input is read only. */
-  isReadOnly?: boolean; // TODO
+  isReadOnly?: boolean;
   /** Flag to show if the input is required. */
-  isRequired?: boolean; // TODO
-  /** Flag to show if the input is valid or invalid. This prop will be deprecated. You should use validated instead. */
-  isValid?: boolean; // TODO
+  isRequired?: boolean;
   /* Value to indicate if the input is modified to show that validation state.
    * If set to success, input will be modified to indicate valid state.
    * If set to error,  input will be modified to indicate error state.
    */
-  validated?: 'success' | 'error' | 'default'; // TODO ?
+  validated?: 'success' | 'error' | 'default';
   /** A callback for when the input value changes. */
   onChange?: (value: string, event: React.FormEvent<HTMLInputElement>) => void; // TODO, look at types
   /** Value of the input. */
-  value?: string | number; // TODO
+  value?: string | number; // TODO do we want to include filename in the value, or use two props?
   /** Aria-label. The input requires an associated id or aria-label. */
-  'aria-label'?: string; // TODO where does this go?
+  'aria-label'?: string;
   /** id attribute for the TextArea, also used to generate ids for accessible labels */
   id: string;
 }
@@ -43,23 +41,14 @@ export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, '
 export class FileUpload extends React.Component<FileUploadProps> {
   static defaultProps: FileUploadProps = {
     id: null as string,
-    'aria-label': null as string,
+    'aria-label': 'File contents' as string,
     className: '',
     isRequired: false,
-    isValid: true,
     validated: 'default' as 'success' | 'error' | 'default',
     isDisabled: false,
     isReadOnly: false,
     onChange: (): any => undefined
   };
-
-  constructor(props: FileUploadProps) {
-    super(props);
-    if (!props.id && !props['aria-label'] && !props['aria-labelledby']) {
-      // eslint-disable-next-line no-console
-      console.error('File upload:', 'File upload requires either an id or aria-label to be specified');
-    }
-  }
 
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     if (this.props.onChange) {
@@ -72,10 +61,10 @@ export class FileUpload extends React.Component<FileUploadProps> {
     const {
       className,
       id,
+      'aria-label': ariaLabel,
       value,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
-      isValid,
       validated,
       isReadOnly,
       isRequired,
@@ -87,7 +76,8 @@ export class FileUpload extends React.Component<FileUploadProps> {
         <div className={styles.fileUploadFileSelect}>
           <InputGroup>
             <TextInput
-              isReadOnly
+              isReadOnly // Always read-only regardless of isReadyOnly prop
+              isDisabled={isDisabled}
               id={`${id}-filename`}
               name={`${id}-filename`} // TODO make this a prop? is it required? use id?
               aria-label="Drag a file here or browse to upload" // TODO use placeholder, or 'Read only filename' after browse?
@@ -103,13 +93,15 @@ export class FileUpload extends React.Component<FileUploadProps> {
           </InputGroup>
         </div>
         <div className={styles.fileUploadFileDetails}>
-          <TextArea
+          <TextArea // TODO do we want to provide an alternate way to render something else for file contents?
+            readOnly={isReadOnly} // TODO how does this work with drop state stuff?
+            disabled={isDisabled}
+            isRequired={isRequired}
             resizeOrientation={TextAreResizeOrientation.vertical}
-            validated="default" // TODO handle validation, maybe pass this down from the top
+            validated={validated}
             id={id}
             name={id} // TODO make this a prop? is it based on top-level id/name?
-            aria-label="Text area" // TODO make this a prop?
-            readOnly // TODO maybe put an isReadOnly prop on TextArea, also make this a prop and base it on file upload state
+            aria-label={ariaLabel}
             value="Foo text contents here"
           />
         </div>
