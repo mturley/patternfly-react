@@ -31,6 +31,8 @@ export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, '
   value?: string | number; // TODO
   /** Aria-label. The input requires an associated id or aria-label. */
   'aria-label'?: string; // TODO where does this go?
+  /** id attribute for the TextArea, also used to generate ids for accessible labels */
+  id: string;
 }
 
 // TODO there should be a stateless presentational component and a stateful Dropzone component.
@@ -40,6 +42,7 @@ export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, '
 
 export class FileUpload extends React.Component<FileUploadProps> {
   static defaultProps: FileUploadProps = {
+    id: null as string,
     'aria-label': null as string,
     className: '',
     isRequired: false,
@@ -68,6 +71,7 @@ export class FileUpload extends React.Component<FileUploadProps> {
   render() {
     const {
       className,
+      id,
       value,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
@@ -80,17 +84,17 @@ export class FileUpload extends React.Component<FileUploadProps> {
     } = this.props;
     return (
       <form className={css(styles.fileUpload, className)}>
-        <div className={styles.fileUploadInputGroup}>
+        <div className={styles.fileUploadFileSelect}>
           <InputGroup>
             <TextInput
               isReadOnly
-              id="TODO-textinput-id" // TODO make this a prop? is it based on top-level id/name?
-              name="TODO-textinput-name" // TODO make this a prop? is it required? use id?
+              id={`${id}-filename`}
+              name={`${id}-filename`} // TODO make this a prop? is it required? use id?
               aria-label="Drag a file here or browse to upload" // TODO use placeholder, or 'Read only filename' after browse?
               placeholder="Drag a file here or browse to upload" // TODO make this a prop
-              aria-describedby="TODO-browse-button-id" // TODO
+              aria-describedby={`${id}-browse-button`} // TODO
             />
-            <Button id="TODO-browse-button-id" variant={ButtonVariant.control}>
+            <Button id={`${id}-browse-button`} variant={ButtonVariant.control}>
               Browse... {/* TODO make this a prop for a11y */}
             </Button>
             <Button variant={ButtonVariant.control} isDisabled>
@@ -98,12 +102,12 @@ export class FileUpload extends React.Component<FileUploadProps> {
             </Button>
           </InputGroup>
         </div>
-        <div className={styles.fileUploadTextarea}>
+        <div className={styles.fileUploadFileDetails}>
           <TextArea
             resizeOrientation={TextAreResizeOrientation.vertical}
             validated="default" // TODO handle validation, maybe pass this down from the top
-            id="TODO-textarea-id" // TODO make this a prop? is it based on top-level id/name?
-            name="TODO-textarea-name" // TODO make this a prop? is it based on top-level id/name?
+            id={id}
+            name={id} // TODO make this a prop? is it based on top-level id/name?
             aria-label="Text area" // TODO make this a prop?
             readOnly // TODO maybe put an isReadOnly prop on TextArea, also make this a prop and base it on file upload state
             value="Foo text contents here"
