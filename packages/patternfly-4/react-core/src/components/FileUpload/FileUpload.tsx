@@ -1,15 +1,13 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/FileUpload/file-upload';
 import { css } from '@patternfly/react-styles';
-import { Omit, withInnerRef } from '../../helpers';
-import { ValidatedOptions } from '../../helpers/constants';
+import { Omit } from '../../helpers';
 import { InputGroup } from '../InputGroup';
 import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 
-// What is the main element (Not HTMLDivElement?) Should props be spread?
-export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
+export interface FileUploadProps extends Omit<React.HTMLProps<HTMLFormElement>, 'onChange'> {
   /** Additional classes added to the FileUpload container. */
   className?: string;
   /** Flag to show if the input is disabled. */
@@ -25,18 +23,23 @@ export interface FileUploadProps extends Omit<React.HTMLProps<HTMLDivElement>, '
   validated?: 'success' | 'error' | 'default';
   /** A callback for when the input value changes. */
   onChange?: (value: string, event: React.FormEvent<HTMLInputElement>) => void; // TODO, look at types
-  /** Value of the input. */
-  value?: string | number; // TODO do we want to include filename in the value, or use two props?
+  /** Value to be shown in the read-only filename field */
+  filename?: string;
+  /** Value of the file's contents (TODO?) */
+  value?: string; // TODO should this support non-string (custom) values?
   /** Aria-label. The input requires an associated id or aria-label. */
   'aria-label'?: string;
   /** id attribute for the TextArea, also used to generate ids for accessible labels */
   id: string;
+  // TODO onBrowseButtonClick? should dropzone be a part of this? probably only in a wrapper
+  // TODO onClearButtonClick? just use onChange with empty value?
 }
 
-// TODO there should be a stateless presentational component and a stateful Dropzone component.
+// TODO there should be a presentational component and a Dropzone component.
 // TODO make sure the Dropzone version is compatible with our minimum React version (no hooks)
-// TODO maybe call the stateless one "FileUploadField" and the stateful one "FileUpload"?
-//      or stateless "FileUpload" and stateful "StatefulFileUpload"?
+// TODO maybe call the presentational one "FileUploadField" and the Dropzone one "FileUpload"?
+//      this should be FileUploadField, and should take an onBrowseButtonClick button and drag/drop state props etc.
+//      FileUpload should be a thin wrapper which adds Dropzone to define the onBrowseButtonClick etc.
 
 export class FileUpload extends React.Component<FileUploadProps> {
   static defaultProps: FileUploadProps = {
@@ -52,7 +55,7 @@ export class FileUpload extends React.Component<FileUploadProps> {
 
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     if (this.props.onChange) {
-      // TODO specifically the value of the textarea body
+      // TODO specifically the value of the textarea body? include filename?
       this.props.onChange(event.currentTarget.value, event);
     }
   };
@@ -62,27 +65,29 @@ export class FileUpload extends React.Component<FileUploadProps> {
       className,
       id,
       'aria-label': ariaLabel,
+      filename,
       value,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onChange,
+      onChange, // TODO actually call onChange!
       validated,
       isReadOnly,
       isRequired,
       isDisabled,
-      ...props // TODO where do we spread these? form? textarea?
+      ...props
     } = this.props;
     return (
-      <form className={css(styles.fileUpload, className)}>
+      <form className={css(styles.fileUpload, className)} {...props}>
         <div className={styles.fileUploadFileSelect}>
           <InputGroup>
             <TextInput
-              isReadOnly // Always read-only regardless of isReadyOnly prop
+              isReadOnly // Always read-only regardless of isReadyOnly prop (that prop is for the TextArea)
               isDisabled={isDisabled}
               id={`${id}-filename`}
               name={`${id}-filename`} // TODO make this a prop? is it required? use id?
-              aria-label="Drag a file here or browse to upload" // TODO use placeholder, or 'Read only filename' after browse?
-              placeholder="Drag a file here or browse to upload" // TODO make this a prop
-              aria-describedby={`${id}-browse-button`} // TODO
+              aria-label={filename ? 'Read only filename' : 'Drag a file here or browse to upload'} // TODO make this a prop for a11y
+              placeholder="Drag a file here or browse to upload" // TODO make this a prop for a11y
+              aria-describedby={`${id}-browse-button`}
+              value={filename}
             />
             <Button id={`${id}-browse-button`} variant={ButtonVariant.control}>
               Browse... {/* TODO make this a prop for a11y */}
@@ -102,7 +107,7 @@ export class FileUpload extends React.Component<FileUploadProps> {
             id={id}
             name={id} // TODO make this a prop? is it based on top-level id/name?
             aria-label={ariaLabel}
-            value="Foo text contents here"
+            value={value}
           />
         </div>
       </form>
