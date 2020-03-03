@@ -7,7 +7,7 @@ import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 
-export interface FileUploadProps extends Omit<React.HTMLProps<HTMLFormElement>, 'onChange'> {
+export interface BaseFileUploadProps extends Omit<React.HTMLProps<HTMLFormElement>, 'onChange'> {
   /** Additional classes added to the FileUpload container. */
   className?: string;
   /** Flag to show if the input is disabled. */
@@ -41,8 +41,8 @@ export interface FileUploadProps extends Omit<React.HTMLProps<HTMLFormElement>, 
 //      this should be FileUploadField, and should take an onBrowseButtonClick button and drag/drop state props etc.
 //      FileUpload should be a thin wrapper which adds Dropzone to define the onBrowseButtonClick etc.
 
-export class FileUpload extends React.Component<FileUploadProps> {
-  static defaultProps: FileUploadProps = {
+export class BaseFileUpload extends React.Component<BaseFileUploadProps> {
+  static defaultProps: BaseFileUploadProps = {
     id: null as string,
     'aria-label': 'File contents' as string,
     className: '',
@@ -80,10 +80,10 @@ export class FileUpload extends React.Component<FileUploadProps> {
         <div className={styles.fileUploadFileSelect}>
           <InputGroup>
             <TextInput
-              isReadOnly // Always read-only regardless of isReadyOnly prop (that prop is for the TextArea)
+              isReadOnly // Always read-only regardless of isReadOnly prop (which is just for the TextArea)
               isDisabled={isDisabled}
               id={`${id}-filename`}
-              name={`${id}-filename`} // TODO make this a prop? is it required? use id?
+              name={`${id}-filename`} // TODO make this a prop? is it required?
               aria-label={filename ? 'Read only filename' : 'Drag a file here or browse to upload'} // TODO make this a prop for a11y
               placeholder="Drag a file here or browse to upload" // TODO make this a prop for a11y
               aria-describedby={`${id}-browse-button`}
