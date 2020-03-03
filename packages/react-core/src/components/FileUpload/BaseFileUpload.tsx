@@ -3,7 +3,7 @@ import styles from '@patternfly/react-styles/css/components/FileUpload/file-uplo
 import { css } from '@patternfly/react-styles';
 import { Omit } from '../../helpers';
 import { InputGroup } from '../InputGroup';
-import { TextInput } from '../TextInput';
+import { TextInput, TextInputProps } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 
@@ -27,6 +27,8 @@ export interface BaseFileUploadProps extends Omit<React.HTMLProps<HTMLFormElemen
   filename?: string;
   /** Value of the file's contents (TODO?) */
   value?: string; // TODO should this support non-string (custom) values?
+  /** Props to pass to the filename TextInput */
+  inputProps?: Omit<TextInputProps, 'ref'>;
   /** Aria-label. The input requires an associated id or aria-label. */
   'aria-label'?: string;
   /** id attribute for the TextArea, also used to generate ids for accessible labels */
@@ -50,7 +52,8 @@ export class BaseFileUpload extends React.Component<BaseFileUploadProps> {
     validated: 'default' as 'success' | 'error' | 'default',
     isDisabled: false,
     isReadOnly: false,
-    onChange: (): any => undefined
+    onChange: (): any => undefined,
+    inputProps: {}
   };
 
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -73,6 +76,7 @@ export class BaseFileUpload extends React.Component<BaseFileUploadProps> {
       isReadOnly,
       isRequired,
       isDisabled,
+      inputProps,
       ...props
     } = this.props;
     return (
@@ -88,6 +92,7 @@ export class BaseFileUpload extends React.Component<BaseFileUploadProps> {
               placeholder="Drag a file here or browse to upload" // TODO make this a prop for a11y
               aria-describedby={`${id}-browse-button`}
               value={filename}
+              {...inputProps}
             />
             <Button id={`${id}-browse-button`} variant={ButtonVariant.control}>
               Browse... {/* TODO make this a prop for a11y */}
