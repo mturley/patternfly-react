@@ -36,6 +36,14 @@ export interface FileUploadProps
   validated?: 'success' | 'error' | 'default';
   /** Aria-label for the TextArea. */
   'aria-label'?: string;
+  /** Placeholder string to display in the empty filename field */
+  filenamePlaceholder?: string;
+  /** Aria-label for the read-only filename field */
+  filenameAriaLabel?: string;
+  /** Text for the Browse button */
+  browseButtonText?: string;
+  /** Text for the Clear button */
+  clearButtonText?: string;
   /** Flag to hide the TextArea. */
   hideTextArea?: boolean;
   /** Optional extra props to customize react-dropzone. */

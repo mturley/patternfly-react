@@ -37,6 +37,14 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   validated?: 'success' | 'error' | 'default';
   /** Aria-label for the TextArea. */
   'aria-label'?: string;
+  /** Placeholder string to display in the empty filename field */
+  filenamePlaceholder?: string;
+  /** Aria-label for the read-only filename field */
+  filenameAriaLabel?: string;
+  /** Text for the Browse button */
+  browseButtonText?: string;
+  /** Text for the Clear button */
+  clearButtonText?: string;
   /** Flag to hide the TextArea. Use with children to add custom support for non-text files. */
   hideTextArea?: boolean;
   /** Additional children to render after (or instead of) the TextArea. */
@@ -61,7 +69,11 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   isRequired = false,
   isDragActive = false,
   validated = 'default' as 'success' | 'error' | 'default',
-  'aria-label': ariaLabel = 'File contents',
+  'aria-label': ariaLabel = 'File upload',
+  filenamePlaceholder = 'Drag a file here or browse to upload',
+  filenameAriaLabel = filename ? 'Read only filename' : filenamePlaceholder,
+  browseButtonText = 'Browse...',
+  clearButtonText = 'Clear',
   containerRef = null as React.Ref<any>,
   children = null,
   hideTextArea = false,
@@ -88,16 +100,16 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             isDisabled={isDisabled}
             id={`${id}-filename`}
             name={`${id}-filename`}
-            aria-label={filename ? 'Read only filename' : 'Drag a file here or browse to upload'} // TODO make this a prop for a11y
-            placeholder="Drag a file here or browse to upload" // TODO make this a prop for a11y
+            aria-label={filenameAriaLabel}
+            placeholder={filenamePlaceholder}
             aria-describedby={`${id}-browse-button`}
             value={filename}
           />
           <Button id={`${id}-browse-button`} variant={ButtonVariant.control} onClick={onBrowseButtonClick}>
-            Browse... {/* TODO make this a prop for a11y */}
+            {browseButtonText}
           </Button>
           <Button variant={ButtonVariant.control} isDisabled={!value} onClick={onClearButtonClick}>
-            Clear {/* TODO make this a prop for a11y */}
+            {clearButtonText}
           </Button>
         </InputGroup>
       </div>
@@ -110,7 +122,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             resizeOrientation={TextAreResizeOrientation.vertical}
             validated={validated}
             id={id}
-            name={id} // TODO make this a prop? is it based on top-level id/name?
+            name={id}
             aria-label={ariaLabel}
             value={value}
             onChange={onTextAreaChange}
