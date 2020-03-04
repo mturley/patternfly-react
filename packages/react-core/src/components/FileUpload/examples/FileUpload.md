@@ -11,6 +11,8 @@ import { FileUpload } from '@patternfly/react-core';
 
 ## Examples
 
+The basic `FileUpload` component can handle simple text files. It uses the `react-dropzone` library to provide the file browse dialog and drag/drop behavior. Any props accepted by `react-dropzone` can be passed as a `dropzoneProps` object in order to customize the behavior of the Dropzone.
+
 ```js title=Basic isBeta
 import React from 'react';
 import { FileUpload } from '@patternfly/react-core';
@@ -30,3 +32,5 @@ class SimpleFileUpload extends React.Component {
   }
 }
 ```
+
+`FileUpload` is a thin wrapper around the `FileUploadField` presentational component. If you need to implement your own logic for reading or displaying a file, you can instead render a `FileUploadField` directly, which requires additional props (you must implement your own `onBrowseButtonClick` handler, etc).
