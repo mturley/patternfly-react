@@ -16,8 +16,14 @@ export class FileUpload extends React.Component<FileUploadProps> {
     const { id, ...props } = this.props;
     return (
       <Dropzone onDrop={this.onDrop}>
-        {({ getRootProps, getInputProps, isDragActive }) => (
-          <FileUploadField id={id} {...getRootProps({ ...props, inputProps: getInputProps(), isDragActive })} />
+        {({ getRootProps, getInputProps, isDragActive, open }) => (
+          <FileUploadField
+            {...getRootProps({ ...props, isDragActive, onClick: evt => evt.preventDefault() })}
+            id={id}
+            onBrowseButtonClick={open}
+          >
+            <input {...getInputProps()} /* hidden, necessary for react-dropzone */ />
+          </FileUploadField>
         )}
       </Dropzone>
     );

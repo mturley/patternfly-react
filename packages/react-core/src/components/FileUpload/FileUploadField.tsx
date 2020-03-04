@@ -16,6 +16,8 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   isReadOnly?: boolean;
   /** Flag to show if the field is required. */
   isRequired?: boolean;
+  /** Flag to show styles while a file is actively being dragged over the field */
+  isDragActive?: boolean;
   /* Value to indicate if the field is modified to show that validation state.
    * If set to success, field will be modified to indicate valid state.
    * If set to error,  field will be modified to indicate error state.
@@ -27,26 +29,17 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   filename?: string;
   /** Value of the file's contents (TODO?) */
   value?: string; // TODO should this support non-string (custom) values?
-  /** Props to pass to the filename TextInput */
-  inputProps?: Omit<TextInputProps, 'ref'>;
   /** Aria-label. The field requires an associated id or aria-label. */
   'aria-label'?: string;
   /** id attribute for the TextArea, also used to generate ids for accessible labels */
   id: string;
   /** A reference object to attach to the <form> container element. */
   innerRef?: React.Ref<any>;
-  /** Flag to show styles while a file is actively being dragged over the field */
-  isDragActive?: boolean;
-  
-  // TODO onBrowseButtonClick? should dropzone be a part of this? probably only in a wrapper
+  /** Additional children to render inside the <form> container element. */
+  children?: React.ReactNode;
+  onBrowseButtonClick: (event: React.MouseEvent) => void;
   // TODO onClearButtonClick? just use onChange with empty value?
 }
-
-// TODO there should be a presentational component and a Dropzone component.
-// TODO make sure the Dropzone version is compatible with our minimum React version (no hooks)
-// TODO maybe call the presentational one "FileUploadField" and the Dropzone one "FileUpload"?
-//      this should be FileUploadField, and should take an onBrowseButtonClick button and drag/drop state props etc.
-//      FileUpload should be a thin wrapper which adds Dropzone to define the onBrowseButtonClick etc.
 
 class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
   static defaultProps: FileUploadFieldProps = {
@@ -58,7 +51,8 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
     isDisabled: false,
     isReadOnly: false,
     onChange: (): any => undefined,
-    inputProps: {}
+    children: null,
+    onBrowseButtonClick: (): any => undefined
   };
 
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -80,12 +74,19 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
       validated,
       isReadOnly,
       isRequired,
+      isDragActive,
       isDisabled,
-      inputProps,
+      innerRef,
+      children,
+      onBrowseButtonClick,
       ...props
     } = this.props;
     return (
-      <form className={css(styles.fileUpload, className)} {...props}>
+      <form
+        className={css(styles.fileUpload, isDragActive && styles.modifiers.dragHover, className)}
+        ref={innerRef}
+        {...props}
+      >
         <div className={styles.fileUploadFileSelect}>
           <InputGroup>
             <TextInput
@@ -97,9 +98,8 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
               placeholder="Drag a file here or browse to upload" // TODO make this a prop for a11y
               aria-describedby={`${id}-browse-button`}
               value={filename}
-              {...inputProps}
             />
-            <Button id={`${id}-browse-button`} variant={ButtonVariant.control}>
+            <Button id={`${id}-browse-button`} variant={ButtonVariant.control} onClick={onBrowseButtonClick}>
               Browse... {/* TODO make this a prop for a11y */}
             </Button>
             <Button variant={ButtonVariant.control} isDisabled>
@@ -120,6 +120,7 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
             value={value}
           />
         </div>
+        {children}
       </form>
     );
   }
