@@ -1,24 +1,56 @@
 import * as React from 'react';
 import Dropzone, { DropzoneProps } from 'react-dropzone';
+import { Omit } from '../../helpers';
 import { FileUploadField, FileUploadFieldProps } from './FileUploadField';
 import { readTextFile } from '../../helpers/fileUtils';
 
-export interface FileUploadProps extends FileUploadFieldProps {
-  /** Optional extra props to customize react-dropzone */
+export interface FileUploadProps
+  extends Omit<FileUploadFieldProps, 'onBrowseButtonClick' | 'isDragActive' | 'containerRef' | 'children'> {
+  /** Unique id for the TextArea, also used to generate ids for accessible labels. */
+  id: string;
+  /** Value of the file's contents. */
+  value?: string;
+  /** Value to be shown in the read-only filename field. */
+  filename?: string;
+  /** A callback for when the file contents change. */
+  onChange?: (
+    value: string,
+    filename: string,
+    event:
+      | React.DragEvent<HTMLElement> // User dragged/dropped a file
+      | React.ChangeEvent<HTMLTextAreaElement> // User typed in the TextArea
+      | React.MouseEvent<HTMLButtonElement, MouseEvent> // User clicked Clear button
+  ) => void;
+  /** Additional classes added to the FileUpload container element. */
+  className?: string;
+  /** Flag to show if the field is disabled. */
+  isDisabled?: boolean;
+  /** Flag to show if the field is read only. */
+  isReadOnly?: boolean;
+  /** Flag to show if the field is required. */
+  isRequired?: boolean;
+  /* Value to indicate if the field is modified to show that validation state.
+   * If set to success, field will be modified to indicate valid state.
+   * If set to error,  field will be modified to indicate error state.
+   */
+  validated?: 'success' | 'error' | 'default';
+  /** Aria-label for the TextArea. */
+  'aria-label'?: string;
+  /** Flag to hide the TextArea. */
+  hideTextArea?: boolean;
+  /** Optional extra props to customize react-dropzone. */
   dropzoneProps?: DropzoneProps;
-  // TODO specify props explicitly here
 }
 
-export class FileUpload extends React.Component<FileUploadProps> {
-  static defaultProps: FileUploadProps = {
-    dropzoneProps: {},
-    id: null as string,
-    onChange: (): any => undefined,
-    onBrowseButtonClick: (): any => undefined
-  };
-
-  onDropAccepted = async (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
-    const { onChange, dropzoneProps } = this.props;
+export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
+  id,
+  value = '',
+  filename = '',
+  onChange = (): any => undefined,
+  dropzoneProps = {},
+  ...props
+}: FileUploadProps) => {
+  const onDropAccepted = async (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
     if (acceptedFiles.length > 0) {
       const result = (await readTextFile(acceptedFiles[0])) as string;
       onChange(result, acceptedFiles[0].name, event);
@@ -26,35 +58,30 @@ export class FileUpload extends React.Component<FileUploadProps> {
     dropzoneProps.onDropAccepted && dropzoneProps.onDropAccepted(acceptedFiles, event);
   };
 
-  onDropRejected = (rejectedFiles: File[], event: React.DragEvent<HTMLElement>) => {
-    const { onChange, dropzoneProps } = this.props;
+  const onDropRejected = (rejectedFiles: File[], event: React.DragEvent<HTMLElement>) => {
     onChange('', '', event);
     dropzoneProps.onDropRejected && dropzoneProps.onDropRejected(rejectedFiles, event);
   };
 
-  render() {
-    const { id, dropzoneProps, filename, value, onChange, isReadOnly, ...props } = this.props;
-    return (
-      <Dropzone multiple={false} {...dropzoneProps} onDropAccepted={this.onDropAccepted}>
-        {({ getRootProps, getInputProps, isDragActive, open }) => (
-          <FileUploadField
-            {...getRootProps({
-              ...props,
-              refKey: 'containerRef',
-              onClick: event => event.preventDefault() // Prevents clicking TextArea from opening file dialog
-            })}
-            id={id}
-            filename={filename}
-            value={value}
-            onChange={onChange}
-            isReadOnly={isReadOnly || !!filename} // A truthy filename means a real file, so no editing
-            isDragActive={isDragActive}
-            onBrowseButtonClick={open}
-          >
-            <input {...getInputProps()} /* hidden, necessary for react-dropzone */ />
-          </FileUploadField>
-        )}
-      </Dropzone>
-    );
-  }
-}
+  return (
+    <Dropzone multiple={false} {...dropzoneProps} onDropAccepted={onDropAccepted} onDropRejected={onDropRejected}>
+      {({ getRootProps, getInputProps, isDragActive, open }) => (
+        <FileUploadField
+          {...getRootProps({
+            ...props,
+            refKey: 'containerRef',
+            onClick: event => event.preventDefault() // Prevents clicking TextArea from opening file dialog
+          })}
+          id={id}
+          filename={filename}
+          value={value}
+          onChange={onChange}
+          isDragActive={isDragActive}
+          onBrowseButtonClick={open}
+        >
+          <input {...getInputProps()} /* hidden, necessary for react-dropzone */ />
+        </FileUploadField>
+      )}
+    </Dropzone>
+  );
+};
