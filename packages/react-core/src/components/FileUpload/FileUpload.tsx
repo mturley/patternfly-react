@@ -6,6 +6,7 @@ import { readTextFile } from '../../helpers/fileUtils';
 export interface FileUploadProps extends FileUploadFieldProps {
   /** Optional extra props to customize react-dropzone */
   dropzoneProps?: DropzoneProps;
+  // TODO specify props explicitly here
 }
 
 export class FileUpload extends React.Component<FileUploadProps> {
@@ -37,7 +38,11 @@ export class FileUpload extends React.Component<FileUploadProps> {
       <Dropzone multiple={false} {...dropzoneProps} onDropAccepted={this.onDropAccepted}>
         {({ getRootProps, getInputProps, isDragActive, open }) => (
           <FileUploadField
-            {...getRootProps({ ...props, onClick: evt => evt.preventDefault() })}
+            {...getRootProps({
+              ...props,
+              refKey: 'containerRef',
+              onClick: event => event.preventDefault() // Prevents clicking TextArea from opening file dialog
+            })}
             id={id}
             filename={filename}
             value={value}

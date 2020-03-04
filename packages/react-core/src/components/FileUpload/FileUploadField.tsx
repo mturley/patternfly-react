@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/FileUpload/file-upload';
 import { css } from '@patternfly/react-styles';
-import { Omit, withInnerRef } from '../../helpers';
+import { Omit } from '../../helpers';
 import { InputGroup } from '../InputGroup';
 import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
@@ -41,7 +41,7 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   /** id attribute for the TextArea, also used to generate ids for accessible labels */
   id: string;
   /** A reference object to attach to the <form> container element. */
-  innerRef?: React.Ref<any>;
+  containerRef?: React.Ref<any>;
   /** Additional children to render after (or instead of) the TextArea. */
   children?: React.ReactNode;
   /** Flag to hide the TextArea. Use with children to add custom support for non-text files. */
@@ -50,7 +50,7 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   // TODO onClearButtonClick? just use onChange with empty value?
 }
 
-class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
+export class FileUploadField extends React.Component<FileUploadFieldProps> {
   static defaultProps: FileUploadFieldProps = {
     id: null as string,
     'aria-label': 'File contents' as string,
@@ -88,7 +88,7 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
       isRequired,
       isDragActive,
       isDisabled,
-      innerRef,
+      containerRef,
       children,
       hideTextArea,
       onBrowseButtonClick,
@@ -97,7 +97,7 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
     return (
       <form
         className={css(styles.fileUpload, isDragActive && styles.modifiers.dragHover, className)}
-        ref={innerRef}
+        ref={containerRef}
         {...props}
       >
         <div className={styles.fileUploadFileSelect}>
@@ -141,7 +141,3 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
     );
   }
 }
-
-// TODO maybe we don't need withInnerRef if we use the refKey option in react-dropzone?
-const FileUploadFieldFR = withInnerRef<HTMLFormElement, FileUploadFieldProps>(FileUploadFieldBase);
-export { FileUploadFieldFR as FileUploadField, FileUploadFieldBase };
