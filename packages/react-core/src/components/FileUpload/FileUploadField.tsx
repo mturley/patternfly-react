@@ -1,38 +1,43 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/FileUpload/file-upload';
 import { css } from '@patternfly/react-styles';
-import { Omit } from '../../helpers';
+import { Omit, withInnerRef } from '../../helpers';
 import { InputGroup } from '../InputGroup';
 import { TextInput, TextInputProps } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 
-export interface BaseFileUploadProps extends Omit<React.HTMLProps<HTMLFormElement>, 'onChange'> {
+export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormElement>, 'onChange'> {
   /** Additional classes added to the FileUpload container. */
   className?: string;
-  /** Flag to show if the input is disabled. */
+  /** Flag to show if the field is disabled. */
   isDisabled?: boolean;
-  /** Flag to show if the input is read only. */
+  /** Flag to show if the field is read only. */
   isReadOnly?: boolean;
-  /** Flag to show if the input is required. */
+  /** Flag to show if the field is required. */
   isRequired?: boolean;
-  /* Value to indicate if the input is modified to show that validation state.
-   * If set to success, input will be modified to indicate valid state.
-   * If set to error,  input will be modified to indicate error state.
+  /* Value to indicate if the field is modified to show that validation state.
+   * If set to success, field will be modified to indicate valid state.
+   * If set to error,  field will be modified to indicate error state.
    */
   validated?: 'success' | 'error' | 'default';
-  /** A callback for when the input value changes. */
-  onChange?: (value: string, event: React.FormEvent<HTMLInputElement>) => void; // TODO, look at types
+  /** A callback for when the field value changes. */
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void; // TODO, look at types
   /** Value to be shown in the read-only filename field */
   filename?: string;
   /** Value of the file's contents (TODO?) */
   value?: string; // TODO should this support non-string (custom) values?
   /** Props to pass to the filename TextInput */
   inputProps?: Omit<TextInputProps, 'ref'>;
-  /** Aria-label. The input requires an associated id or aria-label. */
+  /** Aria-label. The field requires an associated id or aria-label. */
   'aria-label'?: string;
   /** id attribute for the TextArea, also used to generate ids for accessible labels */
   id: string;
+  /** A reference object to attach to the <form> container element. */
+  innerRef?: React.Ref<any>;
+  /** Flag to show styles while a file is actively being dragged over the field */
+  isDragActive?: boolean;
+  
   // TODO onBrowseButtonClick? should dropzone be a part of this? probably only in a wrapper
   // TODO onClearButtonClick? just use onChange with empty value?
 }
@@ -43,8 +48,8 @@ export interface BaseFileUploadProps extends Omit<React.HTMLProps<HTMLFormElemen
 //      this should be FileUploadField, and should take an onBrowseButtonClick button and drag/drop state props etc.
 //      FileUpload should be a thin wrapper which adds Dropzone to define the onBrowseButtonClick etc.
 
-export class BaseFileUpload extends React.Component<BaseFileUploadProps> {
-  static defaultProps: BaseFileUploadProps = {
+class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
+  static defaultProps: FileUploadFieldProps = {
     id: null as string,
     'aria-label': 'File contents' as string,
     className: '',
@@ -59,7 +64,7 @@ export class BaseFileUpload extends React.Component<BaseFileUploadProps> {
   handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     if (this.props.onChange) {
       // TODO specifically the value of the textarea body? include filename?
-      this.props.onChange(event.currentTarget.value, event);
+      // this.props.onChange(event.currentTarget.value, event);
     }
   };
 
@@ -119,3 +124,6 @@ export class BaseFileUpload extends React.Component<BaseFileUploadProps> {
     );
   }
 }
+
+const FileUploadFieldFR = withInnerRef<HTMLFormElement, FileUploadFieldProps>(FileUploadFieldBase);
+export { FileUploadFieldFR as FileUploadField, FileUploadFieldBase };

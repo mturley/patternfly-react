@@ -1,2 +1,2 @@
-export * from './BaseFileUpload';
+export * from './FileUploadField';
 export * from './FileUpload';
