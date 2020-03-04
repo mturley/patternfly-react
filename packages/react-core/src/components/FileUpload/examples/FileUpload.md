@@ -2,7 +2,7 @@
 title: 'File upload'
 cssPrefix: 'pf-c-file-upload'
 typescript: true
-propComponents: ['FileUpload']
+propComponents: ['FileUpload', 'FileUploadField']
 section: 'components'
 beta: true
 ---
@@ -16,18 +16,17 @@ import React from 'react';
 import { FileUpload } from '@patternfly/react-core';
 
 class SimpleFileUpload extends React.Component {
-  /* constructor(props) {
+  constructor(props) {
     super(props);
-    this.state = {
-      value: ''
+    this.state = { value: '', filename: '' };
+    this.handleFileChange = (value, filename, event) => {
+      this.setState({ value, filename });
     };
-    this.handleTextInputChange = value => {
-      this.setState({ value });
-    };
-  } */
+  }
 
   render() {
-    return <FileUpload />;
+    const { value, filename } = this.state;
+    return <FileUpload value={value} filename={filename} onChange={this.handleFileChange} />;
   }
 }
 ```

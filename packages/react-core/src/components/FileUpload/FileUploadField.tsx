@@ -3,7 +3,7 @@ import styles from '@patternfly/react-styles/css/components/FileUpload/file-uplo
 import { css } from '@patternfly/react-styles';
 import { Omit, withInnerRef } from '../../helpers';
 import { InputGroup } from '../InputGroup';
-import { TextInput, TextInputProps } from '../TextInput';
+import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 
@@ -24,7 +24,14 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
    */
   validated?: 'success' | 'error' | 'default';
   /** A callback for when the field value changes. */
-  onChange?: (event: React.FormEvent<HTMLInputElement>) => void; // TODO, look at types
+  onChange?: (
+    value: string,
+    filename: string,
+    event:
+      | React.DragEvent<HTMLElement> // User dragged/dropped a file
+      | React.ChangeEvent<HTMLTextAreaElement> // User typed in the TextArea
+      | React.MouseEvent<HTMLButtonElement, MouseEvent> // User clicked Clear button
+  ) => void;
   /** Value to be shown in the read-only filename field */
   filename?: string;
   /** Value of the file's contents (TODO?) */
@@ -35,8 +42,10 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   id: string;
   /** A reference object to attach to the <form> container element. */
   innerRef?: React.Ref<any>;
-  /** Additional children to render inside the <form> container element. */
+  /** Additional children to render after (or instead of) the TextArea. */
   children?: React.ReactNode;
+  /** Flag to hide the TextArea. Use with children to add custom support for non-text files. */
+  hideTextArea?: boolean;
   onBrowseButtonClick: (event: React.MouseEvent) => void;
   // TODO onClearButtonClick? just use onChange with empty value?
 }
@@ -52,14 +61,17 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
     isReadOnly: false,
     onChange: (): any => undefined,
     children: null,
+    hideTextArea: false,
     onBrowseButtonClick: (): any => undefined
   };
 
-  handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    if (this.props.onChange) {
-      // TODO specifically the value of the textarea body? include filename?
-      // this.props.onChange(event.currentTarget.value, event);
-    }
+  handleChange = (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { filename, onChange } = this.props;
+    onChange(value, filename, event);
+  };
+
+  clear = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    this.props.onChange('', '', event);
   };
 
   render() {
@@ -70,7 +82,7 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
       filename,
       value,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onChange, // TODO actually call onChange!
+      onChange,
       validated,
       isReadOnly,
       isRequired,
@@ -78,6 +90,7 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
       isDisabled,
       innerRef,
       children,
+      hideTextArea,
       onBrowseButtonClick,
       ...props
     } = this.props;
@@ -102,29 +115,33 @@ class FileUploadFieldBase extends React.Component<FileUploadFieldProps> {
             <Button id={`${id}-browse-button`} variant={ButtonVariant.control} onClick={onBrowseButtonClick}>
               Browse... {/* TODO make this a prop for a11y */}
             </Button>
-            <Button variant={ButtonVariant.control} isDisabled>
+            <Button variant={ButtonVariant.control} isDisabled={!value} onClick={this.clear}>
               Clear {/* TODO make this a prop for a11y */}
             </Button>
           </InputGroup>
         </div>
         <div className={styles.fileUploadFileDetails}>
-          <TextArea // TODO do we want to provide an alternate way to render something else for file contents?
-            readOnly={isReadOnly} // TODO how does this work with drop state stuff?
-            disabled={isDisabled}
-            isRequired={isRequired}
-            resizeOrientation={TextAreResizeOrientation.vertical}
-            validated={validated}
-            id={id}
-            name={id} // TODO make this a prop? is it based on top-level id/name?
-            aria-label={ariaLabel}
-            value={value}
-          />
+          {!hideTextArea && (
+            <TextArea
+              readOnly={isReadOnly}
+              disabled={isDisabled}
+              isRequired={isRequired}
+              resizeOrientation={TextAreResizeOrientation.vertical}
+              validated={validated}
+              id={id}
+              name={id} // TODO make this a prop? is it based on top-level id/name?
+              aria-label={ariaLabel}
+              value={value}
+              onChange={this.handleChange}
+            />
+          )}
+          {children}
         </div>
-        {children}
       </form>
     );
   }
 }
 
+// TODO maybe we don't need withInnerRef if we use the refKey option in react-dropzone?
 const FileUploadFieldFR = withInnerRef<HTMLFormElement, FileUploadFieldProps>(FileUploadFieldBase);
 export { FileUploadFieldFR as FileUploadField, FileUploadFieldBase };
