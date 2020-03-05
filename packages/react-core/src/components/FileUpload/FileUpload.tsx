@@ -53,12 +53,14 @@ export interface FileUploadProps
   clearButtonText?: string;
   /** Flag to hide the TextArea. */
   hideTextArea?: boolean;
+  /** A callback for when a selected file starts loading */
+  onReadStarted?: (fileHandle: File) => void;
+  /** A callback for when a selected file finishes loading */
+  onReadFinished?: (fileHandle: File) => void;
   /** Optional extra props to customize react-dropzone. */
   dropzoneProps?: DropzoneProps;
 }
 
-// TODO handle the loading spinner case, and any other style cases I didn't get to yet
-// TODO the loading spinner will either require state (convert back to a class) or callbacks to keep that state in the examples
 // TODO handle an optional message for errors without using FieldGroup
 
 export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
@@ -66,13 +68,19 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   value = '',
   filename = '',
   onChange = (): any => undefined,
+  onReadStarted = (): any => undefined,
+  onReadFinished = (): any => undefined,
   dropzoneProps = {},
   ...props
 }: FileUploadProps) => {
   const onDropAccepted = async (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
     if (acceptedFiles.length > 0) {
-      const result = (await readTextFile(acceptedFiles[0])) as string;
-      onChange(result, acceptedFiles[0].name, event);
+      const fileHandle = acceptedFiles[0];
+      onChange('', fileHandle.name, event);
+      onReadStarted(fileHandle);
+      const result = (await readTextFile(fileHandle)) as string;
+      onReadFinished(fileHandle);
+      onChange(result, fileHandle.name, event);
     }
     dropzoneProps.onDropAccepted && dropzoneProps.onDropAccepted(acceptedFiles, event);
   };

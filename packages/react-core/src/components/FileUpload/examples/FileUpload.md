@@ -20,15 +20,24 @@ import { FileUpload } from '@patternfly/react-core';
 class SimpleTextFileUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', filename: '' };
-    this.handleFileChange = (value, filename, event) => {
-      this.setState({ value, filename });
-    };
+    this.state = { value: '', filename: '', isLoading: false };
+    this.handleFileChange = (value, filename, event) => this.setState({ value, filename });
+    this.handleFileReadStarted = fileHandle => this.setState({ isLoading: true });
+    this.handleFileReadFinished = fileHandle => this.setState({ isLoading: false });
   }
 
   render() {
     const { value, filename } = this.state;
-    return <FileUpload id="simple-text-file" value={value} filename={filename} onChange={this.handleFileChange} />;
+    return (
+      <FileUpload
+        id="simple-text-file"
+        value={value}
+        filename={filename}
+        onChange={this.handleFileChange}
+        onReadStarted={this.handleFileReadStarted}
+        onReadFinished={this.handleFileReadFinished}
+      />
+    );
   }
 }
 ```
@@ -42,36 +51,38 @@ import { FileUpload, Form, FormGroup } from '@patternfly/react-core';
 class SimpleTextFileUploadWithRestrictions extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', filename: '', rejected: false };
+    this.state = { value: '', filename: '', isLoading: false, isRejected: false };
     this.handleFileChange = (value, filename, event) => {
-      this.setState({ value, filename, rejected: false });
+      this.setState({ value, filename, isRejected: false });
     };
-    this.handleFileRejected = (rejectedFiles, event) => {
-      this.setState({ rejected: true });
-    };
+    this.handleFileRejected = (rejectedFiles, event) => this.setState({ isRejected: true });
+    this.handleFileReadStarted = fileHandle => this.setState({ isLoading: true });
+    this.handleFileReadFinished = fileHandle => this.setState({ isLoading: false });
   }
 
   render() {
-    const { value, filename, rejected } = this.state;
+    const { value, filename, isRejected } = this.state;
     return (
       <Form>
         <FormGroup
           fieldId="simple-text-file-with-restrictions"
           helperText="Upload a CSV file"
           helperTextInvalid="Must be a CSV file no larger than 1 KB"
-          validated={rejected ? 'error' : 'default'}
+          validated={isRejected ? 'error' : 'default'}
         >
           <FileUpload
             id="simple-text-file-with-restrictions"
             value={value}
             filename={filename}
             onChange={this.handleFileChange}
+            onReadStarted={this.handleFileReadStarted}
+            onReadFinished={this.handleFileReadFinished}
             dropzoneProps={{
               accept: '.csv',
               maxSize: 1024,
               onDropRejected: this.handleFileRejected
             }}
-            validated={rejected ? 'error' : 'default'}
+            validated={isRejected ? 'error' : 'default'}
           />
         </FormGroup>
       </Form>
@@ -91,6 +102,7 @@ class CustomFileUpload extends React.Component {
     super(props);
     this.state = {
       value: '',
+      filename: false,
       clearButtonDisabled: true,
       isLoading: false,
       isDragActive: false,
@@ -103,10 +115,10 @@ class CustomFileUpload extends React.Component {
   }
 
   render() {
-    const { value, clearButtonDisabled, isLoading, isDragActive, hideTextArea, children } = this.state;
+    const { value, filename, clearButtonDisabled, isLoading, isDragActive, hideTextArea, children } = this.state;
     return (
       <div>
-        {['clearButtonDisabled', 'isLoading', 'isDragActive', 'hideTextArea', 'children'].map(stateKey => (
+        {['filename', 'clearButtonDisabled', 'isLoading', 'isDragActive', 'hideTextArea', 'children'].map(stateKey => (
           <Checkbox
             key={stateKey}
             id={stateKey}
@@ -120,7 +132,7 @@ class CustomFileUpload extends React.Component {
         <FileUploadField
           id="custom-file-upload"
           value={value}
-          filename=""
+          filename={filename ? 'example-filename.txt' : ''}
           onChange={this.handleTextAreaChange}
           filenamePlaceholder="Do something custom with this!"
           onBrowseButtonClick={() => alert('Browse button clicked!')}
