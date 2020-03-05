@@ -7,7 +7,7 @@ import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 
-export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormElement>, 'onChange'> {
+export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
   /** Unique id for the TextArea, also used to generate ids for accessible labels */
   id: string;
   /** Value of the file's contents */
@@ -90,7 +90,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   };
 
   return (
-    <form
+    <div
       className={css(styles.fileUpload, isDragActive && styles.modifiers.dragHover, className)}
       ref={containerRef}
       {...props}
@@ -141,6 +141,6 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
         )}
         {children}
       </div>
-    </form>
+    </div>
   );
 };
