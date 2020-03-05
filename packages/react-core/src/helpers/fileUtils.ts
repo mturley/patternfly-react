@@ -11,7 +11,7 @@ export function readTextFile(fileHandle: File) {
       reader.onload = () => resolve(reader.result);
       reader.onerror = () => reject(reader.error);
       reader.onabort = () => reject(reader.error);
-      reader.readAsBinaryString(fileHandle);
+      reader.readAsText(fileHandle);
     } else {
       reject();
     }

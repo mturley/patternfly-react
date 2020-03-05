@@ -57,6 +57,8 @@ export interface FileUploadProps
   onReadStarted?: (fileHandle: File) => void;
   /** A callback for when a selected file finishes loading */
   onReadFinished?: (fileHandle: File) => void;
+  /** A callback for when the FileReader API fails */
+  onReadFailed?: (error: DOMException, fileHandle: File) => void;
   /** Optional extra props to customize react-dropzone. */
   dropzoneProps?: DropzoneProps;
 }
@@ -70,6 +72,7 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   onChange = (): any => undefined,
   onReadStarted = (): any => undefined,
   onReadFinished = (): any => undefined,
+  onReadFailed = (): any => undefined,
   dropzoneProps = {},
   ...props
 }: FileUploadProps) => {
@@ -78,7 +81,11 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
       const fileHandle = acceptedFiles[0];
       onChange('', fileHandle.name, event);
       onReadStarted(fileHandle);
-      const result = (await readTextFile(fileHandle)) as string;
+      const result = (await readTextFile(fileHandle).catch((error: DOMException) => {
+        onReadFailed(error, fileHandle);
+        onReadFinished(fileHandle);
+        onChange('', '', event);
+      })) as string;
       onReadFinished(fileHandle);
       onChange(result, fileHandle.name, event);
     }
