@@ -31,6 +31,7 @@ class SimpleTextFileUpload extends React.Component {
     return (
       <FileUpload
         id="simple-text-file"
+        type="text"
         value={value}
         filename={filename}
         onChange={this.handleFileChange}
@@ -72,6 +73,7 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
         >
           <FileUpload
             id="simple-text-file-with-restrictions"
+            type="text"
             value={value}
             filename={filename}
             onChange={this.handleFileChange}

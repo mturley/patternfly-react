@@ -2,7 +2,7 @@ import * as React from 'react';
 import Dropzone, { DropzoneProps } from 'react-dropzone';
 import { Omit } from '../../helpers';
 import { FileUploadField, FileUploadFieldProps } from './FileUploadField';
-import { readTextFile } from '../../helpers/fileUtils';
+import { readFile, fileReaderType } from '../../helpers/fileUtils';
 
 export interface FileUploadProps
   extends Omit<
@@ -11,13 +11,15 @@ export interface FileUploadProps
   > {
   /** Unique id for the TextArea, also used to generate ids for accessible labels. */
   id: string;
-  /** Value of the file's contents. */
-  value?: string;
+  /** What type of file. Determines what is is passed to `onChange` and expected by `value` (a string for 'text' and 'dataURL', or a [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise). */
+  type?: 'text' | 'dataURL';
+  /** Value of the file's contents (string if text file, [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise) */
+  value?: string | File;
   /** Value to be shown in the read-only filename field. */
   filename?: string;
   /** A callback for when the file contents change. */
   onChange?: (
-    value: string,
+    value: string | File,
     filename: string,
     event:
       | React.DragEvent<HTMLElement> // User dragged/dropped a file
@@ -52,7 +54,10 @@ export interface FileUploadProps
   /** Text for the Clear button */
   clearButtonText?: string;
   /** Flag to hide the TextArea. */
-  hideTextArea?: boolean;
+  hideTextArea?: boolean; // TODO replace with showPreview!
+
+  // Props available in FileUpload but not FileUploadField:
+
   /** A callback for when a selected file starts loading */
   onReadStarted?: (fileHandle: File) => void;
   /** A callback for when a selected file finishes loading */
@@ -64,10 +69,12 @@ export interface FileUploadProps
 }
 
 // TODO handle an optional message for errors without using FieldGroup
+// TODO also accept children here for custom previews
 
 export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   id,
-  value = '',
+  type,
+  value = type === fileReaderType.text || type === fileReaderType.dataURL ? '' : null,
   filename = '',
   onChange = (): any => undefined,
   onReadStarted = (): any => undefined,
@@ -79,15 +86,19 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   const onDropAccepted = async (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
     if (acceptedFiles.length > 0) {
       const fileHandle = acceptedFiles[0];
-      onChange('', fileHandle.name, event);
-      onReadStarted(fileHandle);
-      const result = (await readTextFile(fileHandle).catch((error: DOMException) => {
-        onReadFailed(error, fileHandle);
+      if (type === fileReaderType.text || type === fileReaderType.dataURL) {
+        onChange('', fileHandle.name, event);
+        onReadStarted(fileHandle);
+        const result = (await readFile(fileHandle, type as fileReaderType).catch((error: DOMException) => {
+          onReadFailed(error, fileHandle);
+          onReadFinished(fileHandle);
+          onChange('', '', event);
+        })) as string;
         onReadFinished(fileHandle);
-        onChange('', '', event);
-      })) as string;
-      onReadFinished(fileHandle);
-      onChange(result, fileHandle.name, event);
+        onChange(result, fileHandle.name, event);
+      } else {
+        onChange(fileHandle, fileHandle.name, event);
+      }
     }
     dropzoneProps.onDropAccepted && dropzoneProps.onDropAccepted(acceptedFiles, event);
   };
@@ -113,6 +124,7 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
             onClick: event => event.preventDefault() // Prevents clicking TextArea from opening file dialog
           })}
           id={id}
+          type={type}
           filename={filename}
           value={value}
           onChange={onChange}

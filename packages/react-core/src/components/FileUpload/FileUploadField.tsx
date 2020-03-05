@@ -7,15 +7,18 @@ import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 import { Spinner, spinnerSize } from '../Spinner';
+import { fileReaderType } from '../../helpers/fileUtils';
 
-export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
+export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElement>, 'value' | 'onChange'> {
   /** Unique id for the TextArea, also used to generate ids for accessible labels */
   id: string;
-  /** Value of the file's contents */
-  value?: string;
+  /** What type of file. Determines what is is expected by `value` (a string for 'text' and 'dataURL', or a [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise). */
+  type?: 'text' | 'dataURL';
+  /** Value of the file's contents (string if text file, [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise) */
+  value?: string | File;
   /** Value to be shown in the read-only filename field. */
   filename?: string;
-  /** A callback for when the field value changes. */
+  /** A callback for when the TextArea value changes. */
   onChange?: (
     value: string,
     filename: string,
@@ -54,6 +57,9 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElemen
   clearButtonDisabled?: boolean;
   /** Flag to hide the TextArea. Use with children to add custom support for non-text files. */
   hideTextArea?: boolean;
+
+  // Props available in FileUploadField but not FileUpload:
+
   /** Additional children to render after (or instead of) the TextArea. */
   children?: React.ReactNode;
   /** A callback for when the Browse button is clicked. */
@@ -68,6 +74,7 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElemen
 
 export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   id,
+  type,
   value = '',
   filename = '',
   onChange = (): any => undefined,
@@ -137,7 +144,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
         </InputGroup>
       </div>
       <div className={styles.fileUploadFileDetails}>
-        {!hideTextArea && (
+        {!hideTextArea /* TODO replace with showPreview */ && type === fileReaderType.text && (
           <TextArea
             readOnly={isReadOnly || !!filename} // A truthy filename means a real file, so no editing
             disabled={isDisabled}
@@ -147,10 +154,11 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             id={id}
             name={id}
             aria-label={ariaLabel}
-            value={value}
+            value={value as string}
             onChange={onTextAreaChange}
           />
         )}
+        {/* TODO handle other `type`s like dataURL and undefined (File) */}
         {isLoading && (
           <div className={styles.fileUploadFileDetailsSpinner}>
             <Spinner size={spinnerSize.lg} aria-valuetext={spinnerAriaValueText} />
