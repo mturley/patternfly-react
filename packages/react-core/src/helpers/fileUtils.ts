@@ -4,6 +4,7 @@
  *
  * @param {File} fileHandle - File object to read
  */
+// TODO handle the loading spinner case?
 export function readTextFile(fileHandle: File) {
   return new Promise((resolve, reject) => {
     if (fileHandle) {

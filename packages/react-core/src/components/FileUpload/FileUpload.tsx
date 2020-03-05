@@ -67,7 +67,9 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   };
 
   const onDropRejected = (rejectedFiles: File[], event: React.DragEvent<HTMLElement>) => {
-    onChange('', '', event);
+    if (rejectedFiles.length > 0) {
+      onChange('', rejectedFiles[0].name, event);
+    }
     dropzoneProps.onDropRejected && dropzoneProps.onDropRejected(rejectedFiles, event);
   };
 

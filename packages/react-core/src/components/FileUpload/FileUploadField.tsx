@@ -45,6 +45,8 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   browseButtonText?: string;
   /** Text for the Clear button */
   clearButtonText?: string;
+  /** Flag to disable the Clear button */
+  clearButtonDisabled?: boolean;
   /** Flag to hide the TextArea. Use with children to add custom support for non-text files. */
   hideTextArea?: boolean;
   /** Additional children to render after (or instead of) the TextArea. */
@@ -74,6 +76,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   filenameAriaLabel = filename ? 'Read only filename' : filenamePlaceholder,
   browseButtonText = 'Browse...',
   clearButtonText = 'Clear',
+  clearButtonDisabled = !filename && !value,
   containerRef = null as React.Ref<any>,
   children = null,
   hideTextArea = false,
@@ -105,10 +108,19 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             aria-describedby={`${id}-browse-button`}
             value={filename}
           />
-          <Button id={`${id}-browse-button`} variant={ButtonVariant.control} onClick={onBrowseButtonClick}>
+          <Button
+            id={`${id}-browse-button`}
+            variant={ButtonVariant.control}
+            onClick={onBrowseButtonClick}
+            isDisabled={isDisabled}
+          >
             {browseButtonText}
           </Button>
-          <Button variant={ButtonVariant.control} isDisabled={!value} onClick={onClearButtonClick}>
+          <Button
+            variant={ButtonVariant.control}
+            isDisabled={isDisabled || clearButtonDisabled}
+            onClick={onClearButtonClick}
+          >
             {clearButtonText}
           </Button>
         </InputGroup>
