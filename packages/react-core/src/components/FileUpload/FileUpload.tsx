@@ -7,7 +7,7 @@ import { readTextFile } from '../../helpers/fileUtils';
 export interface FileUploadProps
   extends Omit<
     FileUploadFieldProps,
-    'onBrowseButtonClick' | 'onClearButtonClick' | 'isDragActive' | 'containerRef' | 'children'
+    'children' | 'onBrowseButtonClick' | 'onClearButtonClick' | 'isDragActive' | 'containerRef'
   > {
   /** Unique id for the TextArea, also used to generate ids for accessible labels. */
   id: string;
@@ -30,6 +30,10 @@ export interface FileUploadProps
   isDisabled?: boolean;
   /** Flag to show if the field is read only. */
   isReadOnly?: boolean;
+  /** Flag to show if a file is being loaded. */
+  isLoading?: boolean;
+  /** Aria-valuetext for the loading spinner */
+  spinnerAriaValueText?: string;
   /** Flag to show if the field is required. */
   isRequired?: boolean;
   /* Value to indicate if the field is modified to show that validation state.
@@ -54,6 +58,8 @@ export interface FileUploadProps
 }
 
 // TODO handle the loading spinner case, and any other style cases I didn't get to yet
+// TODO the loading spinner will either require state (convert back to a class) or callbacks to keep that state in the examples
+// TODO handle an optional message for errors without using FieldGroup
 
 export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   id,

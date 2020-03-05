@@ -80,43 +80,57 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
 }
 ```
 
-`FileUpload` is a thin wrapper around the `FileUploadField` presentational component. If you need to implement your own logic for accepting, reading or displaying files, you can instead render a `FileUploadField` directly, which requires additional props (e.g. `onBrowseButtonClick`, `onClearButtonClick`, `isDragActive`).
+`FileUpload` is a thin wrapper around the `FileUploadField` presentational component. If you need to implement your own logic for accepting, reading or displaying files, you can instead render a `FileUploadField` directly, which does not include `react-dropzone` and requires additional props (e.g. `onBrowseButtonClick`, `onClearButtonClick`, `isDragActive`).
 
 ```js title=Custom-file-upload isBeta
 import React from 'react';
 import { FileUploadField, Checkbox } from '@patternfly/react-core';
 
 class CustomFileUpload extends React.Component {
-  // TODO render FileUploadField instead, and make this custom with some knobs and stuff
   constructor(props) {
     super(props);
-    this.state = { value: '', filename: '', isDragActive: false };
+    this.state = {
+      value: '',
+      clearButtonDisabled: true,
+      isLoading: false,
+      isDragActive: false,
+      hideTextArea: false,
+      children: false
+    };
+    this.handleTextAreaChange = value => {
+      this.setState({ value });
+    };
   }
 
   render() {
-    const { value, filename, isDragActive } = this.state;
+    const { value, clearButtonDisabled, isLoading, isDragActive, hideTextArea, children } = this.state;
     return (
       <div>
-        <Checkbox
-          label="isDragActive"
-          isChecked={isDragActive}
-          onChange={checked => this.setState({ isDragActive: checked })}
-          aria-label="isDragActive"
-          id="isDragActive"
-        />
+        {['clearButtonDisabled', 'isLoading', 'isDragActive', 'hideTextArea', 'children'].map(stateKey => (
+          <Checkbox
+            key={stateKey}
+            id={stateKey}
+            label={stateKey}
+            aria-label={stateKey}
+            isChecked={this.state[stateKey]}
+            onChange={checked => this.setState({ [stateKey]: checked })}
+          />
+        ))}
         <br />
         <FileUploadField
           id="custom-file-upload"
           value={value}
-          filename={filename}
+          filename=""
+          onChange={this.handleTextAreaChange}
           filenamePlaceholder="Do something custom with this!"
           onBrowseButtonClick={() => alert('Browse button clicked!')}
           onClearButtonClick={() => alert('Clear button clicked!')}
-          clearButtonDisabled={false}
+          clearButtonDisabled={clearButtonDisabled}
+          isLoading={isLoading}
           isDragActive={isDragActive}
-          hideTextArea
+          hideTextArea={hideTextArea}
         >
-          <p>A custom preview of the uploaded file can go here</p>
+          {children && <p>(A custom preview of the uploaded file can be passed as children)</p>}
         </FileUploadField>
       </div>
     );

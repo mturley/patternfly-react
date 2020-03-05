@@ -6,6 +6,7 @@ import { InputGroup } from '../InputGroup';
 import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
+import { Spinner, spinnerSize } from '../Spinner';
 
 export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
   /** Unique id for the TextArea, also used to generate ids for accessible labels */
@@ -28,6 +29,10 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElemen
   isDisabled?: boolean;
   /** Flag to show if the field is read only. */
   isReadOnly?: boolean;
+  /** Flag to show if a file is being loaded. */
+  isLoading?: boolean;
+  /** Aria-valuetext for the loading spinner */
+  spinnerAriaValueText?: string;
   /** Flag to show if the field is required. */
   isRequired?: boolean;
   /* Value to indicate if the field is modified to show that validation state.
@@ -71,6 +76,8 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   className = '',
   isDisabled = false,
   isReadOnly = false,
+  isLoading = false,
+  spinnerAriaValueText,
   isRequired = false,
   isDragActive = false,
   validated = 'default' as 'success' | 'error' | 'default',
@@ -91,7 +98,12 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
 
   return (
     <div
-      className={css(styles.fileUpload, isDragActive && styles.modifiers.dragHover, className)}
+      className={css(
+        styles.fileUpload,
+        isDragActive && styles.modifiers.dragHover,
+        isLoading && styles.modifiers.loading,
+        className
+      )}
       ref={containerRef}
       {...props}
     >
@@ -138,6 +150,11 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             value={value}
             onChange={onTextAreaChange}
           />
+        )}
+        {isLoading && (
+          <div className={styles.fileUploadFileDetailsSpinner}>
+            <Spinner size={spinnerSize.lg} aria-valuetext={spinnerAriaValueText} />
+          </div>
         )}
         {children}
       </div>
