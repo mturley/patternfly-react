@@ -5,7 +5,10 @@ import { FileUploadField, FileUploadFieldProps } from './FileUploadField';
 import { readTextFile } from '../../helpers/fileUtils';
 
 export interface FileUploadProps
-  extends Omit<FileUploadFieldProps, 'onBrowseButtonClick' | 'isDragActive' | 'containerRef' | 'children'> {
+  extends Omit<
+    FileUploadFieldProps,
+    'onBrowseButtonClick' | 'onClearButtonClick' | 'isDragActive' | 'containerRef' | 'children'
+  > {
   /** Unique id for the TextArea, also used to generate ids for accessible labels. */
   id: string;
   /** Value of the file's contents. */
@@ -50,6 +53,8 @@ export interface FileUploadProps
   dropzoneProps?: DropzoneProps;
 }
 
+// TODO handle the loading spinner case, and any other style cases I didn't get to yet
+
 export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   id,
   value = '',
@@ -73,6 +78,10 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
     dropzoneProps.onDropRejected && dropzoneProps.onDropRejected(rejectedFiles, event);
   };
 
+  const onClearButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    onChange('', '', event);
+  };
+
   return (
     <Dropzone multiple={false} {...dropzoneProps} onDropAccepted={onDropAccepted} onDropRejected={onDropRejected}>
       {({ getRootProps, getInputProps, isDragActive, open }) => (
@@ -88,6 +97,7 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
           onChange={onChange}
           isDragActive={isDragActive}
           onBrowseButtonClick={open}
+          onClearButtonClick={onClearButtonClick}
         >
           <input {...getInputProps()} /* hidden, necessary for react-dropzone */ />
         </FileUploadField>

@@ -52,7 +52,9 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLFormEleme
   /** Additional children to render after (or instead of) the TextArea. */
   children?: React.ReactNode;
   /** A callback for when the Browse button is clicked. */
-  onBrowseButtonClick?: (event: React.MouseEvent) => void;
+  onBrowseButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  /** A callback for when the Clear button is clicked. */
+  onClearButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   /** Flag to show if a file is being dragged over the field */
   isDragActive?: boolean;
   /** A reference object to attach to the FileUploadField container element. */
@@ -65,6 +67,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   filename = '',
   onChange = (): any => undefined,
   onBrowseButtonClick = (): any => undefined,
+  onClearButtonClick = (): any => undefined,
   className = '',
   isDisabled = false,
   isReadOnly = false,
@@ -84,10 +87,6 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
 }: FileUploadFieldProps) => {
   const onTextAreaChange = (newValue: string, event: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange(newValue, filename, event);
-  };
-
-  const onClearButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    onChange('', '', event);
   };
 
   return (
