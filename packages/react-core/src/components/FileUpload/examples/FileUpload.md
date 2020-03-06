@@ -104,25 +104,14 @@ import { FileUpload } from '@patternfly/react-core';
 class SimpleFileUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: null, filename: '', isLoading: false };
+    this.state = { value: null, filename: '' };
     this.handleFileChange = (value, filename, event) => this.setState({ value, filename });
-    this.handleFileReadStarted = fileHandle => this.setState({ isLoading: true });
-    this.handleFileReadFinished = fileHandle => this.setState({ isLoading: false });
   }
 
   render() {
-    const { value, filename, isLoading } = this.state;
+    const { value, filename } = this.state;
     return (
-      <FileUpload
-        id="simple-file"
-        value={value}
-        filename={filename}
-        onChange={this.handleFileChange}
-        onReadStarted={this.handleFileReadStarted}
-        onReadFinished={this.handleFileReadFinished}
-        isLoading={isLoading}
-        showPreview
-      />
+      <FileUpload id="simple-file" value={value} filename={filename} onChange={this.handleFileChange} showPreview />
     );
   }
 }
