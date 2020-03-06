@@ -95,9 +95,9 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
         onChange('', fileHandle.name, event); // Show the filename while reading
         onReadStarted(fileHandle);
         readFile(fileHandle, type as fileReaderType)
-          .then((result: string) => {
+          .then(data => {
             onReadFinished(fileHandle);
-            onChange(result, fileHandle.name, event);
+            onChange(data as string, fileHandle.name, event);
           })
           .catch((error: DOMException) => {
             onReadFailed(error, fileHandle);
