@@ -45,6 +45,8 @@ export interface FileUploadProps
    * If set to error,  field will be modified to indicate error state.
    */
   validated?: 'success' | 'error' | 'default';
+  /** Message to display below the field for help or validation */
+  message?: string;
   /** Aria-label for the TextArea. */
   'aria-label'?: string;
   /** Placeholder string to display in the empty filename field */
