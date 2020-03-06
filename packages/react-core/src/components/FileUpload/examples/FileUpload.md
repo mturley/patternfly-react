@@ -134,7 +134,7 @@ class SimpleFileUpload extends React.Component {
     const { value, filename, isLoading } = this.state;
     return (
       <FileUpload
-        id="simple-file"
+        id="customized-preview-file"
         value={value}
         filename={filename}
         onChange={this.handleFileChange}
@@ -197,7 +197,16 @@ class CustomFileUpload extends React.Component {
               label={stateKey}
               aria-label={stateKey}
               isChecked={this.state[stateKey]}
-              onChange={checked => this.setState({ [stateKey]: checked })}
+              onChange={checked => {
+                let dependentProps;
+                if (stateKey === 'isLoading' && checked) {
+                  dependentProps = {
+                    hideDefaultPreview: false
+                  };
+                }
+                const updatedState = Object.assign({}, { [stateKey]: checked },dependentProps );
+                return this.setState(updatedState);
+              }}
             />
           )
         )}

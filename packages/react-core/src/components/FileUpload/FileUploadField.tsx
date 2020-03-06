@@ -103,6 +103,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   isClearButtonDisabled = !filename && !value,
   containerRef = null as React.Ref<HTMLDivElement>,
   children = null,
+  hideDefaultPreview = false,
   ...props
 }: FileUploadFieldProps) => {
   const onTextAreaChange = (newValue: string, event: React.ChangeEvent<HTMLTextAreaElement>) => {
