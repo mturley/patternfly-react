@@ -57,9 +57,9 @@ export interface FileUploadProps
   browseButtonText?: string;
   /** Text for the Clear button */
   clearButtonText?: string;
-  /** Flag to show a built-in preview of the file where available.
-   * If false, You can use children to render an alternate preview. */
-  showPreview?: boolean;
+  /** Flag to hide the built-in preview of the file (where available).
+   * If true, you can use children to render an alternate preview. */
+  hideDefaultPreview?: boolean;
   /** Additional children to render after (or instead of) the file preview. */
   children?: React.ReactNode;
 
@@ -80,6 +80,7 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   type,
   value = type === fileReaderType.text || type === fileReaderType.dataURL ? '' : null,
   filename = '',
+  hideDefaultPreview = false,
   children = null,
   onChange = () => {},
   onReadStarted = () => {},

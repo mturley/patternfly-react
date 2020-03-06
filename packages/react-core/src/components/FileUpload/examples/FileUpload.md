@@ -43,7 +43,6 @@ class SimpleTextFileUpload extends React.Component {
         onReadStarted={this.handleFileReadStarted}
         onReadFinished={this.handleFileReadFinished}
         isLoading={isLoading}
-        showPreview
       />
     );
   }
@@ -87,7 +86,6 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
         }}
         validated={isRejected ? 'error' : 'default'}
         message={isRejected ? 'Must be a CSV file no larger than 1 KB' : 'Upload a CSV file'}
-        showPreview
       />
     );
   }
@@ -111,16 +109,14 @@ class SimpleFileUpload extends React.Component {
 
   render() {
     const { value, filename } = this.state;
-    return (
-      <FileUpload id="simple-file" value={value} filename={filename} onChange={this.handleFileChange} showPreview />
-    );
+    return <FileUpload id="simple-file" value={value} filename={filename} onChange={this.handleFileChange} />;
   }
 }
 ```
 
 ### Customizing the file preview
 
-Regardless of `type`, the preview area (the TextArea, or any future implementations of default previews for other types) can be removed by using `showPreview={false}`, and a custom one can be rendered by passing `children`.
+Regardless of `type`, the preview area (the TextArea, or any future implementations of default previews for other types) can be removed by passing `hideDefaultPreview`, and a custom one can be rendered by passing `children`.
 
 ```js title=Custom-file-preview
 import React from 'react';
@@ -142,7 +138,7 @@ class SimpleFileUpload extends React.Component {
         value={value}
         filename={filename}
         onChange={this.handleFileChange}
-        showPreview={false}
+        hideDefaultPreview
       >
         {value && (
           <h1>
@@ -173,7 +169,7 @@ class CustomFileUpload extends React.Component {
       isClearButtonDisabled: true,
       isLoading: false,
       isDragActive: false,
-      showPreview: true,
+      hideDefaultPreview: false,
       children: false
     };
     this.handleTextAreaChange = value => {
@@ -182,19 +178,29 @@ class CustomFileUpload extends React.Component {
   }
 
   render() {
-    const { value, filename, isClearButtonDisabled, isLoading, isDragActive, showPreview, children } = this.state;
+    const {
+      value,
+      filename,
+      isClearButtonDisabled,
+      isLoading,
+      isDragActive,
+      hideDefaultPreview,
+      children
+    } = this.state;
     return (
       <div>
-        {['filename', 'isClearButtonDisabled', 'isLoading', 'isDragActive', 'showPreview', 'children'].map(stateKey => (
-          <Checkbox
-            key={stateKey}
-            id={stateKey}
-            label={stateKey}
-            aria-label={stateKey}
-            isChecked={this.state[stateKey]}
-            onChange={checked => this.setState({ [stateKey]: checked })}
-          />
-        ))}
+        {['filename', 'isClearButtonDisabled', 'isLoading', 'isDragActive', 'hideDefaultPreview', 'children'].map(
+          stateKey => (
+            <Checkbox
+              key={stateKey}
+              id={stateKey}
+              label={stateKey}
+              aria-label={stateKey}
+              isChecked={this.state[stateKey]}
+              onChange={checked => this.setState({ [stateKey]: checked })}
+            />
+          )
+        )}
         <br />
         <FileUploadField
           id="custom-file-upload"
@@ -208,7 +214,7 @@ class CustomFileUpload extends React.Component {
           isClearButtonDisabled={isClearButtonDisabled}
           isLoading={isLoading}
           isDragActive={isDragActive}
-          showPreview={showPreview}
+          hideDefaultPreview={hideDefaultPreview}
         >
           {children && <p>(A custom preview of the uploaded file can be passed as children)</p>}
         </FileUploadField>
