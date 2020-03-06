@@ -12,18 +12,15 @@ export enum fileReaderType {
  */
 export function readFile(fileHandle: File, type: fileReaderType) {
   return new Promise((resolve, reject) => {
-    if (fileHandle) {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(reader.error);
-      if (type === fileReaderType.text) {
-        reader.readAsText(fileHandle);
-      }
-      if (type === fileReaderType.dataURL) {
-        reader.readAsDataURL(fileHandle);
-      }
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error);
+    if (type === fileReaderType.text) {
+      reader.readAsText(fileHandle);
+    } else if (type === fileReaderType.dataURL) {
+      reader.readAsDataURL(fileHandle);
     } else {
-      reject();
+      reject('unknown type');
     }
   });
 }
