@@ -168,7 +168,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             onChange={onTextAreaChange}
           />
         )}
-        {showPreview && value instanceof File && !type && (
+        {showPreview && (typeof File !== 'undefined' && value instanceof File) && !type && (
           <Flex breakpointMods={[{ modifier: FlexModifiers['space-items-lg'] }]}>
             <FlexItem breakpointMods={[{ modifier: FlexModifiers['align-self-center'] }]}>
               <FileUploadIcon size="lg" />
