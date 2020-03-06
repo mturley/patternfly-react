@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/FileUpload/file-upload';
+import FileUploadIcon from '@patternfly/react-icons/dist/js/icons/file-upload-icon';
 import { css } from '@patternfly/react-styles';
 import { Omit } from '../../helpers';
 import { InputGroup } from '../InputGroup';
@@ -7,14 +8,18 @@ import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 import { Spinner, spinnerSize } from '../Spinner';
+import { Flex, FlexItem, FlexModifiers } from '../../layouts/Flex';
+import { Text, TextVariants } from '../Text';
 import { fileReaderType } from '../../helpers/fileUtils';
 
 export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElement>, 'value' | 'onChange'> {
   /** Unique id for the TextArea, also used to generate ids for accessible labels */
   id: string;
-  /** What type of file. Determines what is is expected by `value` (a string for 'text' and 'dataURL', or a [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise). */
+  /** What type of file. Determines what is is expected by `value`
+   * (a string for 'text' and 'dataURL', or a File object otherwise). */
   type?: 'text' | 'dataURL';
-  /** Value of the file's contents (string if text file, [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise) */
+  /** Value of the file's contents
+   * (string if text file, File object otherwise) */
   value?: string | File;
   /** Value to be shown in the read-only filename field. */
   filename?: string;
@@ -54,14 +59,15 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElemen
   /** Text for the Clear button */
   clearButtonText?: string;
   /** Flag to disable the Clear button */
-  clearButtonDisabled?: boolean;
-  /** Flag to hide the TextArea. Use with children to add custom support for non-text files. */
-  hideTextArea?: boolean;
+  isClearButtonDisabled?: boolean;
+  /** Flag to show a built-in preview of the file where available.
+   * If false, You can use children to render an alternate preview. */
+  showPreview?: boolean;
+  /** Additional children to render after (or instead of) the file preview. */
+  children?: React.ReactNode;
 
   // Props available in FileUploadField but not FileUpload:
 
-  /** Additional children to render after (or instead of) the TextArea. */
-  children?: React.ReactNode;
   /** A callback for when the Browse button is clicked. */
   onBrowseButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   /** A callback for when the Clear button is clicked. */
@@ -93,10 +99,10 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   filenameAriaLabel = filename ? 'Read only filename' : filenamePlaceholder,
   browseButtonText = 'Browse...',
   clearButtonText = 'Clear',
-  clearButtonDisabled = !filename && !value,
+  isClearButtonDisabled = !filename && !value,
   containerRef = null as React.Ref<any>,
   children = null,
-  hideTextArea = false,
+  showPreview = false,
   ...props
 }: FileUploadFieldProps) => {
   const onTextAreaChange = (newValue: string, event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -136,7 +142,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
           </Button>
           <Button
             variant={ButtonVariant.control}
-            isDisabled={isDisabled || clearButtonDisabled}
+            isDisabled={isDisabled || isClearButtonDisabled}
             onClick={onClearButtonClick}
           >
             {clearButtonText}
@@ -144,7 +150,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
         </InputGroup>
       </div>
       <div className={styles.fileUploadFileDetails}>
-        {!hideTextArea /* TODO replace with showPreview */ && type === fileReaderType.text && (
+        {showPreview && type === fileReaderType.text && (
           <TextArea
             readOnly={isReadOnly || !!filename} // A truthy filename means a real file, so no editing
             disabled={isDisabled}
@@ -158,7 +164,17 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             onChange={onTextAreaChange}
           />
         )}
-        {/* TODO handle other `type`s like dataURL and undefined (File) */}
+        {showPreview && value instanceof File && !type && (
+          <Flex breakpointMods={[{ modifier: FlexModifiers['space-items-l'] }]}>
+            <FlexItem breakpointMods={[{ modifier: FlexModifiers['align-self-center'] }]}>
+              <FileUploadIcon size="lg" />
+            </FlexItem>
+            <FlexItem breakpointMods={[{ modifier: FlexModifiers.grow }]}>
+              {value.type && <Text component={TextVariants.h3}>{value.type}</Text>}
+              <Text component={TextVariants.h3}>{value.size} bytes</Text>
+            </FlexItem>
+          </Flex>
+        )}
         {isLoading && (
           <div className={styles.fileUploadFileDetailsSpinner}>
             <Spinner size={spinnerSize.lg} aria-valuetext={spinnerAriaValueText} />

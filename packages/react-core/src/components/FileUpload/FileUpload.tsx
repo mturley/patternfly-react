@@ -11,9 +11,11 @@ export interface FileUploadProps
   > {
   /** Unique id for the TextArea, also used to generate ids for accessible labels. */
   id: string;
-  /** What type of file. Determines what is is passed to `onChange` and expected by `value` (a string for 'text' and 'dataURL', or a [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise). */
+  /** What type of file. Determines what is is passed to `onChange` and expected by `value`
+   * (a string for 'text' and 'dataURL', or a File object otherwise. */
   type?: 'text' | 'dataURL';
-  /** Value of the file's contents (string if text file, [File object](https://developer.mozilla.org/en-US/docs/Web/API/File) otherwise) */
+  /** Value of the file's contents
+   * (string if text file, File object otherwise) */
   value?: string | File;
   /** Value to be shown in the read-only filename field. */
   filename?: string;
@@ -53,8 +55,11 @@ export interface FileUploadProps
   browseButtonText?: string;
   /** Text for the Clear button */
   clearButtonText?: string;
-  /** Flag to hide the TextArea. */
-  hideTextArea?: boolean; // TODO replace with showPreview!
+  /** Flag to show a built-in preview of the file where available.
+   * If false, You can use children to render an alternate preview. */
+  showPreview?: boolean;
+  /** Additional children to render after (or instead of) the file preview. */
+  children?: React.ReactNode;
 
   // Props available in FileUpload but not FileUploadField:
 
@@ -69,13 +74,13 @@ export interface FileUploadProps
 }
 
 // TODO handle an optional message for errors without using FieldGroup
-// TODO also accept children here for custom previews
 
 export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   id,
   type,
   value = type === fileReaderType.text || type === fileReaderType.dataURL ? '' : null,
   filename = '',
+  children = null,
   onChange = (): any => undefined,
   onReadStarted = (): any => undefined,
   onReadFinished = (): any => undefined,
@@ -133,6 +138,7 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
           onClearButtonClick={onClearButtonClick}
         >
           <input {...getInputProps()} /* hidden, necessary for react-dropzone */ />
+          {children}
         </FileUploadField>
       )}
     </Dropzone>

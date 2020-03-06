@@ -11,9 +11,13 @@ import { FileUpload, Form, FormGroup, FileUploadField, Checkbox } from '@pattern
 
 ## Examples
 
-The basic `FileUpload` component can handle simple text files via browse or drag-and-drop, loading them into memory and passing their contents as a string to an `onChange` prop.
+The basic `FileUpload` component can accept a file via browse or drag-and-drop, and behaves like a standard form field with its `value` and `onChange` props. The `type` prop determines how the `FileUpload` component behaves upon accepting a file, what type of value it passes to its `onChange` prop, and what type it expects for its `value` prop.
 
-```js title=Simple-text-file isBeta
+### Text files
+
+If `type="text"` is passed, a `TextArea` preview will be rendered underneath the filename bar. When a file is selected, its contents will be read into memory and passed to the `onChange` prop as a string (along with its filename). Typing/pasting text in the box will also call `onChange` with a string, and a string value is expected for the `value` prop.
+
+```js title=Simple-text-file
 import React from 'react';
 import { FileUpload } from '@patternfly/react-core';
 
@@ -27,7 +31,7 @@ class SimpleTextFileUpload extends React.Component {
   }
 
   render() {
-    const { value, filename } = this.state;
+    const { value, filename, isLoading } = this.state;
     return (
       <FileUpload
         id="simple-text-file"
@@ -37,15 +41,17 @@ class SimpleTextFileUpload extends React.Component {
         onChange={this.handleFileChange}
         onReadStarted={this.handleFileReadStarted}
         onReadFinished={this.handleFileReadFinished}
+        isLoading={isLoading}
+        showPreview
       />
     );
   }
 }
 ```
 
-Any [props accepted by `react-dropzone`'s `Dropzone` component](https://react-dropzone.js.org/#!/Dropzone) can be passed as a `dropzoneProps` object in order to customize the behavior of the Dropzone, such as restricting the size and type of files allowed. This example will only accept CSV files smaller than 1 KB.
+Any [props accepted by `react-dropzone`'s `Dropzone` component](https://react-dropzone.js.org/#!/Dropzone) can be passed as a `dropzoneProps` object in order to customize the behavior of the Dropzone, such as restricting the size and type of files allowed. This example will only accept CSV files smaller than 1 KB:
 
-```js title=Simple-text-file-with-restrictions isBeta
+```js title=Simple-text-file-with-restrictions
 import React from 'react';
 import { FileUpload, Form, FormGroup } from '@patternfly/react-core';
 
@@ -62,7 +68,7 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
   }
 
   render() {
-    const { value, filename, isRejected } = this.state;
+    const { value, filename, isLoading, isRejected } = this.state;
     return (
       <Form>
         <FormGroup
@@ -79,12 +85,14 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
             onChange={this.handleFileChange}
             onReadStarted={this.handleFileReadStarted}
             onReadFinished={this.handleFileReadFinished}
+            isLoading={isLoading}
             dropzoneProps={{
               accept: '.csv',
               maxSize: 1024,
               onDropRejected: this.handleFileRejected
             }}
             validated={isRejected ? 'error' : 'default'}
+            showPreview
           />
         </FormGroup>
       </Form>
@@ -93,9 +101,87 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
 }
 ```
 
-`FileUpload` is a thin wrapper around the `FileUploadField` presentational component. If you need to implement your own logic for accepting, reading or displaying files, you can instead render a `FileUploadField` directly, which does not include `react-dropzone` and requires additional props (e.g. `onBrowseButtonClick`, `onClearButtonClick`, `isDragActive`).
+### Other file types
 
-```js title=Custom-file-upload isBeta
+If no `type` prop is specified, the component will not read files directly. When a file is selected, a [`File` object](https://developer.mozilla.org/en-US/docs/Web/API/File) will be passed to `onChange` and your application will be responsible for reading from it (e.g. by using the [FileReader API](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) or attaching it to a [FormData object](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)). A `File` object will also be expected for the `value` prop instead of a string, and a summary of the file's type and size will be rendered instead of the `TextArea`.
+
+```js title=Simple-file-of-any-format
+import React from 'react';
+import { FileUpload } from '@patternfly/react-core';
+
+class SimpleFileUpload extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: null, filename: '', isLoading: false };
+    this.handleFileChange = (value, filename, event) => this.setState({ value, filename });
+    this.handleFileReadStarted = fileHandle => this.setState({ isLoading: true });
+    this.handleFileReadFinished = fileHandle => this.setState({ isLoading: false });
+  }
+
+  render() {
+    const { value, filename, isLoading } = this.state;
+    return (
+      <FileUpload
+        id="simple-file"
+        value={value}
+        filename={filename}
+        onChange={this.handleFileChange}
+        onReadStarted={this.handleFileReadStarted}
+        onReadFinished={this.handleFileReadFinished}
+        isLoading={isLoading}
+        showPreview
+      />
+    );
+  }
+}
+```
+
+### Customizing the file preview
+
+Regardless of `type`, the preview area (TextArea or type/size summary) can be removed by using `showPreview={false}`, and a custom one can be rendered by passing `children`.
+
+```js title=Custom-file-preview
+import React from 'react';
+import { FileUpload } from '@patternfly/react-core';
+
+class SimpleFileUpload extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: null, filename: '', isLoading: false };
+    this.handleFileChange = (value, filename, event) => this.setState({ value, filename });
+    this.handleFileReadStarted = fileHandle => this.setState({ isLoading: true });
+    this.handleFileReadFinished = fileHandle => this.setState({ isLoading: false });
+  }
+
+  render() {
+    const { value, filename, isLoading } = this.state;
+    return (
+      <FileUpload
+        id="simple-file"
+        value={value}
+        filename={filename}
+        onChange={this.handleFileChange}
+        onReadStarted={this.handleFileReadStarted}
+        onReadFinished={this.handleFileReadFinished}
+        isLoading={isLoading}
+        showPreview={false}
+      >
+        {value && (
+          <h1>
+            Custom preview here for your {value.size}-byte file named {value.name}
+          </h1>
+        )}
+      </FileUpload>
+    );
+  }
+}
+```
+
+### Bringing your own file browse logic
+
+`FileUpload` is a thin wrapper around the `FileUploadField` presentational component. If you need to implement your own logic for accepting files, you can instead render a `FileUploadField` directly, which does not include `react-dropzone` and requires additional props (e.g. `onBrowseButtonClick`, `onClearButtonClick`, `isDragActive`).
+
+```js title=Custom-file-upload
 import React from 'react';
 import { FileUploadField, Checkbox } from '@patternfly/react-core';
 
@@ -105,10 +191,10 @@ class CustomFileUpload extends React.Component {
     this.state = {
       value: '',
       filename: false,
-      clearButtonDisabled: true,
+      isClearButtonDisabled: true,
       isLoading: false,
       isDragActive: false,
-      hideTextArea: false,
+      showPreview: true,
       children: false
     };
     this.handleTextAreaChange = value => {
@@ -117,10 +203,10 @@ class CustomFileUpload extends React.Component {
   }
 
   render() {
-    const { value, filename, clearButtonDisabled, isLoading, isDragActive, hideTextArea, children } = this.state;
+    const { value, filename, isClearButtonDisabled, isLoading, isDragActive, showPreview, children } = this.state;
     return (
       <div>
-        {['filename', 'clearButtonDisabled', 'isLoading', 'isDragActive', 'hideTextArea', 'children'].map(stateKey => (
+        {['filename', 'isClearButtonDisabled', 'isLoading', 'isDragActive', 'showPreview', 'children'].map(stateKey => (
           <Checkbox
             key={stateKey}
             id={stateKey}
@@ -133,16 +219,17 @@ class CustomFileUpload extends React.Component {
         <br />
         <FileUploadField
           id="custom-file-upload"
+          type="text"
           value={value}
           filename={filename ? 'example-filename.txt' : ''}
           onChange={this.handleTextAreaChange}
           filenamePlaceholder="Do something custom with this!"
           onBrowseButtonClick={() => alert('Browse button clicked!')}
           onClearButtonClick={() => alert('Clear button clicked!')}
-          clearButtonDisabled={clearButtonDisabled}
+          isClearButtonDisabled={isClearButtonDisabled}
           isLoading={isLoading}
           isDragActive={isDragActive}
-          hideTextArea={hideTextArea}
+          showPreview={showPreview}
         >
           {children && <p>(A custom preview of the uploaded file can be passed as children)</p>}
         </FileUploadField>
