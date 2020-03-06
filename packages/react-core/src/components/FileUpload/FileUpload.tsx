@@ -80,7 +80,6 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   type,
   value = type === fileReaderType.text || type === fileReaderType.dataURL ? '' : null,
   filename = '',
-  hideDefaultPreview = false,
   children = null,
   onChange = () => {},
   onReadStarted = () => {},
