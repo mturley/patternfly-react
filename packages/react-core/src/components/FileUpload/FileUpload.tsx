@@ -4,8 +4,6 @@ import { Omit } from '../../helpers';
 import { FileUploadField, FileUploadFieldProps } from './FileUploadField';
 import { readFile, fileReaderType } from '../../helpers/fileUtils';
 
-export type fileUploadValue = string | File;
-
 export interface FileUploadProps
   extends Omit<
     FileUploadFieldProps,
@@ -18,12 +16,12 @@ export interface FileUploadProps
   type?: 'text' | 'dataURL';
   /** Value of the file's contents
    * (string if text file, File object otherwise) */
-  value?: fileUploadValue;
+  value?: string | File;
   /** Value to be shown in the read-only filename field. */
   filename?: string;
   /** A callback for when the file contents change. */
   onChange?: (
-    value: fileUploadValue,
+    value: string | File,
     filename: string,
     event:
       | React.DragEvent<HTMLElement> // User dragged/dropped a file
@@ -94,16 +92,17 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
     if (acceptedFiles.length > 0) {
       const fileHandle = acceptedFiles[0];
       if (type === fileReaderType.text || type === fileReaderType.dataURL) {
-        onChange('', fileHandle.name, event);
+        onChange('', fileHandle.name, event); // Show the filename while reading
         onReadStarted(fileHandle);
-        Promise.resolve(readFile(fileHandle, type as fileReaderType))
-          .then((data) => {
+        readFile(fileHandle, type as fileReaderType)
+          .then((result: string) => {
             onReadFinished(fileHandle);
-            onChange(data as fileUploadValue, fileHandle.name, event);
-          }, (error) => {
+            onChange(result, fileHandle.name, event);
+          })
+          .catch((error: DOMException) => {
             onReadFailed(error, fileHandle);
             onReadFinished(fileHandle);
-            onChange('', '', event);
+            onChange('', '', event); // Clear the filename field on a failure
           });
       } else {
         onChange(fileHandle, fileHandle.name, event);
