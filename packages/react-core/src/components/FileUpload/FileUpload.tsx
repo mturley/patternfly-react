@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Dropzone, { DropzoneProps } from 'react-dropzone';
+import Dropzone, { DropzoneProps, DropFileEventHandler } from 'react-dropzone';
 import { Omit } from '../../helpers';
 import { FileUploadField, FileUploadFieldProps } from './FileUploadField';
 import { readFile, fileReaderType } from '../../helpers/fileUtils';
@@ -75,22 +75,20 @@ export interface FileUploadProps
   dropzoneProps?: DropzoneProps;
 }
 
-// TODO handle an optional message for errors without using FieldGroup
-
 export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   id,
   type,
   value = type === fileReaderType.text || type === fileReaderType.dataURL ? '' : null,
   filename = '',
   children = null,
-  onChange = (): any => undefined,
-  onReadStarted = (): any => undefined,
-  onReadFinished = (): any => undefined,
-  onReadFailed = (): any => undefined,
+  onChange = () => {},
+  onReadStarted = () => {},
+  onReadFinished = () => {},
+  onReadFailed = () => {},
   dropzoneProps = {},
   ...props
 }: FileUploadProps) => {
-  const onDropAccepted = async (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
+  const onDropAccepted: DropFileEventHandler = async (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
     if (acceptedFiles.length > 0) {
       const fileHandle = acceptedFiles[0];
       if (type === fileReaderType.text || type === fileReaderType.dataURL) {
@@ -110,7 +108,7 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
     dropzoneProps.onDropAccepted && dropzoneProps.onDropAccepted(acceptedFiles, event);
   };
 
-  const onDropRejected = (rejectedFiles: File[], event: React.DragEvent<HTMLElement>) => {
+  const onDropRejected: DropFileEventHandler = (rejectedFiles: File[], event: React.DragEvent<HTMLElement>) => {
     if (rejectedFiles.length > 0) {
       onChange('', rejectedFiles[0].name, event);
     }

@@ -78,7 +78,7 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElemen
   /** Flag to show if a file is being dragged over the field */
   isDragActive?: boolean;
   /** A reference object to attach to the FileUploadField container element. */
-  containerRef?: React.Ref<any>;
+  containerRef?: React.Ref<HTMLDivElement>;
 }
 
 export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
@@ -86,9 +86,9 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   type,
   value = '',
   filename = '',
-  onChange = (): any => undefined,
-  onBrowseButtonClick = (): any => undefined,
-  onClearButtonClick = (): any => undefined,
+  onChange = () => {},
+  onBrowseButtonClick = () => {},
+  onClearButtonClick = () => {},
   className = '',
   isDisabled = false,
   isReadOnly = false,
@@ -104,7 +104,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   browseButtonText = 'Browse...',
   clearButtonText = 'Clear',
   isClearButtonDisabled = !filename && !value,
-  containerRef = null as React.Ref<any>,
+  containerRef = null as React.Ref<HTMLDivElement>,
   children = null,
   showPreview = false,
   ...props
