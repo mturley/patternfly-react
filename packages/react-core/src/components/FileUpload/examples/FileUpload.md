@@ -123,7 +123,7 @@ import React from 'react';
 import { FileUpload } from '@patternfly/react-core';
 import FileUploadIcon from '@patternfly/react-icons/dist/js/icons/file-upload-icon';
 
-class SimpleFileUpload extends React.Component {
+class CustomPreviewFileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: null, filename: '' };
@@ -197,16 +197,17 @@ class CustomFileUpload extends React.Component {
               label={stateKey}
               aria-label={stateKey}
               isChecked={this.state[stateKey]}
-              onChange={checked => {
-                let dependentProps;
-                if (stateKey === 'isLoading' && checked) {
-                  dependentProps = {
-                    hideDefaultPreview: false
-                  };
-                }
-                const updatedState = Object.assign({}, { [stateKey]: checked },dependentProps );
-                return this.setState(updatedState);
-              }}
+              onChange={checked =>
+                this.setState({
+                  [stateKey]: checked,
+                  /*
+                    isLoading and hideDefaultPreview props should not be used together
+                    unless a custom preview is rendered with children during the loading process.
+                    This example forces hideDefaultPreview to be false if isLoading is true.
+                  */
+                  ...(stateKey === 'isLoading' && checked && { hideDefaultPreview: false })
+                })
+              }
             />
           )
         )}
