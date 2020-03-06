@@ -52,9 +52,9 @@ exports[`simple fileuploadfield 1`] = `
       validated="default"
       value=""
     />
-    <p>
-      A custom preview of the uploaded file can be passed as children
-    </p>
   </div>
+  <p>
+    A custom preview of the uploaded file can be passed as children
+  </p>
 </div>
 `;
