@@ -4,6 +4,8 @@ import { Omit } from '../../helpers';
 import { FileUploadField, FileUploadFieldProps } from './FileUploadField';
 import { readFile, fileReaderType } from '../../helpers/fileUtils';
 
+export type fileUploadValue = string | File;
+
 export interface FileUploadProps
   extends Omit<
     FileUploadFieldProps,
@@ -16,12 +18,12 @@ export interface FileUploadProps
   type?: 'text' | 'dataURL';
   /** Value of the file's contents
    * (string if text file, File object otherwise) */
-  value?: string | File;
+  value?: fileUploadValue;
   /** Value to be shown in the read-only filename field. */
   filename?: string;
   /** A callback for when the file contents change. */
   onChange?: (
-    value: string | File,
+    value: fileUploadValue,
     filename: string,
     event:
       | React.DragEvent<HTMLElement> // User dragged/dropped a file
@@ -88,19 +90,21 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
   dropzoneProps = {},
   ...props
 }: FileUploadProps) => {
-  const onDropAccepted: DropFileEventHandler = async (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
+  const onDropAccepted: DropFileEventHandler = (acceptedFiles: File[], event: React.DragEvent<HTMLElement>) => {
     if (acceptedFiles.length > 0) {
       const fileHandle = acceptedFiles[0];
       if (type === fileReaderType.text || type === fileReaderType.dataURL) {
         onChange('', fileHandle.name, event);
         onReadStarted(fileHandle);
-        const result = (await readFile(fileHandle, type as fileReaderType).catch((error: DOMException) => {
-          onReadFailed(error, fileHandle);
-          onReadFinished(fileHandle);
-          onChange('', '', event);
-        })) as string;
-        onReadFinished(fileHandle);
-        onChange(result, fileHandle.name, event);
+        Promise.resolve(readFile(fileHandle, type as fileReaderType))
+          .then((data) => {
+            onReadFinished(fileHandle);
+            onChange(data as fileUploadValue, fileHandle.name, event);
+          }, (error) => {
+            onReadFailed(error, fileHandle);
+            onReadFinished(fileHandle);
+            onChange('', '', event);
+          });
       } else {
         onChange(fileHandle, fileHandle.name, event);
       }
