@@ -96,7 +96,7 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
 
 ### Other file types
 
-If no `type` prop is specified, the component will not read files directly. When a file is selected, a [`File` object](https://developer.mozilla.org/en-US/docs/Web/API/File) will be passed to `onChange` and your application will be responsible for reading from it (e.g. by using the [FileReader API](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) or attaching it to a [FormData object](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)). A `File` object will also be expected for the `value` prop instead of a string, and no preview of the file contents will be shown by default.
+If no `type` prop is specified, the component will not read files directly. When a file is selected, a [`File` object](https://developer.mozilla.org/en-US/docs/Web/API/File) will be passed to `onChange` and your application will be responsible for reading from it (e.g. by using the [FileReader API](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) or attaching it to a [FormData object](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)). A `File` object will also be expected for the `value` prop instead of a string, and no preview of the file contents will be shown by default. The `onReadStarted` and `onReadFinished` callbacks will also not be called since the component is not reading the file.
 
 ```js title=Simple-file-of-any-format
 import React from 'react';
@@ -130,10 +130,8 @@ import FileUploadIcon from '@patternfly/react-icons/dist/js/icons/file-upload-ic
 class SimpleFileUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: null, filename: '', isLoading: false };
+    this.state = { value: null, filename: '' };
     this.handleFileChange = (value, filename, event) => this.setState({ value, filename });
-    this.handleFileReadStarted = fileHandle => this.setState({ isLoading: true });
-    this.handleFileReadFinished = fileHandle => this.setState({ isLoading: false });
   }
 
   render() {
@@ -144,9 +142,6 @@ class SimpleFileUpload extends React.Component {
         value={value}
         filename={filename}
         onChange={this.handleFileChange}
-        onReadStarted={this.handleFileReadStarted}
-        onReadFinished={this.handleFileReadFinished}
-        isLoading={isLoading}
         showPreview={false}
       >
         {value && (
