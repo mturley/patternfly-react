@@ -8,6 +8,7 @@ beta: true
 ---
 
 import { FileUpload, Form, FormGroup, FileUploadField, Checkbox } from '@patternfly/react-core';
+import FileUploadIcon from '@patternfly/react-icons/dist/js/icons/file-upload-icon';
 
 ## Examples
 
@@ -95,7 +96,7 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
 
 ### Other file types
 
-If no `type` prop is specified, the component will not read files directly. When a file is selected, a [`File` object](https://developer.mozilla.org/en-US/docs/Web/API/File) will be passed to `onChange` and your application will be responsible for reading from it (e.g. by using the [FileReader API](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) or attaching it to a [FormData object](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)). A `File` object will also be expected for the `value` prop instead of a string, and a summary of the file's type and size will be rendered instead of the `TextArea`.
+If no `type` prop is specified, the component will not read files directly. When a file is selected, a [`File` object](https://developer.mozilla.org/en-US/docs/Web/API/File) will be passed to `onChange` and your application will be responsible for reading from it (e.g. by using the [FileReader API](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) or attaching it to a [FormData object](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)). A `File` object will also be expected for the `value` prop instead of a string, and no preview of the file contents will be shown by default.
 
 ```js title=Simple-file-of-any-format
 import React from 'react';
@@ -119,11 +120,12 @@ class SimpleFileUpload extends React.Component {
 
 ### Customizing the file preview
 
-Regardless of `type`, the preview area (TextArea or type/size summary) can be removed by using `showPreview={false}`, and a custom one can be rendered by passing `children`.
+Regardless of `type`, the preview area (the TextArea, or any future implementations of default previews for other types) can be removed by using `showPreview={false}`, and a custom one can be rendered by passing `children`.
 
 ```js title=Custom-file-preview
 import React from 'react';
 import { FileUpload } from '@patternfly/react-core';
+import FileUploadIcon from '@patternfly/react-icons/dist/js/icons/file-upload-icon';
 
 class SimpleFileUpload extends React.Component {
   constructor(props) {
@@ -149,6 +151,7 @@ class SimpleFileUpload extends React.Component {
       >
         {value && (
           <h1>
+            <FileUploadIcon size="lg" />
             Custom preview here for your {value.size}-byte file named {value.name}
           </h1>
         )}

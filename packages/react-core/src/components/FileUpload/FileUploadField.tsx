@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styles from '@patternfly/react-styles/css/components/FileUpload/file-upload';
-import FileUploadIcon from '@patternfly/react-icons/dist/js/icons/file-upload-icon';
 import { css } from '@patternfly/react-styles';
 import { Omit } from '../../helpers';
 import { InputGroup } from '../InputGroup';
@@ -8,8 +7,6 @@ import { TextInput } from '../TextInput';
 import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 import { Spinner, spinnerSize } from '../Spinner';
-import { Flex, FlexItem, FlexModifiers } from '../../layouts/Flex';
-import { Text, TextVariants } from '../Text';
 import { fileReaderType } from '../../helpers/fileUtils';
 import { ValidatedOptions } from '../../helpers/constants';
 
@@ -167,17 +164,6 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             value={value as string}
             onChange={onTextAreaChange}
           />
-        )}
-        {showPreview && (typeof File !== 'undefined' && value instanceof File) && !type && (
-          <Flex breakpointMods={[{ modifier: FlexModifiers['space-items-lg'] }]}>
-            <FlexItem breakpointMods={[{ modifier: FlexModifiers['align-self-center'] }]}>
-              <FileUploadIcon size="lg" />
-            </FlexItem>
-            <FlexItem breakpointMods={[{ modifier: FlexModifiers.grow }]}>
-              {value.type && <Text component={TextVariants.h3}>{value.type}</Text>}
-              <Text component={TextVariants.h3}>{value.size} bytes</Text>
-            </FlexItem>
-          </Flex>
         )}
         {isLoading && (
           <div className={styles.fileUploadFileDetailsSpinner}>
