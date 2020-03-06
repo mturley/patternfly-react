@@ -170,8 +170,8 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
             <Spinner size={spinnerSize.lg} aria-valuetext={spinnerAriaValueText} />
           </div>
         )}
-        {children}
       </div>
+      {children}
       {message && (
         <div
           className={css(styles.fileUploadMessage, validated === ValidatedOptions.error && styles.modifiers.error)}

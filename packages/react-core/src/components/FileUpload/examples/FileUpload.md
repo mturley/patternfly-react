@@ -156,6 +156,8 @@ class CustomPreviewFileUpload extends React.Component {
 
 `FileUpload` is a thin wrapper around the `FileUploadField` presentational component. If you need to implement your own logic for accepting files, you can instead render a `FileUploadField` directly, which does not include `react-dropzone` and requires additional props (e.g. `onBrowseButtonClick`, `onClearButtonClick`, `isDragActive`).
 
+Note that the `isLoading` prop is styled to position the spinner dead center above the entire component, so it should not be used with `hideDefaultPreview` unless a custom empty-state preview is provided via `children`. In the below example, turning on `isLoading` will force `hideDefaultPreview` to turn off.
+
 ```js title=Custom-file-upload
 import React from 'react';
 import { FileUploadField, Checkbox } from '@patternfly/react-core';
@@ -199,12 +201,8 @@ class CustomFileUpload extends React.Component {
               isChecked={this.state[stateKey]}
               onChange={checked =>
                 this.setState({
-                  [stateKey]: checked,
-                  /*
-                    isLoading and hideDefaultPreview props should not be used together
-                    unless a custom preview is rendered with children during the loading process.
-                    This example forces hideDefaultPreview to be false if isLoading is true.
-                  */
+                  [stateKey]: checked
+                  // See notes above this example
                   ...(stateKey === 'isLoading' && checked && { hideDefaultPreview: false })
                 })
               }
@@ -226,7 +224,9 @@ class CustomFileUpload extends React.Component {
           isDragActive={isDragActive}
           hideDefaultPreview={hideDefaultPreview}
         >
-          {children && <p>(A custom preview of the uploaded file can be passed as children)</p>}
+          {children && (
+            <div className="pf-u-m-md">(A custom preview of the uploaded file can be passed as children)</div>
+          )}
         </FileUploadField>
       </div>
     );
