@@ -63,6 +63,8 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElemen
   /** Flag to hide the built-in preview of the file (where available).
    * If true, you can use children to render an alternate preview. */
   hideDefaultPreview?: boolean;
+  /** Flag to allow editing of a text file's contents after it is selected from disk */
+  allowEditingUploadedText?: boolean;
   /** Additional children to render after (or instead of) the file preview. */
   children?: React.ReactNode;
 
@@ -102,8 +104,9 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   clearButtonText = 'Clear',
   isClearButtonDisabled = !filename && !value,
   containerRef = null as React.Ref<HTMLDivElement>,
-  children = null,
+  allowEditingUploadedText = false,
   hideDefaultPreview = false,
+  children = null,
   ...props
 }: FileUploadFieldProps) => {
   const onTextAreaChange = (newValue: string, event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -153,7 +156,7 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
       <div className={styles.fileUploadFileDetails}>
         {!hideDefaultPreview && type === fileReaderType.text && (
           <TextArea
-            readOnly={isReadOnly || !!filename} // A truthy filename means a real file, so no editing
+            readOnly={isReadOnly || (!!filename && !allowEditingUploadedText)}
             disabled={isDisabled}
             isRequired={isRequired}
             resizeOrientation={TextAreResizeOrientation.vertical}

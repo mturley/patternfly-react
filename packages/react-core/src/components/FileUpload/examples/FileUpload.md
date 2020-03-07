@@ -49,6 +49,40 @@ class SimpleTextFileUpload extends React.Component {
 }
 ```
 
+A user can always type instead of selecting a file, but by default, once a user selects a text file from their disk they are not allowed to edit it (to prevent unintended changes to a format-sensitive file). This behavior can be changed with the `allowEditingUploadedText` prop:
+
+```js title=Text-file-with-edits-allowed
+import React from 'react';
+import { FileUpload } from '@patternfly/react-core';
+
+class TextFileWithEditsAllowed extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '', filename: '', isLoading: false };
+    this.handleFileChange = (value, filename, event) => this.setState({ value, filename });
+    this.handleFileReadStarted = fileHandle => this.setState({ isLoading: true });
+    this.handleFileReadFinished = fileHandle => this.setState({ isLoading: false });
+  }
+
+  render() {
+    const { value, filename, isLoading } = this.state;
+    return (
+      <FileUpload
+        id="text-file-with-edits-allowed"
+        type="text"
+        value={value}
+        filename={filename}
+        onChange={this.handleFileChange}
+        onReadStarted={this.handleFileReadStarted}
+        onReadFinished={this.handleFileReadFinished}
+        isLoading={isLoading}
+        allowEditingUploadedText
+      />
+    );
+  }
+}
+```
+
 Any [props accepted by `react-dropzone`'s `Dropzone` component](https://react-dropzone.js.org/#!/Dropzone) can be passed as a `dropzoneProps` object in order to customize the behavior of the Dropzone, such as restricting the size and type of files allowed. This example will only accept CSV files smaller than 1 KB:
 
 ```js title=Simple-text-file-with-restrictions

@@ -60,6 +60,8 @@ export interface FileUploadProps
   /** Flag to hide the built-in preview of the file (where available).
    * If true, you can use children to render an alternate preview. */
   hideDefaultPreview?: boolean;
+  /** Flag to allow editing of a text file's contents after it is selected from disk */
+  allowEditingUploadedText?: boolean;
   /** Additional children to render after (or instead of) the file preview. */
   children?: React.ReactNode;
 
