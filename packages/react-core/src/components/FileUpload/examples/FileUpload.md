@@ -201,7 +201,7 @@ class CustomFileUpload extends React.Component {
               isChecked={this.state[stateKey]}
               onChange={checked =>
                 this.setState({
-                  [stateKey]: checked
+                  [stateKey]: checked,
                   // See notes above this example
                   ...(stateKey === 'isLoading' && checked && { hideDefaultPreview: false })
                 })
