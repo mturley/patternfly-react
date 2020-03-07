@@ -16,7 +16,7 @@ The basic `FileUpload` component can accept a file via browse or drag-and-drop, 
 
 ### Text files
 
-If `type="text"` is passed, a `TextArea` preview will be rendered underneath the filename bar. When a file is selected, its contents will be read into memory and passed to the `onChange` prop as a string (along with its filename). Typing/pasting text in the box will also call `onChange` with a string, and a string value is expected for the `value` prop.
+If `type="text"` is passed (and `hideDefaultPreview` is not), a `TextArea` preview will be rendered underneath the filename bar. When a file is selected, its contents will be read into memory and passed to the `onChange` prop as a string (along with its filename). Typing/pasting text in the box will also call `onChange` with a string, and a string value is expected for the `value` prop.
 
 ```js title=Simple-text-file
 import React from 'react';
@@ -156,7 +156,7 @@ class CustomPreviewFileUpload extends React.Component {
 
 `FileUpload` is a thin wrapper around the `FileUploadField` presentational component. If you need to implement your own logic for accepting files, you can instead render a `FileUploadField` directly, which does not include `react-dropzone` and requires additional props (e.g. `onBrowseButtonClick`, `onClearButtonClick`, `isDragActive`).
 
-Note that the `isLoading` prop is styled to position the spinner dead center above the entire component, so it should not be used with `hideDefaultPreview` unless a custom empty-state preview is provided via `children`. In the below example, turning on `isLoading` will force `hideDefaultPreview` to turn off.
+Note that the `isLoading` prop is styled to position the spinner dead center above the entire component, so it should not be used with `hideDefaultPreview` unless a custom empty-state preview is provided via `children`. The below example prevents `isLoading` and `hideDefaultPreview` from being used at the same time. You can always provide your own spinner as part of the `children`!
 
 ```js title=Custom-file-upload
 import React from 'react';
@@ -191,7 +191,7 @@ class CustomFileUpload extends React.Component {
     } = this.state;
     return (
       <div>
-        {['filename', 'isClearButtonDisabled', 'isLoading', 'isDragActive', 'hideDefaultPreview', 'children'].map(
+        {['filename', 'isClearButtonDisabled', 'isDragActive', 'isLoading', 'hideDefaultPreview', 'children'].map(
           stateKey => (
             <Checkbox
               key={stateKey}
@@ -203,7 +203,8 @@ class CustomFileUpload extends React.Component {
                 this.setState({
                   [stateKey]: checked,
                   // See notes above this example
-                  ...(stateKey === 'isLoading' && checked && { hideDefaultPreview: false })
+                  ...(stateKey === 'isLoading' && checked && { hideDefaultPreview: false }),
+                  ...(stateKey === 'hideDefaultPreview' && checked && { isLoading: false })
                 })
               }
             />
