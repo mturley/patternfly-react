@@ -8,7 +8,6 @@ import { Button, ButtonVariant } from '../Button';
 import { TextArea, TextAreResizeOrientation } from '../TextArea';
 import { Spinner, spinnerSize } from '../Spinner';
 import { fileReaderType } from '../../helpers/fileUtils';
-import { ValidatedOptions } from '../../helpers/constants';
 
 export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElement>, 'value' | 'onChange'> {
   /** Unique id for the TextArea, also used to generate ids for accessible labels */
@@ -46,8 +45,6 @@ export interface FileUploadFieldProps extends Omit<React.HTMLProps<HTMLDivElemen
    * If set to error,  field will be modified to indicate error state.
    */
   validated?: 'success' | 'error' | 'default';
-  /** Message to display below the field for help or validation */
-  message?: string;
   /** Aria-label for the TextArea. */
   'aria-label'?: string;
   /** Placeholder string to display in the empty filename field */
@@ -96,7 +93,6 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
   isRequired = false,
   isDragActive = false,
   validated = 'default' as 'success' | 'error' | 'default',
-  message = null,
   'aria-label': ariaLabel = 'File upload',
   filenamePlaceholder = 'Drag a file here or browse to upload',
   filenameAriaLabel = filename ? 'Read only filename' : filenamePlaceholder,
@@ -175,15 +171,6 @@ export const FileUploadField: React.FunctionComponent<FileUploadFieldProps> = ({
         )}
       </div>
       {children}
-      {message && (
-        <div
-          className={css(styles.fileUploadMessage, validated === ValidatedOptions.error && styles.modifiers.error)}
-          id={`${id}-message`}
-          aria-live="polite"
-        >
-          {message}
-        </div>
-      )}
     </div>
   );
 };

@@ -110,23 +110,31 @@ class TextFileUploadWithRestrictions extends React.Component {
   render() {
     const { value, filename, isLoading, isRejected } = this.state;
     return (
-      <FileUpload
-        id="text-file-with-restrictions"
-        type="text"
-        value={value}
-        filename={filename}
-        onChange={this.handleFileChange}
-        onReadStarted={this.handleFileReadStarted}
-        onReadFinished={this.handleFileReadFinished}
-        isLoading={isLoading}
-        dropzoneProps={{
-          accept: '.csv',
-          maxSize: 1024,
-          onDropRejected: this.handleFileRejected
-        }}
-        validated={isRejected ? 'error' : 'default'}
-        message={isRejected ? 'Must be a CSV file no larger than 1 KB' : 'Upload a CSV file'}
-      />
+      <Form>
+        <FormGroup
+          fieldId="text-file-with-restrictions"
+          helperText="Upload a CSV file"
+          helperTextInvalid="Must be a CSV file no larger than 1 KB"
+          validated={isRejected ? 'error' : 'default'}
+        >
+          <FileUpload
+            id="text-file-with-restrictions"
+            type="text"
+            value={value}
+            filename={filename}
+            onChange={this.handleFileChange}
+            onReadStarted={this.handleFileReadStarted}
+            onReadFinished={this.handleFileReadFinished}
+            isLoading={isLoading}
+            dropzoneProps={{
+              accept: '.csv',
+              maxSize: 1024,
+              onDropRejected: this.handleFileRejected
+            }}
+            validated={isRejected ? 'error' : 'default'}
+          />
+        </FormGroup>
+      </Form>
     );
   }
 }
