@@ -189,10 +189,9 @@ class CustomPreviewFileUpload extends React.Component {
         hideDefaultPreview
       >
         {value && (
-          <h1>
-            <FileUploadIcon size="lg" />
-            Custom preview here for your {value.size}-byte file named {value.name}
-          </h1>
+          <div className="pf-u-m-md">
+            <FileUploadIcon size="lg" /> Custom preview here for your {value.size}-byte file named {value.name}
+          </div>
         )}
       </FileUpload>
     );
