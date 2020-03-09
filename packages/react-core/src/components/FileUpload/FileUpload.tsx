@@ -133,6 +133,7 @@ export const FileUpload: React.FunctionComponent<FileUploadProps> = ({
             refKey: 'containerRef',
             onClick: event => event.preventDefault() // Prevents clicking TextArea from opening file dialog
           })}
+          tabIndex={null} // Omit the unwanted tabIndex from react-dropzone's getRootProps
           id={id}
           type={type}
           filename={filename}
