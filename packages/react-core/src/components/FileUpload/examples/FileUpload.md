@@ -83,13 +83,15 @@ class TextFileWithEditsAllowed extends React.Component {
 }
 ```
 
-Any [props accepted by `react-dropzone`'s `Dropzone` component](https://react-dropzone.js.org/#!/Dropzone) can be passed as a `dropzoneProps` object in order to customize the behavior of the Dropzone, such as restricting the size and type of files allowed. This example will only accept CSV files smaller than 1 KB:
+### Restricting file size and type
 
-```js title=Simple-text-file-with-restrictions
+Any [props accepted by `react-dropzone`'s `Dropzone` component](https://react-dropzone.js.org/#!/Dropzone) can be passed as a `dropzoneProps` object in order to customize the behavior of the Dropzone, such as restricting the size and type of files allowed. The following example will only accept CSV files smaller than 1 KB. Note that file type determination is not reliable across platforms (see the note on react-dropzone's docs about the `accept` prop), so be sure to test the behavior of your file upload restriction on all browsers and operating systems targeted by your application.
+
+```js title=Text-file-with-restrictions
 import React from 'react';
 import { FileUpload, Form, FormGroup } from '@patternfly/react-core';
 
-class SimpleTextFileUploadWithRestrictions extends React.Component {
+class TextFileUploadWithRestrictions extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: '', filename: '', isLoading: false, isRejected: false };
@@ -105,7 +107,7 @@ class SimpleTextFileUploadWithRestrictions extends React.Component {
     const { value, filename, isLoading, isRejected } = this.state;
     return (
       <FileUpload
-        id="simple-text-file-with-restrictions"
+        id="text-file-with-restrictions"
         type="text"
         value={value}
         filename={filename}
